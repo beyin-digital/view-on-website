@@ -1,0 +1,84 @@
+import { Box, Typography } from "@mui/material";
+import MouseMoveEffect from "./Mo";
+const TwoBox = () => {
+	return (
+		<>
+			<Box
+				sx={{
+					width: "700px",
+					maxWidth: "100%",
+					// width: "25%",
+					borderLeft: "1px solid #FBFBFB",
+					borderBottom: "1px solid #FBFBFB",
+					borderTopLeftRadius: "30px",
+					borderBottomLeftRadius: "30px",
+					// background: "rgba(251, 251, 251, 0.6)",
+					backdropFilter: "blur(100px)",
+					background:
+						"radial-gradient(19.29% 37.23% at 20.86% 80.45%, rgba(34, 71, 23, 0.3) 0%, rgba(49, 231, 22, 0.012) 100%)",
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "space-between",
+					position: "relative",
+					right: "-1.5rem",
+					// zIndex: "99",
+				}}
+			>
+				<Box
+					sx={{
+						transform: { xs: "skew(1deg, 0deg)", xl: "skew(15deg, 0deg)" },
+						marginTop: "2rem",
+						marginX: "2rem",
+					}}
+				>
+					<Typography
+						sx={{
+							width: { md: "100%", xl: "200px" },
+							fontSize: "20px",
+							lineHeight: "18px",
+							fontWeight: "500",
+							marginY: ".5rem",
+						}}
+					>
+						Physical conversion in less than 1 minute!
+					</Typography>
+					<Typography
+						sx={{
+							width: { md: "100%", xl: "300px" },
+							fontSize: "14px",
+							lineHeight: "13px",
+							fontWeight: "300",
+							marginY: ".5rem",
+						}}
+					>
+						Please provide your keyword’s sub-link Please provide your keyword’s
+						sub-link Please provide your keyword’s sub-link Please provide your
+						keyword’s sub-link
+					</Typography>
+				</Box>
+				<Box
+					sx={{
+						transform: { xs: "skew(1deg, 0deg)", xl: "skew(15deg, 0deg)" },
+						height: "432px",
+						position: "absolute",
+						bottom: "0",
+						right: "0",
+					}}
+				>
+					<img
+						src="/images/mobile.png"
+						alt=""
+						style={{
+							width: "100%",
+							height: "100%",
+							objectFit: "cover",
+						}}
+					/>
+				</Box>
+			</Box>
+			{/* <MouseMoveEffect  /> */}
+		</>
+	);
+};
+
+export default TwoBox;
