@@ -1,5 +1,4 @@
-name: CI
-
+name: PUSH TO "VIEWONWEBSITE"
 on:
     push:
         branches: [dev]
