@@ -191,3 +191,8 @@ body {
 	font-size: 1.4rem;
 	color: black;
 }
+
+.otp-input.MuiOtpInput-TextField {
+	border-radius: 50%;
+	background-color: #0090ec;
+}

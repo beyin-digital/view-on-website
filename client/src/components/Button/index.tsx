@@ -1,12 +1,23 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, ButtonBaseProps, Typography } from "@mui/material";
 import { FiArrowUpRight } from "react-icons/fi";
 
-export const ButtonLogin = ({ name, onClick }: any) => {
+interface ButtonLoginProps extends ButtonBaseProps {
+	name: string;
+	onClick?: () => void;
+	type?: "button" | "submit" | "reset" | undefined;
+}
+
+export const ButtonLogin = (props: ButtonLoginProps) => {
 	return (
 		<>
 			<Box
 				sx={{
-					width: { xs: "240px", sm: "300px", md: "300px", xl: "300px" },
+					width: {
+						xs: "240px",
+						sm: "300px",
+						md: "300px",
+						xl: "300px",
+					},
 					display: "flex",
 					justifyContent: "end",
 					background: "#0090EC",
@@ -21,7 +32,8 @@ export const ButtonLogin = ({ name, onClick }: any) => {
 						display: "flex",
 						justifyContent: "space-around",
 					}}
-					onClick={onClick}
+					onClick={props.onClick}
+					type={props.type}
 				>
 					<Typography
 						sx={{
@@ -34,10 +46,10 @@ export const ButtonLogin = ({ name, onClick }: any) => {
 							textTransform: "uppercase",
 						}}
 					>
-						{name}
+						{props.name}
 					</Typography>
 
-					<FiArrowUpRight size={42} color="#FBFBFB" />
+					<FiArrowUpRight size={42} color='#FBFBFB' />
 				</Button>
 			</Box>
 		</>
@@ -52,7 +64,8 @@ export const ButtonStyle = () => {
 					width: "180px",
 					display: "flex",
 					justifyContent: "end",
-					background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+					background:
+						"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 					borderRadius: "11px",
 				}}
 			>
@@ -79,7 +92,7 @@ export const ButtonStyle = () => {
 						pay
 					</Typography>
 
-					<FiArrowUpRight size={42} color="#343132" />
+					<FiArrowUpRight size={42} color='#343132' />
 				</Button>
 			</Box>
 		</>
@@ -90,7 +103,12 @@ export const ButtonChange = ({ name, onClick }: any) => {
 		<>
 			<Box
 				sx={{
-					width: { xs: "100%", sm: "459px", md: "459px", xl: "459px" },
+					width: {
+						xs: "100%",
+						sm: "459px",
+						md: "459px",
+						xl: "459px",
+					},
 					display: "flex",
 					justifyContent: "center",
 					background: "#0090EC",

@@ -76,7 +76,7 @@ export class AuthController {
     return this.service.resendOtp(resendOtpDto.email);
   }
 
-  @Post('refresh/access-token')
+  @Post('refresh/')
   @HttpCode(HttpStatus.OK)
   async refreshAccessToken(@Body() refreshTokenDto: AuthRefreshAccessTokenDto) {
     return this.service.refreshAccessToken(refreshTokenDto);

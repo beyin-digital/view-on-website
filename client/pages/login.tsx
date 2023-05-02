@@ -13,14 +13,13 @@ import LoginTextSignUp from "@/components/Login/LoginTextSignUp";
 import Layout from "@/components/Login/Layout";
 
 const LoginPage = () => {
-	const router = useRouter();
 	return (
 		<>
 			<Head>
 				<title>ViewOnWebsite - Login Page</title>
-				<meta name="description" content="" />
-				<meta name="keyword" content="" />
-				<meta property="og:image" content="" />
+				<meta name='description' content='' />
+				<meta name='keyword' content='' />
+				<meta property='og:image' content='' />
 			</Head>
 
 			<Layout>
@@ -53,27 +52,10 @@ const LoginPage = () => {
 						>
 							<LoginDetails />
 							<LoginForm />
-							<Box
-								sx={{
-									marginY: "4rem",
-									display: "flex",
-									flexDirection: "column",
-									alignItems: "center",
-								}}
-							>
-								<ButtonLogin
-									name="login"
-									onClick={() => {
-										router.push("/");
-									}}
-								/>
-								<LoginTextSignUp />
-							</Box>
 						</Box>
 					</Box>
 				</Box>
 			</Layout>
-			{/* <Typography>Or login with</Typography> */}
 		</>
 	);
 };

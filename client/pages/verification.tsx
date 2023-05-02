@@ -1,18 +1,51 @@
+import { useEffect, useState } from "react";
 import Layout from "@/components/Layout/Layout";
-import {
-	Box,
-	Container,
-	Grid,
-	InputBase,
-	Typography,
-	TextField,
-} from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
+import { MuiOtpInput } from "mui-one-time-password-input";
+import { toast } from "react-toastify";
+import { verifyEmailFn } from "@/api/authApi";
+import { useMutation } from "@tanstack/react-query";
 
 const VerificationPage = () => {
 	const router = useRouter();
+
+	const [email, setEmail] = useState(router.query?.email as string);
+	const [otp, setOtp] = useState("");
+
+	const handleChange = (newValue: any) => {
+		setOtp(newValue);
+	};
+
+	const { mutate: verifyEmail, isLoading } = useMutation(
+		(verificationCode: string) => verifyEmailFn(verificationCode),
+		{
+			onSuccess: (data: any) => {
+				toast.success(data?.message);
+				router.push("/");
+			},
+			onError(error: any) {
+				{
+					toast.error((error as any).data.message);
+				}
+			},
+		}
+	);
+
+	const handleSubmit = (e: any) => {
+		e.preventDefault();
+		verifyEmail(otp);
+	};
+
+	useEffect(() => {
+		const email = router.query?.email as string;
+		if (email) {
+			setEmail(email);
+		}
+	}, []);
+
 	return (
 		<>
 			<Layout>
@@ -51,10 +84,19 @@ const VerificationPage = () => {
 								justifyContent: "center",
 							}}
 						>
-							<Image src="/icons/message.svg" alt="" height={78} width={78} />
+							<Image
+								src='/icons/message.svg'
+								alt=''
+								height={78}
+								width={78}
+							/>
 							<Typography
 								sx={{
-									fontSize: { xs: "22px", md: "27px", xl: "32px" },
+									fontSize: {
+										xs: "22px",
+										md: "27px",
+										xl: "32px",
+									},
 									fontWight: "300",
 									lineHeight: "29px",
 								}}
@@ -64,7 +106,12 @@ const VerificationPage = () => {
 						</Box>
 						<Box
 							sx={{
-								width: { xs: "100%", sm: "60%", md: "90%", xl: "60%" },
+								width: {
+									xs: "100%",
+									sm: "60%",
+									md: "90%",
+									xl: "60%",
+								},
 
 								display: "flex",
 								flexDirection: "column",
@@ -82,8 +129,12 @@ const VerificationPage = () => {
 									marginY: "2rem",
 								}}
 							>
-								Enter the authenrication code we sent to Your email
-								Test@abceed.com below:
+								Enter the authenrication code we sent to Your
+								email{" "}
+								<span style={{ fontWeight: "bold" }}>
+									{email}
+								</span>{" "}
+								below:
 							</Typography>
 							<Box
 								sx={{
@@ -94,96 +145,11 @@ const VerificationPage = () => {
 									justifyContent: "space-evenly",
 								}}
 							>
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
-								/>
-
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
-								/>
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
-								/>
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
-								/>
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
-								/>
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
+								<MuiOtpInput
+									className='otp-input'
+									value={otp}
+									onChange={handleChange}
+									length={6}
 								/>
 							</Box>
 							<Typography
@@ -193,7 +159,12 @@ const VerificationPage = () => {
 									color: "#A0A9AB",
 									lineHeight: "27px",
 									textAlign: "center",
-									marginY: { xs: "5rem", sm: "2rem", md: "2rem", xl: "2rem" },
+									marginY: {
+										xs: "5rem",
+										sm: "2rem",
+										md: "2rem",
+										xl: "2rem",
+									},
 								}}
 							>
 								Resend code
@@ -209,10 +180,7 @@ const VerificationPage = () => {
 								right: { xs: "", md: "0rem", xl: "0rem" },
 							}}
 						>
-							<ButtonLogin
-								name="Verify"
-								onClick={() => router.push("/payment")}
-							/>
+							<ButtonLogin name='Verify' onClick={handleSubmit} />
 						</Box>
 					</Container>
 				</Grid>
