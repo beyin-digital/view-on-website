@@ -23,10 +23,7 @@ const PaymentPage = () => {
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
-						transform: {
-							xs: "skewX(10deg)",
-							xl: "skewX(20deg)",
-						},
+						transform:"skewX(16deg)",
 					}}
 				>
 					<Container

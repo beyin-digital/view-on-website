@@ -46,12 +46,27 @@ const IllustrationTablet = () => {
 					<Box
 						sx={{
 							position: "relative",
+
+							// right: { xs: "0%", sm: "0%", md: "10%", xl: "14%" },
 							maxWidth: "100%",
 							width: "100%",
 							height: { xs: "100%", sm: "100%", md: "100%", xl: "650px" },
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "center",
+							background: {
+								xs: "transparent",
+								md: "rgba(251, 251, 251, 0.6)",
+								xl: "rgba(251, 251, 251, 0.6)",
+							},
+							border: {
+								xs: "0",
+								md: "1px solid #FBFBFB",
+								xl: "1px solid #FBFBFB",
+							},
+							backdropFilter: { xs: "0", md: "blur(100px)", xl: "blur(100px)" },
+							// borderRadius: "30px",
+							// transform: "skew(-16deg, 0deg)",
 						}}
 					>
 						<Box
@@ -60,6 +75,7 @@ const IllustrationTablet = () => {
 								width: { xs: "98%", xl: "80%" },
 								display: "flex",
 								flexDirection: "column",
+								// transform: "skew(16deg, 0deg)",
 							}}
 						>
 							{/* Header Top */}
@@ -249,9 +265,27 @@ const IllustrationTablet = () => {
 											width: "10px",
 											height: { xs: "", md: "150px" },
 											position: "absolute",
+											right: { xs: "20rem", sm: "20rem", md: "35rem" },
+											top: "-8rem",
+										}}
+										className="illustrationArrowsUp"
+									>
+										<img
+											src="/icons/arrowUp.png"
+											style={{
+												height: "100%",
+											}}
+										/>
+									</Box>
+									<Box
+										sx={{
+											width: "10px",
+											height: { xs: "", md: "150px" },
+											position: "absolute",
 											right: { xs: "20rem", sm: "20rem", md: "23rem" },
 											top: "-8rem",
 										}}
+										className="illustrationArrowsright"
 									>
 										<img
 											src="/icons/arrowupright.png"

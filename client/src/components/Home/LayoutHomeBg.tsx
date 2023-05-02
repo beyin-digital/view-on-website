@@ -49,7 +49,7 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 							backgroundSize: "contain",
 							position: "relative",
 							transform: {
-								xs: "skew(5deg, 0deg)",
+								xs: "skew(10deg, 0deg)",
 								sm: "skew(16deg, 0deg)",
 								md: "skew(16deg, 0deg)",
 								xl: "skew(16deg, 0deg)",

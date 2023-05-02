@@ -65,7 +65,7 @@ const IllustrationDesktop = () => {
 							},
 							backdropFilter: { xs: "0", md: "blur(100px)", xl: "blur(100px)" },
 							borderRadius: "30px",
-							transform: { xs: "skew(-10deg, 0deg)", xl: "skew(-15deg, 0deg)" },
+							transform: "skew(-16deg, 0deg)",
 							overflow: { xs: "", md: "hidden", xl: "hidden" },
 							margin: "3rem auto",
 							display: "flex",
@@ -77,7 +77,7 @@ const IllustrationDesktop = () => {
 							sx={{
 								height: "558px",
 								width: { xs: "88%", xl: "80%" },
-								transform: { xs: "skew(10deg, 0deg)", xl: "skew(15deg, 0deg)" },
+								transform: "skew(16deg, 0deg)",
 								display: "flex",
 								flexDirection: "column",
 								justifyContent: "space-between",

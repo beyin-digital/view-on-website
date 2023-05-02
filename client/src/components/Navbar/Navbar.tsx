@@ -308,7 +308,7 @@ const Header = () => {
 								borderRadius: "16px",
 								paddingX: "18px",
 								height: "59px",
-								display: "flex",
+								display: { xs: "none", md: "flex", xl: "flex" },
 								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 							}}
 						>
@@ -342,10 +342,10 @@ const Header = () => {
 								background: "rgba(251, 251, 251, 0.6)",
 								backdropFilter: "blur(100px)",
 							},
-							"& .mui-style-4t3x6l-MuiPaper-root-MuiDrawer-paper":{
+							"& .mui-style-4t3x6l-MuiPaper-root-MuiDrawer-paper": {
 								background: "rgba(251, 251, 251, 0.6)",
 								backdropFilter: "blur(100px)",
-							}
+							},
 						}}
 					>
 						{drawer}

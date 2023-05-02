@@ -39,7 +39,7 @@ const ChangePassword = () => {
 							<ChangePasswordForm />
 							<Box
 								sx={{
-									marginY: "4rem",
+									marginY: {xs:"4rem",md:"2rem",xl:"4rem"},
 									display: "flex",
 									flexDirection: "column",
 									alignItems: "center",

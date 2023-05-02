@@ -78,6 +78,7 @@ const SubscribePage: NextPage = () => {
 								<OutlinedInput
 									sx={{
 										width: "100%",
+										height:"97px",
 										fontSize: {
 											xs: "18px",
 											sm: "22px",
@@ -97,7 +98,7 @@ const SubscribePage: NextPage = () => {
 									placeholder="Enter your unique hashtag keyword"
 									startAdornment={<BsHash color="#31E716" size={90} />}
 									endAdornment={<FiArrowUpRight color="#343132" size={90} />}
-									className="borderGr"
+									className="borderSubscribeInput"
 								/>
 								{/* <FormHelperText id="outlined-weight-helper-text"> */}
 								<Box width="100%" display="flex" justifyContent="space-between">
@@ -151,7 +152,7 @@ const SubscribePage: NextPage = () => {
 											xl: "32px",
 										},
 										lineHeight: "28px",
-										height: "90px",
+										height: "97px",
 										borderRadius: "20px",
 										background: "#FBFBFB",
 										paddingX: "10px",

@@ -72,6 +72,7 @@ const PageDesktop = () => {
 								width: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },
 								height: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },
 							}}
+							className="sliderArrowsOne"
 						>
 							<img
 								src="/icons/arrowLeftExample.png"

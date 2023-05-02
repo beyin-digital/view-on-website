@@ -16,12 +16,13 @@ const TextViewOnWeb = () => {
 					alignItems: "center",
 					justifyContent: "center",
 				}}
+				className="TextViewOnWebsite"
 			>
 				<Typography
 					sx={{
 						fontSize: {
-							xs: "18px",
-							sm: "30px",
+							xs: "20px",
+							sm: "24px",
 							md: "50px",
 							xl: "64px",
 						},

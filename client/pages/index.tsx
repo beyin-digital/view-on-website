@@ -47,7 +47,7 @@ const HomePage = () => {
 
 								height: "220px",
 								transform: {
-									xs: "skew(5deg, 0deg)",
+									xs: "skew(10deg, 0deg)",
 									sm: "skew(16deg, 0deg)",
 									md: "skew(16deg, 0deg)",
 									xl: "skew(16deg, 0deg)",
@@ -145,6 +145,7 @@ const HomePage = () => {
 												onChange={(e) => setHashtag(e.target.value)}
 												sx={{
 													width: "100%",
+													height: "65px",
 													fontSize: {
 														xs: "18px",
 														sm: "22px",
@@ -207,134 +208,6 @@ const HomePage = () => {
 									<TextViewOnWeb />
 								</Box>
 							</Box>
-
-							{/* <Box
-								sx={{
-									height: {
-										xs: "50px",
-										sm: "70px",
-										md: "100px",
-										xl: "120px",
-									},
-									width: { xs: "80%", md: "70%", xl: "70%" },
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "start",
-									border: "1px solid red",
-								}}
-							>
-								<Box
-									display="flex"
-									alignItems="center"
-									justifyContent={"space-around"}
-									sx={{
-										width: "100%",
-										// border:"1px solid"
-									}}
-								>
-									<Box
-										sx={{
-											display: "flex",
-											alignItems: "center",
-										}}
-									>
-										<Box
-											sx={{
-												width: {
-													xs: "32px",
-													sm: "46px",
-													md: "46px",
-													xl: "66px",
-												},
-												height: {
-													xs: "32px",
-													sm: "46px",
-													md: "46px",
-													xl: "66px",
-												},
-											}}
-										>
-											<img
-												src="/icons/hashtag.svg"
-												style={{
-													width: "100%",
-													height: "100%",
-												}}
-											/>
-										</Box>
-
-										<Box
-											sx={{
-												background: "#000",
-												width: "5px",
-												height: {
-													xs: "30px",
-													sm: "30px",
-													md: "60px",
-													xl: "60px",
-												},
-												margin: "0 .5rem",
-											}}
-										/>
-
-										<form onSubmit={handleSubmit}>
-											<OutlinedInput
-												value={hashtag}
-												onChange={(e) => setHashtag(e.target.value)}
-												sx={{
-													width: "100%",
-													fontSize: {
-														xs: "18px",
-														sm: "22px",
-														md: "28px",
-														xl: "38px",
-													},
-													lineHeight: "28px",
-
-													marginY: ".5rem",
-
-													".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-														border: 0,
-													},
-													// "input:focus":{
-													// 	border:"2px solid red"
-
-													// }
-												}}
-												placeholder="Enter Hashtag Keyword"
-											/>
-										</form>
-									</Box>
-									<Box
-										onClick={() => router.push(`/subscribe/${hashtag}`)}
-										sx={{
-											cursor: "pointer",
-											width: {
-												xs: "22px",
-												sm: "46px",
-												md: "46px",
-												xl: "46px",
-											},
-											height: {
-												xs: "22px",
-												sm: "46px",
-												md: "46px",
-												xl: "46px",
-											},
-										}}
-									>
-										<img
-											src="/icons/arrowUpRight.svg"
-											style={{
-												width: "100%",
-												height: "100%",
-											}}
-										/>
-									</Box>
-								</Box>
-							</Box> */}
-							{/* text bottom  */}
-							{/* <TextViewOnWeb /> */}
 						</LayoutHomeBg>
 					</Box>
 				</Grid>

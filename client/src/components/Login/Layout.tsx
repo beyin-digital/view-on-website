@@ -65,6 +65,20 @@ const Layout: React.FC<Props> = ({ children }) => {
 					<Box
 						sx={{
 							width: "100%",
+							display: { xs: "block", sm: "block", md: "none", xl: "none" },
+						}}
+					>
+						<Image
+							fill
+							src="/images/swirl.svg"
+							alt=""
+							className="ImageMobile"
+						/>
+					</Box>
+					<Box
+						sx={{
+							width: "100%",
+							display: { xs: "none", sm: "none", md: "block", xl: "block" },
 						}}
 					>
 						<Image
@@ -72,7 +86,6 @@ const Layout: React.FC<Props> = ({ children }) => {
 							src="/images/swirl.svg"
 							alt=""
 							style={{
-								// objectFit:"cover",
 								top: "-43rem",
 								position: "absolute",
 							}}
@@ -84,7 +97,13 @@ const Layout: React.FC<Props> = ({ children }) => {
 							right: { xs: "0%", sm: "0%", md: "10%", xl: "20%" },
 							maxWidth: "100%",
 							width: "100%",
-							height: { xs: "100%", sm: "540px", md: "650px", xl: "650px" },
+							height: {
+								xs: "100%",
+								sm: "540px",
+								md: "650px",
+								lg: "650px",
+								xl: "650px",
+							},
 							background: {
 								xs: "transparent",
 								md: "rgba(251, 251, 251, 0.6)",

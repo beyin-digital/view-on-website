@@ -171,7 +171,7 @@ const SubscribePage: NextPage = () => {
 														border: "0",
 													},
 												}}
-												className="borderGr"
+												className="borderSubscribeInput"
 												value={values.hashtag}
 												placeholder="Enter your unique hashtag keyword"
 												startAdornment={<BsHash color="#31E716" size={90} />}
@@ -436,6 +436,8 @@ const SubscribePage: NextPage = () => {
 									backdropFilter: "blur(117px)",
 									boxShadow: "0px 72px 86px rgba(0, 0, 0, 0.07)",
 									marginY: "1rem",
+									marginX: "1rem",
+									paddingX: "1rem",
 								}}
 							>
 								{/* card Header */}

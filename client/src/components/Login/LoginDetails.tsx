@@ -19,7 +19,8 @@ const LoginDetails = () => {
 					flexDirection: "column",
 					alignItems: "center",
 					justifyContent: "center",
-					marginY: "2rem",
+					marginTop: "4rem",
+					marginBottom:{xl:"1rem"}
 				}}
 			>
 				<Image src="/images/logo.svg" alt="logo" width={150} height={80} />
@@ -28,7 +29,7 @@ const LoginDetails = () => {
 						fontSize: { xs: "20px", xl: "24px" },
 						fontWeight: "800",
 						lineHeight: "28px",
-						marginY: ".5rem",
+						marginY: "1rem",
 						textAlign: "center",
 					}}
 					color="#343132"

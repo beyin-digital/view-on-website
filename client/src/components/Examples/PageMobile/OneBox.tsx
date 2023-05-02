@@ -30,10 +30,12 @@ const OneBox = () => {
 				>
 					<Box
 						sx={{
-							width: { xs: "100%", sm: "422px", md: "60%" },
+							width: { xs: "100%", sm: "70%", md: "60%" },
 							height: "258px",
 							borderRadius: "34px",
-							background: "green",
+							background: "url('/images/slid.png')",
+							backgroundRepeat: "no-repeat",
+							backgroundSize:"cover",
 							marginY: "1rem",
 							position: { xs: "relative", sm: "absolute" },
 							right: { xs: "", sm: "6rem", md: "10rem" },

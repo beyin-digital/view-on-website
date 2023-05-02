@@ -12,14 +12,14 @@ const Header = () => {
 			>
 				<Box
 					sx={{
-						width: { xs: "80%", sm: "80%", md: "776px", xl: "776px" },
+						width: { xs: "80%", sm: "80%", md: "650px", xl: "776px" },
 					}}
 				>
 					<Typography
 						sx={{
 							fontSize: {
-								xs: "20px",
-								sm: "35px",
+								xs: "36px",
+								sm: "36px",
 								md: "50px",
 								xl: "64px",
 							},
@@ -28,12 +28,12 @@ const Header = () => {
 						letterSpacing="0.02em"
 						fontWeight="500"
 					>
-						Be instantly directed to what you see!
+						Get redirected to what you see
 					</Typography>
 					<Typography
 						sx={{
 							margin: "1rem auto",
-							fontSize: "20px",
+							fontSize: { xs: "21px", md: "30px", xl: "40px" },
 							lineHeight: "92.5%",
 							fontWeight: "400",
 						}}
@@ -55,8 +55,9 @@ const Header = () => {
 				</Box>
 				<Box
 					sx={{
-						width: { xs: "45px", md: "45px", xl: "103px" },
-						height: { xs: "45px", md: "45px", xl: "103px" },
+						width: { xs: "53px", sm: "53px", md: "80px", xl: "103px" },
+						height: { xs: "53px", sm: "53px", md: "80px", xl: "103px" },
+						marginX: { xs: ".4rem", sm: "1rem", md: "1rem", xl: "1rem" },
 					}}
 				>
 					<img

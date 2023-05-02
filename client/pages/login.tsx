@@ -55,7 +55,7 @@ const LoginPage = () => {
 							<LoginForm />
 							<Box
 								sx={{
-									marginY: "4rem",
+									marginY: "2rem",
 									display: "flex",
 									flexDirection: "column",
 									alignItems: "center",

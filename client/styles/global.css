@@ -10,13 +10,13 @@ body {
 	background-color: #eaeded;
 }
 
-.borderGr {
+.borderSubscribeInput {
 	box-sizing: border-box;
 	background-clip: padding-box;
 	border: solid 3px transparent;
 	border-radius: 20px;
 }
-.borderGr:before {
+.borderSubscribeInput:before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -31,9 +31,46 @@ body {
 .mui-style-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
 	background-color: transparent !important;
 }
+/* Navbar */
+.navigation-menu {
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.navigation-menu li {
+	margin: 0px 20px;
+}
+.navigation-menu li a {
+	text-decoration: none;
+	color: #343132;
+}
+
+/* mobile view */
+.mobile-navigation {
+	list-style: none;
+}
+.mobile-navigation li {
+	margin-top: 20px;
+}
+.mobile-navigation li a {
+	text-decoration: none;
+	font-size: 1.4rem;
+	color: black;
+}
+/*  */
+/* Swiper Slider */
 .swiper-3d {
 	perspective: 307px !important;
 }
+.swiper_container {
+	position: relative;
+	max-width: 100%;
+}
+.SliderMobile {
+	display: none;
+}
+/*  */
 .col {
 	position: fixed;
 	top: 0;
@@ -55,14 +92,10 @@ body {
 	);
 }
 
-.swiper_container {
-	position: relative;
-	max-width: 100%;
-}
-
 .PageMobile {
 	display: none;
 }
+/* Illustration */
 .IllustrationMobile {
 	display: none;
 }
@@ -72,15 +105,27 @@ body {
 .IllustrationDesktop {
 	display: block;
 }
-.SliderMobile {
+.illustrationArrowsright {
 	display: none;
 }
+/*  */
+
 @media screen and (max-width: 1535px) {
 	.IllustrationDesktop {
 		display: none;
 	}
 	.IllustrationTablet {
 		display: block;
+	}
+}
+@media screen and (max-width: 1401px) {
+	.sliderArrowsOne {
+		right: 53rem;
+	}
+}
+@media screen and (max-width: 1330px) {
+	.sliderArrowsOne {
+		right: 50rem;
 	}
 }
 @media screen and (max-width: 1230px) {
@@ -96,6 +141,14 @@ body {
 		display: block;
 	}
 	.PageDesktop {
+		display: none;
+	}
+}
+@media screen and (max-width: 1145px) {
+	.illustrationArrowsright {
+		display: block;
+	}
+	.illustrationArrowsUp {
 		display: none;
 	}
 }
@@ -164,30 +217,8 @@ body {
 		justify-content: center;
 	}
 }
-
-.navigation-menu {
-	list-style: none;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.navigation-menu li {
-	margin: 0px 20px;
-}
-.navigation-menu li a {
-	text-decoration: none;
-	color: #343132;
-}
-
-/* mobile view */
-.mobile-navigation {
-	list-style: none;
-}
-.mobile-navigation li {
-	margin-top: 20px;
-}
-.mobile-navigation li a {
-	text-decoration: none;
-	font-size: 1.4rem;
-	color: black;
+@media screen and (max-width: 318px) {
+	.TextViewOnWebsite {
+		height: 100% !important;
+	}
 }

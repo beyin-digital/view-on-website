@@ -42,7 +42,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 						backdropFilter: "blur(100px)",
 						borderRadius: "30px",
 						transform: {
-							xs: "skew(-5deg, 0deg)",
+							xs: "skew(-10deg, 0deg)",
 							sm: "skew(-16deg, 0deg)",
 							md: "skew(-16deg, 0deg)",
 							xl: "skew(-16deg, 0deg)",

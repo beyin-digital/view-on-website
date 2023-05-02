@@ -28,10 +28,10 @@ const ThreeBox = () => {
 					<Box
 						sx={{
 							position: "absolute",
-							bottom: { xs: "10rem", sm: "0", md: "-1rem" },
-							right: { xs: "0rem", md: "0" },
-							width: { xs: "400px", sm: "500px", md: "700px" },
-							height: { xs: "400px", sm: "500px", md: "700px" },
+							bottom: { xs: "10rem", sm: "9rem", md: "-1rem" },
+							right: { xs: "-13rem",sm:"-4rem", md: "0rem" },
+							width: { xs: "490px", sm: "580px", md: "660px" },
+							height: { xs: "400px", sm: "500px", md: "650px" },
 						}}
 					>
 						<img
@@ -48,8 +48,8 @@ const ThreeBox = () => {
 							width: { xs: "70%", sm: "45%", md: "300px", lg: "40%" },
 							marginX: { xs: "1rem", md: "" },
 							position: "absolute",
-							bottom: "3rem",
-							left: { xs: "1rem", sm: "5.8", md: "5.8rem", lg: "" },
+							bottom: {xs:"1rem",sm:"3rem",md:"3rem",xl:"3rem"},
+							left: { xs: "1rem", sm: "5.8rem", md: "8rem", lg: "" },
 						}}
 					>
 						<Typography
