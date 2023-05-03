@@ -6,6 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  Index,
 } from 'typeorm';
 import { EntityHelper } from 'src/utils/entity-helper';
 import { Allow } from 'class-validator';
@@ -25,6 +26,7 @@ export class Keyword extends EntityHelper {
   @Column()
   featured: boolean;
 
+  @Index()
   @Allow()
   @ManyToOne(() => User, {
     eager: true,
