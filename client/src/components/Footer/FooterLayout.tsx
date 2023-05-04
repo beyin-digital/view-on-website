@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
-const Footer = () => {
+const Footer = ({ onClick }: any) => {
 	return (
 		<footer>
 			<Box
@@ -79,6 +79,7 @@ const Footer = () => {
 							position: "relative",
 							bottom: "-1rem",
 						}}
+						onClick={onClick}
 					>
 						<Typography
 							fontSize="32px"
