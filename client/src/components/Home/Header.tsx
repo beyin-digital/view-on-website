@@ -27,6 +27,7 @@ const Header = () => {
 						lineHeight="92.5%"
 						letterSpacing="0.02em"
 						fontWeight="500"
+						className="Textredirected"
 					>
 						Get redirected to what you see
 					</Typography>
@@ -41,9 +42,10 @@ const Header = () => {
 						Enter the
 						<Typography
 							component={"span"}
-							style={{
-								margin: "auto 2px",
-								padding: "4px 8px",
+							sx={{
+								fontSize: { xs: "21px", md: "30px", xl: "40px" },
+								margin: "0 2px",
+								// padding: "4px 8px",
 								borderRadius: "8px",
 								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 							}}
@@ -59,6 +61,7 @@ const Header = () => {
 						height: { xs: "53px", sm: "53px", md: "80px", xl: "103px" },
 						marginX: { xs: ".4rem", sm: "1rem", md: "1rem", xl: "1rem" },
 					}}
+					className="ImagePlay"
 				>
 					<img
 						src="/icons/play.png"

@@ -58,7 +58,7 @@ const PageMobile = () => {
 				</Box>
 			</Box>
 			<FooterMobile />
-			<Footer />
+			{/* <Footer /> */}
 		</Box>
 	);
 };

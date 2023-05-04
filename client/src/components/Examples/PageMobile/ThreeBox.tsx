@@ -13,26 +13,28 @@ const ThreeBox = () => {
 					top: "-5rem",
 					background: "#EAEDED",
 				}}
+				className="ExampleThreeBox"
 			>
 				<Box
 					sx={{
 						width: { xs: "100%", md: "100%" },
-						height: "80vh",
+						height: { xs: "80vh", sm: "80vh", md: "80vh", xl: "80vh" },
 						background: "url('/images/layoutBoxThree.png')",
 						backgroundSize: "cover",
 						backgroundRepeat: "no-repeat",
- 						position: "relative",
+						position: "relative",
 						overflow: "hidden",
 					}}
 				>
 					<Box
 						sx={{
 							position: "absolute",
-							bottom: { xs: "10rem", sm: "9rem", md: "-1rem" },
-							right: { xs: "-13rem",sm:"-4rem", md: "0rem" },
+							top: { xs: "0", sm: "", md: "0" },
+							right: { xs: "-13rem", sm: "-4rem", md: "0rem" },
 							width: { xs: "490px", sm: "580px", md: "660px" },
 							height: { xs: "400px", sm: "500px", md: "650px" },
 						}}
+						className="ExampleBoxThreePic"
 					>
 						<img
 							src="/images/pic.png"
@@ -48,9 +50,10 @@ const ThreeBox = () => {
 							width: { xs: "70%", sm: "45%", md: "300px", lg: "40%" },
 							marginX: { xs: "1rem", md: "" },
 							position: "absolute",
-							bottom: {xs:"1rem",sm:"3rem",md:"3rem",xl:"3rem"},
+							bottom: { xs: "1rem", sm: "3rem", md: "3rem", xl: "3rem" },
 							left: { xs: "1rem", sm: "5.8rem", md: "8rem", lg: "" },
 						}}
+						className="ExampleBoxThreeText"
 					>
 						<Typography
 							sx={{
@@ -66,8 +69,8 @@ const ThreeBox = () => {
 						<Typography
 							sx={{
 								width: { xs: "100%", md: "100%" },
-								fontSize: { xs: "14px", md: "20px" },
-								lineHeight: { xs: "12px", md: "20px" },
+								fontSize: { xs: "14px", sm: "20px", md: "20px" },
+								lineHeight: { xs: "12px", sm: "20px", md: "20px" },
 								fontWeight: "300",
 							}}
 						>

@@ -31,6 +31,7 @@ body {
 .mui-style-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
 	background-color: transparent !important;
 }
+
 /* Navbar */
 .navigation-menu {
 	list-style: none;
@@ -61,14 +62,30 @@ body {
 /*  */
 /* Swiper Slider */
 .swiper-3d {
-	perspective: 307px !important;
+	/* perspective: 307px !important; */
+	perspective: 468px !important;
 }
 .swiper_container {
 	position: relative;
 	max-width: 100%;
 }
+.swiper,
+swiper-container {
+	overflow: inherit !important;
+}
 .SliderMobile {
 	display: none;
+}
+.swiper-pagination {
+	position: absolute;
+	text-align: center;
+	transition: 0.3s opacity;
+	transform: translate3d(0, 0, 0);
+	z-index: 99999999;
+	bottom: -3.3rem !important;
+	font-size: 32px;
+	font-weight: 500;
+	/* margin:2rem auto */
 }
 /*  */
 .col {
@@ -108,8 +125,39 @@ body {
 .illustrationArrowsright {
 	display: none;
 }
-/*  */
+/* animation cursor */
 
+.cursor {
+	position: relative;
+}
+
+.cursor .i {
+	position: absolute;
+	width: 5px;
+	height: 80%;
+	background-color: #000;
+	left: 5px;
+	top: 10%;
+	animation-name: blink;
+	animation-duration: 800ms;
+	animation-iteration-count: infinite;
+	opacity: 1;
+}
+
+.cursor .l:focus + .i {
+	display: none;
+}
+
+@keyframes blink {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+/*  */
 @media screen and (max-width: 1535px) {
 	.IllustrationDesktop {
 		display: none;
@@ -163,13 +211,38 @@ body {
 @media screen and (max-width: 899px) {
 	.ImageMobile {
 		position: absolute !important;
-		top: -50rem !important;
+		top: -48rem !important;
+	}
+}
+@media screen and (max-width: 700px) {
+	.ExampleBoxThreePic {
+		bottom: 0rem;
+		right: -6rem;
+		height: 100%;
+	}
+	.ExampleBoxThreeText {
+		bottom: 3rem;
+		left: 3rem;
+	}
+	.ExampleBoxTwo {
+		top: -11rem;
+	}
+
+	.ExampleThreeBox {
+		top: -20rem;
 	}
 }
 @media screen and (max-width: 600px) {
 	.ImageMobile {
 		position: absolute !important;
 		top: -60rem !important;
+	}
+
+	.ExampleBoxThreePic {
+		bottom: 0rem;
+		right: -6rem;
+		height: 100%;
+		width: 100%;
 	}
 }
 @media screen and (max-width: 500px) {
@@ -183,7 +256,24 @@ body {
 
 	.ImageMobile {
 		position: absolute !important;
-		top: -55rem !important;
+		top: -45rem !important;
+	}
+	.cursor .i {
+		height: 50% !important;
+		top: 25% !important;
+	}
+	.myClassName {
+		gap: 5px;
+	}
+	.ExampleBoxTwo {
+		top: 0rem;
+	}
+	.ExampleThreeBox {
+		top: 0rem;
+	}
+	.ExampleBoxTwoText {
+		top: 0;
+		margin-top: 0;
 	}
 }
 @media screen and (max-width: 427px) {
@@ -196,9 +286,6 @@ body {
 	}
 }
 @media screen and (max-width: 410px) {
-	/* .parallelogram {
-		height: 110px !important;
-	} */
 	.BoxInputHome {
 		width: 70%;
 	}
@@ -216,9 +303,65 @@ body {
 		-webkit-justify-content: space-evenly;
 		justify-content: center;
 	}
-}
-@media screen and (max-width: 318px) {
 	.TextViewOnWebsite {
 		height: 100% !important;
+	}
+	.ImageMobile {
+		position: absolute !important;
+		top: -43rem !important;
+	}
+	.swiper-pagination {
+		bottom: -2.4rem !important;
+		font-size: 22px;
+	}
+}
+@media screen and (max-width: 333px) {
+	.TextViewOnWebsite {
+		height: 100% !important;
+		margin-top: -1rem;
+	}
+	.Textredirected {
+		font-size: 28px;
+	}
+}
+@media screen and (max-width: 300px) {
+	.ImagePlay {
+		width: 40px !important;
+		height: 40px !important;
+	}
+	.TextViewOnWebsite {
+		height: 100% !important;
+		margin-top: -1.5rem;
+	}
+	.TextViewOnWebsite p {
+		font-size: 15px !important;
+	}
+	.Textredirected {
+		font-size: 23px;
+	}
+	.boxHomeBlack {
+		height: 95px !important;
+	}
+	.ExampleBoxOnePlace,
+	.ExampleBoxTwoText {
+		margin: 0 !important;
+	}
+	.ExampleBoxTwo {
+		top: 0 !important;
+	}
+	.ExampleBoxTwoPic {
+		height: auto !important;
+		right: -4rem !important;
+		width: 100% !important;
+	}
+	.ExampleBoxThreePic {
+		bottom: -4rem;
+		right: -6rem;
+		height: 100%;
+		width: 100%;
+	}
+	.ExampleBoxThreeText {
+		bottom: 3rem;
+		left: 3rem;
 	}
 }

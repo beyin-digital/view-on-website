@@ -1,10 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import Head from "next/head";
 
 import { useRouter } from "next/router";
 
+import Image from "next/image";
 // button
 import { ButtonLogin } from "@/components/Button";
+// import { useRouter } from "next/router";
 
 // components
 import LoginForm from "@/components/Login/LoginForm";
@@ -13,7 +15,24 @@ import LoginTextSignUp from "@/components/Login/LoginTextSignUp";
 import Layout from "@/components/Login/Layout";
 
 const LoginPage = () => {
-	const router = useRouter();
+	// const router = useRouter();
+
+	const icon = [
+		{
+			id: 1,
+			icon: "/icons/google.svg",
+			alt: "Google Icon",
+			title: "Google Icon",
+			link: "https://google.com",
+		},
+		{
+			id: 2,
+			icon: "/icons/apple.svg",
+			alt: "Apple Icon",
+			title: "Apple Icon",
+			link: "https://apple.com",
+		},
+	];
 	return (
 		<>
 			<Head>
@@ -41,7 +60,7 @@ const LoginPage = () => {
 							height: "100%",
 							display: "flex",
 							alignItems: "center",
-							justifyContent: "end",
+							justifyContent: { xs: "center", xl: "end" },
 						}}
 					>
 						<Box
@@ -55,25 +74,42 @@ const LoginPage = () => {
 							<LoginForm />
 							<Box
 								sx={{
-									marginY: "2rem",
-									display: "flex",
-									flexDirection: "column",
+									display: { xs: "none", sm: "flex", md: "none", xl: "none" },
 									alignItems: "center",
+									justifyContent: "center",
+									position: "relative",
 								}}
 							>
-								<ButtonLogin
-									name="login"
-									onClick={() => {
-										router.push("/");
+								<Typography>Or login with</Typography>
+								<Box
+									sx={{
+										// width: "60%",
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "space-evenly",
+										margin: "auto 1rem",
 									}}
-								/>
-								<LoginTextSignUp />
+								>
+									{icon.map((item) => (
+										<Link href={item.link} key={item.id}>
+											<Image
+												src={item.icon}
+												alt={item.alt}
+												title={item.title}
+												height={35}
+												width={35}
+												style={{
+													margin: "auto .2rem",
+												}}
+											/>
+										</Link>
+									))}
+								</Box>
 							</Box>
 						</Box>
 					</Box>
 				</Box>
 			</Layout>
-			{/* <Typography>Or login with</Typography> */}
 		</>
 	);
 };

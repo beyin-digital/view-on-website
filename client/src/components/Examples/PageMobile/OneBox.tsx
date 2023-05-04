@@ -13,9 +13,9 @@ const OneBox = () => {
 					border: " 0.484848px solid #FBFBFB",
 					backdropFilter: "blur(48.4848px)",
 					borderRadius: "14.5455px",
-					overflow: "hidden",
+					overflow: { xs: "", md: "hidden", xl: "hidden" },
 					position: "relative",
-					height: "80vh",
+					height: { xs: "70vh", sm: "80vh", md: "80vh", xl: "80vh" },
 				}}
 			>
 				<Box
@@ -35,7 +35,7 @@ const OneBox = () => {
 							borderRadius: "34px",
 							background: "url('/images/slid.png')",
 							backgroundRepeat: "no-repeat",
-							backgroundSize:"cover",
+							backgroundSize: "cover",
 							marginY: "1rem",
 							position: { xs: "relative", sm: "absolute" },
 							right: { xs: "", sm: "6rem", md: "10rem" },
@@ -53,23 +53,26 @@ const OneBox = () => {
 					>
 						<Box
 							sx={{
-								width: { xs: "60%", sm: "212px", md: "50%" },
+								width: { xs: "60%", sm: "322px", md: "50%" },
 								height: "134px",
 							}}
 						>
 							<Typography
 								sx={{
-									fontSize: { xs: "14px", md: "24px" },
+									fontSize: "20px",
+									fontWeight: "500",
+									lineHeight: "18px",
 
-									marginY: { xs: "3rem", sm: "4rem" },
+									marginY: { xs: "10px", sm: "2rem" },
 								}}
+								className="ExampleBoxOnePlace"
 							>
 								Place it your way
 							</Typography>
 							<Typography
 								sx={{
-									fontSize: { xs: "14px", md: "20px" },
-									lineHeight: { xs: "12px", md: "20px" },
+									fontSize: { xs: "14px", sm: "20px", md: "20px" },
+									lineHeight: { xs: "12px", sm: "20px", md: "20px" },
 									fontWeight: "300",
 									marginY: ".8rem",
 								}}

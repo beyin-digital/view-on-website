@@ -1,7 +1,8 @@
-import { Box, OutlinedInput } from "@mui/material";
+import { Box, Button, OutlinedInput, Typography } from "@mui/material";
 import React from "react";
 import { ButtonLogin } from "../Button";
 import LoginTextSignUp from "../Login/LoginTextSignUp";
+import { FiArrowUpRight } from "react-icons/fi";
 
 const FormRequest = () => {
 	return (
@@ -47,12 +48,49 @@ const FormRequest = () => {
 					alignItems: "center",
 				}}
 			>
-				<ButtonLogin
+				{/* <ButtonLogin
 					name="send"
 					onClick={() => {
 						// router.push("/");
 					}}
-				/>
+				/> */}
+				<Box
+					sx={{
+						width: { xs: "240px", sm: "300px", md: "300px", xl: "300px" },
+						display: "flex",
+						justifyContent: "end",
+						background: "#0090EC",
+						borderRadius: "16px",
+					}}
+				>
+					<Button
+						sx={{
+							paddingX: "18px",
+							height: "59px",
+							width: { xs: "220px", md: "231px", xl: "231px" },
+							display: "flex",
+							justifyContent: "space-around",
+						}}
+						// onClick={}
+						type="submit"
+					>
+						<Typography
+							sx={{
+								// fontFamily: "Helvetica Neue",
+								letterSpacing: "0.02em",
+								fontSize: { xs: "20px", md: "25px", xl: "32px" },
+								fontWeight: 400,
+								lineHeight: "40px",
+								color: "#FBFBFB",
+								textTransform: "uppercase",
+							}}
+						>
+							send
+						</Typography>
+
+						<FiArrowUpRight size={42} color="#FBFBFB" />
+					</Button>
+				</Box>
 				<LoginTextSignUp />
 			</Box>
 		</>

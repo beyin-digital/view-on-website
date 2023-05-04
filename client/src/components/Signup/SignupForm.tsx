@@ -11,26 +11,36 @@ const SignupForm = () => {
 			<Box
 				sx={{
 					width: "100%",
+					height: { xs: "250px", sm: "400px", md: "400px" },
 					display: "flex",
 					alignItems: "center",
-					justifyContent: "space-between",
+					justifyContent: {
+						xs: "center",
+						md: "space-between",
+						xl: "space-between",
+					},
 					flexDirection: { xs: "column", md: "row", xl: "row" },
 				}}
 			>
 				<Box
 					sx={{
 						width: { xs: "100%", md: "50%", xl: "50%" },
-						height: { xs: "100%", md: "235px", xl: "235px" },
+						height: { xs: "115px", md: "235px", xl: "235px" },
 						display: "flex",
 						alignItems: "center",
 						flexDirection: "column",
-						justifyContent: "space-evenly",
+						justifyContent: {
+							xs: "center",
+							md: "space-evenly",
+							xl: "space-evenly",
+						},
+						// marginY: { xs: ".3rem", sm: ".3rem", md: "1rem", xl: ".3rem" },
 					}}
 				>
 					<OutlinedInput
 						sx={{
 							width: "100%",
-							height: "65px",
+							height: { xs: "47px", md: "50px", xl: "65px" },
 							fontSize: {
 								xs: "18px",
 								sm: "22px",
@@ -41,14 +51,14 @@ const SignupForm = () => {
 							background: "#FBFBFB",
 							borderRadius: "15px",
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
-							marginY: ".3rem",
+							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
 						placeholder="Full name"
 					/>
 					<OutlinedInput
 						sx={{
 							width: "100%",
-							height: "65px",
+							height: { xs: "47px", md: "50px", xl: "65px" },
 							fontSize: {
 								xs: "18px",
 								sm: "22px",
@@ -59,7 +69,7 @@ const SignupForm = () => {
 							background: "#FBFBFB",
 							borderRadius: "15px",
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
-							marginY: ".3rem",
+							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
 						placeholder="Password"
 					/>
@@ -67,18 +77,23 @@ const SignupForm = () => {
 				<Box
 					sx={{
 						width: { xs: "100%", md: "40%", xl: "40%" },
-						height: { xs: "100%", md: "235px", xl: "235px" },
-
+						height: { xs: "115px", md: "235px", xl: "235px" },
 						display: "flex",
 						alignItems: "center",
 						flexDirection: "column",
-						justifyContent: "space-evenly",
+						justifyContent: {
+							xs: "center",
+							md: "space-evenly",
+							xl: "space-evenly",
+						},
+						// marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
+						// marginY: { xs: ".3rem", md: "1rem", xl: ".3rem" },
 					}}
 				>
 					<OutlinedInput
 						sx={{
 							width: "100%",
-							height: "65px",
+							height: { xs: "47px", md: "50px", xl: "65px" },
 							fontSize: {
 								xs: "18px",
 								sm: "22px",
@@ -89,14 +104,14 @@ const SignupForm = () => {
 							background: "#FBFBFB",
 							borderRadius: "15px",
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
-							marginY: ".3rem",
+							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
 						placeholder="E-mail"
 					/>
 					<OutlinedInput
 						sx={{
 							width: "100%",
-							height: "65px",
+							height: { xs: "47px", md: "50px", xl: "65px" },
 							fontSize: {
 								xs: "18px",
 								sm: "22px",
@@ -122,13 +137,15 @@ const SignupForm = () => {
 					alignItems: "center",
 					justifyContent: "space-between",
 					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
-					marginY: { xs: "1rem", md: "0", xl: "0" },
+					marginBottom: { xs: "10rem", md: "5rem", xl: "5rem" },
+					marginTop: { xs: "1rem", md: "2rem", xl: "2rem" },
 				}}
 			>
 				<Typography
 					sx={{
 						fontSize: { xs: "13px", xl: "16px" },
 						fontWight: "300",
+						marginY: { xs: ".5rem", md: "", xl: "" },
 					}}
 				>
 					Already have an account?{" "}

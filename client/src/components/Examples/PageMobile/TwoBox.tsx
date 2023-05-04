@@ -9,6 +9,7 @@ const TwoBox = () => {
 					top: "-5rem",
 					background: "#EAEDED",
 				}}
+				className="ExampleBoxTwo"
 			>
 				<Box
 					sx={{
@@ -21,7 +22,7 @@ const TwoBox = () => {
 					<Box
 						sx={{
 							width: { xs: "100%", sm: "100%", md: "100%" },
-							height: "80vh",
+							height: { xs: "60vh",sm:"80vh", md: "80vh", xl: "80vh" },
 							paddingX: "1rem",
 							position: "relative",
 						}}
@@ -32,20 +33,23 @@ const TwoBox = () => {
 								position: "absolute",
 								top: "20%",
 							}}
+							className="ExampleBoxTwoText"
 						>
 							<Box
 								sx={{
 									marginTop: { xs: "4rem", xl: "7rem" },
 									marginX: { xs: "0", md: "2rem" },
 								}}
+								className="ExampleBoxTwoText"
 							>
 								<Typography
 									sx={{
 										width: { xs: "40%", sm: "25%", md: "50%" },
 										height: "100%",
-										fontSize: { xs: "14px", md: "24px" },
-										lineHeight: { xs: "12px", md: "20px" },
+										fontSize: "20px",
 										fontWeight: "500",
+										lineHeight: "18px",
+
 										marginY: "1rem",
 									}}
 								>
@@ -55,8 +59,8 @@ const TwoBox = () => {
 									sx={{
 										width: { xs: "38%", sm: "30%", md: "80%" },
 										height: "100%",
-										fontSize: { xs: "14px", md: "20px" },
-										lineHeight: { xs: "12px", md: "20px" },
+										fontSize: { xs: "13px", sm: "20px", md: "20px" },
+										lineHeight: { xs: "12px", sm: "20px", md: "20px" },
 										fontWeight: "300",
 										marginY: "1rem",
 									}}
@@ -86,6 +90,7 @@ const TwoBox = () => {
 									bottom: "0",
 									right: { xs: "-5rem", sm: "0", md: "0" },
 								}}
+								className="ExampleBoxTwoPic"
 							>
 								<img
 									src="/images/mobile.png"

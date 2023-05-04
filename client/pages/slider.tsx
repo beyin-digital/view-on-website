@@ -1,6 +1,5 @@
 import SliderDesktop from "@/components/Slider/SliderDesktop";
-import SliderMobile from "@/components/Slider/SliderMobile";
-import Head from "next/head";
+ import Head from "next/head";
 
 const Slider = () => {
 	return (
@@ -12,7 +11,7 @@ const Slider = () => {
 				<meta property="og:image" content="" />
 			</Head>
 			<SliderDesktop />
-			<SliderMobile />
+
 		</>
 	);
 };

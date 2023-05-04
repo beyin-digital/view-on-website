@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 
 const TextViewOnWeb = () => {
 	return (
@@ -28,7 +28,7 @@ const TextViewOnWeb = () => {
 						},
 					}}
 					fontWeight="600"
- 					color="#0090EC"
+					color="#0090EC"
 				>
 					ViewOnWebsite.com
 				</Typography>

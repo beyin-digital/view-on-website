@@ -1,13 +1,4 @@
-import {
-	Container,
-	Box,
-	Grid,
-	Input,
-	Typography,
-	Divider,
-	OutlinedInput,
-	TextField,
-} from "@mui/material";
+import { Box, Typography, OutlinedInput, Button } from "@mui/material";
 
 const ChangePasswordForm = () => {
 	return (
@@ -22,7 +13,7 @@ const ChangePasswordForm = () => {
 				<OutlinedInput
 					sx={{
 						width: "100",
-						height: "65px",
+						height: { xs: "47px", md: "50px", xl: "65px" },
 						fontSize: {
 							xs: "18px",
 							sm: "22px",
@@ -44,7 +35,7 @@ const ChangePasswordForm = () => {
 				<OutlinedInput
 					sx={{
 						width: "100",
-						height: "65px",
+						height: { xs: "47px", md: "50px", xl: "65px" },
 						fontSize: {
 							xs: "18px",
 							sm: "22px",
@@ -64,6 +55,55 @@ const ChangePasswordForm = () => {
 					}}
 					placeholder="Password"
 				/>
+			</Box>
+			<Box
+				sx={{
+					marginY: "4rem",
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+				}}
+			>
+				<Box
+					sx={{
+						width: {
+							xs: "100%",
+							sm: "459px",
+							md: "459px",
+							xl: "459px",
+						},
+						display: "flex",
+						justifyContent: "center",
+						background: "#0090EC",
+						borderRadius: "16px",
+					}}
+				>
+					<Button
+						sx={{
+							paddingX: "1rem",
+							height: "59px",
+							width: { xs: "100%", md: "431px", xl: "431px" },
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
+						<Typography
+							sx={{
+								// fontFamily: "Helvetica Neue",
+								letterSpacing: "0.02em",
+								fontSize: { xs: "25px", xl: "32px" },
+								fontWeight: 400,
+								lineHeight: { xs: "25px", xl: "40px" },
+								color: "#FBFBFB",
+								textTransform: "uppercase",
+							}}
+						>
+							Change password
+						</Typography>
+
+						{/* <FiArrowUpRight size={42} color="#FBFBFB" /> */}
+					</Button>
+				</Box>
 			</Box>
 		</>
 	);

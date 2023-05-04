@@ -17,6 +17,7 @@ const Request = () => {
 						justifyContent: "end",
 						transform: "skew(16deg, 0deg)",
 						paddingX: "1rem",
+						marginY: { xs: "7rem", sm: "7rem", md: "1rem", xl: "1rem" },
 					}}
 				>
 					<Box

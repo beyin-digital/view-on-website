@@ -17,7 +17,7 @@ const Example = () => {
 			<Header />
 			<Box>
 				<PageDesktop />
-				{/* <PageMobile /> */}
+				<PageMobile />
 				<Footer />
 			</Box>
 		</>

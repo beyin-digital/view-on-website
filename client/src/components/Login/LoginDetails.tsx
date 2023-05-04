@@ -1,13 +1,4 @@
-import {
-	Container,
-	Box,
-	Grid,
-	Input,
-	Typography,
-	Divider,
-	OutlinedInput,
-	TextField,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
 const LoginDetails = () => {
@@ -19,36 +10,25 @@ const LoginDetails = () => {
 					flexDirection: "column",
 					alignItems: "center",
 					justifyContent: "center",
-					marginTop: "4rem",
-					marginBottom:{xl:"1rem"}
+					marginTop: "5rem",
+					marginBottom: "1rem",
 				}}
 			>
 				<Image src="/images/logo.svg" alt="logo" width={150} height={80} />
-				<Typography
-					sx={{
-						fontSize: { xs: "20px", xl: "24px" },
-						fontWeight: "800",
-						lineHeight: "28px",
-						marginY: "1rem",
-						textAlign: "center",
-					}}
-					color="#343132"
-				>
-					AN E-LABEL STAMP
-				</Typography>
 			</Box>
 			<Box
 				sx={{
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
+					marginY: { xs: "4rem", md: "1rem", xl: "2rem" },
 				}}
 			>
 				<Typography
 					fontWeight="100"
 					sx={{
-						fontSize: { xs: "20px", md: "30px", xl: "40px" },
-
+						fontSize: { xs: "24px", md: "30px", xl: "40px" },
+						fontWeight: "300",
 						lineHeight: "37px",
 					}}
 				>

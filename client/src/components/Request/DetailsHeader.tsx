@@ -27,7 +27,7 @@ const DetailsHeader = () => {
 						sx={{
 							fontSize: { xs: "20px", xl: "40px" },
 							fontWeight: "400",
-							lineHeight: "37px",
+							lineHeight: { xs: "22px", xl: "37px" },
 							marginTop: "2rem",
 							textAlign: "center",
 						}}
@@ -40,7 +40,7 @@ const DetailsHeader = () => {
 							width: { xs: "100%", sm: "100%", md: "605px", xl: "605px" },
 							fontSize: { xs: "20px", xl: "24px" },
 							fontWeight: "400",
-							lineHeight: "37px",
+							lineHeight: { xs: "22px", xl: "37px" },
 							marginY: ".5rem",
 							textAlign: "center",
 						}}

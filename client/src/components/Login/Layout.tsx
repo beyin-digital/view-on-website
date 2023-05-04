@@ -25,20 +25,6 @@ const Layout: React.FC<Props> = ({ children }) => {
 			title: "Apple Icon",
 			link: "https://apple.com",
 		},
-		// {
-		// 	id: 1,
-		// 	icon: "/icons/facebookColor.svg",
-		// 	alt: "Facebook Icon",
-		// 	title: "Facebook Icon",
-		// 	link: "https://facebook.com",
-		// },
-		// {
-		// 	id: 1,
-		// 	icon: "/icons/linkedin.svg",
-		// 	alt: "LinkedIn Icon",
-		// 	title: "LinkedIn Icon",
-		// 	link: "https://linkedin.com",
-		// },
 	];
 	return (
 		<>
@@ -114,30 +100,35 @@ const Layout: React.FC<Props> = ({ children }) => {
 								md: "1px solid #FBFBFB",
 								xl: "1px solid #FBFBFB",
 							},
+
 							backdropFilter: { xs: "0", md: "blur(100px)", xl: "blur(100px)" },
 							borderRadius: "30px",
 							transform: "skew(-16deg, 0deg)",
-							// transform: { xs: "skew(-10deg, 0deg)", xl: "skew(-20deg, 0deg)" },
 							overflow: { xs: "", md: "hidden", xl: "hidden" },
-							margin: "3rem auto",
+							margin: {
+								xs: "10rem auto",
+								sm: "3rem auto",
+								md: "3rem auto",
+								xl: "3rem auto",
+							},
+							zIndex: "999",
 						}}
 					>
 						{children}
 					</Box>
 					<Box
 						sx={{
-							display: "flex",
+							display: { xs: "none", sm: "none", md: "flex", xl: "flex" },
 							alignItems: "center",
 							justifyContent: "center",
 							position: "relative",
-							// left: { xs: "", md: "-5rem", xl: "-20rem" },
+							left: { xs: "", md: "-8rem", xl: "-0rem" },
 							top: "-2rem",
 						}}
 					>
 						<Typography>Or login with</Typography>
 						<Box
 							sx={{
-								// width: "60%",
 								display: "flex",
 								alignItems: "center",
 								justifyContent: "space-evenly",

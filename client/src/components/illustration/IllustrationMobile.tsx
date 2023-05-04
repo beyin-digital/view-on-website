@@ -51,6 +51,7 @@ const IllustrationMobile = () => {
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "center",
+							// paddingX: { xs: "", sm: "3rem", md: "" },
 						}}
 					>
 						<Box
@@ -92,7 +93,12 @@ const IllustrationMobile = () => {
 											sx={{
 												fontSize: { xs: "30px", md: "50px", xl: "64px" },
 												fontWeight: "600",
-												lineHeight: "45px",
+												lineHeight: {
+													xs: "35px",
+													sm: "45px",
+													md: "45px",
+													xl: "45px",
+												},
 											}}
 										>
 											The Call to Action Everyone Already Knows !
@@ -113,7 +119,12 @@ const IllustrationMobile = () => {
 									>
 										<Typography
 											sx={{
-												fontSize: { xs: "30px", sm: "40px" },
+												fontSize: {
+													xs: "20px",
+													sm: "30px",
+													md: "40px",
+													xl: "45px",
+												},
 
 												lineHeight: "37px",
 
@@ -143,7 +154,7 @@ const IllustrationMobile = () => {
 									</Box>
 									<Box
 										sx={{
-											marginTop: { xs: "2rem" },
+											marginY: { xs: "2rem" },
 										}}
 									>
 										<Typography
@@ -153,6 +164,7 @@ const IllustrationMobile = () => {
 												fontWeight: "500",
 												position: "relative",
 												zIndex: "99",
+												marginTop: { xs: "3rem" },
 												background: "transparent",
 											}}
 										>
@@ -162,9 +174,9 @@ const IllustrationMobile = () => {
 										<Box
 											sx={{
 												display: "flex",
-												alignItems: { xs: "", md: "center" },
+												alignItems: { xs: "center", md: "center" },
 												justifyContent: "center",
-												height: { xs: "150px", sm: "150px", md: "200px" },
+												height: { xs: "100px", sm: "100px", md: "200px" },
 											}}
 										>
 											<img src="/icons/arrowDown.png" />
@@ -173,23 +185,30 @@ const IllustrationMobile = () => {
 								</Box>
 								<Box
 									sx={{
-										width: "70%",
-										height: { xs: "280px", sm: "330px" },
+										width: "90%",
+										height: { xs: "175px", sm: "280px", md: "330px" },
 										display: "flex",
 										justifyContent: { xs: "start", md: "center" },
 										flexDirection: "column",
 										position: "relative",
+										// marginX: "3rem",
 									}}
 								>
 									<Box
 										sx={{
-											paddingTop: "1rem",
+											// paddingTop: "1rem",
 											display: "flex",
-
+											width: "100%",
 											justifyContent: "center",
+											// paddingX: "3rem",
 										}}
 									>
-										<img src="/images/illustrationPicCenter.png" />
+										<img
+											src="/images/illustrationPicCenter.png"
+											style={{
+												width: "100%",
+											}}
+										/>
 									</Box>
 								</Box>
 							</Box>
@@ -200,50 +219,62 @@ const IllustrationMobile = () => {
 									height: "500px",
 
 									display: "flex",
-									justifyContent: "center",
+
+									justifyContent:"space-around",
 									alignItems: "center",
 									position: "relative",
 									flexDirection: "column",
+
 								}}
 							>
 								<Box
 									sx={{
+										display: "flex",
+										alignItems: { xs: "center", md: "center" },
+										justifyContent: "center",
+										height: { xs: "100px", sm: "100px", md: "200px" },
+									}}
+								>
+									<img src="/icons/arrowDown.png" />
+								</Box>
+								<Box
+									sx={{
 										position: "absolute",
-										top: { xs: "-2rem", sm: "-2rem" },
+										top: { xs: "8rem", sm: "4rem" },
 
 										width: { xs: "100%", sm: "80%" },
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "center",
+										// background:"url('/images/swirlSmall.svg')",
+										// height:"300px"
 									}}
-									className="illustrationBg"
+									// className="illustrationBg"
 								>
 									<img
 										src="/images/swirlSmall.svg"
-										style={{
-											width: "50%",
-											// objectFit: "contain",
-										}}
+										style={
+											{
+												// width: "50%",
+												// objectFit: "contain",
+											}
+										}
 									/>
 								</Box>
 								<Box
 									sx={{
-										position: "absolute",
-										left: { xs: "-6rem", sm: "-6rem" },
-										top: { xs: "-11rem", sm: "-11.5rem" },
-										display: "flex",
+										// position: "absolute",
+										// left: { xs: "-6rem", sm: "-6rem" },
+										// top: { xs: "-11rem", sm: "-11.5rem" },
+										display: { xs: "none", sm: "none" },
 										alignItems: "center",
-										justifyContent: "center",
+										justifyContent: "start",
 										width: "100%",
+										paddingX: "1rem",
 									}}
 									className="illustrationArrowLeftDown"
 								>
-									<img
-										src="/icons/arrowDownLeft.png"
-										style={{
-											width: "160px",
-										}}
-									/>
+									<img src="/icons/arrowDownLeft.png" />
 								</Box>
 								<Box
 									sx={{
@@ -273,6 +304,8 @@ const IllustrationMobile = () => {
 											zIndex: "9999999999",
 											background: "transparent",
 											width: "262px",
+											height: "100px",
+											// marginY:"2rem"
 										}}
 									>
 										To being fully in control of all your physical conversion
@@ -339,7 +372,12 @@ const IllustrationMobile = () => {
 												>
 													<Typography
 														sx={{
-															fontSize: "20px",
+															fontSize: {
+																xs: "17px",
+																sm: "20px",
+																md: "20px",
+																xl: "20px",
+															},
 															lineHeight: "20px",
 															fontWeight: "400",
 														}}
@@ -363,6 +401,7 @@ const IllustrationMobile = () => {
 										md={4}
 										sx={{
 											marginLeft: "1.5rem",
+											height: "80px",
 										}}
 										sm={12}
 									>
@@ -398,7 +437,12 @@ const IllustrationMobile = () => {
 												>
 													<Typography
 														sx={{
-															fontSize: "20px",
+															fontSize: {
+																xs: "17px",
+																sm: "20px",
+																md: "20px",
+																xl: "20px",
+															},
 															lineHeight: "20px",
 															fontWeight: "400",
 														}}
@@ -422,6 +466,7 @@ const IllustrationMobile = () => {
 										md={4}
 										sx={{
 											marginLeft: "2rem",
+											height: "80px",
 										}}
 										sm={12}
 									>
@@ -457,7 +502,12 @@ const IllustrationMobile = () => {
 												>
 													<Typography
 														sx={{
-															fontSize: "20px",
+															fontSize: {
+																xs: "17px",
+																sm: "20px",
+																md: "20px",
+																xl: "20px",
+															},
 															lineHeight: "20px",
 															fontWeight: "400",
 														}}
@@ -495,7 +545,7 @@ const IllustrationMobile = () => {
 								<Box
 									sx={{
 										width: "277px",
-										height: "46px",
+										height: { xs: "100%", sm: "46px", md: "46px", xl: "46px" },
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "space-between",
@@ -512,9 +562,19 @@ const IllustrationMobile = () => {
 									>
 										<Typography
 											sx={{
-												fontSize: "20px",
+												fontSize: {
+													xs: "17px",
+													sm: "20px",
+													md: "20px",
+													xl: "20px",
+												},
 												fontWeight: "500",
-												lineHeight: "39px",
+												lineHeight: {
+													xs: "25px",
+													sm: "39px",
+													md: "39px",
+													xl: "39px",
+												},
 												color: "#343132",
 												textTransform: "uppercase",
 											}}

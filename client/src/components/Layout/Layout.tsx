@@ -85,6 +85,8 @@ const Layout: React.FC<Props> = ({ children }) => {
 							// transform: { xs: "skew(-10deg, 0deg)", xl: "skew(-20deg, 0deg)" },
 							overflow: { xs: "", md: "hidden", xl: "hidden" },
 							margin: "3rem auto",
+
+							zIndex: "999",
 						}}
 					>
 						{children}

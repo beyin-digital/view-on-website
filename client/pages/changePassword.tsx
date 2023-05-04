@@ -1,4 +1,3 @@
-import { ButtonChange } from "@/components/Button";
 import ChangePasswordDetails from "@/components/ChangePassword/ChangePasswordDetails";
 import ChangePasswordForm from "@/components/ChangePassword/ChangePasswordForm";
 import Layout from "@/components/Layout/Layout";
@@ -37,21 +36,6 @@ const ChangePassword = () => {
 						>
 							<ChangePasswordDetails />
 							<ChangePasswordForm />
-							<Box
-								sx={{
-									marginY: {xs:"4rem",md:"2rem",xl:"4rem"},
-									display: "flex",
-									flexDirection: "column",
-									alignItems: "center",
-								}}
-							>
-								<ButtonChange
-									name="Change password"
-									onClick={() => {
-										// router.push("/");
-									}}
-								/>
-							</Box>
 						</Box>
 					</Box>
 				</Box>

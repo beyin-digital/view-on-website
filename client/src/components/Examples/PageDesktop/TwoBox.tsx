@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import MouseMoveEffect from "./Mo";
 const TwoBox = () => {
 	return (
 		<>
@@ -7,12 +6,10 @@ const TwoBox = () => {
 				sx={{
 					width: "700px",
 					maxWidth: "100%",
-					// width: "25%",
 					borderLeft: "1px solid #FBFBFB",
 					borderBottom: "1px solid #FBFBFB",
 					borderTopLeftRadius: "30px",
 					borderBottomLeftRadius: "30px",
-					// background: "rgba(251, 251, 251, 0.6)",
 					backdropFilter: "blur(100px)",
 					background:
 						"radial-gradient(19.29% 37.23% at 20.86% 80.45%, rgba(34, 71, 23, 0.3) 0%, rgba(49, 231, 22, 0.012) 100%)",
@@ -21,7 +18,6 @@ const TwoBox = () => {
 					justifyContent: "space-between",
 					position: "relative",
 					right: "-1.5rem",
-					// zIndex: "99",
 				}}
 			>
 				<Box

@@ -1,13 +1,4 @@
-import {
-	Container,
-	Box,
-	Grid,
-	Input,
-	Typography,
-	Divider,
-	OutlinedInput,
-	TextField,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
 const ChangePasswordDetails = () => {
@@ -33,7 +24,7 @@ const ChangePasswordDetails = () => {
 					}}
 					color="#343132"
 				>
-					AN E-LABEL STAMP
+					{/* AN E-LABEL STAMP */}
 				</Typography>
 			</Box>
 			<Box
@@ -49,7 +40,7 @@ const ChangePasswordDetails = () => {
 					sx={{
 						fontSize: { xs: "20px", md: "30px", xl: "40px" },
 						fontWeight: "400",
-						lineHeight: "37px",
+						lineHeight: { xs: "22px", xl: "37px" },
 						marginBottom: { xs: "2rem", md: "", xl: "1rem" },
 						textAlign: "center",
 					}}

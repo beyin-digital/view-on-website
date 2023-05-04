@@ -7,7 +7,7 @@ const Footer = () => {
 			<Box
 				sx={{
 					width: "100%",
-					display: { xs: "none", md: "flex", xl: "flex" },
+					display: { xs: "none", sm: "none", md: "flex", xl: "flex" },
 					flexDirection: { xs: "column", md: "row", xl: "row" },
 					alignItems: "center",
 					justifyContent: {
@@ -75,7 +75,6 @@ const Footer = () => {
 						<Typography
 							fontSize="20px"
 							fontWeight="400"
-							// fontFamily="GilroyRegular"
 							lineHeight="32px"
 							textAlign="center"
 						>
@@ -86,7 +85,6 @@ const Footer = () => {
 					<Typography
 						fontSize="20px"
 						fontWeight="400"
-						// fontFamily="GilroyRegular"
 						lineHeight="32px"
 						textAlign="center"
 					>
@@ -95,7 +93,6 @@ const Footer = () => {
 					<Typography
 						fontSize="20px"
 						fontWeight="400"
-						// fontFamily="GilroyRegular"
 						lineHeight="32px"
 						textAlign="center"
 					>
@@ -104,7 +101,6 @@ const Footer = () => {
 					<Typography
 						fontSize="20px"
 						fontWeight="400"
-						// fontFamily="GilroyRegular"
 						lineHeight="32px"
 						textAlign="center"
 					>

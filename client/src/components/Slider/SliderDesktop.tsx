@@ -1,7 +1,5 @@
 import Header from "@/components/Navbar/Navbar";
-import Layout from "@/components/Layout/Layout";
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
 import Image from "next/image";
 import Footer from "@/components/Footer/Footer";
 import FooterMobile from "@/components/Footer/FooterMobile";
@@ -16,6 +14,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
 import { EffectCoverflow, Pagination, Navigation } from "swiper";
+import { ButtonLogin } from "../Button";
 
 const SliderDesktop = () => {
 	const check = [
@@ -25,14 +24,32 @@ const SliderDesktop = () => {
 		{ id: 1, title: "SEO Supported Keyword" },
 	];
 	const images = [
-		{ id: 1, img: "/images/card.png" },
-		{ id: 2, img: "/images/card.png" },
-		{ id: 3, img: "/images/card.png" },
-		{ id: 4, img: "/images/card.png" },
-		{ id: 5, img: "/images/card.png" },
-		{ id: 6, img: "/images/card.png" },
-		{ id: 7, img: "/images/card.png" },
-		{ id: 8, img: "/images/card.png" },
+		{ id: 1, num: "a" },
+		{ id: 2, num: "b" },
+		{ id: 3, num: "c" },
+		{ id: 4, num: "d" },
+		{ id: 5, num: "e" },
+		{ id: 6, num: "f" },
+		{ id: 7, num: "g" },
+		{ id: 8, num: "h" },
+		{ id: 9, num: "i" },
+		{ id: 10, num: "j" },
+		{ id: 11, num: "k" },
+		{ id: 12, num: "l" },
+		{ id: 13, num: "m" },
+		{ id: 14, num: "n" },
+		{ id: 15, num: "o" },
+		{ id: 16, num: "p" },
+		{ id: 17, num: "q" },
+		{ id: 18, num: "r" },
+		{ id: 19, num: "s" },
+		{ id: 20, num: "t" },
+		{ id: 21, num: "u" },
+		{ id: 22, num: "v" },
+		{ id: 23, num: "w" },
+		{ id: 24, num: "x" },
+		{ id: 25, num: "y" },
+		{ id: 26, num: "z" },
 	];
 	return (
 		<Box
@@ -41,7 +58,7 @@ const SliderDesktop = () => {
 				background: "#EAEDED",
 				overflow: "hidden",
 			}}
-			className="SliderDesktop"
+			className="SliderDeskto"
 		>
 			<Box
 				sx={{
@@ -54,7 +71,9 @@ const SliderDesktop = () => {
 					position: "relative",
 				}}
 			>
+				{/* Navbar */}
 				<Header />
+				{/* background image */}
 				<Box
 					sx={{
 						width: "100%",
@@ -66,7 +85,7 @@ const SliderDesktop = () => {
 						alt=""
 						style={{
 							// objectFit:"cover",
-							top: "-43rem",
+							top: "-37rem",
 							position: "absolute",
 						}}
 					/>
@@ -74,281 +93,498 @@ const SliderDesktop = () => {
 				<Box
 					sx={{
 						position: "relative",
-						top: "-2.5rem",
-						right: { xs: "0%", sm: "0%", md: "10%", xl: "20%" },
-						maxWidth: "100%",
-						width: "100%",
-						height: { xs: "100%", sm: "540px", md: "650px", xl: "650px" },
-						background: {
-							xs: "transparent",
-							md: "rgba(251, 251, 251, 0.6)",
-							xl: "rgba(251, 251, 251, 0.6)",
-						},
-						border: {
-							xs: "0",
-							md: "1px solid #FBFBFB",
-							xl: "1px solid #FBFBFB",
-						},
-						backdropFilter: { xs: "0", md: "blur(100px)", xl: "blur(100px)" },
-						borderRadius: "30px",
-						transform: { xs: "skew(-10deg, 0deg)", xl: "skew(-20deg, 0deg)" },
-						overflow: { xs: "", md: "hidden", xl: "hidden" },
+						marginY: "3rem",
 					}}
 				>
-					<>
+					{/* Text Premium top layout */}
+					<Box
+						sx={{
+							width: "100%",
+							position: "absolute",
+							// top: "7rem",
+							top: ".2rem",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+							heigh: "50px",
+							transform: "skew(0deg, 0deg)",
+						}}
+					>
 						<Box
 							sx={{
-								width: "100%",
-								height: "100%",
+								width: "200px",
+								height: "40px",
+								lineHeight: "92.5%",
+								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+								borderRadius: "11px",
 								display: "flex",
 								alignItems: "center",
-								justifyContent: "end",
+								justifyContent: "center",
 							}}
 						>
-							<Box
+							<Typography
 								sx={{
-									width: { xs: "", md: "95%", xl: "80%" },
-									height: "90%",
-									transform: {
-										xs: "skew(10deg, 0deg)",
-										xl: "skew(20deg, 0deg)",
-									},
-									paddingX: "6rem",
-									display: "flex",
-									flexDirection: "column",
-									justifyContent: "space-around",
+									fontSize: { xs: "25px", xl: "32px" },
+									fontWeight: "500",
+									lineHeight: "29px",
+									background: "",
 								}}
 							>
-								<Box sx={{}}>
-									<Typography
-										sx={{
-											fontSize: "40px",
-											fontWeight: "400",
-											lineHeight: "45px",
-										}}
-									>
-										Reserve Your Premium{" "}
+								Premium
+							</Typography>
+						</Box>
+					</Box>
+					{/* layout Box */}
+					<Box
+						sx={{
+							position: "relative",
+							top: "2.5rem",
+							right: { xs: "0%", sm: "0%", md: "0%", xl: "20%" },
+							maxWidth: "100%",
+							width: "100%",
+							height: { xs: "600px", sm: "600px", md: "500px", xl: "500px" },
+							background: {
+								xs: "rgba(251, 251, 251, 0.6)",
+								md: "rgba(251, 251, 251, 0.6)",
+								xl: "rgba(251, 251, 251, 0.6)",
+							},
+							border: {
+								xs: "1px solid #FBFBFB",
+								md: "1px solid #FBFBFB",
+								xl: "1px solid #FBFBFB",
+							},
+							backdropFilter: {
+								xs: "blur(100px)",
+								md: "blur(100px)",
+								xl: "blur(100px)",
+							},
+							borderRadius: "30px",
+							transform: { xs: "", md: "", xl: "skew(-16deg, 0deg)" },
+							overflow: { xs: "", md: "hidden", xl: "hidden" },
+						}}
+					>
+						<>
+							<Box
+								sx={{
+									width: "100%",
+									height: "100%",
+									display: "flex",
+									alignItems: "center",
+									justifyContent: { xs: "center", xl: "end" },
+								}}
+							>
+								<Box
+									sx={{
+										width: { xs: "100%", md: "100%", xl: "80%" },
+										height: "90%",
+
+										transform: { xs: "", md: "", xl: "skew(16deg, 0deg)" },
+										paddingX: { xs: "1rem", md: "2rem", xl: "6rem" },
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "space-around",
+									}}
+								>
+									{/* text top layout */}
+									<Box>
 										<Typography
-											component={"span"}
 											sx={{
-												paddingX: "10px",
-												background:
-													"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
-												borderRadius: "7px",
-												fontSize: "40px",
+												fontSize: { xs: "25px", md: "30px", xl: "40px" },
 												fontWeight: "400",
 												lineHeight: "45px",
 											}}
 										>
-											#Keyword
-										</Typography>
-									</Typography>
-								</Box>
-								<Box
-									className="oop"
-									sx={{
-										height: "300px",
-										width: "100%",
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "center",
-									}}
-								>
-									<Swiper
-										effect={"coverflow"}
-										grabCursor={true}
-										centeredSlides={true}
-										slidesPerView={2}
-										coverflowEffect={{
-											rotate: 0,
-											stretch: 70,
-											depth: 250,
-											modifier: 1,
-											slideShadows: false,
-										}}
-										loop={true}
-										spaceBetween={30}
-										modules={[EffectCoverflow, Pagination, Pagination]}
-										className="swiper_container"
-									>
-										{images.map((item) => (
-											<SwiperSlide
-												key={item.id}
-												style={{
-													// width: "80%",
-													// height: "289px",
-													objectFit: "cover",
+											Reserve Your Premium{" "}
+											<Typography
+												component={"span"}
+												sx={{
+													paddingX: "10px",
+													background:
+														"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+													borderRadius: "7px",
+													fontSize: { xs: "25px", md: "30px", xl: "40px" },
+													fontWeight: "400",
+													lineHeight: "45px",
 												}}
 											>
-												<img
-													src={item.img}
-													alt=""
-													style={{
-														// width: "100%",
-														// height: "100%",
-														objectFit: "cover",
-													}}
-												/>
-											</SwiperSlide>
-										))}
-									</Swiper>
-								</Box>
-								<Box
-									sx={{
-										height: "100px",
-										width: "100%",
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "space-between",
-									}}
-								>
+												#Keyword
+											</Typography>
+										</Typography>
+									</Box>
+									{/* slider swipre */}
 									<Box
+										className="oop"
 										sx={{
-											width: "60%",
-											height: "100%",
+											height: {
+												xs: "100%",
+												sm: "500px",
+												md: "300px",
+												xl: "300px",
+											},
+											width: "100%",
+											maxWidth: "100%",
 											display: "flex",
 											alignItems: "center",
-											justifyContent: "space-between",
+											justifyContent: "center",
 										}}
 									>
-										<Box
-											sx={{
-												width: "20%",
-												height: "100%",
-												display: "flex",
-												flexDirection: "column",
-												justifyContent: "center",
+										<Swiper
+											effect={"coverflow"}
+											grabCursor={true}
+											centeredSlides={true}
+											slidesPerView={2}
+											coverflowEffect={{
+												rotate: 0,
+												stretch: 70,
+												depth: 250,
+												modifier: 1,
+												slideShadows: false,
 											}}
-										>
-											<Typography
-												sx={{
-													fontSize: "40px",
-													lineHeight: "37px",
-													fontWeight: "400",
-													marginY: ".5rem",
-												}}
-											>
-												$1M
-											</Typography>
-											<Typography
-												sx={{
-													fontSize: "16px",
-													lineHeight: "14px",
-													fontWeight: "300",
-												}}
-											>
-												One time payment
-											</Typography>
-										</Box>
-										<Box
-											sx={{
-												width: "20%",
-												height: "100%",
-												display: "flex",
-												flexDirection: "column",
-												justifyContent: "center",
+											loop={true}
+											spaceBetween={30}
+											modules={[EffectCoverflow, Pagination, Pagination]}
+											className="swiper_container"
+											// pagination={{
+											// 	type: "fraction",
+											// }}
+											pagination={{
+												type: "fraction",
+												renderFraction: function (currentClass, totalClass) {
+													return (
+														'<span class="' +
+														currentClass +
+														'"></span>' +
+														" of " +
+														'<span class="' +
+														totalClass +
+														'"></span>'
+													);
+												},
 											}}
+											autoplay={{ delay: 4000, disableOnInteraction: false }} // تحديد فترة التأخير بين كل انتقال
+											direction={"horizontal"}
 										>
-											<Typography
-												sx={{
-													fontSize: "40px",
-													lineHeight: "37px",
-													fontWeight: "400",
-													marginY: ".5rem",
-												}}
-											>
-												$3.65
-											</Typography>
-											<Typography
-												sx={{
-													fontSize: "16px",
-													lineHeight: "14px",
-													fontWeight: "300",
-												}}
-											>
-												Yearly renewal
-											</Typography>
-										</Box>
-										<Box
-											sx={{
-												width: "40%",
-												height: "100%",
-											}}
-										>
-											{check.map((item) => (
-												<Box
+											{images.map((item) => (
+												<SwiperSlide
 													key={item.id}
-													sx={{
+													style={{
+														width: "100%",
+														borderRadius: "32px",
+														backdropFilter: "blur(150px)",
+														border: "1.63722px solid #E3E3E3",
 														display: "flex",
 														alignItems: "center",
-														justifyContent: "space-between",
-														height: "25px",
+														justifyContent: "center",
 													}}
 												>
-													<CheckIcon fontSize="small" />
 													<Box
 														sx={{
-															width: "85%",
+															width: {
+																xs: "400px",
+																sm: "100%",
+																md: "100%",
+																xl: "100%",
+															},
+															height: { xs: "150px", md: "189px", xl: "189px" },
+															background: "rgba(251, 251, 251, 0.25)",
+															backdropFilter: "blur(120px)",
+															border: "1.63722px solid #E3E3E3",
+															boxShadow: "0px 4px 168px rgba(0, 59, 97, 0.1)",
+															borderRadius: "32px",
+															display: "flex",
+															alignItems: "center",
+															justifyContent: "center",
+															zIndex: "9999999999",
+															position: "relative",
 														}}
 													>
-														<Typography
+														<Box
 															sx={{
-																fontSize: "16px",
-																fontWeight: "400",
-																lineHeight: "14px",
+																width: "200px",
+																height: "100px",
 															}}
 														>
-															{item.title}
-														</Typography>
+															<Typography
+																sx={{
+																	fontSize: {
+																		xs: "50px",
+																		sm: "96px",
+																		ms: "96px",
+																		xl: "96px",
+																	},
+																	fontWeight: "500",
+																	color: "#31E716",
+																	lineHeight: "88.8px",
+																	textAlign: "center",
+																	textTransform: "uppercase",
+																}}
+															>
+																# {item.num}
+															</Typography>
+															<Typography
+																sx={{
+																	fontSize: {
+																		xs: "16px",
+																		sm: "20px",
+																		md: "20px",
+																		xl: "20px",
+																	},
+																	fontWeight: "500",
+																	color: "#0091ED",
+																	lineHeight: "18.8px",
+																	textAlign: "center",
+																}}
+															>
+																ViewOnWebsite.Com
+															</Typography>
+														</Box>
 													</Box>
-												</Box>
+												</SwiperSlide>
 											))}
-										</Box>
+										</Swiper>
 									</Box>
+									{/* footer layout  */}
 									<Box
 										sx={{
-											width: "30%",
+											height: { xs: "100%", md: "100px", xl: "100px" },
+											width: "100%",
 											display: "flex",
-											alignItems: "end",
+											alignItems: { xs: "", md: "center", xl: "center" },
+											justifyContent: "space-between",
+											flexDirection: { xs: "column", md: "row", xl: "row" },
 										}}
 									>
 										<Box
 											sx={{
-												width: "100%",
+												width: { xs: "100%", md: "60%", xl: "60%" },
 												display: "flex",
-												justifyContent: "end",
+												alignItems: "center",
+												justifyContent: "space-between",
+												flexDirection: {
+													xs: "column",
+													sm: "row",
+													md: "row",
+													xl: "row",
+												},
+												marginY: { xs: "2rem", md: ".5rem", xl: ".5rem" },
 											}}
 										>
-											<Button
+											<Box
 												sx={{
-													borderRadius: "16px",
-													paddingX: "18px",
-													height: "59px",
-													width: "311px",
+													width: {
+														xs: "100%",
+														sm: "40%",
+														md: "40%",
+														xl: "40%",
+													},
 													display: "flex",
-													background: "#31E716",
+													alignItems: "center",
+													justifyContent: {
+														xs: "space-between",
+														md: "space-around",
+														xl: "space-around",
+													},
+													flexDirection: {
+														xs: "row",
+														sm: "column",
+														md: "row",
+														xl: "row",
+													},
+													marginY: { xs: ".5rem", md: "", xl: "" },
 												}}
 											>
-												<Typography
+												<Box
 													sx={{
-														fontFamily: "Helvetica Neue",
-														letterSpacing: "0.02em",
-														fontSize: "32px",
-														fontWeight: 400,
-														lineHeight: "40px",
-														color: "#343132",
+														width: { xs: "100%", md: "35%", xl: "20%" },
+														height: "100%",
+														display: "flex",
+														flexDirection: "column",
+														justifyContent: "center",
 													}}
 												>
-													Reserve
-												</Typography>
-												<FiArrowDownRight size={42} color="#343132" />
-											</Button>
+													<Typography
+														sx={{
+															fontSize: {
+																xs: "30px",
+																sm: "40px",
+																md: "40px",
+																xl: "40px",
+															},
+															lineHeight: "37px",
+															fontWeight: "400",
+															marginY: ".5rem",
+														}}
+													>
+														$1M
+													</Typography>
+													<Typography
+														sx={{
+															fontSize: "16px",
+															lineHeight: "14px",
+															fontWeight: "300",
+															height: { xs: "100%", md: "20px", xl: "20px" },
+														}}
+													>
+														One time payment
+													</Typography>
+												</Box>
+												<Box
+													sx={{
+														width: { xs: "100%", md: "20%", xl: "20%" },
+														height: "100%",
+														display: "flex",
+														flexDirection: "column",
+														justifyContent: "center",
+													}}
+												>
+													<Typography
+														sx={{
+															fontSize: {
+																xs: "30px",
+																sm: "40px",
+																md: "40px",
+																xl: "40px",
+															},
+															lineHeight: "37px",
+															fontWeight: "400",
+															marginY: ".5rem",
+														}}
+													>
+														$3.65
+													</Typography>
+													<Typography
+														sx={{
+															fontSize: "16px",
+															lineHeight: "14px",
+															fontWeight: "300",
+															height: { xs: "100%", md: "20px", xl: "20px" },
+														}}
+													>
+														Yearly renewal
+													</Typography>
+												</Box>
+											</Box>
+											<Box
+												sx={{
+													width: { md: "50%", xl: "40%" },
+													// height: "100%",
+												}}
+											>
+												{check.map((item) => (
+													<Box
+														key={item.id}
+														sx={{
+															display: "flex",
+															alignItems: "center",
+															justifyContent: "space-between",
+															height: "25px",
+														}}
+													>
+														<CheckIcon fontSize="small" />
+														<Box
+															sx={{
+																width: "85%",
+															}}
+														>
+															<Typography
+																sx={{
+																	fontSize: "16px",
+																	fontWeight: "400",
+																	lineHeight: "14px",
+																}}
+															>
+																{item.title}
+															</Typography>
+														</Box>
+													</Box>
+												))}
+											</Box>
+										</Box>
+										<Box
+											sx={{
+												width: { xs: "100%", md: "30%", xl: "30%" },
+												display: "flex",
+												alignItems: "end",
+												justifyContent: { xs: "center", md: "", xl: "" },
+												marginTop: { sm: "1rem" },
+											}}
+										>
+											<Box
+												sx={{
+													width: "100%",
+													display: "flex",
+													justifyContent: {
+														xs: "center",
+														md: "end",
+														xl: "end",
+													},
+												}}
+											>
+												<Button
+													sx={{
+														borderRadius: "16px",
+														paddingX: "18px",
+														height: "59px",
+														width: "311px",
+														display: "flex",
+														background: "#31E716",
+													}}
+												>
+													<Typography
+														sx={{
+															fontFamily: "Helvetica Neue",
+															letterSpacing: "0.02em",
+															fontSize: "32px",
+															fontWeight: 400,
+															lineHeight: "40px",
+															color: "#343132",
+														}}
+													>
+														Reserve
+													</Typography>
+													<FiArrowDownRight size={42} color="#343132" />
+												</Button>
+											</Box>
 										</Box>
 									</Box>
 								</Box>
 							</Box>
-						</Box>
-					</>
+						</>
+					</Box>
+				</Box>
+				{/* text and button */}
+				<Box
+					sx={{
+						width: "100%",
+						height: "170px",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+						flexDirection: "column",
+						margin: "1rem",
+					}}
+				>
+					<Typography
+						sx={{
+							fontSize: { xs: "20px", xl: "32px" },
+							fontWeight: "400",
+							lineHeight: "36px",
+							marginY: "1rem",
+						}}
+					>
+						Want to look up your own Premium
+						<Typography
+							component={"span"}
+							sx={{
+								fontSize: { xs: "20px", xl: "32px" },
+								borderRadius: "8px",
+								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+							}}
+						>
+							#keyword ?
+						</Typography>
+					</Typography>
+					<ButtonLogin name="Subscribe" />
 				</Box>
 				<Footer />
 				<FooterMobile />

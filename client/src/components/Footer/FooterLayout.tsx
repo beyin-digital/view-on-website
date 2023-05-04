@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Footer = () => {
 	return (
-		<>
+		<footer>
 			<Box
 				sx={{
 					width: "100%",
@@ -23,7 +23,7 @@ const Footer = () => {
 						display: { xs: "flex", md: "flex", xl: "flex" },
 						alignItems: "center",
 						justifyContent: { xs: "center", md: "start", xl: "start" },
-						margin: { xs: " 2rem 0", md: "0", xl: "0" },
+						margin: { xs: " .1rem 0", sm: "2rem 0", md: "0", xl: "0" },
 					}}
 				>
 					<Image
@@ -83,12 +83,12 @@ const Footer = () => {
 						<Typography
 							fontSize="32px"
 							fontWeight="400"
-							// fontFamily="GilroyRegular"
 							lineHeight="92.5%"
 							textAlign="center"
 						>
 							Premium
 						</Typography>
+						{/* <TemporaryDrawer open={drawerOpen} onClose={handleDrawerClose} /> */}
 					</Box>
 				</Box>
 				<Box
@@ -112,7 +112,6 @@ const Footer = () => {
 						<Typography
 							fontSize="20px"
 							fontWeight="400"
-							// fontFamily="GilroyRegular"
 							lineHeight="32px"
 							textAlign="center"
 						>
@@ -123,7 +122,6 @@ const Footer = () => {
 					<Typography
 						fontSize="20px"
 						fontWeight="400"
-						// fontFamily="GilroyRegular"
 						lineHeight="32px"
 						textAlign="center"
 					>
@@ -132,7 +130,6 @@ const Footer = () => {
 					<Typography
 						fontSize="20px"
 						fontWeight="400"
-						// fontFamily="GilroyRegular"
 						lineHeight="32px"
 						textAlign="center"
 					>
@@ -141,7 +138,6 @@ const Footer = () => {
 					<Typography
 						fontSize="20px"
 						fontWeight="400"
-						// fontFamily="GilroyRegular"
 						lineHeight="32px"
 						textAlign="center"
 					>
@@ -149,7 +145,7 @@ const Footer = () => {
 					</Typography>
 				</Box>
 			</Box>
-		</>
+		</footer>
 	);
 };
 

@@ -1,9 +1,7 @@
 import { Container, Grid } from "@mui/material";
 
-
 // layout
 import Layout from "@/components/Layout/Layout";
-
 
 // components
 import SignupForm from "@/components/Signup/SignupForm";
@@ -32,11 +30,11 @@ const SignUpPage = () => {
 						flexDirection: "column",
 						alignItems: "center",
 						justifyContent: "space-around",
+						marginY: { xs: "0rem", sm: "5rem", md: "1px", xl: "1px" },
 					}}
 				>
-					{/* SignupDetails Top */}
 					<SignupDetails />
-					{/* SignupForm Bottom  */}
+
 					<SignupForm />
 				</Container>
 			</Grid>

@@ -1,7 +1,13 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, ButtonBaseProps, Typography } from "@mui/material";
 import { FiArrowUpRight } from "react-icons/fi";
 
-export const ButtonLogin = ({ name, onClick }: any) => {
+interface ButtonLoginProps extends ButtonBaseProps {
+	name: string;
+	onClick?: () => void;
+	type?: "button" | "submit" | "reset" | undefined;
+}
+
+export const ButtonLogin = (props: ButtonLoginProps) => {
 	return (
 		<>
 			<Box
@@ -21,20 +27,21 @@ export const ButtonLogin = ({ name, onClick }: any) => {
 						display: "flex",
 						justifyContent: "space-around",
 					}}
-					onClick={onClick}
+					onClick={props.onClick}
+					type={props.type}
 				>
 					<Typography
 						sx={{
-							fontFamily: "Helvetica Neue",
+							// fontFamily: "Helvetica Neue",
 							letterSpacing: "0.02em",
-							fontSize: "32px",
+							fontSize: { xs: "20px", md: "25px", xl: "32px" },
 							fontWeight: 400,
 							lineHeight: "40px",
 							color: "#FBFBFB",
 							textTransform: "uppercase",
 						}}
 					>
-						{name}
+						{props.name}
 					</Typography>
 
 					<FiArrowUpRight size={42} color="#FBFBFB" />
@@ -67,7 +74,7 @@ export const ButtonStyle = () => {
 				>
 					<Typography
 						sx={{
-							fontFamily: "Helvetica Neue",
+							// fontFamily: "Helvetica Neue",
 							letterSpacing: "0.02em",
 							fontSize: "32px",
 							fontWeight: 400,
@@ -90,7 +97,12 @@ export const ButtonChange = ({ name, onClick }: any) => {
 		<>
 			<Box
 				sx={{
-					width: { xs: "100%", sm: "459px", md: "459px", xl: "459px" },
+					width: {
+						xs: "100%",
+						sm: "459px",
+						md: "459px",
+						xl: "459px",
+					},
 					display: "flex",
 					justifyContent: "center",
 					background: "#0090EC",
@@ -109,7 +121,7 @@ export const ButtonChange = ({ name, onClick }: any) => {
 				>
 					<Typography
 						sx={{
-							fontFamily: "Helvetica Neue",
+							// fontFamily: "Helvetica Neue",
 							letterSpacing: "0.02em",
 							fontSize: "32px",
 							fontWeight: 400,

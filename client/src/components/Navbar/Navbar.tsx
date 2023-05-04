@@ -21,7 +21,6 @@ import Image from "next/image";
 
 const Header = () => {
 	const router = useRouter();
-
 	const [mobileOpen, setMobileOpen] = useState(false);
 	// handle menu click
 	const handleDrawerToggle = () => {
@@ -78,9 +77,6 @@ const Header = () => {
 					onClick={() => router.push("/")}
 				>
 					<img src="/images/logo.svg" alt="logo" />
-					<Typography fontSize="8px" color="#343132">
-						AN E-LABEL STAMP
-					</Typography>
 				</Box>
 				<AiOutlineClose />
 			</Box>
@@ -115,15 +111,13 @@ const Header = () => {
 							>
 								{link.label}
 							</Typography>
-							<IoIosArrowForward />
+							<IoIosArrowForward color="#343132" />
 						</Box>
 					</Link>
 				))}
 			</Box>
 			<Box
 				sx={{
-					// marginX: "1rem",
-					// marginY: "2rem",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
@@ -143,7 +137,6 @@ const Header = () => {
 				>
 					<Typography
 						sx={{
-							// fontFamily: "Helvetica Neue",
 							letterSpacing: "0.02em",
 							fontSize: "25px",
 							fontWeight: 400,
@@ -229,7 +222,6 @@ const Header = () => {
 							>
 								{link.label}
 							</Typography>
-							{/* <IoIosArrowForward /> */}
 						</Box>
 					</Link>
 				))}
@@ -248,7 +240,11 @@ const Header = () => {
 						boxShadow: "0px 0px 0px 0px",
 					}}
 				>
-					<Toolbar>
+					<Toolbar
+						sx={{
+							flexDirection: { xs: "row-reverse", md: "row", xl: "row" },
+						}}
+					>
 						<IconButton
 							color="inherit"
 							aria-label="open drawer"
@@ -259,11 +255,15 @@ const Header = () => {
 							}}
 							onClick={handleDrawerToggle}
 						>
-							<MenuIcon
-								sx={{
-									color: "#343132",
-								}}
-							/>
+							{mobileOpen ? (
+								<AiOutlineClose color="#343132" />
+							) : (
+								<MenuIcon
+									sx={{
+										color: "#343132",
+									}}
+								/>
+							)}
 						</IconButton>
 
 						<Box
@@ -272,9 +272,6 @@ const Header = () => {
 							onClick={() => router.push("/")}
 						>
 							<img src="/images/logo.svg" alt="logo" />
-							<Typography fontSize="8px" color="#343132">
-								AN E-LABEL STAMP
-							</Typography>
 						</Box>
 						<Box
 							sx={{
@@ -314,7 +311,6 @@ const Header = () => {
 						>
 							<Typography
 								sx={{
-									// fontFamily: "Helvetica Neue",
 									letterSpacing: "0.02em",
 									fontSize: { md: "20px", xl: "32px" },
 									fontWeight: 400,
@@ -339,13 +335,14 @@ const Header = () => {
 								boxSizing: "border-box",
 								width: "100%",
 								height: "100%",
-								background: "rgba(251, 251, 251, 0.6)",
+								background: "transparent",
+								// background: "rgba(251, 251, 251, 0.6",
 								backdropFilter: "blur(100px)",
+								boxShadow:"0px 0px 0px 0px"
 							},
-							"& .mui-style-4t3x6l-MuiPaper-root-MuiDrawer-paper": {
-								background: "rgba(251, 251, 251, 0.6)",
-								backdropFilter: "blur(100px)",
-							},
+							// "& .MuiDrawer-paper": {
+							// 	background: "transparent",
+							// },
 						}}
 					>
 						{drawer}
