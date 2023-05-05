@@ -55,22 +55,7 @@ const LoginPage = () => {
 						>
 							<LoginDetails />
 							<LoginForm />
-							<Box
-								sx={{
-									marginY: "4rem",
-									display: "flex",
-									flexDirection: "column",
-									alignItems: "center",
-								}}
-							>
-								<ButtonLogin
-									name="login"
-									onClick={() => {
-										router.push("/");
-									}}
-								/>
-								<LoginTextSignUp />
-							</Box>
+							 
 						</Box>
 					</Box>
 				</Box>

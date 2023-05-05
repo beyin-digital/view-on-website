@@ -1,16 +1,13 @@
 import { useState } from "react";
 import Layout from "@/components/Layout/LayoutWithFooter";
-import { Grid, Box, OutlinedInput } from "@mui/material";
-import Header from "@/components/Home/Header";
-import TextViewOnWeb from "@/components/Home/TextViewOnWeb";
-import LayoutHomeBg from "@/components/Home/LayoutHomeBg";
+import { Box, Button } from "@mui/material";
+
 import { useRouter } from "next/router";
 import Head from "next/head";
 import ArrowUpright from "../public/icons/arrowUpright";
 import HomeDetails from "@/components/Home/HomeDetails";
 import { Drawer, Typography, IconButton } from "@mui/material";
 
-import MenuIcon from "@mui/icons-material/Menu";
 import SliderDesktop from "@/components/Slider/SliderDesktop";
 
 type Anchor = "bottom" | "right";
@@ -57,30 +54,32 @@ const HomePage = (anchor: Anchor) => {
 					width: "100%",
 				}}
 			>
-				<IconButton
-					onClick={() => setIsDrawerOpen(true)}
-					size="large"
-					edge="start"
-					// color="inherit"
-					aria-label="logo"
+				<Box
 					sx={{
 						position: "absolute",
-						zIndex: "99999999",
 						bottom: "0",
 						left: "0",
 						right: "0",
-
-						padding: "20px",
-						marginLeft: "0",
-
-						transition: "0",
-						"&hover":{
-							background:"red"
-						}
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+						zIndex: "999999999",
 					}}
 				>
-					{/* <MenuIcon /> */}
-				</IconButton>
+					<Button
+						sx={{
+							height: "50px",
+							width: "250px",
+							// border:"1px solid ",
+							marginLeft: "-19rem",
+							background: "transparent",
+							color: "transparent",
+						}}
+						onClick={() => setIsDrawerOpen(true)}
+					>
+						{/* mohamed */}
+					</Button>
+				</Box>
 				<Layout>
 					<>
 						<HomeDetails />

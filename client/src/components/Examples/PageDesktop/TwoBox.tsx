@@ -1,4 +1,11 @@
 import { Box, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
+
+interface Position {
+	x: number;
+	y: number;
+}
+
 const TwoBox = () => {
 	return (
 		<>
@@ -19,6 +26,7 @@ const TwoBox = () => {
 					position: "relative",
 					right: "-1.5rem",
 				}}
+				// className="hoverMouse"
 			>
 				<Box
 					sx={{
@@ -72,7 +80,6 @@ const TwoBox = () => {
 					/>
 				</Box>
 			</Box>
-			{/* <MouseMoveEffect  /> */}
 		</>
 	);
 };

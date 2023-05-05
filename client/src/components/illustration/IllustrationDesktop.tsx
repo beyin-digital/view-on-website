@@ -9,12 +9,18 @@ import { Grid, Link, Typography } from "@mui/material";
 const IllustrationDesktop = () => {
 	return (
 		<>
+			<Header />
+
 			<Box
 				sx={{
 					width: "2192px",
 					maxWidth: "100%",
+					height: { xs: "100%", md: "100vh", xl: "95vh" },
 					background: "#EAEDED",
 					overflow: "hidden",
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
 				}}
 				className="IllustrationDesktop"
 			>
@@ -22,14 +28,13 @@ const IllustrationDesktop = () => {
 					sx={{
 						maxWidth: "100%",
 						margin: "auto",
-						height: { xs: "100%", md: "100vh", xl: "100vh" },
+						height: { xs: "100%", md: "100vh", xl: "95vh" },
 						display: "flex",
 						flexDirection: "column",
-						justifyContent: "space-between",
+						justifyContent: "center",
 						position: "relative",
 					}}
 				>
-					<Header />
 					<Box
 						sx={{
 							width: "100%",
@@ -51,7 +56,8 @@ const IllustrationDesktop = () => {
 							position: "relative",
 							right: { xs: "0%", sm: "0%", md: "10%", xl: "14%" },
 							maxWidth: "100%",
-							width: "100%",
+							// width: "100%",
+							width: "2192px",
 							height: { xs: "100%", sm: "540px", md: "650px", xl: "650px" },
 							background: {
 								xs: "transparent",
@@ -67,10 +73,11 @@ const IllustrationDesktop = () => {
 							borderRadius: "30px",
 							transform: "skew(-16deg, 0deg)",
 							overflow: { xs: "", md: "hidden", xl: "hidden" },
-							margin: "3rem auto",
+							// margin: "3rem auto",
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "end",
+							paddingX: "2rem",
 						}}
 					>
 						<Box
@@ -273,7 +280,7 @@ const IllustrationDesktop = () => {
 										sx={{
 											width: "10px",
 											position: "absolute",
-											right: "6rem",
+											right: "7rem",
 											top: "-6rem",
 										}}
 									>
@@ -511,11 +518,10 @@ const IllustrationDesktop = () => {
 							</Box>
 						</Box>
 					</Box>
-
-					<Footer />
-					<FooterMobile />
 				</Box>
 			</Box>
+			<Footer />
+			{/* <FooterMobile /> */}
 		</>
 	);
 };

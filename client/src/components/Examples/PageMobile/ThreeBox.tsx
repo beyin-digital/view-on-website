@@ -18,7 +18,7 @@ const ThreeBox = () => {
 				<Box
 					sx={{
 						width: { xs: "100%", md: "100%" },
-						height: { xs: "80vh", sm: "80vh", md: "80vh", xl: "80vh" },
+						height: { xs: "70vh", sm: "80vh", md: "80vh", xl: "80vh" },
 						background: "url('/images/layoutBoxThree.png')",
 						backgroundSize: "cover",
 						backgroundRepeat: "no-repeat",

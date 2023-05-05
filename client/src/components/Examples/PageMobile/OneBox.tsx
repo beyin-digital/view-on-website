@@ -32,15 +32,22 @@ const OneBox = () => {
 						sx={{
 							width: { xs: "100%", sm: "70%", md: "60%" },
 							height: "258px",
-							borderRadius: "34px",
-							background: "url('/images/slid.png')",
-							backgroundRepeat: "no-repeat",
-							backgroundSize: "cover",
 							marginY: "1rem",
 							position: { xs: "relative", sm: "absolute" },
 							right: { xs: "", sm: "6rem", md: "10rem" },
 						}}
-					></Box>
+					>
+						<img
+							src="/images/slid.png"
+							alt=""
+							style={{
+								width: "100%",
+								height: "100%",
+								objectFit: "cover",
+								borderRadius: "34px",
+							}}
+						/>
+					</Box>
 					<Box
 						sx={{
 							position: "relative",

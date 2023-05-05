@@ -56,7 +56,7 @@ const SliderDesktop = () => {
 			sx={{
 				width: "100%",
 				background: "#EAEDED",
-				overflow: "hidden",
+				// overflow: "hidden",
 			}}
 			className="SliderDeskto"
 		>
@@ -69,6 +69,7 @@ const SliderDesktop = () => {
 					flexDirection: "column",
 					justifyContent: "space-between",
 					position: "relative",
+					overflow: "hidden",
 				}}
 			>
 				{/* Navbar */}
@@ -586,9 +587,11 @@ const SliderDesktop = () => {
 					</Typography>
 					<ButtonLogin name="Subscribe" />
 				</Box>
-				<Footer />
-				<FooterMobile />
+				{/* <Footer />
+				<FooterMobile /> */}
 			</Box>
+			<Footer />
+			<FooterMobile />
 		</Box>
 	);
 };

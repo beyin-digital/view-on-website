@@ -30,11 +30,7 @@ export interface MyAppProps extends AppProps {
 }
 
 export default function MyApp(props: MyAppProps) {
-	const {
-		Component,
-		emotionCache = clientSideEmotionCache,
-		pageProps,
-	} = props;
+	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 	return (
 		<CacheProvider value={emotionCache}>
 			<Head>
@@ -44,6 +40,7 @@ export default function MyApp(props: MyAppProps) {
 					href="https://fonts.googleapis.com/css2?family=Comforter&family=Finlandica:ital,wght@1,400;1,500;1,700&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500;600;700&family=Inter:wght@200;400;500;600;700;800;900&family=League+Spartan:wght@300;400;500;600&family=Neonderthaw&family=Poppins:wght@100;300;400;500;600;700;900&display=swap"
 					rel="stylesheet"
 				/>
+				{/* <script src="/script.js" /> */}
 			</Head>
 			<>
 				<QueryClientProvider client={queryClient}>
