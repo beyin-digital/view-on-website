@@ -53,7 +53,7 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
-						placeholder="Full name"
+						placeholder='Full name'
 					/>
 					<OutlinedInput
 						sx={{
@@ -71,7 +71,7 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
-						placeholder="Password"
+						placeholder='Password'
 					/>
 				</Box>
 				<Box
@@ -106,7 +106,7 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
-						placeholder="E-mail"
+						placeholder='E-mail'
 					/>
 					<OutlinedInput
 						sx={{
@@ -124,7 +124,7 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: ".3rem",
 						}}
-						placeholder="Confirm Password"
+						placeholder='Confirm Password'
 					/>
 				</Box>
 			</Box>
@@ -136,9 +136,18 @@ const SignupForm = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
+<<<<<<< HEAD
 					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
 					marginBottom: { xs: "10rem", md: "5rem", xl: "5rem" },
 					marginTop: { xs: "1rem", md: "2rem", xl: "2rem" },
+=======
+					flexDirection: {
+						xs: "column-reverse",
+						md: "row",
+						xl: "row",
+					},
+					marginY: { xs: "1rem", md: "0", xl: "0" },
+>>>>>>> dev
 				}}
 			>
 				<Typography
@@ -150,7 +159,7 @@ const SignupForm = () => {
 				>
 					Already have an account?{" "}
 					<Link
-						href="/login"
+						href='/login'
 						style={{
 							textDecoration: "none",
 							color: "#343132",
@@ -159,7 +168,10 @@ const SignupForm = () => {
 						Sign in
 					</Link>
 				</Typography>
-				<ButtonLogin name="next" onClick={() => router.push("verification")} />
+				<ButtonLogin
+					name='next'
+					onClick={() => router.push("verification")}
+				/>
 			</Box>
 		</>
 	);

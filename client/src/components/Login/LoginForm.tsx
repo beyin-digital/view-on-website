@@ -20,7 +20,10 @@ import { useStateContext } from "@/contexts";
 
 import LoginTextSignUp from "./LoginTextSignUp";
 import { ButtonLogin } from "../Button";
+<<<<<<< HEAD
 import Link from "next/link";
+=======
+>>>>>>> dev
 
 const loginSchema = object({
 	identifier: string().min(1, "Email address or keyword is required"),
@@ -42,10 +45,17 @@ const LoginForm = () => {
 		password: "",
 	});
 
+<<<<<<< HEAD
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 
 	const handleMouseDownPassword = (
 		event: React.MouseEvent<HTMLButtonElement>,
+=======
+	const handleClickShowPassword = () => setShowPassword(show => !show);
+
+	const handleMouseDownPassword = (
+		event: React.MouseEvent<HTMLButtonElement>
+>>>>>>> dev
 	) => {
 		event.preventDefault();
 	};
@@ -54,9 +64,15 @@ const LoginForm = () => {
 
 	const query = useQuery(["authUser"], getMeFn, {
 		enabled: false,
+<<<<<<< HEAD
 		select: (data) => data.data.user,
 		retry: 1,
 		onSuccess: (data) => {
+=======
+		select: data => data.data.user,
+		retry: 1,
+		onSuccess: data => {
+>>>>>>> dev
 			stateContext.dispatch({ type: "SET_USER", payload: data });
 		},
 	});
@@ -74,7 +90,11 @@ const LoginForm = () => {
 					(error as any).response.data.error.forEach((el: any) =>
 						toast.error(el.message, {
 							position: "top-right",
+<<<<<<< HEAD
 						}),
+=======
+						})
+>>>>>>> dev
 					);
 				} else {
 					toast.error((error as any).response.data.message, {
@@ -82,7 +102,11 @@ const LoginForm = () => {
 					});
 				}
 			},
+<<<<<<< HEAD
 		},
+=======
+		}
+>>>>>>> dev
 	);
 
 	const handleSubmit = () => {
@@ -103,7 +127,11 @@ const LoginForm = () => {
 				}}
 			>
 				<OutlinedInput
+<<<<<<< HEAD
 					name="identifier"
+=======
+					name='identifier'
+>>>>>>> dev
 					value={values.identifier}
 					sx={{
 						width: "100",
@@ -119,16 +147,27 @@ const LoginForm = () => {
 						border: "0.897277px solid #E3E3E3",
 						borderRadius: "10px",
 						marginY: ".5rem",
-						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
+						boxShadow:
+							" 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
 						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
 							border: 0,
 						},
 					}}
+<<<<<<< HEAD
 					onChange={(e) => setValues({ ...values, identifier: e.target.value })}
 					placeholder="Email or #keyword"
 				/>
 				<OutlinedInput
 					name="password"
+=======
+					onChange={e =>
+						setValues({ ...values, identifier: e.target.value })
+					}
+					placeholder='Email or #keyword'
+				/>
+				<OutlinedInput
+					name='password'
+>>>>>>> dev
 					value={values.password}
 					sx={{
 						width: "100",
@@ -144,7 +183,8 @@ const LoginForm = () => {
 						border: "0.897277px solid #E3E3E3",
 						borderRadius: "10px",
 						marginY: ".5rem",
-						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
+						boxShadow:
+							" 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
 
 						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
 							border: 0,
@@ -152,6 +192,7 @@ const LoginForm = () => {
 					}}
 					type={showPassword ? "text" : "password"}
 					endAdornment={
+<<<<<<< HEAD
 						<InputAdornment position="end">
 							<IconButton
 								aria-label="toggle password visibility"
@@ -167,6 +208,45 @@ const LoginForm = () => {
 					placeholder="Password"
 				/>
 			</Box>
+=======
+						<InputAdornment position='end'>
+							<IconButton
+								aria-label='toggle password visibility'
+								onClick={handleClickShowPassword}
+								onMouseDown={handleMouseDownPassword}
+								edge='end'
+							>
+								{showPassword ? (
+									<VisibilityOff />
+								) : (
+									<Visibility />
+								)}
+							</IconButton>
+						</InputAdornment>
+					}
+					onChange={e =>
+						setValues({ ...values, password: e.target.value })
+					}
+					placeholder='Password'
+				/>
+			</Box>
+			<Box
+				sx={{
+					marginY: "2rem",
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+				}}
+			>
+				<ButtonLogin
+					name='login'
+					type='submit'
+					onClick={handleSubmit}
+				/>
+				<LoginTextSignUp />
+			</Box>
+
+>>>>>>> dev
 			<Box
 				sx={{
 					width: "100%",

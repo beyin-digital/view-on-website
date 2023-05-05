@@ -12,7 +12,12 @@ export const ButtonLogin = (props: ButtonLoginProps) => {
 		<>
 			<Box
 				sx={{
-					width: { xs: "240px", sm: "300px", md: "300px", xl: "300px" },
+					width: {
+						xs: "240px",
+						sm: "300px",
+						md: "300px",
+						xl: "300px",
+					},
 					display: "flex",
 					justifyContent: "end",
 					background: "#0090EC",
@@ -44,7 +49,7 @@ export const ButtonLogin = (props: ButtonLoginProps) => {
 						{props.name}
 					</Typography>
 
-					<FiArrowUpRight size={42} color="#FBFBFB" />
+					<FiArrowUpRight size={42} color='#FBFBFB' />
 				</Button>
 			</Box>
 		</>
@@ -59,7 +64,8 @@ export const ButtonStyle = () => {
 					width: "180px",
 					display: "flex",
 					justifyContent: "end",
-					background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+					background:
+						"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 					borderRadius: "11px",
 				}}
 			>
@@ -86,7 +92,7 @@ export const ButtonStyle = () => {
 						pay
 					</Typography>
 
-					<FiArrowUpRight size={42} color="#343132" />
+					<FiArrowUpRight size={42} color='#343132' />
 				</Button>
 			</Box>
 		</>

@@ -365,3 +365,8 @@ swiper-container {
 		left: 3rem;
 	}
 }
+
+.otp-input.MuiOtpInput-TextField {
+	border-radius: 50%;
+	background-color: #0090ec;
+}

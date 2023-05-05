@@ -12,15 +12,24 @@ const FooterMobile = () => {
 	];
 	const icons = [
 		{
+<<<<<<< HEAD
+=======
+			id: 11,
+			name: "faceBook",
+			link: "https://facebook.com",
+			icon: "/icons/facebook.svg",
+		},
+		{
+>>>>>>> dev
 			id: 22,
 			name: "twitter",
-			link: "/https://twitter.com",
+			link: "https://twitter.com",
 			icon: "/icons/twitter.svg",
 		},
 		{
 			id: 33,
 			name: "instagram",
-			link: "/https://instagram.com",
+			link: "https://instagram.com",
 			icon: "/icons/insta.svg",
 		},
 		{
