@@ -136,18 +136,13 @@ const SignupForm = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
-<<<<<<< HEAD
-					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
-					marginBottom: { xs: "10rem", md: "5rem", xl: "5rem" },
-					marginTop: { xs: "1rem", md: "2rem", xl: "2rem" },
-=======
 					flexDirection: {
 						xs: "column-reverse",
 						md: "row",
 						xl: "row",
 					},
-					marginY: { xs: "1rem", md: "0", xl: "0" },
->>>>>>> dev
+					marginBottom: { xs: "10rem", md: "5rem", xl: "5rem" },
+					marginTop: { xs: "1rem", md: "2rem", xl: "2rem" },
 				}}
 			>
 				<Typography
