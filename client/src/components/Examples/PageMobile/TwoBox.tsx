@@ -22,7 +22,7 @@ const TwoBox = () => {
 					<Box
 						sx={{
 							width: { xs: "100%", sm: "100%", md: "100%" },
-							height: { xs: "60vh",sm:"80vh", md: "80vh", xl: "80vh" },
+							height: { xs: "60vh", sm: "80vh", md: "80vh", xl: "80vh" },
 							paddingX: "1rem",
 							position: "relative",
 						}}
@@ -31,7 +31,7 @@ const TwoBox = () => {
 							sx={{
 								width: { xs: "100%", md: "50%" },
 								position: "absolute",
-								top: "20%",
+								top: { xs: "", md: "20%", xl: "20%" },
 							}}
 							className="ExampleBoxTwoText"
 						>
@@ -81,6 +81,7 @@ const TwoBox = () => {
 								position: "absolute",
 								bottom: "0",
 								right: "0",
+								top:"-2rem"
 							}}
 						>
 							<Box

@@ -38,7 +38,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 			>
 				<Box
 					sx={{
-						maxWidth: "100%",
+						// maxWidth: "100%",
 						margin: "auto",
 						height: { xs: "100%", md: "100vh", xl: "100vh" },
 						display: "flex",
@@ -78,47 +78,47 @@ const Layout: React.FC<Props> = ({ children }) => {
 						/>
 					</Box>
 					<Box
+						className="LayoutBox"
 						sx={{
 							position: "relative",
-							right: { xs: "0%", sm: "0%", md: "10%", xl: "20%" },
-							maxWidth: "100%",
-							width: "100%",
-							height: {
-								xs: "100%",
-								sm: "540px",
-								md: "650px",
-								lg: "650px",
-								xl: "650px",
-							},
+							right: { xs: "10%", sm: "0%", md: "10%", xl: "20%" },
+							// maxWidth: "100%",
+							width: { xs: "564px", sm: "100%", md: "100%", xl: "100%" },
+							height: { xs: "100%", sm: "100%", md: "650px", xl: "650px" },
 							background: {
-								xs: "transparent",
+								xs: "rgba(251, 251, 251, 0.6)",
 								md: "rgba(251, 251, 251, 0.6)",
 								xl: "rgba(251, 251, 251, 0.6)",
 							},
 							border: {
-								xs: "0",
+								xs: "1px solid #FBFBFB",
 								md: "1px solid #FBFBFB",
 								xl: "1px solid #FBFBFB",
 							},
-
-							backdropFilter: { xs: "0", md: "blur(100px)", xl: "blur(100px)" },
-							borderRadius: "30px",
-							transform: "skew(-16deg, 0deg)",
-							overflow: { xs: "", md: "hidden", xl: "hidden" },
-							margin: {
-								xs: "10rem auto",
-								sm: "3rem auto",
-								md: "3rem auto",
-								xl: "3rem auto",
+							backdropFilter: {
+								xs: "blur(100px)",
+								md: "blur(100px)",
+								xl: "blur(100px)",
 							},
+							borderRadius: "30px",
+							transform: {
+								xs: "skew(-10deg, 0deg)",
+								sm: "skew(-16deg, 0deg)",
+								md: "skew(-16deg, 0deg)",
+								xl: "skew(-16deg, 0deg)",
+							},
+							// transform: { xs: "skew(-10deg, 0deg)", xl: "skew(-20deg, 0deg)" },
+							overflow: { xs: "", md: "hidden", xl: "hidden" },
+							margin: "3rem auto",
 							zIndex: "999",
+							paddingX: "2rem",
 						}}
 					>
 						{children}
 					</Box>
 					<Box
 						sx={{
-							display: { xs: "none", sm: "none", md: "flex", xl: "flex" },
+							display: "flex",
 							alignItems: "center",
 							justifyContent: "center",
 							position: "relative",

@@ -15,7 +15,9 @@ const OneBox = () => {
 					borderRadius: "14.5455px",
 					overflow: { xs: "", md: "hidden", xl: "hidden" },
 					position: "relative",
-					height: { xs: "70vh", sm: "80vh", md: "80vh", xl: "80vh" },
+					height: { xs: "80vh", sm: "80vh", md: "80vh", xl: "80vh" },
+					transform: "skew(-16deg, 0deg)",
+					right:{xs:"-1rem",sm:"-1rem",md:"-5rem"}
 				}}
 			>
 				<Box
@@ -26,6 +28,7 @@ const OneBox = () => {
 						overflow: "hidden",
 						paddingX: "1rem",
 						position: { xs: "", sm: "", md: "relative" },
+						transform: "skew(16deg, 0deg)",
 					}}
 				>
 					<Box
@@ -62,6 +65,7 @@ const OneBox = () => {
 							sx={{
 								width: { xs: "60%", sm: "322px", md: "50%" },
 								height: "134px",
+								marginY: "1rem",
 							}}
 						>
 							<Typography
@@ -95,7 +99,8 @@ const OneBox = () => {
 							width: { xs: "400px", sm: "60%", md: "555px" },
 							height: "441px",
 							position: "absolute",
-							top: "15rem",
+							// bottom: "0",
+							top: "17rem",
 							right: { xs: "0rem", sm: "3rem", md: "0rem" },
 							zIndex: "9999",
 						}}

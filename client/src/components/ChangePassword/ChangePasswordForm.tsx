@@ -8,11 +8,12 @@ const ChangePasswordForm = () => {
 					display: "flex",
 					flexDirection: "column",
 					width: "100%",
+					paddingX: { xs: ".5rem", sm: "2rem", md: "2rem", xl: "2rem" },
 				}}
 			>
 				<OutlinedInput
 					sx={{
-						width: "100",
+						width: "100%",
 						height: { xs: "47px", md: "50px", xl: "65px" },
 						fontSize: {
 							xs: "18px",
@@ -34,7 +35,7 @@ const ChangePasswordForm = () => {
 				/>
 				<OutlinedInput
 					sx={{
-						width: "100",
+						width: "100%",
 						height: { xs: "47px", md: "50px", xl: "65px" },
 						fontSize: {
 							xs: "18px",
@@ -62,6 +63,7 @@ const ChangePasswordForm = () => {
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",
+					paddingX: { xs: ".5rem", sm: "2rem", md: "2rem", xl: "2rem" },
 				}}
 			>
 				<Box
@@ -80,7 +82,7 @@ const ChangePasswordForm = () => {
 				>
 					<Button
 						sx={{
-							paddingX: "1rem",
+							paddingX: "0rem",
 							height: "59px",
 							width: { xs: "100%", md: "431px", xl: "431px" },
 							display: "flex",
@@ -91,7 +93,7 @@ const ChangePasswordForm = () => {
 							sx={{
 								// fontFamily: "Helvetica Neue",
 								letterSpacing: "0.02em",
-								fontSize: { xs: "25px", xl: "32px" },
+								fontSize: {xs:"20px", sm: "25px", xl: "32px" },
 								fontWeight: 400,
 								lineHeight: { xs: "25px", xl: "40px" },
 								color: "#FBFBFB",

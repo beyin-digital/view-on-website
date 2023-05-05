@@ -28,7 +28,7 @@ export const ButtonLogin = (props: ButtonLoginProps) => {
 					sx={{
 						paddingX: "18px",
 						height: "59px",
-						width: { xs: "220px", md: "231px", xl: "231px" },
+						width: { xs: "220px", md: "231px", xl: "261px" },
 						display: "flex",
 						justifyContent: "space-around",
 					}}

@@ -18,7 +18,12 @@ const SignUpPage = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					transform: "skewX(16deg)",
+					transform: {
+						xs: "skew(10deg, 0deg)",
+						sm: "skew(16deg, 0deg)",
+						md: "skew(16deg, 0deg)",
+						xl: "skew(16deg, 0deg)",
+					},
 				}}
 			>
 				<Container
@@ -30,7 +35,8 @@ const SignUpPage = () => {
 						flexDirection: "column",
 						alignItems: "center",
 						justifyContent: "space-around",
-						marginY: { xs: "0rem", sm: "5rem", md: "1px", xl: "1px" },
+						marginY: { xs: "0rem", sm: "0rem", md: "1px", xl: "1px" },
+						marginX:"1rem"
 					}}
 				>
 					<SignupDetails />

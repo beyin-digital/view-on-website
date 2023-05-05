@@ -51,6 +51,11 @@ const PageMobile = () => {
 					<OneBox />
 
 					{/* Slider Two */}
+					<Box
+					// sx={{
+					// 	height: "10vh",
+					// }}
+					/>
 					<TwoBox />
 
 					{/* Slider Three */}

@@ -23,15 +23,21 @@ const PaymentDetails = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					transform: "skewX(16deg)",
+					transform: {
+						xs: "skew(10deg, 0deg)",
+						sm: "skew(16deg, 0deg)",
+						md: "skew(16deg, 0deg)",
+						xl: "skew(16deg, 0deg)",
+					},
 					marginY: { xs: "7rem", sm: "7rem", md: "1rem", xl: "1rem" },
+					marginX:"1rem"
 				}}
 			>
 				<Container
 					sx={{
 						width: { xs: "100%", md: "100%", xl: "60%" },
 						height: "100%",
-						marginRight: { xs: "", sm: "-1.6rem", md: "-4rem", xl: "10rem" },
+						marginRight: { xs: "2rem", sm: "-1.6rem", md: "-4rem", xl: "10rem" },
 						display: "flex",
 						flexDirection: "column",
 						alignItems: "center",

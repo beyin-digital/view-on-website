@@ -18,10 +18,10 @@ import { ButtonLogin } from "../Button";
 
 const SliderDesktop = () => {
 	const check = [
-		{ id: 1, title: "Easy to Read from Distance" },
+		// { id: 1, title: "Easy to Read from Distance" },
 		{ id: 1, title: "Continuous Analytical Reports" },
-		{ id: 1, title: "Profile Chart Dashboard" },
-		{ id: 1, title: "SEO Supported Keyword" },
+		{ id: 2, title: "Profile Chart Dashboard" },
+		// { id: 1, title: "SEO Supported Keyword" },
 	];
 	const images = [
 		{ id: 1, num: "a" },
@@ -271,6 +271,7 @@ const SliderDesktop = () => {
 													style={{
 														width: "100%",
 														borderRadius: "32px",
+														// filter: "blur(150px)",
 														backdropFilter: "blur(150px)",
 														border: "1.63722px solid #E3E3E3",
 														display: "flex",
@@ -287,10 +288,11 @@ const SliderDesktop = () => {
 																xl: "100%",
 															},
 															height: { xs: "150px", md: "189px", xl: "189px" },
-															background: "rgba(251, 251, 251, 0.25)",
-															backdropFilter: "blur(120px)",
+															// background: "rgba(251, 251, 251, 0.25)",
+															// backdropFilter: "blur(120px)",
+															// filter: "blur(150px)",
 															border: "1.63722px solid #E3E3E3",
-															boxShadow: "0px 4px 168px rgba(0, 59, 97, 0.1)",
+															// boxShadow: "0px 4px 168px rgba(0, 59, 97, 0.1)",
 															borderRadius: "32px",
 															display: "flex",
 															alignItems: "center",
@@ -357,7 +359,7 @@ const SliderDesktop = () => {
 									>
 										<Box
 											sx={{
-												width: { xs: "100%", md: "60%", xl: "60%" },
+												width: { xs: "100%", md: "80%", xl: "60%" },
 												display: "flex",
 												alignItems: "center",
 												justifyContent: "space-between",
@@ -368,6 +370,14 @@ const SliderDesktop = () => {
 													xl: "row",
 												},
 												marginY: { xs: "2rem", md: ".5rem", xl: ".5rem" },
+												border: "1px solid #FBFBFB",
+												background: {
+													xs: "#FBFBFB",
+													md: "transparent",
+													xl: "transparent",
+												},
+												borderRadius: "24px",
+												paddingY: "1rem",
 											}}
 										>
 											<Box
@@ -376,12 +386,12 @@ const SliderDesktop = () => {
 														xs: "100%",
 														sm: "40%",
 														md: "40%",
-														xl: "40%",
+														xl: "50%",
 													},
 													display: "flex",
 													alignItems: "center",
 													justifyContent: {
-														xs: "space-between",
+														xs: "center",
 														md: "space-around",
 														xl: "space-around",
 													},
@@ -391,12 +401,12 @@ const SliderDesktop = () => {
 														md: "row",
 														xl: "row",
 													},
-													marginY: { xs: ".5rem", md: "", xl: "" },
+													marginY: { xs: "1rem", md: "", xl: "" },
 												}}
 											>
 												<Box
 													sx={{
-														width: { xs: "100%", md: "35%", xl: "20%" },
+														width: { xs: "30%", md: "35%", xl: "20%" },
 														height: "100%",
 														display: "flex",
 														flexDirection: "column",
@@ -424,6 +434,7 @@ const SliderDesktop = () => {
 															lineHeight: "14px",
 															fontWeight: "300",
 															height: { xs: "100%", md: "20px", xl: "20px" },
+															color: "#343132",
 														}}
 													>
 														One time payment
@@ -431,7 +442,7 @@ const SliderDesktop = () => {
 												</Box>
 												<Box
 													sx={{
-														width: { xs: "100%", md: "20%", xl: "20%" },
+														width: { xs: "30%", md: "20%", xl: "20%" },
 														height: "100%",
 														display: "flex",
 														flexDirection: "column",
@@ -459,6 +470,7 @@ const SliderDesktop = () => {
 															lineHeight: "14px",
 															fontWeight: "300",
 															height: { xs: "100%", md: "20px", xl: "20px" },
+															color: "#343132",
 														}}
 													>
 														Yearly renewal
@@ -467,8 +479,9 @@ const SliderDesktop = () => {
 											</Box>
 											<Box
 												sx={{
-													width: { md: "50%", xl: "40%" },
+													width: { xs: "60%", md: "50%", xl: "40%" },
 													// height: "100%",
+													// border:"1px solid"
 												}}
 											>
 												{check.map((item) => (
@@ -484,7 +497,8 @@ const SliderDesktop = () => {
 														<CheckIcon fontSize="small" />
 														<Box
 															sx={{
-																width: "85%",
+																width: "100%",
+																paddingX: ".5rem",
 															}}
 														>
 															<Typography

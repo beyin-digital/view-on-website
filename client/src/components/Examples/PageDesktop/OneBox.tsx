@@ -2,18 +2,27 @@ import { Box, Typography } from "@mui/material";
 
 const OneBox = () => {
 	return (
-		<>
+		<Box
+			sx={{
+				transform: "skew(-16deg, 0deg)",
+				width: "1243.72px",
+				maxWidth: "100%",
+				height: "100%",
+				// border:"1px solid red"
+			}}
+		>
 			<Box
 				sx={{
-					width: "1243.72px",
-					maxWidth: "100%",
 					// width: "36%",
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",
 					position: "relative",
 					backdropFilter: "blur(100px)",
-					right: "-1.5rem",
+					transform: "skew(16deg, 0deg)",
+					height: "100%",
+
+					right: "-3rem",
 				}}
 			>
 				<Box>
@@ -36,7 +45,7 @@ const OneBox = () => {
 							position: "relative",
 							transform: {
 								xs: "skew(0deg, 0deg)",
-								xl: "skew(15deg, 0deg)",
+								xl: "skew(16deg, 0deg)",
 							},
 							paddingX: "0rem",
 							height: "100%",
@@ -81,11 +90,11 @@ const OneBox = () => {
 							width: "860x",
 							height: "441px",
 							position: "absolute",
-							bottom: "-2rem",
-							right: "-8rem",
+							bottom: "0rem",
+							// right: "-8rem",
 							transform: {
 								xs: "skew(1deg, 0deg)",
-								xl: "skew(15deg, 0deg)",
+								xl: "skew(16deg, 0deg)",
 							},
 						}}
 					>
@@ -100,7 +109,7 @@ const OneBox = () => {
 					</Box>
 				</Box>
 			</Box>
-		</>
+		</Box>
 	);
 };
 

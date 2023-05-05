@@ -20,9 +20,9 @@ const LoginPage = () => {
 		<>
 			<Head>
 				<title>ViewOnWebsite - Login Page</title>
-				<meta name='description' content='' />
-				<meta name='keyword' content='' />
-				<meta property='og:image' content='' />
+				<meta name="description" content="" />
+				<meta name="keyword" content="" />
+				<meta property="og:image" content="" />
 			</Head>
 
 			<Layout>
@@ -34,7 +34,12 @@ const LoginPage = () => {
 						height: "100%",
 						justifyContent: "center",
 						paddingX: "1rem",
-						transform: "skew(16deg, 0deg)",
+						transform: {
+							xs: "skew(10deg, 0deg)",
+							sm: "skew(16deg, 0deg)",
+							md: "skew(16deg, 0deg)",
+							xl: "skew(16deg, 0deg)",
+						},
 					}}
 				>
 					<Box
@@ -48,14 +53,13 @@ const LoginPage = () => {
 					>
 						<Box
 							sx={{
-								width: "610px",
+								// width: "610px",
 								height: "600px",
-								paddingX: "1rem",
+								// paddingX: "1rem",
 							}}
 						>
 							<LoginDetails />
 							<LoginForm />
-							 
 						</Box>
 					</Box>
 				</Box>

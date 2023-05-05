@@ -15,9 +15,14 @@ const Request = () => {
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "end",
-						transform: "skew(16deg, 0deg)",
+						transform: {
+							xs: "skew(10deg, 0deg)",
+							sm: "skew(16deg, 0deg)",
+							md: "skew(16deg, 0deg)",
+							xl: "skew(16deg, 0deg)",
+						},
 						paddingX: "1rem",
-						marginY: { xs: "7rem", sm: "7rem", md: "1rem", xl: "1rem" },
+						// marginY: { xs: "7rem", sm: "7rem", md: "1rem", xl: "1rem" },
 					}}
 				>
 					<Box
@@ -29,7 +34,9 @@ const Request = () => {
 							alignItems: "center",
 							justifyContent: "space-around",
 							position: "relative",
-							top: { xs: "10rem", sm: "0", md: "0", xl: "0" },
+							paddingX: "2rem",
+
+							// top: { xs: "10rem", sm: "0", md: "0", xl: "0" },
 						}}
 					>
 						<DetailsHeader />

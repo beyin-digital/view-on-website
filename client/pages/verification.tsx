@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
 import Layout from "@/components/Layout/Layout";
-import {
-	Box,
-	Container,
-	Grid,
-	InputBase,
-	Typography,
-	TextField,
-} from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
+import { MuiOtpInput } from "mui-one-time-password-input";
+import React from "react";
 
 const VerificationPage = () => {
 	const router = useRouter();
+	const [otp, setOtp] = React.useState("");
+	const handleChange = (newValue: any) => {
+		setOtp(newValue);
+	};
+
 	return (
 		<>
 			<Layout>
@@ -25,8 +24,12 @@ const VerificationPage = () => {
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
-						transform: "skew(16deg, 0deg)",
-						marginY: { xs: "7rem", sm: "7rem", md: "1rem", xl: "1rem" },
+						transform: {
+							xs: "skew(10deg, 0deg)",
+							sm: "skew(16deg, 0deg)",
+							md: "skew(16deg, 0deg)",
+							xl: "skew(16deg, 0deg)",
+						},
 					}}
 				>
 					<Container
@@ -39,33 +42,24 @@ const VerificationPage = () => {
 							alignItems: "center",
 							justifyContent: "space-around",
 							position: "relative",
-							top: { xs: "10rem", sm: "0", md: "0", xl: "0" },
+							marginY: { xs: "8rem", sm: "4rem", md: "1rem", xl: "0rem" },
+							// border: "1px solid",
 						}}
 					>
-						{/* Box top */}
 						<Box
 							sx={{
 								width: "100%",
-
+								// height:"100px",
 								display: "flex",
 								flexDirection: "column",
 								alignItems: "center",
 								justifyContent: "center",
 							}}
 						>
-							<Image
-								src='/icons/message.svg'
-								alt=''
-								height={78}
-								width={78}
-							/>
+							<Image src="/icons/message.svg" alt="" height={78} width={78} />
 							<Typography
 								sx={{
-									fontSize: {
-										xs: "22px",
-										md: "27px",
-										xl: "32px",
-									},
+									fontSize: { xs: "22px", md: "27px", xl: "32px" },
 									fontWight: "300",
 									lineHeight: "29px",
 								}}
@@ -75,17 +69,12 @@ const VerificationPage = () => {
 						</Box>
 						<Box
 							sx={{
-								width: {
-									xs: "100%",
-									sm: "60%",
-									md: "90%",
-									xl: "60%",
-								},
-
+								width: { xs: "100%", sm: "60%", md: "90%", xl: "60%" },
 								display: "flex",
 								flexDirection: "column",
 								alignItems: "center",
 								justifyContent: "center",
+								// border: "1px solid",
 							}}
 						>
 							<Typography
@@ -110,96 +99,24 @@ const VerificationPage = () => {
 									justifyContent: "space-evenly",
 								}}
 							>
-								<InputBase
+								<MuiOtpInput
+									value={otp}
+									onChange={handleChange}
+									length={6}
+									className="myClassName"
 									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
+										".MuiOutlinedInput-root": {
+											borderRadius: "50%",
+											width: { xs: "40px", sm: "74px", md: "74px", xl: "74px" },
+											height: {
+												xs: "40px",
+												sm: "74px",
+												md: "74px",
+												xl: "74px",
+											},
+											paddingX: "1px",
 										},
 									}}
-									type="number"
-								/>
-
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
-								/>
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
-								/>
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
-								/>
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
-								/>
-								<InputBase
-									sx={{
-										borderRadius: "50%",
-										width: "60px",
-										height: "60px",
-										background: "#FFFFFF",
-										boxShadow: " 0px 52.5697px 86.4857px rgba(0, 0, 0, 0.03)",
-										border: "1.6958px solid #E3E3E3",
-										fontSize: "30px",
-										".mui-style-yz9k0d-MuiInputBase-input": {
-											textAlign: "center",
-										},
-									}}
-									type="number"
 								/>
 							</Box>
 							<Typography
@@ -209,7 +126,7 @@ const VerificationPage = () => {
 									color: "#A0A9AB",
 									lineHeight: "27px",
 									textAlign: "center",
-									marginY: { xs: "5rem", sm: "2rem", md: "2rem", xl: "2rem" },
+									marginY: { xs: "4rem", sm: "2rem", md: "1rem", xl: "2rem" },
 								}}
 							>
 								Resend code
@@ -223,7 +140,6 @@ const VerificationPage = () => {
 								position: { xs: "", md: "", xl: "absolute" },
 								bottom: { xs: "0rem", md: "0rem", xl: "1rem" },
 								right: { xs: "", md: "0rem", xl: "0rem" },
-								marginBottom: { xs: "7rem", sm: "7rem", md: "0", xl: "0" },
 							}}
 						>
 							<ButtonLogin

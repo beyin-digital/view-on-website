@@ -14,12 +14,13 @@ const FormRequest = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
+					paddingX: { xs: "", sm: "3rem" },
 				}}
 			>
 				<OutlinedInput
 					sx={{
 						width: "100%",
-						height: "65px",
+						height: { xs: "45px", md: "50px", xl: "65px" },
 						fontSize: {
 							xs: "18px",
 							sm: "22px",

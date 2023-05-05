@@ -11,7 +11,7 @@ const SignupForm = () => {
 			<Box
 				sx={{
 					width: "100%",
-					height: { xs: "250px", sm: "400px", md: "400px" },
+					height: { xs: "250px", sm: "230px", md: "400px" },
 					display: "flex",
 					alignItems: "center",
 					justifyContent: {
@@ -20,11 +20,13 @@ const SignupForm = () => {
 						xl: "space-between",
 					},
 					flexDirection: { xs: "column", md: "row", xl: "row" },
+					// paddingX: {xs:""},
+					// border: "1px solid red",
 				}}
 			>
 				<Box
 					sx={{
-						width: { xs: "100%", md: "50%", xl: "50%" },
+						width: { xs: "100%", sm: "80%", md: "50%", xl: "50%" },
 						height: { xs: "115px", md: "235px", xl: "235px" },
 						display: "flex",
 						alignItems: "center",
@@ -76,7 +78,7 @@ const SignupForm = () => {
 				</Box>
 				<Box
 					sx={{
-						width: { xs: "100%", md: "40%", xl: "40%" },
+						width: { xs: "100%", sm: "80%", md: "40%", xl: "40%" },
 						height: { xs: "115px", md: "235px", xl: "235px" },
 						display: "flex",
 						alignItems: "center",

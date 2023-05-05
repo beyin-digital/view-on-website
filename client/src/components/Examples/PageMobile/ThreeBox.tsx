@@ -10,7 +10,7 @@ const ThreeBox = () => {
 					alignItems: "center",
 					justifyContent: "center",
 					position: "relative",
-					top: "-5rem",
+					top: "-8rem",
 					background: "#EAEDED",
 				}}
 				className="ExampleThreeBox"

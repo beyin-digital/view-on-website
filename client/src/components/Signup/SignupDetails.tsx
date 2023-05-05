@@ -48,6 +48,7 @@ const SignupDetails = () => {
 					},
 					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
 					marginY: "2rem",
+					// border:"1px solid red"
 				}}
 			>
 				<Box
