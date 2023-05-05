@@ -68,7 +68,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 							<Box
 								sx={{
 									position: "absolute",
-									right: "24px",
+									right: "48px",
 									width: "1544px",
 									maxWidth: "1544px",
 									minHeight: "100vh",
