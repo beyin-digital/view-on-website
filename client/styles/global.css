@@ -235,7 +235,7 @@ swiper-container {
 @media screen and (max-width: 600px) {
 	.ImageMobile {
 		position: absolute !important;
-		top: -60rem !important;
+		top: -50rem !important;
 	}
 
 	.ExampleBoxThreePic {
@@ -279,6 +279,9 @@ swiper-container {
 	.LayoutBox {
 		width: 120% !important;
 	}
+	.InputHomeMargin {
+		margin: 0 !important;
+	}
 }
 @media screen and (max-width: 427px) {
 	.illustrationBg {
@@ -318,6 +321,9 @@ swiper-container {
 		bottom: -2.4rem !important;
 		font-size: 22px;
 	}
+	.LayoutTagsPadding {
+		padding: 2rem !important;
+	}
 }
 @media screen and (max-width: 333px) {
 	.TextViewOnWebsite {
@@ -326,6 +332,12 @@ swiper-container {
 	}
 	.Textredirected {
 		font-size: 28px;
+	}
+	.LayoutHomeMobile {
+		height: 100% !important;
+	}
+	.LayoutHomeMobileBox {
+		height: 16.5vh;
 	}
 }
 @media screen and (max-width: 300px) {
@@ -367,6 +379,10 @@ swiper-container {
 	.ExampleBoxThreeText {
 		bottom: 3rem;
 		left: 3rem;
+	}
+	.ImageMobile {
+		position: absolute !important;
+		top: -39rem !important;
 	}
 }
 

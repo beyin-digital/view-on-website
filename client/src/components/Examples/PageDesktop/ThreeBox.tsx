@@ -42,7 +42,7 @@ const ThreeBox = () => {
 				</Box>
 				<Box
 					sx={{
-						width: "300px",
+						width: "277px",
 						transform: {
 							xs: "skew(1deg, 0deg)",
 							xl: "skew(15deg, 0deg)",
@@ -61,7 +61,7 @@ const ThreeBox = () => {
 							marginY: "1rem",
 						}}
 					>
-						Let your physical conversions flourish
+						Be Redirected!
 					</Typography>
 					<Typography
 						sx={{
@@ -70,9 +70,10 @@ const ThreeBox = () => {
 							lineHeight: "13px",
 						}}
 					>
-						Please provide your keyword’s sub-link Please provide your keyword’s
-						sub-link Please provide your keyword’s sub-link Please provide your
-						keyword’s sub-link
+						Your costumers in a Blink will be automatically redirected to your
+						Sub-link-URL, your dashboard will show you all the conversions of
+						your #keyword, it is your opportunity to optimize, know and to take
+						control over your conversion rate.
 					</Typography>
 				</Box>
 			</Box>

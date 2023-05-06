@@ -13,11 +13,13 @@ import { NextPage } from "next";
 import Image from "next/image";
 import { BsHash } from "react-icons/bs";
 import { FiArrowUpRight, FiArrowDownRight } from "react-icons/fi";
-
+import CheckIcon from "@mui/icons-material/Check";
+import { AiOutlineCheck } from "react-icons/ai";
 import { ButtonStyle } from "@/components/Button";
 import { useState } from "react";
 import { useRouter } from "next/router";
-
+import { GoPrimitiveDot } from "react-icons/go";
+import FooterMobile from "@/components/Footer/FooterMobile";
 const SubscribePage: NextPage = () => {
 	const router = useRouter();
 	const descCardOne = [
@@ -36,6 +38,30 @@ const SubscribePage: NextPage = () => {
 		{ id: 233, desc: "Triple Hashtag Keyword" },
 	];
 
+	const checks = [
+		{
+			id: 1,
+			title: "Easy to Read from Distance",
+		},
+		{
+			id: 2,
+			title: "Continuous Analytical Reports",
+		},
+		{
+			id: 3,
+			title: "Profile Chart Dashboard",
+		},
+		{
+			id: 4,
+			title: "SEO Supported Keyword",
+		},
+	];
+
+	const cash = [
+		{ id: 1, num: "10K", title: "One time payment " },
+		{ id: 1, num: 3.65, title: "Yearly renewal" },
+	];
+
 	const [values, setValues] = useState({
 		hashtag: router.query.tag || "",
 		subLinks: "",
@@ -45,7 +71,8 @@ const SubscribePage: NextPage = () => {
 			<Header />
 			<Box
 				sx={{
-					width: "100%",
+					width: "2162px",
+					maxWidth: "100%",
 					background: "#EAEDED",
 					overflow: "hidden",
 					position: "relative",
@@ -53,7 +80,7 @@ const SubscribePage: NextPage = () => {
 			>
 				<Box
 					sx={{
-						maxWidth: "100%",
+						// maxWidth: "100%",
 						margin: "auto",
 						height: "100%",
 						display: "flex",
@@ -74,17 +101,13 @@ const SubscribePage: NextPage = () => {
 					<Box
 						sx={{
 							position: "relative",
-							right: { xs: "0%", sm: "10%", md: "10%", xl: "20%" },
-							maxWidth: "100%",
-							width: "100%",
-							height: { xs: "100%", sm: "540px", md: "650px", xl: "650px" },
-							background: {
-								xs: "",
-								md: "rgba(251, 251, 251, 0.6)",
-								xl: "rgba(251, 251, 251, 0.6)",
-							},
-							border: { xs: "", md: "", xl: "1px solid #FBFBFB" },
-							backdropFilter: { xs: "", md: "blur(100px)", xl: "blur(100px)" },
+							right: { xs: "15%", sm: "25%", md: "10%", xl: "20%" },
+							// maxWidth: "100%",
+							width: { xs: "130%", md: "100%", xl: "100%" },
+							height: { xs: "100%", sm: "770px", md: "750px", xl: "650px" },
+							background: "rgba(251, 251, 251, 0.6)",
+							border: "1px solid #FBFBFB",
+							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
 							transform: { xs: "skew(-10deg, 0deg)", xl: "skew(-20deg, 0deg)" },
 							overflow: "hidden",
@@ -99,7 +122,7 @@ const SubscribePage: NextPage = () => {
 									md: "140px",
 									xl: "160px",
 								},
-								paddingX: "2rem",
+								paddingX: { xs: "4rem", sm: "4rem", md: "2rem", xl: "rem" },
 								height: "100%",
 								transform: {
 									xs: "skewX(10deg)",
@@ -109,6 +132,7 @@ const SubscribePage: NextPage = () => {
 								alignItems: "center",
 								justifyContent: "center",
 							}}
+							className="LayoutTagsPadding"
 						>
 							<Container>
 								<Box
@@ -117,7 +141,11 @@ const SubscribePage: NextPage = () => {
 										display: "flex",
 										flexDirection: "column",
 										justifyContent: "space-evenly",
-										margin: { xs: "0", md: "0", xl: "1rem auto 0rem 5rem" },
+										margin: {
+											xs: "0 1rem",
+											md: "0",
+											xl: "1rem auto 0rem 5rem",
+										},
 									}}
 								>
 									<Box
@@ -147,7 +175,7 @@ const SubscribePage: NextPage = () => {
 											>
 												#keyword
 											</span>{" "}
-											before someone else does
+											before someone else do
 										</Typography>
 									</Box>
 									<Box>
@@ -157,6 +185,7 @@ const SubscribePage: NextPage = () => {
 											<OutlinedInput
 												sx={{
 													width: "100%",
+													height: { xs: "63px", md: "87px", xl: "97px" },
 													fontSize: {
 														xs: "18px",
 														sm: "22px",
@@ -197,27 +226,66 @@ const SubscribePage: NextPage = () => {
 												>
 													The hashtag keyword you've chosen is premium
 												</Typography>
-												<Typography
-													onClick={() =>
-														router.push(`${router.asPath}/premium`)
-													}
+												<Box
 													sx={{
-														cursor: "pointer",
-														backgroundImage:
-															"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
-														backgroundClip: "text",
-														WebkitBackgroundClip: "text",
-														color: "transparent",
-														fontSize: { xs: "20px", md: "24px", xl: "28px" },
+														width: { xs: "28%", md: "25%", xl: "22%" },
+														display: "flex",
+														justifyContent: "space-between",
+														alignItems: "center",
+														flexDirection: {
+															xs: "column",
+															md: "row",
+															xl: "row",
+														},
 													}}
 												>
-													Premium
-												</Typography>
+													<Typography
+														onClick={() =>
+															router.push(`${router.asPath}/premium`)
+														}
+														sx={{
+															cursor: "pointer",
+															color: "#31E716 ",
+															backgroundClip: "text",
+															WebkitBackgroundClip: "text",
+															fontSize: { xs: "20px", md: "24px", xl: "28px" },
+															alignItems: "center",
+															display: "flex",
+														}}
+													>
+														<GoPrimitiveDot size={"20px"} color="#31E816" />
+														Available
+													</Typography>
+													<Typography
+														onClick={() =>
+															router.push(`${router.asPath}/premium`)
+														}
+														sx={{
+															cursor: "pointer",
+															backgroundImage:
+																"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+															backgroundClip: "text",
+															WebkitBackgroundClip: "text",
+															color: "transparent",
+															fontSize: { xs: "20px", md: "24px", xl: "28px" },
+															alignItems: "center",
+															display: "flex",
+															marginX: ".3rem",
+														}}
+													>
+														<GoPrimitiveDot size={"20px"} color="#31E816" />
+														Premium
+													</Typography>
+												</Box>
 											</Box>
 											{/* </FormHelperText> */}
 										</FormControl>
 									</Box>
-									<Box>
+									<Box
+										sx={{
+											marginY: "2rem",
+										}}
+									>
 										<Box
 											sx={{
 												width: { xs: "100%", md: "90%", xl: "90%" },
@@ -227,11 +295,12 @@ const SubscribePage: NextPage = () => {
 											<Typography
 												sx={{
 													fontSize: {
-														xs: "12px",
-														sm: "20px",
+														xs: { xs: "20px", md: "24px", xl: "24px" },
 														md: "30px",
 														xl: "40px",
 													},
+													lineHeight: { xs: "22px", xl: "30px" },
+													marginY:".5rem"
 												}}
 											>
 												Please provide your keyword's sub-link
@@ -240,6 +309,7 @@ const SubscribePage: NextPage = () => {
 												label="Please provide your keyword's sub-link"
 												sx={{
 													width: "100%",
+													height: { xs: "63px", md: "87px", xl: "97px" },
 													fontSize: {
 														xs: "18px",
 														sm: "22px",
@@ -247,7 +317,6 @@ const SubscribePage: NextPage = () => {
 														xl: "32px",
 													},
 													lineHeight: "28px",
-													height: "90px",
 													borderRadius: "20px",
 													background: "#FBFBFB",
 													paddingX: "10px",
@@ -262,16 +331,154 @@ const SubscribePage: NextPage = () => {
 											sx={{
 												width: "100%",
 												display: "flex",
-												justifyContent: "end",
+												justifyContent: "space-between",
 												marginY: { xs: "2rem", xl: "1rem" },
+												flexDirection: {
+													xs: "column",
+													md: "column",
+													xl: "row",
+												},
+												alignItems: "center",
 											}}
 										>
+											<Box
+												sx={{
+													height: { xs: "100%", md: "100px", xl: "100px" },
+													width: { xs: "100%", xl: "70%" },
+													marginY: ".8rem",
+													display: "flex",
+													justifyContent: "space-around",
+													alignItems: "center",
+													flexDirection: { xs: "column", md: "row", xl: "row" },
+												}}
+											>
+												<Box
+													sx={{
+														width: { xs: "100%", md: "50%", xl: "40%" },
+														display: "flex",
+														height: "100%",
+														justifyContent: "space-between",
+														alignItems: "center",
+														marginY: "1rem",
+													}}
+												>
+													{cash.map((item) => (
+														<Box
+															key={item.id}
+															sx={{
+																width: { xs: "100%", md: "45%", xl: "60%" },
+																height: "100%",
+																display: "flex",
+																alignItems: "center",
+																justifyContent: "space-evenly",
+																flexDirection: "column",
+															}}
+														>
+															<Typography
+																sx={{
+																	fontSize: {
+																		xs: "20px",
+																		sm: "40px",
+																		md: "40px",
+																		xl: "40px",
+																	},
+																	lineHeight: "37px",
+																	fontWeight: "400",
+																	color: "#343132",
+																	textTransform: "uppercase",
+																}}
+															>
+																$ {item.num}
+															</Typography>
+															<Typography
+																sx={{
+																	fontSize: {
+																		xs: "14px",
+																		sm: "16px",
+																		md: "16px",
+																		xl: "16px",
+																	},
+																	lineHeight: "14px",
+																	fontWeight: "400",
+																	color: "#343132",
+																	textTransform: "capitalize",
+																}}
+															>
+																{item.title}
+															</Typography>
+														</Box>
+													))}
+												</Box>
+												<Box
+													sx={{
+														width: { xs: "100%", md: "40%", xl: "35%" },
+														height: "100%",
+														display: "flex",
+														alignItems: "center",
+														justifyContent: "center",
+													}}
+												>
+													<Box
+														sx={{
+															height: "100%",
+															display: "flex",
+															justifyContent: "center",
+															flexDirection: "column",
+														}}
+													>
+														{checks.map((item) => (
+															<Box
+																key={item.id}
+																sx={{
+																	display: "flex",
+																	alignItems: "center",
+																	justifyContent: "space-between",
+																	height: { xs: "25px", xl: "25px" },
+																}}
+															>
+																<AiOutlineCheck
+																	fontSize="small"
+																	color="#455154"
+																/>
+																<Box
+																	sx={{
+																		width: "100%",
+																		paddingX: ".5rem",
+																	}}
+																>
+																	<Typography
+																		sx={{
+																			fontSize: {
+																				xs: "14px",
+																				sm: "16px",
+																				md: "16px",
+																				xl: "16px",
+																			},
+																			fontWeight: "400",
+																			lineHeight: "14px",
+																			color: "#343132",
+																			textTransform: "capitalize",
+																		}}
+																	>
+																		{item.title}
+																	</Typography>
+																</Box>
+															</Box>
+														))}
+													</Box>
+												</Box>
+											</Box>
 											<Button
 												sx={{
 													borderRadius: "16px",
 													paddingX: "18px",
 													height: "59px",
-													width: "311px",
+													width: {
+														xs: "100%",
+														sm: "311px",
+														md: "311px",
+														xl: "311px",
+													},
 													display: "flex",
 													background: "#31E716",
 													// marginRight: { xs: "10rem", xl: "4rem" },
@@ -344,8 +551,9 @@ const SubscribePage: NextPage = () => {
 								>
 									<Typography
 										sx={{
-											fontSize: { xs: "20px", xl: "24px" },
-											fontWeight: "",
+											fontSize: { xs: "24px", xl: "28px" },
+											fontWeight: "600",
+											color: "#58696D",
 										}}
 									>
 										Monthly Package
@@ -360,8 +568,9 @@ const SubscribePage: NextPage = () => {
 								>
 									<Typography
 										sx={{
-											fontSize: { xs: "22px", md: "33px", xl: "44px" },
-											fontWeight: "",
+											fontSize: { xs: "33px", md: "40px", xl: "51px" },
+											fontWeight: "600",
+											color: "#31E716",
 										}}
 									>
 										$99
@@ -417,7 +626,42 @@ const SubscribePage: NextPage = () => {
 										alignItems: "center",
 									}}
 								>
-									<ButtonStyle />
+									{/* <ButtonStyle /> */}
+									<Box
+										sx={{
+											width: "180px",
+											display: "flex",
+											justifyContent: "end",
+											background: "#0090EC",
+											borderRadius: "11px",
+										}}
+									>
+										<Button
+											sx={{
+												paddingX: "18px",
+												width: "140px",
+												height: "45px",
+												display: "flex",
+												justifyContent: "space-between",
+											}}
+										>
+											<Typography
+												sx={{
+													// fontFamily: "Helvetica Neue",
+													letterSpacing: "0.02em",
+													fontSize: "32px",
+													fontWeight: 400,
+													lineHeight: "40px",
+													color: "#FBFBFB",
+													textTransform: "uppercase",
+												}}
+											>
+												pay
+											</Typography>
+
+											<FiArrowUpRight size={42} color="#FBFBFB" />
+										</Button>
+									</Box>
 								</Box>
 							</Box>
 
@@ -453,8 +697,9 @@ const SubscribePage: NextPage = () => {
 								>
 									<Typography
 										sx={{
-											fontSize: { xs: "20px", xl: "24px" },
-											fontWeight: "",
+											fontSize: { xs: "24px", xl: "28px" },
+											fontWeight: "600",
+											color: "#58696D",
 										}}
 									>
 										Yearly Package
@@ -469,8 +714,9 @@ const SubscribePage: NextPage = () => {
 								>
 									<Typography
 										sx={{
-											fontSize: { xs: "22px", md: "33px", xl: "44px" },
-											fontWeight: "",
+											fontSize: { xs: "33px", md: "40px", xl: "51px" },
+											fontWeight: "600",
+											color: "#31E716",
 										}}
 									>
 										$399
@@ -526,7 +772,42 @@ const SubscribePage: NextPage = () => {
 										alignItems: "center",
 									}}
 								>
-									<ButtonStyle />
+									{/* <ButtonStyle /> */}
+									<Box
+										sx={{
+											width: "180px",
+											display: "flex",
+											justifyContent: "end",
+											background: "#0090EC",
+											borderRadius: "11px",
+										}}
+									>
+										<Button
+											sx={{
+												paddingX: "18px",
+												width: "140px",
+												height: "45px",
+												display: "flex",
+												justifyContent: "space-between",
+											}}
+										>
+											<Typography
+												sx={{
+													// fontFamily: "Helvetica Neue",
+													letterSpacing: "0.02em",
+													fontSize: "32px",
+													fontWeight: 400,
+													lineHeight: "40px",
+													color: "#FBFBFB",
+													textTransform: "uppercase",
+												}}
+											>
+												pay
+											</Typography>
+
+											<FiArrowUpRight size={42} color="#FBFBFB" />
+										</Button>
+									</Box>
 								</Box>
 							</Box>
 
@@ -558,8 +839,9 @@ const SubscribePage: NextPage = () => {
 								>
 									<Typography
 										sx={{
-											fontSize: { xs: "20px", xl: "24px" },
-											fontWeight: "",
+											fontSize: { xs: "24px", xl: "28px" },
+											fontWeight: "600",
+											color: "#58696D",
 										}}
 									>
 										6 Months Package
@@ -574,8 +856,9 @@ const SubscribePage: NextPage = () => {
 								>
 									<Typography
 										sx={{
-											fontSize: { xs: "22px", md: "33px", xl: "44px" },
-											fontWeight: "",
+											fontSize: { xs: "33px", md: "40px", xl: "51px" },
+											fontWeight: "600",
+											color: "#31E716",
 										}}
 									>
 										$299
@@ -631,12 +914,48 @@ const SubscribePage: NextPage = () => {
 										alignItems: "center",
 									}}
 								>
-									<ButtonStyle />
+									{/* <ButtonStyle /> */}
+									<Box
+										sx={{
+											width: "180px",
+											display: "flex",
+											justifyContent: "end",
+											background: "#0090EC",
+											borderRadius: "11px",
+										}}
+									>
+										<Button
+											sx={{
+												paddingX: "18px",
+												width: "140px",
+												height: "45px",
+												display: "flex",
+												justifyContent: "space-between",
+											}}
+										>
+											<Typography
+												sx={{
+													// fontFamily: "Helvetica Neue",
+													letterSpacing: "0.02em",
+													fontSize: "32px",
+													fontWeight: 400,
+													lineHeight: "40px",
+													color: "#FBFBFB",
+													textTransform: "uppercase",
+												}}
+											>
+												pay
+											</Typography>
+
+											<FiArrowUpRight size={42} color="#FBFBFB" />
+										</Button>
+									</Box>
 								</Box>
 							</Box>
 						</Box>
 					</Box>
 					<Footer />
+					<FooterMobile />
 				</Box>
 			</Box>
 		</>

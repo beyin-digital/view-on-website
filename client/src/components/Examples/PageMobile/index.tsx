@@ -8,6 +8,7 @@ import ThreeBox from "./ThreeBox";
 // footer
 import Footer from "@/components/Footer/Footer";
 import FooterMobile from "@/components/Footer/FooterMobile";
+import { LinkSubscribe } from "@/components/Button";
 const PageMobile = () => {
 	return (
 		<Box
@@ -60,6 +61,18 @@ const PageMobile = () => {
 
 					{/* Slider Three */}
 					<ThreeBox />
+					{/*  */}
+					<Box
+						sx={{
+							width: "85%",
+							height: "90px",
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<LinkSubscribe />
+					</Box>
 				</Box>
 			</Box>
 			<FooterMobile />

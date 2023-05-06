@@ -37,7 +37,7 @@ const HomeDetails = () => {
 					<Box
 						sx={{
 							width: "80%",
-
+							// height: "100%",
 							margin: ".4rem",
 						}}
 					>
@@ -47,7 +47,7 @@ const HomeDetails = () => {
 
 								height: "220px",
 								transform: {
-									xs: "skew(10deg, 0deg)",
+									xs: "skew(16deg, 0deg)",
 									sm: "skew(16deg, 0deg)",
 									md: "skew(16deg, 0deg)",
 									xl: "skew(16deg, 0deg)",
@@ -99,7 +99,9 @@ const HomeDetails = () => {
 										sx={{
 											display: "flex",
 											alignItems: "center",
+											marginY: { xs: "1rem" },
 										}}
+										className="InputHomeMargin"
 									>
 										<Box
 											sx={{
@@ -167,7 +169,7 @@ const HomeDetails = () => {
 														// display: "none",
 													},
 												}}
-												placeholder="Enter Hashtag Keyword"
+												placeholder="Keyword"
 												className="l"
 											/>
 											<Box

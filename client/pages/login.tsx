@@ -33,7 +33,7 @@ const LoginPage = () => {
 						width: "100%",
 						height: "100%",
 						justifyContent: "center",
-						paddingX: "1rem",
+						paddingX: { xs: "2rem", md: "5rem", xl: "5rem" },
 						transform: {
 							xs: "skew(10deg, 0deg)",
 							sm: "skew(16deg, 0deg)",
@@ -53,9 +53,9 @@ const LoginPage = () => {
 					>
 						<Box
 							sx={{
-								// width: "610px",
+								// width: { xs: "100%", md: "", xl: "" },
 								height: "600px",
-								// paddingX: "1rem",
+								paddingX: "1rem",
 							}}
 						>
 							<LoginDetails />

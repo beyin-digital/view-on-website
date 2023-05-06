@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 
 // footer
 import Footer from "@/components/Footer/Footer";
@@ -7,7 +7,8 @@ import Footer from "@/components/Footer/Footer";
 import OneBox from "./OneBox";
 import TwoBox from "./TwoBox";
 import ThreeBox from "./ThreeBox";
-
+import { AiOutlineArrowRight } from "react-icons/ai";
+import { LinkSubscribe } from "@/components/Button";
 const PageDesktop = () => {
 	return (
 		<>
@@ -34,6 +35,7 @@ const PageDesktop = () => {
 						marginLeft: { xs: "", md: "-5rem", xl: "-5rem" },
 						// background: "rgba(251, 251, 251, 0.5)",
 						// backdropFilter: "blur(100px)",
+						flexDirection: "column",
 					}}
 				>
 					<Box
@@ -45,7 +47,7 @@ const PageDesktop = () => {
 						<img src="/images/swirl.png" />
 					</Box>
 					<Box
-						m="auto"
+						// m="auto"
 						sx={{
 							height: { xs: "100%", md: "600px", xl: "590px" },
 							width: { xs: "100%", md: "200vw", xl: "200vw" },
@@ -106,6 +108,17 @@ const PageDesktop = () => {
 							{/* Slider Three */}
 							<ThreeBox />
 						</>
+					</Box>
+					<Box
+						sx={{
+							width: "85%",
+							height: "90px",
+							display: "flex",
+							justifyContent: "end",
+							alignItems: "center",
+						}}
+					>
+						<LinkSubscribe />
 					</Box>
 				</Box>
 			</Box>

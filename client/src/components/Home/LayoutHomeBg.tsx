@@ -23,24 +23,24 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "end",
+						marginLeft: { xs: "3rem", sm: "3rem", md: "0", xl: "0" },
 					}}
 				>
 					<Box
 						sx={{
-							width: { xs: "100%", sm: "500px", md: "970px", xl: "970px" },
-
+							width: { xs: "100%", sm: "500px", md: "740px", xl: "740px" },
 							height: {
-								xs: "100%",
+								xs: "",
 								sm: "300px",
 								md: "370px",
-								xl: "370px",
+								xl: "360px",
 							},
 							// height: "100%",
 							display: "flex",
 							alignItems: "center",
 							justifyContent: {
 								xs: "",
-								sm: "start",
+								sm: "",
 								md: "center",
 								xl: "center",
 							},
@@ -49,7 +49,7 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 							backgroundSize: "contain",
 							position: "relative",
 							transform: {
-								xs: "skew(10deg, 0deg)",
+								xs: "skew(16deg, 0deg)",
 								sm: "skew(16deg, 0deg)",
 								md: "skew(16deg, 0deg)",
 								xl: "skew(16deg, 0deg)",

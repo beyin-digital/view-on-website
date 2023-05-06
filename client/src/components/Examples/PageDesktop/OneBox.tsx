@@ -69,7 +69,7 @@ const OneBox = () => {
 									marginY: ".8rem",
 								}}
 							>
-								Place it your way
+								See it
 							</Typography>
 							<Typography
 								sx={{
@@ -79,9 +79,9 @@ const OneBox = () => {
 									fontWeight: "300",
 								}}
 							>
-								Please provide your keyword’s sub-link Please provide your
-								keyword’s sub-link Please provide your keyword’s sub-link Please
-								provide your keyword’s sub-link
+								Making your #keyword visible will help customers easily interact
+								with it to be redirected to your product or service sub-link.
+								You can shape your #keyword as you desire.
 							</Typography>
 						</Box>
 					</Box>

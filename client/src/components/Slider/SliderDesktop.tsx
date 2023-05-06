@@ -479,7 +479,7 @@ const SliderDesktop = () => {
 											</Box>
 											<Box
 												sx={{
-													width: { xs: "60%", md: "50%", xl: "40%" },
+													width: { xs: "100%", sm: "60%", md: "50%", xl: "40%" },
 													// height: "100%",
 													// border:"1px solid"
 												}}
@@ -491,7 +491,7 @@ const SliderDesktop = () => {
 															display: "flex",
 															alignItems: "center",
 															justifyContent: "space-between",
-															height: "25px",
+															height: { xs: "30px", xl: "25px" },
 														}}
 													>
 														<CheckIcon fontSize="small" />

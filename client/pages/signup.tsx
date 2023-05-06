@@ -17,7 +17,7 @@ const SignUpPage = () => {
 					height: "100%",
 					display: "flex",
 					alignItems: "center",
-					justifyContent: "center",
+					justifyContent: "end",
 					transform: {
 						xs: "skew(10deg, 0deg)",
 						sm: "skew(16deg, 0deg)",
@@ -28,15 +28,15 @@ const SignUpPage = () => {
 			>
 				<Container
 					sx={{
-						width: { xs: "100%", md: "70%", xl: "70%" },
+						width: { xs: "100%", md: "70%", xl: "60%" },
 						height: "100%",
 						marginRight: { xs: "", md: "7rem", xl: "7rem" },
 						display: "flex",
 						flexDirection: "column",
 						alignItems: "center",
-						justifyContent: "space-around",
+						justifyContent: "space-evenly",
 						marginY: { xs: "0rem", sm: "0rem", md: "1px", xl: "1px" },
-						marginX:"1rem"
+						marginX: "1rem",
 					}}
 				>
 					<SignupDetails />

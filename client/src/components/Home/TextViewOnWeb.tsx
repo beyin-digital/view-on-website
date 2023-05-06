@@ -21,10 +21,10 @@ const TextViewOnWeb = () => {
 				<Typography
 					sx={{
 						fontSize: {
-							xs: "20px",
+							xs: "15px",
 							sm: "24px",
-							md: "50px",
-							xl: "64px",
+							md: "40px",
+							xl: "50px",
 						},
 					}}
 					fontWeight="600"

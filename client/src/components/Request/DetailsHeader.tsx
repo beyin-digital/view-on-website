@@ -44,7 +44,7 @@ const DetailsHeader = () => {
 							marginY: ".5rem",
 							textAlign: "center",
 						}}
-						color="#343132"
+						color="#A0A9AB"
 					>
 						We will send a link to Your email where you can make a new password:{" "}
 					</Typography>

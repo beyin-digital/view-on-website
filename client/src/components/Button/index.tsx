@@ -1,4 +1,5 @@
-import { Box, Button, ButtonBaseProps, Typography } from "@mui/material";
+import { Box, Button, ButtonBaseProps, Link, Typography } from "@mui/material";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import { FiArrowUpRight } from "react-icons/fi";
 
 interface ButtonLoginProps extends ButtonBaseProps {
@@ -49,7 +50,7 @@ export const ButtonLogin = (props: ButtonLoginProps) => {
 						{props.name}
 					</Typography>
 
-					<FiArrowUpRight size={42} color='#FBFBFB' />
+					<FiArrowUpRight size={42} color="#FBFBFB" />
 				</Button>
 			</Box>
 		</>
@@ -64,8 +65,7 @@ export const ButtonStyle = () => {
 					width: "180px",
 					display: "flex",
 					justifyContent: "end",
-					background:
-						"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+					background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 					borderRadius: "11px",
 				}}
 			>
@@ -92,7 +92,7 @@ export const ButtonStyle = () => {
 						pay
 					</Typography>
 
-					<FiArrowUpRight size={42} color='#343132' />
+					<FiArrowUpRight size={42} color="#343132" />
 				</Button>
 			</Box>
 		</>
@@ -143,5 +143,53 @@ export const ButtonChange = ({ name, onClick }: any) => {
 				</Button>
 			</Box>
 		</>
+	);
+};
+
+export const LinkSubscribe = () => {
+	return (
+		<Box
+			sx={{
+				width: {
+					xs: "240px",
+					sm: "300px",
+					md: "300px",
+					xl: "300px",
+				},
+				height: "60px",
+				display: "flex",
+				justifyContent: "end",
+				background: "#31E716",
+				borderRadius: "16px",
+			}}
+		>
+			<Link
+				sx={{
+					paddingX: "18px",
+					height: "59px",
+					width: { xs: "220px", md: "231px", xl: "261px" },
+					display: "flex",
+					justifyContent: "space-around",
+					alignItems: "center",
+					textDecoration: "none",
+				}}
+			>
+				<Typography
+					sx={{
+						// fontFamily: "Helvetica Neue",
+						letterSpacing: "0.02em",
+						fontSize: { xs: "20px", md: "25px", xl: "32px" },
+						fontWeight: "500",
+						lineHeight: "40px",
+						color: "#343132",
+						textTransform: "uppercase",
+					}}
+				>
+					subscribe
+				</Typography>
+
+				<AiOutlineArrowRight size={42} color="#343132" />
+			</Link>
+		</Box>
 	);
 };

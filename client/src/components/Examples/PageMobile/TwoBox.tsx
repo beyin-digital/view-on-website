@@ -53,7 +53,7 @@ const TwoBox = () => {
 										marginY: "1rem",
 									}}
 								>
-									Physical conversion in less than 1 minute!
+									Type the #kyeword.
 								</Typography>
 								<Typography
 									sx={{
@@ -65,9 +65,9 @@ const TwoBox = () => {
 										marginY: "1rem",
 									}}
 								>
-									Please provide your keyword’s sub-link Please provide your
-									keyword’s sub-link Please provide your keyword’s sub-link
-									Please provide your keyword’s sub-link
+									Your customers will quickly type the #keyword they saw in the
+									label you displayed and visit your website through our
+									homepage.
 								</Typography>
 							</Box>
 						</Box>
@@ -81,7 +81,7 @@ const TwoBox = () => {
 								position: "absolute",
 								bottom: "0",
 								right: "0",
-								top:"-2rem"
+								top: "-2rem",
 							}}
 						>
 							<Box

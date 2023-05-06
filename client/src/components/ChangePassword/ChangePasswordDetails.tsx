@@ -54,6 +54,7 @@ const ChangePasswordDetails = () => {
 						lineHeight: "27px",
 						textAlign: "center",
 						marginBottom: { xs: "2rem", md: "", xl: "1rem" },
+						color: "#A0A9AB",
 					}}
 				>
 					Please enter a new password for your email Test@abceed.com and related

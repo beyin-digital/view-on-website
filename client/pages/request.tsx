@@ -34,7 +34,7 @@ const Request = () => {
 							alignItems: "center",
 							justifyContent: "space-around",
 							position: "relative",
-							paddingX: "2rem",
+							paddingX: "1rem",
 
 							// top: { xs: "10rem", sm: "0", md: "0", xl: "0" },
 						}}

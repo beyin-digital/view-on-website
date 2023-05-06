@@ -17,7 +17,7 @@ const OneBox = () => {
 					position: "relative",
 					height: { xs: "80vh", sm: "80vh", md: "80vh", xl: "80vh" },
 					transform: "skew(-16deg, 0deg)",
-					right:{xs:"-1rem",sm:"-1rem",md:"-5rem"}
+					right: { xs: "-1rem", sm: "-1rem", md: "-5rem" },
 				}}
 			>
 				<Box
@@ -78,7 +78,7 @@ const OneBox = () => {
 								}}
 								className="ExampleBoxOnePlace"
 							>
-								Place it your way
+								See it
 							</Typography>
 							<Typography
 								sx={{
@@ -88,9 +88,9 @@ const OneBox = () => {
 									marginY: ".8rem",
 								}}
 							>
-								Please provide your keyword’s sub-link Please provide your
-								keyword’s sub-link Please provide your keyword’s sub-link Please
-								provide your keyword’s sub-link
+								Making your #keyword visible will help customers easily interact
+								with it to be redirected to your product or service sub-link.
+								You can shape your #keyword as you desire.
 							</Typography>
 						</Box>
 					</Box>
