@@ -5,8 +5,16 @@ import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import React from "react";
+import Head from "next/head";
+
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+
+import { useTranslation } from "next-i18next";
 
 const VerificationPage = () => {
+	const { t } = useTranslation("verification");
+
 	const router = useRouter();
 	const [otp, setOtp] = React.useState("");
 	const handleChange = (newValue: any) => {
@@ -15,6 +23,13 @@ const VerificationPage = () => {
 
 	return (
 		<>
+			<Head>
+				<title>{t("meat_title")}</title>
+				<meta name="description" content="" />
+				<meta name="keyword" content="" />
+				<meta property="og:image" content="" />
+				<link rel="icon" href="/images/logo.svg" />
+			</Head>
 			<Layout>
 				<Grid
 					container
@@ -36,15 +51,17 @@ const VerificationPage = () => {
 						sx={{
 							width: { xs: "100%", md: "50%", xl: "50%" },
 							height: "100%",
-							marginRight: { xs: "0", md: "15rem", xl: "20rem" },
+							// marginRight: { xs: "0", md: "15rem", xl: "20rem" },
 							display: "flex",
 							flexDirection: "column",
 							alignItems: "center",
 							justifyContent: "space-around",
 							position: "relative",
 							marginY: { xs: "8rem", sm: "4rem", md: "1rem", xl: "0rem" },
+							paddingY: "1rem",
 							// border: "1px solid",
 						}}
+						className="VerificationPageCenter"
 					>
 						<Box
 							sx={{
@@ -64,7 +81,8 @@ const VerificationPage = () => {
 									lineHeight: "29px",
 								}}
 							>
-								Verification Link Sent
+								{/* Verification Link Sent */}
+								{t("title")}
 							</Typography>
 						</Box>
 						<Box
@@ -85,10 +103,12 @@ const VerificationPage = () => {
 									lineHeight: "28px",
 									textAlign: "center",
 									marginY: "2rem",
+									paddingX: ".5rem",
 								}}
 							>
-								Enter the authenrication code we sent to Your email
-								Test@abceed.com below:
+								{/* Enter the authenrication code we sent to Your email
+								Test@abceed.com below: */}
+								{t("desc")}
 							</Typography>
 							<Box
 								sx={{
@@ -129,7 +149,8 @@ const VerificationPage = () => {
 									marginY: { xs: "4rem", sm: "2rem", md: "1rem", xl: "2rem" },
 								}}
 							>
-								Resend code
+								{/* Resend code */}
+								{t("resend")}
 							</Typography>
 						</Box>
 						<Box
@@ -143,7 +164,7 @@ const VerificationPage = () => {
 							}}
 						>
 							<ButtonLogin
-								name="Verify"
+								name={`${t("button")}`}
 								onClick={() => router.push("/payment")}
 							/>
 						</Box>
@@ -152,6 +173,17 @@ const VerificationPage = () => {
 			</Layout>
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"verification",
+			])),
+		},
+	};
 };
 
 export default VerificationPage;

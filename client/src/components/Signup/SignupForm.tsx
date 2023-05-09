@@ -2,8 +2,11 @@ import { Typography, Box, OutlinedInput } from "@mui/material";
 import Link from "next/link";
 import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const SignupForm = () => {
+	const { t } = useTranslation("signup");
+
 	const router = useRouter();
 
 	return (
@@ -55,7 +58,8 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
-						placeholder='Full name'
+						placeholder={`${t("form_name")}`}
+						// placeholder="Full name"
 					/>
 					<OutlinedInput
 						sx={{
@@ -73,7 +77,8 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
-						placeholder='Password'
+						// placeholder="Password"
+						placeholder={`${t("form_password")}`}
 					/>
 				</Box>
 				<Box
@@ -108,7 +113,8 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
-						placeholder='E-mail'
+						// placeholder="E-mail"
+						placeholder={`${t("form_email")}`}
 					/>
 					<OutlinedInput
 						sx={{
@@ -126,7 +132,8 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: ".3rem",
 						}}
-						placeholder='Confirm Password'
+						// placeholder="Confirm Password"
+						placeholder={`${t("form_confirm")}`}
 					/>
 				</Box>
 			</Box>
@@ -138,11 +145,7 @@ const SignupForm = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
-					flexDirection: {
-						xs: "column-reverse",
-						md: "row",
-						xl: "row",
-					},
+					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
 					marginBottom: { xs: "10rem", md: "5rem", xl: "5rem" },
 					marginTop: { xs: "1rem", md: "2rem", xl: "2rem" },
 					marginY: { xs: "1rem", md: "0", xl: "0" },
@@ -155,19 +158,22 @@ const SignupForm = () => {
 						marginY: { xs: ".5rem", md: "", xl: "" },
 					}}
 				>
-					Already have an account?{" "}
+					{/* Already have an account?{" "} */}
+					{t("sign_up_account")}
+
 					<Link
-						href='/login'
+						href="/login"
 						style={{
 							textDecoration: "none",
 							color: "#343132",
 						}}
 					>
-						Sign in
+						{/* Sign in */}
+						{t("sign_in")}
 					</Link>
 				</Typography>
 				<ButtonLogin
-					name='next'
+					name={`${t("sign_up_button")}`}
 					onClick={() => router.push("verification")}
 				/>
 			</Box>

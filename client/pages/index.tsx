@@ -10,9 +10,16 @@ import { Drawer, Typography, IconButton } from "@mui/material";
 
 import SliderDesktop from "@/components/Slider/SliderDesktop";
 
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+
+import { useTranslation } from "next-i18next";
+
 type Anchor = "bottom" | "right";
 
 const HomePage = (anchor: Anchor) => {
+	const { t } = useTranslation("home");
+
 	const router = useRouter();
 	const [hashtag, setHashtag] = useState("");
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -42,10 +49,11 @@ const HomePage = (anchor: Anchor) => {
 	return (
 		<>
 			<Head>
-				<title>ViewOnWebsite - Home Page</title>
+				<title>{t("meat_title")}</title>
 				<meta name="description" content="" />
 				<meta name="keyword" content="" />
 				<meta property="og:image" content="" />
+				<link rel="icon" href="/images/logo.svg" />
 			</Head>
 			<Box
 				sx={{
@@ -75,7 +83,7 @@ const HomePage = (anchor: Anchor) => {
 							background: "transparent",
 							color: "transparent",
 						}}
-						onClick={() => setIsDrawerOpen(true)}
+						// onClick={() => setIsDrawerOpen(true)}
 					>
 						{/* mohamed */}
 					</Button>
@@ -97,6 +105,14 @@ const HomePage = (anchor: Anchor) => {
 			</Box>
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", ["common", "home"])),
+		},
+	};
 };
 
 export default HomePage;

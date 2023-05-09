@@ -1,6 +1,9 @@
 import { Box, Typography, OutlinedInput, Button } from "@mui/material";
+import { useTranslation } from "next-i18next";
 
 const ChangePasswordForm = () => {
+	const { t } = useTranslation("changePassword");
+
 	return (
 		<>
 			<Box
@@ -31,7 +34,7 @@ const ChangePasswordForm = () => {
 							border: 0,
 						},
 					}}
-					placeholder="UserName"
+					placeholder={`${t("password")}`}
 				/>
 				<OutlinedInput
 					sx={{
@@ -54,7 +57,7 @@ const ChangePasswordForm = () => {
 							border: 0,
 						},
 					}}
-					placeholder="Password"
+					placeholder={`${t("repeat_password")}`}
 				/>
 			</Box>
 			<Box
@@ -93,14 +96,15 @@ const ChangePasswordForm = () => {
 							sx={{
 								// fontFamily: "Helvetica Neue",
 								letterSpacing: "0.02em",
-								fontSize: {xs:"20px", sm: "25px", xl: "32px" },
+								fontSize: { xs: "20px", sm: "25px", xl: "32px" },
 								fontWeight: 400,
 								lineHeight: { xs: "25px", xl: "40px" },
 								color: "#FBFBFB",
 								textTransform: "uppercase",
 							}}
 						>
-							Change password
+							{/* Change password */}
+							{t("change")}
 						</Typography>
 
 						{/* <FiArrowUpRight size={42} color="#FBFBFB" /> */}

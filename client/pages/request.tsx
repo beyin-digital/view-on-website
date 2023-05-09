@@ -3,9 +3,24 @@ import DetailsHeader from "@/components/Request/DetailsHeader";
 import FormRequest from "@/components/Request/FormRequest";
 import { Box, Grid } from "@mui/material";
 
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+
+import { useTranslation } from "next-i18next";
+import Head from "next/head";
+
 const Request = () => {
+	const { t } = useTranslation("request");
+
 	return (
 		<>
+			<Head>
+				<title>{t("meat_title")}</title>
+				<meta name="description" content="" />
+				<meta name="keyword" content="" />
+				<meta property="og:image" content="" />
+				<link rel="icon" href="/images/logo.svg" />
+			</Head>
 			<Layout>
 				<Grid
 					container
@@ -46,6 +61,14 @@ const Request = () => {
 			</Layout>
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", ["common", "request"])),
+		},
+	};
 };
 
 export default Request;

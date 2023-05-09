@@ -10,16 +10,18 @@ import {
 	Button,
 	// Link,
 } from "@mui/material";
+import { useTranslation } from "next-i18next";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MenuIcon from "@mui/icons-material/Menu";
-import { FiArrowUpRight } from "react-icons/fi";
+import { FiArrowUpRight, FiArrowUpLeft } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
 
 const Header = () => {
+	const { t } = useTranslation("common");
 	const router = useRouter();
 	const [mobileOpen, setMobileOpen] = useState(false);
 	// handle menu click
@@ -29,33 +31,47 @@ const Header = () => {
 
 	const links = [
 		{
+			tKey: "nav_subscribe",
 			label: "Subscribe",
 			href: "/subscribe",
 		},
 		{
+			tKey: "nav_examples",
+
 			label: "Examples",
 			href: "/example",
 		},
-		{ label: "AR", href: "/ar", sublinks: "/ar/1" },
 		{
+			tKey: "ar",
+
+			label: "AR",
+			href: "/ar",
+			sublinks: "/ar/1",
+		},
+		{
+			tKey: "nav_login",
 			label: "Login",
 			href: "/login",
 		},
 	];
 	const link = [
 		{
+			tKey: "footer_contact",
 			label: "Contact",
 			href: "/contact",
 		},
 		{
+			tKey: "footer_learn",
 			label: "Learn More",
 			href: "/",
 		},
 		{
+			tKey: "footer_privacy",
 			label: "Privacy Policy",
 			href: "/privacy",
 		},
 		{
+			tKey: "footer_terms",
 			label: "T&C",
 			href: "/terms",
 		},
@@ -78,9 +94,9 @@ const Header = () => {
 				>
 					<img src="/images/logo.svg" alt="logo" />
 				</Box>
-				<AiOutlineClose />
+				<AiOutlineClose size="25px" />
 			</Box>
-			{/* <Divider /> */}
+
 			<Box
 				sx={{
 					marginY: "2rem",
@@ -88,7 +104,8 @@ const Header = () => {
 			>
 				{links.map((link) => (
 					<Link
-						key={link.label}
+						key={t(link.tKey)}
+						title={`${t(link.tKey)}`}
 						href={link.href}
 						style={{
 							textDecoration: "none",
@@ -108,8 +125,9 @@ const Header = () => {
 								fontWeight={"400"}
 								lineHeight="37px"
 								color="#343132"
+								textTransform={"capitalize"}
 							>
-								{link.label}
+								{t(link.tKey)}
 							</Typography>
 							<IoIosArrowForward color="#343132" />
 						</Box>
@@ -142,11 +160,14 @@ const Header = () => {
 							fontWeight: 400,
 							lineHeight: "40px",
 							color: "#343132",
+							textTransform: "uppercase",
 						}}
 					>
-						Get Started
+						{/* Get Started */}
+						{t("nav_getStarted")}
 					</Typography>
-					<FiArrowUpRight size={42} color="#343132" />
+					<FiArrowUpRight size={42} color="#343132" className="left" />
+					{/* <FiArrowUpLeft size={42} color="#343132" className="right" /> */}
 				</Button>
 			</Box>
 			<Box
@@ -200,7 +221,8 @@ const Header = () => {
 			>
 				{link.map((link) => (
 					<Link
-						key={link.label}
+						key={t(link.tKey)}
+						title={`${t(link.tKey)}`}
 						href={link.href}
 						style={{
 							textDecoration: "none",
@@ -219,8 +241,9 @@ const Header = () => {
 								fontWeight={"400"}
 								lineHeight="27px"
 								color="#343132"
+								textTransform={"capitalize"}
 							>
-								{link.label}
+								{t(link.tKey)}
 							</Typography>
 						</Box>
 					</Link>
@@ -256,7 +279,7 @@ const Header = () => {
 							onClick={handleDrawerToggle}
 						>
 							{mobileOpen ? (
-								<AiOutlineClose color="#343132" />
+								<AiOutlineClose color="#343132" size="25px" />
 							) : (
 								<MenuIcon
 									sx={{
@@ -283,7 +306,8 @@ const Header = () => {
 									<li key={`${link.label}1`}>
 										<Link
 											href={link.href}
-											key={link.label}
+											key={t(link.tKey)}
+											title={`${t(link.tKey)}`}
 											style={{ textDecoration: "none" }}
 										>
 											<Typography
@@ -291,8 +315,9 @@ const Header = () => {
 												fontWeight={400}
 												lineHeight="37px"
 												color="#343132"
+												textTransform={"capitalize"}
 											>
-												{link.label}
+												{t(link.tKey)}
 											</Typography>
 										</Link>
 									</li>
@@ -316,11 +341,14 @@ const Header = () => {
 									fontWeight: 400,
 									lineHeight: "40px",
 									color: "#343132",
+									textTransform: "uppercase",
 								}}
 							>
-								Get Started
+								{/* Get Started */}
+								{t("nav_getStarted")}
 							</Typography>
-							<FiArrowUpRight size={42} color="#343132" />
+							<FiArrowUpRight size={42} color="#343132" className="left" />
+							<FiArrowUpLeft size={42} color="#343132" className="right" />
 						</Button>
 					</Toolbar>
 				</AppBar>
@@ -338,7 +366,7 @@ const Header = () => {
 								background: "transparent",
 								// background: "rgba(251, 251, 251, 0.6",
 								backdropFilter: "blur(100px)",
-								boxShadow:"0px 0px 0px 0px"
+								boxShadow: "0px 0px 0px 0px",
 							},
 							// "& .MuiDrawer-paper": {
 							// 	background: "transparent",

@@ -6,26 +6,29 @@ const TextViewOnWeb = () => {
 			<Box
 				sx={{
 					height: {
-						xs: "50px",
+						xs: "60px",
 						sm: "70px",
-						md: "100px",
+						md: "140px",
 						xl: "120px",
 					},
 					width: "50%",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
+					// marginBottom:"2rem"
 				}}
+
 				className="TextViewOnWebsite"
 			>
 				<Typography
 					sx={{
 						fontSize: {
-							xs: "15px",
+							xs: "20px",
 							sm: "24px",
 							md: "40px",
 							xl: "50px",
 						},
+						// paddingBottom:"2rem"
 					}}
 					fontWeight="600"
 					color="#0090EC"

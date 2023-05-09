@@ -66,7 +66,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 					className="LayoutBox"
 						sx={{
 							position: "relative",
-							right: { xs: "10%", sm: "1%", md: "10%", xl: "20%" },
+							// right: { xs: "10%", sm: "1%", md: "10%", xl: "20%" },
 							// maxWidth: "100%",
 							width: { xs: "564px", sm: "100%", md: "100%", xl: "100%" },
 							height: { xs: "100%", sm: "100%", md: "650px", xl: "650px" },

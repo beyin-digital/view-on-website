@@ -1,7 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 const Footer = () => {
+	const { t } = useTranslation("common");
+
 	return (
 		<>
 			<Box
@@ -77,8 +80,10 @@ const Footer = () => {
 							fontWeight="400"
 							lineHeight="32px"
 							textAlign="center"
+							textTransform={"capitalize"}
 						>
-							Learn More
+							{/* Learn More */}
+							{t("footer_learn")}
 						</Typography>
 						<Image src="/icons/i.svg" alt="" width={20} height={20} />
 					</Box>
@@ -87,24 +92,30 @@ const Footer = () => {
 						fontWeight="400"
 						lineHeight="32px"
 						textAlign="center"
+						textTransform={"capitalize"}
 					>
-						T&C
+						{/* T&C */}
+						{t("footer_terms")}
 					</Typography>
 					<Typography
 						fontSize="20px"
 						fontWeight="400"
 						lineHeight="32px"
 						textAlign="center"
+						textTransform={"capitalize"}
 					>
-						Privacy Policy
+						{/* Privacy Policy */}
+						{t("footer_privacy")}
 					</Typography>
 					<Typography
 						fontSize="20px"
 						fontWeight="400"
 						lineHeight="32px"
 						textAlign="center"
+						textTransform={"capitalize"}
 					>
-						Contact Us
+						{/* Contact Us */}
+						{t("footer_contact")}
 					</Typography>
 				</Box>
 			</Box>

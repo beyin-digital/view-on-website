@@ -6,10 +6,14 @@ import { Box } from "@mui/system";
 import Image from "next/image";
 import { Link, Typography } from "@mui/material";
 
+import { useTranslation } from "next-i18next";
+
 interface Props {
 	children: React.ReactNode;
 }
 const Layout: React.FC<Props> = ({ children }) => {
+	const { t } = useTranslation("login");
+
 	const icon = [
 		{
 			id: 1,
@@ -81,7 +85,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 						className="LayoutBox"
 						sx={{
 							position: "relative",
-							right: { xs: "10%", sm: "0%", md: "10%", xl: "20%" },
+							// right: { xs: "10%", sm: "0%", md: "10%", xl: "20%" },
 							// maxWidth: "100%",
 							width: { xs: "564px", sm: "100%", md: "100%", xl: "100%" },
 							height: { xs: "100%", sm: "100%", md: "650px", xl: "650px" },
@@ -122,11 +126,12 @@ const Layout: React.FC<Props> = ({ children }) => {
 							alignItems: "center",
 							justifyContent: "center",
 							position: "relative",
-							left: { xs: "", md: "-8rem", xl: "-0rem" },
+							left: { xs: "0",sm:"0", md: "-14rem", xl: "-0rem" },
 							top: "-2rem",
 						}}
+						className="BoxSignInWith"
 					>
-						<Typography>Or login with</Typography>
+						<Typography>{t("sign_up")}</Typography>
 						<Box
 							sx={{
 								display: "flex",

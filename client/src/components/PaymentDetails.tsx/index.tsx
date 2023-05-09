@@ -9,8 +9,11 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { FiArrowUpRight } from "react-icons/fi";
+import { useTranslation } from "next-i18next";
 
 const PaymentDetails = () => {
+	const { t } = useTranslation("payment");
+
 	const router = useRouter();
 
 	return (
@@ -29,7 +32,7 @@ const PaymentDetails = () => {
 						md: "skew(16deg, 0deg)",
 						xl: "skew(16deg, 0deg)",
 					},
-					marginY: { xs: "7rem", sm: "7rem", md: "1rem", xl: "1rem" },
+					marginY: { xs: "1rem", sm: "1rem", md: "1rem", xl: "1rem" },
 					marginX:"1rem"
 				}}
 			>
@@ -41,7 +44,7 @@ const PaymentDetails = () => {
 						display: "flex",
 						flexDirection: "column",
 						alignItems: "center",
-						justifyContent: "space-around",
+						justifyContent:"space-evenly",
 						position: "relative",
 						zIndex: "99",
 					}}
@@ -53,7 +56,7 @@ const PaymentDetails = () => {
 							display: "flex",
 							flexDirection: "column",
 							alignItems: { xs: "center", md: "start", xl: "start" },
-							justifyContent: { xs: "space-evenly", xl: "space-around" },
+							justifyContent: { xs: "space-evenly", xl: "space-evenly" },
 							position: "relative",
 							// top: { xs: "10rem", sm: "7rem", md: "0", xl: "0" },
 						}}
@@ -63,7 +66,8 @@ const PaymentDetails = () => {
 								sx={{
 									fontSize: { xs: "20px", md: "30px", xl: "40px" },
 									fontWeight: "300",
-									marginY: { xs: "3rem", md: "", xl: "" },
+									margin: { xs: "1rem", md: "", xl: "" },
+
 								}}
 							>
 								Please fill up your payment method

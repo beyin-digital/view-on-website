@@ -2,9 +2,12 @@ import { Box, Button, OutlinedInput, Typography } from "@mui/material";
 import React from "react";
 import { ButtonLogin } from "../Button";
 import LoginTextSignUp from "../Login/LoginTextSignUp";
-import { FiArrowUpRight } from "react-icons/fi";
+import { FiArrowUpRight, FiArrowUpLeft } from "react-icons/fi";
+import { useTranslation } from "next-i18next";
 
 const FormRequest = () => {
+	const { t } = useTranslation("request");
+
 	return (
 		<>
 			<Box
@@ -38,7 +41,7 @@ const FormRequest = () => {
 							border: 0,
 						},
 					}}
-					placeholder="Email or #Keyword"
+					placeholder={`${t("input")}`}
 				/>
 			</Box>
 			<Box
@@ -86,10 +89,12 @@ const FormRequest = () => {
 								textTransform: "uppercase",
 							}}
 						>
-							send
+							{/* send */}
+							{t("send")}
 						</Typography>
 
-						<FiArrowUpRight size={42} color="#FBFBFB" />
+						<FiArrowUpRight size={42} color="#FBFBFB" className="left" />
+						<FiArrowUpLeft size={42} color="#FBFBFB" className="right" />
 					</Button>
 				</Box>
 				<LoginTextSignUp />

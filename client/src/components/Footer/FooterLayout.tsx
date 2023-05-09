@@ -1,7 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 const Footer = () => {
+	const { t } = useTranslation("common");
+
 	return (
 		<footer>
 			<Box
@@ -64,11 +67,12 @@ const Footer = () => {
 							md: "space-between",
 							xl: "space-between",
 						},
+						// overflow: "hidden",
 					}}
 				>
 					<Box
 						sx={{
-							width: "253px",
+							width: { xs: "200px", md: "253px", xl: "253px" },
 							height: "60px",
 							lineHeight: "92.5%",
 							background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
@@ -78,15 +82,19 @@ const Footer = () => {
 							justifyContent: "center",
 							position: "relative",
 							bottom: "-1rem",
+							// overflow: "hidden",
 						}}
 					>
 						<Typography
-							fontSize="32px"
+							sx={{
+								fontSize: { xs: "25px", xl: "32px" },
+							}}
+							// fontSize=
 							fontWeight="400"
 							lineHeight="92.5%"
 							textAlign="center"
 						>
-							Premium
+							{t("premium")}
 						</Typography>
 						{/* <TemporaryDrawer open={drawerOpen} onClose={handleDrawerClose} /> */}
 					</Box>
@@ -113,9 +121,11 @@ const Footer = () => {
 							fontSize="20px"
 							fontWeight="400"
 							lineHeight="32px"
-							textAlign="center"
+								textAlign="center"
+							textTransform={"capitalize"}
 						>
-							Learn More
+							{/* Learn More */}
+							{t("footer_learn")}
 						</Typography>
 						<Image src="/icons/i.svg" alt="" width={20} height={20} />
 					</Box>
@@ -123,25 +133,31 @@ const Footer = () => {
 						fontSize="20px"
 						fontWeight="400"
 						lineHeight="32px"
-						textAlign="center"
+					textAlign="center"
+						textTransform={"capitalize"}
 					>
-						T&C
+						{/* T&C */}
+						{t("footer_terms")}
+					</Typography>
+					<Typography
+						fontSize="20px"
+						fontWeight="400"
+						lineHeight="32px"
+							textAlign="center"
+						textTransform={"capitalize"}
+					>
+						{/* Privacy Policy */}
+						{t("footer_privacy")}
 					</Typography>
 					<Typography
 						fontSize="20px"
 						fontWeight="400"
 						lineHeight="32px"
 						textAlign="center"
+						textTransform={"capitalize"}
 					>
-						Privacy Policy
-					</Typography>
-					<Typography
-						fontSize="20px"
-						fontWeight="400"
-						lineHeight="32px"
-						textAlign="center"
-					>
-						Contact Us
+						{/* Contact Us */}
+						{t("footer_contact")}
 					</Typography>
 				</Box>
 			</Box>

@@ -9,30 +9,52 @@ import {
 	Button,
 	Grid,
 	Container,
+	InputAdornment,
 } from "@mui/material";
 import { NextPage } from "next";
 import { BsHash } from "react-icons/bs";
-import { FiArrowUpRight, FiArrowDownRight } from "react-icons/fi";
+import {
+	FiArrowUpRight,
+	FiArrowUpLeft,
+	FiArrowDownRight,
+	FiArrowDownLeft,
+} from "react-icons/fi";
 import { useRouter } from "next/router";
 
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+
+import { useTranslation } from "next-i18next";
+
 const SubscribePage: NextPage = () => {
+	const { t } = useTranslation("subscribe");
+
 	const router = useRouter();
 	const [values, setValues] = useState({
 		hashtag: "",
 		sublinks: "",
 	});
+	const { locale } = useRouter();
+	// const isRTL = locale === "ar";
 	return (
 		<Layout>
 			<Grid
 				sx={{
-					marginLeft: { xs: "0px", sm: "120px", md: "140px", xl: "160px" },
-					paddingX: "2rem",
+					// marginLeft: { xs: "0px", sm: "120px", md: "15rem", xl: "16rem" },
+					paddingX: { xs: ".5rem", sm: "2rem", md: "2rem", xl: "2rem" },
 					height: "100%",
-					transform: "skewX(16deg)",
+					transform: {
+						xs: "skew(10deg, 0deg)",
+						sm: "skew(16deg, 0deg)",
+						md: "skew(16deg, 0deg)",
+						xl: "skew(16deg, 0deg)",
+					},
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
+					marginY: "2rem",
 				}}
+				className="SubscribePageLayoutBox"
 			>
 				<Container>
 					<Box
@@ -46,27 +68,38 @@ const SubscribePage: NextPage = () => {
 					>
 						<Box
 							sx={{
-								marginY: { xs: "2rem", md: "1rem", xl: "1rem" },
+								marginTop: { xs: "2rem", md: "1rem", xl: "1rem" },
+								marginBottom: { xs: ".1rem", md: "1rem", xl: "1rem" },
 							}}
 						>
 							<Typography
 								sx={{
-									fontSize: { xs: "18px", sm: "20px", md: "30px", xl: "40px" },
+									fontSize: { xs: "18px", sm: "20px", md: "25px", xl: "40px" },
 								}}
 							>
-								Reserve your{" "}
-								<span
-									style={{
-										padding: "4px 8px",
+								{/* Reserve your{" "} */}
+								{t("text_one")}
+								<Typography
+									component={"span"}
+									sx={{
+										fontSize: {
+											xs: "18px",
+											sm: "20px",
+											md: "25px",
+											xl: "40px",
+										},
+
+										padding: "0",
 										borderRadius: "8px",
 										lineHeight: "92.5%",
 										background:
 											"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 									}}
 								>
-									#keyword
-								</span>{" "}
-								before someone else does
+									{/* #keyword */}# {t("text_keyword")}
+								</Typography>{" "}
+								{/* before someone else does */}
+								{t("text_two")}
 							</Typography>
 						</Box>
 						<Box
@@ -74,11 +107,11 @@ const SubscribePage: NextPage = () => {
 								marginY: { xs: "2rem", md: "1rem", xl: "1rem" },
 							}}
 						>
-							<FormControl sx={{ width: "90%" }}>
+							<FormControl sx={{ width: { xs: "100%", md: "90%", xl: "90%" } }}>
 								<OutlinedInput
 									sx={{
 										width: "100%",
-										height:"97px",
+										height: { xs: "60px", md: "87px", xl: "97px" },
 										fontSize: {
 											xs: "18px",
 											sm: "22px",
@@ -95,24 +128,31 @@ const SubscribePage: NextPage = () => {
 									onChange={(e) =>
 										setValues({ ...values, hashtag: e.target.value })
 									}
-									placeholder="Enter your unique hashtag keyword"
+									placeholder={`${t("input_hashtag_one")}`}
 									startAdornment={<BsHash color="#31E716" size={90} />}
-									endAdornment={<FiArrowUpRight color="#343132" size={90} />}
+									endAdornment={
+										locale === "ar" ? (
+											<FiArrowUpLeft color="#343132" size={90} />
+										) : (
+											<FiArrowUpRight color="#343132" size={90} />
+										)
+									}
 									className="borderSubscribeInput"
 								/>
-								{/* <FormHelperText id="outlined-weight-helper-text"> */}
+
 								<Box width="100%" display="flex" justifyContent="space-between">
 									<Typography
 										sx={{
 											fontSize: {
-												xs: "18px",
+												xs: "13px",
 												sm: "20px",
-												md: "24px",
+												md: "22px",
 												xl: "28px",
 											},
 										}}
 									>
-										The hashtag keyword you've chosen is premium
+										{/* The hashtag keyword you've chosen is premium */}
+										{t("text_hashtag")}
 									</Typography>
 									<Typography
 										sx={{
@@ -125,21 +165,28 @@ const SubscribePage: NextPage = () => {
 											fontSize: { xs: "20px", md: "24px", xl: "28px" },
 										}}
 									>
-										Premium
+										{/* Premium */}
+										{t("text_premium")}
 									</Typography>
 								</Box>
 								{/* </FormHelperText> */}
 							</FormControl>
 						</Box>
 						<Box>
-							<Box sx={{ width: "90%" }}>
+							<Box sx={{ width: { xs: "100%", md: "90%", xl: "90%" } }}>
 								<Typography
 									sx={{
-										fontSize: { xs: "20px", md: "30px", xl: "40px" },
+										fontSize: {
+											xs: "15px",
+											sm: "20px",
+											md: "25px",
+											xl: "40px",
+										},
 										marginY: { xs: "1rem", xl: "1rem" },
 									}}
 								>
-									Please provide your keyword's sub-link
+									{/* Please provide your keyword's sub-link */}
+									{t("text_input_sublink")}
 								</Typography>
 								<OutlinedInput
 									label="Please provide your keyword's sub-link"
@@ -152,13 +199,13 @@ const SubscribePage: NextPage = () => {
 											xl: "32px",
 										},
 										lineHeight: "28px",
-										height: "97px",
+										height: { xs: "60px", md: "87px", xl: "97px" },
 										borderRadius: "20px",
 										background: "#FBFBFB",
 										paddingX: "10px",
 										boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.05)",
 									}}
-									placeholder="Enter hashtag keyword"
+									placeholder={`${t("input_hashtag_two")}`}
 								/>
 							</Box>
 						</Box>
@@ -178,6 +225,7 @@ const SubscribePage: NextPage = () => {
 										height: "59px",
 										width: "311px",
 										display: "flex",
+										justifyContent: "space-around",
 										background: "#31E716",
 										// marginRight: { xs: "10rem", xl: "4rem" },
 									}}
@@ -192,9 +240,19 @@ const SubscribePage: NextPage = () => {
 											color: "#343132",
 										}}
 									>
-										Reserve
+										{/* Reserve */}
+										{t("button")}
 									</Typography>
-									<FiArrowDownRight size={42} color="#343132" />
+									<FiArrowDownRight
+										size={42}
+										color="#343132"
+										className="left"
+									/>
+									<FiArrowDownLeft
+										size={42}
+										color="#343132"
+										className="right"
+									/>
 								</Button>
 							</Box>
 						</Box>
@@ -204,5 +262,11 @@ const SubscribePage: NextPage = () => {
 		</Layout>
 	);
 };
-
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", ["common", "subscribe"])),
+		},
+	};
+};
 export default SubscribePage;

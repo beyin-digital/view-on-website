@@ -14,15 +14,23 @@ import LoginDetails from "@/components/Login/LoginDetails";
 import LoginTextSignUp from "@/components/Login/LoginTextSignUp";
 import Layout from "@/components/Login/Layout";
 
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+
+import { useTranslation } from "next-i18next";
+
 const LoginPage = () => {
+	const { t } = useTranslation("login");
+
 	const router = useRouter();
 	return (
 		<>
 			<Head>
-				<title>ViewOnWebsite - Login Page</title>
+				<title>{t("meat_title")}</title>
 				<meta name="description" content="" />
 				<meta name="keyword" content="" />
 				<meta property="og:image" content="" />
+				<link rel="icon" href="/images/logo.svg" />
 			</Head>
 
 			<Layout>
@@ -66,6 +74,14 @@ const LoginPage = () => {
 			</Layout>
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", ["common", "login"])),
+		},
+	};
 };
 
 export default LoginPage;

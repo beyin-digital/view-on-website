@@ -1,0 +1,15 @@
+{
+  "meta_title": "View On Website | SignUp",
+  "meta_desc": "",
+  "meta_keyword": "",
+  "title": "Please create an account",
+  "sign_up": "Or sign up with",
+  "sign_up_account": "Already have an account?  ",
+  "sign_in": "Sign in ",
+  "sign_up_button": "next",
+  "form_name": "Name",
+  "form_email": "E-mail",
+  "form_password": "Password",
+  "form_confirm": "Confirm Password",
+  "or":"Or"
+}

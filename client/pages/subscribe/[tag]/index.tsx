@@ -9,7 +9,7 @@ import {
 	Grid,
 	Container,
 } from "@mui/material";
-import { NextPage } from "next";
+// import { NextPage } from "next";
 import Image from "next/image";
 import { BsHash } from "react-icons/bs";
 import { FiArrowUpRight, FiArrowDownRight } from "react-icons/fi";
@@ -20,6 +20,9 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { GoPrimitiveDot } from "react-icons/go";
 import FooterMobile from "@/components/Footer/FooterMobile";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import type { GetStaticProps, NextPage } from "next";
+
 const SubscribePage: NextPage = () => {
 	const router = useRouter();
 	const descCardOne = [
@@ -101,7 +104,7 @@ const SubscribePage: NextPage = () => {
 					<Box
 						sx={{
 							position: "relative",
-							right: { xs: "15%", sm: "25%", md: "10%", xl: "20%" },
+							// right: { xs: "15%", sm: "25%", md: "10%", xl: "20%" },
 							// maxWidth: "100%",
 							width: { xs: "130%", md: "100%", xl: "100%" },
 							height: { xs: "100%", sm: "770px", md: "750px", xl: "650px" },
@@ -113,6 +116,7 @@ const SubscribePage: NextPage = () => {
 							overflow: "hidden",
 							margin: "3rem auto",
 						}}
+						className="SubscribePageLayoutBox"
 					>
 						<Grid
 							sx={{
@@ -300,7 +304,7 @@ const SubscribePage: NextPage = () => {
 														xl: "40px",
 													},
 													lineHeight: { xs: "22px", xl: "30px" },
-													marginY:".5rem"
+													marginY: ".5rem",
 												}}
 											>
 												Please provide your keyword's sub-link
@@ -667,7 +671,7 @@ const SubscribePage: NextPage = () => {
 
 							<Box
 								sx={{
-									width: "371px",
+									width: { xs: "330px", md: "372", xl: "371px" },
 									height: "551px",
 									display: "flex",
 									alignItems: "center",

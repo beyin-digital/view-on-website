@@ -1,37 +1,35 @@
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const OneBox = () => {
+	const { t } = useTranslation("example");
+	const { locale } = useRouter();
+
 	return (
 		<Box
 			sx={{
-				transform: "skew(-16deg, 0deg)",
+				// transform: "skew(-16deg, 0deg)",
 				width: "1243.72px",
 				maxWidth: "100%",
 				height: "100%",
-				// border:"1px solid red"
 			}}
+			className="OneBoxDesktop"
 		>
 			<Box
 				sx={{
-					// width: "36%",
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",
 					position: "relative",
 					backdropFilter: "blur(100px)",
-					transform: "skew(16deg, 0deg)",
 					height: "100%",
-
-					right: "-3rem",
 				}}
+				className="OneBoxDesktopLayout"
 			>
 				<Box>
 					<Box
 						sx={{
-							transform: {
-								xs: "skew(0deg, 0deg)",
-								xl: "skew(15deg, 0deg)",
-							},
 							width: { md: "400px", xl: "422px" },
 							height: "258px",
 							borderRadius: "34px",
@@ -39,29 +37,29 @@ const OneBox = () => {
 							marginY: "1rem",
 							overflow: "hidden",
 						}}
+						className="OneBoxDesktopLayoutSlid"
 					></Box>
 					<Box
 						sx={{
 							position: "relative",
-							transform: {
-								xs: "skew(0deg, 0deg)",
-								xl: "skew(16deg, 0deg)",
-							},
+
 							paddingX: "0rem",
 							height: "100%",
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "space-evenly",
 						}}
+						className="OneBoxDesktopLayoutSlid"
 					>
 						<Box
 							sx={{
 								width: "212px",
 								height: "134px",
 								position: "absolute",
-								left: { md: "2rem", xl: "4rem" },
-								top: { md: "0", xl: "" },
+								// left: { md: "2rem", xl: "4rem" },
+								// top: { md: "0", xl: "" },
 							}}
+							className="OneBoxDesktopLayoutText"
 						>
 							<Typography
 								sx={{
@@ -69,7 +67,7 @@ const OneBox = () => {
 									marginY: ".8rem",
 								}}
 							>
-								See it
+								{t("box_one_title")}
 							</Typography>
 							<Typography
 								sx={{
@@ -79,34 +77,50 @@ const OneBox = () => {
 									fontWeight: "300",
 								}}
 							>
-								Making your #keyword visible will help customers easily interact
-								with it to be redirected to your product or service sub-link.
-								You can shape your #keyword as you desire.
+								{t("box_one_desc")}
 							</Typography>
 						</Box>
 					</Box>
-					<Box
-						sx={{
-							width: "860x",
-							height: "441px",
-							position: "absolute",
-							bottom: "0rem",
-							// right: "-8rem",
-							transform: {
-								xs: "skew(1deg, 0deg)",
-								xl: "skew(16deg, 0deg)",
-							},
-						}}
-					>
-						<img
-							src="/images/phone.png"
-							alt=""
-							style={{
-								width: "100%",
-								height: "100%",
+
+					{locale === "ar" ? (
+						<Box
+							sx={{
+								width: "500x",
+								height: "350px",
+								position: "absolute",
 							}}
-						/>
-					</Box>
+							className="OneBoxDesktopLayoutImage"
+						>
+							<img
+								src="/images/phoneAR.png"
+								alt="Phone Vow Left"
+								title="Phone Vow Left"
+								style={{
+									width: "100%",
+									// height: "100%",
+								}}
+							/>
+						</Box>
+					) : (
+						<Box
+							sx={{
+								width: "860x",
+								height: "441px",
+								position: "absolute",
+							}}
+							className="OneBoxDesktopLayoutImage"
+						>
+							<img
+								src="/images/phone.png"
+								alt="Phone Vow Left"
+								title="Phone Vow Left"
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+							/>
+						</Box>
+					)}
 				</Box>
 			</Box>
 		</Box>

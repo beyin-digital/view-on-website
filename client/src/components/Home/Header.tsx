@@ -1,5 +1,8 @@
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "next-i18next";
+
 const Header = () => {
+	const { t } = useTranslation("home");
 	return (
 		<>
 			<Box
@@ -12,7 +15,8 @@ const Header = () => {
 			>
 				<Box
 					sx={{
-						width: { xs: "80%", sm: "80%", md: "650px", xl: "776px" },
+						width: { xs: "85%", sm: "80%", md: "650px", xl: "776px" },
+						px: "1.5rem",
 					}}
 				>
 					<Typography
@@ -29,7 +33,8 @@ const Header = () => {
 						fontWeight="500"
 						className="Textredirected"
 					>
-						Get redirected to what you see
+						{/* Get redirected to what you see */}
+						{t("title")}
 					</Typography>
 					<Typography
 						sx={{
@@ -39,20 +44,23 @@ const Header = () => {
 							fontWeight: "400",
 						}}
 					>
-						Enter the
+						{/* Enter the */}
+						{t("header_text_one")}
 						<Typography
 							component={"span"}
 							sx={{
 								fontSize: { xs: "21px", md: "30px", xl: "40px" },
-								margin: "0 2px",
-								// padding: "4px 8px",
+								// margin: "0 3px",
+								// padding: "0px 3px",
 								borderRadius: "8px",
 								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 							}}
 						>
-							#keyword
+							{/* #keyword */}
+							{t("header_text_two")}
 						</Typography>
-						here to get redirected
+						{/* here to get redirected */}
+						{t("header_text_three")}
 					</Typography>
 				</Box>
 				<Box

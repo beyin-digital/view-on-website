@@ -1,8 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
+import { useTranslation } from "next-i18next";
 
 const DetailsHeader = () => {
+	const { t } = useTranslation("request");
+
 	return (
 		<>
 			<Box
@@ -33,7 +36,8 @@ const DetailsHeader = () => {
 						}}
 						color="#343132"
 					>
-						Please enter your email address or #keyword
+						{/* Please enter your email address or #keyword */}
+						{t("title")}
 					</Typography>
 					<Typography
 						sx={{
@@ -46,7 +50,8 @@ const DetailsHeader = () => {
 						}}
 						color="#A0A9AB"
 					>
-						We will send a link to Your email where you can make a new password:{" "}
+						{/* We will send a link to Your email where you can make a new password:{" "} */}
+						{t("desc")}
 					</Typography>
 				</Box>
 			</Box>

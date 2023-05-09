@@ -112,6 +112,9 @@ swiper-container {
 .PageMobile {
 	display: none;
 }
+.PageTablet {
+	display: none;
+}
 /* Illustration */
 .IllustrationMobile {
 	display: none;
@@ -157,6 +160,264 @@ swiper-container {
 	}
 }
 
+/* Layout AR / EN */
+
+[dir="ltr"] .BoxHomeLayout {
+	right: 25%;
+}
+[dir="rtl"] .BoxHomeLayout {
+	left: 18%;
+}
+[dir="ltr"] .BoxHomeLayoutCenter {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+}
+[dir="rtl"] .BoxHomeLayoutCenter {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+[dir="ltr"] .LayoutBox {
+	right: 20%;
+}
+[dir="rtl"] .LayoutBox {
+	left: 20%;
+}
+
+[dir="ltr"] .VerificationPageCenter {
+	margin-right: 20rem;
+}
+[dir="rtl"] .VerificationPageCenter {
+	margin-left: 15rem;
+}
+[dir="ltr"] .SubscribePageLayoutBox {
+	margin-left: 16rem;
+}
+[dir="rtl"] .SubscribePageLayoutBox {
+	margin-right: 20rem;
+}
+[dir="rtl"] .IllustrationDesktopLayout {
+	left: 14%;
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .IllustrationDesktopLayout {
+	right: 14%;
+	transform: skew(-16deg, 0deg);
+}
+[dir="rtl"] .IllustrationDesktopLayoutBox {
+	transform: skew(-16deg, 0deg);
+}
+[dir="ltr"] .IllustrationDesktopLayoutBox {
+	transform: skew(16deg, 0deg);
+}
+
+[dir="rtl"] .optionOne {
+	margin-right: 1rem;
+}
+
+[dir="rtl"] .optionTwo {
+	margin-right: 1.5rem;
+}
+
+[dir="rtl"] .optionThree {
+	margin-right: 2rem;
+}
+[dir="ltr"] .optionOne {
+	margin-left: 1rem;
+}
+
+[dir="ltr"] .optionTwo {
+	margin-left: 1.5rem;
+}
+
+[dir="ltr"] .optionThree {
+	margin-left: 2rem;
+}
+[dir="lrt"] .arrowDownLeft {
+	justify-content: flex-start;
+}
+[dir="rtl"] .arrowDownLeft {
+	justify-content: end;
+}
+[dir="ltr"] .OneBoxTablet {
+	right: -3rem;
+	transform: skew(-16deg, 0deg);
+}
+[dir="rtl"] .OneBoxTablet {
+	right: -3rem;
+	transform: skew(-16deg, 0deg);
+}
+[dir="rtl"] .OneBoxTabletText {
+	justify-content: end;
+}
+[dir="ltr"] .OneBoxTabletText {
+	justify-content: start;
+}
+[dir="rtl"] .TwoBoxTablet {
+	right: -9rem;
+	transform: skew(-16deg, 0deg);
+}
+[dir="ltr"] .TwoBoxTablet {
+	right: -10rem;
+	transform: skew(-16deg, 0deg);
+}
+[dir="ltr"] .TwoBoxTabletImage {
+	transform: skew(16deg, 0deg);
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+[dir="rtl"] .TwoBoxTabletImage {
+	transform: skew(16deg, 0deg);
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+[dir="rtl"] .TwoBoxTabletLayout {
+	flex-direction: row-reverse;
+	justify-content: center;
+}
+[dir="ltr"] .TwoBoxTabletLayout {
+	flex-direction: row;
+	justify-content: center;
+}
+[dir="ltr"] .ThreeBoxTablet {
+	transform: skew(-16deg, 0deg);
+	right: -11rem;
+}
+[dir="rtl"] .ThreeBoxTablet {
+	transform: skew(-16deg, 0deg);
+	right: -11rem;
+}
+[dir="ltr"] .ThreeBoxTabletLayout {
+	transform: skew(16deg, 0deg);
+}
+[dir="rtl"] .ThreeBoxTabletLayout {
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .ThreeBoxTabletLayoutImage {
+	top: 0;
+	right: 0;
+}
+[dir="rtl"] .ThreeBoxTabletLayoutImage {
+	top: 0;
+	right: 0;
+}
+[dir="ltr"] .ThreeBoxTabletLayoutText {
+	bottom: 0;
+	left: 2rem;
+}
+[dir="rtl"] .ThreeBoxTabletLayoutText {
+	bottom: 0;
+	left: -1rem;
+}
+[dir="ltr"] .OneBoxMobile {
+	transform: skew(-16deg, 0deg);
+	right: -1rem;
+}
+[dir="rtl"] .OneBoxMobile {
+	transform: skew(-16deg, 0deg);
+	right: -1rem;
+}
+[dir="ltr"] .exampleOneBoxMobiletImage,
+.exampleOneBoxMobileText {
+	justify-content: space-between;
+}
+[dir="rtl"] .exampleOneBoxMobileText {
+	justify-content: end;
+}
+[dir="rtl"] .exampleOneBoxMobiletImage {
+	justify-content: end;
+}
+[dir="ltr"] .ExampleBoxTwoMobile {
+	top: 20%;
+	transform: skew(16deg, 0deg);
+	padding-right: 1px;
+	padding-left: 5px;
+}
+[dir="rtl"] .ExampleBoxTwoMobile {
+	top: 20%;
+	left: -22rem;
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .ExampleBoxTwoMobileImage {
+	bottom: 0;
+	right: 0;
+	top: -1rem;
+	margin-right: -5rem;
+}
+[dir="rtl"] .ExampleBoxTwoMobileImage {
+	bottom: 0;
+	right: 0;
+	top: -1rem;
+	margin-right: -5rem;
+}
+[dir="ltr"] .ExampleBoxTwoImageMobile {
+	bottom: 0;
+	right: 0;
+	transform: skew(16deg, 0deg);
+}
+[dir="rtl"] .ExampleBoxTwoImageMobile {
+	bottom: 0;
+	right: 0;
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .OneBoxDesktop {
+	transform: skew(-16deg, 0deg);
+}
+[dir="rtl"] .OneBoxDesktop {
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .OneBoxDesktopLayout {
+	transform: skew(16deg, 0deg);
+	right: -3rem;
+}
+[dir="rtl"] .OneBoxDesktopLayout {
+	transform: skew(-16deg, 0deg);
+	right: 0rem;
+}
+[dir="ltr"] .OneBoxDesktopLayoutSlid {
+	transform: skew(16deg, 0deg);
+}
+[dir="rtl"] .OneBoxDesktopLayoutSlid {
+	transform: skew(-16deg, 0deg);
+}
+[dir="ltr"] .OneBoxDesktopLayoutText {
+	left: 4rem;
+}
+[dir="rtl"] .OneBoxDesktopLayoutText {
+	right: 0rem;
+}
+[dir="ltr"] .OneBoxDesktopLayoutImage {
+	bottom: 0rem;
+	transform: skew(16deg, 0deg);
+}
+[dir="rtl"] .OneBoxDesktopLayoutImage {
+	bottom: 0rem;
+	transform: skew(-16deg, 0deg);
+}
+[dir="ltr"] .PageDesktopLayout {
+	transform: skew(-16deg, 0deg);
+}
+[dir="rtl"] .PageDesktopLayout {
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .PageDesktopMargin {
+	margin-left: -5rem;
+}
+[dir="rtl"] .PageDesktopMargin {
+	margin-right: -5rem;
+}
+
+/* icon arrow */
+[dir="ltr"] .right {
+	display: none;
+}
+[dir="rtl"] .left {
+	display: none;
+}
+
 /*  */
 @media screen and (max-width: 1535px) {
 	.IllustrationDesktop {
@@ -164,6 +425,12 @@ swiper-container {
 	}
 	.IllustrationTablet {
 		display: block;
+	}
+	[dir="rtl"] .BoxSignInWith {
+		left: 19rem !important;
+	}
+	[dir="rtl"] .OneBoxDesktopLayoutText {
+		right: 3rem;
 	}
 }
 @media screen and (max-width: 1401px) {
@@ -185,7 +452,7 @@ swiper-container {
 	}
 }
 @media screen and (max-width: 1319px) {
-	.PageMobile {
+	.PageTablet {
 		display: block;
 	}
 	.PageDesktop {
@@ -199,19 +466,61 @@ swiper-container {
 	.illustrationArrowsUp {
 		display: none;
 	}
+	[dir="ltr"] .VerificationPageCenter {
+		margin-right: 15rem;
+	}
+	[dir="ltr"] .SubscribePageLayoutBox {
+		margin-left: 10rem;
+	}
+	[dir="rtl"] .SubscribePageLayoutBox {
+		margin-right: 10rem;
+	}
 }
-@media screen and (max-width: 893px) {
+@media screen and (max-width: 1055px) {
+	[dir="ltr"] .BoxHomeLayout {
+		right: 15%;
+		/* margin-left: 3rem; */
+	}
+	[dir="rtl"] .BoxHomeLayout {
+		left: 15%;
+	}
+	[dir="ltr"] .LayoutBox {
+		right: 10%;
+	}
+	[dir="rtl"] .LayoutBox {
+		left: 10%;
+	}
+	[dir="rtl"] .BoxSignInWith {
+		left: 6rem !important;
+	}
+}
+
+@media screen and (max-width: 899px) {
 	.IllustrationMobile {
 		display: block;
 	}
 	.IllustrationTablet {
 		display: none;
 	}
-}
-@media screen and (max-width: 899px) {
 	.ImageMobile {
 		position: absolute !important;
 		top: -48rem !important;
+	}
+	[dir="ltr"] .VerificationPageCenter {
+		margin-right: 0rem;
+	}
+	[dir="rtl"] .VerificationPageCenter {
+		margin-left: 0rem;
+	}
+	.MainBoxPic {
+		margin-top: 2rem !important;
+	}
+	[dir="ltr"] .TwoBoxTablet {
+		right: -8rem;
+	}
+	[dir="rtl"] .TwoBoxTablet {
+		right: -5rem;
+		transform: skew(-16deg, 0deg);
 	}
 }
 @media screen and (max-width: 700px) {
@@ -224,12 +533,40 @@ swiper-container {
 		bottom: 3rem;
 		left: 3rem;
 	}
-	.ExampleBoxTwo {
-		/* top: -11rem; */
-	}
-
 	.ExampleThreeBox {
-		top: -10rem;
+		top: -3rem;
+	}
+	[dir="ltr"] .BoxHomeLayout {
+		right: 12%;
+		/* margin-left: 1rem; */
+	}
+	[dir="ltr"] .BoxHomeLayoutCenter {
+		margin-left: 3rem;
+	}
+	[dir="rtl"] .BoxHomeLayoutCenter {
+		margin-left: 3rem;
+	}
+	[dir="rtl"] .BoxHomeLayout {
+		left: 5%;
+		/* margin-left: 3rem; */
+	}
+	[dir="rtl"] .VerificationPageCenter {
+		margin-left: -3rem;
+	}
+	[dir="ltr"] .SubscribePageLayoutBox {
+		margin-left: 2rem;
+	}
+	[dir="rtl"] .SubscribePageLayoutBox {
+		margin-right: 2rem;
+	}
+	.MainBoxPic {
+		margin-top: 7rem !important;
+	}
+	.PageMobile {
+		display: block;
+	}
+	.PageTablet {
+		display: none;
 	}
 }
 @media screen and (max-width: 600px) {
@@ -243,6 +580,15 @@ swiper-container {
 		right: -6rem;
 		height: 100%;
 		width: 100%;
+	}
+	[dir="rtl"] .VerificationPageCenter {
+		margin-left: 0rem;
+	}
+	[dir="rtl"] .BoxSignInWith {
+		left: 0rem !important;
+	}
+	[dir="rtl"] .ExampleBoxTwoMobile {
+		left: -15rem;
 	}
 }
 @media screen and (max-width: 500px) {
@@ -282,6 +628,15 @@ swiper-container {
 	.InputHomeMargin {
 		margin: 0 !important;
 	}
+	[dir="ltr"] .LayoutBox {
+		right: 8.5%;
+	}
+	[dir="rtl"] .LayoutBox {
+		left: 8.5%;
+	}
+	[dir="rtl"] .ExampleBoxTwoMobile {
+		left: -12rem;
+	}
 }
 @media screen and (max-width: 427px) {
 	.illustrationBg {
@@ -290,6 +645,17 @@ swiper-container {
 	.illustrationArrowLeftDown {
 		top: -6.5rem !important;
 		left: -3rem !important;
+	}
+	.swirlSmall {
+		top: 8rem !important;
+		width: 300px !important;
+	}
+	.swirlSmall img {
+		/* top: 6rem !important; */
+		width: 200px !important;
+	}
+	.MainBoxPic {
+		margin-top: 0 !important;
 	}
 }
 @media screen and (max-width: 410px) {
@@ -311,7 +677,7 @@ swiper-container {
 		justify-content: center;
 	}
 	.TextViewOnWebsite {
-		height: 100% !important;
+		height: 0px !important;
 	}
 	.ImageMobile {
 		position: absolute !important;
@@ -324,20 +690,45 @@ swiper-container {
 	.LayoutTagsPadding {
 		padding: 2rem !important;
 	}
+	.LayoutHomeMobile {
+		/* height: 100% !important; */
+		overflow-x: hidden;
+		overflow-y: scroll;
+	}
+	.exampleOneBoxStart {
+		justify-content: flex-start !important;
+	}
+	[dir="ltr"] .SubscribePageLayoutBox {
+		margin-left: 0rem;
+	}
+	[dir="rtl"] .SubscribePageLayoutBox {
+		margin-right: 0rem;
+	}
+	[dir="rtl"] .ExampleBoxTwoMobile {
+		left: -8.5rem;
+	}
 }
 @media screen and (max-width: 333px) {
 	.TextViewOnWebsite {
 		height: 100% !important;
 		margin-top: -1rem;
 	}
+	.TextViewOnWebsite p {
+		font-size: 17px !important;
+	}
 	.Textredirected {
 		font-size: 28px;
 	}
 	.LayoutHomeMobile {
 		height: 100% !important;
+		overflow-y: scroll;
 	}
 	.LayoutHomeMobileBox {
 		height: 16.5vh;
+	}
+	.ExampleBoxThreeText {
+		bottom: 2rem;
+		left: 1rem;
 	}
 }
 @media screen and (max-width: 300px) {
@@ -366,8 +757,8 @@ swiper-container {
 		top: 0 !important;
 	}
 	.ExampleBoxTwoPic {
-		height: auto !important;
-		right: -4rem !important;
+		height: 200px !important;
+		right: -0rem !important;
 		width: 100% !important;
 	}
 	.ExampleBoxThreePic {
@@ -377,12 +768,15 @@ swiper-container {
 		width: 100%;
 	}
 	.ExampleBoxThreeText {
-		bottom: 3rem;
-		left: 3rem;
+		bottom: 0rem;
+		left: 1rem;
 	}
 	.ImageMobile {
 		position: absolute !important;
 		top: -39rem !important;
+	}
+	.exampleOneBoxTextSmall {
+		font-size: 10px;
 	}
 }
 

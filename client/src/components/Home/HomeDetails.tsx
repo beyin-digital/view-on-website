@@ -7,8 +7,11 @@ import LayoutHomeBg from "@/components/Home/LayoutHomeBg";
 import { useRouter } from "next/router";
 import Head from "next/head";
 // import ArrowUpright from "../public/icons/arrowUpright";
+import { useTranslation } from "next-i18next";
 
 const HomeDetails = () => {
+	const { t } = useTranslation("home");
+
 	const router = useRouter();
 	const [hashtag, setHashtag] = useState("");
 
@@ -18,12 +21,7 @@ const HomeDetails = () => {
 	};
 	return (
 		<>
-			<Head>
-				<title>ViewOnWebsite - Home Page</title>
-				<meta name="description" content="" />
-				<meta name="keyword" content="" />
-				<meta property="og:image" content="" />
-			</Head>
+			 
 			<>
 				<Grid
 					container
@@ -169,7 +167,7 @@ const HomeDetails = () => {
 														// display: "none",
 													},
 												}}
-												placeholder="Keyword"
+												placeholder={`${t("keyword")}`}
 												className="l"
 											/>
 											<Box
@@ -212,6 +210,15 @@ const HomeDetails = () => {
 												width: "100%",
 												height: "100%",
 											}}
+											className="left"
+										/>
+										<img
+											src="/icons/arrowUpLeft.svg"
+											style={{
+												width: "100%",
+												height: "100%",
+											}}
+											className="right"
 										/>
 									</Box>
 								</Box>

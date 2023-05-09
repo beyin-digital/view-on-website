@@ -1,6 +1,8 @@
 import { Box, Button, ButtonBaseProps, Link, Typography } from "@mui/material";
-import { AiOutlineArrowRight } from "react-icons/ai";
-import { FiArrowUpRight } from "react-icons/fi";
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
+import { FiArrowUpRight, FiArrowUpLeft } from "react-icons/fi";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 interface ButtonLoginProps extends ButtonBaseProps {
 	name: string;
@@ -17,7 +19,7 @@ export const ButtonLogin = (props: ButtonLoginProps) => {
 						xs: "240px",
 						sm: "300px",
 						md: "300px",
-						xl: "300px",
+						xl: "320px",
 					},
 					display: "flex",
 					justifyContent: "end",
@@ -29,7 +31,7 @@ export const ButtonLogin = (props: ButtonLoginProps) => {
 					sx={{
 						paddingX: "18px",
 						height: "59px",
-						width: { xs: "220px", md: "231px", xl: "261px" },
+						width: { xs: "220px", md: "231px", xl: "271px" },
 						display: "flex",
 						justifyContent: "space-around",
 					}}
@@ -50,7 +52,9 @@ export const ButtonLogin = (props: ButtonLoginProps) => {
 						{props.name}
 					</Typography>
 
-					<FiArrowUpRight size={42} color="#FBFBFB" />
+					{/* <FiArrowUpRight size={42} color="#FBFBFB" /> */}
+					<FiArrowUpRight size={42} color="#FBFBFB" className="left" />
+					<FiArrowUpLeft size={42} color="#FBFBFB" className="right" />
 				</Button>
 			</Box>
 		</>
@@ -147,6 +151,9 @@ export const ButtonChange = ({ name, onClick }: any) => {
 };
 
 export const LinkSubscribe = () => {
+	const { t } = useTranslation("example");
+	const { locale } = useRouter();
+
 	return (
 		<Box
 			sx={{
@@ -185,10 +192,14 @@ export const LinkSubscribe = () => {
 						textTransform: "uppercase",
 					}}
 				>
-					subscribe
+					{t("button")}
 				</Typography>
 
-				<AiOutlineArrowRight size={42} color="#343132" />
+				{locale === "ar" ? (
+					<AiOutlineArrowLeft size={42} color="#343132" />
+				) : (
+					<AiOutlineArrowRight size={42} color="#343132" />
+				)}
 			</Link>
 		</Box>
 	);

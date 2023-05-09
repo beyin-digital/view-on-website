@@ -4,7 +4,7 @@ import Header from "../Navbar/Navbar";
 import Footer from "../Footer/FooterLayout";
 import { Box } from "@mui/system";
 import FooterMobile from "../Footer/FooterMobile";
-
+import Image from "next/image";
 interface Props {
 	children: React.ReactNode;
 	// onClick:onClick () => void;
@@ -21,7 +21,7 @@ const Layout: React.FC<Props> = ({ children, onClick }: any) => {
 				sx={{
 					width: "2162px",
 					maxWidth: "100%",
-					// height: { xs: "100vh", md: "100vh", xl: "100%" },
+					height: { xs: "100vh", md: "100vh", xl: "100%" },
 					background: "#EAEDED",
 					overflow: "hidden",
 					marginY: "auto",
@@ -31,23 +31,42 @@ const Layout: React.FC<Props> = ({ children, onClick }: any) => {
 					sx={{
 						maxWidth: "100%",
 						margin: "auto",
-						height: { xs: "100vh", md: "100vh", xl: "100vh" },
+						height: { xs: "100%", md: "100vh", xl: "100vh" },
 						maxHeight: "100%",
-						backgroundImage: "url('/images/swirl.png')",
+						// backgroundImage: "url('/images/swirl.png')",
 						backgroundSize: "cover",
-						backgroundPosition: "bottom",
+						backgroundPosition: "center",
 						display: "flex",
 						flexDirection: "column",
-						justifyContent: "center",
+						justifyContent: "space-between",
+						position: "relative",
 					}}
 					className="LayoutHomeMobile"
 				>
+					{/* <Image
+						fill
+						src="/images/swirl.png"
+						alt=""
+						style={{
+							top: "-15rem",
+							objectFit: "cover",
+						}}
+					/> */}
+					<img
+						src="/images/swirl.png"
+						style={{
+							position: "absolute",
+							top: "-10rem",
+							width:"100%",
+							height:"100%"
+						}}
+					/>
 					<Header />
 
 					<Box
 						sx={{
 							position: "relative",
-							right: { xs: "13%", sm: "16%", md: "15%", xl: "25%" },
+							// right: { xs: "13%", sm: "16%", md: "15%", xl: "25%" },
 							// maxWidth: "100%",
 							width: { xs: "115%", sm: "100%", md: "100%", xl: "100%" },
 							height: { xs: "445px", sm: "443px", md: "589px", xl: "589px" },
@@ -61,18 +80,19 @@ const Layout: React.FC<Props> = ({ children, onClick }: any) => {
 								md: "skew(-16deg, 0deg)",
 								xl: "skew(-16deg, 0deg)",
 							},
-							overflow: "hidden",
-							margin: "3rem auto",
+							// overflow: "hidden",
+							// margin: "3rem auto",
 						}}
+						className="BoxHomeLayout"
 					>
 						{children}
 					</Box>
-					{/* <Footer /> */}
+					<Footer />
 				</Box>
 				{/* <Footer /> */}
 			</Box>
-			<Box className="LayoutHomeMobileBox" />
-			<Box
+			{/* <Box className="LayoutHomeMobileBox" /> */}
+			{/* <Box
 				sx={{
 					width: "100%",
 					position: "relative",
@@ -80,7 +100,7 @@ const Layout: React.FC<Props> = ({ children, onClick }: any) => {
 				}}
 			>
 				<Footer />
-			</Box>
+			</Box> */}
 		</Box>
 	);
 };

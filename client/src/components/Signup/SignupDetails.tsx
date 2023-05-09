@@ -1,8 +1,11 @@
 import { Typography, Box } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 const SignupDetails = () => {
+	const { t } = useTranslation("signup");
+
 	const icon = [
 		{
 			id: 1,
@@ -25,13 +28,13 @@ const SignupDetails = () => {
 		// 	title: "Facebook Icon",
 		// 	link: "https://facebook.com",
 		// },
-		// {
-		// 	id: 4,
-		// 	icon: "/icons/linkedin.svg",
-		// 	alt: "LinkedIn Icon",
-		// 	title: "LinkedIn Icon",
-		// 	link: "https://linkedin.com",
-		// },
+		{
+			id: 4,
+			icon: "/icons/linkedin.svg",
+			alt: "LinkedIn Icon",
+			title: "LinkedIn Icon",
+			link: "https://linkedin.com",
+		},
 	];
 	return (
 		<>
@@ -65,7 +68,8 @@ const SignupDetails = () => {
 							marginY: { xs: "1rem", md: "0", xl: "0" },
 						}}
 					>
-						Please fill up your information
+						{/* Please fill up your information */}
+						{t("title")}
 					</Typography>
 				</Box>
 				<Box
@@ -93,9 +97,11 @@ const SignupDetails = () => {
 								lineHeight: "22px",
 								marginY: { xs: "1rem", md: "0", xl: "0" },
 								display: { xs: "none", md: "block", xl: "block" },
+								paddingX: "4px",
 							}}
 						>
-							Or sign up with
+							{/* Or sign up with */}
+							{t("sign_up")}
 						</Typography>
 						<Typography
 							sx={{
@@ -106,7 +112,8 @@ const SignupDetails = () => {
 								display: { xs: "block", md: "none", xl: "none" },
 							}}
 						>
-							sign up with
+							{/* sign up with */}
+							{t("sign_up")}
 						</Typography>
 						<Box
 							sx={{
@@ -129,7 +136,7 @@ const SignupDetails = () => {
 									marginY: { xs: "1rem", md: "0", xl: "0" },
 								}}
 							>
-								Or
+								{/* Or */}
 							</Typography>
 							<Typography
 								sx={{
@@ -185,7 +192,7 @@ const SignupDetails = () => {
 								marginY: { xs: "1rem", md: "0", xl: "0" },
 							}}
 						>
-							Or
+							{t("or")}
 						</Typography>
 						<Typography
 							sx={{

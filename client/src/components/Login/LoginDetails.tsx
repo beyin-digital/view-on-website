@@ -1,7 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 const LoginDetails = () => {
+	const { t } = useTranslation("login");
+
 	return (
 		<>
 			<Box
@@ -28,11 +31,12 @@ const LoginDetails = () => {
 					fontWeight="100"
 					sx={{
 						fontSize: { xs: "24px", md: "30px", xl: "40px" },
-						fontWeight: "300",
+						fontWeight: "400",
 						lineHeight: "37px",
 					}}
 				>
-					Welcome Back
+					{/* Welcome Back */}
+					{t("title")}
 				</Typography>
 			</Box>
 		</>

@@ -15,6 +15,9 @@ import Layout from "@/components/Layout/Layout";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+
 const subscribePremium: NextPage = () => {
 	const router = useRouter();
 	const [values, setValues] = useState({
@@ -27,7 +30,12 @@ const subscribePremium: NextPage = () => {
 				sx={{
 					marginLeft: { xs: "70px", sm: "120px", md: "140px", xl: "160px" },
 					height: "100%",
-					transform: "skewX(16deg)",
+					transform: {
+						xs: "skew(10deg, 0deg)",
+						sm: "skew(16deg, 0deg)",
+						md: "skew(16deg, 0deg)",
+						xl: "skew(16deg, 0deg)",
+					},
 					display: "flex",
 				}}
 			>
@@ -349,5 +357,11 @@ const subscribePremium: NextPage = () => {
 		</Layout>
 	);
 };
-
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", ["common", "signup"])),
+		},
+	};
+};
 export default subscribePremium;

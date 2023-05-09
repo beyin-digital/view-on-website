@@ -3,9 +3,24 @@ import ChangePasswordForm from "@/components/ChangePassword/ChangePasswordForm";
 import Layout from "@/components/Layout/Layout";
 import { Box } from "@mui/material";
 
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+
+import { useTranslation } from "next-i18next";
+import Head from "next/head";
+
 const ChangePassword = () => {
+	const { t } = useTranslation("changePassword");
+
 	return (
 		<>
+			<Head>
+				<title>{t("meat_title")}</title>
+				<meta name="description" content="" />
+				<meta name="keyword" content="" />
+				<meta property="og:image" content="" />
+				<link rel="icon" href="/images/logo.svg" />
+			</Head>
 			<Layout>
 				<Box
 					sx={{
@@ -35,8 +50,8 @@ const ChangePassword = () => {
 						<Box
 							sx={{
 								width: "728px",
-								height: "600px",
-								paddingX: "1rem",
+								height: { xs: "100%", sm: "600px", md: "600px", xl: "600px" },
+								padding: "1rem",
 							}}
 						>
 							<ChangePasswordDetails />
@@ -47,6 +62,16 @@ const ChangePassword = () => {
 			</Layout>
 		</>
 	);
+};
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"changePassword",
+			])),
+		},
+	};
 };
 
 export default ChangePassword;

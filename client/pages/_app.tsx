@@ -11,6 +11,9 @@ import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
 import { StateContextProvider } from "@/contexts";
 
+import { appWithTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
@@ -29,7 +32,10 @@ export interface MyAppProps extends AppProps {
 	emotionCache?: EmotionCache;
 }
 
-export default function MyApp(props: MyAppProps) {
+function MyApp(props: MyAppProps) {
+	const { locale } = useRouter();
+	const isRTL = locale === "ar";
+
 	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 	return (
 		<CacheProvider value={emotionCache}>
@@ -42,7 +48,7 @@ export default function MyApp(props: MyAppProps) {
 				/>
 				{/* <script src="/script.js" /> */}
 			</Head>
-			<>
+			<div dir={isRTL ? "rtl" : "ltr"}>
 				<QueryClientProvider client={queryClient}>
 					<StateContextProvider>
 						<ThemeProvider theme={theme}>
@@ -55,7 +61,8 @@ export default function MyApp(props: MyAppProps) {
 						<ReactQueryDevtools />
 					</StateContextProvider>
 				</QueryClientProvider>
-			</>
+			</div>
 		</CacheProvider>
 	);
 }
+export default appWithTranslation(MyApp);

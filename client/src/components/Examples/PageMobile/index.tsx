@@ -5,9 +5,6 @@ import OneBox from "./OneBox";
 import TwoBox from "./TwoBox";
 import ThreeBox from "./ThreeBox";
 
-// footer
-import Footer from "@/components/Footer/Footer";
-import FooterMobile from "@/components/Footer/FooterMobile";
 import { LinkSubscribe } from "@/components/Button";
 const PageMobile = () => {
 	return (
@@ -15,6 +12,7 @@ const PageMobile = () => {
 			className="PageMobile"
 			sx={{
 				width: "100%",
+				maxHeight: "100%",
 				overflow: "hidden",
 			}}
 		>
@@ -50,13 +48,7 @@ const PageMobile = () => {
 				>
 					{/* Slider One */}
 					<OneBox />
-
 					{/* Slider Two */}
-					<Box
-					// sx={{
-					// 	height: "10vh",
-					// }}
-					/>
 					<TwoBox />
 
 					{/* Slider Three */}
@@ -64,7 +56,7 @@ const PageMobile = () => {
 					{/*  */}
 					<Box
 						sx={{
-							width: "85%",
+							width: { xs: "100%", sm: "85%", md: "85%", xl: "85%" },
 							height: "90px",
 							display: "flex",
 							justifyContent: "center",
@@ -75,8 +67,6 @@ const PageMobile = () => {
 					</Box>
 				</Box>
 			</Box>
-			<FooterMobile />
-			{/* <Footer /> */}
 		</Box>
 	);
 };
