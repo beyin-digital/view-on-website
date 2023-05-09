@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Box, Tab, Tabs, Typography } from "@mui/material";

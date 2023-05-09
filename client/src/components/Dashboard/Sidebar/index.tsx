@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { Box, Divider, Typography } from "@mui/material";

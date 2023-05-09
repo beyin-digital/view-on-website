@@ -1,7 +1,5 @@
-/** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
 	reactStrictMode: true,
-	experimental: { esmExternals: "loose" },
 	transpilePackages: ["@mui/system", "@mui/material", "@mui/icons-material"],
 	modularizeImports: {
 		"@mui/material/?(((\\w*)?/?)*)": {
@@ -11,4 +9,13 @@ module.exports = {
 			transform: "@mui/icons-material/{{ matches.[1] }}/{{member}}",
 		},
 	},
+};
+module.exports = async phase => {
+	/**
+	 * @type {import('next').NextConfig}
+	 */
+
+	const plugins = []; //All your plugins go into this array
+
+	return plugins.reduce((acc, next) => next(acc), nextConfig);
 };

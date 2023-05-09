@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import {
 	Box,
 	Typography,
@@ -7,40 +7,14 @@ import {
 	IconButton,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { toast } from "react-toastify";
-
-import { useRouter } from "next/router";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { object, string, TypeOf } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery } from "@tanstack/react-query";
-
-import { getMeFn, loginUserFn } from "@/api/authApi";
-import { useStateContext } from "@/contexts";
 
 import LoginTextSignUp from "./LoginTextSignUp";
 import { ButtonLogin } from "../Button";
 import Link from "next/link";
-
-const loginSchema = object({
-	identifier: string().min(1, "Email address or keyword is required"),
-	password: string()
-		.min(1, "Password is required")
-		.min(8, "Password must be more than 8 characters")
-		.max(32, "Password must be less than 32 characters"),
-});
-
-export type LoginInput = TypeOf<typeof loginSchema>;
+import { UserContext } from "@/contexts";
 
 const LoginForm = () => {
-	const router = useRouter();
-
 	const [showPassword, setShowPassword] = useState(false);
-
-	const [values, setValues] = useState({
-		identifier: "",
-		password: "",
-	});
 
 	const handleClickShowPassword = () => setShowPassword(show => !show);
 
@@ -50,51 +24,14 @@ const LoginForm = () => {
 		event.preventDefault();
 	};
 
-	const stateContext = useStateContext();
+	const { token, refreshToken, values, handleChange, handleLogin } =
+		useContext(UserContext);
 
-	const query = useQuery(["authUser"], getMeFn, {
-		enabled: false,
-		select: data => data.data.user,
-		retry: 1,
-		onSuccess: data => {
-			stateContext.dispatch({ type: "SET_USER", payload: data });
-		},
-	});
-
-	const { mutate: loginUser, isLoading } = useMutation(
-		(userData: any) => loginUserFn(userData),
-		{
-			onSuccess: () => {
-				query.refetch();
-				toast.success("You successfully logged in");
-				router.push("/");
-			},
-			onError: (error: any) => {
-				if (Array.isArray((error as any).response.data.error)) {
-					(error as any).response.data.error.forEach((el: any) =>
-						toast.error(el.message, {
-							position: "top-right",
-						})
-					);
-				} else {
-					toast.error((error as any).response.data.message, {
-						position: "top-right",
-					});
-				}
-			},
-		}
-	);
-
-	const handleSubmit = () => {
-		console.log(values);
-		loginUser({
-			identifier: values.identifier,
-			password: values.password,
-		});
-	};
+	console.log("Token", token);
+	console.log("Refresh Token", refreshToken);
 
 	return (
-		<>
+		<form onSubmit={handleLogin}>
 			<Box
 				sx={{
 					display: "flex",
@@ -125,9 +62,7 @@ const LoginForm = () => {
 							border: 0,
 						},
 					}}
-					onChange={e =>
-						setValues({ ...values, identifier: e.target.value })
-					}
+					onChange={handleChange}
 					placeholder='Email or #keyword'
 				/>
 				<OutlinedInput
@@ -171,9 +106,7 @@ const LoginForm = () => {
 							</IconButton>
 						</InputAdornment>
 					}
-					onChange={e =>
-						setValues({ ...values, password: e.target.value })
-					}
+					onChange={handleChange}
 					placeholder='Password'
 				/>
 			</Box>
@@ -211,14 +144,10 @@ const LoginForm = () => {
 					alignItems: "center",
 				}}
 			>
-				<ButtonLogin
-					name='login'
-					type='submit'
-					onClick={handleSubmit}
-				/>
+				<ButtonLogin name='login' type='submit' />
 				<LoginTextSignUp />
 			</Box>
-		</>
+		</form>
 	);
 };
 
