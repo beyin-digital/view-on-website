@@ -83,6 +83,8 @@ const DashboardHomePage = () => {
 		},
 	});
 
+	const [timeline, setTimeline] = React.useState("today");
+
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<Grid container spacing={2.5} rowGap={2}>
@@ -356,6 +358,48 @@ const DashboardHomePage = () => {
 				{/* Second Row */}
 				<Grid item xs={12} height={419}>
 					<Item sx={{ background: "rgba(251, 251, 251, 0.3)" }}>
+						<Box
+							sx={{
+								width: "90%",
+								height: "24px",
+								margin: "0 auto",
+								display: "flex",
+                                justifyContent: "space-between",
+								paddingX: "48px",
+								border: "1px solid red",
+							}}
+						>
+							<Typography fontSize='20px'>Main Chart</Typography>
+							{/* Time Selection */}
+							<Select
+								displayEmpty
+								value={timeline}
+								renderValue={(selected: any) => {
+									if (selected.length === 0) {
+										return "Duration";
+									}
+								}}
+								sx={{
+									height: "42px",
+									width: "168px",
+									background: "white",
+									borderRadius: "15px",
+								}}
+							>
+								<MenuItem disabled value='today'>
+									last 24 hours
+								</MenuItem>
+								<MenuItem disabled value='week'>
+									last 7 days
+								</MenuItem>
+								<MenuItem disabled value='month'>
+									last 30 days
+								</MenuItem>
+								<MenuItem disabled value='year'>
+									Past year
+								</MenuItem>
+							</Select>
+						</Box>
 						<LineChart data={viewsTimeGraphData} />
 					</Item>
 				</Grid>

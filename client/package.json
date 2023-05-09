@@ -27,7 +27,7 @@
         "axios": "^1.4.0",
         "dayjs": "^1.11.7",
         "mui-one-time-password-input": "^1.1.0",
-        "next": "latest",
+        "next": "^13.3.4",
         "react": "latest",
         "react-dom": "latest",
         "react-hook-form": "^7.43.9",

@@ -77,7 +77,7 @@ const Sidebar = () => {
 			sx={{
 				position: "fixed",
 				height: "821px",
-				width: "319px",
+				width: { xs: "100%", md: "240px", xl: "319px" },
 				background: "rgba(251, 251, 251, 0.9)",
 				border: "1px solid #E3E3E3",
 				backdropFilter: "blur(100px)",

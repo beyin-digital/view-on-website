@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box } from "@mui/material";
-
+import { usePathname } from "next/navigation";
 import Navbar from "@/components/Dashboard/Navbar";
 import Sidebar from "@/components/Dashboard/Sidebar";
 
@@ -11,11 +11,12 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+	const pathname = usePathname();
 	return (
 		<>
 			<html lang='en' suppressHydrationWarning>
 				<head />
-				<body style={{ margin: 0 }}>
+				<body style={{ margin: 0, minHeight: "100vh" }}>
 					{/* Background */}
 					<Box
 						sx={{
@@ -52,12 +53,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
 							width: "100%",
 						}}
 					>
-						{/* Navbar */}
-						<Navbar />
+						{pathname === "/dashboard" && <Navbar />}
 						{/* Sidebar and Content body */}
 						<Box
 							sx={{
-								display: "flex",
+								marginTop:
+									pathname === "/dashboard" ? "0px" : "106px",
+								display: { xs: "none", md: "flex" },
 								justifyContent: "space-between",
 								alignItems: "flex-start",
 							}}
@@ -68,8 +70,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
 							<Box
 								sx={{
 									position: "absolute",
-									right: "48px",
-									width: "1544px",
+									right: { xs: "0", md: "24px", xl: "48px" },
+									width: {
+										xs: "100%",
+										md: "1080px",
+										xl: "1544px",
+									},
 									maxWidth: "1544px",
 									minHeight: "100vh",
 								}}
