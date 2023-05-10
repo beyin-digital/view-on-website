@@ -23,6 +23,7 @@ import { ButtonLogin } from "../Button";
 import Link from "next/link";
 
 import { useTranslation } from "next-i18next";
+import Image from "next/image";
 
 const loginSchema = object({
 	identifier: string().min(1, "Email address or keyword is required"),
@@ -88,6 +89,22 @@ const LoginForm = () => {
 			},
 		},
 	);
+	const icon = [
+		{
+			id: 1,
+			icon: "/icons/google.svg",
+			alt: "Google Icon",
+			title: "Google Icon",
+			link: "https://google.com",
+		},
+		{
+			id: 2,
+			icon: "/icons/apple.svg",
+			alt: "Apple Icon",
+			title: "Apple Icon",
+			link: "https://apple.com",
+		},
+	];
 
 	const handleSubmit = () => {
 		console.log(values);
@@ -124,6 +141,7 @@ const LoginForm = () => {
 						borderRadius: "10px",
 						marginY: ".5rem",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
+						// delete this once time
 						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
 							border: 0,
 						},
@@ -149,7 +167,7 @@ const LoginForm = () => {
 						borderRadius: "10px",
 						marginY: ".5rem",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
-
+						// delete this once time
 						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
 							border: 0,
 						},
@@ -211,6 +229,40 @@ const LoginForm = () => {
 					onClick={handleSubmit}
 				/>
 				<LoginTextSignUp />
+				<Box
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+						marginTop: "1rem",
+					}}
+					className="BoxSignInWith"
+				>
+					<Typography>{t("sign_up")}</Typography>
+					<Box
+						sx={{
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "space-evenly",
+							margin: "auto 1rem",
+						}}
+					>
+						{icon.map((item) => (
+							<Link href={item.link} key={item.id}>
+								<Image
+									src={item.icon}
+									alt={item.alt}
+									title={item.title}
+									height={35}
+									width={35}
+									style={{
+										margin: "auto .2rem",
+									}}
+								/>
+							</Link>
+						))}
+					</Box>
+				</Box>
 			</Box>
 		</>
 	);

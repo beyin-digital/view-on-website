@@ -129,9 +129,7 @@ const FooterMobile = () => {
 											marginY: "1rem",
 										}}
 										color="#343132"
-									>
-										{/* AN E-LABEL STAMP */}
-									</Typography>
+									></Typography>
 								</Box>
 								<TextViewOnWeb />
 

@@ -17,7 +17,6 @@ const LoginTextSignUp = () => {
 						textAlign: "center",
 					}}
 				>
-					{/* Don’t have an account? */}
 					{t("account")}
 					<Link
 						href={"/signup"}
@@ -25,8 +24,8 @@ const LoginTextSignUp = () => {
 							textDecoration: "none",
 							color: "#343132",
 						}}
+						title="View On Website SignUp"
 					>
-						{/* Signup */}
 						{t("create_account")}
 					</Link>
 				</Typography>

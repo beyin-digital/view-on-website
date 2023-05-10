@@ -965,5 +965,12 @@ const SubscribePage: NextPage = () => {
 		</>
 	);
 };
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", ["common", "subscribe"])),
+		},
+	};
+};
 
 export default SubscribePage;

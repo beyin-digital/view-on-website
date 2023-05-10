@@ -82,7 +82,6 @@ const Footer = () => {
 							textAlign="center"
 							textTransform={"capitalize"}
 						>
-							{/* Learn More */}
 							{t("footer_learn")}
 						</Typography>
 						<Image src="/icons/i.svg" alt="" width={20} height={20} />
@@ -94,7 +93,7 @@ const Footer = () => {
 						textAlign="center"
 						textTransform={"capitalize"}
 					>
-						{/* T&C */}
+						{" "}
 						{t("footer_terms")}
 					</Typography>
 					<Typography
@@ -104,7 +103,6 @@ const Footer = () => {
 						textAlign="center"
 						textTransform={"capitalize"}
 					>
-						{/* Privacy Policy */}
 						{t("footer_privacy")}
 					</Typography>
 					<Typography
@@ -114,7 +112,6 @@ const Footer = () => {
 						textAlign="center"
 						textTransform={"capitalize"}
 					>
-						{/* Contact Us */}
 						{t("footer_contact")}
 					</Typography>
 				</Box>

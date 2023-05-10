@@ -12,7 +12,7 @@ import { ButtonLogin } from "@/components/Button";
 import LoginForm from "@/components/Login/LoginForm";
 import LoginDetails from "@/components/Login/LoginDetails";
 import LoginTextSignUp from "@/components/Login/LoginTextSignUp";
-import Layout from "@/components/Login/Layout";
+import Layout from "@/components/Layout/Layout";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
@@ -26,7 +26,7 @@ const LoginPage = () => {
 	return (
 		<>
 			<Head>
-				<title>{t("meat_title")}</title>
+				<title>{t("meta_title")}</title>
 				<meta name="description" content="" />
 				<meta name="keyword" content="" />
 				<meta property="og:image" content="" />
@@ -61,7 +61,6 @@ const LoginPage = () => {
 					>
 						<Box
 							sx={{
-								// width: { xs: "100%", md: "", xl: "" },
 								height: "600px",
 								paddingX: "1rem",
 							}}

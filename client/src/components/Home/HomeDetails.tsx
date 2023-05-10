@@ -21,7 +21,6 @@ const HomeDetails = () => {
 	};
 	return (
 		<>
-			 
 			<>
 				<Grid
 					container
@@ -35,7 +34,6 @@ const HomeDetails = () => {
 					<Box
 						sx={{
 							width: "80%",
-							// height: "100%",
 							margin: ".4rem",
 						}}
 					>
@@ -119,6 +117,8 @@ const HomeDetails = () => {
 										>
 											<img
 												src="/icons/hashtag.svg"
+												alt="View On Website Hashtag Icon"
+												title="View On Website Hashtag Icon"
 												style={{
 													width: "100%",
 													height: "100%",
@@ -170,20 +170,7 @@ const HomeDetails = () => {
 												placeholder={`${t("keyword")}`}
 												className="l"
 											/>
-											<Box
-												className="i"
-												// sx={{
-												// 	background: "#000",
-												// 	width: "5px",
-												// 	height: {
-												// 		xs: "30px",
-												// 		sm: "30px",
-												// 		md: "60px",
-												// 		xl: "60px",
-												// 	},
-												// 	margin: "0 .5rem",
-												// }}
-											/>
+											<Box className="i" />
 										</form>
 									</Box>
 									<Box
@@ -206,6 +193,8 @@ const HomeDetails = () => {
 									>
 										<img
 											src="/icons/arrowUpRight.svg"
+											alt="View On Website Arrow Up Left Icon"
+											title="View On Website Arrow Up Left Icon"
 											style={{
 												width: "100%",
 												height: "100%",
@@ -214,6 +203,8 @@ const HomeDetails = () => {
 										/>
 										<img
 											src="/icons/arrowUpLeft.svg"
+											alt="View On Website Arrow Up Left Icon"
+											title="View On Website Arrow Up Left Icon"
 											style={{
 												width: "100%",
 												height: "100%",

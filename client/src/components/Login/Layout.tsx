@@ -4,32 +4,11 @@ import Footer from "../Footer/Footer";
 import FooterMobile from "../Footer/FooterMobile";
 import { Box } from "@mui/system";
 import Image from "next/image";
-import { Link, Typography } from "@mui/material";
-
-import { useTranslation } from "next-i18next";
 
 interface Props {
 	children: React.ReactNode;
 }
 const Layout: React.FC<Props> = ({ children }) => {
-	const { t } = useTranslation("login");
-
-	const icon = [
-		{
-			id: 1,
-			icon: "/icons/google.svg",
-			alt: "Google Icon",
-			title: "Google Icon",
-			link: "https://google.com",
-		},
-		{
-			id: 2,
-			icon: "/icons/apple.svg",
-			alt: "Apple Icon",
-			title: "Apple Icon",
-			link: "https://apple.com",
-		},
-	];
 	return (
 		<>
 			<Box
@@ -42,12 +21,11 @@ const Layout: React.FC<Props> = ({ children }) => {
 			>
 				<Box
 					sx={{
-						// maxWidth: "100%",
 						margin: "auto",
 						height: { xs: "100%", md: "100vh", xl: "100vh" },
 						display: "flex",
 						flexDirection: "column",
-						justifyContent: "space-between",
+						justifyContent: "center",
 						position: "relative",
 					}}
 				>
@@ -74,7 +52,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 						<Image
 							fill
 							src="/images/swirl.svg"
-							alt=""
+							alt="View On Website Background"
 							style={{
 								top: "-43rem",
 								position: "absolute",
@@ -85,10 +63,8 @@ const Layout: React.FC<Props> = ({ children }) => {
 						className="LayoutBox"
 						sx={{
 							position: "relative",
-							// right: { xs: "10%", sm: "0%", md: "10%", xl: "20%" },
-							// maxWidth: "100%",
 							width: { xs: "564px", sm: "100%", md: "100%", xl: "100%" },
-							height: { xs: "100%", sm: "100%", md: "650px", xl: "650px" },
+							height: { xs: "100%", sm: "100%", md: "650px", xl: "630px" },
 							background: {
 								xs: "rgba(251, 251, 251, 0.6)",
 								md: "rgba(251, 251, 251, 0.6)",
@@ -111,56 +87,18 @@ const Layout: React.FC<Props> = ({ children }) => {
 								md: "skew(-16deg, 0deg)",
 								xl: "skew(-16deg, 0deg)",
 							},
-							// transform: { xs: "skew(-10deg, 0deg)", xl: "skew(-20deg, 0deg)" },
 							overflow: { xs: "", md: "hidden", xl: "hidden" },
-							margin: "3rem auto",
+							margin: "1rem auto",
 							zIndex: "999",
-							paddingX: "2rem",
+							padding: "2rem",
 						}}
 					>
 						{children}
 					</Box>
-					<Box
-						sx={{
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-							position: "relative",
-							left: { xs: "0",sm:"0", md: "-14rem", xl: "-0rem" },
-							top: "-2rem",
-						}}
-						className="BoxSignInWith"
-					>
-						<Typography>{t("sign_up")}</Typography>
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-evenly",
-								margin: "auto 1rem",
-							}}
-						>
-							{icon.map((item) => (
-								<Link href={item.link} key={item.id}>
-									<Image
-										src={item.icon}
-										alt={item.alt}
-										title={item.title}
-										height={35}
-										width={35}
-										style={{
-											margin: "auto .2rem",
-										}}
-									/>
-								</Link>
-							))}
-						</Box>
-					</Box>
-
-					<Footer />
-					<FooterMobile />
 				</Box>
 			</Box>
+			<Footer />
+			<FooterMobile />
 		</>
 	);
 };

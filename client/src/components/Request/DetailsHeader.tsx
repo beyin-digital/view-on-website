@@ -17,7 +17,13 @@ const DetailsHeader = () => {
 					marginY: "2rem",
 				}}
 			>
-				<Image src="/images/logo.svg" alt="logo" width={150} height={80} />
+				<Image
+					src="/images/logo.svg"
+					alt="Logo View On Website"
+					title="Logo View On Website"
+					width={150}
+					height={80}
+				/>
 				<Box
 					sx={{
 						display: "flex",
@@ -36,7 +42,6 @@ const DetailsHeader = () => {
 						}}
 						color="#343132"
 					>
-						{/* Please enter your email address or #keyword */}
 						{t("title")}
 					</Typography>
 					<Typography
@@ -50,7 +55,6 @@ const DetailsHeader = () => {
 						}}
 						color="#A0A9AB"
 					>
-						{/* We will send a link to Your email where you can make a new password:{" "} */}
 						{t("desc")}
 					</Typography>
 				</Box>

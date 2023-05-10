@@ -15,7 +15,8 @@ const PageDesktop = () => {
 			<Box
 				className="PageDesktop"
 				sx={{
-					width: "100%",
+					width: "2162px",
+					maxWidth: "100%",
 					overflow: "hidden",
 				}}
 			>
@@ -70,8 +71,8 @@ const PageDesktop = () => {
 							<Box
 								sx={{
 									position: "absolute",
-									top: { xs: "12rem", xl: "12rem" },
-									right: { xs: "", sm: "", md: "", lg: "55rem", xl: "69rem" },
+									top: { xs: "12rem", xl: "11rem" },
+									right: { xs: "", sm: "", md: "", lg: "55rem", xl: "60rem" },
 									zIndex: "91",
 									width: { xs: "", sm: "", md: "", lg: "400px", xl: "600px" },
 									height: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },

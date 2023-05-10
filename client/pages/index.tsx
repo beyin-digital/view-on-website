@@ -1,19 +1,16 @@
 import { useState } from "react";
-import Layout from "@/components/Layout/LayoutWithFooter";
-import { Box, Button } from "@mui/material";
-
-import { useRouter } from "next/router";
-import Head from "next/head";
-import ArrowUpright from "../public/icons/arrowUpright";
-import HomeDetails from "@/components/Home/HomeDetails";
-import { Drawer, Typography, IconButton } from "@mui/material";
-
-import SliderDesktop from "@/components/Slider/SliderDesktop";
-
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
-
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import Head from "next/head";
+
+import { Drawer } from "@mui/material";
+import { Box, Button } from "@mui/material";
+
+import Layout from "@/components/Layout/LayoutWithFooter";
+import SliderDesktop from "@/components/Slider";
+import HomeDetails from "@/components/Home/HomeDetails";
 
 type Anchor = "bottom" | "right";
 
@@ -46,10 +43,16 @@ const HomePage = (anchor: Anchor) => {
 
 		setState({ ...state, [anchor]: open });
 	};
+	function openModel() {
+		setIsDrawerOpen(true);
+	}
+	function closeModel() {
+		setIsDrawerOpen(false);
+	}
 	return (
 		<>
 			<Head>
-				<title>{t("meat_title")}</title>
+				<title>{t("meta_title")}</title>
 				<meta name="description" content="" />
 				<meta name="keyword" content="" />
 				<meta property="og:image" content="" />
@@ -62,33 +65,7 @@ const HomePage = (anchor: Anchor) => {
 					width: "100%",
 				}}
 			>
-				<Box
-					sx={{
-						position: "absolute",
-						bottom: "0",
-						left: "0",
-						right: "0",
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-						zIndex: "999999999",
-					}}
-				>
-					<Button
-						sx={{
-							height: "50px",
-							width: "250px",
-							// border:"1px solid ",
-							marginLeft: "-19rem",
-							background: "transparent",
-							color: "transparent",
-						}}
-						// onClick={() => setIsDrawerOpen(true)}
-					>
-						{/* mohamed */}
-					</Button>
-				</Box>
-				<Layout>
+				<Layout onClick={openModel}>
 					<>
 						<HomeDetails />
 						<Drawer
@@ -98,7 +75,7 @@ const HomePage = (anchor: Anchor) => {
 							onClick={toggleDrawer(anchor, false)}
 							onKeyDown={toggleDrawer(anchor, false)}
 						>
-							<SliderDesktop />
+							<SliderDesktop onClick={closeModel} />
 						</Drawer>
 					</>
 				</Layout>
@@ -110,7 +87,11 @@ const HomePage = (anchor: Anchor) => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
 	return {
 		props: {
-			...(await serverSideTranslations(locale || "", ["common", "home"])),
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"home",
+				"slider",
+			])),
 		},
 	};
 };

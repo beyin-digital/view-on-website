@@ -1,13 +1,15 @@
-import Layout from "@/components/Layout/Layout";
-import DetailsHeader from "@/components/Request/DetailsHeader";
-import FormRequest from "@/components/Request/FormRequest";
+import Head from "next/head";
 import { Box, Grid } from "@mui/material";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
-import Head from "next/head";
+
+// components
+import Layout from "@/components/Layout/Layout";
+import DetailsHeader from "@/components/Request/DetailsHeader";
+import FormRequest from "@/components/Request/FormRequest";
 
 const Request = () => {
 	const { t } = useTranslation("request");
@@ -15,7 +17,7 @@ const Request = () => {
 	return (
 		<>
 			<Head>
-				<title>{t("meat_title")}</title>
+				<title>{t("meta_title")}</title>
 				<meta name="description" content="" />
 				<meta name="keyword" content="" />
 				<meta property="og:image" content="" />

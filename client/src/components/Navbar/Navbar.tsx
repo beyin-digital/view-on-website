@@ -92,7 +92,11 @@ const Header = () => {
 					sx={{ cursor: "pointer", margin: ".5rem 0", textAlign: "center" }}
 					onClick={() => router.push("/")}
 				>
-					<img src="/images/logo.svg" alt="logo" />
+					<img
+						src="/images/logo.svg"
+						alt="logo View On Website"
+						title="logo View On Website"
+					/>
 				</Box>
 				<AiOutlineClose size="25px" />
 			</Box>
@@ -167,8 +171,7 @@ const Header = () => {
 						{t("nav_getStarted")}
 					</Typography>
 					<FiArrowUpRight size={42} color="#343132" className="left" />
-					{/* <FiArrowUpLeft size={42} color="#343132" className="right" /> */}
-				</Button>
+ 				</Button>
 			</Box>
 			<Box
 				sx={{
@@ -266,6 +269,8 @@ const Header = () => {
 					<Toolbar
 						sx={{
 							flexDirection: { xs: "row-reverse", md: "row", xl: "row" },
+							background: "rgba(251, 251, 251, 0.6)",
+							backdropFilter: "blur(100px)",
 						}}
 					>
 						<IconButton
@@ -275,6 +280,7 @@ const Header = () => {
 							sx={{
 								mr: 2,
 								display: { md: "none" },
+								background: "transparent",
 							}}
 							onClick={handleDrawerToggle}
 						>
@@ -299,6 +305,7 @@ const Header = () => {
 						<Box
 							sx={{
 								display: { xs: "none", sm: "none", md: "flex", xl: "flex" },
+								background: "transparent",
 							}}
 						>
 							<ul className="navigation-menu">
@@ -352,11 +359,18 @@ const Header = () => {
 						</Button>
 					</Toolbar>
 				</AppBar>
-				<Box component="nav">
+				<Box
+					component="nav"
+					sx={{
+						background: "rgba(251, 251, 251, 0.6)",
+						backdropFilter: "blur(100px)",
+					}}
+				>
 					<Drawer
 						variant="temporary"
 						open={mobileOpen}
 						onClose={handleDrawerToggle}
+						hideBackdrop={true}
 						sx={{
 							display: { xs: "block" },
 							"& .MuiDrawer-paper": {
@@ -364,13 +378,9 @@ const Header = () => {
 								width: "100%",
 								height: "100%",
 								background: "transparent",
-								// background: "rgba(251, 251, 251, 0.6",
 								backdropFilter: "blur(100px)",
 								boxShadow: "0px 0px 0px 0px",
 							},
-							// "& .MuiDrawer-paper": {
-							// 	background: "transparent",
-							// },
 						}}
 					>
 						{drawer}

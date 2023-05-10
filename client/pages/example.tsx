@@ -18,14 +18,18 @@ const Example = () => {
 	return (
 		<>
 			<Head>
-				<title>{t("meat_title")}</title>
+				<title>{t("meta_title")}</title>
 				<meta name="description" content="" />
 				<meta name="keyword" content="" />
 				<meta property="og:image" content="" />
 				<link rel="icon" href="/images/logo.svg" />
 			</Head>
 			<Header />
-			<Box>
+			<Box
+				sx={{
+					height: "89vh",
+				}}
+			>
 				<PageDesktop />
 				<PageTablet />
 				<PageMobile />

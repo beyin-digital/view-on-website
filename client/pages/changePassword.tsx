@@ -15,7 +15,7 @@ const ChangePassword = () => {
 	return (
 		<>
 			<Head>
-				<title>{t("meat_title")}</title>
+				<title>{t("meta_title")}</title>
 				<meta name="description" content="" />
 				<meta name="keyword" content="" />
 				<meta property="og:image" content="" />

@@ -229,7 +229,7 @@ const SubscribePage: NextPage = () => {
 										background: "#31E716",
 										// marginRight: { xs: "10rem", xl: "4rem" },
 									}}
-									onClick={() => router.push(`/subscribe/${values.hashtag}`)}
+									// onClick={() => router.push(`/subscribe/${values.hashtag}`)}
 								>
 									<Typography
 										sx={{

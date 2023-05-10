@@ -28,13 +28,13 @@ const SignupDetails = () => {
 		// 	title: "Facebook Icon",
 		// 	link: "https://facebook.com",
 		// },
-		{
-			id: 4,
-			icon: "/icons/linkedin.svg",
-			alt: "LinkedIn Icon",
-			title: "LinkedIn Icon",
-			link: "https://linkedin.com",
-		},
+		// {
+		// 	id: 4,
+		// 	icon: "/icons/linkedin.svg",
+		// 	alt: "LinkedIn Icon",
+		// 	title: "LinkedIn Icon",
+		// 	link: "https://linkedin.com",
+		// },
 	];
 	return (
 		<>
@@ -51,7 +51,6 @@ const SignupDetails = () => {
 					},
 					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
 					marginY: "2rem",
-					// border:"1px solid red"
 				}}
 			>
 				<Box
@@ -68,7 +67,6 @@ const SignupDetails = () => {
 							marginY: { xs: "1rem", md: "0", xl: "0" },
 						}}
 					>
-						{/* Please fill up your information */}
 						{t("title")}
 					</Typography>
 				</Box>
@@ -86,7 +84,7 @@ const SignupDetails = () => {
 							width: { xs: "100%", md: "45%", xl: "100%" },
 							display: "flex",
 							alignItems: "center",
-							justifyContent: "space-between",
+							justifyContent: "space-around",
 							flexDirection: { xs: "column", md: "row", xl: "row" },
 						}}
 					>
@@ -100,7 +98,6 @@ const SignupDetails = () => {
 								paddingX: "4px",
 							}}
 						>
-							{/* Or sign up with */}
 							{t("sign_up")}
 						</Typography>
 						<Typography
@@ -112,7 +109,6 @@ const SignupDetails = () => {
 								display: { xs: "block", md: "none", xl: "none" },
 							}}
 						>
-							{/* sign up with */}
 							{t("sign_up")}
 						</Typography>
 						<Box
@@ -135,9 +131,7 @@ const SignupDetails = () => {
 									lineHeight: "22px",
 									marginY: { xs: "1rem", md: "0", xl: "0" },
 								}}
-							>
-								{/* Or */}
-							</Typography>
+							></Typography>
 							<Typography
 								sx={{
 									border: "1px solid #6C6C6C",
@@ -150,7 +144,7 @@ const SignupDetails = () => {
 
 					<Box
 						sx={{
-							width: "40%",
+							width: "50%",
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "center",

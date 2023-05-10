@@ -4,7 +4,6 @@ import Footer from "../Footer/Footer";
 import FooterMobile from "../Footer/FooterMobile";
 import { Box } from "@mui/system";
 import Image from "next/image";
-import { Link, Typography } from "@mui/material";
 
 interface Props {
 	children: React.ReactNode;
@@ -23,12 +22,12 @@ const Layout: React.FC<Props> = ({ children }) => {
 			>
 				<Box
 					sx={{
-						// maxWidth: "100%",
+
 						margin: "auto",
-						height: { xs: "100%", md: "100vh", xl: "100vh" },
+						height: { xs: "100%", md: "90vh", xl: "96vh" },
 						display: "flex",
 						flexDirection: "column",
-						justifyContent: "space-between",
+						justifyContent: "center",
 						position: "relative",
 					}}
 				>
@@ -63,11 +62,9 @@ const Layout: React.FC<Props> = ({ children }) => {
 						/>
 					</Box>
 					<Box
-					className="LayoutBox"
+						className="LayoutBox"
 						sx={{
 							position: "relative",
-							// right: { xs: "10%", sm: "1%", md: "10%", xl: "20%" },
-							// maxWidth: "100%",
 							width: { xs: "564px", sm: "100%", md: "100%", xl: "100%" },
 							height: { xs: "100%", sm: "100%", md: "650px", xl: "650px" },
 							background: {
@@ -92,7 +89,6 @@ const Layout: React.FC<Props> = ({ children }) => {
 								md: "skew(-16deg, 0deg)",
 								xl: "skew(-16deg, 0deg)",
 							},
-							// transform: { xs: "skew(-10deg, 0deg)", xl: "skew(-20deg, 0deg)" },
 							overflow: { xs: "", md: "hidden", xl: "hidden" },
 							margin: "3rem auto",
 							zIndex: "999",
@@ -101,10 +97,10 @@ const Layout: React.FC<Props> = ({ children }) => {
 					>
 						{children}
 					</Box>
-					<Footer />
-					<FooterMobile />
 				</Box>
 			</Box>
+			<Footer />
+			<FooterMobile />
 		</>
 	);
 };

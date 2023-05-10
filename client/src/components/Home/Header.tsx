@@ -33,7 +33,6 @@ const Header = () => {
 						fontWeight="500"
 						className="Textredirected"
 					>
-						{/* Get redirected to what you see */}
 						{t("title")}
 					</Typography>
 					<Typography
@@ -44,22 +43,18 @@ const Header = () => {
 							fontWeight: "400",
 						}}
 					>
-						{/* Enter the */}
 						{t("header_text_one")}
 						<Typography
 							component={"span"}
 							sx={{
 								fontSize: { xs: "21px", md: "30px", xl: "40px" },
-								// margin: "0 3px",
-								// padding: "0px 3px",
 								borderRadius: "8px",
 								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 							}}
 						>
-							{/* #keyword */}
 							{t("header_text_two")}
 						</Typography>
-						{/* here to get redirected */}
+
 						{t("header_text_three")}
 					</Typography>
 				</Box>
@@ -73,7 +68,8 @@ const Header = () => {
 				>
 					<img
 						src="/icons/play.png"
-						alt=""
+						alt="View On Website Play Icon"
+						title="View On Website Play Icon"
 						style={{
 							width: "100%",
 							height: "100%",

@@ -15,9 +15,7 @@ const TextViewOnWeb = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					// marginBottom:"2rem"
 				}}
-
 				className="TextViewOnWebsite"
 			>
 				<Typography
@@ -28,7 +26,6 @@ const TextViewOnWeb = () => {
 							md: "40px",
 							xl: "50px",
 						},
-						// paddingBottom:"2rem"
 					}}
 					fontWeight="600"
 					color="#0090EC"

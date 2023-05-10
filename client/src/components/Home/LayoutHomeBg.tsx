@@ -21,10 +21,6 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 				<Box
 					sx={{
 						width: { xs: "100%", md: "100%", xl: "100%" },
-						// display: "flex",
-						// alignItems: "center",
-						// justifyContent: "end",
-						// marginLeft: { xs: "3rem", sm: "3rem", md: "0", xl: "0" },
 					}}
 					className="BoxHomeLayoutCenter"
 				>
@@ -37,7 +33,6 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 								md: "370px",
 								xl: "360px",
 							},
-							// height: "100%",
 							display: "flex",
 							alignItems: "center",
 							justifyContent: {
@@ -56,19 +51,10 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 								md: "skew(16deg, 0deg)",
 								xl: "skew(16deg, 0deg)",
 							},
-							// marginLeft: "-3rem",
 							backgroundImage: "url('/images/cut-out-parallelogram.png')",
 						}}
 						className="parallelogram"
 					>
-						{/* <img
-							src="/images/cut-out-parallelogram.png"
-							style={{
-								width: "100%",
-								height: "300px",
-							}}
-						/> */}
-						{/* <Image src="/images/cut-out-parallelogram.png" alt="" fill /> */}
 						{children}
 					</Box>
 				</Box>

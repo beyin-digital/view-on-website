@@ -11,6 +11,8 @@ interface ButtonLoginProps extends ButtonBaseProps {
 }
 
 export const ButtonLogin = (props: ButtonLoginProps) => {
+	const { locale } = useRouter();
+
 	return (
 		<>
 			<Box
@@ -37,6 +39,7 @@ export const ButtonLogin = (props: ButtonLoginProps) => {
 					}}
 					onClick={props.onClick}
 					type={props.type}
+					title={props.name}
 				>
 					<Typography
 						sx={{
@@ -53,8 +56,13 @@ export const ButtonLogin = (props: ButtonLoginProps) => {
 					</Typography>
 
 					{/* <FiArrowUpRight size={42} color="#FBFBFB" /> */}
-					<FiArrowUpRight size={42} color="#FBFBFB" className="left" />
-					<FiArrowUpLeft size={42} color="#FBFBFB" className="right" />
+					{/* <FiArrowUpRight size={42} color="#FBFBFB" className="left" /> */}
+					{/* <FiArrowUpLeft size={42} color="#FBFBFB" className="right" /> */}
+					{locale === "ar" ? (
+						<FiArrowUpLeft size={42} color="#FBFBFB" className="rig" />
+					) : (
+						<FiArrowUpRight size={42} color="#FBFBFB" className="le" />
+					)}
 				</Button>
 			</Box>
 		</>
@@ -81,6 +89,7 @@ export const ButtonStyle = () => {
 						display: "flex",
 						justifyContent: "space-around",
 					}}
+					title="payment"
 				>
 					<Typography
 						sx={{
@@ -128,6 +137,7 @@ export const ButtonChange = ({ name, onClick }: any) => {
 						justifyContent: "center",
 					}}
 					onClick={onClick}
+					title={name}
 				>
 					<Typography
 						sx={{
@@ -180,6 +190,7 @@ export const LinkSubscribe = () => {
 					alignItems: "center",
 					textDecoration: "none",
 				}}
+				title={`${t("button")}`}
 			>
 				<Typography
 					sx={{

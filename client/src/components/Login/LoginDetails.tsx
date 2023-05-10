@@ -13,18 +13,24 @@ const LoginDetails = () => {
 					flexDirection: "column",
 					alignItems: "center",
 					justifyContent: "center",
-					marginTop: "5rem",
+					marginTop: "2rem",
 					marginBottom: "1rem",
 				}}
 			>
-				<Image src="/images/logo.svg" alt="logo" width={150} height={80} />
+				<Image
+					src="/images/logo.svg"
+					title="Logo View On Website"
+					alt="Logo View On Website"
+					width={150}
+					height={80}
+				/>
 			</Box>
 			<Box
 				sx={{
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					marginY: { xs: "4rem", md: "1rem", xl: "2rem" },
+					marginY: { xs: "2rem", md: "1rem", xl: "2rem" },
 				}}
 			>
 				<Typography
@@ -35,7 +41,6 @@ const LoginDetails = () => {
 						lineHeight: "37px",
 					}}
 				>
-					{/* Welcome Back */}
 					{t("title")}
 				</Typography>
 			</Box>

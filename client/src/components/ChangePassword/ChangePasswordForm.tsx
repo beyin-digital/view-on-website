@@ -94,7 +94,6 @@ const ChangePasswordForm = () => {
 					>
 						<Typography
 							sx={{
-								// fontFamily: "Helvetica Neue",
 								letterSpacing: "0.02em",
 								fontSize: { xs: "20px", sm: "25px", xl: "32px" },
 								fontWeight: 400,
@@ -103,11 +102,8 @@ const ChangePasswordForm = () => {
 								textTransform: "uppercase",
 							}}
 						>
-							{/* Change password */}
 							{t("change")}
-						</Typography>
-
-						{/* <FiArrowUpRight size={42} color="#FBFBFB" /> */}
+						</Typography>{" "}
 					</Button>
 				</Box>
 			</Box>

@@ -10,6 +10,5 @@
   "form_name": "Name",
   "form_email": "E-mail",
   "form_password": "Password",
-  "form_confirm": "Confirm Password",
-  "or":"Or"
+  "form_confirm": "Confirm Password"
 }

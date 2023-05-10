@@ -18,8 +18,8 @@ const ChangePasswordDetails = () => {
 			>
 				<Image
 					src="/images/logo.svg"
-					alt="Logo Vow"
-					title="Logo Vow"
+					alt="Logo View On Website"
+					title="Logo View On Website"
 					width={150}
 					height={80}
 				/>
@@ -32,9 +32,7 @@ const ChangePasswordDetails = () => {
 						textAlign: "center",
 					}}
 					color="#343132"
-				>
-					{/* AN E-LABEL STAMP */}
-				</Typography>
+				></Typography>
 			</Box>
 			<Box
 				sx={{
@@ -54,7 +52,6 @@ const ChangePasswordDetails = () => {
 						textAlign: "center",
 					}}
 				>
-					{/* Please enter your new password */}
 					{t("title")}
 				</Typography>
 				<Typography
@@ -67,8 +64,6 @@ const ChangePasswordDetails = () => {
 						color: "#A0A9AB",
 					}}
 				>
-					{/* Please enter a new password for your email Test@abceed.com and related
-					#Keywords below: */}
 					{t("desc")}
 				</Typography>
 			</Box>

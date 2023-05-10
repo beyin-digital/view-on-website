@@ -23,8 +23,6 @@ const SignupForm = () => {
 						xl: "space-between",
 					},
 					flexDirection: { xs: "column", md: "row", xl: "row" },
-					// paddingX: {xs:""},
-					// border: "1px solid red",
 				}}
 			>
 				<Box
@@ -77,7 +75,6 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
-						// placeholder="Password"
 						placeholder={`${t("form_password")}`}
 					/>
 				</Box>
@@ -93,8 +90,6 @@ const SignupForm = () => {
 							md: "space-evenly",
 							xl: "space-evenly",
 						},
-						// marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
-						// marginY: { xs: ".3rem", md: "1rem", xl: ".3rem" },
 					}}
 				>
 					<OutlinedInput
@@ -113,7 +108,6 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
-						// placeholder="E-mail"
 						placeholder={`${t("form_email")}`}
 					/>
 					<OutlinedInput
@@ -132,7 +126,6 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: ".3rem",
 						}}
-						// placeholder="Confirm Password"
 						placeholder={`${t("form_confirm")}`}
 					/>
 				</Box>
@@ -158,7 +151,6 @@ const SignupForm = () => {
 						marginY: { xs: ".5rem", md: "", xl: "" },
 					}}
 				>
-					{/* Already have an account?{" "} */}
 					{t("sign_up_account")}
 
 					<Link
@@ -168,7 +160,6 @@ const SignupForm = () => {
 							color: "#343132",
 						}}
 					>
-						{/* Sign in */}
 						{t("sign_in")}
 					</Link>
 				</Typography>

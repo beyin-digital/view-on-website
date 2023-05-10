@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-
-const Footer = () => {
+import { useState } from "react";
+const Footer = ({ onClick }: any) => {
 	const { t } = useTranslation("common");
 
 	return (
@@ -10,6 +10,7 @@ const Footer = () => {
 			<Box
 				sx={{
 					width: "100%",
+					maxWidth: "100%",
 					display: { xs: "", md: "flex", xl: "flex" },
 					flexDirection: { xs: "column", md: "row", xl: "row" },
 					alignItems: "start",
@@ -67,7 +68,6 @@ const Footer = () => {
 							md: "space-between",
 							xl: "space-between",
 						},
-						// overflow: "hidden",
 					}}
 				>
 					<Box
@@ -82,21 +82,20 @@ const Footer = () => {
 							justifyContent: "center",
 							position: "relative",
 							bottom: "-1rem",
-							// overflow: "hidden",
+							cursor: "pointer",
 						}}
+						onClick={onClick}
 					>
 						<Typography
 							sx={{
 								fontSize: { xs: "25px", xl: "32px" },
 							}}
-							// fontSize=
 							fontWeight="400"
 							lineHeight="92.5%"
 							textAlign="center"
 						>
 							{t("premium")}
 						</Typography>
-						{/* <TemporaryDrawer open={drawerOpen} onClose={handleDrawerClose} /> */}
 					</Box>
 				</Box>
 				<Box
@@ -121,10 +120,9 @@ const Footer = () => {
 							fontSize="20px"
 							fontWeight="400"
 							lineHeight="32px"
-								textAlign="center"
+							textAlign="center"
 							textTransform={"capitalize"}
 						>
-							{/* Learn More */}
 							{t("footer_learn")}
 						</Typography>
 						<Image src="/icons/i.svg" alt="" width={20} height={20} />
@@ -133,20 +131,18 @@ const Footer = () => {
 						fontSize="20px"
 						fontWeight="400"
 						lineHeight="32px"
-					textAlign="center"
+						textAlign="center"
 						textTransform={"capitalize"}
 					>
-						{/* T&C */}
 						{t("footer_terms")}
 					</Typography>
 					<Typography
 						fontSize="20px"
 						fontWeight="400"
 						lineHeight="32px"
-							textAlign="center"
+						textAlign="center"
 						textTransform={"capitalize"}
 					>
-						{/* Privacy Policy */}
 						{t("footer_privacy")}
 					</Typography>
 					<Typography
@@ -156,7 +152,6 @@ const Footer = () => {
 						textAlign="center"
 						textTransform={"capitalize"}
 					>
-						{/* Contact Us */}
 						{t("footer_contact")}
 					</Typography>
 				</Box>

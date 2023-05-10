@@ -24,7 +24,7 @@ const VerificationPage = () => {
 	return (
 		<>
 			<Head>
-				<title>{t("meat_title")}</title>
+				<title>{t("meta_title")}</title>
 				<meta name="description" content="" />
 				<meta name="keyword" content="" />
 				<meta property="og:image" content="" />
@@ -51,7 +51,6 @@ const VerificationPage = () => {
 						sx={{
 							width: { xs: "100%", md: "50%", xl: "50%" },
 							height: "100%",
-							// marginRight: { xs: "0", md: "15rem", xl: "20rem" },
 							display: "flex",
 							flexDirection: "column",
 							alignItems: "center",
@@ -59,14 +58,12 @@ const VerificationPage = () => {
 							position: "relative",
 							marginY: { xs: "8rem", sm: "4rem", md: "1rem", xl: "0rem" },
 							paddingY: "1rem",
-							// border: "1px solid",
 						}}
 						className="VerificationPageCenter"
 					>
 						<Box
 							sx={{
 								width: "100%",
-								// height:"100px",
 								display: "flex",
 								flexDirection: "column",
 								alignItems: "center",
@@ -81,7 +78,6 @@ const VerificationPage = () => {
 									lineHeight: "29px",
 								}}
 							>
-								{/* Verification Link Sent */}
 								{t("title")}
 							</Typography>
 						</Box>
@@ -92,7 +88,6 @@ const VerificationPage = () => {
 								flexDirection: "column",
 								alignItems: "center",
 								justifyContent: "center",
-								// border: "1px solid",
 							}}
 						>
 							<Typography
@@ -106,8 +101,6 @@ const VerificationPage = () => {
 									paddingX: ".5rem",
 								}}
 							>
-								{/* Enter the authenrication code we sent to Your email
-								Test@abceed.com below: */}
 								{t("desc")}
 							</Typography>
 							<Box
@@ -149,7 +142,6 @@ const VerificationPage = () => {
 									marginY: { xs: "4rem", sm: "2rem", md: "1rem", xl: "2rem" },
 								}}
 							>
-								{/* Resend code */}
 								{t("resend")}
 							</Typography>
 						</Box>

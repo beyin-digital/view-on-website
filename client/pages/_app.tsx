@@ -13,6 +13,7 @@ import { StateContextProvider } from "@/contexts";
 
 import { appWithTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { Container } from "@mui/material";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import Image from "next/image";
-import React from "react";
 import { useRouter } from "next/router";
 
 export const ImageBackground = () => {
@@ -12,7 +11,6 @@ export const ImageBackground = () => {
 					<Box
 						sx={{
 							display: { xs: "none", sm: "block" },
-
 						}}
 					>
 						<Image

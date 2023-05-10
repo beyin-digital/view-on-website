@@ -12,7 +12,6 @@ const FormRequest = () => {
 		<>
 			<Box
 				sx={{
-					// width: "100%",
 					width: { xs: "100%", sm: "100%", md: "565px", xl: "565px" },
 					display: "flex",
 					alignItems: "center",
@@ -36,7 +35,7 @@ const FormRequest = () => {
 						borderRadius: "10px",
 						marginY: ".5rem",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
-
+						// delete this once time
 						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
 							border: 0,
 						},
@@ -52,12 +51,6 @@ const FormRequest = () => {
 					alignItems: "center",
 				}}
 			>
-				{/* <ButtonLogin
-					name="send"
-					onClick={() => {
-						// router.push("/");
-					}}
-				/> */}
 				<Box
 					sx={{
 						width: { xs: "240px", sm: "300px", md: "300px", xl: "300px" },
@@ -80,7 +73,6 @@ const FormRequest = () => {
 					>
 						<Typography
 							sx={{
-								// fontFamily: "Helvetica Neue",
 								letterSpacing: "0.02em",
 								fontSize: { xs: "20px", md: "25px", xl: "32px" },
 								fontWeight: 400,
@@ -89,7 +81,6 @@ const FormRequest = () => {
 								textTransform: "uppercase",
 							}}
 						>
-							{/* send */}
 							{t("send")}
 						</Typography>
 
