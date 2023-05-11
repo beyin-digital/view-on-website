@@ -25,6 +25,7 @@ const FooterLayout = () => {
 					justifyContent: "space-between",
 					flexDirection: { xs: "column", md: "row", xl: "row" },
 				}}
+				// className="FooterLayoutSlider"
 			>
 				<Box
 					sx={{
@@ -132,7 +133,7 @@ const FooterLayout = () => {
 									marginY: ".5rem",
 								}}
 							>
-								{t("more_dolor")}
+								{t("more_dolor")} 
 								{t("num_more")}
 							</Typography>
 							<Typography

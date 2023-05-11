@@ -13,7 +13,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<>
-			<html lang='en' suppressHydrationWarning>
+			<html lang="en" suppressHydrationWarning>
 				<head />
 				<body style={{ margin: 0 }}>
 					{/* Background */}
@@ -69,8 +69,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
 								sx={{
 									position: "absolute",
 									right: "48px",
-									width: "1544px",
-									maxWidth: "1544px",
+									width: "1300px",
+
+									// width: "1544px",
+									maxWidth: "100%",
 									minHeight: "100vh",
 								}}
 							>

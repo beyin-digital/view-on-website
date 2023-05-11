@@ -41,7 +41,7 @@ const SwiperSlider = () => {
 	return (
 		<>
 			<Box
-				className="oop"
+				// className="oop"
 				sx={{
 					height: {
 						xs: "100%",
@@ -54,7 +54,10 @@ const SwiperSlider = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
+					// background:"#FBFBFB"
+					background: "transparent",
 				}}
+				className="swiper-blurr oop"
 			>
 				<Swiper
 					effect={"coverflow"}
@@ -91,7 +94,7 @@ const SwiperSlider = () => {
 					}}
 					autoplay={{ delay: 4000, disableOnInteraction: false }} // تحديد فترة التأخير بين كل انتقال
 					direction={"horizontal"}
-					// className="sw"
+					// className="swiper-blur"
 				>
 					{images.map((item) => (
 						<SwiperSlide
@@ -99,12 +102,11 @@ const SwiperSlider = () => {
 							style={{
 								width: "100%",
 								borderRadius: "32px",
-
 								display: "flex",
 								alignItems: "center",
 								justifyContent: "center",
 							}}
-							// className="sw"
+							// className="swiper-blur"
 						>
 							<Box
 								sx={{
@@ -121,7 +123,7 @@ const SwiperSlider = () => {
 									alignItems: "center",
 									justifyContent: "center",
 								}}
-								className="sw"
+								className="swiper-blur"
 							>
 								<Box
 									sx={{

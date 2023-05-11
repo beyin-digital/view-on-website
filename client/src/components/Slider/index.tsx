@@ -18,14 +18,14 @@ const SliderDesktop = ({ onClick }: any) => {
 		<Box
 			sx={{
 				width: "100%",
-				background: "#EAEDED",
+				// background: "#EAEDED",
 			}}
 		>
 			<Box
 				sx={{
 					maxWidth: "100%",
 					margin: "auto",
-					height: { xs: "100%", md: "100vh", xl: "100vh" },
+					height: { xs: "100%", md: "100vh", xl: "95vh" },
 					display: "flex",
 					flexDirection: "column",
 					justifyContent: "space-between",
@@ -53,22 +53,10 @@ const SliderDesktop = ({ onClick }: any) => {
 							right: { xs: "0%", sm: "0%", md: "0%", xl: "20%" },
 							maxWidth: "100%",
 							width: "100%",
-							height: { xs: "600px", sm: "600px", md: "500px", xl: "500px" },
-							background: {
-								xs: "rgba(251, 251, 251, 0.6)",
-								md: "rgba(251, 251, 251, 0.6)",
-								xl: "rgba(251, 251, 251, 0.6)",
-							},
-							border: {
-								xs: "1px solid #FBFBFB",
-								md: "1px solid #FBFBFB",
-								xl: "1px solid #FBFBFB",
-							},
-							backdropFilter: {
-								xs: "blur(100px)",
-								md: "blur(100px)",
-								xl: "blur(100px)",
-							},
+							height: { xs: "600px", sm: "600px", md: "600px", xl: "500px" },
+							// background: "rgba(251, 251, 251, 0.6)",
+							border: "1px solid #FBFBFB",
+							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
 							transform: { xs: "", md: "", xl: "skew(-16deg, 0deg)" },
 							overflow: { xs: "", md: "hidden", xl: "hidden" },

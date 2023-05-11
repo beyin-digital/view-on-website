@@ -14,6 +14,7 @@ import { StateContextProvider } from "@/contexts";
 import { appWithTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { Container } from "@mui/material";
+import Script from "next/script";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -47,7 +48,8 @@ function MyApp(props: MyAppProps) {
 					href="https://fonts.googleapis.com/css2?family=Comforter&family=Finlandica:ital,wght@1,400;1,500;1,700&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500;600;700&family=Inter:wght@200;400;500;600;700;800;900&family=League+Spartan:wght@300;400;500;600&family=Neonderthaw&family=Poppins:wght@100;300;400;500;600;700;900&display=swap"
 					rel="stylesheet"
 				/>
-				{/* <script src="/script.js" /> */}
+				<Script src="/script.js" />
+				{/* <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></cript> */}
 			</Head>
 			<div dir={isRTL ? "rtl" : "ltr"}>
 				<QueryClientProvider client={queryClient}>

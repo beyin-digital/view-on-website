@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import SliderSwiper from "../SliderSwiper";
 
 const OneBox = () => {
 	const { t } = useTranslation("example");
@@ -33,12 +34,14 @@ const OneBox = () => {
 							width: { md: "400px", xl: "422px" },
 							height: "258px",
 							borderRadius: "34px",
-							background: "url('/images/slid.png')",
+							// background: "url('/images/slid.png')",
 							marginY: "1rem",
 							overflow: "hidden",
 						}}
 						className="OneBoxDesktopLayoutSlid"
-					></Box>
+					>
+						<SliderSwiper />
+					</Box>
 					<Box
 						sx={{
 							position: "relative",
@@ -46,7 +49,7 @@ const OneBox = () => {
 							paddingX: "0rem",
 							height: "100%",
 							display: "flex",
-							alignItems: "center",
+							alignItems: "flex-start",
 							justifyContent: "space-evenly",
 						}}
 						className="OneBoxDesktopLayoutSlid"

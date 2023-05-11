@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
+import SliderSwiper from "../SliderSwiper";
 
 const OneBox = () => {
 	const { t } = useTranslation("example");
@@ -21,7 +22,6 @@ const OneBox = () => {
 					flexDirection: "column",
 					transform: "skew(-16deg, 0deg)",
 					position: "relative",
-					// right: { xs: "-1rem", sm: "-3rem", md: "-3rem" },
 				}}
 				className="OneBoxTablet"
 			>
@@ -29,20 +29,14 @@ const OneBox = () => {
 					sx={{
 						width: "492px",
 						height: "258px",
+						borderRadius: "34px",
 						transform: "skew(16deg, 0deg)",
 						marginY: "1rem",
+						position: "relative",
+						overflow: "hidden",
 					}}
 				>
-					<img
-						src="/images/slid.png"
-						alt=""
-						style={{
-							width: "100%",
-							height: "100%",
-							objectFit: "cover",
-							borderRadius: "34px",
-						}}
-					/>
+					<SliderSwiper />
 				</Box>
 				<Box
 					sx={{

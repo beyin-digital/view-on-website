@@ -12,7 +12,7 @@ const PageMobile = () => {
 			className="PageMobile"
 			sx={{
 				width: "100%",
-				maxHeight: "100%",
+				// maxHeight: "100%",
 				overflow: "hidden",
 			}}
 		>

@@ -89,18 +89,35 @@ swiper-container {
 	font-weight: 500;
 	/* margin:2rem auto */
 }
- .sw {
-	-webkit-filter: blur(1px);
-	-moz-filter: blur(5px);
-	-o-filter: blur(5px);
-	-ms-filter: blur(5px);
-	filter: blur(1px);
-	background: rgba(251, 251, 251, 0.25);
+.swiper-blur {
+	-webkit-filter: blur(53px);
+	-moz-filter: blur(53px);
+	-o-filter: blur(53px);
+	-ms-filter: blur(53px);
+	filter: blur(2px);
+	background: transparent;
 	border: 1.63722px solid #e3e3e3;
-	/* box-shadow: 0px 4px 168px rgba(0, 59, 97, 0.1); */
+	border-radius: 32.7444px;
+	backdrop-filter: blur(1px);
+	filter: blur(1px);
+	border: 1.63722px solid #e3e3e3;
+	backdrop-filter: blur(50px);
 	border-radius: 32.7444px;
 }
+.swiper-blurr {
+	background: transparent;
+	backdrop-filter: blur(10px);
+}
 
+[dir="ltr"] .FooterLayoutSlider {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: row;
+}
+[dir="rtl"] .FooterLayoutSlider {
+	flex-direction: row-reverse;
+}
 /* [dir="ltr"] .SLiderLayout {
 	transform: skew(-16deg, 0deg);
 	right: 20%;
@@ -561,6 +578,12 @@ swiper-container {
 	[dir="rtl"] .TwoBoxTablet {
 		right: -5rem;
 		transform: skew(-16deg, 0deg);
+	}
+	[dir="ltr"] .FooterLayoutSlider {
+		flex-direction: column;
+	}
+	[dir="rtl"] .FooterLayoutSlider {
+		flex-direction: column;
 	}
 }
 @media screen and (max-width: 700px) {

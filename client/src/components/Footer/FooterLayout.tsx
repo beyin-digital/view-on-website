@@ -23,7 +23,7 @@ const Footer = ({ onClick }: any) => {
 			>
 				<Box
 					sx={{
-						width: "100%",
+						width: { xs: "100%", md: "30%", xl: "30%" },
 						display: { xs: "flex", md: "flex", xl: "flex" },
 						alignItems: "center",
 						justifyContent: { xs: "center", md: "start", xl: "start" },
@@ -60,62 +60,82 @@ const Footer = ({ onClick }: any) => {
 				</Box>
 				<Box
 					sx={{
-						width: "100%",
+						width: { xs: "100%", md: "70%", xl: "70%" },
 						display: "flex",
 						alignItems: "center",
-						justifyContent: {
-							xs: "center",
-							md: "space-between",
-							xl: "space-between",
-						},
+						justifyContent: "space-between",
+						// flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
 					}}
 				>
 					<Box
 						sx={{
-							width: { xs: "200px", md: "253px", xl: "253px" },
-							height: "60px",
-							lineHeight: "92.5%",
-							background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
-							borderRadius: "11px",
+							width: { xs: "100%", md: "30%", xl: "30%" },
 							display: "flex",
 							alignItems: "center",
-							justifyContent: "center",
-							position: "relative",
-							bottom: "-1rem",
-							cursor: "pointer",
+							justifyContent: {
+								xs: "center",
+								md: "space-between",
+								xl: "space-between",
+							},
 						}}
-						onClick={onClick}
 					>
-						<Typography
+						<Box
 							sx={{
-								fontSize: { xs: "25px", xl: "32px" },
+								width: { xs: "200px", md: "253px", xl: "253px" },
+								height: "60px",
+								lineHeight: "92.5%",
+								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+								borderRadius: "11px",
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
+								position: "relative",
+								bottom: "-1rem",
+								cursor: "pointer",
 							}}
-							fontWeight="400"
-							lineHeight="92.5%"
-							textAlign="center"
+							onClick={onClick}
 						>
-							{t("premium")}
-						</Typography>
+							<Typography
+								sx={{
+									fontSize: { xs: "25px", xl: "32px" },
+								}}
+								fontWeight="400"
+								lineHeight="92.5%"
+								textAlign="center"
+							>
+								{t("premium")}
+							</Typography>
+						</Box>
 					</Box>
-				</Box>
-				<Box
-					sx={{
-						width: "100%",
-						display: { xs: "none", xl: "flex" },
-						alignItems: "center",
-						justifyContent: { xs: "center", xl: "space-around" },
-					}}
-				>
 					<Box
 						sx={{
-							border: "1px solid #343132",
-							borderRadius: "34px",
-							display: "flex",
+							width: { xs: "100%", md: "60%", xl: "60%" },
+							display: { xs: "none", md: "flex", xl: "flex" },
 							alignItems: "center",
 							justifyContent: "space-around",
-							width: "143px",
 						}}
 					>
+						<Box
+							sx={{
+								border: "1px solid #343132",
+								borderRadius: "34px",
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "space-around",
+								width: "143px",
+							}}
+						>
+							<Typography
+								fontSize="20px"
+								fontWeight="400"
+								lineHeight="32px"
+								textAlign="center"
+								textTransform={"capitalize"}
+							>
+								{t("footer_learn")}
+							</Typography>
+							<Image src="/icons/i.svg" alt="" width={20} height={20} />
+						</Box>
 						<Typography
 							fontSize="20px"
 							fontWeight="400"
@@ -123,37 +143,27 @@ const Footer = ({ onClick }: any) => {
 							textAlign="center"
 							textTransform={"capitalize"}
 						>
-							{t("footer_learn")}
+							{t("footer_terms")}
 						</Typography>
-						<Image src="/icons/i.svg" alt="" width={20} height={20} />
+						<Typography
+							fontSize="20px"
+							fontWeight="400"
+							lineHeight="32px"
+							textAlign="center"
+							textTransform={"capitalize"}
+						>
+							{t("footer_privacy")}
+						</Typography>
+						<Typography
+							fontSize="20px"
+							fontWeight="400"
+							lineHeight="32px"
+							textAlign="center"
+							textTransform={"capitalize"}
+						>
+							{t("footer_contact")}
+						</Typography>
 					</Box>
-					<Typography
-						fontSize="20px"
-						fontWeight="400"
-						lineHeight="32px"
-						textAlign="center"
-						textTransform={"capitalize"}
-					>
-						{t("footer_terms")}
-					</Typography>
-					<Typography
-						fontSize="20px"
-						fontWeight="400"
-						lineHeight="32px"
-						textAlign="center"
-						textTransform={"capitalize"}
-					>
-						{t("footer_privacy")}
-					</Typography>
-					<Typography
-						fontSize="20px"
-						fontWeight="400"
-						lineHeight="32px"
-						textAlign="center"
-						textTransform={"capitalize"}
-					>
-						{t("footer_contact")}
-					</Typography>
 				</Box>
 			</Box>
 		</footer>

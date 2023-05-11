@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
+import SliderSwiper from "../SliderSwiper";
 
 const OneBox = () => {
 	const { t } = useTranslation("example");
@@ -43,22 +44,15 @@ const OneBox = () => {
 				>
 					<Box
 						sx={{
-							width: { xs: "80%", sm: "70%", md: "60%" },
-							height: { xs: "160px", sm: "190px", md: "210px" },
-							marginY: "1rem",
+							width: { xs: "100%", sm: "70%", md: "60%" },
+							height: { xs: "170px", sm: "200px", md: "210px" },
+							marginBottom: "1rem",
 							position: { xs: "relative", sm: "" },
+							overflow: "hidden",
+							borderRadius: "34px",
 						}}
 					>
-						<img
-							src="/images/slid.png"
-							alt=""
-							style={{
-								width: "100%",
-								height: "100%",
-								objectFit: "cover",
-								borderRadius: "34px",
-							}}
-						/>
+						<SliderSwiper />
 					</Box>
 					<Box
 						sx={{

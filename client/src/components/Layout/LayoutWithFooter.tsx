@@ -67,6 +67,7 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 								md: "skew(-16deg, 0deg)",
 								xl: "skew(-16deg, 0deg)",
 							},
+							padding: "7px",
 						}}
 						className="BoxHomeLayout"
 					>

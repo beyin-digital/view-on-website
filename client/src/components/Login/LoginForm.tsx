@@ -137,7 +137,7 @@ const LoginForm = () => {
 						},
 						lineHeight: "28px",
 						background: "#FBFBFB",
-						border: "0.897277px solid #E3E3E3",
+						// border: "0.897277px solid #E3E3E3",
 						borderRadius: "10px",
 						marginY: ".5rem",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
@@ -163,7 +163,7 @@ const LoginForm = () => {
 						},
 						lineHeight: "28px",
 						background: "#FBFBFB",
-						border: "0.897277px solid #E3E3E3",
+						border: "0",
 						borderRadius: "10px",
 						marginY: ".5rem",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
@@ -172,6 +172,7 @@ const LoginForm = () => {
 							border: 0,
 						},
 					}}
+					className="loginButton"
 					type={showPassword ? "text" : "password"}
 					endAdornment={
 						<InputAdornment position="end">

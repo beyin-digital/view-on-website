@@ -27,7 +27,7 @@ const Example = () => {
 			<Header />
 			<Box
 				sx={{
-					height: "89vh",
+					height: { xs: "100%", xl: "89vh" },
 				}}
 			>
 				<PageDesktop />

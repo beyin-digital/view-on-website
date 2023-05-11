@@ -22,7 +22,6 @@ const Layout: React.FC<Props> = ({ children }) => {
 			>
 				<Box
 					sx={{
-
 						margin: "auto",
 						height: { xs: "100%", md: "90vh", xl: "96vh" },
 						display: "flex",
@@ -93,6 +92,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 							margin: "3rem auto",
 							zIndex: "999",
 							paddingX: "2rem",
+							paddingY: "7px",
 						}}
 					>
 						{children}

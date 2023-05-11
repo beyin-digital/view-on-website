@@ -96,7 +96,7 @@ const SubscribePage: NextPage = () => {
 											"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 									}}
 								>
-									{/* #keyword */}# {t("text_keyword")}
+									{/* #keyword */}#{t("text_keyword")}
 								</Typography>{" "}
 								{/* before someone else does */}
 								{t("text_two")}
@@ -189,7 +189,7 @@ const SubscribePage: NextPage = () => {
 									{t("text_input_sublink")}
 								</Typography>
 								<OutlinedInput
-									label="Please provide your keyword's sub-link"
+									// label={`${t("input_hashtag_two")}`}
 									sx={{
 										width: "100%",
 										fontSize: {
@@ -229,7 +229,7 @@ const SubscribePage: NextPage = () => {
 										background: "#31E716",
 										// marginRight: { xs: "10rem", xl: "4rem" },
 									}}
-									// onClick={() => router.push(`/subscribe/${values.hashtag}`)}
+									onClick={() => router.push(`/subscribe/${values.hashtag}`)}
 								>
 									<Typography
 										sx={{

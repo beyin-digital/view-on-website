@@ -1,8 +1,35 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button, Modal } from "@mui/material";
 import { useTranslation } from "next-i18next";
+import React, { useState, useRef, MouseEvent } from "react";
+import ReactPlayer from "react-player";
+import { AiOutlineClose } from "react-icons/ai";
+
+const style = {
+	position: "absolute" as "absolute",
+	top: "50%",
+	left: "50%",
+	transform: "translate(-50%, -50%)",
+	width: 1000,
+	bgcolor: "transparent",
+	border: "2px solid transparent",
+	// boxShadow: 24,
+	// p: 4,
+};
 
 const Header = () => {
 	const { t } = useTranslation("home");
+	const [open, setOpen] = useState(false);
+	// const handleOpen = () => setOpen(true);
+	// const handleClose = () => setOpen(false);
+
+	function closeModel() {
+		setOpen(false);
+		// console.log("hi");
+	}
+	function openModel() {
+		setOpen(true);
+		// console.log("hi");
+	}
 	return (
 		<>
 			<Box
@@ -63,8 +90,10 @@ const Header = () => {
 						width: { xs: "53px", sm: "53px", md: "80px", xl: "103px" },
 						height: { xs: "53px", sm: "53px", md: "80px", xl: "103px" },
 						marginX: { xs: ".4rem", sm: "1rem", md: "1rem", xl: "1rem" },
+						cursor: "pointer",
 					}}
 					className="ImagePlay"
+					onClick={openModel}
 				>
 					<img
 						src="/icons/play.png"
@@ -76,6 +105,59 @@ const Header = () => {
 						}}
 					/>
 				</Box>
+				<Modal
+					open={open}
+					onClose={closeModel}
+					aria-labelledby="modal-modal-title"
+					aria-describedby="modal-modal-description"
+					className="swiper-blurr"
+					closeAfterTransition
+					slotProps={{
+						backdrop: {
+							timeout: 500,
+						},
+					}}
+				>
+					<Box
+						sx={{
+							width: "100%",
+							height: "100vh",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
+						<Box
+							sx={{
+								width: { xs: "100%", md: "800px", xl: "900px" },
+								height: { xs: "400px", md: "600px", xl: "600px" },
+								bgcolor: "transparent",
+								paddingX: "1rem",
+							}}
+						>
+							<ReactPlayer
+								url="https://www.youtube.com/watch?v=ryUxrFUk6MY"
+								width="100%"
+								height="100%"
+								playing={true}
+							/>
+							<Box
+								sx={{
+									cursor: "pointer",
+									bottom: "-3rem",
+									zIndex: "9999999",
+								}}
+								onClick={closeModel}
+							>
+								<AiOutlineClose
+									onClick={closeModel}
+									size={42}
+									color="#FBFBFB"
+								/>
+							</Box>
+						</Box>
+					</Box>
+				</Modal>
 			</Box>
 		</>
 	);

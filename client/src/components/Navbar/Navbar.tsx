@@ -11,7 +11,11 @@ import {
 	// Link,
 } from "@mui/material";
 import { useTranslation } from "next-i18next";
-
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
+// import FormHelperText from '@mui/material/FormHelperText';
+// import FormControl from '@mui/material/FormControl';
+// import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -260,7 +264,7 @@ const Header = () => {
 				<AppBar
 					component={"nav"}
 					sx={{
-						background: "rgba(251, 251, 251, 0.6)",
+						background: "rgba(251, 251, 251, 0.1)",
 						backdropFilter: "blur(100px)",
 						border: "1px solid #FBFBFB",
 						boxShadow: "0px 0px 0px 0px",
@@ -344,7 +348,7 @@ const Header = () => {
 							<Typography
 								sx={{
 									letterSpacing: "0.02em",
-									fontSize: { md: "20px", xl: "32px" },
+									fontSize: { xs: "25px", xl: "32px" },
 									fontWeight: 400,
 									lineHeight: "40px",
 									color: "#343132",
