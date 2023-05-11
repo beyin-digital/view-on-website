@@ -44,16 +44,11 @@ const SignupForm = () => {
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
-							fontSize: {
-								xs: "18px",
-								sm: "22px",
-								md: "28px",
-								xl: "32px",
-							},
+							fontSize: "24px",
 							lineHeight: "28px",
 							background: "#FBFBFB",
 							borderRadius: "15px",
-							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
+							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
 						placeholder={`${t("form_name")}`}
@@ -63,16 +58,11 @@ const SignupForm = () => {
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
-							fontSize: {
-								xs: "18px",
-								sm: "22px",
-								md: "28px",
-								xl: "32px",
-							},
+							fontSize: "24px",
 							lineHeight: "28px",
 							background: "#FBFBFB",
 							borderRadius: "15px",
-							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
+							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
 						placeholder={`${t("form_password")}`}
@@ -96,16 +86,11 @@ const SignupForm = () => {
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
-							fontSize: {
-								xs: "18px",
-								sm: "22px",
-								md: "28px",
-								xl: "32px",
-							},
+							fontSize: "24px",
 							lineHeight: "28px",
 							background: "#FBFBFB",
 							borderRadius: "15px",
-							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
+							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
 						placeholder={`${t("form_email")}`}
@@ -114,16 +99,11 @@ const SignupForm = () => {
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
-							fontSize: {
-								xs: "18px",
-								sm: "22px",
-								md: "28px",
-								xl: "32px",
-							},
+							fontSize: "24px",
 							lineHeight: "28px",
 							background: "#FBFBFB",
 							borderRadius: "15px",
-							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
+							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: ".3rem",
 						}}
 						placeholder={`${t("form_confirm")}`}
@@ -157,7 +137,7 @@ const SignupForm = () => {
 						href="/login"
 						style={{
 							textDecoration: "none",
-							color: "#343132",
+							color: "#0090EC",
 						}}
 					>
 						{t("sign_in")}

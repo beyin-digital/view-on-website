@@ -1,12 +1,10 @@
 import { useState } from "react";
-import Layout from "@/components/Layout/LayoutWithFooter";
 import { Grid, Box, OutlinedInput } from "@mui/material";
 import Header from "@/components/Home/Header";
 import TextViewOnWeb from "@/components/Home/TextViewOnWeb";
 import LayoutHomeBg from "@/components/Home/LayoutHomeBg";
 import { useRouter } from "next/router";
-import Head from "next/head";
-// import ArrowUpright from "../public/icons/arrowUpright";
+
 import { useTranslation } from "next-i18next";
 
 const HomeDetails = () => {

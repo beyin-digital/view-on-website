@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 
 import { useRouter } from "next/router";
+
 // components
 import OneBox from "./OneBox";
 import TwoBox from "./TwoBox";
@@ -30,7 +31,6 @@ const PageDesktop = () => {
 						width: { xs: "100%", md: "110vw", xl: "110vw" },
 						overflow: "hidden",
 						position: "relative",
-						// marginLeft: { xs: "", md: "-5rem", xl: "-5rem" },
 						flexDirection: "column",
 					}}
 					className="PageDesktopMargin"
@@ -56,7 +56,6 @@ const PageDesktop = () => {
 							borderBottom: "1px solid #FBFBFB",
 							display: "flex",
 							flexDirection: { xs: "column", md: "row", xl: "row" },
-							// transform: { xs: "skew(0deg, 0deg)", xl: "skew(-16deg, 0deg)" },
 							overflow: "hidden",
 							background: "rgba(251, 251, 251, 0.6)",
 							marginX: { xs: "", md: "3rem", xl: "0" },
@@ -93,7 +92,13 @@ const PageDesktop = () => {
 								sx={{
 									position: "absolute",
 									top: "19rem",
-									right: { xs: "60rem", sm: "", md: "", lg: "60rem", xl: "64rem" },
+									right: {
+										xs: "60rem",
+										sm: "",
+										md: "",
+										lg: "60rem",
+										xl: "64rem",
+									},
 									zIndex: "91",
 									width: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },
 									height: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },

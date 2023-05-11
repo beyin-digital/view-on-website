@@ -1,6 +1,9 @@
-import { Box, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+
+import { Box, Typography } from "@mui/material";
+
+// components
 import SliderSwiper from "../SliderSwiper";
 
 const OneBox = () => {
@@ -10,7 +13,6 @@ const OneBox = () => {
 	return (
 		<Box
 			sx={{
-				// transform: "skew(-16deg, 0deg)",
 				width: "1243.72px",
 				maxWidth: "100%",
 				height: "100%",
@@ -34,7 +36,6 @@ const OneBox = () => {
 							width: { md: "400px", xl: "422px" },
 							height: "258px",
 							borderRadius: "34px",
-							// background: "url('/images/slid.png')",
 							marginY: "1rem",
 							overflow: "hidden",
 						}}
@@ -59,8 +60,6 @@ const OneBox = () => {
 								width: "212px",
 								height: "134px",
 								position: "absolute",
-								// left: { md: "2rem", xl: "4rem" },
-								// top: { md: "0", xl: "" },
 							}}
 							className="OneBoxDesktopLayoutText"
 						>
@@ -100,16 +99,16 @@ const OneBox = () => {
 								title="Phone Vow Left"
 								style={{
 									width: "100%",
-									// height: "100%",
 								}}
 							/>
 						</Box>
 					) : (
 						<Box
 							sx={{
-								width: "860x",
-								height: "441px",
+								width: "800x",
+								height: "360px",
 								position: "absolute",
+								right: "0",
 							}}
 							className="OneBoxDesktopLayoutImage"
 						>

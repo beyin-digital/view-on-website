@@ -1,10 +1,35 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Link } from "@mui/material";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-import { useState } from "react";
+
 const Footer = ({ onClick }: any) => {
 	const { t } = useTranslation("common");
 
+	const links = [
+		{ id: 1, link: "/privacy", title: "footer_privacy" },
+		{ id: 2, link: "/terms", title: "footer_terms" },
+		{ id: 3, link: "/contact", title: "footer_contact" },
+	];
+	const icons = [
+		{
+			id: 1,
+			icon: "/icons/facebook.svg",
+			alt: "Facebook icon",
+			link: "https://facebook.com",
+		},
+		{
+			id: 2,
+			icon: "/icons/twitter.svg",
+			alt: "Twitter icon",
+			link: "https://twitter.com",
+		},
+		{
+			id: 3,
+			icon: "/icons/instagram.svg",
+			alt: "Instagram icon",
+			link: "https://instagram.com",
+		},
+	];
 	return (
 		<footer>
 			<Box
@@ -30,33 +55,20 @@ const Footer = ({ onClick }: any) => {
 						margin: { xs: " .1rem 0", sm: "2rem 0", md: "0", xl: "0" },
 					}}
 				>
-					<Image
-						src="/icons/facebook.svg"
-						alt=""
-						height={30}
-						width={30}
-						style={{
-							margin: "0 2rem",
-						}}
-					/>
-					<Image
-						src="/icons/twitter.svg"
-						alt=""
-						height={30}
-						width={30}
-						style={{
-							margin: "0 2rem",
-						}}
-					/>
-					<Image
-						src="/icons/insta.svg"
-						alt=""
-						height={30}
-						width={30}
-						style={{
-							margin: "0 2rem",
-						}}
-					/>
+					{icons.map((item) => (
+						<Link key={item.id} title={item.alt} href={item.link}>
+							<Image
+								src={item.icon}
+								alt={item.alt}
+								title={item.alt}
+								height={30}
+								width={30}
+								style={{
+									margin: "0 2rem",
+								}}
+							/>
+						</Link>
+					))}
 				</Box>
 				<Box
 					sx={{
@@ -64,7 +76,6 @@ const Footer = ({ onClick }: any) => {
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "space-between",
-						// flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
 					}}
 				>
 					<Box
@@ -136,33 +147,27 @@ const Footer = ({ onClick }: any) => {
 							</Typography>
 							<Image src="/icons/i.svg" alt="" width={20} height={20} />
 						</Box>
-						<Typography
-							fontSize="20px"
-							fontWeight="400"
-							lineHeight="32px"
-							textAlign="center"
-							textTransform={"capitalize"}
-						>
-							{t("footer_terms")}
-						</Typography>
-						<Typography
-							fontSize="20px"
-							fontWeight="400"
-							lineHeight="32px"
-							textAlign="center"
-							textTransform={"capitalize"}
-						>
-							{t("footer_privacy")}
-						</Typography>
-						<Typography
-							fontSize="20px"
-							fontWeight="400"
-							lineHeight="32px"
-							textAlign="center"
-							textTransform={"capitalize"}
-						>
-							{t("footer_contact")}
-						</Typography>
+						{links.map((item) => (
+							<Link
+								key={item.id}
+								href={item.link}
+								title={`${t(item.title)}`}
+								sx={{
+									textDecoration: "none",
+									color: "inherit",
+								}}
+							>
+								<Typography
+									fontSize="20px"
+									fontWeight="400"
+									lineHeight="32px"
+									textAlign="center"
+									textTransform={"capitalize"}
+								>
+									{`${t(item.title)}`}
+								</Typography>
+							</Link>
+						))}
 					</Box>
 				</Box>
 			</Box>

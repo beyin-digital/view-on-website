@@ -23,7 +23,6 @@ const ThreeBox = () => {
 			>
 				<Box
 					sx={{
-						// transform: "skew(16deg, 0deg)",
 						position: "relative",
 						width: "100%",
 						height: "100%",
@@ -33,8 +32,6 @@ const ThreeBox = () => {
 					<Box
 						sx={{
 							position: "absolute",
-							// top: "0",
-							// right: "0",
 							width: { sm: "480px", md: "590px" },
 							height: "482px",
 						}}
@@ -42,7 +39,8 @@ const ThreeBox = () => {
 					>
 						<img
 							src="/images/pic.png"
-							alt=""
+							title="Your costumers in a Blink will be automatically redirected to your Sub-link-URL"
+							alt="Your costumers in a Blink will be automatically redirected to your Sub-link-URL, your dashboard will show you all the conversions of your #keyword, it is your opportunity to optimize"
 							style={{
 								width: "100%",
 								height: "auto",
@@ -52,8 +50,6 @@ const ThreeBox = () => {
 					<Box
 						sx={{
 							position: "absolute",
-							// bottom: "0",
-							// left: { xs: "", sm: "", md: "2rem" },
 							width: { xs: "", sm: "330px", md: "400px" },
 							height: "250px",
 						}}

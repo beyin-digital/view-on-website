@@ -22,7 +22,7 @@ const LoginTextSignUp = () => {
 						href={"/signup"}
 						style={{
 							textDecoration: "none",
-							color: "#343132",
+							color: "#0090EC",
 						}}
 						title="View On Website SignUp"
 					>

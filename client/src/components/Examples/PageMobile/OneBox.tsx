@@ -1,6 +1,7 @@
-import { Box, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import SliderSwiper from "../SliderSwiper";
+
+import { Box, Typography } from "@mui/material";
 
 const OneBox = () => {
 	const { t } = useTranslation("example");

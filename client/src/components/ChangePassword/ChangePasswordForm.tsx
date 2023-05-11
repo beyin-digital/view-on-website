@@ -1,5 +1,6 @@
-import { Box, Typography, OutlinedInput, Button } from "@mui/material";
 import { useTranslation } from "next-i18next";
+
+import { Box, Typography, OutlinedInput, Button } from "@mui/material";
 
 const ChangePasswordForm = () => {
 	const { t } = useTranslation("changePassword");

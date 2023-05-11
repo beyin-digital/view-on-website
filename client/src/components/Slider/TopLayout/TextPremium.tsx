@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 
 const TextPremium = ({ onClick }: any) => {
-	const { t } = useTranslation("slider");
+	const { t } = useTranslation("common");
 
 	return (
 		<>
@@ -41,7 +41,7 @@ const TextPremium = ({ onClick }: any) => {
 							background: "",
 						}}
 					>
-						{t("premium")}
+						{t("home")}
 					</Typography>
 				</Box>
 			</Box>

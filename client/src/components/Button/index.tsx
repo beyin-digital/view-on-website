@@ -54,10 +54,6 @@ export const ButtonLogin = (props: ButtonLoginProps) => {
 					>
 						{props.name}
 					</Typography>
-
-					{/* <FiArrowUpRight size={42} color="#FBFBFB" /> */}
-					{/* <FiArrowUpRight size={42} color="#FBFBFB" className="left" /> */}
-					{/* <FiArrowUpLeft size={42} color="#FBFBFB" className="right" /> */}
 					{locale === "ar" ? (
 						<FiArrowUpLeft size={42} color="#FBFBFB" className="rig" />
 					) : (
@@ -93,7 +89,6 @@ export const ButtonStyle = () => {
 				>
 					<Typography
 						sx={{
-							// fontFamily: "Helvetica Neue",
 							letterSpacing: "0.02em",
 							fontSize: "32px",
 							fontWeight: 400,
@@ -141,7 +136,6 @@ export const ButtonChange = ({ name, onClick }: any) => {
 				>
 					<Typography
 						sx={{
-							// fontFamily: "Helvetica Neue",
 							letterSpacing: "0.02em",
 							fontSize: "32px",
 							fontWeight: 400,
@@ -152,8 +146,6 @@ export const ButtonChange = ({ name, onClick }: any) => {
 					>
 						{name}
 					</Typography>
-
-					{/* <FiArrowUpRight size={42} color="#FBFBFB" /> */}
 				</Button>
 			</Box>
 		</>
@@ -194,7 +186,6 @@ export const LinkSubscribe = () => {
 			>
 				<Typography
 					sx={{
-						// fontFamily: "Helvetica Neue",
 						letterSpacing: "0.02em",
 						fontSize: { xs: "20px", md: "25px", xl: "32px" },
 						fontWeight: "500",
@@ -205,7 +196,6 @@ export const LinkSubscribe = () => {
 				>
 					{t("button")}
 				</Typography>
-
 				{locale === "ar" ? (
 					<AiOutlineArrowLeft size={42} color="#343132" />
 				) : (

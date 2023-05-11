@@ -1,4 +1,4 @@
-import { Box} from "@mui/material";
+import { Box } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import OneBox from "./OneBox";
@@ -40,7 +40,8 @@ const PageTablet = () => {
 					<Image
 						fill
 						src="/images/swirl.svg"
-						alt=""
+						alt="Background Example Page"
+						title="Background Example Page"
 						style={{
 							top: "-33rem",
 							position: "absolute",

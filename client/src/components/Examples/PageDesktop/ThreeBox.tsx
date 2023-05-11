@@ -1,6 +1,7 @@
-import { Box, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+
+import { Box, Typography } from "@mui/material";
 
 const ThreeBox = () => {
 	const { t } = useTranslation("example");
@@ -21,8 +22,8 @@ const ThreeBox = () => {
 						background:
 							"radial-gradient(28.05% 49.93% at 21.95% 50.07%, rgba(0, 144, 236, 0.3) 0%, rgba(0, 144, 236, 0.015) 100%)",
 						backdropFilter: "blur(100px)",
-						position:"relative",
-						right:"-2rem"
+						position: "relative",
+						right: "-2rem",
 					}}
 				>
 					<Box
@@ -30,7 +31,6 @@ const ThreeBox = () => {
 							transform: "skew(-16deg, 0deg)",
 							position: "absolute",
 							top: "-1rem",
-							// bottom: { xs: "", md: "0rem", xl: "0rem" },
 							left: { xs: "", md: "0rem", xl: "0rem" },
 							width: { md: "450px", xl: "500px" },
 							height: { md: "450px", xl: "500px" },
@@ -38,8 +38,8 @@ const ThreeBox = () => {
 					>
 						<img
 							src="/images/picAR.png"
-							alt="Photo Vow"
-							title="Photo Vow"
+							title="Your costumers in a Blink will be automatically redirected to your Sub-link-URL"
+							alt="Your costumers in a Blink will be automatically redirected to your Sub-link-URL, your dashboard will show you all the conversions of your #keyword, it is your opportunity to optimize"
 							style={{
 								width: "100%",
 								height: "auto",

@@ -1,6 +1,7 @@
-import { Box, Typography } from "@mui/material";
-import Image from "next/image";
 import { useTranslation } from "next-i18next";
+
+import Image from "next/image";
+import { Box, Typography } from "@mui/material";
 
 const ChangePasswordDetails = () => {
 	const { t } = useTranslation("changePassword");

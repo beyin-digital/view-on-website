@@ -57,14 +57,13 @@ body {
 	color: black;
 }
 /*  */
-/* delete this !! */
+/* delete this once time !! */
 .otp-input.MuiOtpInput-TextField {
 	border-radius: 50%;
 	background-color: #0090ec;
 }
 /* Swiper Slider */
 .swiper-3d {
-	/* perspective: 307px !important; */
 	perspective: 468px !important;
 }
 .swiper_container {
@@ -87,7 +86,6 @@ swiper-container {
 	bottom: -3.3rem !important;
 	font-size: 32px;
 	font-weight: 500;
-	/* margin:2rem auto */
 }
 .swiper-blur {
 	-webkit-filter: blur(53px);
@@ -109,35 +107,6 @@ swiper-container {
 	backdrop-filter: blur(10px);
 }
 
-[dir="ltr"] .FooterLayoutSlider {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-direction: row;
-}
-[dir="rtl"] .FooterLayoutSlider {
-	flex-direction: row-reverse;
-}
-/* [dir="ltr"] .SLiderLayout {
-	transform: skew(-16deg, 0deg);
-	right: 20%;
-}
-[dir="rtl"] .SLiderLayout {
-	transform: skew(16deg, 0deg);
-	left: 30%;
-}
-[dir="ltr"] .SLiderLayoutBox {
-	transform: skew(16deg, 0deg);
-}
-[dir="rtl"] .SLiderLayoutBox {
-	transform: skew(-16deg, 0deg);
-}
-[dir="ltr"] .sliderBox {
-	justify-content: end;
-}
-[dir="rtl"] .sliderBox {
-	justify-content: start;
-} */
 /*  */
 .col {
 	position: fixed;
@@ -579,12 +548,6 @@ swiper-container {
 		right: -5rem;
 		transform: skew(-16deg, 0deg);
 	}
-	[dir="ltr"] .FooterLayoutSlider {
-		flex-direction: column;
-	}
-	[dir="rtl"] .FooterLayoutSlider {
-		flex-direction: column;
-	}
 }
 @media screen and (max-width: 700px) {
 	.ExampleBoxThreePic {
@@ -601,7 +564,6 @@ swiper-container {
 	}
 	[dir="ltr"] .BoxHomeLayout {
 		right: 12%;
-		/* margin-left: 1rem; */
 	}
 	[dir="ltr"] .BoxHomeLayoutCenter {
 		margin-left: 3rem;
@@ -611,7 +573,6 @@ swiper-container {
 	}
 	[dir="rtl"] .BoxHomeLayout {
 		left: 5%;
-		/* margin-left: 3rem; */
 	}
 	[dir="rtl"] .VerificationPageCenter {
 		margin-left: -3rem;
@@ -714,7 +675,6 @@ swiper-container {
 		width: 300px !important;
 	}
 	.swirlSmall img {
-		/* top: 6rem !important; */
 		width: 200px !important;
 	}
 	.MainBoxPic {
@@ -754,7 +714,6 @@ swiper-container {
 		padding: 2rem !important;
 	}
 	.LayoutHomeMobile {
-		/* height: 100% !important; */
 		overflow-x: hidden;
 		overflow-y: scroll;
 	}

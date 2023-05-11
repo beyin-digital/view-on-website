@@ -28,6 +28,8 @@ const Header = () => {
 	const { t } = useTranslation("common");
 	const router = useRouter();
 	const [mobileOpen, setMobileOpen] = useState(false);
+	const { pathname, query, asPath, locale } = router;
+
 	// handle menu click
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
@@ -110,37 +112,120 @@ const Header = () => {
 					marginY: "2rem",
 				}}
 			>
-				{links.map((link) => (
-					<Link
-						key={t(link.tKey)}
-						title={`${t(link.tKey)}`}
-						href={link.href}
-						style={{
-							textDecoration: "none",
+				{/* {links.map((link) => ( */}
+				<Link
+					title={`${t("nav_subscribe")}`}
+					href="/subscribe"
+					style={{
+						textDecoration: "none",
+					}}
+				>
+					<Box
+						sx={{
+							marginX: "1rem",
+							height: "55px",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "space-between",
 						}}
 					>
-						<Box
-							sx={{
-								marginX: "1rem",
-								height: "55px",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-between",
-							}}
+						<Typography
+							fontSize="24px"
+							fontWeight={"400"}
+							lineHeight="37px"
+							color="#343132"
+							textTransform={"capitalize"}
 						>
-							<Typography
-								fontSize="24px"
-								fontWeight={"400"}
-								lineHeight="37px"
-								color="#343132"
-								textTransform={"capitalize"}
-							>
-								{t(link.tKey)}
-							</Typography>
-							<IoIosArrowForward color="#343132" />
-						</Box>
-					</Link>
-				))}
+							{t("nav_subscribe")}
+						</Typography>
+						<IoIosArrowForward color="#343132" />
+					</Box>
+				</Link>
+				<Link
+					title={`${t("nav_examples")}`}
+					href="/example"
+					style={{
+						textDecoration: "none",
+					}}
+				>
+					<Box
+						sx={{
+							marginX: "1rem",
+							height: "55px",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "space-between",
+						}}
+					>
+						<Typography
+							fontSize="24px"
+							fontWeight={"400"}
+							lineHeight="37px"
+							color="#343132"
+							textTransform={"capitalize"}
+						>
+							{t("nav_examples")}
+						</Typography>
+						<IoIosArrowForward color="#343132" />
+					</Box>
+				</Link>
+				<Link
+					title={`${t("nav_examples")}`}
+					href={asPath}
+					locale={locale === "en" ? "ar" : "en"}
+					style={{
+						textDecoration: "none",
+					}}
+				>
+					<Box
+						sx={{
+							marginX: "1rem",
+							height: "55px",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "space-between",
+						}}
+					>
+						<Typography
+							fontSize="24px"
+							fontWeight={"400"}
+							lineHeight="37px"
+							color="#343132"
+							textTransform={"capitalize"}
+						>
+							{locale === "en" ? "AR" : "EN"}
+						</Typography>
+						<IoIosArrowForward color="#343132" />
+					</Box>
+				</Link>
+				<Link
+					title={`${t("nav_login")}`}
+					href="/login"
+					style={{
+						textDecoration: "none",
+					}}
+				>
+					<Box
+						sx={{
+							marginX: "1rem",
+							height: "55px",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "space-between",
+						}}
+					>
+						<Typography
+							fontSize="24px"
+							fontWeight={"400"}
+							lineHeight="37px"
+							color="#343132"
+							textTransform={"capitalize"}
+						>
+							{t("nav_login")}
+						</Typography>
+						<IoIosArrowForward color="#343132" />
+					</Box>
+				</Link>
 			</Box>
 			<Box
 				sx={{
@@ -175,7 +260,7 @@ const Header = () => {
 						{t("nav_getStarted")}
 					</Typography>
 					<FiArrowUpRight size={42} color="#343132" className="left" />
- 				</Button>
+				</Button>
 			</Box>
 			<Box
 				sx={{
@@ -312,7 +397,7 @@ const Header = () => {
 								background: "transparent",
 							}}
 						>
-							<ul className="navigation-menu">
+							{/* <ul className="navigation-menu">
 								{links.map((link) => (
 									<li key={`${link.label}1`}>
 										<Link
@@ -333,6 +418,77 @@ const Header = () => {
 										</Link>
 									</li>
 								))}
+							</ul> */}
+							<ul className="navigation-menu">
+								<li>
+									<Link
+										href="/subscribe"
+										title={`${t("nav_subscribe")}`}
+										style={{ textDecoration: "none" }}
+									>
+										<Typography
+											fontSize="32px"
+											fontWeight={400}
+											lineHeight="37px"
+											color="#343132"
+											textTransform={"capitalize"}
+										>
+											{t("nav_subscribe")}
+										</Typography>
+									</Link>
+								</li>
+								<li>
+									<Link
+										href="/example"
+										title={`${t("nav_examples")}`}
+										style={{ textDecoration: "none" }}
+									>
+										<Typography
+											fontSize="32px"
+											fontWeight={400}
+											lineHeight="37px"
+											color="#343132"
+											textTransform={"capitalize"}
+										>
+											{t("nav_examples")}
+										</Typography>
+									</Link>
+								</li>
+								<li>
+									<Link
+										href={asPath}
+										locale={locale === "en" ? "ar" : "en"}
+										title=""
+										style={{ textDecoration: "none" }}
+									>
+										<Typography
+											fontSize="32px"
+											fontWeight={400}
+											lineHeight="37px"
+											color="#343132"
+											textTransform={"capitalize"}
+										>
+											{locale === "en" ? "AR" : "EN"}
+										</Typography>
+									</Link>
+								</li>
+								<li>
+									<Link
+										href="/login"
+										title={`${t("nav_login")}`}
+										style={{ textDecoration: "none" }}
+									>
+										<Typography
+											fontSize="32px"
+											fontWeight={400}
+											lineHeight="37px"
+											color="#343132"
+											textTransform={"capitalize"}
+										>
+											{t("nav_login")}
+										</Typography>
+									</Link>
+								</li>
 							</ul>
 						</Box>
 						<Button
@@ -355,7 +511,6 @@ const Header = () => {
 									textTransform: "uppercase",
 								}}
 							>
-								{/* Get Started */}
 								{t("nav_getStarted")}
 							</Typography>
 							<FiArrowUpRight size={42} color="#343132" className="left" />

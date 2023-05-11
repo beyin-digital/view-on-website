@@ -40,7 +40,8 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
 						<Image
 							fill
 							src="/images/swirl.svg"
-							alt=""
+							alt="Background View On Website"
+							title="Background View On Website"
 							style={{
 								top: "-43rem",
 								position: "absolute",

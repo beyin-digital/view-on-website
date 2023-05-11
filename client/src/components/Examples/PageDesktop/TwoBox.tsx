@@ -1,7 +1,7 @@
-import { Box, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+
+import { Box, Typography } from "@mui/material";
 
 const TwoBox = () => {
 	const { t } = useTranslation("example");
@@ -26,7 +26,7 @@ const TwoBox = () => {
 						justifyContent: "space-between",
 						position: "relative",
 						right: "-1.5rem",
-						zIndex:"9"
+						zIndex: "9",
 					}}
 				>
 					<Box

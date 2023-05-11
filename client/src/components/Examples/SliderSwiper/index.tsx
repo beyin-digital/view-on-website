@@ -51,6 +51,8 @@ export default function SliderSwiper() {
 								objectFit: "cover",
 								objectPosition: "center",
 							}}
+							alt=""
+							title=""
 						/>
 					</SwiperSlide>
 				))}

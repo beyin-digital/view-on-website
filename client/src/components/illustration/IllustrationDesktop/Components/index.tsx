@@ -113,6 +113,8 @@ export const HeaderLayoutDesktop = () => {
 					>
 						<img
 							src="/images/illustrationPic.png"
+							alt="illustration Photo"
+							title="illustration Photo"
 							style={{
 								width: "100%",
 								objectFit: "cover",
@@ -122,7 +124,6 @@ export const HeaderLayoutDesktop = () => {
 							sx={{
 								width: "257px",
 								height: "90px",
-
 								display: "flex",
 								alignItems: "",
 								justifyContent: "end",
@@ -196,6 +197,8 @@ export const MainContainerDesktop = () => {
 						>
 							<img
 								src="/icons/arrowAR.png"
+								alt="arrow icon View On Website"
+								title="arrow icon View On Website"
 								style={{
 									width: "100%",
 								}}
@@ -213,6 +216,8 @@ export const MainContainerDesktop = () => {
 						>
 							<img
 								src="/icons/arrow.png"
+								alt="arrow icon View On Website"
+								title="arrow icon View On Website"
 								style={{
 									width: "100%",
 								}}
@@ -242,7 +247,11 @@ export const MainContainerDesktop = () => {
 								top: "-5rem",
 							}}
 						>
-							<img src="/icons/arrowUpAR.png" />
+							<img
+								src="/icons/arrowUpAR.png"
+								alt="arrow icon View On Website"
+								title="arrow icon View On Website"
+							/>
 						</Box>
 					) : (
 						<Box
@@ -253,7 +262,11 @@ export const MainContainerDesktop = () => {
 								top: "-6rem",
 							}}
 						>
-							<img src="/icons/arrowUp.png" />
+							<img
+								src="/icons/arrowUp.png"
+								alt="arrow icon View On Website"
+								title="arrow icon View On Website"
+							/>
 						</Box>
 					)}
 				</Box>

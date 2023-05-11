@@ -1,5 +1,6 @@
-import { Box, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
+
+import { Box, Typography } from "@mui/material";
 
 const ThreeBox = () => {
 	const { t } = useTranslation("example");
@@ -46,7 +47,8 @@ const ThreeBox = () => {
 					>
 						<img
 							src="/images/pic.png"
-							alt=""
+							title="Your costumers in a Blink will be automatically redirected to your Sub-link-URL"
+							alt="Your costumers in a Blink will be automatically redirected to your Sub-link-URL, your dashboard will show you all the conversions of your #keyword, it is your opportunity to optimize"
 							style={{
 								width: "100%",
 							}}

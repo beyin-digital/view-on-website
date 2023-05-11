@@ -1,6 +1,4 @@
 import { Box, Button, OutlinedInput, Typography } from "@mui/material";
-import React from "react";
-import { ButtonLogin } from "../Button";
 import LoginTextSignUp from "../Login/LoginTextSignUp";
 import { FiArrowUpRight, FiArrowUpLeft } from "react-icons/fi";
 import { useTranslation } from "next-i18next";
@@ -23,12 +21,7 @@ const FormRequest = () => {
 					sx={{
 						width: "100%",
 						height: { xs: "45px", md: "50px", xl: "65px" },
-						fontSize: {
-							xs: "18px",
-							sm: "22px",
-							md: "28px",
-							xl: "32px",
-						},
+						fontSize: "24px",
 						lineHeight: "28px",
 						background: "#FBFBFB",
 						border: "0.897277px solid #E3E3E3",

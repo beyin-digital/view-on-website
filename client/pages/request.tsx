@@ -39,7 +39,6 @@ const Request = () => {
 							xl: "skew(16deg, 0deg)",
 						},
 						paddingX: "1rem",
-						// marginY: { xs: "7rem", sm: "7rem", md: "1rem", xl: "1rem" },
 					}}
 				>
 					<Box
@@ -52,8 +51,6 @@ const Request = () => {
 							justifyContent: "space-around",
 							position: "relative",
 							paddingX: "1rem",
-
-							// top: { xs: "10rem", sm: "0", md: "0", xl: "0" },
 						}}
 					>
 						<DetailsHeader />

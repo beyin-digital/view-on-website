@@ -6,19 +6,21 @@ import Footer from "@/components/Footer/Footer";
 import FooterMobile from "@/components/Footer/FooterMobile";
 
 // components
-import SwiperSlider from "./SwiperSlider";
-import FooterLayout from "./FooterLayout";
-import HeaderLayout from "./HeaderLayout";
-import TextPremium from "./TextPremium";
+import SwiperSlider from "./CenterLayout/SwiperSlider";
+import FooterLayout from "./FooterLayout/FooterLayout";
+import HeaderLayout from "./TopLayout/HeaderLayout";
+import TextPremium from "./TopLayout/TextPremium";
 import TextAndButton from "./TextAndButton";
 import BackgroundImage from "./BackgroundImage";
+import { useRouter } from "next/router";
 
 const SliderDesktop = ({ onClick }: any) => {
+	const { locale } = useRouter();
+
 	return (
 		<Box
 			sx={{
 				width: "100%",
-				// background: "#EAEDED",
 			}}
 		>
 			<Box
@@ -61,7 +63,6 @@ const SliderDesktop = ({ onClick }: any) => {
 							transform: { xs: "", md: "", xl: "skew(-16deg, 0deg)" },
 							overflow: { xs: "", md: "hidden", xl: "hidden" },
 						}}
-						// className="SLiderLayout"
 					>
 						<>
 							<Box
@@ -72,27 +73,47 @@ const SliderDesktop = ({ onClick }: any) => {
 									alignItems: "center",
 									justifyContent: { xs: "center", xl: "end" },
 								}}
-								// className="sliderBox"
 							>
-								<Box
-									sx={{
-										width: { xs: "100%", md: "100%", xl: "80%" },
-										height: "90%",
+								{locale === "ar" ? (
+									<Box
+										sx={{
+											width: { xs: "100%", md: "100%", xl: "80%" },
+											height: "90%",
+											transform: { xs: "", md: "", xl: "skew(16deg, 0deg)" },
+											paddingX: { xs: "1rem", md: "2rem", xl: "6rem" },
+											display: "flex",
+											flexDirection: "column",
+											justifyContent: "space-around",
+											alignItems: "end",
+										}}
+									>
+										{/* text top layout */}
+										<HeaderLayout /> {/* slider swipre */}
+										<SwiperSlider />
+										{/* footer layout And Button Reserve   */}
+										<FooterLayout />
+									</Box>
+								) : (
+									<Box
+										sx={{
+											width: { xs: "100%", md: "100%", xl: "80%" },
+											height: "90%",
 
-										transform: { xs: "", md: "", xl: "skew(16deg, 0deg)" },
-										paddingX: { xs: "1rem", md: "2rem", xl: "6rem" },
-										display: "flex",
-										flexDirection: "column",
-										justifyContent: "space-around",
-									}}
-									// className="SLiderLayoutBox"
-								>
-									{/* text top layout */}
-									<HeaderLayout /> {/* slider swipre */}
-									<SwiperSlider />
-									{/* footer layout  */}
-									<FooterLayout />
-								</Box>
+											transform: { xs: "", md: "", xl: "skew(16deg, 0deg)" },
+											paddingX: { xs: "1rem", md: "2rem", xl: "6rem" },
+											display: "flex",
+											flexDirection: "column",
+											justifyContent: "space-around",
+										}}
+									>
+										{/* text top layout */}
+										<HeaderLayout />
+										{/* slider swipre */}
+										<SwiperSlider />
+										{/* footer layout And Button Reserve   */}
+										<FooterLayout />
+									</Box>
+								)}
 							</Box>
 						</>
 					</Box>

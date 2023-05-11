@@ -129,12 +129,13 @@ const LoginForm = () => {
 					sx={{
 						width: "100",
 						height: { xs: "47px", md: "50px", xl: "65px" },
-						fontSize: {
-							xs: "18px",
-							sm: "22px",
-							md: "28px",
-							xl: "32px",
-						},
+						// fontSize: {
+						// 	xs: "18px",
+						// 	sm: "22px",
+						// 	md: "28px",
+						// 	xl: "32px",
+						// },
+						fontSize: "24px",
 						lineHeight: "28px",
 						background: "#FBFBFB",
 						// border: "0.897277px solid #E3E3E3",
@@ -155,12 +156,7 @@ const LoginForm = () => {
 					sx={{
 						width: "100",
 						height: { xs: "47px", md: "50px", xl: "65px" },
-						fontSize: {
-							xs: "18px",
-							sm: "22px",
-							md: "28px",
-							xl: "32px",
-						},
+						fontSize: "24px",
 						lineHeight: "28px",
 						background: "#FBFBFB",
 						border: "0",

@@ -12,7 +12,6 @@ const PageMobile = () => {
 			className="PageMobile"
 			sx={{
 				width: "100%",
-				// maxHeight: "100%",
 				overflow: "hidden",
 			}}
 		>
@@ -33,7 +32,11 @@ const PageMobile = () => {
 						top: "-90rem",
 					}}
 				>
-					<img src="/images/swirl.png" />
+					<img
+						src="/images/swirl.png"
+						alt="Background View On Website"
+						title="Background View On Website"
+					/>
 				</Box>
 				<Box
 					m="auto"
@@ -53,7 +56,7 @@ const PageMobile = () => {
 
 					{/* Slider Three */}
 					<ThreeBox />
-					{/*  */}
+					{/* Link */}
 					<Box
 						sx={{
 							width: { xs: "100%", sm: "85%", md: "85%", xl: "85%" },
