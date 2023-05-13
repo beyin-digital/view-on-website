@@ -91,6 +91,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 							margin: "1rem auto",
 							zIndex: "999",
 							padding: "2rem",
+
 						}}
 					>
 						{children}

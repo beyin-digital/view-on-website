@@ -52,7 +52,7 @@ const SubscribePage: NextPage = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					marginY: "2rem",
+					// marginY: "2rem",
 				}}
 				className="SubscribePageLayoutBox"
 			>

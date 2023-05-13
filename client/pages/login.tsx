@@ -61,7 +61,7 @@ const LoginPage = () => {
 					>
 						<Box
 							sx={{
-								height: "600px",
+								height: "550px",
 								paddingX: "1rem",
 							}}
 						>
