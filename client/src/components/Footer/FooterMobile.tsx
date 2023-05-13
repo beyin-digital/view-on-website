@@ -36,7 +36,7 @@ const FooterMobile = () => {
 			id: 3,
 			name: "instagram",
 			link: "https://instagram.com",
-			icon: "/icons/insta.svg",
+			icon: "/icons/instagram.svg",
 		},
 		{
 			id: 4,

@@ -10,6 +10,7 @@ const DetailsFooter = () => {
 	const { locale } = useRouter();
 	return (
 		<>
+			{/* Right Footer AR / EN */}
 			{locale === "ar" ? (
 				<Box
 					sx={{
@@ -24,7 +25,11 @@ const DetailsFooter = () => {
 							xl: "row-reverse",
 						},
 						marginY: { xs: "2rem", md: ".5rem", xl: ".5rem" },
-						border: "1px solid #FBFBFB",
+						border: {
+							xs: "1px solid #FBFBFB",
+							md: "transparent",
+							xl: "transparent",
+						},
 						background: {
 							xs: "#FBFBFB",
 							md: "transparent",
@@ -50,7 +55,11 @@ const DetailsFooter = () => {
 							xl: "row-reverse",
 						},
 						marginY: { xs: "2rem", md: ".5rem", xl: ".5rem" },
-						border: "1px solid #FBFBFB",
+						border: {
+							xs: "1px solid #FBFBFB",
+							md: "transparent",
+							xl: "transparent",
+						},
 						background: {
 							xs: "#FBFBFB",
 							md: "transparent",
@@ -63,7 +72,7 @@ const DetailsFooter = () => {
 					<RightSide />
 				</Box>
 			)}
-
+			{/* Button AR / EN */}
 			<Box
 				sx={{
 					width: { xs: "100%", md: "30%", xl: "30%" },

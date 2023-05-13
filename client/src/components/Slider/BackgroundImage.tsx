@@ -6,18 +6,28 @@ const BackgroundImage = () => {
 	return (
 		<>
 			<Box
-				sx={{
-					width: "100%",
-				}}
+				sx={
+					{
+						// width: "100%",
+					}
+				}
 			>
-				<Image
+				{/* <Image
 					fill
 					src="/images/swirl.svg"
 					alt=""
 					style={{
 						// objectFit:"cover",
-						top: "-37rem",
+						top: "-30rem",
 						position: "absolute",
+					}}
+				/> */}
+				<img
+					src="/images/swirl.svg"
+					style={{
+						top: "-80rem",
+						position: "absolute",
+						left:"-10rem"
 					}}
 				/>
 			</Box>

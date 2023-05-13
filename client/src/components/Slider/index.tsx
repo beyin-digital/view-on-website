@@ -27,7 +27,7 @@ const SliderDesktop = ({ onClick }: any) => {
 				sx={{
 					maxWidth: "100%",
 					margin: "auto",
-					height: { xs: "100%", md: "100vh", xl: "95vh" },
+					height: { xs: "100vh%", md: "100vh", xl: "95vh" },
 					display: "flex",
 					flexDirection: "column",
 					justifyContent: "space-between",
@@ -42,7 +42,9 @@ const SliderDesktop = ({ onClick }: any) => {
 				<Box
 					sx={{
 						position: "relative",
-						marginY: "3rem",
+						marginTop: "2rem",
+						marginBottom: "1rem",
+
 					}}
 				>
 					{/* Text Premium top layout */}
@@ -55,8 +57,8 @@ const SliderDesktop = ({ onClick }: any) => {
 							right: { xs: "0%", sm: "0%", md: "0%", xl: "20%" },
 							maxWidth: "100%",
 							width: "100%",
-							height: { xs: "600px", sm: "600px", md: "600px", xl: "500px" },
-							// background: "rgba(251, 251, 251, 0.6)",
+							height: { xs: "100vh", sm: "100vh", md: "550px", xl: "500px" },
+							background: "rgba(251, 251, 251, 0.6)",
 							border: "1px solid #FBFBFB",
 							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
@@ -98,7 +100,6 @@ const SliderDesktop = ({ onClick }: any) => {
 										sx={{
 											width: { xs: "100%", md: "100%", xl: "80%" },
 											height: "90%",
-
 											transform: { xs: "", md: "", xl: "skew(16deg, 0deg)" },
 											paddingX: { xs: "1rem", md: "2rem", xl: "6rem" },
 											display: "flex",

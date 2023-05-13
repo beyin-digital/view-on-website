@@ -9,7 +9,10 @@ body {
 	font-family: "IBM Plex Sans Arabic";
 	background-color: #eaeded;
 }
-
+iframe {
+	border-radius: 30px;
+	box-shadow: 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.08);
+}
 .borderSubscribeInput {
 	box-sizing: border-box;
 	background-clip: padding-box;
@@ -88,23 +91,22 @@ swiper-container {
 	font-weight: 500;
 }
 .swiper-blur {
-	-webkit-filter: blur(53px);
-	-moz-filter: blur(53px);
-	-o-filter: blur(53px);
-	-ms-filter: blur(53px);
-	filter: blur(2px);
-	background: transparent;
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px);
 	border: 1.63722px solid #e3e3e3;
 	border-radius: 32.7444px;
-	backdrop-filter: blur(1px);
-	filter: blur(1px);
-	border: 1.63722px solid #e3e3e3;
-	backdrop-filter: blur(50px);
+	backdrop-filter: blur(10px);
+	filter: blur(0px);
 	border-radius: 32.7444px;
+	background: rgba(251, 251, 251, 0.2);
+	backdrop-filter: blur(10px);
 }
 .swiper-blurr {
 	background: transparent;
-	backdrop-filter: blur(10px);
+	backdrop-filter: blur(0px);
 }
 
 /*  */
@@ -548,6 +550,9 @@ swiper-container {
 		right: -5rem;
 		transform: skew(-16deg, 0deg);
 	}
+	.swiper-3d {
+		perspective: 999px !important;
+	}
 }
 @media screen and (max-width: 700px) {
 	.ExampleBoxThreePic {
@@ -566,7 +571,7 @@ swiper-container {
 		right: 12%;
 	}
 	[dir="ltr"] .BoxHomeLayoutCenter {
-		margin-left: 3rem;
+		margin-left: 2rem;
 	}
 	[dir="rtl"] .BoxHomeLayoutCenter {
 		margin-left: 3rem;
@@ -591,6 +596,9 @@ swiper-container {
 	}
 	.PageTablet {
 		display: none;
+	}
+	.swiper-3d {
+		perspective: 8px !important;
 	}
 }
 @media screen and (max-width: 600px) {
@@ -739,7 +747,7 @@ swiper-container {
 		font-size: 17px !important;
 	}
 	.Textredirected {
-		font-size: 28px;
+		font-size: 24px !important;
 	}
 	.LayoutHomeMobile {
 		height: 100% !important;

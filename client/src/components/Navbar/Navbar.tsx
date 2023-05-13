@@ -513,8 +513,11 @@ const Header = () => {
 							>
 								{t("nav_getStarted")}
 							</Typography>
-							<FiArrowUpRight size={42} color="#343132" className="left" />
-							<FiArrowUpLeft size={42} color="#343132" className="right" />
+							{locale === "ar" ? (
+								<FiArrowUpLeft size={42} color="#343132" className="" />
+							) : (
+								<FiArrowUpRight size={42} color="#343132" className="" />
+							)}
 						</Button>
 					</Toolbar>
 				</AppBar>

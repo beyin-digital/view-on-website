@@ -27,7 +27,7 @@ const RightSide = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: {
-						xs: "center",
+						xs: "space-between",
 						sm: "space-around",
 						md: "space-around",
 						xl: "space-around",

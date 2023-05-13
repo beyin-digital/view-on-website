@@ -8,8 +8,11 @@ import "swiper/css/pagination";
 
 import { EffectCoverflow, Pagination, Navigation } from "swiper";
 import { Box, Button, Typography } from "@mui/material";
+import { useTranslation } from "next-i18next";
 
 const SwiperSlider = () => {
+	const { t } = useTranslation("slider");
+
 	const images = [
 		{ id: 1, num: "a" },
 		{ id: 2, num: "b" },
@@ -41,12 +44,11 @@ const SwiperSlider = () => {
 	return (
 		<>
 			<Box
-				// className="oop"
 				sx={{
 					height: {
-						xs: "100%",
-						sm: "500px",
-						md: "300px",
+						xs: "600px",
+						sm: "600px",
+						md: "400px",
 						xl: "300px",
 					},
 					width: "100%",
@@ -54,7 +56,6 @@ const SwiperSlider = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					// background:"#FBFBFB"
 					background: "transparent",
 				}}
 				className="swiper-blurr oop"
@@ -75,26 +76,26 @@ const SwiperSlider = () => {
 					spaceBetween={30}
 					modules={[EffectCoverflow, Pagination, Pagination]}
 					className="swiper_container"
-					// pagination={{
-					// 	type: "fraction",
-					// }}
 					pagination={{
 						type: "fraction",
 						renderFraction: function (currentClass, totalClass) {
 							return (
 								'<span class="' +
 								currentClass +
-								'"></span>' +
-								" of " +
+								'"> </span>' +
+								`${t("of")}` +
 								'<span class="' +
 								totalClass +
-								'"></span>'
+								'"> </span>'
 							);
 						},
+						clickable: true,
 					}}
 					autoplay={{ delay: 4000, disableOnInteraction: false }} // تحديد فترة التأخير بين كل انتقال
 					direction={"horizontal"}
-					// className="swiper-blur"
+					style={{
+						background: "transparent",
+					}}
 				>
 					{images.map((item) => (
 						<SwiperSlide
@@ -106,7 +107,6 @@ const SwiperSlider = () => {
 								alignItems: "center",
 								justifyContent: "center",
 							}}
-							// className="swiper-blur"
 						>
 							<Box
 								sx={{
@@ -117,8 +117,6 @@ const SwiperSlider = () => {
 										xl: "100%",
 									},
 									height: { xs: "150px", md: "189px", xl: "189px" },
-									// border: "1.63722px solid #E3E3E3",
-									// borderRadius: "32px",
 									display: "flex",
 									alignItems: "center",
 									justifyContent: "center",
