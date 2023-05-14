@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
 import Image from "next/image";
 import { BiMenu } from "react-icons/bi";
 import { IoIosLogOut, IoMdClose } from "react-icons/io";
 import { MdHomeFilled } from "react-icons/md";
 import { FaUserAlt } from "react-icons/fa";
-import { AiFillCreditCard } from "react-icons/ai";
-import { BsFillShieldLockFill } from "react-icons/bs";
+import { AiFillCreditCard, AiFillInstagram } from "react-icons/ai";
+import {
+	BsFacebook,
+	BsFillShieldLockFill,
+	BsLinkedin,
+	BsTwitter,
+} from "react-icons/bs";
+import Link from "next/link";
+import Modal from "../Modal";
+import { UserContext } from "@/contexts/userContext";
 
 const Navbar = () => {
 	const [value, setValue] = React.useState(0);
 	const pathname = usePathname();
 	const router = useRouter();
 	const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
+
+	const { logout } = useContext(UserContext);
+
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => {
+		setOpen(true);
+	};
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
@@ -223,6 +241,7 @@ const Navbar = () => {
 					sx={{
 						position: "absolute",
 						display: "flex",
+						zIndex: 999,
 						flexDirection: "column",
 						background: "rgba(251, 251, 251, 0.6)",
 						backdropFilter: "blur(100px)",
@@ -235,7 +254,15 @@ const Navbar = () => {
 					{links.map(link => (
 						<Box
 							key={link.name}
-							onClick={() => router.push(link.href)}
+							onClick={() => {
+								if (link.name === "Logout") {
+									handleOpen();
+									return;
+								}
+								router.push(link.href);
+								setMobileNavOpen(false);
+								console.log("Clicked");
+							}}
 							sx={{
 								display: "flex",
 								cursor: "pointer",
@@ -284,14 +311,68 @@ const Navbar = () => {
 					))}
 					<Box
 						sx={{
+							display: "flex",
 							marginTop: "125px",
-							width: "80%",
+							width: "50%",
 							height: "24px",
-							border: "1px solid red",
+							justifyContent: "space-between",
 						}}
-					></Box>
+					>
+						<Link href='https://instagram.com/vow' target='_blank'>
+							<BsFacebook size={17.5} color='#343132' />
+						</Link>
+						<Link href='https://instagram.com/vow' target='_blank'>
+							<BsTwitter size={17.5} color='#343132' />
+						</Link>
+						<Link href='https://instagram.com/vow' target='_blank'>
+							<AiFillInstagram size={17.5} color='#343132' />
+						</Link>
+						<Link href='https://instagram.com/vow' target='_blank'>
+							<BsLinkedin size={17.5} color='#343132' />
+						</Link>
+					</Box>
 				</Box>
 			)}
+			<Modal title='Log Out' open={open} handleClose={handleClose}>
+				<Box>
+					<Typography>
+						You're about to Log out of your View On Website
+						Dashboard?
+					</Typography>
+				</Box>
+				<Box
+					sx={{
+						display: "flex",
+						position: "absolute",
+						bottom: 0,
+						width: "90%",
+						justifyContent: "space-between",
+						margin: "0 auto",
+						paddingBottom: "21px",
+					}}
+				>
+					<Button
+						color='info'
+						variant='contained'
+						sx={{ height: "42px", width: "154px" }}
+						onClick={() => {
+							logout();
+						}}
+					>
+						Log out
+					</Button>
+					<Button
+						color='error'
+						variant='contained'
+						sx={{ height: "42px", width: "154px" }}
+						onClick={() => {
+							handleClose();
+						}}
+					>
+						Cancel
+					</Button>
+				</Box>
+			</Modal>
 		</>
 	);
 };

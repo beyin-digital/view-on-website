@@ -5,9 +5,10 @@ import { Keyword } from './entities/keyword.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { IsExist } from 'src/utils/validators/is-exists.validator';
 import { IsNotExist } from 'src/utils/validators/is-not-exists.validator';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Keyword])],
+  imports: [TypeOrmModule.forFeature([Keyword]), UsersModule],
   controllers: [KeywordsController],
   providers: [IsExist, IsNotExist, KeywordsService],
   exports: [KeywordsService],

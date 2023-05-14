@@ -32,9 +32,6 @@ export class MailService {
     await this.mailerService.sendMail({
       to: mailData.to,
       subject: emailConfirmTitle,
-      //   text: `${this.configService.get('app.frontendDomain', {
-      //     infer: true,
-      //   })}/confirm-email/${mailData.data.otp} ${emailConfirmTitle}`,
       template: 'activation',
       context: {
         title: emailConfirmTitle,
@@ -69,9 +66,6 @@ export class MailService {
     await this.mailerService.sendMail({
       to: mailData.to,
       subject: resetPasswordTitle,
-      //   text: `${this.configService.get('app.frontendDomain', {
-      //     infer: true,
-      //   })}/password-change/${mailData.data.otp} ${resetPasswordTitle}`,
       template: 'reset-password',
       context: {
         title: resetPasswordTitle,
@@ -84,6 +78,38 @@ export class MailService {
         text2,
         text3,
         text4,
+      },
+    });
+  }
+
+  async twoFactorAuth(mailData: MailData<{ otp: string }>): Promise<void> {
+    const i18n = I18nContext.current();
+    let emailTwoFactorAuthTitle: MaybeType<string>;
+    let text1: MaybeType<string>;
+    let text2: MaybeType<string>;
+    let text3: MaybeType<string>;
+
+    if (i18n) {
+      [emailTwoFactorAuthTitle, text1, text2, text3] = await Promise.all([
+        i18n.t('common.twoFactorAuthentication'),
+        i18n.t('two-factor-auth.text1'),
+        i18n.t('two-factor-auth.text2'),
+        i18n.t('two-factor-auth.text3'),
+      ]);
+    }
+
+    await this.mailerService.sendMail({
+      to: mailData.to,
+      subject: emailTwoFactorAuthTitle,
+      template: 'two-factor-auth',
+      context: {
+        title: emailTwoFactorAuthTitle,
+        otp: `${mailData.data.otp}`,
+        actionTitle: emailTwoFactorAuthTitle,
+        app_name: this.configService.get('app.name', { infer: true }),
+        text1,
+        text2,
+        text3,
       },
     });
   }

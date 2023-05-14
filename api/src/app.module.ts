@@ -31,6 +31,9 @@ import { AllConfigType } from './config/config.type';
 import { KeywordsModule } from './keywords/keywords.module';
 import { StripeModule } from './stripe/stripe.module';
 import { RefreshModule } from './refresh/refresh.module';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module';
+import { OrdersService } from './orders/orders.service';
+import { OrdersModule } from './orders/orders.module';
 import stripeConfig from './config/stripe.config';
 
 @Module({
@@ -93,6 +96,9 @@ import stripeConfig from './config/stripe.config';
     KeywordsModule,
     StripeModule,
     RefreshModule,
+    SubscriptionsModule,
+    OrdersModule,
   ],
+  providers: [OrdersService],
 })
 export class AppModule {}

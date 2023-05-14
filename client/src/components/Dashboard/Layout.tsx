@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Box } from "@mui/material";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Navbar from "@/components/Dashboard/Navbar";
 import Sidebar from "@/components/Dashboard/Sidebar";
+import { UserContext } from "@/contexts/userContext";
 
 interface RootLayoutProps {
 	children: React.ReactNode;
@@ -10,6 +11,13 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
 	const pathname = usePathname();
+	const router = useRouter();
+
+	const { token, user } = useContext(UserContext);
+	useEffect(() => {
+		if (!token) router.push("/login");
+	}, [user]);
+
 	return (
 		<>
 			{/* Background */}
@@ -48,29 +56,40 @@ export default function RootLayout({ children }: RootLayoutProps) {
 					width: "100%",
 				}}
 			>
-				{pathname === "/dashboard" && <Navbar />}
+				<Navbar />
 				{/* Sidebar and Content body */}
 				<Box
 					sx={{
 						marginTop: pathname === "/dashboard" ? "0px" : "106px",
-						display: { xs: "none", md: "flex" },
 						justifyContent: "space-between",
 						alignItems: "flex-start",
 					}}
 				>
 					{/* Sidebar */}
 					<Sidebar />
-					{/* Body container */}
+					{/* Desktop Body container */}
 					<Box
 						sx={{
 							position: "absolute",
 							right: { xs: "0", md: "24px", xl: "48px" },
+							display: { xs: "none", md: "flex" },
 							width: {
 								xs: "100%",
 								md: "1080px",
 								xl: "1544px",
 							},
 							maxWidth: "1544px",
+							minHeight: "100vh",
+						}}
+					>
+						{children}
+					</Box>
+					{/* Mobile Body container */}
+					<Box
+						sx={{
+							position: "absolute",
+							display: { xs: "flex", md: "none", lg: "none" },
+							width: "100%",
 							minHeight: "100vh",
 						}}
 					>

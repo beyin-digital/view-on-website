@@ -114,6 +114,19 @@ export class AuthService {
       );
     }
 
+    if (foundUser.twoFactorAuth) {
+      const otp = Math.floor(100000 + Math.random() * 900000).toString();
+      foundUser.otp = otp;
+      await foundUser.save();
+      await this.mailService.twoFactorAuth({
+        to: foundUser?.email || '',
+        data: {
+          otp,
+        },
+      });
+
+      return { user: foundUser };
+    }
     // Create new refresh token in db and assign it to user
     const refreshToken = await this.refreshService.create({
       token: nanoid(),
@@ -270,17 +283,18 @@ export class AuthService {
       );
     }
 
-    // Create stripe customer
-    const stripeCustomer = await this.stripeService.createCustomer({
-      email: user?.email as string,
-      name: `${user?.fullName}`,
-    });
-
     user.otp = null;
     user.status = plainToClass(Status, {
       id: StatusEnum.active,
     });
-    user.stripeCustomerId = stripeCustomer.id;
+    if (!user.stripeCustomerId) {
+      // Create stripe customer
+      const stripeCustomer = await this.stripeService.createCustomer({
+        email: user?.email as string,
+        name: `${user?.fullName}`,
+      });
+      user.stripeCustomerId = stripeCustomer.id;
+    }
     const token = this.jwtService.sign({
       id: user.id,
       role: user.role,
@@ -487,7 +501,7 @@ export class AuthService {
 
     await this.usersService.update(user.id, userDto);
 
-    return this.usersService.findOne({
+    return await this.usersService.findOne({
       id: user.id,
     });
   }

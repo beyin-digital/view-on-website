@@ -21,6 +21,11 @@ export class AuthUpdateDto {
   @IsNotEmpty({ message: 'mustBeNotEmpty' })
   lastName?: string;
 
+  @ApiProperty({ example: true })
+  @IsOptional()
+  @IsNotEmpty({ message: 'mustBeNotEmpty' })
+  twoFactorAuth: boolean;
+
   @ApiProperty()
   @IsOptional()
   @IsNotEmpty()

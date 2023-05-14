@@ -1,13 +1,32 @@
-import { Typography, Box, OutlinedInput } from "@mui/material";
+import {
+	Typography,
+	Box,
+	OutlinedInput,
+	InputAdornment,
+	IconButton,
+} from "@mui/material";
 import Link from "next/link";
 import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
+import { useContext, useState } from "react";
+import { UserContext } from "@/contexts/userContext";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const SignupForm = () => {
 	const router = useRouter();
+	const { values, handleChange, handleSignup } = useContext(UserContext);
 
+	const [showPassword, setShowPassword] = useState(false);
+
+	const handleClickShowPassword = () => setShowPassword(show => !show);
+
+	const handleMouseDownPassword = (
+		event: React.MouseEvent<HTMLButtonElement>
+	) => {
+		event.preventDefault();
+	};
 	return (
-		<>
+		<form onSubmit={handleSignup}>
 			<Box
 				sx={{
 					width: "100%",
@@ -40,6 +59,8 @@ const SignupForm = () => {
 					}}
 				>
 					<OutlinedInput
+						value={values.fullName}
+						name='fullName'
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
@@ -56,8 +77,11 @@ const SignupForm = () => {
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
 						placeholder='Full name'
+						onChange={handleChange}
 					/>
 					<OutlinedInput
+						value={values.password}
+						name='password'
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
@@ -73,7 +97,25 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
+						onChange={handleChange}
 						placeholder='Password'
+						type={showPassword ? "text" : "password"}
+						endAdornment={
+							<InputAdornment position='end'>
+								<IconButton
+									aria-label='toggle password visibility'
+									onClick={handleClickShowPassword}
+									onMouseDown={handleMouseDownPassword}
+									edge='end'
+								>
+									{showPassword ? (
+										<VisibilityOff />
+									) : (
+										<Visibility />
+									)}
+								</IconButton>
+							</InputAdornment>
+						}
 					/>
 				</Box>
 				<Box
@@ -93,6 +135,8 @@ const SignupForm = () => {
 					}}
 				>
 					<OutlinedInput
+						value={values.email}
+						name='email'
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
@@ -108,6 +152,7 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
+						onChange={handleChange}
 						placeholder='E-mail'
 					/>
 					<OutlinedInput
@@ -126,7 +171,25 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
 							marginY: ".3rem",
 						}}
+						onChange={handleChange}
 						placeholder='Confirm Password'
+						type={showPassword ? "text" : "password"}
+						endAdornment={
+							<InputAdornment position='end'>
+								<IconButton
+									aria-label='toggle password visibility'
+									onClick={handleClickShowPassword}
+									onMouseDown={handleMouseDownPassword}
+									edge='end'
+								>
+									{showPassword ? (
+										<VisibilityOff />
+									) : (
+										<Visibility />
+									)}
+								</IconButton>
+							</InputAdornment>
+						}
 					/>
 				</Box>
 			</Box>
@@ -155,7 +218,7 @@ const SignupForm = () => {
 						marginY: { xs: ".5rem", md: "", xl: "" },
 					}}
 				>
-					Already have an account?{" "}
+					Already have an account?
 					<Link
 						href='/login'
 						style={{
@@ -166,12 +229,9 @@ const SignupForm = () => {
 						Sign in
 					</Link>
 				</Typography>
-				<ButtonLogin
-					name='next'
-					onClick={() => router.push("verification")}
-				/>
+				<ButtonLogin name='next' type='submit' />
 			</Box>
-		</>
+		</form>
 	);
 };
 

@@ -2,7 +2,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  Index,
   ManyToOne,
   PrimaryGeneratedColumn,
   DeleteDateColumn,
@@ -18,7 +17,6 @@ export class Forgot extends EntityHelper {
 
   @Allow()
   @Column()
-  @Index()
   otp: string;
 
   @Allow()

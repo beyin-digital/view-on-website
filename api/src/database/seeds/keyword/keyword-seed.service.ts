@@ -17,9 +17,18 @@ export class KeywordSeedService {
     if (count === 0) {
       await this.repository.save(
         this.repository.create({
-          letters: 'Hello world',
-          slug: slugify('Hello world', { lower: true }),
+          letters: 'VOW',
+          slug: slugify('VOW', { lower: true }),
           featured: true,
+          sublink: 'https://www.vow.com',
+          location: {
+            state: 'Abu Dhabi',
+            country: 'United Arab Emirates',
+            coordinates: {
+              lat: 24.4539,
+              lng: 54.3773,
+            },
+          },
           user: {
             id: 1,
           },

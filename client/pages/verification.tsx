@@ -4,7 +4,8 @@ import Image from "next/image";
 import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
 import { MuiOtpInput } from "mui-one-time-password-input";
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "@/contexts/userContext";
 
 const VerificationPage = () => {
 	const router = useRouter();
@@ -12,6 +13,8 @@ const VerificationPage = () => {
 	const handleChange = (newValue: any) => {
 		setOtp(newValue);
 	};
+
+	const { user, verifyOtp } = useContext(UserContext);
 
 	return (
 		<>
@@ -42,7 +45,12 @@ const VerificationPage = () => {
 							alignItems: "center",
 							justifyContent: "space-around",
 							position: "relative",
-							marginY: { xs: "8rem", sm: "4rem", md: "1rem", xl: "0rem" },
+							marginY: {
+								xs: "8rem",
+								sm: "4rem",
+								md: "1rem",
+								xl: "0rem",
+							},
 							// border: "1px solid",
 						}}
 					>
@@ -56,10 +64,19 @@ const VerificationPage = () => {
 								justifyContent: "center",
 							}}
 						>
-							<Image src="/icons/message.svg" alt="" height={78} width={78} />
+							<Image
+								src='/icons/message.svg'
+								alt=''
+								height={78}
+								width={78}
+							/>
 							<Typography
 								sx={{
-									fontSize: { xs: "22px", md: "27px", xl: "32px" },
+									fontSize: {
+										xs: "22px",
+										md: "27px",
+										xl: "32px",
+									},
 									fontWight: "300",
 									lineHeight: "29px",
 								}}
@@ -69,7 +86,12 @@ const VerificationPage = () => {
 						</Box>
 						<Box
 							sx={{
-								width: { xs: "100%", sm: "60%", md: "90%", xl: "60%" },
+								width: {
+									xs: "100%",
+									sm: "60%",
+									md: "90%",
+									xl: "60%",
+								},
 								display: "flex",
 								flexDirection: "column",
 								alignItems: "center",
@@ -87,8 +109,8 @@ const VerificationPage = () => {
 									marginY: "2rem",
 								}}
 							>
-								Enter the authenrication code we sent to Your email
-								Test@abceed.com below:
+								Enter the authenrication code we sent to Your
+								email {user?.email} below:
 							</Typography>
 							<Box
 								sx={{
@@ -103,11 +125,16 @@ const VerificationPage = () => {
 									value={otp}
 									onChange={handleChange}
 									length={6}
-									className="myClassName"
+									className='myClassName'
 									sx={{
 										".MuiOutlinedInput-root": {
 											borderRadius: "50%",
-											width: { xs: "40px", sm: "74px", md: "74px", xl: "74px" },
+											width: {
+												xs: "40px",
+												sm: "74px",
+												md: "74px",
+												xl: "74px",
+											},
 											height: {
 												xs: "40px",
 												sm: "74px",
@@ -126,7 +153,12 @@ const VerificationPage = () => {
 									color: "#A0A9AB",
 									lineHeight: "27px",
 									textAlign: "center",
-									marginY: { xs: "4rem", sm: "2rem", md: "1rem", xl: "2rem" },
+									marginY: {
+										xs: "4rem",
+										sm: "2rem",
+										md: "1rem",
+										xl: "2rem",
+									},
 								}}
 							>
 								Resend code
@@ -136,15 +168,19 @@ const VerificationPage = () => {
 							sx={{
 								width: "300px",
 								display: "flex",
-								justifyContent: { xs: "center", md: "end", xl: "end" },
+								justifyContent: {
+									xs: "center",
+									md: "end",
+									xl: "end",
+								},
 								position: { xs: "", md: "", xl: "absolute" },
 								bottom: { xs: "0rem", md: "0rem", xl: "1rem" },
 								right: { xs: "", md: "0rem", xl: "0rem" },
 							}}
 						>
 							<ButtonLogin
-								name="Verify"
-								onClick={() => router.push("/payment")}
+								name='Verify'
+								onClick={() => verifyOtp(otp)}
 							/>
 						</Box>
 					</Container>

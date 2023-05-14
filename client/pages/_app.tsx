@@ -1,5 +1,5 @@
 import "../styles/global.css";
-import Head from "next/head";
+
 import { AppProps } from "next/app";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,7 +10,8 @@ import { ToastContainer } from "react-toastify";
 
 import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
-import { UserProvider } from "@/contexts";
+import { UserProvider } from "@/contexts/userContext";
+import "react-toastify/dist/ReactToastify.css";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

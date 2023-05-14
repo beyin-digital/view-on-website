@@ -1,3 +1,5 @@
+import { useEffect, useContext } from "react";
+
 import { Box, Link, Typography } from "@mui/material";
 import Head from "next/head";
 
@@ -11,18 +13,25 @@ import { ButtonLogin } from "@/components/Button";
 // components
 import LoginForm from "@/components/Login/LoginForm";
 import LoginDetails from "@/components/Login/LoginDetails";
-import LoginTextSignUp from "@/components/Login/LoginTextSignUp";
 import Layout from "@/components/Login/Layout";
+import { UserContext } from "@/contexts/userContext";
 
 const LoginPage = () => {
 	const router = useRouter();
+
+	const { token } = useContext(UserContext);
+
+	useEffect(() => {
+		if (token) router.push("/dashboard");
+	}, [token]);
+
 	return (
 		<>
 			<Head>
 				<title>ViewOnWebsite - Login Page</title>
-				<meta name="description" content="" />
-				<meta name="keyword" content="" />
-				<meta property="og:image" content="" />
+				<meta name='description' content='' />
+				<meta name='keyword' content='' />
+				<meta property='og:image' content='' />
 			</Head>
 
 			<Layout>

@@ -50,11 +50,11 @@ export class User extends EntityHelper {
     }
   }
 
+  @Index()
   @Column({ default: AuthProvidersEnum.email })
   @Expose({ groups: ['me', 'admin'] })
   provider: string;
 
-  @Index()
   @Column({ type: String, nullable: true })
   @Expose({ groups: ['me', 'admin'] })
   socialId: string | null;
@@ -63,7 +63,6 @@ export class User extends EntityHelper {
   @Column({ type: String })
   fullName: string | null;
 
-  @Index()
   @Column({ type: String, nullable: true })
   stripeCustomerId: string | null;
 
@@ -86,6 +85,9 @@ export class User extends EntityHelper {
   @Index()
   @Exclude({ toPlainOnly: true })
   otp: string | null;
+
+  @Column({ type: Boolean, nullable: true, default: false })
+  twoFactorAuth: boolean | null;
 
   @CreateDateColumn()
   createdAt: Date;

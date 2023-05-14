@@ -7,4 +7,5 @@ export interface User {
 	stripeCustomerId?: string;
 	deletedAt?: Date;
 	twoFactorAuth?: boolean;
+	organisation?: any;
 }

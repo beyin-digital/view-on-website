@@ -12,22 +12,32 @@ export interface IUserContext {
 	values: {
 		identifier: string;
 		password: string;
+		fullName: string;
+		email: string;
 	};
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	handleLogin?: (e: React.FormEvent<HTMLFormElement>) => void;
+	handleSignup?: (e: React.FormEvent<HTMLFormElement>) => void;
+	updateUser: (values: any) => void;
+	logout: () => void;
+	verifyOtp: (otp: string) => void;
 }
 
 export const UserContext = createContext<IUserContext>({
 	token: null,
 	refreshToken: null,
 	user: null,
-	values: { identifier: "", password: "" },
+	values: { identifier: "", password: "", fullName: "", email: "" },
 	handleChange: (
 		e: React.ChangeEvent<
 			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
 		>
 	) => {},
 	handleLogin: (e: React.FormEvent<HTMLFormElement>) => {},
+	handleSignup: (e: React.FormEvent<HTMLFormElement>) => {},
+	updateUser: (values: any) => {},
+	logout: () => {},
+	verifyOtp: (otp: string) => {},
 });
 
 export const UserProvider = ({ children }: any) => {
@@ -65,10 +75,35 @@ export const UserProvider = ({ children }: any) => {
 				throw new Error();
 			}
 			console.log(data);
-			toast.success("Login successful", {
+			if (data.user.twoFactorAuth) {
+				setUser(data.user);
+				router.push("/verification");
+			} else {
+				setToken(data.token);
+				setRefreshToken(data.refreshToken);
+				setUser(data.user);
+				localStorage.setItem("token", data.token);
+				localStorage.setItem("refreshToken", data.refreshToken);
+				localStorage.setItem("user", JSON.stringify(data.user));
+				router.push("/dashboard");
+			}
+		} catch (err) {
+			toast.error("Error logging in. Please try again.", {
 				position: "top-right",
 				autoClose: 5000,
 			});
+		}
+	};
+
+	const verifyOtp = async (otp: string) => {
+		try {
+			const res = await api.post("/auth/email/confirm", {
+				otp,
+			});
+			const data = res.data;
+			if (res.status >= 400) {
+				throw new Error();
+			}
 
 			setToken(data.token);
 			setRefreshToken(data.refreshToken);
@@ -79,8 +114,8 @@ export const UserProvider = ({ children }: any) => {
 			localStorage.setItem("user", JSON.stringify(data.user));
 
 			router.push("/dashboard");
-		} catch (err) {
-			toast.error("Error logging in. Please try again.", {
+		} catch (e) {
+			toast.error("Error verifying otp. Please try again.", {
 				position: "top-right",
 				autoClose: 5000,
 			});
@@ -91,8 +126,8 @@ export const UserProvider = ({ children }: any) => {
 		e.preventDefault();
 		try {
 			const res = await api.post("/auth/email/register", {
-				fullName: values.identifier,
-				email: values.password,
+				fullName: values.fullName,
+				email: values.email,
 				password: values.password,
 			});
 			const data = res.data;
@@ -115,7 +150,7 @@ export const UserProvider = ({ children }: any) => {
 		}
 	};
 
-	const refreshAccesToken = () => {
+	const refreshAccesToken = async () => {
 		const refreshToken = localStorage.getItem("refreshToken");
 		if (refreshToken) {
 			api.post("/auth/refreshToken", { refreshToken })
@@ -142,6 +177,51 @@ export const UserProvider = ({ children }: any) => {
 		localStorage.removeItem("token");
 		localStorage.removeItem("refreshToken");
 		localStorage.removeItem("user");
+		router.push("/login");
+	};
+
+	const updateUser = async (values: any) => {
+		try {
+			const res = await api.patch(
+				"/auth/me",
+				{ ...values },
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			if (res.status >= 400) {
+				throw new Error();
+			}
+
+			const data = res.data;
+			console.log(data);
+			toast.success("User updated successfully", {
+				position: "top-right",
+				autoClose: 5000,
+			});
+		} catch (error) {
+			toast.error("Error updating user", {
+				position: "top-right",
+				autoClose: 5000,
+			});
+		}
+	};
+
+	const getUserDetails = async () => {
+		try {
+			const res = await api.get("/auth/me", {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			const data = res.data;
+			console.log(data);
+			setUser(data);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	useEffect(() => {
@@ -150,20 +230,22 @@ export const UserProvider = ({ children }: any) => {
 		const user = localStorage.getItem("user");
 
 		if (token && refreshToken && user) {
-			const decodedToken: any = jwt.decode(token);
-			const now = new Date();
+			setToken(token);
+			setRefreshToken(refreshToken);
+			setUser(JSON.parse(user));
+		}
 
-			if (decodedToken.exp * 1000 < now.getTime()) {
+		if (token) {
+			const decodedToken: any = jwt.decode(token);
+			if (decodedToken.exp * 1000 < Date.now()) {
 				refreshAccesToken();
-				// router.push("/dashboard");
-			} else {
-				setToken(token);
-				setRefreshToken(refreshToken);
-				setUser(JSON.parse(user));
-				// router.push("/dashboard");
 			}
 		}
-	}, []);
+
+		if (token && user) {
+			getUserDetails();
+		}
+	}, [token]);
 
 	return (
 		<UserContext.Provider
@@ -174,6 +256,10 @@ export const UserProvider = ({ children }: any) => {
 				values,
 				handleChange,
 				handleLogin,
+				handleSignup,
+				updateUser,
+				logout,
+				verifyOtp,
 			}}
 		>
 			{children}

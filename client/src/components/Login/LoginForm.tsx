@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 import {
 	Box,
 	Typography,
@@ -11,9 +12,10 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import LoginTextSignUp from "./LoginTextSignUp";
 import { ButtonLogin } from "../Button";
 import Link from "next/link";
-import { UserContext } from "@/contexts";
+import { UserContext } from "@/contexts/userContext";
 
 const LoginForm = () => {
+	const router = useRouter();
 	const [showPassword, setShowPassword] = useState(false);
 
 	const handleClickShowPassword = () => setShowPassword(show => !show);
@@ -30,6 +32,11 @@ const LoginForm = () => {
 	console.log("Token", token);
 	console.log("Refresh Token", refreshToken);
 
+	useEffect(() => {
+		if (token) {
+			router.push("/dashboard");
+		}
+	}, [token, refreshToken]);
 	return (
 		<form onSubmit={handleLogin}>
 			<Box
