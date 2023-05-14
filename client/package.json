@@ -30,6 +30,7 @@
         "mui-one-time-password-input": "^1.1.0",
         "next": "latest",
         "next-i18next": "^13.2.2",
+        "next-pwa": "^5.6.0",
         "react": "latest",
         "react-dom": "latest",
         "react-hook-form": "^7.43.9",

@@ -1,8 +1,8 @@
-import { Box,  Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { ButtonLogin } from "../Button";
+import { IconsStyle } from "../Button";
 
 const TextAndButton = () => {
 	const { t } = useTranslation("slider");
@@ -12,12 +12,14 @@ const TextAndButton = () => {
 			<Box
 				sx={{
 					width: "100%",
-					height: "170px",
+					height: "190px",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
 					flexDirection: "column",
-					margin: "1rem",
+					marginY: { xs: "3rem", md: "1rem", xl: "1rem" },
+					// marginX: "1rem",
+					paddingX:"1rem"
 				}}
 			>
 				{locale === "ar" ? (
@@ -72,7 +74,48 @@ const TextAndButton = () => {
 						</Typography>
 					</Typography>
 				)}
-				<ButtonLogin name={`${t("button_two")}`} />
+				{/* <ButtonLogin name={`${t("button_two")}`} /> */}
+				<Box
+					sx={{
+						width: {
+							xs: "240px",
+							sm: "300px",
+							md: "300px",
+							xl: "320px",
+						},
+						display: "flex",
+						justifyContent: "end",
+						background: "#0090EC",
+						borderRadius: "16px",
+					}}
+				>
+					<Button
+						sx={{
+							paddingX: "18px",
+							height: "59px",
+							width: { xs: "220px", md: "231px", xl: "271px" },
+							display: "flex",
+							justifyContent: "space-around",
+						}}
+						onClick={() => ""}
+						type="submit"
+						title={`${t("button_two")}`}
+					>
+						<Typography
+							sx={{
+								letterSpacing: "0.02em",
+								fontSize: { xs: "20px", md: "25px", xl: "32px" },
+								fontWeight: 400,
+								lineHeight: "40px",
+								color: "#FBFBFB",
+								textTransform: "uppercase",
+							}}
+						>
+							{t("button_two")}
+						</Typography>
+						<IconsStyle />
+					</Button>
+				</Box>
 			</Box>
 		</>
 	);

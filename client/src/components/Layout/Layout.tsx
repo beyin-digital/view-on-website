@@ -1,10 +1,11 @@
 import React from "react";
+import { Box } from "@mui/system";
+
+// components
+import Background from "./Background";
 import Header from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import FooterMobile from "../Footer/FooterMobile";
-import { Box } from "@mui/system";
-import Image from "next/image";
-
 interface Props {
 	children: React.ReactNode;
 }
@@ -17,7 +18,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 					maxWidth: "100%",
 					background: "#EAEDED",
 					overflow: "hidden",
-					// marginTop: "5rem",
+					height: "96vh",
 				}}
 			>
 				<Box
@@ -31,35 +32,8 @@ const Layout: React.FC<Props> = ({ children }) => {
 					}}
 				>
 					<Header />
-					<Box
-						sx={{
-							width: "100%",
-							display: { xs: "block", sm: "block", md: "none", xl: "none" },
-						}}
-					>
-						<Image
-							fill
-							src="/images/swirl.svg"
-							alt=""
-							className="ImageMobile"
-						/>
-					</Box>
-					<Box
-						sx={{
-							width: "100%",
-							display: { xs: "none", sm: "none", md: "block", xl: "block" },
-						}}
-					>
-						<Image
-							fill
-							src="/images/swirl.svg"
-							alt=""
-							style={{
-								top: "-43rem",
-								position: "absolute",
-							}}
-						/>
-					</Box>
+					{/* background Layout */}
+					<Background />
 					<Box
 						className="LayoutBox"
 						sx={{
@@ -83,7 +57,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 							},
 							borderRadius: "30px",
 							transform: {
-								xs: "skew(-10deg, 0deg)",
+								xs: "skew(-16deg, 0deg)",
 								sm: "skew(-16deg, 0deg)",
 								md: "skew(-16deg, 0deg)",
 								xl: "skew(-16deg, 0deg)",

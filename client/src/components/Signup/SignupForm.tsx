@@ -1,14 +1,13 @@
-import { Typography, Box, OutlinedInput } from "@mui/material";
+import { Typography, Box, OutlinedInput, Button } from "@mui/material";
 import Link from "next/link";
-import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
+import { IconsStyle } from "../Button";
 
 const SignupForm = () => {
 	const { t } = useTranslation("signup");
-
 	const router = useRouter();
-
 	return (
 		<>
 			<Box
@@ -27,7 +26,7 @@ const SignupForm = () => {
 			>
 				<Box
 					sx={{
-						width: { xs: "100%", sm: "80%", md: "50%", xl: "50%" },
+						width: { xs: "100%", sm: "80%", md: "45%", xl: "45%" },
 						height: { xs: "115px", md: "235px", xl: "235px" },
 						display: "flex",
 						alignItems: "center",
@@ -37,7 +36,6 @@ const SignupForm = () => {
 							md: "space-evenly",
 							xl: "space-evenly",
 						},
-						// marginY: { xs: ".3rem", sm: ".3rem", md: "1rem", xl: ".3rem" },
 					}}
 				>
 					<OutlinedInput
@@ -52,7 +50,6 @@ const SignupForm = () => {
 							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
 						}}
 						placeholder={`${t("form_name")}`}
-						// placeholder="Full name"
 					/>
 					<OutlinedInput
 						sx={{
@@ -70,7 +67,7 @@ const SignupForm = () => {
 				</Box>
 				<Box
 					sx={{
-						width: { xs: "100%", sm: "80%", md: "40%", xl: "40%" },
+						width: { xs: "100%", sm: "80%", md: "45%", xl: "45%" },
 						height: { xs: "115px", md: "235px", xl: "235px" },
 						display: "flex",
 						alignItems: "center",
@@ -143,10 +140,48 @@ const SignupForm = () => {
 						{t("sign_in")}
 					</Link>
 				</Typography>
-				<ButtonLogin
-					name={`${t("sign_up_button")}`}
-					onClick={() => router.push("verification")}
-				/>
+
+				<Box
+					sx={{
+						width: {
+							xs: "240px",
+							sm: "300px",
+							md: "300px",
+							xl: "320px",
+						},
+						display: "flex",
+						justifyContent: "end",
+						background: "#0090EC",
+						borderRadius: "16px",
+					}}
+				>
+					<Button
+						sx={{
+							paddingX: "18px",
+							height: "59px",
+							width: { xs: "220px", md: "231px", xl: "271px" },
+							display: "flex",
+							justifyContent: "space-around",
+						}}
+						onClick={() => router.push("verification")}
+						type="submit"
+						title={`${t("sign_up_button")}`}
+					>
+						<Typography
+							sx={{
+								letterSpacing: "0.02em",
+								fontSize: { xs: "20px", md: "25px", xl: "32px" },
+								fontWeight: 400,
+								lineHeight: "40px",
+								color: "#FBFBFB",
+								textTransform: "uppercase",
+							}}
+						>
+							{t("sign_up_button")}
+						</Typography>
+						<IconsStyle />
+					</Button>
+				</Box>
 			</Box>
 		</>
 	);

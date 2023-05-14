@@ -4,67 +4,6 @@ import { FiArrowUpRight, FiArrowUpLeft } from "react-icons/fi";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
-interface ButtonLoginProps extends ButtonBaseProps {
-	name: string;
-	onClick?: () => void;
-	type?: "button" | "submit" | "reset" | undefined;
-}
-
-export const ButtonLogin = (props: ButtonLoginProps) => {
-	const { locale } = useRouter();
-
-	return (
-		<>
-			<Box
-				sx={{
-					width: {
-						xs: "240px",
-						sm: "300px",
-						md: "300px",
-						xl: "320px",
-					},
-					display: "flex",
-					justifyContent: "end",
-					background: "#0090EC",
-					borderRadius: "16px",
-				}}
-			>
-				<Button
-					sx={{
-						paddingX: "18px",
-						height: "59px",
-						width: { xs: "220px", md: "231px", xl: "271px" },
-						display: "flex",
-						justifyContent: "space-around",
-					}}
-					onClick={props.onClick}
-					type={props.type}
-					title={props.name}
-				>
-					<Typography
-						sx={{
-							// fontFamily: "Helvetica Neue",
-							letterSpacing: "0.02em",
-							fontSize: { xs: "20px", md: "25px", xl: "32px" },
-							fontWeight: 400,
-							lineHeight: "40px",
-							color: "#FBFBFB",
-							textTransform: "uppercase",
-						}}
-					>
-						{props.name}
-					</Typography>
-					{locale === "ar" ? (
-						<FiArrowUpLeft size={42} color="#FBFBFB" className="rig" />
-					) : (
-						<FiArrowUpRight size={42} color="#FBFBFB" className="le" />
-					)}
-				</Button>
-			</Box>
-		</>
-	);
-};
-
 export const ButtonStyle = () => {
 	return (
 		<>
@@ -183,6 +122,7 @@ export const LinkSubscribe = () => {
 					textDecoration: "none",
 				}}
 				title={`${t("button")}`}
+				href="/subscribe"
 			>
 				<Typography
 					sx={{
@@ -203,5 +143,19 @@ export const LinkSubscribe = () => {
 				)}
 			</Link>
 		</Box>
+	);
+};
+
+export const IconsStyle = () => {
+	const { locale } = useRouter();
+
+	return (
+		<>
+			{locale === "ar" ? (
+				<FiArrowUpLeft size={42} color="#FBFBFB" className="rig" />
+			) : (
+				<FiArrowUpRight size={42} color="#FBFBFB" className="le" />
+			)}
+		</>
 	);
 };

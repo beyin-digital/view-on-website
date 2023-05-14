@@ -5,6 +5,7 @@ import {
 	OutlinedInput,
 	InputAdornment,
 	IconButton,
+	Button,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { toast } from "react-toastify";
@@ -19,7 +20,7 @@ import { getMeFn, loginUserFn } from "@/api/authApi";
 import { useStateContext } from "@/contexts";
 
 import LoginTextSignUp from "./LoginTextSignUp";
-import { ButtonLogin } from "../Button";
+import { IconsStyle } from "../Button";
 import Link from "next/link";
 
 import { useTranslation } from "next-i18next";
@@ -128,23 +129,21 @@ const LoginForm = () => {
 					value={values.identifier}
 					sx={{
 						width: "100",
-						height: { xs: "47px", md: "50px", xl: "65px" },
-						// fontSize: {
-						// 	xs: "18px",
-						// 	sm: "22px",
-						// 	md: "28px",
-						// 	xl: "32px",
-						// },
+						height: { xs: "47px", md: "50px", xl: "60px" },
 						fontSize: "24px",
 						lineHeight: "28px",
 						background: "#FBFBFB",
-						// border: "0.897277px solid #E3E3E3",
 						borderRadius: "10px",
-						marginY: ".5rem",
+						marginY: ".3rem",
+						border: "1 solid #E3E3E3",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
-						// delete this once time
-						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-							border: 0,
+
+						".MuiOutlinedInput-notchedOutline": {
+							border: "0",
+							padding: "9px",
+						},
+						"&:hover > .MuiOutlinedInput-notchedOutline": {
+							border: "0",
 						},
 					}}
 					onChange={(e) => setValues({ ...values, identifier: e.target.value })}
@@ -155,17 +154,20 @@ const LoginForm = () => {
 					value={values.password}
 					sx={{
 						width: "100",
-						height: { xs: "47px", md: "50px", xl: "65px" },
+						height: { xs: "47px", md: "50px", xl: "60px" },
 						fontSize: "24px",
 						lineHeight: "28px",
 						background: "#FBFBFB",
-						border: "0",
 						borderRadius: "10px",
-						marginY: ".5rem",
+						border: "1 solid #E3E3E3",
+						marginY: ".3rem",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
-						// delete this once time
-						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-							border: 0,
+						".MuiOutlinedInput-notchedOutline": {
+							border: "0",
+							padding: "9px",
+						},
+						"&:hover > .MuiOutlinedInput-notchedOutline": {
+							border: "0",
 						},
 					}}
 					className="loginButton"
@@ -214,18 +216,58 @@ const LoginForm = () => {
 			</Box>
 			<Box
 				sx={{
-					marginY: "2rem",
+					marginY: "1rem",
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",
 				}}
 			>
-				<ButtonLogin
-					name={`${t("login")}`}
-					type="submit"
-					onClick={handleSubmit}
-				/>
+				{/* login  */}
+				<Box
+					sx={{
+						width: {
+							xs: "240px",
+							sm: "300px",
+							md: "300px",
+							xl: "320px",
+						},
+						display: "flex",
+						justifyContent: "end",
+						background: "#0090EC",
+						borderRadius: "16px",
+					}}
+				>
+					<Button
+						sx={{
+							paddingX: "18px",
+							height: "59px",
+							width: { xs: "220px", md: "231px", xl: "271px" },
+							display: "flex",
+							justifyContent: "space-around",
+						}}
+						onClick={handleSubmit}
+						type="submit"
+						title={`${t("login")}`}
+					>
+						<Typography
+							sx={{
+								letterSpacing: "0.02em",
+								fontSize: { xs: "20px", md: "25px", xl: "32px" },
+								fontWeight: 400,
+								lineHeight: "40px",
+								color: "#FBFBFB",
+								textTransform: "uppercase",
+							}}
+						>
+							{t("login")}
+						</Typography>
+						<IconsStyle />
+					</Button>
+				</Box>
+				{/*  */}
+
 				<LoginTextSignUp />
+				{/*  */}
 				<Box
 					sx={{
 						display: "flex",

@@ -13,8 +13,8 @@ const LoginDetails = () => {
 					flexDirection: "column",
 					alignItems: "center",
 					justifyContent: "center",
-					marginTop: "2rem",
-					marginBottom: "1rem",
+					marginTop: "3.5rem",
+					marginBottom: ".5rem",
 				}}
 			>
 				<Image
@@ -30,7 +30,7 @@ const LoginDetails = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					marginY: { xs: "2rem", md: "1rem", xl: "2rem" },
+					marginY: { xs: "2rem", md: ".5rem", xl: "1rem" },
 				}}
 			>
 				<Typography

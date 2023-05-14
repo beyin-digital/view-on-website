@@ -297,7 +297,16 @@ const Header = () => {
 					}}
 				/>
 				<Image
-					src="/icons/insta.svg"
+					src="/icons/instagram.svg"
+					alt=""
+					height={18}
+					width={18}
+					style={{
+						margin: "0 .5rem",
+					}}
+				/>
+				<Image
+					src="/icons/linkedin.svg"
 					alt=""
 					height={18}
 					width={18}

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -12,7 +13,7 @@ import { useTranslation } from "next-i18next";
 
 const SwiperSlider = () => {
 	const { t } = useTranslation("slider");
-
+	const [isVertical, setIsVertical] = useState(true);
 	const images = [
 		{ id: 1, num: "a" },
 		{ id: 2, num: "b" },
@@ -41,15 +42,30 @@ const SwiperSlider = () => {
 		{ id: 25, num: "y" },
 		{ id: 26, num: "z" },
 	];
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth < 610) {
+				setIsVertical(true);
+			} else {
+				setIsVertical(false);
+			}
+		};
+		handleResize();
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 	return (
 		<>
 			<Box
 				sx={{
 					height: {
-						xs: "600px",
-						sm: "600px",
-						md: "400px",
-						xl: "300px",
+						xs: "100%",
+						sm: "300px",
+						md: "300px",
+						xl: "200px",
 					},
 					width: "100%",
 					maxWidth: "100%",
@@ -58,9 +74,10 @@ const SwiperSlider = () => {
 					justifyContent: "center",
 					background: "transparent",
 				}}
-				className="swiper-blurr oop"
+				className=""
 			>
 				<Swiper
+					direction={isVertical ? "vertical" : "horizontal"}
 					effect={"coverflow"}
 					grabCursor={true}
 					centeredSlides={true}
@@ -91,8 +108,7 @@ const SwiperSlider = () => {
 						},
 						clickable: true,
 					}}
-					autoplay={{ delay: 4000, disableOnInteraction: false }} // تحديد فترة التأخير بين كل انتقال
-					direction={"horizontal"}
+					autoplay={{ delay: 4000, disableOnInteraction: false }} // تحديد فترة التأخير بين كل انتقال					direction={isVertical ? "vertical" : "horizontal"}
 					style={{
 						background: "transparent",
 					}}
@@ -106,63 +122,50 @@ const SwiperSlider = () => {
 								display: "flex",
 								alignItems: "center",
 								justifyContent: "center",
+								zIndex: "9",
+								position: "relative",
 							}}
 						>
+							<img src="/images/card.png" className="ImageSlider" />
 							<Box
 								sx={{
-									width: {
-										xs: "400px",
-										sm: "100%",
-										md: "100%",
-										xl: "100%",
-									},
-									height: { xs: "150px", md: "189px", xl: "189px" },
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "center",
+									position: "absolute",
 								}}
-								className="swiper-blur"
 							>
-								<Box
+								<Typography
 									sx={{
-										width: "200px",
-										height: "100px",
+										fontSize: {
+											xs: "50px",
+											sm: "96px",
+											ms: "96px",
+											xl: "96px",
+										},
+										fontWeight: "500",
+										color: "#31E716",
+										lineHeight: "88.8px",
+										textAlign: "center",
+										textTransform: "uppercase",
+										marginY: ".2rem",
 									}}
 								>
-									<Typography
-										sx={{
-											fontSize: {
-												xs: "50px",
-												sm: "96px",
-												ms: "96px",
-												xl: "96px",
-											},
-											fontWeight: "500",
-											color: "#31E716",
-											lineHeight: "88.8px",
-											textAlign: "center",
-											textTransform: "uppercase",
-										}}
-									>
-										# {item.num}
-									</Typography>
-									<Typography
-										sx={{
-											fontSize: {
-												xs: "16px",
-												sm: "20px",
-												md: "20px",
-												xl: "20px",
-											},
-											fontWeight: "500",
-											color: "#0091ED",
-											lineHeight: "18.8px",
-											textAlign: "center",
-										}}
-									>
-										ViewOnWebsite.Com
-									</Typography>
-								</Box>
+									#{item.num}
+								</Typography>
+								<Typography
+									sx={{
+										fontSize: {
+											xs: "16px",
+											sm: "20px",
+											md: "20px",
+											xl: "20px",
+										},
+										fontWeight: "500",
+										color: "#0091ED",
+										lineHeight: "18.8px",
+										textAlign: "center",
+									}}
+								>
+									ViewOnWebsite.Com
+								</Typography>
 							</Box>
 						</SwiperSlide>
 					))}

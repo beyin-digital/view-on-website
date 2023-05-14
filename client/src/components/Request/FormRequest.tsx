@@ -1,7 +1,8 @@
 import { Box, Button, OutlinedInput, Typography } from "@mui/material";
 import LoginTextSignUp from "../Login/LoginTextSignUp";
-import { FiArrowUpRight, FiArrowUpLeft } from "react-icons/fi";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { IconsStyle } from "../Button";
 
 const FormRequest = () => {
 	const { t } = useTranslation("request");
@@ -76,9 +77,7 @@ const FormRequest = () => {
 						>
 							{t("send")}
 						</Typography>
-
-						<FiArrowUpRight size={42} color="#FBFBFB" className="left" />
-						<FiArrowUpLeft size={42} color="#FBFBFB" className="right" />
+						<IconsStyle />
 					</Button>
 				</Box>
 				<LoginTextSignUp />

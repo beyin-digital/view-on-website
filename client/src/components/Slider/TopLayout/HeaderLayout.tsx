@@ -1,15 +1,20 @@
-import { Box, Button, Typography } from "@mui/material";
+// import { Box, Button, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { Box, Typography } from "@mui/material";
 
-const HeaderLayout = () => {
+
+const HeaderLayout = ({ num }: any) => {
 	const { t } = useTranslation("slider");
 	const { locale } = useRouter();
+
 	return (
 		<>
-			<Box sx={{
-				width:"100%"
-			}}>
+			<Box
+				sx={{
+					width: "100%",
+				}}
+			>
 				{locale === "ar" ? (
 					<Box
 						sx={{
@@ -17,7 +22,7 @@ const HeaderLayout = () => {
 							alignItems: "center",
 							justifyContent: "space-between",
 							height: { xs: "100%", md: "100px", xl: "100px" },
-							width:"100%",
+							width: "100%",
 							flexDirection: {
 								xs: "column-reverse",
 								md: "row-reverse",
@@ -131,19 +136,19 @@ const HeaderLayout = () => {
 										borderRadius: "7px",
 										fontSize: { xs: "25px", md: "30px", xl: "40px" },
 										fontWeight: "400",
-										lineHeight: "45px",
+										lineHeight: "40px",
 									}}
 								>
 									#{t("keyword")}
 								</Typography>
-								{/* {t("prime")} */}
+
 							</Typography>
 						</Box>
 						<Box
 							sx={{
 								position: "relative",
 								width: "200px",
-								// height:"200px"
+
 							}}
 						>
 							<img
@@ -163,29 +168,34 @@ const HeaderLayout = () => {
 									flexDirection: "column",
 									top: "0",
 									right: "0",
-									// marginX:"1rem"
+
 								}}
 							>
-								<Typography
-									sx={{
-										fontSize: "36px",
-										fontWeight: "600",
-										lineHeight: "70px",
-										color: "#31E716",
-									}}
-								>
-									#A
-								</Typography>
-								<Typography
-									sx={{
-										fontSize: "19px",
-										fontWeight: "600",
-										lineHeight: "13px",
-										color: "#0090EC",
-									}}
-								>
-									ViewOnWebsite.com
-								</Typography>
+
+								<>
+									<Typography
+
+										sx={{
+											fontSize: "36px",
+											fontWeight: "600",
+											lineHeight: "70px",
+											color: "#31E716",
+										}}
+									>
+										#A
+									</Typography>
+									<Typography
+										sx={{
+											fontSize: "19px",
+											fontWeight: "600",
+											lineHeight: "13px",
+											color: "#0090EC",
+										}}
+									>
+										ViewOnWebsite.com
+									</Typography>
+								</>
+
 							</Box>
 						</Box>
 					</Box>

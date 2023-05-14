@@ -30,12 +30,7 @@ const ChangePassword = () => {
 						height: "100%",
 						justifyContent: "center",
 						paddingX: "1rem",
-						transform: {
-							xs: "skew(10deg, 0deg)",
-							sm: "skew(16deg, 0deg)",
-							md: "skew(16deg, 0deg)",
-							xl: "skew(16deg, 0deg)",
-						},
+						transform: "skew(16deg, 0deg)",
 					}}
 				>
 					<Box

@@ -40,19 +40,12 @@ const SubscribePage: NextPage = () => {
 		<Layout>
 			<Grid
 				sx={{
-					// marginLeft: { xs: "0px", sm: "120px", md: "15rem", xl: "16rem" },
-					paddingX: { xs: ".5rem", sm: "2rem", md: "2rem", xl: "2rem" },
+					paddingX: { xs: ".5rem", sm: "1rem", md: "2rem", xl: "2rem" },
 					height: "100%",
-					transform: {
-						xs: "skew(10deg, 0deg)",
-						sm: "skew(16deg, 0deg)",
-						md: "skew(16deg, 0deg)",
-						xl: "skew(16deg, 0deg)",
-					},
+					transform: "skew(16deg, 0deg)",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					// marginY: "2rem",
 				}}
 				className="SubscribePageLayoutBox"
 			>
@@ -68,8 +61,8 @@ const SubscribePage: NextPage = () => {
 					>
 						<Box
 							sx={{
-								marginTop: { xs: "2rem", md: "1rem", xl: "1rem" },
-								marginBottom: { xs: ".1rem", md: "1rem", xl: "1rem" },
+								marginY: { xs: "2rem", md: "1rem", xl: "0rem" },
+								marginX: { xs: "1rem", md: "1rem", xl: "1rem" },
 							}}
 						>
 							<Typography
@@ -214,7 +207,7 @@ const SubscribePage: NextPage = () => {
 								sx={{
 									width: "100%",
 									display: "flex",
-									justifyContent: "end",
+									justifyContent: { xs: "center", md: "end", xl: "end" },
 									marginY: { xs: "2rem", xl: "1rem" },
 								}}
 							>
@@ -229,7 +222,7 @@ const SubscribePage: NextPage = () => {
 										background: "#31E716",
 										// marginRight: { xs: "10rem", xl: "4rem" },
 									}}
-									onClick={() => router.push(`/subscribe/${values.hashtag}`)}
+									// onClick={() => router.push(`/subscribe/${values.hashtag}`)}
 								>
 									<Typography
 										sx={{

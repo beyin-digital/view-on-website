@@ -109,7 +109,6 @@ const DetailsFooter = () => {
 						>
 							<Typography
 								sx={{
-									fontFamily: "Helvetica Neue",
 									letterSpacing: "0.02em",
 									fontSize: "32px",
 									fontWeight: 400,
@@ -138,7 +137,6 @@ const DetailsFooter = () => {
 						>
 							<Typography
 								sx={{
-									fontFamily: "Helvetica Neue",
 									letterSpacing: "0.02em",
 									fontSize: "32px",
 									fontWeight: 400,

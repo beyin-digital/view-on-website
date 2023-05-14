@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-
 interface Props {
 	children: React.ReactNode;
 }
@@ -14,7 +13,7 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 					display: "flex",
 					alignItems: "start",
 					justifyContent: "end",
-					marginLeft: { xl: "-3rem" },
+					marginLeft: { xs: "2rem", sm: "1rem", md: "-2rem", xl: "-3rem" },
 				}}
 			>
 				<Box
@@ -27,7 +26,7 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 						sx={{
 							width: { xs: "100%", sm: "500px", md: "740px", xl: "740px" },
 							height: {
-								xs: "",
+								xs: "180px",
 								sm: "300px",
 								md: "370px",
 								xl: "360px",

@@ -24,6 +24,12 @@ const Footer = () => {
 			alt: "Instagram icon",
 			link: "https://instagram.com",
 		},
+		{
+			id: 4,
+			icon: "/icons/linkedin.svg",
+			alt: "Instagram icon",
+			link: "https://linkedin.com",
+		},
 	];
 	const links = [
 		{ id: 1, link: "/privacy", title: "footer_privacy" },
@@ -51,7 +57,7 @@ const Footer = () => {
 						display: { xs: "flex", md: "flex", xl: "flex" },
 						alignItems: "center",
 						justifyContent: { xs: "center", md: "start", xl: "start" },
-						margin: { xs: " 2rem 0", xl: "0" },
+						// margin: { xs: " 2rem 0", xl: "0" },
 					}}
 				>
 					{icons.map((item) => (

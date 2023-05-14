@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout/Layout";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import { ButtonLogin } from "@/components/Button";
+// import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import React from "react";
@@ -11,6 +11,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
+import { IconsStyle } from "@/components/Button";
 
 const VerificationPage = () => {
 	const { t } = useTranslation("verification");
@@ -32,19 +33,14 @@ const VerificationPage = () => {
 			</Head>
 			<Layout>
 				<Grid
-					container
+					// container
 					sx={{
 						width: "100%",
 						height: "100%",
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
-						transform: {
-							xs: "skew(10deg, 0deg)",
-							sm: "skew(16deg, 0deg)",
-							md: "skew(16deg, 0deg)",
-							xl: "skew(16deg, 0deg)",
-						},
+						transform: "skew(16deg, 0deg)",
 					}}
 				>
 					<Container
@@ -56,7 +52,7 @@ const VerificationPage = () => {
 							alignItems: "center",
 							justifyContent: "space-around",
 							position: "relative",
-							marginY: { xs: "8rem", sm: "4rem", md: "1rem", xl: "0rem" },
+							marginY: { xs: "4rem", sm: "4rem", md: "1rem", xl: "0rem" },
 							paddingY: "1rem",
 						}}
 						className="VerificationPageCenter"
@@ -70,7 +66,12 @@ const VerificationPage = () => {
 								justifyContent: "center",
 							}}
 						>
-							<Image src="/icons/message.svg" alt="" height={78} width={78} />
+							<Image
+								src="/icons/message.svg"
+								alt="View On Website Icon message"
+								height={78}
+								width={78}
+							/>
 							<Typography
 								sx={{
 									fontSize: { xs: "22px", md: "27px", xl: "32px" },
@@ -97,7 +98,7 @@ const VerificationPage = () => {
 									color: "#A0A9AB",
 									lineHeight: "28px",
 									textAlign: "center",
-									marginY: "2rem",
+									marginY: "1rem",
 									paddingX: ".5rem",
 								}}
 							>
@@ -116,13 +117,13 @@ const VerificationPage = () => {
 									value={otp}
 									onChange={handleChange}
 									length={6}
-									className="myClassName"
+									className="myClassName "
 									sx={{
 										".MuiOutlinedInput-root": {
 											borderRadius: "50%",
-											width: { xs: "40px", sm: "74px", md: "74px", xl: "74px" },
+											width: { xs: "50px", sm: "74px", md: "74px", xl: "74px" },
 											height: {
-												xs: "40px",
+												xs: "50px",
 												sm: "74px",
 												md: "74px",
 												xl: "74px",
@@ -139,7 +140,7 @@ const VerificationPage = () => {
 									color: "#A0A9AB",
 									lineHeight: "27px",
 									textAlign: "center",
-									marginY: { xs: "4rem", sm: "2rem", md: "1rem", xl: "2rem" },
+									marginY: { xs: "1rem", sm: "2rem", md: "1rem", xl: "2rem" },
 								}}
 							>
 								{t("resend")}
@@ -155,10 +156,47 @@ const VerificationPage = () => {
 								right: { xs: "", md: "0rem", xl: "0rem" },
 							}}
 						>
-							<ButtonLogin
-								name={`${t("button")}`}
-								onClick={() => router.push("/payment")}
-							/>
+							<Box
+								sx={{
+									width: {
+										xs: "240px",
+										sm: "300px",
+										md: "300px",
+										xl: "320px",
+									},
+									display: "flex",
+									justifyContent: "end",
+									background: "#0090EC",
+									borderRadius: "16px",
+								}}
+							>
+								<Button
+									sx={{
+										paddingX: "18px",
+										height: "59px",
+										width: { xs: "220px", md: "231px", xl: "271px" },
+										display: "flex",
+										justifyContent: "space-around",
+									}}
+									onClick={() => router.push("/payment")}
+									type="submit"
+									title={`${t("button")}`}
+								>
+									<Typography
+										sx={{
+											letterSpacing: "0.02em",
+											fontSize: { xs: "20px", md: "25px", xl: "32px" },
+											fontWeight: 400,
+											lineHeight: "40px",
+											color: "#FBFBFB",
+											textTransform: "uppercase",
+										}}
+									>
+										{t("button")}
+									</Typography>
+									<IconsStyle />
+								</Button>
+							</Box>
 						</Box>
 					</Container>
 				</Grid>

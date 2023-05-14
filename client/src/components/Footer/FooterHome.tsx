@@ -29,6 +29,12 @@ const Footer = ({ onClick }: any) => {
 			alt: "Instagram icon",
 			link: "https://instagram.com",
 		},
+		{
+			id: 4,
+			icon: "/icons/linkedin.svg",
+			alt: "Instagram icon",
+			link: "https://linkedin.com",
+		},
 	];
 	return (
 		<footer>
@@ -36,9 +42,9 @@ const Footer = ({ onClick }: any) => {
 				sx={{
 					width: "100%",
 					maxWidth: "100%",
-					display: { xs: "", md: "flex", xl: "flex" },
+					display: "flex",
 					flexDirection: { xs: "column", md: "row", xl: "row" },
-					alignItems: "start",
+					alignItems: "center",
 					justifyContent: {
 						xs: "space-between",
 						md: "space-between",
@@ -49,10 +55,11 @@ const Footer = ({ onClick }: any) => {
 				<Box
 					sx={{
 						width: { xs: "100%", md: "30%", xl: "30%" },
-						display: { xs: "flex", md: "flex", xl: "flex" },
-						alignItems: "center",
+						display: "flex",
+						alignItems: "end",
 						justifyContent: { xs: "center", md: "start", xl: "start" },
 						margin: { xs: " .1rem 0", sm: "2rem 0", md: "0", xl: "0" },
+						zIndex: "999",
 					}}
 				>
 					{icons.map((item) => (
@@ -64,7 +71,7 @@ const Footer = ({ onClick }: any) => {
 								height={30}
 								width={30}
 								style={{
-									margin: "0 2rem",
+									margin: "auto 1rem",
 								}}
 							/>
 						</Link>
@@ -76,6 +83,7 @@ const Footer = ({ onClick }: any) => {
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "space-between",
+						// border: "1px solid",
 					}}
 				>
 					<Box
@@ -88,6 +96,7 @@ const Footer = ({ onClick }: any) => {
 								md: "space-between",
 								xl: "space-between",
 							},
+							overflow: "hidden",
 						}}
 					>
 						<Box
@@ -110,7 +119,7 @@ const Footer = ({ onClick }: any) => {
 								sx={{
 									fontSize: { xs: "25px", xl: "32px" },
 								}}
-								fontWeight="400"
+								fontWeight="700"
 								lineHeight="92.5%"
 								textAlign="center"
 							>

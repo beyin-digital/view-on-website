@@ -8,7 +8,7 @@ import Head from "next/head";
 import { Drawer } from "@mui/material";
 import { Box, Button } from "@mui/material";
 
-import Layout from "@/components/Layout/LayoutWithFooter";
+import Layout from "@/components/Layout/LayoutHome";
 import SliderDesktop from "@/components/Slider";
 import HomeDetails from "@/components/Home/HomeDetails";
 

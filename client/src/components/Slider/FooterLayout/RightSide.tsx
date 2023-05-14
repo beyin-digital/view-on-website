@@ -26,12 +26,7 @@ const RightSide = () => {
 					},
 					display: "flex",
 					alignItems: "center",
-					justifyContent: {
-						xs: "space-between",
-						sm: "space-around",
-						md: "space-around",
-						xl: "space-around",
-					},
+					justifyContent: "space-around",
 					flexDirection: {
 						xs: "row",
 						sm: "row",
@@ -43,7 +38,7 @@ const RightSide = () => {
 			>
 				<Box
 					sx={{
-						width: { xs: "30%", md: "35%", xl: "23%" },
+						width: { xs: "37%", md: "35%", xl: "23%" },
 						height: "100%",
 						display: "flex",
 						flexDirection: "column",
@@ -103,7 +98,7 @@ const RightSide = () => {
 						{/* {t("more_dolor")} */}
 						{/* {t("dolor")} */}
 						{/* {t("num_more")} */}
-						1M
+						1M$
 					</Typography>
 					<Typography
 						sx={{
@@ -121,7 +116,7 @@ const RightSide = () => {
 			<Box
 				sx={{
 					width: {
-						xs: "100%",
+						xs: "70%",
 						sm: "60%",
 						md: "50%",
 						xl: "40%",
@@ -167,8 +162,9 @@ const RightSide = () => {
 								sx={{
 									display: "flex",
 									alignItems: "center",
-									justifyContent: "space-between",
+									justifyContent: "center",
 									height: { xs: "30px", xl: "25px" },
+									// border:"1px solid"
 									// flexDirection:"row-reverse"
 								}}
 							>

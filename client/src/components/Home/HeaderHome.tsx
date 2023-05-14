@@ -1,8 +1,8 @@
-import { Box, Typography, Button, Modal } from "@mui/material";
+import { Box, Typography, Modal } from "@mui/material";
 import { useTranslation } from "next-i18next";
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactPlayer from "react-player";
-import { AiOutlineClose, AiFillCloseCircle } from "react-icons/ai";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const Header = () => {
 	const { t } = useTranslation("home");
@@ -20,7 +20,7 @@ const Header = () => {
 		<>
 			<Box
 				sx={{
-					width: { xs: "100%", md: "90%", xl: "85%" },
+					width: { xs: "100%", md: "90%", xl: "90%" },
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
@@ -28,7 +28,7 @@ const Header = () => {
 			>
 				<Box
 					sx={{
-						width: { xs: "85%", sm: "80%", md: "650px", xl: "776px" },
+						width: { xs: "85%", sm: "80%", md: "80%", xl: "90%" },
 						px: { xs: ".5rem", sm: "1.5rem", md: "1.5rem", xl: "1.5rem" },
 					}}
 				>
@@ -73,8 +73,8 @@ const Header = () => {
 				</Box>
 				<Box
 					sx={{
-						width: { xs: "53px", sm: "53px", md: "80px", xl: "103px" },
-						height: { xs: "53px", sm: "53px", md: "80px", xl: "103px" },
+						width: { xs: "53px", sm: "50px", md: "70px", xl: "103px" },
+						height: { xs: "53px", sm: "50px", md: "70px", xl: "103px" },
 						marginX: { xs: ".4rem", sm: "1rem", md: "1rem", xl: "1rem" },
 						cursor: "pointer",
 					}}
@@ -101,8 +101,6 @@ const Header = () => {
 					>
 						<Box
 							sx={{
-								// width: "100%",
-								// height: "100vh",
 								display: "flex",
 								alignItems: "center",
 								justifyContent: "center",
@@ -114,7 +112,6 @@ const Header = () => {
 									height: { xs: "400px", md: "600px", xl: "600px" },
 									bgcolor: "transparent",
 									paddingX: "1rem",
-									// position: "relative",
 									position: "absolute" as "absolute",
 									top: "50%",
 									left: "50%",
@@ -137,11 +134,6 @@ const Header = () => {
 									}}
 									onClick={closeModel}
 								>
-									{/* <AiOutlineClose
-									onClick={closeModel}
-									size={30}
-									color="#FBFBFB"
-								/> */}
 									<AiFillCloseCircle
 										onClick={closeModel}
 										size={30}

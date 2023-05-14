@@ -15,6 +15,7 @@ const PaymentPage = () => {
 	return (
 		<>
 			<Layout>
+				{/* delete page */}
 				{/* <PaymentDetails /> */}
 			</Layout>
 		</>
