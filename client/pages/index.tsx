@@ -26,26 +26,26 @@ const HomePage = (anchor: Anchor) => {
 		top: false,
 		bottom: false,
 	});
-	const toggleDrawer = (anchor: Anchor, open: boolean) => (
-		event: React.KeyboardEvent | React.MouseEvent,
-	) => {
-		if (
-			event.type === "keydown" &&
-			((event as React.KeyboardEvent).key === "Tab" ||
-				(event as React.KeyboardEvent).key === "Shift")
-		) {
-			return;
-		}
+	const toggleDrawer =
+		(anchor: Anchor, open: boolean) =>
+		(event: React.KeyboardEvent | React.MouseEvent) => {
+			if (
+				event.type === "keydown" &&
+				((event as React.KeyboardEvent).key === "Tab" ||
+					(event as React.KeyboardEvent).key === "Shift")
+			) {
+				return;
+			}
 
-		setState({ ...state, [anchor]: open });
-	};
+			setState({ ...state, [anchor]: open });
+		};
 	return (
 		<>
 			<Head>
 				<title>ViewOnWebsite - Home Page</title>
-				<meta name="description" content="" />
-				<meta name="keyword" content="" />
-				<meta property="og:image" content="" />
+				<meta name='description' content='' />
+				<meta name='keyword' content='' />
+				<meta property='og:image' content='' />
 			</Head>
 			<Box
 				sx={{
@@ -84,7 +84,7 @@ const HomePage = (anchor: Anchor) => {
 					<>
 						<HomeDetails />
 						<Drawer
-							anchor="bottom"
+							anchor='bottom'
 							open={isDrawerOpen}
 							onClose={() => setIsDrawerOpen(false)}
 							onClick={toggleDrawer(anchor, false)}

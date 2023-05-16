@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import jwt from "jsonwebtoken";
 import { User } from "@/types/user";
 import { api } from "@/utils/api";
+import useDebounce from "@/hooks/useDebounce";
 
 export interface IUserContext {
 	token: string | null;
@@ -20,6 +21,7 @@ export interface IUserContext {
 	handleSignup?: (e: React.FormEvent<HTMLFormElement>) => void;
 	updateUser: (values: any) => void;
 	logout: () => void;
+	resendOTP: (email: string) => void;
 	verifyOtp: (otp: string) => void;
 }
 
@@ -37,6 +39,7 @@ export const UserContext = createContext<IUserContext>({
 	handleSignup: (e: React.FormEvent<HTMLFormElement>) => {},
 	updateUser: (values: any) => {},
 	logout: () => {},
+	resendOTP: (email: string) => {},
 	verifyOtp: (otp: string) => {},
 });
 
@@ -48,6 +51,8 @@ export const UserProvider = ({ children }: any) => {
 		fullName: "",
 		password: "",
 	});
+
+	const emailDebounceValue = useDebounce(values.email, 500);
 
 	const [token, setToken] = useState<string | null>(null);
 	const [refreshToken, setRefreshToken] = useState<string | null>(null);
@@ -78,15 +83,21 @@ export const UserProvider = ({ children }: any) => {
 			if (data.user.twoFactorAuth) {
 				setUser(data.user);
 				router.push("/verification");
-			} else {
-				setToken(data.token);
-				setRefreshToken(data.refreshToken);
-				setUser(data.user);
-				localStorage.setItem("token", data.token);
-				localStorage.setItem("refreshToken", data.refreshToken);
-				localStorage.setItem("user", JSON.stringify(data.user));
-				router.push("/dashboard");
+				return;
 			}
+			setToken(data.token);
+			setRefreshToken(data.refreshToken);
+			setUser(data.user);
+			localStorage.setItem("token", data.token);
+			localStorage.setItem("refreshToken", data.refreshToken);
+			localStorage.setItem("user", JSON.stringify(data.user));
+			setValues({
+				identifier: "",
+				email: "",
+				fullName: "",
+				password: "",
+			});
+			router.push("/dashboard");
 		} catch (err) {
 			toast.error("Error logging in. Please try again.", {
 				position: "top-right",
@@ -112,6 +123,16 @@ export const UserProvider = ({ children }: any) => {
 			localStorage.setItem("token", data.token);
 			localStorage.setItem("refreshToken", data.refreshToken);
 			localStorage.setItem("user", JSON.stringify(data.user));
+			setValues({
+				identifier: "",
+				email: "",
+				fullName: "",
+				password: "",
+			});
+			toast.success("Email verified successfully", {
+				position: "top-right",
+				autoClose: 5000,
+			});
 
 			router.push("/dashboard");
 		} catch (e) {
@@ -136,12 +157,14 @@ export const UserProvider = ({ children }: any) => {
 				throw new Error();
 			}
 			console.log(data);
-			toast.success("Signup successful", {
-				position: "top-right",
-				autoClose: 5000,
-			});
+			router.push(`/verification?newUser=${values.email}`);
 
-			router.push("/verification");
+			setValues({
+				identifier: "",
+				email: "",
+				fullName: "",
+				password: "",
+			});
 		} catch (err) {
 			toast.error("Error signing up. Please try again.", {
 				position: "top-right",
@@ -150,7 +173,33 @@ export const UserProvider = ({ children }: any) => {
 		}
 	};
 
-	const refreshAccesToken = async () => {
+	const checkEmail = async (email: string) => {
+		try {
+			const res = await api.get("/auth/email/check", {
+				params: {
+					email,
+				},
+			});
+			const data = res.data;
+			if (res.status >= 400) {
+				throw new Error();
+			}
+			console.log(data);
+			if (data.exists) {
+				toast.error("Email already exists", {
+					position: "top-right",
+					autoClose: 5000,
+				});
+			}
+		} catch (err) {
+			toast.error("Error checking email", {
+				position: "top-right",
+				autoClose: 5000,
+			});
+		}
+	};
+
+	const refreshAccessToken = async () => {
 		const refreshToken = localStorage.getItem("refreshToken");
 		if (refreshToken) {
 			api.post("/auth/refreshToken", { refreshToken })
@@ -166,6 +215,9 @@ export const UserProvider = ({ children }: any) => {
 				})
 				.catch(err => {
 					console.log(err);
+					localStorage.removeItem("token");
+					localStorage.removeItem("refreshToken");
+					localStorage.removeItem("user");
 				});
 		}
 	};
@@ -209,6 +261,20 @@ export const UserProvider = ({ children }: any) => {
 		}
 	};
 
+	const resendOTP = async () => {
+		try {
+			const res = await api.post("/auth/email/resend", {
+				email: user?.email,
+			});
+			if (res.status >= 400) {
+				throw new Error();
+			}
+			toast.success("OTP sent successfully", {});
+		} catch (error) {
+			toast.error("Error sending OTP", {});
+		}
+	};
+
 	const getUserDetails = async () => {
 		try {
 			const res = await api.get("/auth/me", {
@@ -227,25 +293,26 @@ export const UserProvider = ({ children }: any) => {
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		const refreshToken = localStorage.getItem("refreshToken");
-		const user = localStorage.getItem("user");
-
-		if (token && refreshToken && user) {
-			setToken(token);
-			setRefreshToken(refreshToken);
-			setUser(JSON.parse(user));
-		}
 
 		if (token) {
 			const decodedToken: any = jwt.decode(token);
 			if (decodedToken.exp * 1000 < Date.now()) {
-				refreshAccesToken();
+				if (refreshToken) {
+					refreshAccessToken();
+				}
 			}
 		}
 
 		if (token && user) {
 			getUserDetails();
 		}
-	}, [token]);
+
+		if (emailDebounceValue) {
+			if (emailDebounceValue.match(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/)) {
+				checkEmail(emailDebounceValue);
+			}
+		}
+	}, [token, emailDebounceValue]);
 
 	return (
 		<UserContext.Provider
@@ -258,6 +325,7 @@ export const UserProvider = ({ children }: any) => {
 				handleLogin,
 				handleSignup,
 				updateUser,
+				resendOTP,
 				logout,
 				verifyOtp,
 			}}

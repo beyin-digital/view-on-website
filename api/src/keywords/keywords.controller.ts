@@ -1,24 +1,27 @@
 import {
-  Body,
+  //   Body,
   Controller,
   DefaultValuePipe,
   Get,
   HttpCode,
   HttpStatus,
   ParseIntPipe,
-  Post,
+  //   Post,
   Query,
-  Req,
+  //   Req,
   SerializeOptions,
-  UseGuards,
+  //   UseGuards,
 } from '@nestjs/common';
 import { Keyword } from './entities/keyword.entity';
 import { KeywordsService } from './keywords.service';
 import { InfinityPaginationResultType } from 'src/utils/types/infinity-pagination-result.type';
 import { infinityPagination } from 'src/utils/infinity-pagination';
-import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CreateKeywordDto } from './dto/create-keyword.dto';
+// import { AuthGuard } from '@nestjs/passport';
+import {
+  // ApiBearerAuth,
+  ApiTags,
+} from '@nestjs/swagger';
+// import { CreateKeywordDto } from './dto/create-keyword.dto';
 
 @ApiTags('Keywords')
 @Controller({
@@ -28,21 +31,21 @@ import { CreateKeywordDto } from './dto/create-keyword.dto';
 export class KeywordsController {
   constructor(private readonly keywordsService: KeywordsService) {}
 
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
-  @Post('')
-  @HttpCode(HttpStatus.CREATED)
-  async create(
-    @Req() request,
-    @Body() createKeywordDto: CreateKeywordDto,
-  ): Promise<Keyword> {
-    return this.keywordsService.create(request.user, createKeywordDto);
-  }
-
   @Get('')
   async findOne(@Query('hashtag') hashtag: string) {
     return this.keywordsService.findByHashTag(hashtag);
   }
+
+  //   @ApiBearerAuth()
+  //   @UseGuards(AuthGuard('jwt'))
+  //   @Post('')
+  //   @HttpCode(HttpStatus.CREATED)
+  //   async create(
+  //     @Req() request,
+  //     @Body() createKeywordDto: CreateKeywordDto,
+  //   ): Promise<Keyword> {
+  //     return this.keywordsService.create(request.user, createKeywordDto);
+  //   }
 
   @SerializeOptions({
     groups: ['admin'],

@@ -6,11 +6,13 @@ import {
   Post,
   Headers,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { StripeService } from './stripe.service';
 import { StripeCreateSetupIntentDto } from './dto/stripe-create-setup-intent.dto';
 import RequestWithRawBody from './interfaces/request-with-raw-body';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Stripe')
 @Controller({ path: 'stripe', version: '1' })
@@ -23,6 +25,19 @@ export class StripeController {
     @Body() setupIntentDto: StripeCreateSetupIntentDto,
   ): Promise<any> {
     return this.stripeService.createSetupIntent(setupIntentDto);
+  }
+
+  @Post('payment')
+  @UseGuards(AuthGuard('jwt'))
+  @HttpCode(HttpStatus.OK)
+  async createCheckoutSession(
+    @Req() request,
+    @Body() createCheckoutSessionDto: any,
+  ): Promise<any> {
+    return this.stripeService.createCheckoutSession(
+      request.user,
+      createCheckoutSessionDto,
+    );
   }
 
   @Post('webhooks')

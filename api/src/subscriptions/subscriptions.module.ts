@@ -6,15 +6,15 @@ import { IsExist } from 'src/utils/validators/is-exists.validator';
 import { IsNotExist } from 'src/utils/validators/is-not-exists.validator';
 import { SubscriptionsService } from './subscriptions.service';
 import { UsersModule } from 'src/users/users.module';
-import { StripeModule } from 'src/stripe/stripe.module';
 import { KeywordsModule } from 'src/keywords/keywords.module';
+import { OrdersModule } from 'src/orders/orders.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Subscription]),
     UsersModule,
-    StripeModule,
     KeywordsModule,
+    OrdersModule,
   ],
   controllers: [SubscriptionsController],
   providers: [IsExist, IsNotExist, SubscriptionsService],

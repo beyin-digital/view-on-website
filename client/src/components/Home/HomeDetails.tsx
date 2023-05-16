@@ -1,28 +1,106 @@
-import { useState } from "react";
-import Layout from "@/components/Layout/LayoutWithFooter";
+import { useEffect, useState, CSSProperties } from "react";
 import { Grid, Box, OutlinedInput } from "@mui/material";
 import Header from "@/components/Home/Header";
 import TextViewOnWeb from "@/components/Home/TextViewOnWeb";
 import LayoutHomeBg from "@/components/Home/LayoutHomeBg";
 import { useRouter } from "next/router";
 import Head from "next/head";
-// import ArrowUpright from "../public/icons/arrowUpright";
+import useDebounce from "@/hooks/useDebounce";
+import { api } from "@/utils/api";
+import { toast } from "react-toastify";
+import ClipLoader from "react-spinners/ClipLoader";
+import slugify from "slugify";
+
+const override: CSSProperties = {
+	display: "block",
+	margin: "0 auto",
+	borderColor: "red",
+};
+
+const hashTagInputStyles = {
+	width: "100%",
+	height: "65px",
+	fontSize: {
+		xs: "18px",
+		sm: "22px",
+		md: "28px",
+		xl: "38px",
+	},
+	lineHeight: "28px",
+	marginY: ".5rem",
+	".MuiOutlinedInput-notchedOutline": {
+		border: "0",
+		padding: "9px",
+	},
+	"&:hover > .MuiOutlinedInput-notchedOutline": {
+		border: "0",
+	},
+	"& .MuiOutlinedInput-root": {
+		"& fieldset": {
+			borderColor: "red",
+			borderWidth: "2px",
+			transition: "border-width 0.5s",
+		},
+		"&:hover fieldset": {
+			borderColor: "red",
+			borderWidth: "2px",
+		},
+		"&.Mui-focused fieldset": {
+			borderColor: "red",
+			borderWidth: "2px",
+		},
+	},
+	"& .MuiInputBase-input": {
+		caretColor: "#000",
+	},
+};
 
 const HomeDetails = () => {
 	const router = useRouter();
 	const [hashtag, setHashtag] = useState("");
+	const [foundLink, setFoundLink] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
-	const handleSubmit = (e: any) => {
-		e.preventDefault();
-		router.push(`/subscribe/${hashtag}`);
+	const debouncedValue = useDebounce(hashtag, 1000);
+
+	const handleCheckHashtag = async (hashtag: string) => {
+		try {
+			setIsLoading(true);
+			const res = await api.get("/keywords", {
+				params: {
+					hashtag,
+				},
+			});
+			if (res.status === 200) {
+				console.log(res.data);
+				if (res.data && res.data.sublink) {
+					setFoundLink(res.data.sublink);
+					toast.success(`Link found for ${hashtag}`);
+					return;
+				}
+				setFoundLink("");
+				throw Error("No link found");
+			}
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsLoading(false);
+		}
 	};
+
+	useEffect(() => {
+		if (debouncedValue) {
+			handleCheckHashtag(slugify(debouncedValue, { lower: true }));
+		}
+	}, [debouncedValue]);
+
 	return (
 		<>
 			<Head>
 				<title>ViewOnWebsite - Home Page</title>
-				<meta name="description" content="" />
-				<meta name="keyword" content="" />
-				<meta property="og:image" content="" />
+				<meta name='description' content='' />
+				<meta name='keyword' content='' />
+				<meta property='og:image' content='' />
 			</Head>
 			<>
 				<Grid
@@ -31,7 +109,12 @@ const HomeDetails = () => {
 						width: "100%",
 						height: "100%",
 						display: "flex",
-						justifyContent: { xs: "center", sm: "end", md: "end", xl: "end" },
+						justifyContent: {
+							xs: "center",
+							sm: "end",
+							md: "end",
+							xl: "end",
+						},
 					}}
 				>
 					<Box
@@ -63,7 +146,12 @@ const HomeDetails = () => {
 						<LayoutHomeBg>
 							<Box
 								sx={{
-									width: { xs: "100%", sm: "70%", md: "70%", xl: "70%" },
+									width: {
+										xs: "100%",
+										sm: "70%",
+										md: "70%",
+										xl: "70%",
+									},
 									height: {
 										xs: "200px",
 										sm: "250px",
@@ -80,20 +168,24 @@ const HomeDetails = () => {
 										xl: "",
 									},
 								}}
-								className="boxHomeBlack"
+								className='boxHomeBlack'
 							>
 								<Box
-									display="flex"
-									alignItems="center"
+									display='flex'
+									alignItems='center'
 									sx={{
-										width: { xs: "70%", md: "100%", xl: "100%" },
+										width: {
+											xs: "70%",
+											md: "100%",
+											xl: "100%",
+										},
 										justifyContent: {
 											xs: "center",
 											md: "space-evenly",
 											xl: "space-around",
 										},
 									}}
-									className="BoxInputHome"
+									className='BoxInputHome'
 								>
 									<Box
 										sx={{
@@ -101,7 +193,7 @@ const HomeDetails = () => {
 											alignItems: "center",
 											marginY: { xs: "1rem" },
 										}}
-										className="InputHomeMargin"
+										className='InputHomeMargin'
 									>
 										<Box
 											sx={{
@@ -120,100 +212,95 @@ const HomeDetails = () => {
 											}}
 										>
 											<img
-												src="/icons/hashtag.svg"
+												src='/icons/hashtag.svg'
 												style={{
 													width: "100%",
 													height: "100%",
 												}}
 											/>
 										</Box>
-										<form onSubmit={handleSubmit} className="cursor">
+										<form
+											onSubmit={() => {
+												if (foundLink) {
+													window.location.href =
+														foundLink;
+												}
+											}}
+											className='cursor'
+										>
 											<OutlinedInput
 												value={hashtag}
-												onChange={(e) => setHashtag(e.target.value)}
-												sx={{
-													width: "100%",
-													height: "65px",
-													fontSize: {
-														xs: "18px",
-														sm: "22px",
-														md: "28px",
-														xl: "38px",
-													},
-													lineHeight: "28px",
-													marginY: ".5rem",
-													".MuiOutlinedInput-notchedOutline": {
-														border: "0",
-														padding: "9px",
-													},
-													"&:hover > .MuiOutlinedInput-notchedOutline": {
-														border: "0",
-													},
-													"& .MuiOutlinedInput-root": {
-														"& fieldset": {
-															borderColor: "red",
-															borderWidth: "2px",
-															transition: "border-width 0.5s",
-														},
-														"&:hover fieldset": {
-															borderColor: "red",
-															borderWidth: "2px",
-														},
-														"&.Mui-focused fieldset": {
-															borderColor: "red",
-															borderWidth: "2px",
-														},
-													},
-													"& .MuiInputBase-input": {
-														caretColor: "#000",
-														// display: "none",
-													},
-												}}
-												placeholder="Keyword"
-												className="l"
+												onChange={e =>
+													setHashtag(e.target.value)
+												}
+												sx={hashTagInputStyles}
+												placeholder='Keyword'
+												className='l'
 											/>
-											<Box
-												className="i"
-												// sx={{
-												// 	background: "#000",
-												// 	width: "5px",
-												// 	height: {
-												// 		xs: "30px",
-												// 		sm: "30px",
-												// 		md: "60px",
-												// 		xl: "60px",
-												// 	},
-												// 	margin: "0 .5rem",
-												// }}
-											/>
+											<Box className='i' />
 										</form>
 									</Box>
-									<Box
-										onClick={() => router.push(`/subscribe/${hashtag}`)}
-										sx={{
-											cursor: "pointer",
-											width: {
-												xs: "32px",
-												sm: "46px",
-												md: "46px",
-												xl: "46px",
-											},
-											height: {
-												xs: "32px",
-												sm: "46px",
-												md: "46px",
-												xl: "46px",
-											},
-										}}
-									>
-										<img
-											src="/icons/arrowUpRight.svg"
-											style={{
-												width: "100%",
-												height: "100%",
+									{isLoading ? (
+										<Box
+											sx={{
+												width: {
+													xs: "32px",
+													sm: "46px",
+													md: "46px",
+													xl: "46px",
+												},
+												height: {
+													xs: "32px",
+													sm: "46px",
+													md: "46px",
+													xl: "46px",
+												},
 											}}
-										/>
-									</Box>
+										>
+											<ClipLoader
+												loading={isLoading}
+												cssOverride={override}
+												size={46}
+												aria-label='Loading Spinner'
+												data-testid='loader'
+											/>
+										</Box>
+									) : (
+										<Box
+											component={
+												foundLink ? "a" : "button"
+											}
+											onClick={() =>
+												router.push(foundLink, {
+													href: foundLink,
+												})
+											}
+											disabled={!foundLink}
+											sx={{
+												cursor: "pointer",
+												width: {
+													xs: "32px",
+													sm: "46px",
+													md: "46px",
+													xl: "46px",
+												},
+												height: {
+													xs: "32px",
+													sm: "46px",
+													md: "46px",
+													xl: "46px",
+												},
+											}}
+										>
+											<img
+												src='/icons/arrowUpRight.svg'
+												style={{
+													width: "100%",
+													height: "100%",
+												}}
+											/>
+										</Box>
+									)}
 								</Box>
 								<Box
 									sx={{
@@ -227,9 +314,9 @@ const HomeDetails = () => {
 										alignItems: "center",
 										justifyContent: "center",
 									}}
-									className="BoxTextHome"
+									className='BoxTextHome'
 								>
-									<TextViewOnWeb />
+									<TextViewOnWeb foundLink={foundLink} />
 								</Box>
 							</Box>
 						</LayoutHomeBg>

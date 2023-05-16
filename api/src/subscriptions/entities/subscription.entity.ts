@@ -5,14 +5,13 @@ import {
   Entity,
   Index,
   ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Allow } from 'class-validator';
-import { Keyword } from 'src/keywords/entities/keyword.entity';
 import { User } from 'src/users/entities/user.entity';
 import { EntityHelper } from 'src/utils/entity-helper';
+import { Keyword } from 'src/keywords/entities/keyword.entity';
 
 @Entity({ name: 'subscription' })
 export class Subscription extends EntityHelper {
@@ -26,11 +25,8 @@ export class Subscription extends EntityHelper {
   })
   user: User;
 
-  @Allow()
-  @OneToOne(() => Keyword, {
-    eager: true,
-  })
-  keyword: Keyword;
+  @Column({ nullable: true })
+  letters: string;
 
   @Index()
   @Column({ nullable: true })
@@ -41,14 +37,26 @@ export class Subscription extends EntityHelper {
   renewalDate: Date;
 
   @Column({ nullable: true })
-  subscriptionId: string;
+  stripeSubscriptionId: string;
+
+  @Column({ nullable: true, default: false })
+  isPremium: boolean;
 
   @Index()
   @Column({ nullable: true })
-  subscriptionStatus: string;
+  stripeSubscriptionStatus: string;
+
+  @Allow()
+  @ManyToOne(() => Keyword, {
+    eager: true,
+  })
+  keyword: Keyword;
 
   @Column({ nullable: true })
-  price: number;
+  duration: string;
+
+  @Column({ nullable: true })
+  amount: number;
 
   @CreateDateColumn()
   createdAt: Date;

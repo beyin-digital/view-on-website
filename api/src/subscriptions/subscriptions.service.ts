@@ -5,45 +5,21 @@ import { DeepPartial, Repository } from 'typeorm';
 import { EntityCondition } from 'src/utils/types/entity-condition.type';
 import { NullableType } from 'src/utils/types/nullable.type';
 import { IPaginationOptions } from 'src/utils/types/pagination-options';
-import { CreateSubscriptionDto } from './dto/create-subscription.dto';
-import { StripeService } from 'src/stripe/stripe.service';
-import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
-import { PaySubscriptionDto } from './dto/pay-subscription.dto';
 import { KeywordsService } from 'src/keywords/keywords.service';
+import { User } from 'src/users/entities/user.entity';
 @Injectable()
 export class SubscriptionsService {
   constructor(
     @InjectRepository(Subscription)
     private subscriptionsRepository: Repository<Subscription>,
-    private stripeService: StripeService,
     private usersService: UsersService,
-    private readonly keywordService: KeywordsService,
+    private keywordService: KeywordsService,
   ) {}
 
-  async paySubscription(user: User, paySubscriptionDto: PaySubscriptionDto) {
-    const currentUser = await this.usersService.findOne({
-      id: user.id,
-    });
-
-    const keyword = await this.keywordService.findOne({
-      id: paySubscriptionDto.keywordId,
-    });
-    const subscriptionCheckout = await this.stripeService.createCheckoutSession(
-      currentUser as User,
-      {
-        customerId: currentUser?.stripeCustomerId as string,
-        letters: keyword?.letters as string,
-        price: keyword?.price as number,
-      },
-    );
-
-    return { ...subscriptionCheckout };
-  }
-
-  create(createSubscriptionDto: CreateSubscriptionDto): Promise<Subscription> {
+  create(data: DeepPartial<Subscription>): Promise<Subscription> {
     return this.subscriptionsRepository.save(
-      this.subscriptionsRepository.create(createSubscriptionDto),
+      this.subscriptionsRepository.create(data),
     );
   }
 
@@ -55,9 +31,27 @@ export class SubscriptionsService {
     });
   }
 
-  findManyWithPagination(
+  async findManyWithPagination(
     paginationOptions: IPaginationOptions,
+    user?: User,
   ): Promise<Subscription[]> {
+    if (user) {
+      const foundUser = await this.usersService.findOne({
+        id: user?.id,
+      });
+
+      if (!foundUser) {
+        throw new Error('User not found');
+      }
+
+      return this.subscriptionsRepository.find({
+        where: {
+          user: !!foundUser,
+        },
+        skip: (paginationOptions.page - 1) * paginationOptions.limit,
+        take: paginationOptions.limit,
+      });
+    }
     return this.subscriptionsRepository.find({
       skip: (paginationOptions.page - 1) * paginationOptions.limit,
       take: paginationOptions.limit,

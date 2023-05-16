@@ -10,6 +10,7 @@ import {
   Patch,
   Delete,
   SerializeOptions,
+  Query,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -33,6 +34,12 @@ import { AuthRefreshAccessTokenDto } from './dto/auth-refresh-access-token.dto';
 })
 export class AuthController {
   constructor(private readonly service: AuthService) {}
+
+  @Get('email/check')
+  @HttpCode(HttpStatus.OK)
+  async checkEmail(@Query('email') email: string): Promise<boolean> {
+    return this.service.checkEmail(email);
+  }
 
   @SerializeOptions({
     groups: ['me'],

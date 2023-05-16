@@ -4,8 +4,9 @@ import Image from "next/image";
 import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
 import { MuiOtpInput } from "mui-one-time-password-input";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "@/contexts/userContext";
+import useCountdown from "@/hooks/useCountdown";
 
 const VerificationPage = () => {
 	const router = useRouter();
@@ -14,7 +15,13 @@ const VerificationPage = () => {
 		setOtp(newValue);
 	};
 
-	const { user, verifyOtp } = useContext(UserContext);
+	const { secondsLeft, start } = useCountdown();
+
+	const { user, values, verifyOtp, resendOTP } = useContext(UserContext);
+
+	useEffect(() => {
+		start(10);
+	}, [user]);
 
 	return (
 		<>
@@ -110,7 +117,11 @@ const VerificationPage = () => {
 								}}
 							>
 								Enter the authenrication code we sent to Your
-								email {user?.email} below:
+								email{" "}
+								{router.query.newUser
+									? router.query.newUser
+									: user?.email}{" "}
+								below:
 							</Typography>
 							<Box
 								sx={{
@@ -146,23 +157,46 @@ const VerificationPage = () => {
 									}}
 								/>
 							</Box>
-							<Typography
-								sx={{
-									fontSize: { xs: "15px", xl: "18px" },
-									fontWight: "400",
-									color: "#A0A9AB",
-									lineHeight: "27px",
-									textAlign: "center",
-									marginY: {
-										xs: "4rem",
-										sm: "2rem",
-										md: "1rem",
-										xl: "2rem",
-									},
-								}}
-							>
-								Resend code
-							</Typography>
+							{secondsLeft > 0 ? (
+								<Typography
+									onClick={() => resendOTP(user?.email || "")}
+									sx={{
+										fontSize: { xs: "15px", xl: "18px" },
+										fontWight: "400",
+										color: "#A0A9AB",
+										lineHeight: "27px",
+										textAlign: "center",
+										marginY: {
+											xs: "4rem",
+											sm: "2rem",
+											md: "1rem",
+											xl: "2rem",
+										},
+									}}
+								>
+									You can request for a new code in{" "}
+									{secondsLeft}s
+								</Typography>
+							) : (
+								<Typography
+									onClick={() => resendOTP(user?.email || "")}
+									sx={{
+										fontSize: { xs: "15px", xl: "18px" },
+										fontWight: "400",
+										color: "#A0A9AB",
+										lineHeight: "27px",
+										textAlign: "center",
+										marginY: {
+											xs: "4rem",
+											sm: "2rem",
+											md: "1rem",
+											xl: "2rem",
+										},
+									}}
+								>
+									Resend code
+								</Typography>
+							)}
 						</Box>
 						<Box
 							sx={{

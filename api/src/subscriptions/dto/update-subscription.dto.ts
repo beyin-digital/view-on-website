@@ -1,13 +1,9 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class CreateSubscriptionDto {
+export class UpdateSubscriptionDto {
   @IsString()
   @IsNotEmpty()
-  stripeCustomerId: string;
-
-  @IsNotEmpty()
-  @IsNumber()
-  amount: number;
+  stripeCustomerId?: string;
 
   @IsString()
   @IsNotEmpty()
@@ -18,13 +14,12 @@ export class CreateSubscriptionDto {
   subscriptionStatus?: string;
 
   @IsNumber()
-  @IsNotEmpty()
-  purchaseDate: number;
+  renewalDate?: number;
 
   @IsString()
   @IsNotEmpty()
   letters?: string;
 
   @IsString()
-  stripeSubscriptionId?: string;
+  duration?: string;
 }

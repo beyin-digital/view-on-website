@@ -1,13 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Keyword } from './entities/keyword.entity';
 import { DeepPartial, Repository } from 'typeorm';
 import { EntityCondition } from 'src/utils/types/entity-condition.type';
 import { NullableType } from 'src/utils/types/nullable.type';
 import { IPaginationOptions } from 'src/utils/types/pagination-options';
-import { CreateKeywordDto } from './dto/create-keyword.dto';
 import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
+import slugify from 'slugify';
 @Injectable()
 export class KeywordsService {
   constructor(
@@ -16,40 +16,40 @@ export class KeywordsService {
     private usersService: UsersService,
   ) {}
 
-  async create(
-    user: User,
-    createKeywordDto: CreateKeywordDto,
-  ): Promise<Keyword> {
-    const currentUser = await this.usersService.findOne({
-      id: user.id,
-    });
-    if (!user) {
-      throw new Error('User not found');
-    }
-
+  async create(data: DeepPartial<Keyword>): Promise<Keyword> {
     const checkExistingKeyword = await this.findOne({
-      letters: createKeywordDto.letters,
+      slug: slugify(data.letters as string, {
+        lower: true,
+      }),
     });
 
     if (checkExistingKeyword) {
-      throw new Error('Keyword already exists');
+      throw new ConflictException('Keyword already exists');
     }
 
     return this.keywordsRepository.save(
       this.keywordsRepository.create({
-        user: currentUser as User,
-        ...createKeywordDto,
+        user: data.user as User,
+        ...data,
       }),
     );
   }
 
-  findByHashTag(hashtag: string): Promise<Keyword | null> {
+  findByHashTag(hashtag: string): Promise<any> {
     return this.keywordsRepository.findOne({
       where: {
-        letters: hashtag as string,
+        slug: hashtag,
       },
     });
   }
+
+  //   findUserKeywords(user: User): Promise<NullableType<Keyword[]>> {
+  //     return this.keywordsRepository.find({
+  //       where: {
+  //         user: user.id,
+  //       },
+  //     });
+  //   }
 
   findOne(fields: EntityCondition<Keyword>): Promise<NullableType<Keyword>> {
     return this.keywordsRepository.findOne({

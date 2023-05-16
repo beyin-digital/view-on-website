@@ -448,6 +448,16 @@ export class AuthService {
     });
   }
 
+  async checkEmail(email: string): Promise<any> {
+    const user = await this.usersService.findOne({
+      email,
+    });
+
+    return {
+      exists: !!user,
+    };
+  }
+
   async update(
     user: User,
     userDto: AuthUpdateDto,

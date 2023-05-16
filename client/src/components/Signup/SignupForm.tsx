@@ -13,7 +13,6 @@ import { UserContext } from "@/contexts/userContext";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const SignupForm = () => {
-	const router = useRouter();
 	const { values, handleChange, handleSignup } = useContext(UserContext);
 
 	const [showPassword, setShowPassword] = useState(false);
@@ -39,8 +38,6 @@ const SignupForm = () => {
 						xl: "space-between",
 					},
 					flexDirection: { xs: "column", md: "row", xl: "row" },
-					// paddingX: {xs:""},
-					// border: "1px solid red",
 				}}
 			>
 				<Box
@@ -55,7 +52,6 @@ const SignupForm = () => {
 							md: "space-evenly",
 							xl: "space-evenly",
 						},
-						// marginY: { xs: ".3rem", sm: ".3rem", md: "1rem", xl: ".3rem" },
 					}}
 				>
 					<OutlinedInput
@@ -130,8 +126,6 @@ const SignupForm = () => {
 							md: "space-evenly",
 							xl: "space-evenly",
 						},
-						// marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
-						// marginY: { xs: ".3rem", md: "1rem", xl: ".3rem" },
 					}}
 				>
 					<OutlinedInput

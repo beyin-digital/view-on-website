@@ -1,8 +1,20 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  DefaultValuePipe,
+  Get,
+  HttpCode,
+  HttpStatus,
+  ParseIntPipe,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { SubscriptionsService } from './subscriptions.service';
 import { AuthGuard } from '@nestjs/passport';
-import { PaySubscriptionDto } from './dto/pay-subscription.dto';
+import { InfinityPaginationResultType } from 'src/utils/types/infinity-pagination-result.type';
+import { Subscription } from './entities/subscription.entity';
+import { infinityPagination } from 'src/utils/infinity-pagination';
 
 @ApiTags('Subscriptions')
 @Controller({
@@ -14,14 +26,26 @@ export class SubscriptionsController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Post('pay')
-  async paySubscription(
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  async findAll(
     @Req() request,
-    @Body() paySubscriptionDto: PaySubscriptionDto,
-  ) {
-    return this.subscriptionsService.paySubscription(
-      request.user,
-      paySubscriptionDto,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+  ): Promise<InfinityPaginationResultType<Subscription>> {
+    if (limit > 50) {
+      limit = 50;
+    }
+
+    return infinityPagination(
+      await this.subscriptionsService.findManyWithPagination(
+        {
+          page,
+          limit,
+        },
+        request.user,
+      ),
+      { page, limit },
     );
   }
 }
