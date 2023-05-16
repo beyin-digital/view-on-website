@@ -1,12 +1,15 @@
 import React from "react";
 import { Box } from "@mui/material";
-import Image from "next/image";
-import Footer from "@/components/Footer/Footer";
+ import Footer from "@/components/Footer/Footer";
+import { BackgroundImage, ButtonStyleDesktop } from ".";
+import { useRouter } from "next/router";
 
 interface Props {
 	children: React.ReactNode;
 }
 const LayoutDesktop: React.FC<Props> = ({ children }) => {
+	const { locale } = useRouter();
+
 	return (
 		<div className="IllustrationDesktop">
 			<Box
@@ -15,7 +18,7 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
 					maxWidth: "100%",
 					height: { xs: "100%", md: "100vh", xl: "89vh" },
 					background: "#EAEDED",
-					overflow: "hidden",
+					// overflow: "hidden",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
@@ -33,20 +36,7 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
 						position: "fixed",
 					}}
 				>
-					<>
-						<img
-							// fill
-							src="/images/swirl.svg"
-							alt="Background View On Website"
-							title="Background View On Website"
-							style={{
-								top: "-25rem",
-								left: "-7rem",
-								position: "absolute",
-								width: "900px",
-							}}
-						/>
-					</>
+					<BackgroundImage />
 					<Box
 						sx={{
 							position: "relative",
@@ -65,11 +55,12 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
 							},
 							backdropFilter: { xs: "0", md: "blur(100px)", xl: "blur(100px)" },
 							borderRadius: "30px",
-							overflow: { xs: "", md: "hidden", xl: "hidden" },
+							// overflow: { xs: "", md: "hidden", xl: "hidden" },
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "end",
 							paddingX: "2rem",
+							// flexDirection:"column"
 						}}
 						className="IllustrationDesktopLayout"
 					>
@@ -86,6 +77,25 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
 							{children}
 						</Box>
 					</Box>
+					{locale === "ar" ? (
+						<Box
+							sx={{
+								paddingLeft: "15rem",
+								zIndex: "999999",
+							}}
+						>
+							<ButtonStyleDesktop />
+						</Box>
+					) : (
+						<Box
+							sx={{
+								paddingRight: "15rem",
+								zIndex: "999999",
+							}}
+						>
+							<ButtonStyleDesktop />
+						</Box>
+					)}
 				</Box>
 			</Box>
 			<Footer />

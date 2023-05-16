@@ -49,7 +49,7 @@ export default function SliderSwiper() {
 							}}
 							alt=""
 							title=""
-							loading="lazy"
+							// loading="lazy"
 						/>
 					</SwiperSlide>
 				))}

@@ -24,7 +24,7 @@ const PageDesktop = () => {
 				<Box
 					my="auto"
 					sx={{
-						height: { xs: "100%", md: "90vh", xl: "88vh" },
+						height: { xs: "100%", md: "100vh", xl: "88vh" },
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
@@ -38,19 +38,19 @@ const PageDesktop = () => {
 					<Box
 						sx={{
 							position: "absolute",
-							top: "-90rem",
+							top: "-95rem",
 						}}
 					>
 						<img
 							src="/images/swirl.png"
 							alt="Background Example Page"
 							title="Background Example Page"
-							loading="lazy"
+							// loading="lazy"
 						/>
 					</Box>
 					<Box
 						sx={{
-							height: { xs: "100%", md: "600px", xl: "590px" },
+							height: { xs: "100%", md: "560px", xl: "590px" },
 							width: { xs: "100%", md: "1920px", xl: "1920px" },
 							maxWidth: "100%",
 							borderTop: "1px solid #FBFBFB",
@@ -72,11 +72,11 @@ const PageDesktop = () => {
 							<Box
 								sx={{
 									position: "absolute",
-									top: { xs: "12rem", xl: "11rem" },
-									right: { xs: "", sm: "", md: "", lg: "55rem", xl: "60rem" },
+									top: {xs:"0rem", lg: "10rem", xl: "15rem" },
+									right: { xs: "0", sm: "", md: "0rem", lg: "58rem", xl: "63rem" },
 									zIndex: "91",
-									width: { xs: "", sm: "", md: "", lg: "400px", xl: "600px" },
-									height: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },
+									width: { xs: "0", sm: "", md: "500px", lg: "500px", xl: "500px" },
+									height: { xs: "0", sm: "", md: "500px", lg: "300px", xl: "300px" },
 								}}
 								className="sliderArrowsOne"
 							>
@@ -98,7 +98,7 @@ const PageDesktop = () => {
 									right: {
 										// md: "55rem",
 										lg: "59rem",
-										xl: "63rem",
+										xl: "65rem",
 									},
 									zIndex: "91",
 									width: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },

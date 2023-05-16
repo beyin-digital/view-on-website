@@ -21,35 +21,7 @@ import "swiper/swiper-bundle.min.css";
 const SwiperSlider = () => {
 	const { t } = useTranslation("slider");
 	const [isVertical, setIsVertical] = useState(true);
-	// const [thumbsSwiper, setThumbsSwiper] = useState(null);
 	const thumbsSwiper = useRef<SwiperCore>();
-	// 	{ id: 1, num: "a" },
-	// 	{ id: 2, num: "b" },
-	// 	{ id: 3, num: "c" },
-	// 	{ id: 4, num: "d" },
-	// 	{ id: 5, num: "e" },
-	// 	{ id: 6, num: "f" },
-	// 	{ id: 7, num: "g" },
-	// 	{ id: 8, num: "h" },
-	// 	{ id: 9, num: "i" },
-	// 	{ id: 10, num: "j" },
-	// 	{ id: 11, num: "k" },
-	// 	{ id: 12, num: "l" },
-	// 	{ id: 13, num: "m" },
-	// 	{ id: 14, num: "n" },
-	// 	{ id: 15, num: "o" },
-	// 	{ id: 16, num: "p" },
-	// 	{ id: 17, num: "q" },
-	// 	{ id: 18, num: "r" },
-	// 	{ id: 19, num: "s" },
-	// 	{ id: 20, num: "t" },
-	// 	{ id: 21, num: "u" },
-	// 	{ id: 22, num: "v" },
-	// 	{ id: 23, num: "w" },
-	// 	{ id: 24, num: "x" },
-	// 	{ id: 25, num: "y" },
-	// 	{ id: 26, num: "z" },
-	// ]);
 	const images = [
 		"a",
 		"b",
@@ -242,7 +214,7 @@ const SwiperSlider = () => {
 								>
 									#{item}
 								</Typography>
- 							</SwiperSlide>
+							</SwiperSlide>
 						))}
 					</Swiper>
 				</Box> */}

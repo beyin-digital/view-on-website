@@ -29,14 +29,14 @@ const PageMobile = () => {
 				<Box
 					sx={{
 						position: "absolute",
-						top: "-90rem",
+						top: "-100rem",
 					}}
 				>
 					<img
 						src="/images/swirl.png"
 						alt="Background View On Website"
 						title="Background View On Website"
-						loading="lazy"
+						// loading="lazy"
 					/>
 				</Box>
 				<Box

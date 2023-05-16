@@ -93,6 +93,18 @@ export const HeaderLayoutMobile = () => {
 					}}
 				>
 					<img
+						src="/images/swirlIllustrationLeft.svg"
+						alt="View On Website swirl Illustration Left icon"
+						title="View On Website swirl Illustration Left icon"
+						style={{
+							position: "absolute",
+							top: "-5rem",
+							width: "300px",
+							right: "16rem",
+							zIndex:"-1"
+						}}
+					/>
+					<img
 						src="/images/illustrationPic.png"
 						style={{
 							width: "100%",
@@ -346,7 +358,7 @@ export const ThreeOptionMobile = () => {
 					container
 					sx={{
 						flexDirection: { xs: "", md: "row" },
-						marginY:"1.2rem"
+						marginY: "1.2rem",
 					}}
 				>
 					<Grid

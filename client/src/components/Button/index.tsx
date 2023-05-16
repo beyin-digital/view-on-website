@@ -1,9 +1,9 @@
-import { Box, Button, ButtonBaseProps, Link, Typography } from "@mui/material";
+import { Box, Button, ButtonBaseProps, Typography } from "@mui/material";
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 import { FiArrowUpRight, FiArrowUpLeft } from "react-icons/fi";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-
+import Link from "next/link";
 export const ButtonStyle = () => {
 	return (
 		<>
@@ -94,6 +94,7 @@ export const ButtonChange = ({ name, onClick }: any) => {
 export const LinkSubscribe = () => {
 	const { t } = useTranslation("example");
 	const { locale } = useRouter();
+	const router = useRouter();
 
 	return (
 		<Box
@@ -112,10 +113,11 @@ export const LinkSubscribe = () => {
 			}}
 		>
 			<Link
-				sx={{
-					paddingX: "18px",
+				style={{
+					paddingRight: "18px",
+					paddingLeft: "18px",
 					height: "59px",
-					width: { xs: "220px", md: "231px", xl: "261px" },
+					width: "271px",
 					display: "flex",
 					justifyContent: "space-around",
 					alignItems: "center",
@@ -123,6 +125,9 @@ export const LinkSubscribe = () => {
 				}}
 				title={`${t("button")}`}
 				href="/subscribe"
+				locale={router.locale}
+				// as={NextLink}
+				// locale={router.locale || "en"}
 			>
 				<Typography
 					sx={{

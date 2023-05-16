@@ -92,6 +92,8 @@ const DetailsFooter = () => {
 							alignItems: "end",
 							justifyContent: { xs: "center", md: "", xl: "" },
 							marginY: { sm: "2rem" },
+							zIndex: "9999999999",
+							position: "relative",
 						}}
 					>
 						<Box

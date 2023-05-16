@@ -361,6 +361,7 @@ const Header = () => {
 						backdropFilter: "blur(100px)",
 						border: "1px solid #FBFBFB",
 						boxShadow: "0px 0px 0px 0px",
+						zIndex:"999999999"
 					}}
 				>
 					<Toolbar

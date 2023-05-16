@@ -41,7 +41,21 @@ export const HeaderLayoutDesktop = () => {
 							{t("title")}
 						</Typography>
 					</Box>
-
+					<Typography
+						sx={{
+							fontSize: { xs: "40px", xl: "40px" },
+							fontWeight: "600",
+							lineHeight: "37px",
+							color: "#FBFBFB",
+							background: " linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+							borderRadius: "7px",
+							paddingY: ".3rem",
+							paddingX: ".5rem",
+							width: "419px",
+						}}
+					>
+						ViewOnWebsite.com
+					</Typography>
 					<Box
 						sx={{
 							height: "33px",
@@ -63,84 +77,123 @@ export const HeaderLayoutDesktop = () => {
 				{locale === "ar" ? (
 					<Box
 						sx={{
-							width: "600px",
-							height: "240px",
-							position: "absolute",
-							left: "-12%",
-							top: "-10%",
+							width: "100%",
+							height: "100%",
 						}}
 					>
 						<img
-							src="/images/illustrationPicAR.png"
+							src="/images/swirlIllustration.svg"
+							alt="View On Website swirl Illustration Right icon"
+							title="View On Website swirl Illustration Right icon"
 							style={{
-								width: "100%",
-								objectFit: "cover",
+								position: "absolute",
+								top: "-5rem",
+								width: "300px",
+								left: "9rem",
 							}}
 						/>
 						<Box
 							sx={{
-								width: "257px",
-								height: "90px",
-
-								display: "flex",
-								alignItems: "",
-								justifyContent: "end",
+								width: "600px",
+								height: "240px",
 								position: "absolute",
-								bottom: { xs: "", md: "-10rem", xl: "-5rem" },
-								left: { md: "9rem", xl: "9rem" },
+								left: "-12%",
+								top: "-10%",
 							}}
 						>
-							<Typography
+							<img
+								src="/images/illustrationPicAR.png"
+								alt="View On Website swirl Illustration photo"
+								title="View On Website swirl Illustration photo"
+								style={{
+									width: "100%",
+									objectFit: "cover",
+								}}
+							/>
+							<Box
 								sx={{
-									fontSize: { md: "20px", xl: "24px" },
-									lineHeight: "22px",
-									fontWeight: "500",
+									width: "257px",
+									height: "90px",
+
+									display: "flex",
+									alignItems: "",
+									justifyContent: "end",
+									position: "absolute",
+									bottom: { xs: "", md: "-10rem", xl: "-5rem" },
+									left: { md: "9rem", xl: "9rem" },
 								}}
 							>
-								{t("desc_three")}
-							</Typography>
+								<Typography
+									sx={{
+										fontSize: { md: "20px", xl: "24px" },
+										lineHeight: "22px",
+										fontWeight: "500",
+									}}
+								>
+									{t("desc_three")}
+								</Typography>
+							</Box>
 						</Box>
 					</Box>
 				) : (
 					<Box
 						sx={{
-							width: "600px",
-							height: "240px",
-							position: "absolute",
-							right: "-10%",
-							top: "-10%",
+							width: "100%",
+							border: "1px solid red",
+							height: "100%",
 						}}
 					>
 						<img
-							src="/images/illustrationPic.png"
-							alt="illustration Photo"
-							title="illustration Photo"
+							src="/images/swirlIllustrationLeft.svg"
+							alt="View On Website swirl Illustration Left icon"
+							title="View On Website swirl Illustration Left icon"
 							style={{
-								width: "100%",
-								objectFit: "cover",
+								position: "absolute",
+								top: "-5rem",
+								width: "300px",
+								right: "9rem",
 							}}
 						/>
 						<Box
 							sx={{
-								width: "257px",
-								height: "90px",
-								display: "flex",
-								alignItems: "",
-								justifyContent: "end",
+								width: "600px",
+								height: "240px",
 								position: "absolute",
-								bottom: { xs: "", md: "-10rem", xl: "-5rem" },
-								right: { md: "9rem", xl: "9rem" },
+								right: "-10%",
+								top: "-10%",
 							}}
 						>
-							<Typography
+							<img
+								src="/images/illustrationPic.png"
+								alt="View On Website swirl Illustration photo"
+								title="View On Website swirl Illustration photo"
+								style={{
+									width: "100%",
+									objectFit: "cover",
+								}}
+							/>
+							<Box
 								sx={{
-									fontSize: { md: "20px", xl: "24px" },
-									lineHeight: "22px",
-									fontWeight: "500",
+									width: "257px",
+									height: "90px",
+									display: "flex",
+									alignItems: "",
+									justifyContent: "end",
+									position: "absolute",
+									bottom: { xs: "", md: "-10rem", xl: "-5rem" },
+									right: { md: "9rem", xl: "9rem" },
 								}}
 							>
-								{t("desc_three")}
-							</Typography>
+								<Typography
+									sx={{
+										fontSize: { md: "20px", xl: "24px" },
+										lineHeight: "22px",
+										fontWeight: "500",
+									}}
+								>
+									{t("desc_three")}
+								</Typography>
+							</Box>
 						</Box>
 					</Box>
 				)}
@@ -470,7 +523,7 @@ export const ButtonStyleDesktop = () => {
 					height: "60px",
 					width: "90%",
 					marginX: "1rem",
-					marginY: ".5rem",
+					marginY: "1rem",
 					paddingX: "1rem",
 					cursor: "pointer",
 				}}
@@ -535,6 +588,43 @@ export const ButtonStyleDesktop = () => {
 					)}
 				</Box>
 			</Box>
+		</>
+	);
+};
+
+export const BackgroundImage = () => {
+	const { locale } = useRouter();
+	return (
+		<>
+			{locale === "ar" ? (
+				<>
+					<img
+						src="/images/swirl.svg"
+						alt="Background View On Website"
+						title="Background View On Website"
+						style={{
+							top: "-18rem",
+							right: "-19rem",
+							position: "absolute",
+							width: "1100px",
+						}}
+					/>
+				</>
+			) : (
+				<>
+					<img
+						src="/images/swirl.svg"
+						alt="Background View On Website"
+						title="Background View On Website"
+						style={{
+							top: "-15rem",
+							left: "-12rem",
+							position: "absolute",
+							width: "1100px",
+						}}
+					/>
+				</>
+			)}
 		</>
 	);
 };

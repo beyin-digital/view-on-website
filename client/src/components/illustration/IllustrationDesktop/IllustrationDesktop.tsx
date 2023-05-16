@@ -17,7 +17,7 @@ const IllustrationDesktop = () => {
 				{/* three option */}
 				<ThreeOptionDesktop />
 				{/* button */}
-				<ButtonStyleDesktop />
+				{/* <ButtonStyleDesktop /> */}
 			</LayoutDesktop>
 		</>
 	);

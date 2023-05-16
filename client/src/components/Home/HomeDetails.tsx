@@ -43,7 +43,7 @@ const HomeDetails = () => {
 								height: {
 									xs: "100%",
 									sm: "80%",
-									md: "40%",
+									md: "60%",
 									xl: "300px",
 								},
 								display: "flex",
@@ -53,7 +53,7 @@ const HomeDetails = () => {
 									xs: "end",
 									sm: "center",
 									md: "center",
-									xl: "space-around",
+									xl: "space-evenly",
 								},
 							}}
 							className="boxHomeBlack"
@@ -64,7 +64,7 @@ const HomeDetails = () => {
 									marginBottom: {
 										xs: "2.5rem",
 										sm: "1.5rem",
-										md: "2rem",
+										md: "4rem",
 										xl: "0",
 									},
 									display: "flex",

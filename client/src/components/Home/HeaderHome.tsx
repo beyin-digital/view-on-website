@@ -90,7 +90,7 @@ const Header = () => {
 						title="View On Website Play Icon"
 						style={{
 							width: "100%",
-							// height: "100%",
+
 						}}
 					/>
 				</Box>

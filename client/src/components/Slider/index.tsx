@@ -11,7 +11,7 @@ import FooterLayout from "./FooterLayout/FooterLayout";
 import HeaderLayout from "./TopLayout/HeaderLayout";
 import TextPremium from "./TopLayout/TextPremium";
 import TextAndButton from "./TextAndButton";
-import BackgroundImage from "./BackgroundImage";
+import { BackgroundImageSlider } from "./BackgroundImage";
 import { useRouter } from "next/router";
 
 const SliderDesktop = ({ onClick }: any) => {
@@ -21,7 +21,7 @@ const SliderDesktop = ({ onClick }: any) => {
 		<Box
 			sx={{
 				width: "100%",
-				zIndex:"9999999"
+				zIndex: "9999999",
 			}}
 		>
 			{/* <Header /> */}
@@ -30,21 +30,18 @@ const SliderDesktop = ({ onClick }: any) => {
 				sx={{
 					maxWidth: "100%",
 					margin: "auto",
-					height: { xs: "100vh%", md: "100vh", xl: "95vh" },
+					height: "100%",
 					display: "flex",
 					flexDirection: "column",
 					justifyContent: "space-between",
 					position: "relative",
-					overflow: "hidden",
 				}}
 			>
-				{/* Navbar */}
-				{/* background image */}
-				<BackgroundImage />
+				<BackgroundImageSlider />
 				<Box
 					sx={{
 						position: "relative",
-						marginTop: "2rem",
+						marginTop: "1rem",
 						marginBottom: "1rem",
 					}}
 				>

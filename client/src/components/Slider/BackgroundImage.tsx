@@ -2,32 +2,17 @@ import { Box } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
-const BackgroundImage = () => {
+export const BackgroundImage = () => {
 	return (
 		<>
-			<Box
-				sx={
-					{
-						// width: "100%",
-					}
-				}
-			>
-				{/* <Image
-					fill
-					src="/images/swirl.svg"
-					alt=""
-					style={{
-						// objectFit:"cover",
-						top: "-30rem",
-						position: "absolute",
-					}}
-				/> */}
+			<Box>
 				<img
 					src="/images/swirl.svg"
 					style={{
 						top: "-80rem",
 						position: "absolute",
-						left:"-10rem"
+						left: "-10rem",
+						zIndex: "-9",
 					}}
 				/>
 			</Box>
@@ -35,4 +20,31 @@ const BackgroundImage = () => {
 	);
 };
 
-export default BackgroundImage;
+export const BackgroundImageSlider = () => {
+	return (
+		<>
+			<img
+				src="/images/swirl.svg"
+				style={{
+					top: "-65rem",
+					position: "absolute",
+					left: "0rem",
+					zIndex: "-999999999999",
+					width: "100%",
+				}}
+				className="SliderImageMobileNone"
+			/>
+			<img
+				src="/images/swirl.svg"
+				style={{
+					top: "-20rem",
+					position: "absolute",
+					left: "0rem",
+					zIndex: "-9",
+					width: "100%",
+				}}
+				className="SliderImageMobile"
+			/>
+		</>
+	);
+};

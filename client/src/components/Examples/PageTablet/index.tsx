@@ -27,10 +27,14 @@ const PageTablet = () => {
 					sx={{
 						width: "100%",
 						display: { xs: "block", sm: "block", md: "none", xl: "none" },
+
 					}}
 				>
-					<Image fill src="/images/swirl.svg" alt="" className="ImageMobile" />
+					<Image fill src="/images/swirl.svg" alt="" className="ImageMobil" style={{
+						top:"-35rem"
+					}} />
 				</Box>
+
 				<Box
 					sx={{
 						width: "100%",
@@ -43,7 +47,7 @@ const PageTablet = () => {
 						alt="Background Example Page"
 						title="Background Example Page"
 						style={{
-							top: "-33rem",
+							top: "-36rem",
 							position: "absolute",
 						}}
 					/>

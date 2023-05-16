@@ -41,11 +41,12 @@ export const BackgroundHome = () => {
 					alt="View On Website Background"
 					title="View On Website Background"
 					style={{
-						top: "-8rem",
+						top: "-7rem",
 						left: "-19rem",
 						position: "absolute",
 						width: "800px",
 					}}
+					className="BackgroundHome"
 				/>
 			</Box>
 			<Box
@@ -65,7 +66,6 @@ export const BackgroundHome = () => {
 						left: "42rem",
 						position: "absolute",
 						width: "800px",
-						// height:"80vh"
 					}}
 				/>
 			</Box>
@@ -73,7 +73,6 @@ export const BackgroundHome = () => {
 				sx={{
 					display: { xs: "none", md: "block", xl: "none" },
 					width: "100%",
-					// height: "100%",
 					position: "relative",
 				}}
 			>
@@ -83,10 +82,9 @@ export const BackgroundHome = () => {
 					title="View On Website Background"
 					style={{
 						top: "-8rem",
-						left: "28rem",
+						left: "18rem",
 						position: "absolute",
 						width: "800px",
-						// height:"80vh"
 					}}
 				/>
 			</Box>

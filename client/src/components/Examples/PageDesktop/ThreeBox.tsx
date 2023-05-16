@@ -12,7 +12,7 @@ const ThreeBox = () => {
 			{locale === "ar" ? (
 				<Box
 					sx={{
-						width: "1243.72px",
+						width: "1200.72px",
 						maxWidth: "100%",
 						borderLeft: "1px solid #FBFBFB",
 						borderBottom: "1px solid #FBFBFB",
@@ -32,8 +32,8 @@ const ThreeBox = () => {
 							position: "absolute",
 							top: "-1rem",
 							left: { xs: "", md: "0rem", xl: "0rem" },
-							width: { md: "450px", xl: "500px" },
-							height: { md: "450px", xl: "500px" },
+							width: { md: "450px", xl: "550px" },
+							height: { md: "450px", xl: "550px" },
 						}}
 					>
 						<img

@@ -62,6 +62,7 @@ const Footer = ({ onClick }: any) => {
 						justifyContent: { xs: "center", md: "start", xl: "start" },
 						margin: { xs: " .1rem 0", sm: "2rem 0", md: "0", xl: "0" },
 						zIndex: "999",
+						paddingY: "1rem",
 					}}
 				>
 					{icons.map((item) => (
