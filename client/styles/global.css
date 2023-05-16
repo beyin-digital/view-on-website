@@ -13,6 +13,13 @@ iframe {
 	border-radius: 30px;
 	box-shadow: 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.08);
 }
+
+/* Layout home */
+
+.layoutHomeOverflow {
+	overflow-x: hidden;
+}
+/* subscribe */
 .borderSubscribeInput {
 	box-sizing: border-box;
 	background-clip: padding-box;
@@ -31,7 +38,12 @@ iframe {
 	border-radius: inherit;
 	background: linear-gradient(270deg, #0090ec 0%, #31e716 100%);
 }
-
+[dir="ltr"] .SubscribePageLayoutBox {
+	margin-left: -16rem;
+}
+[dir="rtl"] .SubscribePageLayoutBox {
+	margin-right: 20rem;
+}
 /* Navbar */
 .navigation-menu {
 	list-style: none;
@@ -60,19 +72,15 @@ iframe {
 	color: black;
 }
 /*  */
-/* delete this once time !! */
-.otp-input.MuiOtpInput-TextField {
-	border-radius: 50%;
-	background-color: #0090ec;
-}
+
 /* Swiper Slider */
 .swiper-3d {
-	perspective: 335px !important;
+	perspective: 380px !important;
 }
-/* .swiper_container {
+.swiper_container {
 	position: relative;
 	max-width: 100%;
-} */
+}
 
 .SliderMobile {
 	display: none;
@@ -80,10 +88,10 @@ iframe {
 .swiper-pagination {
 	position: absolute;
 	text-align: center;
-	transition: 0.3s opacity;
-	transform: translate3d(0, 0, 0);
+	/* transition: 0.3s opacity; */
+	/* transform: translate3d(0, 0, 0); */
 	z-index: 99999999;
-	bottom: -3.3rem !important;
+	bottom: 6.5rem !important;
 	font-size: 32px;
 	font-weight: 500;
 }
@@ -101,10 +109,7 @@ iframe {
 	background: rgba(251, 251, 251, 0.2);
 	backdrop-filter: blur(10px);
 }
-.swiper-blurr {
-	background: transparent;
-	backdrop-filter: blur(0px);
-}
+
 
 /*  */
 .col {
@@ -127,7 +132,7 @@ iframe {
 		rgba(49, 231, 22, 0.012) 100%
 	);
 }
-
+/* Examples Page  */
 .PageMobile {
 	display: none;
 }
@@ -216,12 +221,7 @@ iframe {
 [dir="rtl"] .VerificationPageCenter {
 	margin-left: 15rem;
 }
-[dir="ltr"] .SubscribePageLayoutBox {
-	margin-left: 16rem;
-}
-[dir="rtl"] .SubscribePageLayoutBox {
-	margin-right: 20rem;
-}
+
 [dir="rtl"] .IllustrationDesktopLayout {
 	left: 14%;
 	transform: skew(16deg, 0deg);
@@ -465,7 +465,7 @@ iframe {
 }
 @media screen and (max-width: 1330px) {
 	.sliderArrowsOne {
-		right: 50rem;
+		right: 54rem;
 	}
 }
 @media screen and (max-width: 1230px) {
@@ -493,12 +493,6 @@ iframe {
 	}
 	[dir="ltr"] .VerificationPageCenter {
 		margin-right: 15rem;
-	}
-	[dir="ltr"] .SubscribePageLayoutBox {
-		margin-left: 10rem;
-	}
-	[dir="rtl"] .SubscribePageLayoutBox {
-		margin-right: 10rem;
 	}
 }
 @media screen and (max-width: 1055px) {
@@ -550,8 +544,8 @@ iframe {
 		perspective: 999px !important;
 	}
 	.ImageSlider {
-		/* width: 100%; */
-		height: 390px;
+		width: 100%;
+		height: 350px;
 	}
 }
 @media screen and (max-width: 700px) {
@@ -581,12 +575,6 @@ iframe {
 	}
 	[dir="rtl"] .VerificationPageCenter {
 		margin-left: -3rem;
-	}
-	[dir="ltr"] .SubscribePageLayoutBox {
-		margin-left: 2rem;
-	}
-	[dir="rtl"] .SubscribePageLayoutBox {
-		margin-right: 2rem;
 	}
 	.MainBoxPic {
 		margin-top: 7rem !important;
@@ -621,6 +609,9 @@ iframe {
 	}
 	[dir="rtl"] .ExampleBoxTwoMobile {
 		left: -15rem;
+	}
+	.layoutHomeOverflow {
+		overflow: hidden;
 	}
 }
 @media screen and (max-width: 500px) {
@@ -663,6 +654,9 @@ iframe {
 	[dir="rtl"] .ExampleBoxTwoMobile {
 		left: -12rem;
 	}
+	.InputHomeMargin {
+		margin-top: 0;
+	}
 }
 @media screen and (max-width: 427px) {
 	.illustrationBg {
@@ -687,6 +681,9 @@ iframe {
 	}
 	.BoxTextHome {
 		margin-bottom: 5rem;
+	}
+	.InputHomeMargin {
+		margin-top: 1rem;
 	}
 }
 @media screen and (max-width: 410px) {
@@ -715,24 +712,19 @@ iframe {
 		top: -15rem !important;
 	}
 	.swiper-pagination {
-		bottom: -2.4rem !important;
+		bottom: 0.6rem !important;
 		font-size: 22px;
+		/* background-color: red; */
+		z-index: 99999999;
+		display: none;
 	}
-	.LayoutTagsPadding {
-		padding: 2rem !important;
-	}
+
 	.LayoutHomeMobile {
 		overflow-x: hidden;
 		overflow-y: scroll;
 	}
 	.exampleOneBoxStart {
 		justify-content: flex-start !important;
-	}
-	[dir="ltr"] .SubscribePageLayoutBox {
-		margin-left: 0rem;
-	}
-	[dir="rtl"] .SubscribePageLayoutBox {
-		margin-right: 0rem;
 	}
 	[dir="rtl"] .ExampleBoxTwoMobile {
 		left: -8.5rem;
@@ -763,9 +755,8 @@ iframe {
 		bottom: 2rem;
 		left: 1rem;
 	}
-	.ImageSlider {
-		width: 400px;
-		height: 350px;
+	.InputHomeMargin {
+		margin-top: 0;
 	}
 }
 @media screen and (max-width: 300px) {
@@ -811,8 +802,5 @@ iframe {
 
 	.exampleOneBoxTextSmall {
 		font-size: 10px;
-	}
-	.InputHomeMargin {
-		margin-top: 0;
 	}
 }

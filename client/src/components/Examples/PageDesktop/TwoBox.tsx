@@ -40,9 +40,9 @@ const TwoBox = () => {
 							sx={{
 								width: { md: "100%", xl: "200px" },
 								fontSize: "20px",
-								lineHeight: "18px",
-								fontWeight: "500",
-								marginY: ".5rem",
+								lineHeight: "20px",
+								fontWeight: "600",
+								marginY: "1.5rem",
 							}}
 						>
 							{t("box_two_title")}
@@ -51,8 +51,8 @@ const TwoBox = () => {
 							sx={{
 								width: { md: "100%", xl: "300px" },
 								fontSize: "14px",
-								lineHeight: "13px",
-								fontWeight: "300",
+								lineHeight: "14px",
+								fontWeight: "400",
 								marginY: ".5rem",
 							}}
 						>
@@ -83,7 +83,7 @@ const TwoBox = () => {
 			) : (
 				<Box
 					sx={{
-						width: "700px",
+						width: "750px",
 						maxWidth: "100%",
 						borderLeft: "1px solid #FBFBFB",
 						borderBottom: "1px solid #FBFBFB",
@@ -108,21 +108,21 @@ const TwoBox = () => {
 					>
 						<Typography
 							sx={{
-								width: { md: "100%", xl: "200px" },
+								width: { md: "200px", xl: "200px" },
 								fontSize: "20px",
-								lineHeight: "18px",
-								fontWeight: "500",
-								marginY: ".5rem",
+								lineHeight: "20px",
+								fontWeight: "600",
+								marginY: "1.5rem",
 							}}
 						>
 							{t("box_two_title")}
 						</Typography>
 						<Typography
 							sx={{
-								width: { md: "100%", xl: "300px" },
+								width: { md: "300px", xl: "300px" },
 								fontSize: "14px",
-								lineHeight: "13px",
-								fontWeight: "300",
+								lineHeight: "14px",
+								fontWeight: "400",
 								marginY: ".5rem",
 							}}
 						>

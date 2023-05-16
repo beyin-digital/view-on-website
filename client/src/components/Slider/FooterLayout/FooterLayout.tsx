@@ -9,7 +9,7 @@ const FooterLayout = () => {
 
 	return (
 		<>
-			{locale === "ar" ? (
+			{/* {locale === "ar" ? (
 				<Box
 					sx={{
 						height: { xs: "100%", md: "100px", xl: "100px" },
@@ -22,6 +22,7 @@ const FooterLayout = () => {
 							md: "row-reverse",
 							xl: "row-reverse",
 						},
+
 					}}
 				>
 					<DetailsFooter />
@@ -35,11 +36,13 @@ const FooterLayout = () => {
 						alignItems: { xs: "", md: "center", xl: "center" },
 						justifyContent: "space-between",
 						flexDirection: { xs: "column", md: "row", xl: "row" },
+						marginTop:"1rem"
 					}}
 				>
 					<DetailsFooter />
 				</Box>
-			)}
+			)} */}
+			<DetailsFooter />
 		</>
 	);
 };

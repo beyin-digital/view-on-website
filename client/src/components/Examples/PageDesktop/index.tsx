@@ -16,7 +16,7 @@ const PageDesktop = () => {
 			<Box
 				className="PageDesktop"
 				sx={{
-					width: "2162px",
+					width: "1920",
 					maxWidth: "100%",
 					overflow: "hidden",
 				}}
@@ -50,7 +50,7 @@ const PageDesktop = () => {
 					<Box
 						sx={{
 							height: { xs: "100%", md: "600px", xl: "590px" },
-							width: { xs: "100%", md: "200vw", xl: "200vw" },
+							width: { xs: "100%", md: "1920px", xl: "1920px" },
 							maxWidth: "100%",
 							borderTop: "1px solid #FBFBFB",
 							borderBottom: "1px solid #FBFBFB",
@@ -59,7 +59,8 @@ const PageDesktop = () => {
 							overflow: "hidden",
 							background: "rgba(251, 251, 251, 0.6)",
 							marginX: { xs: "", md: "3rem", xl: "0" },
-							position: "relative",
+							position: "absolute",
+							left: "0",
 						}}
 						className="PageDesktopLayout"
 					>
@@ -91,13 +92,12 @@ const PageDesktop = () => {
 							<Box
 								sx={{
 									position: "absolute",
-									top: "19rem",
+									top: { md: "20rem", xl: "18rem" },
 									right: {
-										xs: "60rem",
-										sm: "",
-										md: "",
-										lg: "60rem",
-										xl: "64rem",
+
+										// md: "55rem",
+										lg: "59rem",
+										xl: "63rem",
 									},
 									zIndex: "91",
 									width: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },
@@ -155,13 +155,13 @@ const PageDesktop = () => {
 								<Box
 									sx={{
 										position: "absolute",
-										top: { xs: "", sm: "", md: "", lg: "9rem", xl: "12.5rem" },
+										top: { xs: "", sm: "", md: "", lg: "10rem", xl: "14.5rem" },
 										right: {
 											xs: "",
 											sm: "",
 											md: "",
-											lg: "18rem",
-											xl: "22.3rem",
+											lg: "20rem",
+											xl: "19.5rem",
 										},
 										width: { xs: "", sm: "", md: "", lg: "500px", xl: "600px" },
 										height: {
@@ -197,6 +197,8 @@ const PageDesktop = () => {
 							display: "flex",
 							justifyContent: "end",
 							alignItems: "center",
+							position: "absolute",
+							bottom: "0",
 						}}
 					>
 						<LinkSubscribe />

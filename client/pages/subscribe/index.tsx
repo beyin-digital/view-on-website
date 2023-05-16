@@ -45,18 +45,21 @@ const SubscribePage: NextPage = () => {
 					transform: "skew(16deg, 0deg)",
 					display: "flex",
 					alignItems: "center",
-					justifyContent: "center",
+					justifyContent: { xs: "center", md: "flex-end" },
+					// border: "1px solid",
 				}}
-				className="SubscribePageLayoutBox"
+				className="SubscribePageLayout"
 			>
-				<Container>
+				<>
 					<Box
 						sx={{
+							width: "70%",
 							height: "100%",
 							display: "flex",
 							flexDirection: "column",
 							justifyContent: { xs: "center", xl: "space-evenly" },
-							margin: { xs: "0", md: "0", xl: "1rem auto 0rem 5rem" },
+							// border: "1px solid",
+							marginX: { xs: "1px", md: "5rem" },
 						}}
 					>
 						<Box
@@ -113,7 +116,11 @@ const SubscribePage: NextPage = () => {
 										},
 										lineHeight: "28px",
 										background: "#FBFBFB",
-										".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+										".MuiOutlinedInput-notchedOutline": {
+											border: "0",
+											padding: "9px",
+										},
+										"&:hover > .MuiOutlinedInput-notchedOutline": {
 											border: "0",
 										},
 									}}
@@ -130,7 +137,13 @@ const SubscribePage: NextPage = () => {
 											<FiArrowUpRight color="#343132" size={90} />
 										)
 									}
-									className="borderSubscribeInput"
+									className={`${
+										values.hashtag.length === 1 ||
+										values.hashtag.length === 2 ||
+										values.hashtag.length === 3
+											? "borderSubscribeInput"
+											: ""
+									}`}
 								/>
 
 								<Box width="100%" display="flex" justifyContent="space-between">
@@ -147,20 +160,37 @@ const SubscribePage: NextPage = () => {
 										{/* The hashtag keyword you've chosen is premium */}
 										{t("text_hashtag")}
 									</Typography>
-									<Typography
-										sx={{
-											cursor: "pointer",
-											backgroundImage:
-												"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
-											backgroundClip: "text",
-											WebkitBackgroundClip: "text",
-											color: "transparent",
-											fontSize: { xs: "20px", md: "24px", xl: "28px" },
-										}}
-									>
-										{/* Premium */}
-										{t("text_premium")}
-									</Typography>
+									{values.hashtag.length === 1 ||
+									values.hashtag.length === 2 ||
+									values.hashtag.length === 3 ? (
+										<Typography
+											sx={{
+												cursor: "pointer",
+												backgroundImage:
+													"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+												backgroundClip: "text",
+												WebkitBackgroundClip: "text",
+												color: "transparent",
+												fontSize: { xs: "20px", md: "24px", xl: "28px" },
+											}}
+										>
+											{t("availableP")}
+										</Typography>
+									) : values.hashtag.length >= 4 ? (
+										<Typography
+											sx={{
+												cursor: "pointer",
+												backgroundImage:
+													"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+												backgroundClip: "text",
+												WebkitBackgroundClip: "text",
+												color: "transparent",
+												fontSize: { xs: "20px", md: "24px", xl: "28px" },
+											}}
+										>
+											{t("available")}
+										</Typography>
+									) : null}
 								</Box>
 								{/* </FormHelperText> */}
 							</FormControl>
@@ -220,9 +250,13 @@ const SubscribePage: NextPage = () => {
 										display: "flex",
 										justifyContent: "space-around",
 										background: "#31E716",
+										"&:hover": {
+											background: "#31E716",
+											color: "#343132",
+										},
 										// marginRight: { xs: "10rem", xl: "4rem" },
 									}}
-									// onClick={() => router.push(`/subscribe/${values.hashtag}`)}
+									onClick={() => router.push(`/subscribe/${values.hashtag}`)}
 								>
 									<Typography
 										sx={{
@@ -250,7 +284,7 @@ const SubscribePage: NextPage = () => {
 							</Box>
 						</Box>
 					</Box>
-				</Container>
+				</>
 			</Grid>
 		</Layout>
 	);

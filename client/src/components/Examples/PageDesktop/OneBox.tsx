@@ -57,7 +57,7 @@ const OneBox = () => {
 					>
 						<Box
 							sx={{
-								width: "212px",
+								width: "210px",
 								height: "134px",
 								position: "absolute",
 							}}
@@ -66,7 +66,9 @@ const OneBox = () => {
 							<Typography
 								sx={{
 									fontSize: "20px",
-									marginY: ".8rem",
+									fontWeight:"600",
+									lineHeight:"20px",
+									marginY: "1.5rem",
 								}}
 							>
 								{t("box_one_title")}
@@ -74,9 +76,9 @@ const OneBox = () => {
 							<Typography
 								sx={{
 									fontSize: "14px",
-									marginY: ".8rem",
-									lineHeight: "13px",
-									fontWeight: "300",
+									marginY: "1rem",
+									lineHeight: "14px",
+									fontWeight: "400",
 								}}
 							>
 								{t("box_one_desc")}

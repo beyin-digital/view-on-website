@@ -1,6 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import Image from "next/image";
+import Footer from "@/components/Footer/Footer";
 
 interface Props {
 	children: React.ReactNode;
@@ -89,6 +90,7 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
 					</Box>
 				</Box>
 			</Box>
+			<Footer />
 		</>
 	);
 };

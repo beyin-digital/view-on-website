@@ -30,7 +30,7 @@ const LoginDetails = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					marginY: { xs: "2rem", md: ".5rem", xl: "1rem" },
+					marginY: { xs: "1rem", md: ".5rem", xl: "1rem" },
 				}}
 			>
 				<Typography

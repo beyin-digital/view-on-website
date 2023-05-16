@@ -346,6 +346,7 @@ export const ThreeOptionMobile = () => {
 					container
 					sx={{
 						flexDirection: { xs: "", md: "row" },
+						marginY:"1.2rem"
 					}}
 				>
 					<Grid

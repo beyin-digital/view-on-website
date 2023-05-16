@@ -51,6 +51,7 @@ const DetailsHeader = () => {
 							lineHeight: { xs: "22px", xl: "37px" },
 							marginY: ".5rem",
 							textAlign: "center",
+							paddingX:".5rem"
 						}}
 						color="#A0A9AB"
 					>

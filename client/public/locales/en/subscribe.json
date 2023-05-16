@@ -12,6 +12,8 @@
   "input_hashtag_two": "Enter hashtag keyword",
   "button": "reserve",
   "available": "Available",
+  "availableP":"Available premium",
+  "availableN":"Unavailable premium",
   "card_head_one": "Monthly Package ",
   "card_one_one": "Triple Hashtag Keyword",
   "card_one_two": "Triple Hashtag Keyword",

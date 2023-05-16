@@ -117,7 +117,8 @@ const FooterMobile = () => {
 								>
 									<Image
 										src="/images/logo.svg"
-										alt="logo"
+										alt="Logo View On Website "
+										title="Logo View On Website "
 										width={100}
 										height={50}
 									/>
@@ -210,11 +211,13 @@ const FooterMobile = () => {
 										}}
 									>
 										<Typography
-											fontSize="20px"
-											fontWeight="400"
-											lineHeight="32px"
-											textAlign="center"
-											textTransform={"capitalize"}
+											sx={{
+												fontSize: { xs: "14px", sm: "20px" },
+												fontWeight: "400",
+												lineHeight: "25px",
+												textAlign: "center",
+												textTransform: "capitalize",
+											}}
 										>
 											{t(item.tKey)}
 										</Typography>
@@ -241,6 +244,9 @@ const FooterMobile = () => {
 							<Typography
 								sx={{
 									textAlign: "center",
+									fontSize: { xs: "10px", md: "13px" },
+									lineHeight: "15px",
+									fontWeight: "400",
 								}}
 							>
 								All Rights Reserved View On Website Portal Co LLC 2023

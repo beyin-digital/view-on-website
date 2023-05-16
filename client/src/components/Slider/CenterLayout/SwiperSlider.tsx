@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination, Navigation } from "swiper";
 import { Box, Button, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
+import Slid from "./Slid";
 
 const SwiperSlider = () => {
 	const { t } = useTranslation("slider");
@@ -42,6 +43,7 @@ const SwiperSlider = () => {
 		{ id: 25, num: "y" },
 		{ id: 26, num: "z" },
 	];
+
 	useEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth < 610) {
@@ -64,17 +66,17 @@ const SwiperSlider = () => {
 					height: {
 						xs: "100%",
 						sm: "300px",
-						md: "300px",
-						xl: "200px",
+						md: "250px",
+						xl: "250px",
 					},
 					width: "100%",
 					maxWidth: "100%",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					background: "transparent",
+					background: "#ffffff00",
 				}}
-				className=""
+				
 			>
 				<Swiper
 					direction={isVertical ? "vertical" : "horizontal"}
@@ -91,7 +93,7 @@ const SwiperSlider = () => {
 					}}
 					loop={true}
 					spaceBetween={30}
-					modules={[EffectCoverflow, Pagination, Pagination]}
+					modules={[EffectCoverflow, Pagination]}
 					className="swiper_container"
 					pagination={{
 						type: "fraction",
@@ -110,7 +112,7 @@ const SwiperSlider = () => {
 					}}
 					autoplay={{ delay: 4000, disableOnInteraction: false }} // تحديد فترة التأخير بين كل انتقال					direction={isVertical ? "vertical" : "horizontal"}
 					style={{
-						background: "transparent",
+						background: "#ffffff00",
 					}}
 				>
 					{images.map((item) => (
@@ -122,11 +124,18 @@ const SwiperSlider = () => {
 								display: "flex",
 								alignItems: "center",
 								justifyContent: "center",
+
 								zIndex: "9",
 								position: "relative",
 							}}
 						>
-							<img src="/images/card.png" className="ImageSlider" />
+							<img
+								src="/images/card.png"
+								style={{
+									width: "auto",
+								}}
+								className="ImageSlider"
+							/>
 							<Box
 								sx={{
 									position: "absolute",
@@ -150,6 +159,7 @@ const SwiperSlider = () => {
 								>
 									#{item.num}
 								</Typography>
+								{/* <Slid num={name} onNameChange={handleNameChange} /> */}
 								<Typography
 									sx={{
 										fontSize: {

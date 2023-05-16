@@ -49,6 +49,8 @@ const Footer = () => {
 						md: "space-between",
 						xl: "space-between",
 					},
+					top: "-.3rem",
+					position: "relative",
 				}}
 			>
 				<Box
@@ -57,7 +59,6 @@ const Footer = () => {
 						display: { xs: "flex", md: "flex", xl: "flex" },
 						alignItems: "center",
 						justifyContent: { xs: "center", md: "start", xl: "start" },
-						// margin: { xs: " 2rem 0", xl: "0" },
 					}}
 				>
 					{icons.map((item) => (
@@ -69,7 +70,7 @@ const Footer = () => {
 								height={30}
 								width={30}
 								style={{
-									margin: "0 2rem",
+									margin: "0 1rem",
 								}}
 							/>
 						</Link>
@@ -77,7 +78,7 @@ const Footer = () => {
 				</Box>
 				<Box
 					sx={{
-						width: "100%",
+						width: { xs: "", sm: "90%", xl: "50%" },
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "space-around",

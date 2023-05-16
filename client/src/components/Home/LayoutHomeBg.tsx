@@ -24,12 +24,12 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 				>
 					<Box
 						sx={{
-							width: { xs: "100%", sm: "500px", md: "740px", xl: "740px" },
+							width: { xs: "100%", sm: "500px", md: "700px", xl: "940px" },
 							height: {
 								xs: "180px",
 								sm: "300px",
-								md: "370px",
-								xl: "360px",
+								md: "400px",
+								xl: "435px",
 							},
 							display: "flex",
 							alignItems: "center",

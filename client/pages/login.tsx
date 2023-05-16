@@ -1,9 +1,6 @@
 import { Box } from "@mui/material";
 import Head from "next/head";
 
-import { useRouter } from "next/router";
-
-// import { useRouter } from "next/router";
 
 // components
 import LoginForm from "@/components/Login/LoginForm";

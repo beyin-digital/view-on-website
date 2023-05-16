@@ -44,7 +44,6 @@ const SliderDesktop = ({ onClick }: any) => {
 						position: "relative",
 						marginTop: "2rem",
 						marginBottom: "1rem",
-
 					}}
 				>
 					{/* Text Premium top layout */}
@@ -57,13 +56,14 @@ const SliderDesktop = ({ onClick }: any) => {
 							right: { xs: "0%", sm: "0%", md: "0%", xl: "20%" },
 							maxWidth: "100%",
 							width: "100%",
-							height: { xs: "100%", sm: "100vh", md: "550px", xl: "500px" },
-							// background: "rgba(251, 251, 251, 0.6)",
+							height: { xs: "100%", sm: "100vh", md: "550px", xl: "530px" },
+							background: "rgba(251, 251, 251, 0.6)",
 							border: "1px solid #FBFBFB",
 							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
 							transform: { xs: "", md: "", xl: "skew(-16deg, 0deg)" },
 							overflow: { xs: "", md: "hidden", xl: "hidden" },
+							paddingY: "2rem",
 						}}
 					>
 						<>

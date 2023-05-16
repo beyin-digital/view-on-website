@@ -10,26 +10,27 @@ const TextPremium = ({ onClick }: any) => {
 				sx={{
 					width: "100%",
 					position: "absolute",
-					// top: "7rem",
 					top: ".2rem",
 					display: "flex",
-					alignItems: "center",
+					alignItems: "start",
 					justifyContent: "center",
-					heigh: "50px",
+					heigh: "80px",
 					transform: "skew(0deg, 0deg)",
 				}}
 			>
 				<Box
 					sx={{
 						width: "200px",
-						height: "40px",
+						height: "60px",
 						lineHeight: "92.5%",
 						background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 						borderRadius: "11px",
 						display: "flex",
-						alignItems: "center",
+						alignItems: "start",
 						justifyContent: "center",
 						cursor: "pointer",
+						paddingBottom: "1rem",
+						paddingTop: ".2rem",
 					}}
 					onClick={onClick}
 				>

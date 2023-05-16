@@ -40,11 +40,7 @@ function MyApp(props: MyAppProps) {
 	return (
 		<CacheProvider value={emotionCache}>
 			<Head>
-				<meta
-					name="viewport"
-					content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
-				/>
-				{/* <meta name="viewport" content="initial-scale=1, width=device-width" /> */}
+				<meta name="viewport" content="initial-scale=1, width=device-width" />
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link
 					href="https://fonts.googleapis.com/css2?family=Comforter&family=Finlandica:ital,wght@1,400;1,500;1,700&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500;600;700&family=Inter:wght@200;400;500;600;700;800;900&family=League+Spartan:wght@300;400;500;600&family=Neonderthaw&family=Poppins:wght@100;300;400;500;600;700;900&display=swap"

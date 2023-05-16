@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/system";
 
 // components
-import Background from "./Background";
+import { Background } from "./Background";
 import Header from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import FooterMobile from "../Footer/FooterMobile";
@@ -40,28 +40,11 @@ const Layout: React.FC<Props> = ({ children }) => {
 							position: "relative",
 							width: { xs: "564px", sm: "100%", md: "100%", xl: "100%" },
 							height: { xs: "100%", sm: "100%", md: "650px", xl: "650px" },
-							background: {
-								xs: "rgba(251, 251, 251, 0.6)",
-								md: "rgba(251, 251, 251, 0.6)",
-								xl: "rgba(251, 251, 251, 0.6)",
-							},
-							border: {
-								xs: "1px solid #FBFBFB",
-								md: "1px solid #FBFBFB",
-								xl: "1px solid #FBFBFB",
-							},
-							backdropFilter: {
-								xs: "blur(100px)",
-								md: "blur(100px)",
-								xl: "blur(100px)",
-							},
+							background: "rgba(251, 251, 251, 0.6)",
+							border: "1px solid #FBFBFB",
+							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
-							transform: {
-								xs: "skew(-16deg, 0deg)",
-								sm: "skew(-16deg, 0deg)",
-								md: "skew(-16deg, 0deg)",
-								xl: "skew(-16deg, 0deg)",
-							},
+							transform: "skew(-16deg, 0deg)",
 							overflow: { xs: "", md: "hidden", xl: "hidden" },
 							margin: "3rem auto",
 							zIndex: "999",

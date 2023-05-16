@@ -7,7 +7,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
-import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Navbar/Navbar";
 import FooterMobile from "@/components/Footer/FooterMobile";
 const Illustration = () => {
@@ -26,7 +25,7 @@ const Illustration = () => {
 			<IllustrationTablet />
 			<IllustrationDesktop />
 			<IllustrationMobile />
-			<Footer />
+			{/* <Footer /> */}
 			<FooterMobile />
 		</>
 	);

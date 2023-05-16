@@ -283,7 +283,7 @@ export const ThreeOptionDesktop = () => {
 			<Box
 				sx={{
 					width: "100%",
-					height: "65px",
+					height: "70px",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",

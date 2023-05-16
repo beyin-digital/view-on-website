@@ -2,7 +2,6 @@ import { Typography, Box, OutlinedInput, Button } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
 import { IconsStyle } from "../Button";
 
 const SignupForm = () => {
@@ -27,7 +26,6 @@ const SignupForm = () => {
 				<Box
 					sx={{
 						width: { xs: "100%", sm: "80%", md: "45%", xl: "45%" },
-						height: { xs: "115px", md: "235px", xl: "235px" },
 						display: "flex",
 						alignItems: "center",
 						flexDirection: "column",
@@ -47,7 +45,7 @@ const SignupForm = () => {
 							background: "#FBFBFB",
 							borderRadius: "15px",
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
-							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
+							marginY: ".2rem",
 						}}
 						placeholder={`${t("form_name")}`}
 					/>
@@ -60,7 +58,7 @@ const SignupForm = () => {
 							background: "#FBFBFB",
 							borderRadius: "15px",
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
-							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
+							marginY: ".2rem",
 						}}
 						placeholder={`${t("form_password")}`}
 					/>
@@ -68,7 +66,6 @@ const SignupForm = () => {
 				<Box
 					sx={{
 						width: { xs: "100%", sm: "80%", md: "45%", xl: "45%" },
-						height: { xs: "115px", md: "235px", xl: "235px" },
 						display: "flex",
 						alignItems: "center",
 						flexDirection: "column",
@@ -88,7 +85,7 @@ const SignupForm = () => {
 							background: "#FBFBFB",
 							borderRadius: "15px",
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
-							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
+							marginY: ".2rem",
 						}}
 						placeholder={`${t("form_email")}`}
 					/>
@@ -101,7 +98,7 @@ const SignupForm = () => {
 							background: "#FBFBFB",
 							borderRadius: "15px",
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
-							marginY: ".3rem",
+							marginY: ".2rem",
 						}}
 						placeholder={`${t("form_confirm")}`}
 					/>

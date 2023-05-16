@@ -1,7 +1,6 @@
 import Layout from "@/components/Layout/Layout";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-// import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import React from "react";
@@ -33,7 +32,6 @@ const VerificationPage = () => {
 			</Head>
 			<Layout>
 				<Grid
-					// container
 					sx={{
 						width: "100%",
 						height: "100%",
@@ -69,6 +67,7 @@ const VerificationPage = () => {
 							<Image
 								src="/icons/message.svg"
 								alt="View On Website Icon message"
+								title="View On Website Icon message"
 								height={78}
 								width={78}
 							/>
@@ -121,9 +120,9 @@ const VerificationPage = () => {
 									sx={{
 										".MuiOutlinedInput-root": {
 											borderRadius: "50%",
-											width: { xs: "50px", sm: "74px", md: "74px", xl: "74px" },
+											width: { xs: "40px", sm: "74px", md: "74px", xl: "74px" },
 											height: {
-												xs: "50px",
+												xs: "40px",
 												sm: "74px",
 												md: "74px",
 												xl: "74px",
@@ -151,9 +150,9 @@ const VerificationPage = () => {
 								width: "300px",
 								display: "flex",
 								justifyContent: { xs: "center", md: "end", xl: "end" },
-								position: { xs: "", md: "", xl: "absolute" },
-								bottom: { xs: "0rem", md: "0rem", xl: "1rem" },
-								right: { xs: "", md: "0rem", xl: "0rem" },
+								position: { xs: "absolute", md: "absolute", xl: "absolute" },
+								bottom: { xs: "0rem", md: "1rem", xl: "1rem" },
+								right: { xs: "", md: "-5rem", xl: "-5rem" },
 							}}
 						>
 							<Box

@@ -59,7 +59,7 @@ const ThreeBox = () => {
 							sx={{
 								width: "195px",
 								fontSize: "20px",
-								fontWeight: "500",
+								fontWeight: "600",
 								lineHeight: "15px",
 								marginY: "1rem",
 							}}
@@ -69,8 +69,8 @@ const ThreeBox = () => {
 						<Typography
 							sx={{
 								fontSize: "14px",
-								fontWeight: "300",
-								lineHeight: "13px",
+								fontWeight: "400",
+								lineHeight: "14px",
 							}}
 						>
 							{t("box_three_desc")}
@@ -95,15 +95,15 @@ const ThreeBox = () => {
 					<Box
 						sx={{
 							transform: {
-								xs: "skew(1deg, 0deg)",
+								xs: "skew(15deg, 0deg)",
 								xl: "skew(15deg, 0deg)",
 							},
 							position: "absolute",
 							top: "0",
 							bottom: { xs: "", md: "-1rem", xl: "-1rem" },
-							right: { xs: "", md: "0rem", xl: "0" },
-							width: { md: "450px", xl: "600px" },
-							height: { md: "450px", xl: "600px" },
+							right: { xs: "", md: "0rem", xl: "-5rem" },
+							width: { md: "500px", xl: "650px" },
+							height: { md: "500px", xl: "650px" },
 						}}
 					>
 						<img
@@ -120,11 +120,11 @@ const ThreeBox = () => {
 						sx={{
 							width: "277px",
 							transform: {
-								xs: "skew(1deg, 0deg)",
+								xs: "skew(15deg, 0deg)",
 								xl: "skew(15deg, 0deg)",
 							},
 							position: "absolute",
-							bottom: "3rem",
+							bottom: "1rem",
 							left: "2.8rem",
 						}}
 					>
@@ -132,7 +132,7 @@ const ThreeBox = () => {
 							sx={{
 								width: "195px",
 								fontSize: "20px",
-								fontWeight: "500",
+								fontWeight: "600",
 								lineHeight: "15px",
 								marginY: "1rem",
 							}}
@@ -142,8 +142,8 @@ const ThreeBox = () => {
 						<Typography
 							sx={{
 								fontSize: "14px",
-								fontWeight: "300",
-								lineHeight: "13px",
+								fontWeight: "400",
+								lineHeight: "14px",
 							}}
 						>
 							{t("box_three_desc")}

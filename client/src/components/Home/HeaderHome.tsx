@@ -28,8 +28,8 @@ const Header = () => {
 			>
 				<Box
 					sx={{
-						width: { xs: "85%", sm: "80%", md: "80%", xl: "90%" },
-						px: { xs: ".5rem", sm: "1.5rem", md: "1.5rem", xl: "1.5rem" },
+						width: { xs: "85%", sm: "80%", md: "100%", xl: "90%" },
+						px: { xs: ".5rem", sm: "1.5rem", md: "0rem", xl: "1.5rem" },
 					}}
 				>
 					<Typography
@@ -41,7 +41,7 @@ const Header = () => {
 								xl: "64px",
 							},
 						}}
-						lineHeight="92.5%"
+						lineHeight="30px"
 						letterSpacing="0.02em"
 						fontWeight="500"
 						className="Textredirected"
@@ -54,6 +54,7 @@ const Header = () => {
 							fontSize: { xs: "20px", md: "30px", xl: "40px" },
 							lineHeight: "92.5%",
 							fontWeight: "400",
+							height: "44px",
 						}}
 					>
 						{t("header_text_one")}
@@ -61,8 +62,11 @@ const Header = () => {
 							component={"span"}
 							sx={{
 								fontSize: { xs: "20px", md: "30px", xl: "40px" },
-								borderRadius: "8px",
+								borderRadius: "7px",
 								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+								height: "44px",
+								marginX: ".3rem",
+								paddingY: "-.1rem",
 							}}
 						>
 							{t("header_text_two")}
@@ -73,8 +77,6 @@ const Header = () => {
 				</Box>
 				<Box
 					sx={{
-						width: { xs: "53px", sm: "50px", md: "70px", xl: "103px" },
-						height: { xs: "53px", sm: "50px", md: "70px", xl: "103px" },
 						marginX: { xs: ".4rem", sm: "1rem", md: "1rem", xl: "1rem" },
 						cursor: "pointer",
 					}}

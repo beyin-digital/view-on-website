@@ -2,6 +2,7 @@
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
+import Slid from "../CenterLayout/Slid";
 
 
 const HeaderLayout = ({ num }: any) => {
@@ -184,6 +185,7 @@ const HeaderLayout = ({ num }: any) => {
 									>
 										#A
 									</Typography>
+									{/* <Slid num={num} /> */}
 									<Typography
 										sx={{
 											fontSize: "19px",

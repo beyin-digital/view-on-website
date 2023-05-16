@@ -58,7 +58,7 @@ export const ImageBackground = () => {
 							style={{
 								width: "100%",
 								left: "-21rem",
-								top: "-0rem",
+								top: "5rem",
 							}}
 						/>
 					</Box>
@@ -75,7 +75,7 @@ export const ImageBackground = () => {
 							style={{
 								width: "100%",
 								left: "-10rem",
-								top: "-5rem",
+								top: "-0rem",
 							}}
 						/>
 					</Box>

@@ -50,11 +50,13 @@ const Footer = ({ onClick }: any) => {
 						md: "space-between",
 						xl: "space-between",
 					},
+					height: { xs: "100%", md: "70px", xl: "70px" },
 				}}
 			>
 				<Box
 					sx={{
-						width: { xs: "100%", md: "30%", xl: "30%" },
+						width: { xs: "100%", md: "30%", xl: "35%" },
+						height: "100%",
 						display: "flex",
 						alignItems: "end",
 						justifyContent: { xs: "center", md: "start", xl: "start" },
@@ -79,60 +81,49 @@ const Footer = ({ onClick }: any) => {
 				</Box>
 				<Box
 					sx={{
-						width: { xs: "100%", md: "70%", xl: "70%" },
+						width: { xs: "100%", md: "20%", xl: "25%" },
+						height: "100%",
 						display: "flex",
 						alignItems: "center",
-						justifyContent: "space-between",
-						// border: "1px solid",
+						justifyContent: "center",
+						overflow: "hidden",
 					}}
 				>
 					<Box
 						sx={{
-							width: { xs: "100%", md: "30%", xl: "30%" },
+							width: { xs: "200px", md: "253px", xl: "253px" },
+							height: "60px",
+							lineHeight: "92.5%",
+							background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+							borderRadius: "11px",
 							display: "flex",
 							alignItems: "center",
-							justifyContent: {
-								xs: "center",
-								md: "space-between",
-								xl: "space-between",
-							},
-							overflow: "hidden",
+							justifyContent: "center",
+							position: "relative",
+							bottom: { xs: "-.5rem", md: "-.8rem", xl: "-1rem" },
+							cursor: "pointer",
 						}}
+						onClick={onClick}
 					>
-						<Box
+						<Typography
 							sx={{
-								width: { xs: "200px", md: "253px", xl: "253px" },
-								height: "60px",
-								lineHeight: "92.5%",
-								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
-								borderRadius: "11px",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center",
-								position: "relative",
-								bottom: "-1rem",
-								cursor: "pointer",
+								fontSize: { xs: "25px", xl: "32px" },
 							}}
-							onClick={onClick}
+							fontWeight="700"
+							lineHeight="92.5%"
+							textAlign="center"
 						>
-							<Typography
-								sx={{
-									fontSize: { xs: "25px", xl: "32px" },
-								}}
-								fontWeight="700"
-								lineHeight="92.5%"
-								textAlign="center"
-							>
-								{t("premium")}
-							</Typography>
-						</Box>
+							{t("premium")}
+						</Typography>
 					</Box>
+				</Box>
+				<>
 					<Box
 						sx={{
-							width: { xs: "100%", md: "60%", xl: "60%" },
-							display: { xs: "none", md: "flex", xl: "flex" },
+							width: { xs: "100%", md: "50%", xl: "35%" },
+							display: { xs: "none", md: "flex" },
 							alignItems: "center",
-							justifyContent: "space-around",
+							justifyContent: "end",
 						}}
 					>
 						<Box
@@ -143,6 +134,7 @@ const Footer = ({ onClick }: any) => {
 								alignItems: "center",
 								justifyContent: "space-around",
 								width: "143px",
+								margin: "auto .8rem",
 							}}
 						>
 							<Typography
@@ -154,7 +146,13 @@ const Footer = ({ onClick }: any) => {
 							>
 								{t("footer_learn")}
 							</Typography>
-							<Image src="/icons/i.svg" alt="" width={20} height={20} />
+							<Image
+								src="/icons/i.svg"
+								alt="View On Website Icon more"
+								title="View On Website Icon more"
+								width={20}
+								height={20}
+							/>
 						</Box>
 						{links.map((item) => (
 							<Link
@@ -164,21 +162,18 @@ const Footer = ({ onClick }: any) => {
 								sx={{
 									textDecoration: "none",
 									color: "inherit",
+									margin: "auto .8rem",
+									fontSize: "20px",
+									fontWeight: "400",
+									lineHeight: "30px",
 								}}
+								textTransform={"capitalize"}
 							>
-								<Typography
-									fontSize="20px"
-									fontWeight="400"
-									lineHeight="32px"
-									textAlign="center"
-									textTransform={"capitalize"}
-								>
-									{`${t(item.title)}`}
-								</Typography>
+								{`${t(item.title)}`}
 							</Link>
 						))}
 					</Box>
-				</Box>
+				</>
 			</Box>
 		</footer>
 	);

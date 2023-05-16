@@ -8,14 +8,8 @@ import {
 	Toolbar,
 	Typography,
 	Button,
-	// Link,
 } from "@mui/material";
 import { useTranslation } from "next-i18next";
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import FormHelperText from '@mui/material/FormHelperText';
-// import FormControl from '@mui/material/FormControl';
-// import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -112,7 +106,6 @@ const Header = () => {
 					marginY: "2rem",
 				}}
 			>
-				{/* {links.map((link) => ( */}
 				<Link
 					title={`${t("nav_subscribe")}`}
 					href="/subscribe"
@@ -280,7 +273,8 @@ const Header = () => {
 			>
 				<Image
 					src="/icons/facebook.svg"
-					alt=""
+					alt="View On Website Icon Facebook"
+					title="View On Website Icon Facebook"
 					height={18}
 					width={18}
 					style={{
@@ -289,7 +283,8 @@ const Header = () => {
 				/>
 				<Image
 					src="/icons/twitter.svg"
-					alt=""
+					alt="View On Website Icon Twitter"
+					title="View On Website Icon Twitter"
 					height={18}
 					width={18}
 					style={{
@@ -298,7 +293,8 @@ const Header = () => {
 				/>
 				<Image
 					src="/icons/instagram.svg"
-					alt=""
+					alt="View On Website Icon Instagram "
+					title="View On Website Icon Instagram "
 					height={18}
 					width={18}
 					style={{
@@ -307,7 +303,8 @@ const Header = () => {
 				/>
 				<Image
 					src="/icons/linkedin.svg"
-					alt=""
+					alt="View On Website Icon Linkedin"
+					title="View On Website Icon Linkedin"
 					height={18}
 					width={18}
 					style={{
@@ -369,6 +366,7 @@ const Header = () => {
 							flexDirection: { xs: "row-reverse", md: "row", xl: "row" },
 							background: "rgba(251, 251, 251, 0.6)",
 							backdropFilter: "blur(100px)",
+							justifyContent: "space-between",
 						}}
 					>
 						<IconButton
@@ -395,7 +393,7 @@ const Header = () => {
 
 						<Box
 							component="div"
-							sx={{ flexGrow: 1, cursor: "pointer", margin: ".5rem 0" }}
+							sx={{ cursor: "pointer", margin: ".5rem 0" }}
 							onClick={() => router.push("/")}
 						>
 							<img src="/images/logo.svg" alt="logo" />
@@ -406,13 +404,17 @@ const Header = () => {
 								background: "transparent",
 							}}
 						>
-							{/* <ul className="navigation-menu">
-								{links.map((link) => (
-									<li key={`${link.label}1`}>
+							<Box
+								sx={{
+									display: { xs: "none", sm: "none", md: "flex", xl: "flex" },
+									background: "transparent",
+								}}
+							>
+								<ul className="navigation-menu">
+									<li>
 										<Link
-											href={link.href}
-											key={t(link.tKey)}
-											title={`${t(link.tKey)}`}
+											href="/subscribe"
+											title={`${t("nav_subscribe")}`}
 											style={{ textDecoration: "none" }}
 										>
 											<Typography
@@ -422,112 +424,95 @@ const Header = () => {
 												color="#343132"
 												textTransform={"capitalize"}
 											>
-												{t(link.tKey)}
+												{t("nav_subscribe")}
 											</Typography>
 										</Link>
 									</li>
-								))}
-							</ul> */}
-							<ul className="navigation-menu">
-								<li>
-									<Link
-										href="/subscribe"
-										title={`${t("nav_subscribe")}`}
-										style={{ textDecoration: "none" }}
-									>
-										<Typography
-											fontSize="32px"
-											fontWeight={400}
-											lineHeight="37px"
-											color="#343132"
-											textTransform={"capitalize"}
+									<li>
+										<Link
+											href="/example"
+											title={`${t("nav_examples")}`}
+											style={{ textDecoration: "none" }}
 										>
-											{t("nav_subscribe")}
-										</Typography>
-									</Link>
-								</li>
-								<li>
-									<Link
-										href="/example"
-										title={`${t("nav_examples")}`}
-										style={{ textDecoration: "none" }}
-									>
-										<Typography
-											fontSize="32px"
-											fontWeight={400}
-											lineHeight="37px"
-											color="#343132"
-											textTransform={"capitalize"}
+											<Typography
+												fontSize="32px"
+												fontWeight={400}
+												lineHeight="37px"
+												color="#343132"
+												textTransform={"capitalize"}
+											>
+												{t("nav_examples")}
+											</Typography>
+										</Link>
+									</li>
+									<li>
+										<Link
+											href={asPath}
+											locale={locale === "en" ? "ar" : "en"}
+											title=""
+											style={{ textDecoration: "none" }}
 										>
-											{t("nav_examples")}
-										</Typography>
-									</Link>
-								</li>
-								<li>
-									<Link
-										href={asPath}
-										locale={locale === "en" ? "ar" : "en"}
-										title=""
-										style={{ textDecoration: "none" }}
-									>
-										<Typography
-											fontSize="32px"
-											fontWeight={400}
-											lineHeight="37px"
-											color="#343132"
-											textTransform={"capitalize"}
+											<Typography
+												fontSize="32px"
+												fontWeight={400}
+												lineHeight="37px"
+												color="#343132"
+												textTransform={"capitalize"}
+											>
+												{locale === "en" ? "AR" : "EN"}
+											</Typography>
+										</Link>
+									</li>
+									<li>
+										<Link
+											href="/login"
+											title={`${t("nav_login")}`}
+											style={{ textDecoration: "none" }}
 										>
-											{locale === "en" ? "AR" : "EN"}
-										</Typography>
-									</Link>
-								</li>
-								<li>
-									<Link
-										href="/login"
-										title={`${t("nav_login")}`}
-										style={{ textDecoration: "none" }}
-									>
-										<Typography
-											fontSize="32px"
-											fontWeight={400}
-											lineHeight="37px"
-											color="#343132"
-											textTransform={"capitalize"}
-										>
-											{t("nav_login")}
-										</Typography>
-									</Link>
-								</li>
-							</ul>
-						</Box>
-						<Button
-							onClick={() => router.push("/signup")}
-							sx={{
-								borderRadius: "16px",
-								paddingX: "18px",
-								height: "59px",
-								display: { xs: "none", md: "flex", xl: "flex" },
-								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
-							}}
-						>
-							<Typography
+											<Typography
+												fontSize="32px"
+												fontWeight={400}
+												lineHeight="37px"
+												color="#343132"
+												textTransform={"capitalize"}
+											>
+												{t("nav_login")}
+											</Typography>
+										</Link>
+									</li>
+								</ul>
+							</Box>
+							<Button
+								onClick={() => router.push("/signup")}
 								sx={{
-									letterSpacing: "0.02em",
-									fontSize: { xs: "25px", xl: "32px" },
-									fontWeight: 400,
-									lineHeight: "40px",
-									color: "#343132",
-									textTransform: "uppercase",
+									borderRadius: "16px",
+									paddingX: "18px",
+									height: "59px",
+									width: { xs: "300px", xl: "311px" },
+									display: { xs: "none", md: "flex", xl: "flex" },
+									background:
+										"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 								}}
 							>
-								{t("nav_getStarted")}
-							</Typography>
-							{locale === "ar" ? (
-								<FiArrowUpLeft size={42} color="#343132" className="" />
-							) : (
-								<FiArrowUpRight size={42} color="#343132" className="" />
-							)}
-						</Button>
+								<Typography
+									sx={{
+										letterSpacing: "0.02em",
+										fontSize: { xs: "23px", xl: "32px" },
+										fontWeight: "700",
+										lineHeight: "40px",
+										color: "#343132",
+										textTransform: "uppercase",
+									}}
+								>
+									{t("nav_getStarted")}
+								</Typography>
+								{locale === "ar" ? (
+									<FiArrowUpLeft size={42} color="#343132" className="" />
+								) : (
+									<FiArrowUpRight size={42} color="#343132" className="" />
+								)}
+							</Button>
+						</Box>
 					</Toolbar>
 				</AppBar>
 				<Box

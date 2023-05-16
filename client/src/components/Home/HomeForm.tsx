@@ -16,15 +16,15 @@ const HomeForm = () => {
 	return (
 		<>
 			<Box
-				display="flex"
-				alignItems="center"
 				sx={{
+					display: "flex",
 					width: { xs: "70%", md: "100%", xl: "100%" },
 					justifyContent: {
 						xs: "center",
 						md: "space-evenly",
 						xl: "space-around",
 					},
+					alignItems: "baseline",
 				}}
 				className="BoxInputHome"
 			>

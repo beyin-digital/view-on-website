@@ -29,9 +29,12 @@ const FormRequest = () => {
 						borderRadius: "10px",
 						marginY: ".5rem",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
-						// delete this once time
-						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-							border: 0,
+						".MuiOutlinedInput-notchedOutline": {
+							border: "0",
+							padding: "9px",
+						},
+						"&:hover > .MuiOutlinedInput-notchedOutline": {
+							border: "0",
 						},
 					}}
 					placeholder={`${t("input")}`}

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 import { Drawer } from "@mui/material";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 
 import Layout from "@/components/Layout/LayoutHome";
 import SliderDesktop from "@/components/Slider";

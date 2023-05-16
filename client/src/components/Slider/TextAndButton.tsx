@@ -43,9 +43,9 @@ const TextAndButton = () => {
 							{locale === "ar" ? (
 								<>#{t("footer_prime")} </>
 							) : (
-								<>#{t("keyword")} ?</>
+								<>#{t("keyword")}</>
 							)}
-						</Typography>
+						</Typography>?
 						{t("prime_two")}
 					</Typography>
 				) : (
@@ -69,9 +69,9 @@ const TextAndButton = () => {
 							{locale === "ar" ? (
 								<>#{t("footer_prime")} </>
 							) : (
-								<>#{t("keyword")} ?</>
+								<>#{t("keyword")} </>
 							)}
-						</Typography>
+						</Typography>?
 					</Typography>
 				)}
 				{/* <ButtonLogin name={`${t("button_two")}`} /> */}
