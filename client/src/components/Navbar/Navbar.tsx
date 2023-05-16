@@ -92,11 +92,13 @@ const Header = () => {
 					sx={{ cursor: "pointer", margin: ".5rem 0", textAlign: "center" }}
 					onClick={() => router.push("/")}
 				>
-					<img
-						src="/images/logo.svg"
-						alt="logo View On Website"
-						title="logo View On Website"
-					/>
+					<Link href="/">
+						<img
+							src="/images/logo.svg"
+							alt="logo View On Website"
+							title="logo View On Website"
+						/>
+					</Link>
 				</Box>
 				<AiOutlineClose size="25px" />
 			</Box>
@@ -394,9 +396,11 @@ const Header = () => {
 						<Box
 							component="div"
 							sx={{ cursor: "pointer", margin: ".5rem 0" }}
-							onClick={() => router.push("/")}
+							// onClick={() => router.push("/")}
 						>
-							<img src="/images/logo.svg" alt="logo" />
+							<Link href="/">
+								<img src="/images/logo.svg" alt="logo" />
+							</Link>
 						</Box>
 						<Box
 							sx={{

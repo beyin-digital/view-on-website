@@ -45,6 +45,7 @@ const ThreeBox = () => {
 								width: "100%",
 								height: "auto",
 							}}
+							loading="lazy"
 						/>
 					</Box>
 					<Box

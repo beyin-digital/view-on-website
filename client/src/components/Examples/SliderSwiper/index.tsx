@@ -30,11 +30,7 @@ export default function SliderSwiper() {
 					delay: 2500,
 					disableOnInteraction: false,
 				}}
-				pagination={{
-					clickable: true,
-				}}
-				// navigation={true}
-				modules={[Autoplay, Pagination]}
+				modules={[Autoplay]}
 				className="mySwiper"
 			>
 				{images.map((item) => (
@@ -53,6 +49,7 @@ export default function SliderSwiper() {
 							}}
 							alt=""
 							title=""
+							loading="lazy"
 						/>
 					</SwiperSlide>
 				))}

@@ -1,12 +1,14 @@
 import { Box, Button, Typography } from "@mui/material";
 
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import { IconsStyle } from "../Button";
 
 const TextAndButton = () => {
 	const { t } = useTranslation("slider");
 	const { locale } = useRouter();
+	const router = useRouter();
+
 	return (
 		<>
 			<Box
@@ -19,7 +21,7 @@ const TextAndButton = () => {
 					flexDirection: "column",
 					marginY: { xs: "3rem", md: "1rem", xl: "1rem" },
 					// marginX: "1rem",
-					paddingX:"1rem"
+					paddingX: "1rem",
 				}}
 			>
 				{locale === "ar" ? (
@@ -37,6 +39,7 @@ const TextAndButton = () => {
 							sx={{
 								fontSize: { xs: "20px", xl: "32px" },
 								borderRadius: "8px",
+								marginX:"4px",
 								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 							}}
 						>
@@ -45,7 +48,7 @@ const TextAndButton = () => {
 							) : (
 								<>#{t("keyword")}</>
 							)}
-						</Typography>?
+						</Typography>
 						{t("prime_two")}
 					</Typography>
 				) : (
@@ -71,7 +74,8 @@ const TextAndButton = () => {
 							) : (
 								<>#{t("keyword")} </>
 							)}
-						</Typography>?
+						</Typography>
+						?
 					</Typography>
 				)}
 				{/* <ButtonLogin name={`${t("button_two")}`} /> */}
@@ -97,7 +101,7 @@ const TextAndButton = () => {
 							display: "flex",
 							justifyContent: "space-around",
 						}}
-						onClick={() => ""}
+						onClick={() => router.push("/subscribe")}
 						type="submit"
 						title={`${t("button_two")}`}
 					>

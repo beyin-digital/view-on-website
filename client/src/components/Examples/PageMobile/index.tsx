@@ -36,6 +36,7 @@ const PageMobile = () => {
 						src="/images/swirl.png"
 						alt="Background View On Website"
 						title="Background View On Website"
+						loading="lazy"
 					/>
 				</Box>
 				<Box

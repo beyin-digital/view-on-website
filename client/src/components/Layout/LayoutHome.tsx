@@ -45,7 +45,7 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 						sx={{
 							position: "relative",
 							width: { xs: "115%", sm: "100%", md: "100%", xl: "100%" },
-							height: { xs: "470px", sm: "500px", md: "580px", xl: "620px" },
+							height: { xs: "470px", sm: "500px", md: "580px", xl: "610px" },
 							background: "rgba(251, 251, 251, 0.6)",
 							border: "1px solid #FBFBFB",
 							backdropFilter: "blur(100px)",

@@ -21,8 +21,11 @@ const SliderDesktop = ({ onClick }: any) => {
 		<Box
 			sx={{
 				width: "100%",
+				zIndex:"9999999"
 			}}
 		>
+			{/* <Header /> */}
+
 			<Box
 				sx={{
 					maxWidth: "100%",
@@ -36,7 +39,6 @@ const SliderDesktop = ({ onClick }: any) => {
 				}}
 			>
 				{/* Navbar */}
-				<Header />
 				{/* background image */}
 				<BackgroundImage />
 				<Box
@@ -56,7 +58,7 @@ const SliderDesktop = ({ onClick }: any) => {
 							right: { xs: "0%", sm: "0%", md: "0%", xl: "20%" },
 							maxWidth: "100%",
 							width: "100%",
-							height: { xs: "100%", sm: "100vh", md: "550px", xl: "530px" },
+							height: { xs: "100%", sm: "100vh", md: "550px", xl: "520px" },
 							background: "rgba(251, 251, 251, 0.6)",
 							border: "1px solid #FBFBFB",
 							backdropFilter: "blur(100px)",

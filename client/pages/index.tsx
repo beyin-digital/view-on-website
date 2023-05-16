@@ -11,6 +11,7 @@ import { Box } from "@mui/material";
 import Layout from "@/components/Layout/LayoutHome";
 import SliderDesktop from "@/components/Slider";
 import HomeDetails from "@/components/Home/HomeDetails";
+import Header from "@/components/Navbar/Navbar";
 
 type Anchor = "bottom" | "right";
 
@@ -75,6 +76,7 @@ const HomePage = (anchor: Anchor) => {
 							onClick={toggleDrawer(anchor, false)}
 							onKeyDown={toggleDrawer(anchor, false)}
 						>
+							<Header />
 							<SliderDesktop onClick={closeModel} />
 						</Drawer>
 					</>

@@ -17,7 +17,7 @@ export const ImageHeader = () => {
 					src="/images/swirl.svg"
 					alt=""
 					style={{
-						top: "-88rem",
+						top: "-63rem",
 						position: "absolute",
 					}}
 				/>
@@ -52,7 +52,7 @@ export const HeaderLayout = () => {
 					display: "flex",
 					justifyContent: "space-between",
 					position: "relative",
-					marginTop: { xs: "3rem", sm: "10rem", md: "1rem" },
+					marginTop: { xs: "3rem", sm: "1rem", md: "1rem" },
 					alignItems: "center",
 					flexDirection: { xs: "column", md: "row" },
 					paddingX: { xs: "1rem", sm: "1.5rem", md: "3rem" },

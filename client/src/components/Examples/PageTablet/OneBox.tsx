@@ -91,6 +91,7 @@ const OneBox = () => {
 							style={{
 								width: "100%",
 							}}
+							loading="lazy"
 						/>
 					</Box>
 				</Box>

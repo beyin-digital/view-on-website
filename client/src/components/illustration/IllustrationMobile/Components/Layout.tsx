@@ -18,7 +18,7 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
 				<Box
 					sx={{
 						maxWidth: "100%",
-						height: { xs: "100%", md: "120vh", xl: "100vh" },
+						height: { xs: "100%", md: "100vh", xl: "100vh" },
 						display: "flex",
 						flexDirection: "column",
 						justifyContent: "space-evenly",

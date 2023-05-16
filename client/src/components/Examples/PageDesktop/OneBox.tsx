@@ -66,8 +66,8 @@ const OneBox = () => {
 							<Typography
 								sx={{
 									fontSize: "20px",
-									fontWeight:"600",
-									lineHeight:"20px",
+									fontWeight: "600",
+									lineHeight: "20px",
 									marginY: "1.5rem",
 								}}
 							>
@@ -96,12 +96,25 @@ const OneBox = () => {
 							className="OneBoxDesktopLayoutImage"
 						>
 							<img
+								src="/images/exampleBoxOneIconRight.png"
+								style={{
+
+									position: "absolute",
+									right: "12rem",
+									top: "-3rem",
+								}}
+								loading="lazy"
+
+							/>
+							<img
 								src="/images/phoneAR.png"
 								alt="Phone Vow Left"
 								title="Phone Vow Left"
 								style={{
 									width: "100%",
 								}}
+								loading="lazy"
+
 							/>
 						</Box>
 					) : (
@@ -115,6 +128,17 @@ const OneBox = () => {
 							className="OneBoxDesktopLayoutImage"
 						>
 							<img
+								src="/images/exampleBoxOneIconLeft.png"
+								style={{
+
+									position: "absolute",
+									right: "12rem",
+									top: "-3rem",
+
+								}}
+								loading="lazy"
+							/>
+							<img
 								src="/images/phone.png"
 								alt="Phone Vow Left"
 								title="Phone Vow Left"
@@ -122,6 +146,8 @@ const OneBox = () => {
 									width: "100%",
 									height: "100%",
 								}}
+								loading="lazy"
+
 							/>
 						</Box>
 					)}

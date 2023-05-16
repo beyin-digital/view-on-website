@@ -26,13 +26,13 @@ const HomeForm = () => {
 					},
 					alignItems: "baseline",
 				}}
-				className="BoxInputHome"
+				className="BoxInputHom"
 			>
 				<Box
 					sx={{
 						display: "flex",
 						alignItems: "center",
-						marginTop: { xs: "1rem" },
+						marginTop: { xs: ".1rem" },
 					}}
 					className="InputHomeMargin"
 				>
@@ -48,7 +48,7 @@ const HomeForm = () => {
 								xs: "32px",
 								sm: "46px",
 								md: "46px",
-								xl: "66px",
+								xl: "65px",
 							},
 						}}
 					>
@@ -68,7 +68,7 @@ const HomeForm = () => {
 							onChange={(e) => setHashtag(e.target.value)}
 							sx={{
 								width: "100%",
-								height: "65px",
+								height: { xs: "45px", md: "65px" },
 								fontSize: {
 									xs: "18px",
 									sm: "22px",

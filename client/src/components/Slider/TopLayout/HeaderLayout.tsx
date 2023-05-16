@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
 import Slid from "../CenterLayout/Slid";
 
-
 const HeaderLayout = ({ num }: any) => {
 	const { t } = useTranslation("slider");
 	const { locale } = useRouter();
@@ -29,7 +28,7 @@ const HeaderLayout = ({ num }: any) => {
 								md: "row-reverse",
 								xl: "row-reverse",
 							},
-							marginTop: { xs: "1rem", md: "0", xl: "0" },
+							marginTop: { xs: "1rem", md: "0", xl: "1rem" },
 						}}
 					>
 						<Box>
@@ -44,7 +43,8 @@ const HeaderLayout = ({ num }: any) => {
 								<Typography
 									component={"span"}
 									sx={{
-										paddingX: "10px",
+										paddingX: "4px",
+										margin: "auto 5px",
 										background:
 											"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 										borderRadius: "7px",
@@ -124,14 +124,16 @@ const HeaderLayout = ({ num }: any) => {
 								sx={{
 									fontSize: { xs: "25px", md: "30px", xl: "40px" },
 									fontWeight: "400",
-									lineHeight: "45px",
+									lineHeight: { xs: "20px", md: "45px" },
+									marginY: { xs: ".5rem", md: "0" },
 								}}
 							>
 								{t("title")}
 								<Typography
 									component={"span"}
 									sx={{
-										paddingX: "10px",
+										paddingX: "4px",
+										margin: "auto 4px",
 										background:
 											"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 										borderRadius: "7px",
@@ -142,14 +144,12 @@ const HeaderLayout = ({ num }: any) => {
 								>
 									#{t("keyword")}
 								</Typography>
-
 							</Typography>
 						</Box>
 						<Box
 							sx={{
 								position: "relative",
 								width: "200px",
-
 							}}
 						>
 							<img
@@ -169,18 +169,16 @@ const HeaderLayout = ({ num }: any) => {
 									flexDirection: "column",
 									top: "0",
 									right: "0",
-
 								}}
 							>
-
 								<>
 									<Typography
-
 										sx={{
 											fontSize: "36px",
 											fontWeight: "600",
 											lineHeight: "70px",
 											color: "#31E716",
+											height: "70px",
 										}}
 									>
 										#A
@@ -197,7 +195,6 @@ const HeaderLayout = ({ num }: any) => {
 										ViewOnWebsite.com
 									</Typography>
 								</>
-
 							</Box>
 						</Box>
 					</Box>

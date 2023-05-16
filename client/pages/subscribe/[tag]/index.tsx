@@ -337,7 +337,6 @@ const SubscribePage: NextPage = () => {
 													{t("text_input_sublink")}
 												</Typography>
 												<OutlinedInput
-													label={`${t("text_input_sublink")}`}
 													sx={{
 														width: "100%",
 														height: { xs: "63px", md: "87px", xl: "97px" },

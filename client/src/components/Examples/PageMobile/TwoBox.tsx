@@ -33,17 +33,18 @@ const TwoBox = () => {
 							sx={{
 								width: { xs: "100%", md: "50%" },
 								position: "absolute",
-								// left:"-9rem",
+								left: { xs: ".5rem", sm: "2rem" },
+
 								zIndex: "9999",
 							}}
 							className="ExampleBoxTwoMobile"
 						>
 							<Box
 								sx={{
-									marginTop: { xs: "-4rem",sm:"-1rem", xl: "7rem" },
+									marginTop: { xs: "-2rem", sm: "-1rem", xl: "7rem" },
 									marginX: { xs: "0rem", md: "1rem" },
 									zIndex: "999999999",
-									position:"relative"
+									position: "relative",
 								}}
 							>
 								<Typography
@@ -52,7 +53,7 @@ const TwoBox = () => {
 										height: "100%",
 										fontSize: { xs: "15px", sm: "24px", md: "24px" },
 										fontWeight: "600",
-										lineHeight: "18px",
+										lineHeight: "25px",
 
 										marginY: "1rem",
 									}}
@@ -67,6 +68,7 @@ const TwoBox = () => {
 										lineHeight: { xs: "15px", sm: "20px", md: "20px" },
 										fontWeight: "300",
 										marginY: "1rem",
+										paddingRight: ".5rem",
 									}}
 								>
 									{t("box_three_desc")}
@@ -90,7 +92,7 @@ const TwoBox = () => {
 						>
 							<Box
 								sx={{
-									height: { xs: "250px", sm: "350px", md: "350px" },
+									height: { xs: "300px", sm: "350px", md: "350px" },
 									position: "absolute",
 								}}
 								className="ExampleBoxTwoPi ExampleBoxTwoImageMobile"
@@ -102,8 +104,9 @@ const TwoBox = () => {
 									style={{
 										width: "100%",
 										height: "100%",
-										objectFit: "cover",
+										objectFit: "contain",
 									}}
+									// loading="lazy"
 								/>
 							</Box>
 						</Box>

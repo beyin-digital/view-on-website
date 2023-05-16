@@ -8,7 +8,7 @@ interface Props {
 }
 const LayoutDesktop: React.FC<Props> = ({ children }) => {
 	return (
-		<>
+		<div className="IllustrationDesktop">
 			<Box
 				sx={{
 					width: "2192px",
@@ -33,22 +33,20 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
 						position: "fixed",
 					}}
 				>
-					<Box
-						sx={{
-							width: "100%",
-						}}
-					>
-						<Image
-							fill
+					<>
+						<img
+							// fill
 							src="/images/swirl.svg"
 							alt="Background View On Website"
 							title="Background View On Website"
 							style={{
-								top: "-43rem",
+								top: "-25rem",
+								left: "-7rem",
 								position: "absolute",
+								width: "900px",
 							}}
 						/>
-					</Box>
+					</>
 					<Box
 						sx={{
 							position: "relative",
@@ -91,7 +89,7 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
 				</Box>
 			</Box>
 			<Footer />
-		</>
+		</div>
 	);
 };
 

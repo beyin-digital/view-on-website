@@ -45,6 +45,7 @@ const PageDesktop = () => {
 							src="/images/swirl.png"
 							alt="Background Example Page"
 							title="Background Example Page"
+							loading="lazy"
 						/>
 					</Box>
 					<Box
@@ -58,7 +59,7 @@ const PageDesktop = () => {
 							flexDirection: { xs: "column", md: "row", xl: "row" },
 							overflow: "hidden",
 							background: "rgba(251, 251, 251, 0.6)",
-							marginX: { xs: "", md: "3rem", xl: "0" },
+							marginX: { xs: "", md: "0rem", xl: "0" },
 							position: "absolute",
 							left: "0",
 						}}
@@ -86,6 +87,7 @@ const PageDesktop = () => {
 									style={{
 										width: "100%",
 									}}
+									loading="lazy"
 								/>
 							</Box>
 						) : (
@@ -94,7 +96,6 @@ const PageDesktop = () => {
 									position: "absolute",
 									top: { md: "20rem", xl: "18rem" },
 									right: {
-
 										// md: "55rem",
 										lg: "59rem",
 										xl: "63rem",
@@ -112,6 +113,7 @@ const PageDesktop = () => {
 									style={{
 										width: "100%",
 									}}
+									loading="lazy"
 								/>
 							</Box>
 						)}
@@ -149,6 +151,7 @@ const PageDesktop = () => {
 										style={{
 											width: "100%",
 										}}
+										loading="lazy"
 									/>
 								</Box>
 							) : (
@@ -182,6 +185,7 @@ const PageDesktop = () => {
 										style={{
 											width: "100%",
 										}}
+										loading="lazy"
 									/>
 								</Box>
 							)}

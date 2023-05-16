@@ -37,7 +37,7 @@ const ThreeBox = () => {
 					<Box
 						sx={{
 							position: "absolute",
-							top: { xs: "-2rem", sm: "-1rem", md: "-3rem" },
+							top: { xs: "0rem", sm: "-1rem", md: "-3rem" },
 							right: "0",
 							width: { xs: "290px", sm: "350px", md: "492px" },
 							height: "365px",
@@ -51,7 +51,9 @@ const ThreeBox = () => {
 							alt="Your costumers in a Blink will be automatically redirected to your Sub-link-URL, your dashboard will show you all the conversions of your #keyword, it is your opportunity to optimize"
 							style={{
 								width: "100%",
+
 							}}
+							loading="lazy"
 						/>
 					</Box>
 					<Box
@@ -61,7 +63,7 @@ const ThreeBox = () => {
 							bottom: { xs: "0rem", sm: "2rem", md: "3rem", xl: "3rem" },
 							left: { xs: "0rem", sm: "3rem", md: "8rem", lg: "" },
 							transform: "skew(16deg, 0deg)",
-							marginY: "1rem",
+							marginRight: ".5rem",
 						}}
 						className="ExampleBoxThreeText"
 					>
@@ -79,7 +81,7 @@ const ThreeBox = () => {
 						<Typography
 							sx={{
 								width: { xs: "100%", md: "100%" },
-								fontSize: { xs: "14px", sm: "20px", md: "20px" },
+								fontSize: { xs: "13px", sm: "20px", md: "20px" },
 								lineHeight: { xs: "12px", sm: "20px", md: "20px" },
 								fontWeight: "300",
 							}}

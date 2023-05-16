@@ -24,7 +24,7 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 				>
 					<Box
 						sx={{
-							width: { xs: "100%", sm: "500px", md: "700px", xl: "940px" },
+							width: { xs: "100%", sm: "500px", md: "700px", xl: "920px" },
 							height: {
 								xs: "180px",
 								sm: "300px",
@@ -43,12 +43,8 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
 							backgroundRepeat: "no-repeat",
 							backgroundSize: "contain",
 							position: "relative",
-							transform: {
-								xs: "skew(16deg, 0deg)",
-								sm: "skew(16deg, 0deg)",
-								md: "skew(16deg, 0deg)",
-								xl: "skew(16deg, 0deg)",
-							},
+							transform: "skew(16deg, 0deg)",
+							xl: "skew(16deg, 0deg)",
 							backgroundImage: "url('/images/cut-out-parallelogram.png')",
 						}}
 						className="parallelogram"

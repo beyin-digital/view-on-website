@@ -112,6 +112,7 @@ const Footer = ({ onClick }: any) => {
 							fontWeight="700"
 							lineHeight="92.5%"
 							textAlign="center"
+							className="premium"
 						>
 							{t("premium")}
 						</Typography>

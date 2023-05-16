@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -7,41 +7,76 @@ import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
-import { EffectCoverflow, Pagination, Navigation } from "swiper";
+import SwiperCore, {
+	EffectCoverflow,
+	Pagination,
+	Navigation,
+	Thumbs,
+} from "swiper";
 import { Box, Button, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import Slid from "./Slid";
+import "swiper/swiper-bundle.min.css";
 
 const SwiperSlider = () => {
 	const { t } = useTranslation("slider");
 	const [isVertical, setIsVertical] = useState(true);
+	// const [thumbsSwiper, setThumbsSwiper] = useState(null);
+	const thumbsSwiper = useRef<SwiperCore>();
+	// 	{ id: 1, num: "a" },
+	// 	{ id: 2, num: "b" },
+	// 	{ id: 3, num: "c" },
+	// 	{ id: 4, num: "d" },
+	// 	{ id: 5, num: "e" },
+	// 	{ id: 6, num: "f" },
+	// 	{ id: 7, num: "g" },
+	// 	{ id: 8, num: "h" },
+	// 	{ id: 9, num: "i" },
+	// 	{ id: 10, num: "j" },
+	// 	{ id: 11, num: "k" },
+	// 	{ id: 12, num: "l" },
+	// 	{ id: 13, num: "m" },
+	// 	{ id: 14, num: "n" },
+	// 	{ id: 15, num: "o" },
+	// 	{ id: 16, num: "p" },
+	// 	{ id: 17, num: "q" },
+	// 	{ id: 18, num: "r" },
+	// 	{ id: 19, num: "s" },
+	// 	{ id: 20, num: "t" },
+	// 	{ id: 21, num: "u" },
+	// 	{ id: 22, num: "v" },
+	// 	{ id: 23, num: "w" },
+	// 	{ id: 24, num: "x" },
+	// 	{ id: 25, num: "y" },
+	// 	{ id: 26, num: "z" },
+	// ]);
 	const images = [
-		{ id: 1, num: "a" },
-		{ id: 2, num: "b" },
-		{ id: 3, num: "c" },
-		{ id: 4, num: "d" },
-		{ id: 5, num: "e" },
-		{ id: 6, num: "f" },
-		{ id: 7, num: "g" },
-		{ id: 8, num: "h" },
-		{ id: 9, num: "i" },
-		{ id: 10, num: "j" },
-		{ id: 11, num: "k" },
-		{ id: 12, num: "l" },
-		{ id: 13, num: "m" },
-		{ id: 14, num: "n" },
-		{ id: 15, num: "o" },
-		{ id: 16, num: "p" },
-		{ id: 17, num: "q" },
-		{ id: 18, num: "r" },
-		{ id: 19, num: "s" },
-		{ id: 20, num: "t" },
-		{ id: 21, num: "u" },
-		{ id: 22, num: "v" },
-		{ id: 23, num: "w" },
-		{ id: 24, num: "x" },
-		{ id: 25, num: "y" },
-		{ id: 26, num: "z" },
+		"a",
+		"b",
+		"c",
+		"d",
+		"e",
+		"f",
+		"g",
+		"h",
+		"i",
+		"j",
+		"k",
+		"l",
+		"m",
+		"n",
+		"o",
+		"p",
+		"q",
+		"r",
+		"s",
+		"t",
+		"u",
+		"v",
+		"w",
+		"x",
+		"y",
+		"z",
 	];
 
 	useEffect(() => {
@@ -76,7 +111,6 @@ const SwiperSlider = () => {
 					justifyContent: "center",
 					background: "#ffffff00",
 				}}
-				
 			>
 				<Swiper
 					direction={isVertical ? "vertical" : "horizontal"}
@@ -93,7 +127,8 @@ const SwiperSlider = () => {
 					}}
 					loop={true}
 					spaceBetween={30}
-					modules={[EffectCoverflow, Pagination]}
+					modules={[EffectCoverflow, Pagination, Thumbs]}
+					thumbs={{ swiper: thumbsSwiper.current }}
 					className="swiper_container"
 					pagination={{
 						type: "fraction",
@@ -115,9 +150,9 @@ const SwiperSlider = () => {
 						background: "#ffffff00",
 					}}
 				>
-					{images.map((item) => (
+					{images.map((item, index) => (
 						<SwiperSlide
-							key={item.id}
+							key={index}
 							style={{
 								width: "100%",
 								borderRadius: "32px",
@@ -145,21 +180,20 @@ const SwiperSlider = () => {
 									sx={{
 										fontSize: {
 											xs: "50px",
-											sm: "96px",
-											ms: "96px",
+											sm: "60px",
+											md: "70px",
 											xl: "96px",
 										},
 										fontWeight: "500",
 										color: "#31E716",
-										lineHeight: "88.8px",
+										lineHeight: { xs: "48px", md: "88.8px" },
 										textAlign: "center",
 										textTransform: "uppercase",
 										marginY: ".2rem",
 									}}
 								>
-									#{item.num}
+									#{item}
 								</Typography>
-								{/* <Slid num={name} onNameChange={handleNameChange} /> */}
 								<Typography
 									sx={{
 										fontSize: {
@@ -180,6 +214,38 @@ const SwiperSlider = () => {
 						</SwiperSlide>
 					))}
 				</Swiper>
+				{/* <Box
+					sx={{
+						position: "absolute",
+						top: "1rem",
+						right: "-1rem",
+						width: "300px",
+						overflow: "hidden",
+					}}
+				>
+					<Swiper
+						id="thumbs"
+						spaceBetween={10}
+						slidesPerView={1}
+						onSwiper={(swiper) => (thumbsSwiper.current = swiper)}
+					>
+						{images.map((item, index) => (
+							<SwiperSlide key={index}>
+								<Typography
+									sx={{
+										fontSize: "36px",
+										fontWeight: "600",
+										lineHeight: "70px",
+										color: "#31E716",
+										textTransform: "uppercase",
+									}}
+								>
+									#{item}
+								</Typography>
+ 							</SwiperSlide>
+						))}
+					</Swiper>
+				</Box> */}
 			</Box>
 		</>
 	);

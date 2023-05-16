@@ -9,7 +9,7 @@ const HomeDetails = () => {
 	return (
 		<>
 			<Grid
-				container
+				// container
 				sx={{
 					width: "100%",
 					height: "100%",
@@ -26,14 +26,8 @@ const HomeDetails = () => {
 					<Box
 						sx={{
 							width: "100%",
-
 							height: "220px",
-							transform: {
-								xs: "skew(16deg, 0deg)",
-								sm: "skew(16deg, 0deg)",
-								md: "skew(16deg, 0deg)",
-								xl: "skew(16deg, 0deg)",
-							},
+							transform: "skew(16deg, 0deg)",
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "center",
@@ -47,18 +41,18 @@ const HomeDetails = () => {
 							sx={{
 								width: { xs: "100%", sm: "70%", md: "70%", xl: "70%" },
 								height: {
-									xs: "200px",
-									sm: "250px",
-									md: "300px",
+									xs: "100%",
+									sm: "80%",
+									md: "40%",
 									xl: "300px",
 								},
 								display: "flex",
 								alignItems: "center",
 								flexDirection: "column",
 								justifyContent: {
-									xs: "center",
+									xs: "end",
 									sm: "center",
-									md: "start",
+									md: "center",
 									xl: "space-around",
 								},
 							}}
@@ -68,7 +62,7 @@ const HomeDetails = () => {
 							<Box
 								sx={{
 									marginBottom: {
-										xs: "1rem",
+										xs: "2.5rem",
 										sm: "1.5rem",
 										md: "2rem",
 										xl: "0",
@@ -77,7 +71,7 @@ const HomeDetails = () => {
 									alignItems: "center",
 									justifyContent: "center",
 								}}
-								className="BoxTextHome"
+								className="BoxTextHom"
 							>
 								<TextViewOnWeb />
 							</Box>

@@ -85,7 +85,8 @@ const SubscribePage: NextPage = () => {
 											xl: "40px",
 										},
 
-										padding: "0",
+										padding: "2px",
+										margin:"auto 4px",
 										borderRadius: "8px",
 										lineHeight: "92.5%",
 										background:
@@ -116,10 +117,11 @@ const SubscribePage: NextPage = () => {
 										},
 										lineHeight: "28px",
 										background: "#FBFBFB",
-										".MuiOutlinedInput-notchedOutline": {
-											border: "0",
-											padding: "9px",
-										},
+										borderRadius: "20px",
+										// ".MuiOutlinedInput-notchedOutline": {
+										// 	border: "0",
+										// 	padding: "9px",
+										// },
 										"&:hover > .MuiOutlinedInput-notchedOutline": {
 											border: "0",
 										},

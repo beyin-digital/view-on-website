@@ -17,6 +17,18 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
 				}}
 				className="IllustrationTablet"
 			>
+				<img
+					// fill
+					src="/images/swirl.svg"
+					alt="Background View On Website"
+					title="Background View On Website"
+					style={{
+						top: "-25rem",
+						left: "-7rem",
+						position: "absolute",
+						width: "900px",
+					}}
+				/>
 				<Box
 					sx={{
 						width: "2192px",

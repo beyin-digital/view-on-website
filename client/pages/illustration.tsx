@@ -25,7 +25,6 @@ const Illustration = () => {
 			<IllustrationTablet />
 			<IllustrationDesktop />
 			<IllustrationMobile />
-			{/* <Footer /> */}
 			<FooterMobile />
 		</>
 	);

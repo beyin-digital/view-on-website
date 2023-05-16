@@ -77,6 +77,7 @@ const TwoBox = () => {
 								height: "100%",
 								objectFit: "cover",
 							}}
+							loading="lazy"
 						/>
 					</Box>
 				</Box>
@@ -147,6 +148,7 @@ const TwoBox = () => {
 								height: "100%",
 								objectFit: "cover",
 							}}
+							loading="lazy"
 						/>
 					</Box>
 				</Box>

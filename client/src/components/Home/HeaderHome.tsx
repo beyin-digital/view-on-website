@@ -41,7 +41,7 @@ const Header = () => {
 								xl: "64px",
 							},
 						}}
-						lineHeight="30px"
+						lineHeight="40px"
 						letterSpacing="0.02em"
 						fontWeight="500"
 						className="Textredirected"
@@ -77,6 +77,7 @@ const Header = () => {
 				</Box>
 				<Box
 					sx={{
+						width:{xs:"50px",md:"90px"},
 						marginX: { xs: ".4rem", sm: "1rem", md: "1rem", xl: "1rem" },
 						cursor: "pointer",
 					}}
@@ -89,7 +90,7 @@ const Header = () => {
 						title="View On Website Play Icon"
 						style={{
 							width: "100%",
-							height: "100%",
+							// height: "100%",
 						}}
 					/>
 				</Box>
