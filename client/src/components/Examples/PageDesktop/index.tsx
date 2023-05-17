@@ -1,110 +1,195 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
-// footer
-import Footer from "@/components/Footer/Footer";
+import { useRouter } from "next/router";
 
 // components
 import OneBox from "./OneBox";
 import TwoBox from "./TwoBox";
 import ThreeBox from "./ThreeBox";
-import { AiOutlineArrowRight } from "react-icons/ai";
 import { LinkSubscribe } from "@/components/Button";
+
 const PageDesktop = () => {
+	const { locale } = useRouter();
+
 	return (
 		<>
 			<Box
 				className="PageDesktop"
 				sx={{
-					// height: "100vh",
-					width: "100%",
+					width: "1920",
+					maxWidth: "100%",
 					overflow: "hidden",
-					// background: "rgba(251, 251, 251, 0.5)",
-					// backdropFilter: "blur(100px)",
 				}}
 			>
 				<Box
 					my="auto"
 					sx={{
-						height: { xs: "100%", md: "90vh", xl: "88vh" },
+						height: { xs: "100%", md: "100vh", xl: "88vh" },
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
 						width: { xs: "100%", md: "110vw", xl: "110vw" },
 						overflow: "hidden",
 						position: "relative",
-						marginLeft: { xs: "", md: "-5rem", xl: "-5rem" },
-						// background: "rgba(251, 251, 251, 0.5)",
-						// backdropFilter: "blur(100px)",
 						flexDirection: "column",
 					}}
+					className="PageDesktopMargin"
 				>
 					<Box
 						sx={{
 							position: "absolute",
-							top: "-90rem",
+							top: "-95rem",
 						}}
 					>
-						<img src="/images/swirl.png" />
+						<img
+							src="/images/swirl.png"
+							alt="Background Example Page"
+							title="Background Example Page"
+							// loading="lazy"
+						/>
 					</Box>
 					<Box
-						// m="auto"
 						sx={{
-							height: { xs: "100%", md: "600px", xl: "590px" },
-							width: { xs: "100%", md: "200vw", xl: "200vw" },
+							height: { xs: "100%", md: "560px", xl: "590px" },
+							width: { xs: "100%", md: "1920px", xl: "1920px" },
 							maxWidth: "100%",
 							borderTop: "1px solid #FBFBFB",
 							borderBottom: "1px solid #FBFBFB",
 							display: "flex",
 							flexDirection: { xs: "column", md: "row", xl: "row" },
-							transform: { xs: "skew(0deg, 0deg)", xl: "skew(-15deg, 0deg)" },
 							overflow: "hidden",
 							background: "rgba(251, 251, 251, 0.6)",
-							marginX: { xs: "", md: "3rem", xl: "0" },
-							position: "relative",
+							marginX: { xs: "", md: "0rem", xl: "0" },
+							position: "absolute",
+							left: "0",
 						}}
+						className="PageDesktopLayout"
 					>
 						{/* Slider One */}
 						<OneBox />
-						<Box
-							sx={{
-								position: "absolute",
-								top: "19rem",
-								right: { xs: "", sm: "", md: "", lg: "55rem", xl: "64rem" },
-								zIndex: "9",
-								width: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },
-								height: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },
-							}}
-							className="sliderArrowsOne"
-						>
-							<img
-								src="/icons/arrowLeftExample.png"
-								style={{
-									width: "100%",
-								}}
-							/>
-						</Box>
-						{/* Slider Two */}
-						<TwoBox />
-						<>
+
+						{locale === "ar" ? (
 							<Box
 								sx={{
 									position: "absolute",
-									top: { xs: "", sm: "", md: "", lg: "9rem", xl: "12.5rem" },
-									right: { xs: "", sm: "", md: "", lg: "18rem", xl: "22.3rem" },
-									width: { xs: "", sm: "", md: "", lg: "500px", xl: "600px" },
-									height: { xs: "", sm: "", md: "", lg: "500px", xl: "600px" },
-
-									zIndex: "9",
+									top: {xs:"0rem", lg: "10rem", xl: "15rem" },
+									right: { xs: "0", sm: "", md: "0rem", lg: "58rem", xl: "63rem" },
+									zIndex: "91",
+									width: { xs: "0", sm: "", md: "500px", lg: "500px", xl: "500px" },
+									height: { xs: "0", sm: "", md: "500px", lg: "300px", xl: "300px" },
 								}}
+								className="sliderArrowsOne"
 							>
 								<img
-									src="/icons/arrowExample.png"
+									src="/icons/arrowLeftExampleAR.png"
+									alt="icon arrow Left"
+									title="icon arrow Left"
 									style={{
 										width: "100%",
-										// height: "100%",
 									}}
+									loading="lazy"
 								/>
 							</Box>
+						) : (
+							<Box
+								sx={{
+									position: "absolute",
+									top: { md: "20rem", xl: "18rem" },
+									right: {
+										// md: "55rem",
+										lg: "59rem",
+										xl: "65rem",
+									},
+									zIndex: "91",
+									width: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },
+									height: { xs: "", sm: "", md: "", lg: "300px", xl: "320px" },
+								}}
+								className="sliderArrowsOne"
+							>
+								<img
+									src="/icons/arrowLeftExample.png"
+									alt="icon arrow Left"
+									title="icon arrow Left"
+									style={{
+										width: "100%",
+									}}
+									loading="lazy"
+								/>
+							</Box>
+						)}
+						{/* Slider Two */}
+						<TwoBox />
+						<>
+							{locale === "ar" ? (
+								<Box
+									sx={{
+										position: "absolute",
+										top: { xs: "", sm: "", md: "", lg: "19rem", xl: "18rem" },
+										right: {
+											xs: "",
+											sm: "",
+											md: "",
+											lg: "22rem",
+											xl: "25.3rem",
+										},
+										width: { xs: "", sm: "", md: "", lg: "300px", xl: "400px" },
+										height: {
+											xs: "",
+											sm: "",
+											md: "",
+											lg: "500px",
+											xl: "600px",
+										},
+
+										zIndex: "9",
+									}}
+								>
+									<img
+										src="/icons/arrowExampleAR.png"
+										alt="icon arrow Left"
+										title="icon arrow Left"
+										style={{
+											width: "100%",
+										}}
+										loading="lazy"
+									/>
+								</Box>
+							) : (
+								<Box
+									sx={{
+										position: "absolute",
+										top: { xs: "", sm: "", md: "", lg: "10rem", xl: "14.5rem" },
+										right: {
+											xs: "",
+											sm: "",
+											md: "",
+											lg: "20rem",
+											xl: "19.5rem",
+										},
+										width: { xs: "", sm: "", md: "", lg: "500px", xl: "600px" },
+										height: {
+											xs: "",
+											sm: "",
+											md: "",
+											lg: "500px",
+											xl: "600px",
+										},
+
+										zIndex: "9",
+									}}
+								>
+									<img
+										src="/icons/arrowExample.png"
+										alt="icon arrow Left"
+										title="icon arrow Left"
+										style={{
+											width: "100%",
+										}}
+										loading="lazy"
+									/>
+								</Box>
+							)}
+
 							{/* Slider Three */}
 							<ThreeBox />
 						</>
@@ -116,13 +201,14 @@ const PageDesktop = () => {
 							display: "flex",
 							justifyContent: "end",
 							alignItems: "center",
+							position: "absolute",
+							bottom: "0",
 						}}
 					>
 						<LinkSubscribe />
 					</Box>
 				</Box>
 			</Box>
-			{/* <Footer /> */}
 		</>
 	);
 };

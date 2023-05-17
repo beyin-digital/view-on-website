@@ -1,11 +1,28 @@
+import Head from "next/head";
+import { Box, Grid } from "@mui/material";
+
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+
+import { useTranslation } from "next-i18next";
+
+// components
 import Layout from "@/components/Layout/Layout";
 import DetailsHeader from "@/components/Request/DetailsHeader";
 import FormRequest from "@/components/Request/FormRequest";
-import { Box, Grid } from "@mui/material";
 
 const Request = () => {
+	const { t } = useTranslation("request");
+
 	return (
 		<>
+			<Head>
+				<title>{t("meta_title")}</title>
+				<meta name="description" content="" />
+				<meta name="keyword" content="" />
+				<meta property="og:image" content="" />
+				<link rel="icon" href="/images/logo.svg" />
+			</Head>
 			<Layout>
 				<Grid
 					container
@@ -15,14 +32,8 @@ const Request = () => {
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "end",
-						transform: {
-							xs: "skew(10deg, 0deg)",
-							sm: "skew(16deg, 0deg)",
-							md: "skew(16deg, 0deg)",
-							xl: "skew(16deg, 0deg)",
-						},
+						transform: "skew(16deg, 0deg)",
 						paddingX: "1rem",
-						// marginY: { xs: "7rem", sm: "7rem", md: "1rem", xl: "1rem" },
 					}}
 				>
 					<Box
@@ -35,8 +46,6 @@ const Request = () => {
 							justifyContent: "space-around",
 							position: "relative",
 							paddingX: "1rem",
-
-							// top: { xs: "10rem", sm: "0", md: "0", xl: "0" },
 						}}
 					>
 						<DetailsHeader />
@@ -46,6 +55,14 @@ const Request = () => {
 			</Layout>
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", ["common", "request"])),
+		},
+	};
 };
 
 export default Request;

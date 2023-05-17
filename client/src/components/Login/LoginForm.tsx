@@ -6,22 +6,50 @@ import {
 	OutlinedInput,
 	InputAdornment,
 	IconButton,
+	Button,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import LoginTextSignUp from "./LoginTextSignUp";
-import { ButtonLogin } from "../Button";
+import { IconsStyle } from "../Button";
 import Link from "next/link";
+<<<<<<< HEAD
 import { UserContext } from "@/contexts/userContext";
+=======
+
+import { useTranslation } from "next-i18next";
+import Image from "next/image";
+
+const loginSchema = object({
+	identifier: string().min(1, "Email address or keyword is required"),
+	password: string()
+		.min(1, "Password is required")
+		.min(8, "Password must be more than 8 characters")
+		.max(32, "Password must be less than 32 characters"),
+});
+
+export type LoginInput = TypeOf<typeof loginSchema>;
+>>>>>>> origin/feat-last-finish-pages
 
 const LoginForm = () => {
+	const { t } = useTranslation("login");
+
 	const router = useRouter();
 	const [showPassword, setShowPassword] = useState(false);
 
+<<<<<<< HEAD
 	const handleClickShowPassword = () => setShowPassword(show => !show);
+=======
+	const [values, setValues] = useState({
+		identifier: "",
+		password: "",
+	});
+
+	const handleClickShowPassword = () => setShowPassword((show) => !show);
+>>>>>>> origin/feat-last-finish-pages
 
 	const handleMouseDownPassword = (
-		event: React.MouseEvent<HTMLButtonElement>
+		event: React.MouseEvent<HTMLButtonElement>,
 	) => {
 		event.preventDefault();
 	};
@@ -29,6 +57,7 @@ const LoginForm = () => {
 	const { token, refreshToken, values, handleChange, handleLogin } =
 		useContext(UserContext);
 
+<<<<<<< HEAD
 	console.log("Token", token);
 	console.log("Refresh Token", refreshToken);
 
@@ -37,6 +66,65 @@ const LoginForm = () => {
 			router.push("/dashboard");
 		}
 	}, [token, refreshToken]);
+=======
+	const query = useQuery(["authUser"], getMeFn, {
+		enabled: false,
+		select: (data) => data.data.user,
+		retry: 1,
+		onSuccess: (data) => {
+			stateContext.dispatch({ type: "SET_USER", payload: data });
+		},
+	});
+
+	const { mutate: loginUser, isLoading } = useMutation(
+		(userData: any) => loginUserFn(userData),
+		{
+			onSuccess: () => {
+				query.refetch();
+				toast.success("You successfully logged in");
+				router.push("/");
+			},
+			onError: (error: any) => {
+				if (Array.isArray((error as any).response.data.error)) {
+					(error as any).response.data.error.forEach((el: any) =>
+						toast.error(el.message, {
+							position: "top-right",
+						}),
+					);
+				} else {
+					toast.error((error as any).response.data.message, {
+						position: "top-right",
+					});
+				}
+			},
+		},
+	);
+	const icon = [
+		{
+			id: 1,
+			icon: "/icons/google.svg",
+			alt: "Google Icon",
+			title: "Google Icon",
+			link: "https://google.com",
+		},
+		{
+			id: 2,
+			icon: "/icons/apple.svg",
+			alt: "Apple Icon",
+			title: "Apple Icon",
+			link: "https://apple.com",
+		},
+	];
+
+	const handleSubmit = () => {
+		console.log(values);
+		loginUser({
+			identifier: values.identifier,
+			password: values.password,
+		});
+	};
+
+>>>>>>> origin/feat-last-finish-pages
 	return (
 		<form onSubmit={handleLogin}>
 			<Box
@@ -47,74 +135,77 @@ const LoginForm = () => {
 				}}
 			>
 				<OutlinedInput
-					name='identifier'
+					name="identifier"
 					value={values.identifier}
 					sx={{
 						width: "100",
-						height: { xs: "47px", md: "50px", xl: "65px" },
-						fontSize: {
-							xs: "18px",
-							sm: "22px",
-							md: "28px",
-							xl: "32px",
-						},
+						height: { xs: "47px", md: "50px", xl: "60px" },
+						fontSize: "24px",
 						lineHeight: "28px",
 						background: "#FBFBFB",
-						border: "0.897277px solid #E3E3E3",
 						borderRadius: "10px",
-						marginY: ".5rem",
-						boxShadow:
-							" 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
-						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-							border: 0,
+						marginY: ".3rem",
+						border: "1 solid #E3E3E3",
+						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
+
+						".MuiOutlinedInput-notchedOutline": {
+							border: "0",
+							padding: "9px",
+						},
+						"&:hover > .MuiOutlinedInput-notchedOutline": {
+							border: "0",
 						},
 					}}
+<<<<<<< HEAD
 					onChange={handleChange}
 					placeholder='Email or #keyword'
+=======
+					onChange={(e) => setValues({ ...values, identifier: e.target.value })}
+					placeholder={`${t("input_email")}`}
+>>>>>>> origin/feat-last-finish-pages
 				/>
 				<OutlinedInput
-					name='password'
+					name="password"
 					value={values.password}
 					sx={{
 						width: "100",
-						height: { xs: "47px", md: "50px", xl: "65px" },
-						fontSize: {
-							xs: "18px",
-							sm: "22px",
-							md: "28px",
-							xl: "32px",
-						},
+						height: { xs: "47px", md: "50px", xl: "60px" },
+						fontSize: "24px",
 						lineHeight: "28px",
 						background: "#FBFBFB",
-						border: "0.897277px solid #E3E3E3",
 						borderRadius: "10px",
-						marginY: ".5rem",
-						boxShadow:
-							" 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
-
-						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-							border: 0,
+						border: "1 solid #E3E3E3",
+						marginY: ".3rem",
+						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
+						".MuiOutlinedInput-notchedOutline": {
+							border: "0",
+							padding: "9px",
+						},
+						"&:hover > .MuiOutlinedInput-notchedOutline": {
+							border: "0",
 						},
 					}}
+					className="loginButton"
 					type={showPassword ? "text" : "password"}
 					endAdornment={
-						<InputAdornment position='end'>
+						<InputAdornment position="end">
 							<IconButton
-								aria-label='toggle password visibility'
+								aria-label="toggle password visibility"
 								onClick={handleClickShowPassword}
 								onMouseDown={handleMouseDownPassword}
-								edge='end'
+								edge="end"
 							>
-								{showPassword ? (
-									<VisibilityOff />
-								) : (
-									<Visibility />
-								)}
+								{showPassword ? <VisibilityOff /> : <Visibility />}
 							</IconButton>
 						</InputAdornment>
 					}
+<<<<<<< HEAD
 					onChange={handleChange}
 					placeholder='Password'
+=======
+					onChange={(e) => setValues({ ...values, password: e.target.value })}
+					placeholder={`${t("input_password")}`}
+>>>>>>> origin/feat-last-finish-pages
 				/>
 			</Box>
 			<Box
@@ -126,7 +217,7 @@ const LoginForm = () => {
 				}}
 			>
 				<Link
-					href=''
+					href=""
 					style={{
 						textDecoration: "none",
 						color: "inherit",
@@ -139,20 +230,102 @@ const LoginForm = () => {
 							lineHeight: "14px",
 						}}
 					>
-						Forgot Password?
+						{t("forget")}
 					</Typography>
 				</Link>
 			</Box>
 			<Box
 				sx={{
-					marginY: "2rem",
+					marginY: "1rem",
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",
 				}}
 			>
+<<<<<<< HEAD
 				<ButtonLogin name='login' type='submit' />
+=======
+				{/* login  */}
+				<Box
+					sx={{
+						width: {
+							xs: "240px",
+							sm: "300px",
+							md: "300px",
+							xl: "320px",
+						},
+						display: "flex",
+						justifyContent: "end",
+						background: "#0090EC",
+						borderRadius: "16px",
+					}}
+				>
+					<Button
+						sx={{
+							paddingX: "18px",
+							height: "59px",
+							width: { xs: "220px", md: "231px", xl: "271px" },
+							display: "flex",
+							justifyContent: "space-around",
+						}}
+						onClick={handleSubmit}
+						type="submit"
+						title={`${t("login")}`}
+					>
+						<Typography
+							sx={{
+								letterSpacing: "0.02em",
+								fontSize: { xs: "20px", md: "25px", xl: "32px" },
+								fontWeight: 400,
+								lineHeight: "40px",
+								color: "#FBFBFB",
+								textTransform: "uppercase",
+							}}
+						>
+							{t("login")}
+						</Typography>
+						<IconsStyle />
+					</Button>
+				</Box>
+				{/*  */}
+
+>>>>>>> origin/feat-last-finish-pages
 				<LoginTextSignUp />
+				{/*  */}
+				<Box
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+						marginTop: "1rem",
+					}}
+					className="BoxSignInWith"
+				>
+					<Typography>{t("sign_up")}</Typography>
+					<Box
+						sx={{
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "space-evenly",
+							margin: "auto 1rem",
+						}}
+					>
+						{icon.map((item) => (
+							<Link href={item.link} key={item.id}>
+								<Image
+									src={item.icon}
+									alt={item.alt}
+									title={item.title}
+									height={35}
+									width={35}
+									style={{
+										margin: "auto .2rem",
+									}}
+								/>
+							</Link>
+						))}
+					</Box>
+				</Box>
 			</Box>
 		</form>
 	);

@@ -1,14 +1,22 @@
 import Layout from "@/components/Layout/Layout";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "@/contexts/userContext";
 import useCountdown from "@/hooks/useCountdown";
+import Head from "next/head";
+
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+
+import { useTranslation } from "next-i18next";
+import { IconsStyle } from "@/components/Button";
 
 const VerificationPage = () => {
+	const { t } = useTranslation("verification");
+
 	const router = useRouter();
 	const [otp, setOtp] = React.useState("");
 	const handleChange = (newValue: any) => {
@@ -25,46 +33,46 @@ const VerificationPage = () => {
 
 	return (
 		<>
+			<Head>
+				<title>{t("meta_title")}</title>
+				<meta name='description' content='' />
+				<meta name='keyword' content='' />
+				<meta property='og:image' content='' />
+				<link rel='icon' href='/images/logo.svg' />
+			</Head>
 			<Layout>
 				<Grid
-					container
 					sx={{
 						width: "100%",
 						height: "100%",
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
-						transform: {
-							xs: "skew(10deg, 0deg)",
-							sm: "skew(16deg, 0deg)",
-							md: "skew(16deg, 0deg)",
-							xl: "skew(16deg, 0deg)",
-						},
+						transform: "skew(16deg, 0deg)",
 					}}
 				>
 					<Container
 						sx={{
 							width: { xs: "100%", md: "50%", xl: "50%" },
 							height: "100%",
-							marginRight: { xs: "0", md: "15rem", xl: "20rem" },
 							display: "flex",
 							flexDirection: "column",
 							alignItems: "center",
 							justifyContent: "space-around",
 							position: "relative",
 							marginY: {
-								xs: "8rem",
+								xs: "4rem",
 								sm: "4rem",
 								md: "1rem",
 								xl: "0rem",
 							},
-							// border: "1px solid",
+							paddingY: "1rem",
 						}}
+						className='VerificationPageCenter'
 					>
 						<Box
 							sx={{
 								width: "100%",
-								// height:"100px",
 								display: "flex",
 								flexDirection: "column",
 								alignItems: "center",
@@ -73,7 +81,8 @@ const VerificationPage = () => {
 						>
 							<Image
 								src='/icons/message.svg'
-								alt=''
+								alt='View On Website Icon message'
+								title='View On Website Icon message'
 								height={78}
 								width={78}
 							/>
@@ -88,7 +97,7 @@ const VerificationPage = () => {
 									lineHeight: "29px",
 								}}
 							>
-								Verification Link Sent
+								{t("title")}
 							</Typography>
 						</Box>
 						<Box
@@ -103,7 +112,6 @@ const VerificationPage = () => {
 								flexDirection: "column",
 								alignItems: "center",
 								justifyContent: "center",
-								// border: "1px solid",
 							}}
 						>
 							<Typography
@@ -113,7 +121,8 @@ const VerificationPage = () => {
 									color: "#A0A9AB",
 									lineHeight: "28px",
 									textAlign: "center",
-									marginY: "2rem",
+									marginY: "1rem",
+									paddingX: ".5rem",
 								}}
 							>
 								Enter the authenrication code we sent to Your
@@ -122,6 +131,7 @@ const VerificationPage = () => {
 									? router.query.newUser
 									: user?.email}{" "}
 								below:
+								{t("desc")}
 							</Typography>
 							<Box
 								sx={{
@@ -136,7 +146,7 @@ const VerificationPage = () => {
 									value={otp}
 									onChange={handleChange}
 									length={6}
-									className='myClassName'
+									className='myClassName '
 									sx={{
 										".MuiOutlinedInput-root": {
 											borderRadius: "50%",
@@ -157,46 +167,23 @@ const VerificationPage = () => {
 									}}
 								/>
 							</Box>
-							{secondsLeft > 0 ? (
-								<Typography
-									onClick={() => resendOTP(user?.email || "")}
-									sx={{
-										fontSize: { xs: "15px", xl: "18px" },
-										fontWight: "400",
-										color: "#A0A9AB",
-										lineHeight: "27px",
-										textAlign: "center",
-										marginY: {
-											xs: "4rem",
-											sm: "2rem",
-											md: "1rem",
-											xl: "2rem",
-										},
-									}}
-								>
-									You can request for a new code in{" "}
-									{secondsLeft}s
-								</Typography>
-							) : (
-								<Typography
-									onClick={() => resendOTP(user?.email || "")}
-									sx={{
-										fontSize: { xs: "15px", xl: "18px" },
-										fontWight: "400",
-										color: "#A0A9AB",
-										lineHeight: "27px",
-										textAlign: "center",
-										marginY: {
-											xs: "4rem",
-											sm: "2rem",
-											md: "1rem",
-											xl: "2rem",
-										},
-									}}
-								>
-									Resend code
-								</Typography>
-							)}
+							<Typography
+								sx={{
+									fontSize: { xs: "15px", xl: "18px" },
+									fontWight: "400",
+									color: "#A0A9AB",
+									lineHeight: "27px",
+									textAlign: "center",
+									marginY: {
+										xs: "1rem",
+										sm: "2rem",
+										md: "1rem",
+										xl: "2rem",
+									},
+								}}
+							>
+								{t("resend")}
+							</Typography>
 						</Box>
 						<Box
 							sx={{
@@ -207,21 +194,81 @@ const VerificationPage = () => {
 									md: "end",
 									xl: "end",
 								},
-								position: { xs: "", md: "", xl: "absolute" },
-								bottom: { xs: "0rem", md: "0rem", xl: "1rem" },
-								right: { xs: "", md: "0rem", xl: "0rem" },
+								position: {
+									xs: "absolute",
+									md: "absolute",
+									xl: "absolute",
+								},
+								bottom: { xs: "0rem", md: "1rem", xl: "1rem" },
+								right: { xs: "", md: "-5rem", xl: "-5rem" },
 							}}
 						>
-							<ButtonLogin
-								name='Verify'
-								onClick={() => verifyOtp(otp)}
-							/>
+							<Box
+								sx={{
+									width: {
+										xs: "240px",
+										sm: "300px",
+										md: "300px",
+										xl: "320px",
+									},
+									display: "flex",
+									justifyContent: "end",
+									background: "#0090EC",
+									borderRadius: "16px",
+								}}
+							>
+								<Button
+									sx={{
+										paddingX: "18px",
+										height: "59px",
+										width: {
+											xs: "220px",
+											md: "231px",
+											xl: "271px",
+										},
+										display: "flex",
+										justifyContent: "space-around",
+									}}
+									onClick={() => router.push("/payment")}
+									type='submit'
+									title={`${t("button")}`}
+								>
+									<Typography
+										sx={{
+											letterSpacing: "0.02em",
+											fontSize: {
+												xs: "20px",
+												md: "25px",
+												xl: "32px",
+											},
+											fontWeight: 400,
+											lineHeight: "40px",
+											color: "#FBFBFB",
+											textTransform: "uppercase",
+										}}
+									>
+										{t("button")}
+									</Typography>
+									<IconsStyle />
+								</Button>
+							</Box>
 						</Box>
 					</Container>
 				</Grid>
 			</Layout>
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"verification",
+			])),
+		},
+	};
 };
 
 export default VerificationPage;

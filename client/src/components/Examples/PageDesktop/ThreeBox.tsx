@@ -1,82 +1,158 @@
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+
 import { Box, Typography } from "@mui/material";
 
 const ThreeBox = () => {
+	const { t } = useTranslation("example");
+	const { locale } = useRouter();
+
 	return (
 		<>
-			<Box
-				sx={{
-					width: "1243.72px",
-					maxWidth: "100%",
-					// width: "40%",
-					borderLeft: "1px solid #FBFBFB",
-					borderBottom: "1px solid #FBFBFB",
-					borderTop: "1px solid #FBFBFB",
-					borderTopLeftRadius: "35px",
-					borderBottomLeftRadius: "35px",
-					background:
-						"radial-gradient(28.05% 49.93% at 21.95% 50.07%, rgba(0, 144, 236, 0.3) 0%, rgba(0, 144, 236, 0.015) 100%)",
-					backdropFilter: "blur(100px)",
-				}}
-			>
+			{locale === "ar" ? (
 				<Box
 					sx={{
-						transform: {
-							xs: "skew(1deg, 0deg)",
-							xl: "skew(15deg, 0deg)",
-						},
-						position: "absolute",
-						top: "0",
-						bottom: { xs: "", md: "-1rem", xl: "-1rem" },
-						right: { xs: "", md: "0rem", xl: "0" },
-						width: { md: "450px", xl: "600px" },
-						height: { md: "450px", xl: "600px" },
+						width: "1200.72px",
+						maxWidth: "100%",
+						borderLeft: "1px solid #FBFBFB",
+						borderBottom: "1px solid #FBFBFB",
+						borderTop: "1px solid #FBFBFB",
+						borderTopLeftRadius: "35px",
+						borderBottomLeftRadius: "35px",
+						background:
+							"radial-gradient(28.05% 49.93% at 21.95% 50.07%, rgba(0, 144, 236, 0.3) 0%, rgba(0, 144, 236, 0.015) 100%)",
+						backdropFilter: "blur(100px)",
+						position: "relative",
+						right: "-2rem",
 					}}
 				>
-					<img
-						src="/images/pic.png"
-						style={{
-							width: "100%",
-							height: "auto",
+					<Box
+						sx={{
+							transform: "skew(-16deg, 0deg)",
+							position: "absolute",
+							top: "-1rem",
+							left: { xs: "", md: "0rem", xl: "0rem" },
+							width: { md: "450px", xl: "550px" },
+							height: { md: "450px", xl: "550px" },
 						}}
-					/>
+					>
+						<img
+							src="/images/picAR.png"
+							title="Your costumers in a Blink will be automatically redirected to your Sub-link-URL"
+							alt="Your costumers in a Blink will be automatically redirected to your Sub-link-URL, your dashboard will show you all the conversions of your #keyword, it is your opportunity to optimize"
+							style={{
+								width: "100%",
+								height: "auto",
+							}}
+							loading="lazy"
+						/>
+					</Box>
+					<Box
+						sx={{
+							width: "277px",
+							transform: "skew(-16deg, 0deg)",
+							position: "absolute",
+							bottom: "3rem",
+							right: "2.8rem",
+						}}
+					>
+						<Typography
+							sx={{
+								width: "195px",
+								fontSize: "20px",
+								fontWeight: "600",
+								lineHeight: "15px",
+								marginY: "1rem",
+							}}
+						>
+							{t("box_three_title")}
+						</Typography>
+						<Typography
+							sx={{
+								fontSize: "14px",
+								fontWeight: "400",
+								lineHeight: "14px",
+							}}
+						>
+							{t("box_three_desc")}
+						</Typography>
+					</Box>
 				</Box>
+			) : (
 				<Box
 					sx={{
-						width: "277px",
-						transform: {
-							xs: "skew(1deg, 0deg)",
-							xl: "skew(15deg, 0deg)",
-						},
-						position: "absolute",
-						bottom: "3rem",
-						left: "2.8rem",
+						width: "1243.72px",
+						maxWidth: "100%",
+						borderLeft: "1px solid #FBFBFB",
+						borderBottom: "1px solid #FBFBFB",
+						borderTop: "1px solid #FBFBFB",
+						borderTopLeftRadius: "35px",
+						borderBottomLeftRadius: "35px",
+						background:
+							"radial-gradient(28.05% 49.93% at 21.95% 50.07%, rgba(0, 144, 236, 0.3) 0%, rgba(0, 144, 236, 0.015) 100%)",
+						backdropFilter: "blur(100px)",
 					}}
 				>
-					<Typography
+					<Box
 						sx={{
-							width: "195px",
-							fontSize: "20px",
-							fontWeight: "500",
-							lineHeight: "15px",
-							marginY: "1rem",
+							transform: {
+								xs: "skew(15deg, 0deg)",
+								xl: "skew(15deg, 0deg)",
+							},
+							position: "absolute",
+							top: "0",
+							bottom: { xs: "", md: "-1rem", xl: "-1rem" },
+							right: { xs: "", md: "0rem", xl: "-5rem" },
+							width: { md: "500px", xl: "650px" },
+							height: { md: "500px", xl: "650px" },
 						}}
 					>
-						Be Redirected!
-					</Typography>
-					<Typography
+						<img
+							src="/images/pic.png"
+							alt="Photo Vow"
+							title="Photo Vow"
+							style={{
+								width: "100%",
+								height: "auto",
+							}}
+							loading="lazy"
+						/>
+					</Box>
+					<Box
 						sx={{
-							fontSize: "14px",
-							fontWeight: "300",
-							lineHeight: "13px",
+							width: "277px",
+							transform: {
+								xs: "skew(15deg, 0deg)",
+								xl: "skew(15deg, 0deg)",
+							},
+							position: "absolute",
+							bottom: "1rem",
+							left: "2.8rem",
 						}}
 					>
-						Your costumers in a Blink will be automatically redirected to your
-						Sub-link-URL, your dashboard will show you all the conversions of
-						your #keyword, it is your opportunity to optimize, know and to take
-						control over your conversion rate.
-					</Typography>
+						<Typography
+							sx={{
+								width: "195px",
+								fontSize: "20px",
+								fontWeight: "600",
+								lineHeight: "15px",
+								marginY: "1rem",
+							}}
+						>
+							{t("box_three_title")}
+						</Typography>
+						<Typography
+							sx={{
+								fontSize: "14px",
+								fontWeight: "400",
+								lineHeight: "14px",
+							}}
+						>
+							{t("box_three_desc")}
+						</Typography>
+					</Box>
 				</Box>
-			</Box>
+			)}
 		</>
 	);
 };

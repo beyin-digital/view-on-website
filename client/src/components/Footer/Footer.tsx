@@ -1,7 +1,41 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 const Footer = () => {
+	const { t } = useTranslation("common");
+
+	const icons = [
+		{
+			id: 1,
+			icon: "/icons/facebook.svg",
+			alt: "Facebook icon",
+			link: "https://facebook.com",
+		},
+		{
+			id: 2,
+			icon: "/icons/twitter.svg",
+			alt: "Twitter icon",
+			link: "https://twitter.com",
+		},
+		{
+			id: 3,
+			icon: "/icons/instagram.svg",
+			alt: "Instagram icon",
+			link: "https://instagram.com",
+		},
+		{
+			id: 4,
+			icon: "/icons/linkedin.svg",
+			alt: "Instagram icon",
+			link: "https://linkedin.com",
+		},
+	];
+	const links = [
+		{ id: 1, link: "/privacy", title: "footer_privacy" },
+		{ id: 2, link: "/terms", title: "footer_terms" },
+		{ id: 3, link: "/contact", title: "footer_contact" },
+	];
 	return (
 		<>
 			<Box
@@ -15,6 +49,8 @@ const Footer = () => {
 						md: "space-between",
 						xl: "space-between",
 					},
+					top: "-.3rem",
+					position: "relative",
 				}}
 			>
 				<Box
@@ -23,40 +59,26 @@ const Footer = () => {
 						display: { xs: "flex", md: "flex", xl: "flex" },
 						alignItems: "center",
 						justifyContent: { xs: "center", md: "start", xl: "start" },
-						margin: { xs: " 2rem 0", xl: "0" },
 					}}
 				>
-					<Image
-						src="/icons/facebook.svg"
-						alt=""
-						height={30}
-						width={30}
-						style={{
-							margin: "0 2rem",
-						}}
-					/>
-					<Image
-						src="/icons/twitter.svg"
-						alt=""
-						height={30}
-						width={30}
-						style={{
-							margin: "0 2rem",
-						}}
-					/>
-					<Image
-						src="/icons/insta.svg"
-						alt=""
-						height={30}
-						width={30}
-						style={{
-							margin: "0 2rem",
-						}}
-					/>
+					{icons.map((item) => (
+						<Link key={item.id} title={item.alt} href={item.link}>
+							<Image
+								src={item.icon}
+								alt={item.alt}
+								title={item.alt}
+								height={30}
+								width={30}
+								style={{
+									margin: "0 1rem",
+								}}
+							/>
+						</Link>
+					))}
 				</Box>
 				<Box
 					sx={{
-						width: "100%",
+						width: { xs: "", sm: "90%", xl: "50%" },
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "space-around",
@@ -77,35 +99,33 @@ const Footer = () => {
 							fontWeight="400"
 							lineHeight="32px"
 							textAlign="center"
+							textTransform={"capitalize"}
 						>
-							Learn More
+							{t("footer_learn")}
 						</Typography>
 						<Image src="/icons/i.svg" alt="" width={20} height={20} />
 					</Box>
-					<Typography
-						fontSize="20px"
-						fontWeight="400"
-						lineHeight="32px"
-						textAlign="center"
-					>
-						T&C
-					</Typography>
-					<Typography
-						fontSize="20px"
-						fontWeight="400"
-						lineHeight="32px"
-						textAlign="center"
-					>
-						Privacy Policy
-					</Typography>
-					<Typography
-						fontSize="20px"
-						fontWeight="400"
-						lineHeight="32px"
-						textAlign="center"
-					>
-						Contact Us
-					</Typography>
+					{links.map((item) => (
+						<Link
+							key={item.id}
+							href={item.link}
+							title={`${t(item.title)}`}
+							sx={{
+								textDecoration: "none",
+								color: "inherit",
+							}}
+						>
+							<Typography
+								fontSize="20px"
+								fontWeight="400"
+								lineHeight="32px"
+								textAlign="center"
+								textTransform={"capitalize"}
+							>
+								{`${t(item.title)}`}
+							</Typography>
+						</Link>
+					))}
 				</Box>
 			</Box>
 		</>

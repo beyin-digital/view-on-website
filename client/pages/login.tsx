@@ -1,37 +1,27 @@
-import { useEffect, useContext } from "react";
-
-import { Box, Link, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Head from "next/head";
-
-import { useRouter } from "next/router";
-
-import Image from "next/image";
-// button
-import { ButtonLogin } from "@/components/Button";
-// import { useRouter } from "next/router";
 
 // components
 import LoginForm from "@/components/Login/LoginForm";
-import LoginDetails from "@/components/Login/LoginDetails";
-import Layout from "@/components/Login/Layout";
-import { UserContext } from "@/contexts/userContext";
+import LoginDetails from "@/components/Login/LoginHeader";
+import Layout from "@/components/Layout/Layout";
+
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+
+import { useTranslation } from "next-i18next";
 
 const LoginPage = () => {
-	const router = useRouter();
-
-	const { token } = useContext(UserContext);
-
-	useEffect(() => {
-		if (token) router.push("/dashboard");
-	}, [token]);
+	const { t } = useTranslation("login");
 
 	return (
 		<>
 			<Head>
-				<title>ViewOnWebsite - Login Page</title>
+				<title>{t("meta_title")}</title>
 				<meta name='description' content='' />
 				<meta name='keyword' content='' />
 				<meta property='og:image' content='' />
+				<link rel='icon' href='/images/logo.svg' />
 			</Head>
 
 			<Layout>
@@ -43,27 +33,26 @@ const LoginPage = () => {
 						height: "100%",
 						justifyContent: "center",
 						paddingX: { xs: "2rem", md: "5rem", xl: "5rem" },
-						transform: {
-							xs: "skew(10deg, 0deg)",
-							sm: "skew(16deg, 0deg)",
-							md: "skew(16deg, 0deg)",
-							xl: "skew(16deg, 0deg)",
-						},
+						transform: "skew(16deg, 0deg)",
 					}}
 				>
 					<Box
 						sx={{
-							width: { xs: "100%", md: "80%", xl: "75%" },
+							width: { xs: "100%", md: "90%", xl: "75%" },
 							height: "100%",
 							display: "flex",
 							alignItems: "center",
-							justifyContent: { xs: "center", xl: "end" },
+							justifyContent: {
+								xs: "center",
+								md: "end",
+								xl: "end",
+							},
 						}}
 					>
 						<Box
 							sx={{
-								// width: { xs: "100%", md: "", xl: "" },
-								height: "600px",
+								width: "600px",
+								height: "550px",
 								paddingX: "1rem",
 							}}
 						>
@@ -75,6 +64,17 @@ const LoginPage = () => {
 			</Layout>
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"login",
+			])),
+		},
+	};
 };
 
 export default LoginPage;

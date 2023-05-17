@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
 	Typography,
 	Box,
@@ -5,9 +6,12 @@ import {
 	InputAdornment,
 	IconButton,
 } from "@mui/material";
+=======
+import { Typography, Box, OutlinedInput, Button } from "@mui/material";
+>>>>>>> origin/feat-last-finish-pages
 import Link from "next/link";
-import { ButtonLogin } from "@/components/Button";
 import { useRouter } from "next/router";
+<<<<<<< HEAD
 import { useContext, useState } from "react";
 import { UserContext } from "@/contexts/userContext";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -24,6 +28,14 @@ const SignupForm = () => {
 	) => {
 		event.preventDefault();
 	};
+=======
+import { useTranslation } from "next-i18next";
+import { IconsStyle } from "../Button";
+
+const SignupForm = () => {
+	const { t } = useTranslation("signup");
+	const router = useRouter();
+>>>>>>> origin/feat-last-finish-pages
 	return (
 		<form onSubmit={handleSignup}>
 			<Box
@@ -42,8 +54,7 @@ const SignupForm = () => {
 			>
 				<Box
 					sx={{
-						width: { xs: "100%", sm: "80%", md: "50%", xl: "50%" },
-						height: { xs: "115px", md: "235px", xl: "235px" },
+						width: { xs: "100%", sm: "80%", md: "45%", xl: "45%" },
 						display: "flex",
 						alignItems: "center",
 						flexDirection: "column",
@@ -60,20 +71,19 @@ const SignupForm = () => {
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
-							fontSize: {
-								xs: "18px",
-								sm: "22px",
-								md: "28px",
-								xl: "32px",
-							},
+							fontSize: "24px",
 							lineHeight: "28px",
 							background: "#FBFBFB",
 							borderRadius: "15px",
-							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
-							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
+							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
+							marginY: ".2rem",
 						}}
+<<<<<<< HEAD
 						placeholder='Full name'
 						onChange={handleChange}
+=======
+						placeholder={`${t("form_name")}`}
+>>>>>>> origin/feat-last-finish-pages
 					/>
 					<OutlinedInput
 						value={values.password}
@@ -81,18 +91,14 @@ const SignupForm = () => {
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
-							fontSize: {
-								xs: "18px",
-								sm: "22px",
-								md: "28px",
-								xl: "32px",
-							},
+							fontSize: "24px",
 							lineHeight: "28px",
 							background: "#FBFBFB",
 							borderRadius: "15px",
-							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
-							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
+							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
+							marginY: ".2rem",
 						}}
+<<<<<<< HEAD
 						onChange={handleChange}
 						placeholder='Password'
 						type={showPassword ? "text" : "password"}
@@ -112,12 +118,14 @@ const SignupForm = () => {
 								</IconButton>
 							</InputAdornment>
 						}
+=======
+						placeholder={`${t("form_password")}`}
+>>>>>>> origin/feat-last-finish-pages
 					/>
 				</Box>
 				<Box
 					sx={{
-						width: { xs: "100%", sm: "80%", md: "40%", xl: "40%" },
-						height: { xs: "115px", md: "235px", xl: "235px" },
+						width: { xs: "100%", sm: "80%", md: "45%", xl: "45%" },
 						display: "flex",
 						alignItems: "center",
 						flexDirection: "column",
@@ -134,37 +142,32 @@ const SignupForm = () => {
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
-							fontSize: {
-								xs: "18px",
-								sm: "22px",
-								md: "28px",
-								xl: "32px",
-							},
+							fontSize: "24px",
 							lineHeight: "28px",
 							background: "#FBFBFB",
 							borderRadius: "15px",
-							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
-							marginY: { xs: ".3rem", md: ".3rem", xl: ".3rem" },
+							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
+							marginY: ".2rem",
 						}}
+<<<<<<< HEAD
 						onChange={handleChange}
 						placeholder='E-mail'
+=======
+						placeholder={`${t("form_email")}`}
+>>>>>>> origin/feat-last-finish-pages
 					/>
 					<OutlinedInput
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
-							fontSize: {
-								xs: "18px",
-								sm: "22px",
-								md: "28px",
-								xl: "32px",
-							},
+							fontSize: "24px",
 							lineHeight: "28px",
 							background: "#FBFBFB",
 							borderRadius: "15px",
-							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.08)",
-							marginY: ".3rem",
+							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
+							marginY: ".2rem",
 						}}
+<<<<<<< HEAD
 						onChange={handleChange}
 						placeholder='Confirm Password'
 						type={showPassword ? "text" : "password"}
@@ -184,6 +187,9 @@ const SignupForm = () => {
 								</IconButton>
 							</InputAdornment>
 						}
+=======
+						placeholder={`${t("form_confirm")}`}
+>>>>>>> origin/feat-last-finish-pages
 					/>
 				</Box>
 			</Box>
@@ -195,11 +201,7 @@ const SignupForm = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
-					flexDirection: {
-						xs: "column-reverse",
-						md: "row",
-						xl: "row",
-					},
+					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
 					marginBottom: { xs: "10rem", md: "5rem", xl: "5rem" },
 					marginTop: { xs: "1rem", md: "2rem", xl: "2rem" },
 					marginY: { xs: "1rem", md: "0", xl: "0" },
@@ -212,18 +214,68 @@ const SignupForm = () => {
 						marginY: { xs: ".5rem", md: "", xl: "" },
 					}}
 				>
+<<<<<<< HEAD
 					Already have an account?
+=======
+					{t("sign_up_account")}
+
+>>>>>>> origin/feat-last-finish-pages
 					<Link
-						href='/login'
+						href="/login"
 						style={{
 							textDecoration: "none",
-							color: "#343132",
+							color: "#0090EC",
 						}}
 					>
-						Sign in
+						{t("sign_in")}
 					</Link>
 				</Typography>
+<<<<<<< HEAD
 				<ButtonLogin name='next' type='submit' />
+=======
+
+				<Box
+					sx={{
+						width: {
+							xs: "240px",
+							sm: "300px",
+							md: "300px",
+							xl: "320px",
+						},
+						display: "flex",
+						justifyContent: "end",
+						background: "#0090EC",
+						borderRadius: "16px",
+					}}
+				>
+					<Button
+						sx={{
+							paddingX: "18px",
+							height: "59px",
+							width: { xs: "220px", md: "231px", xl: "271px" },
+							display: "flex",
+							justifyContent: "space-around",
+						}}
+						onClick={() => router.push("verification")}
+						type="submit"
+						title={`${t("sign_up_button")}`}
+					>
+						<Typography
+							sx={{
+								letterSpacing: "0.02em",
+								fontSize: { xs: "20px", md: "25px", xl: "32px" },
+								fontWeight: 400,
+								lineHeight: "40px",
+								color: "#FBFBFB",
+								textTransform: "uppercase",
+							}}
+						>
+							{t("sign_up_button")}
+						</Typography>
+						<IconsStyle />
+					</Button>
+				</Box>
+>>>>>>> origin/feat-last-finish-pages
 			</Box>
 		</form>
 	);

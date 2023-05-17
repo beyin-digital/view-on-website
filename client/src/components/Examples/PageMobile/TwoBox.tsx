@@ -1,13 +1,15 @@
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "next-i18next";
 
 const TwoBox = () => {
+	const { t } = useTranslation("example");
+
 	return (
 		<>
 			<Box
 				sx={{
 					position: "relative",
-					top: "-5rem",
-					background: "#EAEDED",
+					top: "0rem",
 				}}
 				className="ExampleBoxTwo"
 			>
@@ -22,52 +24,54 @@ const TwoBox = () => {
 					<Box
 						sx={{
 							width: { xs: "100%", sm: "100%", md: "100%" },
-							height: { xs: "60vh", sm: "80vh", md: "80vh", xl: "80vh" },
-							paddingX: "1rem",
+							height: "366px",
 							position: "relative",
+							transform: "skew(-16deg, 0deg)",
 						}}
 					>
 						<Box
 							sx={{
 								width: { xs: "100%", md: "50%" },
 								position: "absolute",
-								top: { xs: "", md: "20%", xl: "20%" },
+								left: { xs: ".5rem", sm: "2rem" },
+
+								zIndex: "9999",
 							}}
-							className="ExampleBoxTwoText"
+							className="ExampleBoxTwoMobile"
 						>
 							<Box
 								sx={{
-									marginTop: { xs: "4rem", xl: "7rem" },
-									marginX: { xs: "0", md: "2rem" },
+									marginTop: { xs: "-2rem", sm: "-1rem", xl: "7rem" },
+									marginX: { xs: "0rem", md: "1rem" },
+									zIndex: "999999999",
+									position: "relative",
 								}}
-								className="ExampleBoxTwoText"
 							>
 								<Typography
 									sx={{
-										width: { xs: "40%", sm: "25%", md: "50%" },
+										width: { xs: "97px", sm: "30%", md: "50%" },
 										height: "100%",
-										fontSize: "20px",
-										fontWeight: "500",
-										lineHeight: "18px",
+										fontSize: { xs: "15px", sm: "24px", md: "24px" },
+										fontWeight: "600",
+										lineHeight: "25px",
 
 										marginY: "1rem",
 									}}
 								>
-									Type the #kyeword.
+									{t("box_two_title")}
 								</Typography>
 								<Typography
 									sx={{
-										width: { xs: "38%", sm: "30%", md: "80%" },
+										width: { xs: "50%", sm: "40%", md: "80%" },
 										height: "100%",
 										fontSize: { xs: "13px", sm: "20px", md: "20px" },
-										lineHeight: { xs: "12px", sm: "20px", md: "20px" },
+										lineHeight: { xs: "15px", sm: "20px", md: "20px" },
 										fontWeight: "300",
 										marginY: "1rem",
+										paddingRight: ".5rem",
 									}}
 								>
-									Your customers will quickly type the #keyword they saw in the
-									label you displayed and visit your website through our
-									homepage.
+									{t("box_three_desc")}
 								</Typography>
 							</Box>
 						</Box>
@@ -75,32 +79,34 @@ const TwoBox = () => {
 							sx={{
 								width: { xs: "75%", sm: "70%", md: "60%" },
 								height: "100%",
-								background: "url(/images/layoutBoxTwo.png)",
+								backdropFilter: "blur(48px)",
+								background:
+									"radial-gradient(35.03% 67.6% at 17.29% 50.07%, rgba(49, 231, 22, 0.3) 0%, rgba(49, 231, 22, 0.012) 100%)",
 								backgroundRepeat: "no-repeat",
+								borderRadius: "14px",
+								border: "1px solid #FBFBFB",
 								backgroundSize: "cover",
 								position: "absolute",
-								bottom: "0",
-								right: "0",
-								top: "-2rem",
 							}}
+							className="ExampleBoxTwoMobileImage"
 						>
 							<Box
 								sx={{
-									height: { xs: "360px", sm: "450px", md: "432px" },
+									height: { xs: "300px", sm: "350px", md: "350px" },
 									position: "absolute",
-									bottom: "0",
-									right: { xs: "-5rem", sm: "0", md: "0" },
 								}}
-								className="ExampleBoxTwoPic"
+								className="ExampleBoxTwoPi ExampleBoxTwoImageMobile"
 							>
 								<img
 									src="/images/mobile.png"
-									alt=""
+									alt="View On Website Photo Inter Keyword"
+									title="View On Website Photo Inter Keyword"
 									style={{
 										width: "100%",
 										height: "100%",
-										objectFit: "cover",
+										objectFit: "contain",
 									}}
+									// loading="lazy"
 								/>
 							</Box>
 						</Box>

@@ -2,17 +2,32 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import TextViewOnWeb from "../Home/TextViewOnWeb";
+import { useTranslation } from "next-i18next";
+import { ImageBackground } from "./ImageBackground";
 
 const FooterMobile = () => {
+	const { t } = useTranslation("common");
+
 	const links = [
-		{ id: 11, name: "contact", link: "/contact" },
-		{ id: 22, name: "Learn More", link: "/" },
-		{ id: 33, name: "Privacy Policy", link: "/privacy" },
-		{ id: 44, name: "T&C", link: "/terms" },
+		{ id: 11, name: "contact", link: "/contact", tKey: "footer_contact" },
+		{ id: 22, name: "Learn More", link: "/", tKey: "footer_learn" },
+		{
+			id: 33,
+			name: "Privacy Policy",
+			link: "/privacy",
+			tKey: "footer_privacy",
+		},
+		{ id: 44, name: "T&C", link: "/terms", tKey: "footer_terms" },
 	];
 	const icons = [
 		{
-			id: 22,
+			id: 1,
+			name: "faceBook",
+			link: "https://facebook.com",
+			icon: "/icons/facebook.svg",
+		},
+		{
+			id: 2,
 			name: "twitter",
 			link: "https://twitter.com",
 			icon: "/icons/twitter.svg",
@@ -21,7 +36,7 @@ const FooterMobile = () => {
 			id: 3,
 			name: "instagram",
 			link: "https://instagram.com",
-			icon: "/icons/insta.svg",
+			icon: "/icons/instagram.svg",
 		},
 		{
 			id: 4,
@@ -41,40 +56,15 @@ const FooterMobile = () => {
 					justifyContent: "center",
 					position: "relative",
 					overflow: "hidden",
+					maxHeight: "70vh",
 				}}
 			>
-				<Box
-					sx={{
-						position: "absolute",
-						height: "100%",
-						left: "-12rem",
-					}}
-				>
-					<img
-						src='/images/swirl.svg'
-						style={{
-							width: "100%",
-						}}
-					/>
-				</Box>
-				<Box
-					sx={{
-						background: "url('/images/swirl.svg')",
-						backgroundRepeat: "no-repeat",
-						backgroundSize: "cover",
-						height: { xs: "70vh", sm: "", md: "" },
-					}}
-				/>
-
+				{/* footer background */}
+				<ImageBackground />
 				<Box
 					sx={{
 						width: "100%",
-						display: {
-							xs: "flex",
-							sm: "flex",
-							md: "none",
-							xl: "none",
-						},
+						display: { xs: "flex", sm: "flex", md: "none", xl: "none" },
 						alignItems: "end",
 						justifyContent: "center",
 						position: "relative",
@@ -85,12 +75,7 @@ const FooterMobile = () => {
 						sx={{
 							width: "100%",
 							border: "1px solid #E3E3E3",
-							height: {
-								xs: "100%",
-								sm: "315px",
-								md: "400px",
-								xl: "30vh",
-							},
+							height: { xs: "100%", sm: "315px", md: "400px", xl: "30vh" },
 							backdropFilter: "blur(50px)",
 							borderRadius: "15px 15px 0px 0px",
 							background: "rgba(251, 251, 251, 0.6)",
@@ -131,8 +116,9 @@ const FooterMobile = () => {
 									}}
 								>
 									<Image
-										src='/images/logo.svg'
-										alt='logo'
+										src="/images/logo.svg"
+										alt="Logo View On Website "
+										title="Logo View On Website "
 										width={100}
 										height={50}
 									/>
@@ -143,10 +129,8 @@ const FooterMobile = () => {
 											lineHeight: "12px",
 											marginY: "1rem",
 										}}
-										color='#343132'
-									>
-										AN E-LABEL STAMP
-									</Typography>
+										color="#343132"
+									></Typography>
 								</Box>
 								<TextViewOnWeb />
 
@@ -157,25 +141,21 @@ const FooterMobile = () => {
 										lineHeight: "16px",
 										marginY: ".5rem",
 									}}
-									color='#343132'
+									color="#343132"
 								>
 									Be distantly directed to what you see!
 								</Typography>
 								{/* box icons */}
 								<Box
 									sx={{
-										width: {
-											xs: "90%",
-											md: "50%",
-											xl: "40%",
-										},
+										width: { xs: "90%", md: "50%", xl: "40%" },
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "center",
 										margin: ".5rem 0",
 									}}
 								>
-									{icons.map(item => (
+									{icons.map((item) => (
 										<Link href={item.link} key={item.id}>
 											<Image
 												src={item.icon}
@@ -201,18 +181,8 @@ const FooterMobile = () => {
 
 							<Box
 								sx={{
-									width: {
-										xs: "90%",
-										sm: "30%",
-										md: "50%",
-										xl: "40%",
-									},
-									height: {
-										xs: "50%",
-										sm: "200px",
-										md: "100%",
-										xl: "100%",
-									},
+									width: { xs: "90%", sm: "30%", md: "50%", xl: "40%" },
+									height: { xs: "50%", sm: "200px", md: "100%", xl: "100%" },
 									display: "flex",
 									alignItems: {
 										xs: "start",
@@ -227,18 +197,13 @@ const FooterMobile = () => {
 										md: "row",
 										xl: "row",
 									},
-									paddingX: {
-										xs: "1rem",
-										sm: "0",
-										md: "0",
-										xl: "0",
-									},
+									paddingX: { xs: "1rem", sm: "0", md: "0", xl: "0" },
 								}}
 							>
-								{links.map(item => (
+								{links.map((item) => (
 									<Link
 										href={item.link}
-										title={item.name}
+										title={`${t(item.tKey)}`}
 										key={item.id}
 										style={{
 											textDecoration: "none",
@@ -246,12 +211,15 @@ const FooterMobile = () => {
 										}}
 									>
 										<Typography
-											fontSize='20px'
-											fontWeight='400'
-											lineHeight='32px'
-											textAlign='center'
+											sx={{
+												fontSize: { xs: "14px", sm: "20px" },
+												fontWeight: "400",
+												lineHeight: "25px",
+												textAlign: "center",
+												textTransform: "capitalize",
+											}}
 										>
-											{item.name}
+											{t(item.tKey)}
 										</Typography>
 									</Link>
 								))}
@@ -276,10 +244,12 @@ const FooterMobile = () => {
 							<Typography
 								sx={{
 									textAlign: "center",
+									fontSize: { xs: "10px", md: "13px" },
+									lineHeight: "15px",
+									fontWeight: "400",
 								}}
 							>
-								All Rights Reserved View On Website Portal Co
-								LLC 2023
+								All Rights Reserved View On Website Portal Co LLC 2023
 							</Typography>
 						</Box>
 					</Box>

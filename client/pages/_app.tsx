@@ -13,6 +13,10 @@ import createEmotionCache from "../src/createEmotionCache";
 import { UserProvider } from "@/contexts/userContext";
 import "react-toastify/dist/ReactToastify.css";
 
+import { appWithTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import Head from "next/head";
+
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
@@ -39,7 +43,11 @@ const combineProviders = (providers: any[]) =>
 	));
 
 const Providers = combineProviders([UserProvider]);
-export default function MyApp(props: MyAppProps) {
+
+function MyApp(props: MyAppProps) {
+	const { locale } = useRouter();
+	const isRTL = locale === "ar";
+
 	const {
 		Component,
 		emotionCache = clientSideEmotionCache,
@@ -47,7 +55,14 @@ export default function MyApp(props: MyAppProps) {
 	} = props;
 	return (
 		<CacheProvider value={emotionCache}>
-			<>
+			<Head>
+				<meta
+					name='viewport'
+					content='initial-scale=1, width=device-width'
+				/>
+				<link rel='preconnect' href='https://fonts.googleapis.com' />
+			</Head>
+			<div dir={isRTL ? "rtl" : "ltr"}>
 				<QueryClientProvider client={queryClient}>
 					<Providers>
 						<ThemeProvider theme={theme}>
@@ -58,7 +73,8 @@ export default function MyApp(props: MyAppProps) {
 					</Providers>
 					<ReactQueryDevtools />
 				</QueryClientProvider>
-			</>
+			</div>
 		</CacheProvider>
 	);
 }
+export default appWithTranslation(MyApp);

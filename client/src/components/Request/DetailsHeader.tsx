@@ -1,8 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import { useTranslation } from "next-i18next";
 
 const DetailsHeader = () => {
+	const { t } = useTranslation("request");
+
 	return (
 		<>
 			<Box
@@ -14,7 +16,13 @@ const DetailsHeader = () => {
 					marginY: "2rem",
 				}}
 			>
-				<Image src="/images/logo.svg" alt="logo" width={150} height={80} />
+				<Image
+					src="/images/logo.svg"
+					alt="Logo View On Website"
+					title="Logo View On Website"
+					width={150}
+					height={80}
+				/>
 				<Box
 					sx={{
 						display: "flex",
@@ -33,7 +41,7 @@ const DetailsHeader = () => {
 						}}
 						color="#343132"
 					>
-						Please enter your email address or #keyword
+						{t("title")}
 					</Typography>
 					<Typography
 						sx={{
@@ -43,10 +51,11 @@ const DetailsHeader = () => {
 							lineHeight: { xs: "22px", xl: "37px" },
 							marginY: ".5rem",
 							textAlign: "center",
+							paddingX:".5rem"
 						}}
 						color="#A0A9AB"
 					>
-						We will send a link to Your email where you can make a new password:{" "}
+						{t("desc")}
 					</Typography>
 				</Box>
 			</Box>

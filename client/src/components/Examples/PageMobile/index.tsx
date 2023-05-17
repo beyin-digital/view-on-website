@@ -5,9 +5,6 @@ import OneBox from "./OneBox";
 import TwoBox from "./TwoBox";
 import ThreeBox from "./ThreeBox";
 
-// footer
-import Footer from "@/components/Footer/Footer";
-import FooterMobile from "@/components/Footer/FooterMobile";
 import { LinkSubscribe } from "@/components/Button";
 const PageMobile = () => {
 	return (
@@ -32,10 +29,15 @@ const PageMobile = () => {
 				<Box
 					sx={{
 						position: "absolute",
-						top: "-90rem",
+						top: "-100rem",
 					}}
 				>
-					<img src="/images/swirl.png" />
+					<img
+						src="/images/swirl.png"
+						alt="Background View On Website"
+						title="Background View On Website"
+						// loading="lazy"
+					/>
 				</Box>
 				<Box
 					m="auto"
@@ -50,21 +52,15 @@ const PageMobile = () => {
 				>
 					{/* Slider One */}
 					<OneBox />
-
 					{/* Slider Two */}
-					<Box
-					// sx={{
-					// 	height: "10vh",
-					// }}
-					/>
 					<TwoBox />
 
 					{/* Slider Three */}
 					<ThreeBox />
-					{/*  */}
+					{/* Link */}
 					<Box
 						sx={{
-							width: "85%",
+							width: { xs: "100%", sm: "85%", md: "85%", xl: "85%" },
 							height: "90px",
 							display: "flex",
 							justifyContent: "center",
@@ -75,8 +71,6 @@ const PageMobile = () => {
 					</Box>
 				</Box>
 			</Box>
-			<FooterMobile />
-			{/* <Footer /> */}
 		</Box>
 	);
 };

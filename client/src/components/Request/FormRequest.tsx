@@ -1,15 +1,16 @@
 import { Box, Button, OutlinedInput, Typography } from "@mui/material";
-import React from "react";
-import { ButtonLogin } from "../Button";
 import LoginTextSignUp from "../Login/LoginTextSignUp";
-import { FiArrowUpRight } from "react-icons/fi";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { IconsStyle } from "../Button";
 
 const FormRequest = () => {
+	const { t } = useTranslation("request");
+
 	return (
 		<>
 			<Box
 				sx={{
-					// width: "100%",
 					width: { xs: "100%", sm: "100%", md: "565px", xl: "565px" },
 					display: "flex",
 					alignItems: "center",
@@ -21,24 +22,22 @@ const FormRequest = () => {
 					sx={{
 						width: "100%",
 						height: { xs: "45px", md: "50px", xl: "65px" },
-						fontSize: {
-							xs: "18px",
-							sm: "22px",
-							md: "28px",
-							xl: "32px",
-						},
+						fontSize: "24px",
 						lineHeight: "28px",
 						background: "#FBFBFB",
 						border: "0.897277px solid #E3E3E3",
 						borderRadius: "10px",
 						marginY: ".5rem",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
-
-						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-							border: 0,
+						".MuiOutlinedInput-notchedOutline": {
+							border: "0",
+							padding: "9px",
+						},
+						"&:hover > .MuiOutlinedInput-notchedOutline": {
+							border: "0",
 						},
 					}}
-					placeholder="Email or #Keyword"
+					placeholder={`${t("input")}`}
 				/>
 			</Box>
 			<Box
@@ -49,12 +48,6 @@ const FormRequest = () => {
 					alignItems: "center",
 				}}
 			>
-				{/* <ButtonLogin
-					name="send"
-					onClick={() => {
-						// router.push("/");
-					}}
-				/> */}
 				<Box
 					sx={{
 						width: { xs: "240px", sm: "300px", md: "300px", xl: "300px" },
@@ -77,7 +70,6 @@ const FormRequest = () => {
 					>
 						<Typography
 							sx={{
-								// fontFamily: "Helvetica Neue",
 								letterSpacing: "0.02em",
 								fontSize: { xs: "20px", md: "25px", xl: "32px" },
 								fontWeight: 400,
@@ -86,10 +78,9 @@ const FormRequest = () => {
 								textTransform: "uppercase",
 							}}
 						>
-							send
+							{t("send")}
 						</Typography>
-
-						<FiArrowUpRight size={42} color="#FBFBFB" />
+						<IconsStyle />
 					</Button>
 				</Box>
 				<LoginTextSignUp />

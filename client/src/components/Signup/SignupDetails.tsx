@@ -1,8 +1,11 @@
 import { Typography, Box } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 const SignupDetails = () => {
+	const { t } = useTranslation("signup");
+
 	const icon = [
 		{
 			id: 1,
@@ -48,7 +51,6 @@ const SignupDetails = () => {
 					},
 					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
 					marginY: "2rem",
-					// border:"1px solid red"
 				}}
 			>
 				<Box
@@ -65,7 +67,7 @@ const SignupDetails = () => {
 							marginY: { xs: "1rem", md: "0", xl: "0" },
 						}}
 					>
-						Please fill up your information
+						{t("title")}
 					</Typography>
 				</Box>
 				<Box
@@ -82,7 +84,7 @@ const SignupDetails = () => {
 							width: { xs: "100%", md: "45%", xl: "100%" },
 							display: "flex",
 							alignItems: "center",
-							justifyContent: "space-between",
+							justifyContent: "space-around",
 							flexDirection: { xs: "column", md: "row", xl: "row" },
 						}}
 					>
@@ -93,9 +95,10 @@ const SignupDetails = () => {
 								lineHeight: "22px",
 								marginY: { xs: "1rem", md: "0", xl: "0" },
 								display: { xs: "none", md: "block", xl: "block" },
+								paddingX: "4px",
 							}}
 						>
-							Or sign up with
+							{t("sign_up")}
 						</Typography>
 						<Typography
 							sx={{
@@ -106,7 +109,7 @@ const SignupDetails = () => {
 								display: { xs: "block", md: "none", xl: "none" },
 							}}
 						>
-							sign up with
+							{t("sign_up")}
 						</Typography>
 						<Box
 							sx={{
@@ -128,9 +131,7 @@ const SignupDetails = () => {
 									lineHeight: "22px",
 									marginY: { xs: "1rem", md: "0", xl: "0" },
 								}}
-							>
-								Or
-							</Typography>
+							></Typography>
 							<Typography
 								sx={{
 									border: "1px solid #6C6C6C",
@@ -143,7 +144,7 @@ const SignupDetails = () => {
 
 					<Box
 						sx={{
-							width: "40%",
+							width: "50%",
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "center",
@@ -185,7 +186,7 @@ const SignupDetails = () => {
 								marginY: { xs: "1rem", md: "0", xl: "0" },
 							}}
 						>
-							Or
+							{t("or")}
 						</Typography>
 						<Typography
 							sx={{

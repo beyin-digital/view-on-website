@@ -9,7 +9,21 @@ body {
 	font-family: "IBM Plex Sans Arabic";
 	background-color: #eaeded;
 }
+iframe {
+	border-radius: 30px;
+	box-shadow: 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.08);
+}
+.overlay {
+	overflow-x: auto;
+	/* overflow-y: inherit; */
+}
 
+/* Layout home */
+
+.layoutHomeOverflow {
+	overflow-x: hidden;
+}
+/* subscribe */
 .borderSubscribeInput {
 	box-sizing: border-box;
 	background-clip: padding-box;
@@ -28,10 +42,12 @@ body {
 	border-radius: inherit;
 	background: linear-gradient(270deg, #0090ec 0%, #31e716 100%);
 }
-.mui-style-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
-	background-color: transparent !important;
+[dir="ltr"] .SubscribePageLayoutBox {
+	margin-left: -16rem;
 }
-
+[dir="rtl"] .SubscribePageLayoutBox {
+	margin-right: 20rem;
+}
 /* Navbar */
 .navigation-menu {
 	list-style: none;
@@ -60,19 +76,16 @@ body {
 	color: black;
 }
 /*  */
+
 /* Swiper Slider */
 .swiper-3d {
-	/* perspective: 307px !important; */
-	perspective: 468px !important;
+	perspective: 380px !important;
 }
 .swiper_container {
 	position: relative;
 	max-width: 100%;
 }
-.swiper,
-swiper-container {
-	overflow: inherit !important;
-}
+
 .SliderMobile {
 	display: none;
 }
@@ -82,10 +95,26 @@ swiper-container {
 	transition: 0.3s opacity;
 	transform: translate3d(0, 0, 0);
 	z-index: 99999999;
-	bottom: -3.3rem !important;
+	bottom: 6.5rem !important;
 	font-size: 32px;
 	font-weight: 500;
-	/* margin:2rem auto */
+}
+.swiper-blur {
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px);
+	border: 1.63722px solid #e3e3e3;
+	border-radius: 32.7444px;
+	backdrop-filter: blur(10px);
+	filter: blur(0px);
+	border-radius: 32.7444px;
+	background: rgba(251, 251, 251, 0.2);
+	backdrop-filter: blur(10px);
+}
+.SliderImageMobile {
+	display: none;
 }
 /*  */
 .col {
@@ -108,8 +137,11 @@ swiper-container {
 		rgba(49, 231, 22, 0.012) 100%
 	);
 }
-
+/* Examples Page  */
 .PageMobile {
+	display: none;
+}
+.PageTablet {
 	display: none;
 }
 /* Illustration */
@@ -136,12 +168,18 @@ swiper-container {
 	width: 5px;
 	height: 80%;
 	background-color: #000;
-	left: 5px;
+
 	top: 10%;
 	animation-name: blink;
 	animation-duration: 800ms;
 	animation-iteration-count: infinite;
 	opacity: 1;
+}
+[dir="ltr"] .cursor .i {
+	left: 5px;
+}
+[dir="rtl"] .cursor .i {
+	right: 5px;
 }
 
 .cursor .l:focus + .i {
@@ -157,6 +195,259 @@ swiper-container {
 	}
 }
 
+/* Layout AR / EN */
+
+[dir="ltr"] .BoxHomeLayout {
+	right: 20%;
+}
+[dir="rtl"] .BoxHomeLayout {
+	left: 18%;
+}
+[dir="ltr"] .BoxHomeLayoutCenter {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+}
+[dir="rtl"] .BoxHomeLayoutCenter {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+[dir="ltr"] .LayoutBox {
+	right: 20%;
+}
+[dir="rtl"] .LayoutBox {
+	left: 20%;
+}
+
+[dir="ltr"] .VerificationPageCenter {
+	margin-right: 20rem;
+}
+[dir="rtl"] .VerificationPageCenter {
+	margin-left: 15rem;
+}
+
+[dir="rtl"] .IllustrationDesktopLayout {
+	left: 14%;
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .IllustrationDesktopLayout {
+	right: 14%;
+	transform: skew(-16deg, 0deg);
+}
+[dir="rtl"] .IllustrationDesktopLayoutBox {
+	transform: skew(-16deg, 0deg);
+}
+[dir="ltr"] .IllustrationDesktopLayoutBox {
+	transform: skew(16deg, 0deg);
+}
+
+[dir="rtl"] .optionOne {
+	margin-right: 1rem;
+}
+
+[dir="rtl"] .optionTwo {
+	margin-right: 1.5rem;
+}
+
+[dir="rtl"] .optionThree {
+	margin-right: 2rem;
+}
+[dir="ltr"] .optionOne {
+	margin-left: 1rem;
+}
+
+[dir="ltr"] .optionTwo {
+	margin-left: 1.5rem;
+}
+
+[dir="ltr"] .optionThree {
+	margin-left: 2rem;
+}
+[dir="lrt"] .arrowDownLeft {
+	justify-content: flex-start;
+}
+[dir="rtl"] .arrowDownLeft {
+	justify-content: end;
+}
+[dir="ltr"] .OneBoxTablet {
+	right: -3rem;
+	transform: skew(-16deg, 0deg);
+}
+[dir="rtl"] .OneBoxTablet {
+	right: -3rem;
+	transform: skew(-16deg, 0deg);
+}
+[dir="rtl"] .OneBoxTabletText {
+	justify-content: end;
+}
+[dir="ltr"] .OneBoxTabletText {
+	justify-content: start;
+}
+[dir="rtl"] .TwoBoxTablet {
+	right: -9rem;
+	transform: skew(-16deg, 0deg);
+}
+[dir="ltr"] .TwoBoxTablet {
+	right: -10rem;
+	transform: skew(-16deg, 0deg);
+}
+[dir="ltr"] .TwoBoxTabletImage {
+	transform: skew(16deg, 0deg);
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+[dir="rtl"] .TwoBoxTabletImage {
+	transform: skew(16deg, 0deg);
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+[dir="rtl"] .TwoBoxTabletLayout {
+	flex-direction: row-reverse;
+	justify-content: center;
+}
+[dir="ltr"] .TwoBoxTabletLayout {
+	flex-direction: row;
+	justify-content: center;
+}
+[dir="ltr"] .ThreeBoxTablet {
+	transform: skew(-16deg, 0deg);
+	right: -11rem;
+}
+[dir="rtl"] .ThreeBoxTablet {
+	transform: skew(-16deg, 0deg);
+	right: -11rem;
+}
+[dir="ltr"] .ThreeBoxTabletLayout {
+	transform: skew(16deg, 0deg);
+}
+[dir="rtl"] .ThreeBoxTabletLayout {
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .ThreeBoxTabletLayoutImage {
+	top: 0;
+	right: 0;
+}
+[dir="rtl"] .ThreeBoxTabletLayoutImage {
+	top: 0;
+	right: 0;
+}
+[dir="ltr"] .ThreeBoxTabletLayoutText {
+	bottom: 0;
+	left: 2rem;
+}
+[dir="rtl"] .ThreeBoxTabletLayoutText {
+	bottom: 0;
+	left: -1rem;
+}
+[dir="ltr"] .OneBoxMobile {
+	transform: skew(-16deg, 0deg);
+	right: -1rem;
+}
+[dir="rtl"] .OneBoxMobile {
+	transform: skew(-16deg, 0deg);
+	right: -1rem;
+}
+[dir="ltr"] .exampleOneBoxMobiletImage,
+.exampleOneBoxMobileText {
+	justify-content: space-between;
+}
+[dir="rtl"] .exampleOneBoxMobileText {
+	justify-content: end;
+}
+[dir="rtl"] .exampleOneBoxMobiletImage {
+	justify-content: end;
+}
+[dir="ltr"] .ExampleBoxTwoMobile {
+	top: 12%;
+	transform: skew(16deg, 0deg);
+	padding-right: 1px;
+	padding-left: 5px;
+}
+[dir="rtl"] .ExampleBoxTwoMobile {
+	top: 20%;
+	left: -22rem;
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .ExampleBoxTwoMobileImage {
+	bottom: 0;
+	right: 0;
+	top: -1rem;
+	margin-right: -5rem;
+}
+[dir="rtl"] .ExampleBoxTwoMobileImage {
+	bottom: 0;
+	right: 0;
+	top: -1rem;
+	margin-right: -5rem;
+}
+[dir="ltr"] .ExampleBoxTwoImageMobile {
+	bottom: 0;
+	right: 0;
+	transform: skew(16deg, 0deg);
+}
+[dir="rtl"] .ExampleBoxTwoImageMobile {
+	bottom: 0;
+	right: 0;
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .OneBoxDesktop {
+	transform: skew(-16deg, 0deg);
+}
+[dir="rtl"] .OneBoxDesktop {
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .OneBoxDesktopLayout {
+	transform: skew(16deg, 0deg);
+	right: -3rem;
+}
+[dir="rtl"] .OneBoxDesktopLayout {
+	transform: skew(-16deg, 0deg);
+	right: 0rem;
+}
+[dir="ltr"] .OneBoxDesktopLayoutSlid {
+	transform: skew(16deg, 0deg);
+}
+[dir="rtl"] .OneBoxDesktopLayoutSlid {
+	transform: skew(-16deg, 0deg);
+}
+[dir="ltr"] .OneBoxDesktopLayoutText {
+	left: 4rem;
+}
+[dir="rtl"] .OneBoxDesktopLayoutText {
+	right: 0rem;
+}
+[dir="ltr"] .OneBoxDesktopLayoutImage {
+	bottom: 0rem;
+	transform: skew(16deg, 0deg);
+}
+[dir="rtl"] .OneBoxDesktopLayoutImage {
+	bottom: 0rem;
+	transform: skew(-16deg, 0deg);
+}
+[dir="ltr"] .PageDesktopLayout {
+	transform: skew(-16deg, 0deg);
+}
+[dir="rtl"] .PageDesktopLayout {
+	transform: skew(16deg, 0deg);
+}
+[dir="ltr"] .PageDesktopMargin {
+	margin-left: -5rem;
+}
+[dir="rtl"] .PageDesktopMargin {
+	margin-right: -5rem;
+}
+
+/* icon arrow */
+[dir="ltr"] .right {
+	display: none;
+}
+[dir="rtl"] .left {
+	display: none;
+}
+
 /*  */
 @media screen and (max-width: 1535px) {
 	.IllustrationDesktop {
@@ -164,6 +455,12 @@ swiper-container {
 	}
 	.IllustrationTablet {
 		display: block;
+	}
+	[dir="rtl"] .BoxSignInWith {
+		left: 19rem !important;
+	}
+	[dir="rtl"] .OneBoxDesktopLayoutText {
+		right: 3rem;
 	}
 }
 @media screen and (max-width: 1401px) {
@@ -173,7 +470,7 @@ swiper-container {
 }
 @media screen and (max-width: 1330px) {
 	.sliderArrowsOne {
-		right: 50rem;
+		right: 54rem;
 	}
 }
 @media screen and (max-width: 1230px) {
@@ -185,7 +482,7 @@ swiper-container {
 	}
 }
 @media screen and (max-width: 1319px) {
-	.PageMobile {
+	.PageTablet {
 		display: block;
 	}
 	.PageDesktop {
@@ -199,19 +496,79 @@ swiper-container {
 	.illustrationArrowsUp {
 		display: none;
 	}
+	[dir="ltr"] .VerificationPageCenter {
+		margin-right: 15rem;
+	}
 }
-@media screen and (max-width: 893px) {
+@media screen and (max-width: 1055px) {
+	[dir="ltr"] .BoxHomeLayout {
+		right: 10%;
+	}
+	[dir="rtl"] .BoxHomeLayout {
+		left: 15%;
+	}
+	[dir="ltr"] .LayoutBox {
+		right: 10%;
+	}
+	[dir="rtl"] .LayoutBox {
+		left: 10%;
+	}
+	[dir="rtl"] .BoxSignInWith {
+		left: 6rem !important;
+	}
+	.SliderImageMobile {
+		display: block;
+		top: -44rem !important;
+	}
+}
+
+@media screen and (max-width: 899px) {
 	.IllustrationMobile {
 		display: block;
 	}
 	.IllustrationTablet {
 		display: none;
 	}
-}
-@media screen and (max-width: 899px) {
 	.ImageMobile {
 		position: absolute !important;
-		top: -48rem !important;
+		top: -20rem !important;
+	}
+	[dir="ltr"] .VerificationPageCenter {
+		margin-right: 0rem;
+	}
+	[dir="rtl"] .VerificationPageCenter {
+		margin-left: 0rem;
+	}
+	.MainBoxPic {
+		margin-top: 2rem !important;
+	}
+	[dir="ltr"] .TwoBoxTablet {
+		right: -8rem;
+	}
+	[dir="rtl"] .TwoBoxTablet {
+		right: -5rem;
+		transform: skew(-16deg, 0deg);
+	}
+	.swiper-3d {
+		perspective: 999px !important;
+	}
+	.ImageSlider {
+		width: 100%;
+		height: 350px;
+	}
+	.swiper-pagination {
+		position: absolute;
+		text-align: center;
+		/* transition: 0.3s opacity; */
+		/* transform: translate3d(0, 0, 0); */
+		z-index: 99999999;
+		bottom: 2.5rem !important;
+		font-size: 32px;
+		font-weight: 500;
+	}
+	.SliderImageMobile {
+		display: block;
+		top: -35rem !important;
 	}
 }
 @media screen and (max-width: 700px) {
@@ -224,25 +581,74 @@ swiper-container {
 		bottom: 3rem;
 		left: 3rem;
 	}
-	.ExampleBoxTwo {
-		/* top: -11rem; */
-	}
-
 	.ExampleThreeBox {
-		top: -10rem;
+		top: -3rem;
+	}
+	[dir="ltr"] .BoxHomeLayout {
+		right: 12%;
+	}
+	[dir="ltr"] .BoxHomeLayoutCenter {
+		margin-left: 2rem;
+	}
+	[dir="rtl"] .BoxHomeLayoutCenter {
+		margin-left: 3rem;
+	}
+	[dir="rtl"] .BoxHomeLayout {
+		left: 5%;
+	}
+	[dir="rtl"] .VerificationPageCenter {
+		margin-left: -3rem;
+	}
+	.MainBoxPic {
+		margin-top: 7rem !important;
+	}
+	.PageMobile {
+		display: block;
+	}
+	.PageTablet {
+		display: none;
+	}
+	.swiper-3d {
+		perspective: 277rem !important;
+	}
+	.swiper_container {
+		width: 100%;
+		height: 330px;
+		margin: 1rem auto;
+	}
+	.swiper-pagination {
+		display: none;
 	}
 }
 @media screen and (max-width: 600px) {
-	.ImageMobile {
-		position: absolute !important;
-		top: -50rem !important;
-	}
-
 	.ExampleBoxThreePic {
 		bottom: 0rem;
 		right: -6rem;
 		height: 100%;
 		width: 100%;
+	}
+	[dir="rtl"] .VerificationPageCenter {
+		margin-left: 0rem;
+	}
+	[dir="rtl"] .BoxSignInWith {
+		left: 0rem !important;
+	}
+	[dir="rtl"] .ExampleBoxTwoMobile {
+		left: -15rem;
+	}
+	.layoutHomeOverflow {
+		overflow: hidden;
+	}
+	.swiper-3d {
+		perspective: 999px !important;
+	}
+	.ImageSlider {
+		/* width: 100%; */
+		height: 274px;
+	}
+	.SliderImageMobile {
+		display: block;
+		top: -20rem !important;
 	}
 }
 @media screen and (max-width: 500px) {
@@ -254,10 +660,6 @@ swiper-container {
 		top: 0rem !important;
 	}
 
-	.ImageMobile {
-		position: absolute !important;
-		top: -45rem !important;
-	}
 	.cursor .i {
 		height: 50% !important;
 		top: 25% !important;
@@ -279,8 +681,19 @@ swiper-container {
 	.LayoutBox {
 		width: 120% !important;
 	}
-	.InputHomeMargin {
-		margin: 0 !important;
+
+	[dir="ltr"] .LayoutBox {
+		right: 8.5%;
+	}
+	[dir="rtl"] .LayoutBox {
+		left: 8.5%;
+	}
+	[dir="rtl"] .ExampleBoxTwoMobile {
+		left: -12rem;
+	}
+
+	.SliderImageMobileNone {
+		display: none;
 	}
 }
 @media screen and (max-width: 427px) {
@@ -290,6 +703,29 @@ swiper-container {
 	.illustrationArrowLeftDown {
 		top: -6.5rem !important;
 		left: -3rem !important;
+	}
+	.swirlSmall {
+		top: 8rem !important;
+		width: 300px !important;
+	}
+	.swirlSmall img {
+		width: 200px !important;
+	}
+	.MainBoxPic {
+		margin-top: 0 !important;
+	}
+	.BoxHomeLayout {
+		height: 410px;
+	}
+	.BoxTextHome {
+		margin-bottom: 5rem;
+	}
+	.InputHomeMargin {
+		margin-top: 1rem !important;
+	}
+	.Textredirected {
+		font-size: 24px !important;
+		line-height: 24px;
 	}
 }
 @media screen and (max-width: 410px) {
@@ -310,34 +746,66 @@ swiper-container {
 		-webkit-justify-content: space-evenly;
 		justify-content: center;
 	}
-	.TextViewOnWebsite {
-		height: 100% !important;
-	}
+
 	.ImageMobile {
 		position: absolute !important;
-		top: -43rem !important;
+		top: -15rem !important;
 	}
 	.swiper-pagination {
-		bottom: -2.4rem !important;
+		bottom: 0.6rem !important;
 		font-size: 22px;
+		z-index: 99999999;
+		display: none;
 	}
-	.LayoutTagsPadding {
-		padding: 2rem !important;
+
+	.LayoutHomeMobile {
+		overflow-x: hidden;
+		overflow-y: scroll;
+	}
+	.exampleOneBoxStart {
+		justify-content: flex-start !important;
+	}
+	[dir="rtl"] .ExampleBoxTwoMobile {
+		/* left: 0; */
+	}
+	.boxHomeBlack {
+		justify-content: start;
+	}
+	.InputHomeMargin {
+		margin-top: 0 !important;
+	}
+	.SliderImageMobile {
+		display: block;
+		top: -15rem !important;
 	}
 }
 @media screen and (max-width: 333px) {
 	.TextViewOnWebsite {
 		height: 100% !important;
-		margin-top: -1rem;
+	}
+	.TextViewOnWebsite p {
+		font-size: 17px !important;
 	}
 	.Textredirected {
-		font-size: 28px;
+		font-size: 24px !important;
+		line-height: 24px;
 	}
 	.LayoutHomeMobile {
 		height: 100% !important;
+		overflow-y: scroll;
 	}
 	.LayoutHomeMobileBox {
 		height: 16.5vh;
+	}
+	.ExampleBoxThreeText {
+		bottom: 2rem;
+		left: 1rem;
+	}
+	.InputHomeMargin {
+		margin-top: 0;
+	}
+	.BackgroundHome {
+		top: -14rem !important;
 	}
 }
 @media screen and (max-width: 300px) {
@@ -347,7 +815,6 @@ swiper-container {
 	}
 	.TextViewOnWebsite {
 		height: 100% !important;
-		margin-top: -1.5rem;
 	}
 	.TextViewOnWebsite p {
 		font-size: 15px !important;
@@ -366,8 +833,8 @@ swiper-container {
 		top: 0 !important;
 	}
 	.ExampleBoxTwoPic {
-		height: auto !important;
-		right: -4rem !important;
+		height: 200px !important;
+		right: -0rem !important;
 		width: 100% !important;
 	}
 	.ExampleBoxThreePic {
@@ -377,16 +844,42 @@ swiper-container {
 		width: 100%;
 	}
 	.ExampleBoxThreeText {
-		bottom: 3rem;
-		left: 3rem;
+		bottom: 0rem;
+		left: 1rem;
 	}
-	.ImageMobile {
-		position: absolute !important;
-		top: -39rem !important;
+
+	.exampleOneBoxTextSmall {
+		font-size: 10px;
+	}
+	.InputHomeMargin {
+		margin-top: 0 !important;
+		height: 51px !important;
+		margin-bottom: 0 !important;
 	}
 }
-
-.otp-input.MuiOtpInput-TextField {
-	border-radius: 50%;
-	background-color: #0090ec;
+@media screen and (max-width: 260px) {
+	.Textredirected {
+		font-size: 18px !important;
+		line-height: 20px;
+	}
+	p {
+		font-size: 15px !important;
+		line-height: 20px;
+	}
+	input,
+	form {
+		padding: 0;
+		margin: 0;
+	}
+	.boxHomeBlack {
+		width: 200px;
+	}
+	.InputHomeMargin {
+		margin-top: 0;
+		height: 61px;
+		margin-bottom: 11px;
+	}
+	.premium {
+		font-size: 25px !important;
+	}
 }

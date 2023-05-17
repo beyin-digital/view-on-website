@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+<<<<<<< HEAD
 
 const TextViewOnWeb = ({ foundLink }: { foundLink?: string }) => {
 	// check if link has http or https and remove it
@@ -8,15 +9,17 @@ const TextViewOnWeb = ({ foundLink }: { foundLink?: string }) => {
 		}
 		return link.replace("http://", "");
 	};
+=======
+>>>>>>> origin/feat-last-finish-pages
 
 	return (
 		<>
 			<Box
 				sx={{
 					height: {
-						xs: "50px",
+						xs: "60px",
 						sm: "70px",
-						md: "100px",
+						md: "140px",
 						xl: "120px",
 					},
 					width: "50%",
@@ -29,7 +32,7 @@ const TextViewOnWeb = ({ foundLink }: { foundLink?: string }) => {
 				<Typography
 					sx={{
 						fontSize: {
-							xs: "15px",
+							xs: "20px",
 							sm: "24px",
 							md: "40px",
 							xl: "50px",

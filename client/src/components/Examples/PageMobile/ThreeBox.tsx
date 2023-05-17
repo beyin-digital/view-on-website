@@ -1,6 +1,10 @@
+import { useTranslation } from "next-i18next";
+
 import { Box, Typography } from "@mui/material";
 
 const ThreeBox = () => {
+	const { t } = useTranslation("example");
+
 	return (
 		<>
 			<Box
@@ -10,48 +14,56 @@ const ThreeBox = () => {
 					alignItems: "center",
 					justifyContent: "center",
 					position: "relative",
-					top: "-8rem",
-					background: "#EAEDED",
+					top: "-1rem",
+					transform: "skew(-16deg, 0deg)",
 				}}
 				className="ExampleThreeBox"
 			>
 				<Box
 					sx={{
 						width: { xs: "100%", md: "100%" },
-						height: { xs: "70vh", sm: "80vh", md: "80vh", xl: "80vh" },
-						background: "url('/images/layoutBoxThree.png')",
+						height: "400px",
+						background:
+							"radial-gradient(28.05% 49.93% at 21.95% 50.07%, rgba(0, 144, 236, 0.3) 0%, rgba(0, 144, 236, 0.015) 100%) ",
+						borderRadius: "14px",
+						border: "0.484848px solid #FBFBFB",
+						backdropFilter: "blur(48.4848px)",
 						backgroundSize: "cover",
 						backgroundRepeat: "no-repeat",
 						position: "relative",
-						overflow: "hidden",
+						marginRight: "-8rem",
 					}}
 				>
 					<Box
 						sx={{
 							position: "absolute",
-							top: { xs: "0", sm: "", md: "0" },
-							right: { xs: "-13rem", sm: "-4rem", md: "0rem" },
-							width: { xs: "490px", sm: "580px", md: "660px" },
-							height: { xs: "400px", sm: "500px", md: "650px" },
+							top: { xs: "0rem", sm: "-1rem", md: "-3rem" },
+							right: "0",
+							width: { xs: "290px", sm: "350px", md: "492px" },
+							height: "365px",
+							transform: "skew(16deg, 0deg)",
 						}}
-						className="ExampleBoxThreePic"
+						className="ExampleBoxThreePi"
 					>
 						<img
 							src="/images/pic.png"
-							alt=""
+							title="Your costumers in a Blink will be automatically redirected to your Sub-link-URL"
+							alt="Your costumers in a Blink will be automatically redirected to your Sub-link-URL, your dashboard will show you all the conversions of your #keyword, it is your opportunity to optimize"
 							style={{
 								width: "100%",
-								height: "auto",
+
 							}}
+							loading="lazy"
 						/>
 					</Box>
 					<Box
 						sx={{
 							width: { xs: "70%", sm: "45%", md: "300px", lg: "40%" },
-							marginX: { xs: "1rem", md: "" },
 							position: "absolute",
-							bottom: { xs: "1rem", sm: "3rem", md: "3rem", xl: "3rem" },
-							left: { xs: "1rem", sm: "5.8rem", md: "8rem", lg: "" },
+							bottom: { xs: "0rem", sm: "2rem", md: "3rem", xl: "3rem" },
+							left: { xs: "0rem", sm: "3rem", md: "8rem", lg: "" },
+							transform: "skew(16deg, 0deg)",
+							marginRight: ".5rem",
 						}}
 						className="ExampleBoxThreeText"
 					>
@@ -64,20 +76,17 @@ const ThreeBox = () => {
 								marginY: "1rem",
 							}}
 						>
-							Be Redirected!
+							{t("box_three_title")}
 						</Typography>
 						<Typography
 							sx={{
 								width: { xs: "100%", md: "100%" },
-								fontSize: { xs: "14px", sm: "20px", md: "20px" },
+								fontSize: { xs: "13px", sm: "20px", md: "20px" },
 								lineHeight: { xs: "12px", sm: "20px", md: "20px" },
 								fontWeight: "300",
 							}}
 						>
-							Your costumers in a Blink will be automatically redirected to your
-							Sub-link-URL, your dashboard will show you all the conversions of
-							your #keyword, it is your opportunity to optimize, know and to
-							take control over your conversion rate.
+							{t("box_three_desc")}
 						</Typography>
 					</Box>
 				</Box>

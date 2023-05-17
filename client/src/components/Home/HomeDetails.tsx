@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useState, CSSProperties } from "react";
 import { Grid, Box, OutlinedInput } from "@mui/material";
 import Header from "@/components/Home/Header";
@@ -115,37 +116,72 @@ const HomeDetails = () => {
 							md: "end",
 							xl: "end",
 						},
+=======
+import { Grid, Box } from "@mui/material";
+import Header from "@/components/Home/HeaderHome";
+import TextViewOnWeb from "@/components/Home/TextViewOnWeb";
+import LayoutHomeBg from "@/components/Home/LayoutHomeBg";
+
+import HomeForm from "./HomeForm";
+
+const HomeDetails = () => {
+	return (
+		<>
+			<Grid
+				// container
+				sx={{
+					width: "100%",
+					height: "100%",
+					display: "flex",
+					justifyContent: { xs: "center", sm: "end", md: "end", xl: "end" },
+				}}
+			>
+				<Box
+					sx={{
+						width: "80%",
+						margin: ".4rem",
+>>>>>>> origin/feat-last-finish-pages
 					}}
 				>
 					<Box
 						sx={{
-							width: "80%",
-							// height: "100%",
-							margin: ".4rem",
+							width: "100%",
+							height: "220px",
+							transform: "skew(16deg, 0deg)",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
 						}}
 					>
+						{/* text header  */}
+						<Header />
+					</Box>
+					<LayoutHomeBg>
 						<Box
 							sx={{
-								width: "100%",
-
-								height: "220px",
-								transform: {
-									xs: "skew(16deg, 0deg)",
-									sm: "skew(16deg, 0deg)",
-									md: "skew(16deg, 0deg)",
-									xl: "skew(16deg, 0deg)",
+								width: { xs: "100%", sm: "70%", md: "70%", xl: "70%" },
+								height: {
+									xs: "100%",
+									sm: "80%",
+									md: "60%",
+									xl: "300px",
 								},
 								display: "flex",
 								alignItems: "center",
-								justifyContent: "center",
+								flexDirection: "column",
+								justifyContent: {
+									xs: "end",
+									sm: "center",
+									md: "center",
+									xl: "space-evenly",
+								},
 							}}
+							className="boxHomeBlack"
 						>
-							{/* text header  */}
-							<Header />
-						</Box>
-						<LayoutHomeBg>
+							<HomeForm />
 							<Box
 								sx={{
+<<<<<<< HEAD
 									width: {
 										xs: "100%",
 										sm: "70%",
@@ -157,17 +193,19 @@ const HomeDetails = () => {
 										sm: "250px",
 										md: "300px",
 										xl: "300px",
+=======
+									marginBottom: {
+										xs: "2.5rem",
+										sm: "1.5rem",
+										md: "4rem",
+										xl: "0",
+>>>>>>> origin/feat-last-finish-pages
 									},
 									display: "flex",
 									alignItems: "center",
-									flexDirection: "column",
-									justifyContent: {
-										xs: "start",
-										sm: "center",
-										md: "space-evenly",
-										xl: "",
-									},
+									justifyContent: "center",
 								}}
+<<<<<<< HEAD
 								className='boxHomeBlack'
 							>
 								<Box
@@ -318,11 +356,16 @@ const HomeDetails = () => {
 								>
 									<TextViewOnWeb foundLink={foundLink} />
 								</Box>
+=======
+								className="BoxTextHom"
+							>
+								<TextViewOnWeb />
+>>>>>>> origin/feat-last-finish-pages
 							</Box>
-						</LayoutHomeBg>
-					</Box>
-				</Grid>
-			</>
+						</Box>
+					</LayoutHomeBg>
+				</Box>
+			</Grid>
 		</>
 	);
 };

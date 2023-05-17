@@ -1,6 +1,9 @@
+import { useTranslation } from "next-i18next";
 import { Box, Typography, OutlinedInput, Button } from "@mui/material";
 
 const ChangePasswordForm = () => {
+	const { t } = useTranslation("changePassword");
+
 	return (
 		<>
 			<Box
@@ -27,11 +30,14 @@ const ChangePasswordForm = () => {
 						borderRadius: "10px",
 						marginY: ".5rem",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
-						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-							border: 0,
+						".MuiOutlinedInput-notchedOutline": {
+							border: "0",
+						},
+						"&:hover > .MuiOutlinedInput-notchedOutline": {
+							border: "0",
 						},
 					}}
-					placeholder="UserName"
+					placeholder={`${t("password")}`}
 				/>
 				<OutlinedInput
 					sx={{
@@ -49,12 +55,15 @@ const ChangePasswordForm = () => {
 						borderRadius: "10px",
 						marginY: ".5rem",
 						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
-
-						".mui-style-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-							border: 0,
+						".MuiOutlinedInput-notchedOutline": {
+							border: "0",
+							padding: "9px",
+						},
+						"&:hover > .MuiOutlinedInput-notchedOutline": {
+							border: "0",
 						},
 					}}
-					placeholder="Password"
+					placeholder={`${t("repeat_password")}`}
 				/>
 			</Box>
 			<Box
@@ -91,19 +100,16 @@ const ChangePasswordForm = () => {
 					>
 						<Typography
 							sx={{
-								// fontFamily: "Helvetica Neue",
 								letterSpacing: "0.02em",
-								fontSize: {xs:"20px", sm: "25px", xl: "32px" },
+								fontSize: { xs: "20px", sm: "25px", xl: "32px" },
 								fontWeight: 400,
 								lineHeight: { xs: "25px", xl: "40px" },
 								color: "#FBFBFB",
 								textTransform: "uppercase",
 							}}
 						>
-							Change password
-						</Typography>
-
-						{/* <FiArrowUpRight size={42} color="#FBFBFB" /> */}
+							{t("change")}
+						</Typography>{" "}
 					</Button>
 				</Box>
 			</Box>

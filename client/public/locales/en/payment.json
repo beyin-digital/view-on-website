@@ -1,0 +1,13 @@
+{
+  "meta_title": "View On Website | Payment",
+  "meta_desc": "",
+  "meta_keyword": "",
+  "title": "Please fill up your payment method",
+  "input_name": "",
+  "input_card": "",
+  "input_date": "",
+  "input_cvc": "",
+  "finish": "finish",
+  "current": "Payment Method Denied",
+  "error": "Your payment method is verified"
+}

@@ -1,7 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import { useTranslation } from "next-i18next";
+
 import Image from "next/image";
+import { Box, Typography } from "@mui/material";
 
 const ChangePasswordDetails = () => {
+	const { t } = useTranslation("changePassword");
+
 	return (
 		<>
 			<Box
@@ -13,7 +17,13 @@ const ChangePasswordDetails = () => {
 					marginY: "1rem",
 				}}
 			>
-				<Image src="/images/logo.svg" alt="logo" width={150} height={80} />
+				<Image
+					src="/images/logo.svg"
+					alt="Logo View On Website"
+					title="Logo View On Website"
+					width={150}
+					height={80}
+				/>
 				<Typography
 					sx={{
 						fontSize: { xs: "20px", xl: "24px" },
@@ -23,9 +33,7 @@ const ChangePasswordDetails = () => {
 						textAlign: "center",
 					}}
 					color="#343132"
-				>
-					{/* AN E-LABEL STAMP */}
-				</Typography>
+				></Typography>
 			</Box>
 			<Box
 				sx={{
@@ -45,7 +53,7 @@ const ChangePasswordDetails = () => {
 						textAlign: "center",
 					}}
 				>
-					Please enter your new password
+					{t("title")}
 				</Typography>
 				<Typography
 					sx={{
@@ -57,8 +65,7 @@ const ChangePasswordDetails = () => {
 						color: "#A0A9AB",
 					}}
 				>
-					Please enter a new password for your email Test@abceed.com and related
-					#Keywords below:
+					{t("desc")}
 				</Typography>
 			</Box>
 		</>
