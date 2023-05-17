@@ -35,16 +35,16 @@ const VerificationPage = () => {
 		<>
 			<Head>
 				<title>{t("meta_title")}</title>
-				<meta name='description' content='' />
-				<meta name='keyword' content='' />
-				<meta property='og:image' content='' />
-				<link rel='icon' href='/images/logo.svg' />
+				<meta name="description" content="" />
+				<meta name="keyword" content="" />
+				<meta property="og:image" content="" />
+				<link rel="icon" href="/images/logo.svg" />
 			</Head>
 			<Layout>
 				<Grid
 					sx={{
 						width: "100%",
-						height: "100%",
+						height: { xs: "90%", md: "100%" },
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
@@ -58,7 +58,7 @@ const VerificationPage = () => {
 							display: "flex",
 							flexDirection: "column",
 							alignItems: "center",
-							justifyContent: "space-around",
+							justifyContent: "space-evenly",
 							position: "relative",
 							marginY: {
 								xs: "4rem",
@@ -68,7 +68,7 @@ const VerificationPage = () => {
 							},
 							paddingY: "1rem",
 						}}
-						className='VerificationPageCenter'
+						className="VerificationPageCenter"
 					>
 						<Box
 							sx={{
@@ -80,9 +80,9 @@ const VerificationPage = () => {
 							}}
 						>
 							<Image
-								src='/icons/message.svg'
-								alt='View On Website Icon message'
-								title='View On Website Icon message'
+								src="/icons/message.svg"
+								alt="View On Website Icon message"
+								title="View On Website Icon message"
 								height={78}
 								width={78}
 							/>
@@ -106,7 +106,7 @@ const VerificationPage = () => {
 									xs: "100%",
 									sm: "60%",
 									md: "90%",
-									xl: "60%",
+									xl: "70%",
 								},
 								display: "flex",
 								flexDirection: "column",
@@ -121,15 +121,12 @@ const VerificationPage = () => {
 									color: "#A0A9AB",
 									lineHeight: "28px",
 									textAlign: "center",
-									marginY: "1rem",
+									marginBottom: "2rem",
 									paddingX: ".5rem",
 								}}
 							>
-								Enter the authenrication code we sent to Your
-								email{" "}
-								{router.query.newUser
-									? router.query.newUser
-									: user?.email}{" "}
+								Enter the authenrication code we sent to Your email{" "}
+								{router.query.newUser ? router.query.newUser : user?.email}{" "}
 								below:
 								{t("desc")}
 							</Typography>
@@ -146,7 +143,7 @@ const VerificationPage = () => {
 									value={otp}
 									onChange={handleChange}
 									length={6}
-									className='myClassName '
+									className="myClassName "
 									sx={{
 										".MuiOutlinedInput-root": {
 											borderRadius: "50%",
@@ -199,7 +196,7 @@ const VerificationPage = () => {
 									md: "absolute",
 									xl: "absolute",
 								},
-								bottom: { xs: "0rem", md: "1rem", xl: "1rem" },
+								bottom: { xs: "1rem", md: "1rem", xl: "1rem" },
 								right: { xs: "", md: "-5rem", xl: "-5rem" },
 							}}
 						>
@@ -230,7 +227,7 @@ const VerificationPage = () => {
 										justifyContent: "space-around",
 									}}
 									onClick={() => router.push("/payment")}
-									type='submit'
+									type="submit"
 									title={`${t("button")}`}
 								>
 									<Typography

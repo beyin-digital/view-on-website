@@ -14,7 +14,7 @@ import TextAndButton from "./TextAndButton";
 import { BackgroundImageSlider } from "./BackgroundImage";
 import { useRouter } from "next/router";
 
-const SliderDesktop = ({ onClick }: any) => {
+const SliderDesktop = ({ onClick, selectedImage }: any) => {
 	const { locale } = useRouter();
 
 	return (
@@ -30,7 +30,7 @@ const SliderDesktop = ({ onClick }: any) => {
 				sx={{
 					maxWidth: "100%",
 					margin: "auto",
-					height: "100%",
+					height: { xs: "", md: "89vh" },
 					display: "flex",
 					flexDirection: "column",
 					justifyContent: "space-between",
@@ -61,8 +61,9 @@ const SliderDesktop = ({ onClick }: any) => {
 							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
 							transform: { xs: "", md: "", xl: "skew(-16deg, 0deg)" },
-							overflow: { xs: "", md: "hidden", xl: "hidden" },
+							overflow: { xs: "hidden", md: "hidden", xl: "hidden" },
 							paddingY: "2rem",
+							marginTop: { xs: "4rem", md: "0" },
 						}}
 					>
 						<>
@@ -89,8 +90,9 @@ const SliderDesktop = ({ onClick }: any) => {
 										}}
 									>
 										{/* text top layout */}
-										<HeaderLayout /> {/* slider swipre */}
-										<SwiperSlider />
+										<HeaderLayout selectedImage={selectedImage} />{" "}
+										{/* slider swipre */}
+										<SwiperSlider swiper="" />
 										{/* footer layout And Button Reserve   */}
 										<FooterLayout />
 									</Box>
@@ -107,9 +109,9 @@ const SliderDesktop = ({ onClick }: any) => {
 										}}
 									>
 										{/* text top layout */}
-										<HeaderLayout />
+										<HeaderLayout selectedImage={selectedImage} />
 										{/* slider swipre */}
-										<SwiperSlider />
+										<SwiperSlider swiper="" />
 										{/* footer layout And Button Reserve   */}
 										<FooterLayout />
 									</Box>

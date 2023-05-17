@@ -8,11 +8,15 @@ const HomeForm = () => {
 
 	const router = useRouter();
 	const [hashtag, setHashtag] = useState("");
+	const [isCursorVisible, setIsCursorVisible] = useState(true);
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		router.push(`/subscribe/${hashtag}`);
+		const { value } = e.target;
+		setIsCursorVisible(value === "");
 	};
+
 	return (
 		<>
 			<Box
@@ -66,6 +70,12 @@ const HomeForm = () => {
 						<OutlinedInput
 							value={hashtag}
 							onChange={(e) => setHashtag(e.target.value)}
+							inputProps={{
+								autoComplete: "off",
+								spellCheck: false,
+							}}
+							// onChange={handleInputChange}
+							style={{ caretColor: isCursorVisible ? "auto" : "transparent" }}
 							sx={{
 								width: "100%",
 								height: { xs: "45px", md: "65px" },

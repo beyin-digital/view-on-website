@@ -13,16 +13,24 @@ import SwiperCore, {
 	Navigation,
 	Thumbs,
 } from "swiper";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
-import Slid from "./Slid";
 import "swiper/swiper-bundle.min.css";
 
-const SwiperSlider = () => {
+import SwiperLabel from "./SwiperLabel";
+
+SwiperCore.use([Navigation, Thumbs]);
+
+type ReactIdSwiperRef = {
+	swiper: any;
+};
+
+const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
 	const { t } = useTranslation("slider");
 	const [isVertical, setIsVertical] = useState(true);
-	const thumbsSwiper = useRef<SwiperCore>();
-	const images = [
+	const [sliderValue, setSliderValue] = useState(0); // حالة لتخزين قيمة السلايدر الأول
+
+	const keywords = [
 		"a",
 		"b",
 		"c",
@@ -50,6 +58,16 @@ const SwiperSlider = () => {
 		"y",
 		"z",
 	];
+	const [selectedKeyword, setSelectedKeyword] = useState(keywords[0]); // حالة لتخزين الصورة المحددة
+
+	const swiperRef = useRef<ReactIdSwiperRef>(null);
+	const handleSlideChange = (swiper: SwiperCore) => {
+		if (swiperRef.current) {
+			const swiperInstance = swiperRef.current.swiper;
+			const currentIndex = swiperInstance.realIndex;
+			setSelectedKeyword(keywords[currentIndex]);
+		}
+	};
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -66,22 +84,23 @@ const SwiperSlider = () => {
 			window.removeEventListener("resize", handleResize);
 		};
 	}, []);
+
 	return (
 		<>
 			<Box
 				sx={{
 					height: {
 						xs: "100%",
-						sm: "300px",
+						sm: "400px",
 						md: "250px",
 						xl: "250px",
 					},
 					width: "100%",
-					maxWidth: "100%",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					background: "#ffffff00",
+					background: "transparent",
+					flexDirection: { xs: "column-reverse", md: "row" },
 				}}
 			>
 				<Swiper
@@ -98,9 +117,10 @@ const SwiperSlider = () => {
 						slideShadows: false,
 					}}
 					loop={true}
-					spaceBetween={30}
+					spaceBetween={3}
 					modules={[EffectCoverflow, Pagination, Thumbs]}
-					thumbs={{ swiper: thumbsSwiper.current }}
+					onSlideChange={handleSlideChange}
+					ref={swiperRef}
 					className="swiper_container"
 					pagination={{
 						type: "fraction",
@@ -117,12 +137,13 @@ const SwiperSlider = () => {
 						},
 						clickable: true,
 					}}
-					autoplay={{ delay: 4000, disableOnInteraction: false }} // تحديد فترة التأخير بين كل انتقال					direction={isVertical ? "vertical" : "horizontal"}
+					autoplay={{ delay: 4000, disableOnInteraction: false }}
 					style={{
-						background: "#ffffff00",
+						background: "transparent",
+						position: "relative",
 					}}
 				>
-					{images.map((item, index) => (
+					{keywords.map((keyword, index) => (
 						<SwiperSlide
 							key={index}
 							style={{
@@ -131,18 +152,16 @@ const SwiperSlider = () => {
 								display: "flex",
 								alignItems: "center",
 								justifyContent: "center",
-
-								zIndex: "9",
-								position: "relative",
 							}}
 						>
 							<img
 								src="/images/card.png"
 								style={{
-									width: "auto",
+									width: "800px",
 								}}
 								className="ImageSlider"
 							/>
+
 							<Box
 								sx={{
 									position: "absolute",
@@ -164,7 +183,7 @@ const SwiperSlider = () => {
 										marginY: ".2rem",
 									}}
 								>
-									#{item}
+									#{keyword}
 								</Typography>
 								<Typography
 									sx={{
@@ -186,38 +205,7 @@ const SwiperSlider = () => {
 						</SwiperSlide>
 					))}
 				</Swiper>
-				{/* <Box
-					sx={{
-						position: "absolute",
-						top: "1rem",
-						right: "-1rem",
-						width: "300px",
-						overflow: "hidden",
-					}}
-				>
-					<Swiper
-						id="thumbs"
-						spaceBetween={10}
-						slidesPerView={1}
-						onSwiper={(swiper) => (thumbsSwiper.current = swiper)}
-					>
-						{images.map((item, index) => (
-							<SwiperSlide key={index}>
-								<Typography
-									sx={{
-										fontSize: "36px",
-										fontWeight: "600",
-										lineHeight: "70px",
-										color: "#31E716",
-										textTransform: "uppercase",
-									}}
-								>
-									#{item}
-								</Typography>
-							</SwiperSlide>
-						))}
-					</Swiper>
-				</Box> */}
+				<SwiperLabel selectedKeyword={selectedKeyword} />
 			</Box>
 		</>
 	);

@@ -79,7 +79,7 @@ iframe {
 
 /* Swiper Slider */
 .swiper-3d {
-	perspective: 380px !important;
+	perspective: 370px !important;
 }
 .swiper_container {
 	position: relative;
@@ -562,7 +562,7 @@ iframe {
 		/* transition: 0.3s opacity; */
 		/* transform: translate3d(0, 0, 0); */
 		z-index: 99999999;
-		bottom: 2.5rem !important;
+		bottom: -0.5rem !important;
 		font-size: 32px;
 		font-weight: 500;
 	}
@@ -618,6 +618,7 @@ iframe {
 	}
 	.swiper-pagination {
 		display: none;
+		/* position: inherit; */
 	}
 }
 @media screen and (max-width: 600px) {

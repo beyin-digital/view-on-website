@@ -21,7 +21,8 @@ const RightSide = () => {
 			sx={{
 				display: "flex",
 				width: "100%",
-				flexDirection: { xs: "column-reverse",sm:"row", md:"row" },
+				maxWidth: "100%",
+				flexDirection: { xs: "column-reverse", sm: "row", md: "row" },
 				alignItems: "center",
 			}}
 		>
@@ -37,71 +38,71 @@ const RightSide = () => {
 			>
 				{/* Check components */}
 				<>
-				{locale === "ar" ? (
-					<>
-						{check.map((item) => (
-							<Box
-								key={item.id}
-								sx={{
-									display: "flex",
-									alignItems: "center",
-									height: { xs: "30px", xl: "25px" },
-									flexDirection: "row-reverse",
-								}}
-							>
-								<CheckIcon fontSize="small" />
+					{locale === "ar" ? (
+						<>
+							{check.map((item) => (
 								<Box
+									key={item.id}
 									sx={{
-										paddingX: ".5rem",
+										display: "flex",
+										alignItems: "center",
+										height: { xs: "30px", xl: "25px" },
+										flexDirection: "row-reverse",
 									}}
 								>
-									<Typography
+									<CheckIcon fontSize="small" />
+									<Box
 										sx={{
-											fontSize: "16px",
-											fontWeight: "400",
-											lineHeight: "14px",
+											paddingX: ".5rem",
 										}}
 									>
-										{t(item.tKey)}
-									</Typography>
+										<Typography
+											sx={{
+												fontSize: "16px",
+												fontWeight: "400",
+												lineHeight: "14px",
+											}}
+										>
+											{t(item.tKey)}
+										</Typography>
+									</Box>
 								</Box>
-							</Box>
-						))}
-					</>
-				) : (
-					<>
-						{check.map((item) => (
-							<Box
-								key={item.id}
-								sx={{
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "center",
-									height: { xs: "30px", xl: "25px" },
-								}}
-							>
-								<CheckIcon fontSize="small" />
+							))}
+						</>
+					) : (
+						<>
+							{check.map((item) => (
 								<Box
+									key={item.id}
 									sx={{
-										width: "100%",
-										paddingX: ".5rem",
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "center",
+										height: { xs: "30px", xl: "25px" },
 									}}
 								>
-									<Typography
+									<CheckIcon fontSize="small" />
+									<Box
 										sx={{
-											fontSize: "16px",
-											fontWeight: "400",
-											lineHeight: "14px",
-											// textAlign:"right"
+											width: "100%",
+											paddingX: ".5rem",
 										}}
 									>
-										{t(item.tKey)}
-									</Typography>
+										<Typography
+											sx={{
+												fontSize: "16px",
+												fontWeight: "400",
+												lineHeight: "14px",
+												// textAlign:"right"
+											}}
+										>
+											{t(item.tKey)}
+										</Typography>
+									</Box>
 								</Box>
-							</Box>
-						))}
-					</>
-				)}
+							))}
+						</>
+					)}
 				</>
 			</Box>
 			{/*  */}

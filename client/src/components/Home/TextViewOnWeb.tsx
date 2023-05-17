@@ -1,14 +1,6 @@
 import { Box, Typography } from "@mui/material";
 
-const TextViewOnWeb = ({ foundLink }: { foundLink?: string }) => {
-	// check if link has http or https and remove it
-	const removeHttp = (link: string) => {
-		if (link.includes("https://")) {
-			return link.replace("https://", "");
-		}
-		return link.replace("http://", "");
-	};
-
+const TextViewOnWeb = () => {
 	return (
 		<>
 			<Box
@@ -24,7 +16,7 @@ const TextViewOnWeb = ({ foundLink }: { foundLink?: string }) => {
 					alignItems: "center",
 					justifyContent: "center",
 				}}
-				className='TextViewOnWebsite'
+				className="TextViewOnWebsite"
 			>
 				<Typography
 					sx={{
@@ -35,10 +27,10 @@ const TextViewOnWeb = ({ foundLink }: { foundLink?: string }) => {
 							xl: "50px",
 						},
 					}}
-					fontWeight='600'
-					color='#0090EC'
+					fontWeight="600"
+					color="#0090EC"
 				>
-					{foundLink ? removeHttp(foundLink) : "ViewOnWebsite.com"}
+					ViewOnWebsite.com
 				</Typography>
 			</Box>
 		</>

@@ -48,19 +48,16 @@ function MyApp(props: MyAppProps) {
 	const { locale } = useRouter();
 	const isRTL = locale === "ar";
 
-	const {
-		Component,
-		emotionCache = clientSideEmotionCache,
-		pageProps,
-	} = props;
+	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 	return (
 		<CacheProvider value={emotionCache}>
 			<Head>
-				<meta
-					name='viewport'
-					content='initial-scale=1, width=device-width'
+				<meta name="viewport" content="initial-scale=1, width=device-width" />
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link
+					href="https://fonts.googleapis.com/css2?family=Comforter&family=Finlandica:ital,wght@1,400;1,500;1,700&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500;600;700&family=Inter:wght@200;400;500;600;700;800;900&family=League+Spartan:wght@300;400;500;600&family=Neonderthaw&family=Poppins:wght@100;300;400;500;600;700;900&display=swap"
+					rel="stylesheet"
 				/>
-				<link rel='preconnect' href='https://fonts.googleapis.com' />
 			</Head>
 			<div dir={isRTL ? "rtl" : "ltr"}>
 				<QueryClientProvider client={queryClient}>

@@ -2,10 +2,15 @@
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
-import Slid from "../CenterLayout/Slid";
-
-const HeaderLayout = ({ num }: any) => {
+import Slid from "../CenterLayout/SwiperLabel";
+interface SecondComponentProps {
+	selectedImage: string;
+}
+const HeaderLayout: React.FC<SecondComponentProps> = ({ selectedImage }) => {
+	// Translation hook
 	const { t } = useTranslation("slider");
+
+	// Router hook
 	const { locale } = useRouter();
 
 	return (
@@ -15,6 +20,8 @@ const HeaderLayout = ({ num }: any) => {
 					width: "100%",
 				}}
 			>
+				{/* Conditionally render based on locale */}
+
 				{locale === "ar" ? (
 					<Box
 						sx={{
@@ -62,61 +69,20 @@ const HeaderLayout = ({ num }: any) => {
 							sx={{
 								position: "relative",
 								width: "200px",
-								// height:"200px"
+								height: "50px",
 							}}
-						>
-							<img
-								src="/images/cut-out-parallelogram.png"
-								alt=""
-								style={{
-									width: "230px",
-									height: "100px",
-								}}
-							/>
-							<Box
-								sx={{
-									position: "absolute",
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "center",
-									flexDirection: "column",
-									top: "0",
-									right: "0",
-									// marginX:"1rem"
-								}}
-							>
-								<Typography
-									sx={{
-										fontSize: "36px",
-										fontWeight: "600",
-										lineHeight: "70px",
-										color: "#31E716",
-									}}
-								>
-									#A
-								</Typography>
-								<Typography
-									sx={{
-										fontSize: "19px",
-										fontWeight: "600",
-										lineHeight: "13px",
-										color: "#0090EC",
-									}}
-								>
-									ViewOnWebsite.com
-								</Typography>
-							</Box>
-						</Box>
+						></Box>
 					</Box>
 				) : (
 					<Box
 						sx={{
 							display: "flex",
 							alignItems: "center",
-							justifyContent: "space-around",
+							justifyContent: "flex-start",
 							height: { xs: "100%", md: "100px", xl: "100px" },
-							flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
+							flexDirection: { xs: "column", md: "row", xl: "row" },
 							marginTop: { xs: "1rem", md: "0", xl: "0" },
+							marginBottom: { xs: "0rem", md: "0", xl: "0rem" },
 						}}
 					>
 						<Box>
@@ -150,53 +116,9 @@ const HeaderLayout = ({ num }: any) => {
 							sx={{
 								position: "relative",
 								width: "200px",
+								height: "50px",
 							}}
-						>
-							<img
-								src="/images/cut-out-parallelogram.png"
-								alt=""
-								style={{
-									width: "230px",
-									height: "100px",
-								}}
-							/>
-							<Box
-								sx={{
-									position: "absolute",
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "center",
-									flexDirection: "column",
-									top: "0",
-									right: "0",
-								}}
-							>
-								<>
-									<Typography
-										sx={{
-											fontSize: "36px",
-											fontWeight: "600",
-											lineHeight: "70px",
-											color: "#31E716",
-											height: "70px",
-										}}
-									>
-										#A
-									</Typography>
-									{/* <Slid num={num} /> */}
-									<Typography
-										sx={{
-											fontSize: "19px",
-											fontWeight: "600",
-											lineHeight: "13px",
-											color: "#0090EC",
-										}}
-									>
-										ViewOnWebsite.com
-									</Typography>
-								</>
-							</Box>
-						</Box>
+						></Box>
 					</Box>
 				)}
 			</Box>

@@ -16,6 +16,7 @@ import {
 	FiArrowUpRight,
 	FiArrowDownRight,
 	FiArrowDownLeft,
+	FiArrowUpLeft,
 } from "react-icons/fi";
 import CheckIcon from "@mui/icons-material/Check";
 import { AiOutlineCheck } from "react-icons/ai";
@@ -37,19 +38,20 @@ const SubscribePage: NextPage = () => {
 	const { locale } = useRouter();
 
 	const descCardOne = [
-		{ id: 1, desc: "Triple Hashtag Keyword" },
-		{ id: 2, desc: "Triple Hashtag Keyword" },
-		{ id: 2, desc: "Triple Hashtag Keyword" },
+		{ id: 1, desc: "Triple Hashtag Keyword", tKey: "box_one_one" },
+		{ id: 2, desc: "Triple Hashtag Keyword", tKey: "box_one_two" },
+		{ id: 2, desc: "Triple Hashtag Keyword", tKey: "box_one_three" },
 	];
 	const descCardTwo = [
-		{ id: 11, desc: "Triple Hashtag Keyword" },
-		{ id: 22, desc: "Triple Hashtag Keyword" },
-		{ id: 23, desc: "Triple Hashtag Keyword" },
+		{ id: 11, desc: "Triple Hashtag Keyword", tKey: "box_two_one" },
+		{ id: 22, desc: "Triple Hashtag Keyword", tKey: "box_two_two" },
+		{ id: 23, desc: "Triple Hashtag Keyword", tKey: "box_two_three" },
+		// { id: 244, desc: "Triple Hashtag Keyword", tKey: "box_two_four" },
 	];
 	const descCardThree = [
-		{ id: 111, desc: "Triple Hashtag Keyword" },
-		{ id: 222, desc: "Triple Hashtag Keyword" },
-		{ id: 233, desc: "Triple Hashtag Keyword" },
+		{ id: 111, desc: "Triple Hashtag Keyword", tKey: "box_three_one" },
+		{ id: 222, desc: "Triple Hashtag Keyword", tKey: "box_three_two" },
+		{ id: 233, desc: "Triple Hashtag Keyword", tKey: "box_three_three" },
 	];
 
 	const checks = [
@@ -60,8 +62,8 @@ const SubscribePage: NextPage = () => {
 	];
 
 	const cash = [
-		{ id: 1, num: "10K", title: "One time payment " },
-		{ id: 1, num: 3.65, title: "Yearly renewal" },
+		{ id: 1, num: "100K", title: "One time payment ",tKey:"cash_one" },
+		{ id: 1, num: "3.65", title: "Yearly renewal",tKey:"cash_two" },
 	];
 
 	const [values, setValues] = useState({
@@ -102,7 +104,7 @@ const SubscribePage: NextPage = () => {
 								src="/images/swirl.svg"
 								style={{
 									position: "absolute",
-									top: "-102rem",
+									top: "-49rem",
 								}}
 							/>
 						</>
@@ -136,10 +138,10 @@ const SubscribePage: NextPage = () => {
 									marginLeft: {
 										xs: "0px",
 										sm: "0px",
-										md: "140px",
-										xl: "160px",
+										md: "10px",
+										xl: "130px",
 									},
-									paddingX: { xs: ".5rem", sm: "1rem", md: "2rem", xl: "rem" },
+									paddingX: { xs: ".5rem", sm: "1rem", md: "1rem", xl: "rem" },
 									height: "100%",
 									transform: {
 										xs: "skewX(0deg)",
@@ -149,6 +151,7 @@ const SubscribePage: NextPage = () => {
 									display: "flex",
 									alignItems: "center",
 									justifyContent: "center",
+									width: { md: "80%", xl: "70%" },
 								}}
 								className="LayoutTagsPadding"
 							>
@@ -205,7 +208,7 @@ const SubscribePage: NextPage = () => {
 												<OutlinedInput
 													sx={{
 														width: "100%",
-														height: { xs: "63px", md: "87px", xl: "97px" },
+														height: { xs: "63px", md: "80px", xl: "80px" },
 														fontSize: {
 															xs: "18px",
 															sm: "22px",
@@ -215,7 +218,7 @@ const SubscribePage: NextPage = () => {
 														lineHeight: "28px",
 														background: "#FBFBFB",
 														borderRadius: "20px",
-														border: "1px solid ",
+														border: "1px solid #E3E3E3",
 														".MuiOutlinedInput-notchedOutline": {
 															border: "0",
 															padding: "9px",
@@ -229,7 +232,11 @@ const SubscribePage: NextPage = () => {
 													placeholder={`${t("input_hashtag_one")}`}
 													startAdornment={<BsHash color="#31E716" size={90} />}
 													endAdornment={
-														<FiArrowUpRight color="#343132" size={90} />
+														locale === "ar" ? (
+															<FiArrowUpLeft color="#343132" size={90} />
+														) : (
+															<FiArrowUpRight color="#343132" size={90} />
+														)
 													}
 												/>
 												{/* <FormHelperText id="outlined-weight-helper-text"> */}
@@ -331,7 +338,7 @@ const SubscribePage: NextPage = () => {
 															xl: "40px",
 														},
 														lineHeight: { xs: "22px", xl: "30px" },
-														marginY: ".5rem",
+														marginBottom: "2rem",
 													}}
 												>
 													{t("text_input_sublink")}
@@ -339,7 +346,7 @@ const SubscribePage: NextPage = () => {
 												<OutlinedInput
 													sx={{
 														width: "100%",
-														height: { xs: "63px", md: "87px", xl: "97px" },
+														height: { xs: "63px", md: "80px", xl: "80px" },
 														fontSize: {
 															xs: "18px",
 															sm: "22px",
@@ -351,6 +358,14 @@ const SubscribePage: NextPage = () => {
 														background: "#FBFBFB",
 														paddingX: "10px",
 														boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.05)",
+														border: "1px solid #E3E3E3",
+														".MuiOutlinedInput-notchedOutline": {
+															border: "0",
+															padding: "9px",
+														},
+														"&:hover > .MuiOutlinedInput-notchedOutline": {
+															border: "0",
+														},
 													}}
 													placeholder={`${t("input_hashtag_two")}`}
 												/>
@@ -373,8 +388,8 @@ const SubscribePage: NextPage = () => {
 											>
 												<Box
 													sx={{
-														height: { xs: "100%", md: "100px", xl: "100px" },
-														width: { xs: "100%", xl: "70%" },
+														height: { xs: "100%", md: "100%", xl: "100px" },
+														width: { xs: "100%", xl: "90%" },
 														marginY: ".8rem",
 														display: "flex",
 														justifyContent: "space-around",
@@ -388,7 +403,7 @@ const SubscribePage: NextPage = () => {
 												>
 													<Box
 														sx={{
-															width: { xs: "100%", md: "50%", xl: "40%" },
+															width: { xs: "100%", md: "100%", xl: "50%" },
 															display: "flex",
 															height: "100%",
 															justifyContent: "space-between",
@@ -400,7 +415,7 @@ const SubscribePage: NextPage = () => {
 															<Box
 																key={item.id}
 																sx={{
-																	width: { xs: "100%", md: "45%", xl: "60%" },
+																	width: { xs: "100%", md: "100%", xl: "60%" },
 																	height: "100%",
 																	display: "flex",
 																	alignItems: "center",
@@ -422,7 +437,7 @@ const SubscribePage: NextPage = () => {
 																		textTransform: "uppercase",
 																	}}
 																>
-																	$ {item.num}
+																	${item.num}
 																</Typography>
 																<Typography
 																	sx={{
@@ -438,14 +453,14 @@ const SubscribePage: NextPage = () => {
 																		textTransform: "capitalize",
 																	}}
 																>
-																	{item.title}
+																	{t(item.tKey)}
 																</Typography>
 															</Box>
 														))}
 													</Box>
 													<Box
 														sx={{
-															width: { xs: "100%", md: "50%", xl: "38%" },
+															width: { xs: "100%", md: "50%", xl: "40%" },
 															height: "100%",
 															display: "flex",
 															alignItems: "center",
@@ -478,6 +493,7 @@ const SubscribePage: NextPage = () => {
 																		sx={{
 																			width: "100%",
 																			paddingX: ".5rem",
+																			paddingY: ".2rem",
 																		}}
 																	>
 																		<Typography
@@ -566,7 +582,7 @@ const SubscribePage: NextPage = () => {
 							>
 								<Box
 									sx={{
-										width: { xs: "90%", sm: "314px", md: "314px", xl: "314px" },
+										width: { xs: "90%", sm: "314px", md: "314px", xl: "350px" },
 										height: "467",
 										display: "flex",
 										alignItems: "center",
@@ -597,7 +613,7 @@ const SubscribePage: NextPage = () => {
 												color: "#58696D",
 											}}
 										>
-											Monthly Package
+											{t("box_one_title")}
 										</Typography>
 									</Box>
 									{/* card price */}
@@ -650,9 +666,10 @@ const SubscribePage: NextPage = () => {
 														fontSize: { xs: "15px", md: "18px", xl: "20px" },
 														fontWeight: "400",
 														marginX: { xs: ".1rem", md: "1rem" },
+														width: "90%",
 													}}
 												>
-													{item.desc}
+													{t(item.tKey)}
 												</Typography>
 											</Box>
 										))}
@@ -708,7 +725,7 @@ const SubscribePage: NextPage = () => {
 
 								<Box
 									sx={{
-										width: { xs: "90%", sm: "372px", md: "372px", xl: "371px" },
+										width: { xs: "90%", sm: "372px", md: "372px", xl: "400px" },
 										height: "551px",
 										display: "flex",
 										alignItems: "center",
@@ -717,12 +734,13 @@ const SubscribePage: NextPage = () => {
 										border: "1px solid #FBFBFB",
 										borderRadius: "28px",
 										background:
-											" linear-gradient(270deg, rgba(0, 144, 236, 0.1) 0%, rgba(49, 231, 22, 0.1) 100%)",
+											"radial-gradient(163.29% 99.69% at 90.76% 58.8%, rgba(0, 144, 236, 0.1) 0%, rgba(0, 145, 237, 0) 100%)",
+										// " linear-gradient(270deg, rgba(0, 144, 236, 0.1) 0%, rgba(49, 231, 22, 0.1) 100%)",
 										backdropFilter: "blur(117px)",
 										boxShadow: "0px 72px 86px rgba(0, 0, 0, 0.07)",
 										marginY: "1rem",
 										marginX: "1rem",
-										paddingX: "1rem",
+										paddingX: ".2rem",
 									}}
 								>
 									{/* card Header */}
@@ -743,7 +761,7 @@ const SubscribePage: NextPage = () => {
 												color: "#58696D",
 											}}
 										>
-											Yearly Package
+											{t("box_two_title")}
 										</Typography>
 									</Box>
 									{/* card price */}
@@ -796,9 +814,10 @@ const SubscribePage: NextPage = () => {
 														fontSize: { xs: "15px", md: "18px", xl: "20px" },
 														fontWeight: "400",
 														marginX: { xs: ".1rem", md: "1rem" },
+														width: "90%",
 													}}
 												>
-													{item.desc}
+													{t(item.tKey)}
 												</Typography>
 											</Box>
 										))}
@@ -854,7 +873,7 @@ const SubscribePage: NextPage = () => {
 
 								<Box
 									sx={{
-										width: { xs: "90%", sm: "314px", md: "314px", xl: "314px" },
+										width: { xs: "90%", sm: "314px", md: "314px", xl: "350px" },
 										height: "467",
 										display: "flex",
 										alignItems: "center",
@@ -885,7 +904,7 @@ const SubscribePage: NextPage = () => {
 												color: "#58696D",
 											}}
 										>
-											6 Months Package
+											{t("box_three_title")}
 										</Typography>
 									</Box>
 									{/* card price */}
@@ -938,9 +957,10 @@ const SubscribePage: NextPage = () => {
 														fontSize: { xs: "15px", md: "18px", xl: "20px" },
 														fontWeight: "400",
 														marginX: { xs: ".1rem", md: "1rem" },
+														width: "90%",
 													}}
 												>
-													{item.desc}
+													{t(item.tKey)}
 												</Typography>
 											</Box>
 										))}

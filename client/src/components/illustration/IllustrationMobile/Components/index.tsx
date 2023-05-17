@@ -90,7 +90,7 @@ export const HeaderLayout = () => {
 					<Box
 						sx={{
 							height: "50px",
-							width: {xs:"70%",sm:"85%"},
+							width: { xs: "70%", sm: "85%" },
 							background: " linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 							borderRadius: "7px",
 							display: "flex",
@@ -546,7 +546,8 @@ export const ButtonStyle = () => {
 					}}
 				>
 					<Link
-						href=""
+						href="/example"
+						title="Example View On Website Page"
 						sx={{
 							textDecoration: "none",
 						}}

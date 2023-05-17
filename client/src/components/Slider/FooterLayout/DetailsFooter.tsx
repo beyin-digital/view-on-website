@@ -119,11 +119,14 @@ const DetailsFooter = () => {
 										justifyContent: "space-around",
 										flexDirection: "row-reverse",
 										alignItems: "center",
+										"&:hover": {
+											background: "#31E716",
+											color: "#343132",
+										},
 									}}
 								>
 									<Typography
 										sx={{
-											fontFamily: "Helvetica Neue",
 											letterSpacing: "0.02em",
 											fontSize: "32px",
 											fontWeight: 400,
@@ -157,7 +160,6 @@ const DetailsFooter = () => {
 								>
 									<Typography
 										sx={{
-											fontFamily: "Helvetica Neue",
 											letterSpacing: "0.02em",
 											fontSize: "32px",
 											fontWeight: 400,
@@ -186,6 +188,8 @@ const DetailsFooter = () => {
 						flexDirection: { xs: "column-reverse", md: "row" },
 						justifyContent: "center",
 						marginTop: { xs: "3rem", sm: "0", xl: "0" },
+						zIndex: "9999999999",
+						position: "relative",
 					}}
 				>
 					{/* Right Footer AR / EN */}
@@ -284,11 +288,14 @@ const DetailsFooter = () => {
 										justifyContent: "space-around",
 										flexDirection: "row-reverse",
 										alignItems: "center",
+										"&:hover": {
+											background: "#31E716",
+											color: "#343132",
+										},
 									}}
 								>
 									<Typography
 										sx={{
-											fontFamily: "Helvetica Neue",
 											letterSpacing: "0.02em",
 											fontSize: "32px",
 											fontWeight: 400,
@@ -322,7 +329,6 @@ const DetailsFooter = () => {
 								>
 									<Typography
 										sx={{
-											fontFamily: "Helvetica Neue",
 											letterSpacing: "0.02em",
 											fontSize: "32px",
 											fontWeight: 400,

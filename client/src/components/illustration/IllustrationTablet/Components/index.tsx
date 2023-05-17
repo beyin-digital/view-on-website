@@ -101,7 +101,7 @@ export const HeaderLayoutMobile = () => {
 							top: "-5rem",
 							width: "300px",
 							right: "16rem",
-							zIndex:"-1"
+							zIndex: "-1",
 						}}
 					/>
 					<img
@@ -575,7 +575,8 @@ export const ButtonStyleMobile = () => {
 					}}
 				>
 					<Link
-						href=""
+						href="/example"
+						title="Example View On Website Page"
 						sx={{
 							textDecoration: "none",
 						}}

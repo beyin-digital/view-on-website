@@ -139,7 +139,6 @@ export const HeaderLayoutDesktop = () => {
 					<Box
 						sx={{
 							width: "100%",
-							border: "1px solid red",
 							height: "100%",
 						}}
 					>
@@ -541,7 +540,8 @@ export const ButtonStyleDesktop = () => {
 					}}
 				>
 					<Link
-						href=""
+						href="/example"
+						title="Example View On Website Page"
 						sx={{
 							textDecoration: "none",
 						}}
@@ -561,8 +561,8 @@ export const ButtonStyleDesktop = () => {
 
 					{locale === "ar" ? (
 						<svg
-							width="38"
-							height="38"
+							width="26"
+							height="26"
 							viewBox="0 0 38 38"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"

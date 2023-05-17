@@ -128,34 +128,44 @@ const Footer = ({ onClick }: any) => {
 							justifyContent: "end",
 						}}
 					>
-						<Box
-							sx={{
-								border: "1px solid #343132",
-								borderRadius: "34px",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-around",
-								width: "143px",
-								margin: "auto .8rem",
+						<Link
+							href="/illustration"
+							title="View On Website Illustration Page"
+							style={{
+								textDecoration: "none",
+								color: "inherit",
 							}}
 						>
-							<Typography
-								fontSize="20px"
-								fontWeight="400"
-								lineHeight="32px"
-								textAlign="center"
-								textTransform={"capitalize"}
+							<Box
+								sx={{
+									border: "1px solid #343132",
+									borderRadius: "34px",
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "space-around",
+									width: "143px",
+									margin: "auto .7rem",
+								}}
 							>
-								{t("footer_learn")}
-							</Typography>
-							<Image
-								src="/icons/i.svg"
-								alt="View On Website Icon more"
-								title="View On Website Icon more"
-								width={20}
-								height={20}
-							/>
-						</Box>
+								<Typography
+									fontSize="20px"
+									fontWeight="400"
+									lineHeight="32px"
+									textAlign="center"
+									textTransform={"capitalize"}
+								>
+									{t("footer_learn")}
+								</Typography>
+								<Image
+									src="/icons/i.svg"
+									alt="View On Website Icon more"
+									title="View On Website Icon more"
+									width={20}
+									height={20}
+								/>
+							</Box>
+						</Link>
+
 						{links.map((item) => (
 							<Link
 								key={item.id}
