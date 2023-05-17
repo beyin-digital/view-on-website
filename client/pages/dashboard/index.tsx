@@ -16,6 +16,9 @@ import RootLayout from "@/components/Dashboard/Layout";
 import Head from "next/head";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/contexts/userContext";
+import { GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
 
 const Item = styled(Paper)(({ theme }) => ({
 	backgroundColor: "rgba(251, 251, 251, 0.8)",
@@ -76,6 +79,7 @@ const viewsTimeGraphData = [
 	},
 ];
 const DashboardHomePage = () => {
+	const { t } = useTranslation("home");
 	const router = useRouter();
 	const { updateUser, user, token } = useContext(UserContext);
 
@@ -431,6 +435,17 @@ const DashboardHomePage = () => {
 			</RootLayout>
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"login",
+			])),
+		},
+	};
 };
 
 export default DashboardHomePage;

@@ -1,43 +1,18 @@
-<<<<<<< HEAD
-import {
-	Typography,
-	Box,
-	OutlinedInput,
-	InputAdornment,
-	IconButton,
-} from "@mui/material";
-=======
 import { Typography, Box, OutlinedInput, Button } from "@mui/material";
->>>>>>> origin/feat-last-finish-pages
 import Link from "next/link";
 import { useRouter } from "next/router";
-<<<<<<< HEAD
-import { useContext, useState } from "react";
-import { UserContext } from "@/contexts/userContext";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-
-const SignupForm = () => {
-	const { values, handleChange, handleSignup } = useContext(UserContext);
-
-	const [showPassword, setShowPassword] = useState(false);
-
-	const handleClickShowPassword = () => setShowPassword(show => !show);
-
-	const handleMouseDownPassword = (
-		event: React.MouseEvent<HTMLButtonElement>
-	) => {
-		event.preventDefault();
-	};
-=======
 import { useTranslation } from "next-i18next";
 import { IconsStyle } from "../Button";
+import { UserContext } from "@/contexts/userContext";
+import { useContext } from "react";
 
 const SignupForm = () => {
 	const { t } = useTranslation("signup");
 	const router = useRouter();
->>>>>>> origin/feat-last-finish-pages
+
+	const { values } = useContext(UserContext);
 	return (
-		<form onSubmit={handleSignup}>
+		<form>
 			<Box
 				sx={{
 					width: "100%",
@@ -78,12 +53,7 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: ".2rem",
 						}}
-<<<<<<< HEAD
-						placeholder='Full name'
-						onChange={handleChange}
-=======
 						placeholder={`${t("form_name")}`}
->>>>>>> origin/feat-last-finish-pages
 					/>
 					<OutlinedInput
 						value={values.password}
@@ -98,29 +68,7 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: ".2rem",
 						}}
-<<<<<<< HEAD
-						onChange={handleChange}
-						placeholder='Password'
-						type={showPassword ? "text" : "password"}
-						endAdornment={
-							<InputAdornment position='end'>
-								<IconButton
-									aria-label='toggle password visibility'
-									onClick={handleClickShowPassword}
-									onMouseDown={handleMouseDownPassword}
-									edge='end'
-								>
-									{showPassword ? (
-										<VisibilityOff />
-									) : (
-										<Visibility />
-									)}
-								</IconButton>
-							</InputAdornment>
-						}
-=======
 						placeholder={`${t("form_password")}`}
->>>>>>> origin/feat-last-finish-pages
 					/>
 				</Box>
 				<Box
@@ -149,12 +97,7 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: ".2rem",
 						}}
-<<<<<<< HEAD
-						onChange={handleChange}
-						placeholder='E-mail'
-=======
 						placeholder={`${t("form_email")}`}
->>>>>>> origin/feat-last-finish-pages
 					/>
 					<OutlinedInput
 						sx={{
@@ -167,29 +110,7 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: ".2rem",
 						}}
-<<<<<<< HEAD
-						onChange={handleChange}
-						placeholder='Confirm Password'
-						type={showPassword ? "text" : "password"}
-						endAdornment={
-							<InputAdornment position='end'>
-								<IconButton
-									aria-label='toggle password visibility'
-									onClick={handleClickShowPassword}
-									onMouseDown={handleMouseDownPassword}
-									edge='end'
-								>
-									{showPassword ? (
-										<VisibilityOff />
-									) : (
-										<Visibility />
-									)}
-								</IconButton>
-							</InputAdornment>
-						}
-=======
 						placeholder={`${t("form_confirm")}`}
->>>>>>> origin/feat-last-finish-pages
 					/>
 				</Box>
 			</Box>
@@ -201,7 +122,11 @@ const SignupForm = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
-					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
+					flexDirection: {
+						xs: "column-reverse",
+						md: "row",
+						xl: "row",
+					},
 					marginBottom: { xs: "10rem", md: "5rem", xl: "5rem" },
 					marginTop: { xs: "1rem", md: "2rem", xl: "2rem" },
 					marginY: { xs: "1rem", md: "0", xl: "0" },
@@ -214,14 +139,10 @@ const SignupForm = () => {
 						marginY: { xs: ".5rem", md: "", xl: "" },
 					}}
 				>
-<<<<<<< HEAD
-					Already have an account?
-=======
 					{t("sign_up_account")}
 
->>>>>>> origin/feat-last-finish-pages
 					<Link
-						href="/login"
+						href='/login'
 						style={{
 							textDecoration: "none",
 							color: "#0090EC",
@@ -230,9 +151,6 @@ const SignupForm = () => {
 						{t("sign_in")}
 					</Link>
 				</Typography>
-<<<<<<< HEAD
-				<ButtonLogin name='next' type='submit' />
-=======
 
 				<Box
 					sx={{
@@ -257,13 +175,17 @@ const SignupForm = () => {
 							justifyContent: "space-around",
 						}}
 						onClick={() => router.push("verification")}
-						type="submit"
+						type='submit'
 						title={`${t("sign_up_button")}`}
 					>
 						<Typography
 							sx={{
 								letterSpacing: "0.02em",
-								fontSize: { xs: "20px", md: "25px", xl: "32px" },
+								fontSize: {
+									xs: "20px",
+									md: "25px",
+									xl: "32px",
+								},
 								fontWeight: 400,
 								lineHeight: "40px",
 								color: "#FBFBFB",
@@ -275,7 +197,6 @@ const SignupForm = () => {
 						<IconsStyle />
 					</Button>
 				</Box>
->>>>>>> origin/feat-last-finish-pages
 			</Box>
 		</form>
 	);
