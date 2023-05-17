@@ -13,6 +13,7 @@ export interface IUserContext {
 	values: {
 		identifier: string;
 		password: string;
+		confirmPassword: string;
 		fullName: string;
 		email: string;
 	};
@@ -29,7 +30,13 @@ export const UserContext = createContext<IUserContext>({
 	token: null,
 	refreshToken: null,
 	user: null,
-	values: { identifier: "", password: "", fullName: "", email: "" },
+	values: {
+		identifier: "",
+		password: "",
+		fullName: "",
+		email: "",
+		confirmPassword: "",
+	},
 	handleChange: (
 		e: React.ChangeEvent<
 			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -50,6 +57,7 @@ export const UserProvider = ({ children }: any) => {
 		email: "",
 		fullName: "",
 		password: "",
+		confirmPassword: "",
 	});
 
 	const emailDebounceValue = useDebounce(values.email, 500);
@@ -79,7 +87,6 @@ export const UserProvider = ({ children }: any) => {
 			if (res.status >= 400) {
 				throw new Error();
 			}
-			console.log(data);
 			if (data.user.twoFactorAuth) {
 				setUser(data.user);
 				router.push("/verification");
@@ -96,6 +103,7 @@ export const UserProvider = ({ children }: any) => {
 				email: "",
 				fullName: "",
 				password: "",
+				confirmPassword: "",
 			});
 			router.push("/dashboard");
 		} catch (err) {
@@ -128,6 +136,7 @@ export const UserProvider = ({ children }: any) => {
 				email: "",
 				fullName: "",
 				password: "",
+				confirmPassword: "",
 			});
 			toast.success("Email verified successfully", {
 				position: "top-right",
@@ -156,7 +165,6 @@ export const UserProvider = ({ children }: any) => {
 			if (res.status >= 400) {
 				throw new Error();
 			}
-			console.log(data);
 			router.push(`/verification?newUser=${values.email}`);
 
 			setValues({
@@ -164,10 +172,11 @@ export const UserProvider = ({ children }: any) => {
 				email: "",
 				fullName: "",
 				password: "",
+				confirmPassword: "",
 			});
 		} catch (err) {
 			toast.error("Error signing up. Please try again.", {
-				position: "top-right",
+				position: "bottom-right",
 				autoClose: 5000,
 			});
 		}
@@ -184,10 +193,9 @@ export const UserProvider = ({ children }: any) => {
 			if (res.status >= 400) {
 				throw new Error();
 			}
-			console.log(data);
 			if (data.exists) {
 				toast.error("Email already exists", {
-					position: "top-right",
+					position: "bottom-right",
 					autoClose: 5000,
 				});
 			}
@@ -215,9 +223,6 @@ export const UserProvider = ({ children }: any) => {
 				})
 				.catch(err => {
 					console.log(err);
-					localStorage.removeItem("token");
-					localStorage.removeItem("refreshToken");
-					localStorage.removeItem("user");
 				});
 		}
 	};
@@ -248,7 +253,6 @@ export const UserProvider = ({ children }: any) => {
 			}
 
 			const data = res.data;
-			console.log(data);
 			toast.success("User updated successfully", {
 				position: "top-right",
 				autoClose: 5000,
@@ -261,49 +265,43 @@ export const UserProvider = ({ children }: any) => {
 		}
 	};
 
-	const resendOTP = async () => {
+	const resendOTP = async (email: string) => {
 		try {
-			const res = await api.post("/auth/email/resend", {
-				email: user?.email,
+			const res = await api.post("/auth/email/resend/otp", {
+				email,
 			});
 			if (res.status >= 400) {
 				throw new Error();
 			}
-			toast.success("OTP sent successfully", {});
+			toast.success("OTP sent successfully", {
+				position: "bottom-right",
+			});
 		} catch (error) {
 			toast.error("Error sending OTP", {});
 		}
 	};
 
 	const getUserDetails = async () => {
-		try {
-			const res = await api.get("/auth/me", {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			const data = res.data;
-			console.log(data);
-			setUser(data);
-		} catch (err) {
-			console.log(err);
+		if (token) {
+			try {
+				const res = await api.get("/auth/me", {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				const data = res.data;
+				setUser(data);
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	};
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
-		const refreshToken = localStorage.getItem("refreshToken");
+		const tokenFromStorage = localStorage.getItem("token");
 
-		if (token) {
-			const decodedToken: any = jwt.decode(token);
-			if (decodedToken.exp * 1000 < Date.now()) {
-				if (refreshToken) {
-					refreshAccessToken();
-				}
-			}
-		}
-
-		if (token && user) {
+		if (tokenFromStorage) {
+			setToken(tokenFromStorage);
 			getUserDetails();
 		}
 

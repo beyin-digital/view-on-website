@@ -52,10 +52,6 @@ const LoginForm = () => {
 		},
 	];
 
-	const handleSubmit = () => {
-		console.log(values);
-	};
-
 	return (
 		<form onSubmit={handleLogin}>
 			<Box
@@ -192,7 +188,6 @@ const LoginForm = () => {
 							display: "flex",
 							justifyContent: "space-around",
 						}}
-						onClick={handleSubmit}
 						type='submit'
 						title={`${t("login")}`}
 					>

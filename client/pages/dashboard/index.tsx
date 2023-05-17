@@ -104,7 +104,7 @@ const DashboardHomePage = () => {
 			</Head>
 			<RootLayout>
 				<Box sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }}>
-					<Grid container spacing={2.5} rowGap={2}>
+					<Grid container columnSpacing={2} rowGap={2}>
 						{/* First row */}
 
 						{/* First Card */}
@@ -253,7 +253,7 @@ const DashboardHomePage = () => {
 									textAlign='start'
 									component='div'
 									fontSize='20px'
-									height='57px'
+									height='35px'
 									fontWeight={400}
 								>
 									Hashtag Details
@@ -324,7 +324,7 @@ const DashboardHomePage = () => {
 								<Item>
 									<Typography
 										align='center'
-										marginTop='18px'
+										marginTop='10px'
 										fontSize='20px'
 										marginX='37px'
 									>
@@ -333,7 +333,7 @@ const DashboardHomePage = () => {
 									<Typography
 										fontSize='36px'
 										fontWeight={600}
-										lineHeight='54px'
+										lineHeight='40px'
 									>
 										16,584
 									</Typography>
@@ -350,7 +350,7 @@ const DashboardHomePage = () => {
 										Total Number of Redirections
 									</Typography>
 									<Typography
-										marginTop='14px'
+										marginTop='10px'
 										marginBottom='8px'
 										fontSize='14px'
 									>
@@ -359,7 +359,7 @@ const DashboardHomePage = () => {
 									<Typography
 										fontSize='36px'
 										fontWeight={600}
-										lineHeight='54px'
+										lineHeight='40px'
 									>
 										13,846,847
 									</Typography>
@@ -431,6 +431,319 @@ const DashboardHomePage = () => {
 							</Item>
 						</Grid>
 					</Grid>
+				</Box>
+				{/* Mobile boxes */}
+				<Box
+					sx={{
+						marginTop: "16px",
+						flexGrow: 1,
+						display: { xs: "flex", md: "none" },
+						flexDirection: "column",
+						gap: "16px",
+						paddingX: "29px",
+					}}
+				>
+					{/* Main chart */}
+					<Item
+						sx={{
+							width: "100%",
+							height: "419px",
+						}}
+					></Item>
+					{/* pie chart */}
+					<Item
+						sx={{
+							width: "100%",
+							height: "303px",
+						}}
+					>
+						<Typography
+							align='center'
+							marginTop='18px'
+							fontSize='20px'
+							marginX='37px'
+						>
+							Today VS All-time
+						</Typography>
+						<PieChart data={viewsData} />
+					</Item>
+					{/* Redirection count */}
+					<Item
+						sx={{
+							width: "100%",
+							height: "161px",
+						}}
+					>
+						<Typography
+							align='center'
+							marginTop='18px'
+							fontSize='20px'
+							marginX='37px'
+						>
+							Redirections Last 24 Hours
+						</Typography>
+						<Typography
+							fontSize='36px'
+							fontWeight={600}
+							lineHeight='54px'
+						>
+							16,584
+						</Typography>
+					</Item>
+					{/* total redirections */}
+					<Item
+						sx={{
+							width: "100%",
+							height: "207px",
+						}}
+					>
+						<Typography
+							align='center'
+							marginTop='10px'
+							fontSize='20px'
+							marginX='37px'
+						>
+							Total Number of Redirections
+						</Typography>
+						<Typography
+							marginTop='14px'
+							marginBottom='8px'
+							fontSize='14px'
+						>
+							Since: 20/06/2023
+						</Typography>
+						<Typography
+							fontSize='36px'
+							fontWeight={600}
+							lineHeight='54px'
+						>
+							13,846,847
+						</Typography>
+					</Item>
+					<Item
+						sx={{
+							width: "100%",
+							height: "319px",
+						}}
+					>
+						<Typography
+							marginTop='17px'
+							variant='h5'
+							textAlign='start'
+							component='div'
+							fontSize='16px'
+							height='47px'
+							fontWeight={400}
+						>
+							Hashtag Details
+						</Typography>
+						<Box
+							sx={{
+								display: "flex",
+								flexDirection: "column",
+								alignItems: "center",
+								justifyContent: "space-between",
+								height: "80%",
+								width: "100%",
+								margin: "0 auto",
+								paddingX: "54px",
+							}}
+						>
+							{/* Hashtag */}
+							<Box
+								sx={{
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "center",
+									width: "100%",
+									height: "49px",
+									borderRadius: "13px",
+									background:
+										"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+								}}
+							>
+								<Typography fontSize='26px' fontWeight={700}>
+									#VOW
+								</Typography>
+							</Box>
+
+							<Typography
+								fontSize='11px'
+								fontWeight={400}
+								align='center'
+								marginY='18px'
+							>
+								Valid
+							</Typography>
+							{/* Subscription dates */}
+							<Box
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									width: "60%",
+									height: "90px",
+									borderRadius: "20px",
+									justifyContent: "space-around",
+								}}
+							>
+								<Typography>Date bought: 1/2/2023</Typography>
+								<Typography>Next renewal: 2/8/2023</Typography>
+							</Box>
+
+							<Box
+								sx={{
+									display: "flex",
+									width: "100%",
+									justifyContent: "space-between",
+									height: "15%",
+								}}
+							>
+								<Typography fontSize='11px'>
+									Go to subscriptions
+								</Typography>
+								<Typography fontSize='11px'>
+									Download E-label
+								</Typography>
+							</Box>
+						</Box>
+					</Item>
+					<Item
+						sx={{
+							width: "100%",
+							height: "319px",
+							paddingX: "40px",
+						}}
+					>
+						<Typography
+							marginTop='17px'
+							variant='h5'
+							textAlign='start'
+							component='div'
+							fontSize='20px'
+							fontWeight={400}
+						>
+							Hashtag Info
+						</Typography>
+
+						{/* Sublink and organisation input */}
+						<Box
+							sx={{
+								display: "flex",
+								flexDirection: "column",
+								height: "80%",
+								width: "full",
+							}}
+						>
+							<OutlinedInput
+								placeholder='Sublink'
+								sx={{
+									height: "35px",
+									width: "100%",
+									background: "white",
+									borderRadius: "10px",
+									marginY: "7px",
+								}}
+							/>
+							<OutlinedInput
+								placeholder='Organisation'
+								sx={{
+									height: "35px",
+									width: "100%",
+									background: "white",
+									borderRadius: "10px",
+									marginY: "7px",
+								}}
+							/>
+							{/* Location input */}
+							<Box>
+								{/* Title */}
+								<Typography
+									marginTop='40px'
+									fontSize='16px'
+									variant='h5'
+									textAlign='start'
+									component='div'
+								>
+									Location
+								</Typography>
+								{/* Second inputs container */}
+								<Box
+									sx={{
+										display: "flex",
+										justifyContent: "space-between",
+									}}
+								>
+									{/* Country select */}
+									<Select
+										displayEmpty
+										value={values.location.country}
+										renderValue={(selected: any) => {
+											if (selected.length === 0) {
+												return "Country";
+											}
+										}}
+										sx={{
+											height: "35px",
+											width: "40%",
+											background: "white",
+											borderRadius: "15px",
+										}}
+									>
+										<MenuItem disabled value=''>
+											Country
+										</MenuItem>
+										<MenuItem value={1}>One</MenuItem>
+									</Select>
+									{/* State Select */}
+									<Select
+										displayEmpty
+										value={values.location.country}
+										renderValue={(selected: any) => {
+											if (selected.length === 0) {
+												return "State";
+											}
+										}}
+										sx={{
+											height: "35px",
+											width: "40%",
+											background: "white",
+											borderRadius: "15px",
+										}}
+									>
+										<MenuItem disabled value=''>
+											State
+										</MenuItem>
+										<MenuItem value={1}>One</MenuItem>
+									</Select>
+								</Box>
+								<Box
+									sx={{
+										display: "flex",
+										flexDirection: "row-reverse",
+										marginTop: "16px",
+									}}
+								>
+									<Button
+										disableRipple
+										variant='contained'
+										sx={{
+											height: "35px",
+											width: "127px",
+											background: "#0090EC",
+											borderRadius: "7px",
+											color: "#FBFBFB",
+											fontWeight: 500,
+											fontSize: "16px",
+											boxShadow: "none",
+											textTransform: "none",
+										}}
+									>
+										Update
+									</Button>
+								</Box>
+							</Box>
+						</Box>
+					</Item>
 				</Box>
 			</RootLayout>
 		</>

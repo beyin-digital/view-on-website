@@ -28,7 +28,7 @@ const VerificationPage = () => {
 	const { user, values, verifyOtp, resendOTP } = useContext(UserContext);
 
 	useEffect(() => {
-		start(10);
+		start(30);
 	}, [user]);
 
 	return (
@@ -131,7 +131,7 @@ const VerificationPage = () => {
 									? router.query.newUser
 									: user?.email}{" "}
 								below:
-								{t("desc")}
+								{/* {t("desc")} */}
 							</Typography>
 							<Box
 								sx={{
@@ -168,8 +168,20 @@ const VerificationPage = () => {
 								/>
 							</Box>
 							<Typography
+								onClick={() => {
+									if (secondsLeft <= 0) {
+										resendOTP(
+											user?.email ||
+												(router.query
+													.newUser as string) ||
+												""
+										);
+										start(30);
+									}
+								}}
 								sx={{
 									fontSize: { xs: "15px", xl: "18px" },
+									cursor: secondsLeft <= 0 ? "pointer" : "",
 									fontWight: "400",
 									color: "#A0A9AB",
 									lineHeight: "27px",
@@ -182,7 +194,9 @@ const VerificationPage = () => {
 									},
 								}}
 							>
-								{t("resend")}
+								{secondsLeft > 0
+									? `you can request for a new code in ${secondsLeft}s`
+									: t("resend")}
 							</Typography>
 						</Box>
 						<Box
@@ -229,7 +243,7 @@ const VerificationPage = () => {
 										display: "flex",
 										justifyContent: "space-around",
 									}}
-									onClick={() => router.push("/payment")}
+									onClick={() => verifyOtp(otp)}
 									type='submit'
 									title={`${t("button")}`}
 								>

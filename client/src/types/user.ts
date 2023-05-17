@@ -8,4 +8,5 @@ export interface User {
 	deletedAt?: Date;
 	twoFactorAuth?: boolean;
 	organisation?: any;
+	country?: string;
 }

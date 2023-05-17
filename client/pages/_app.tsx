@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { appWithTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { KeywordProvider } from "@/contexts/keywordContext";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -42,7 +43,7 @@ const combineProviders = (providers: any[]) =>
 		</Combined>
 	));
 
-const Providers = combineProviders([UserProvider]);
+const Providers = combineProviders([UserProvider, KeywordProvider]);
 
 function MyApp(props: MyAppProps) {
 	const { locale } = useRouter();
@@ -63,16 +64,16 @@ function MyApp(props: MyAppProps) {
 				<link rel='preconnect' href='https://fonts.googleapis.com' />
 			</Head>
 			<div dir={isRTL ? "rtl" : "ltr"}>
-				<QueryClientProvider client={queryClient}>
-					<Providers>
+				<Providers>
+					<QueryClientProvider client={queryClient}>
 						<ThemeProvider theme={theme}>
 							<CssBaseline />
 							<Component {...pageProps} />
 							<ToastContainer />
 						</ThemeProvider>
-					</Providers>
-					<ReactQueryDevtools />
-				</QueryClientProvider>
+						<ReactQueryDevtools />
+					</QueryClientProvider>
+				</Providers>
 			</div>
 		</CacheProvider>
 	);

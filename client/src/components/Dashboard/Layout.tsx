@@ -14,9 +14,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
 	const router = useRouter();
 
 	const { token, user } = useContext(UserContext);
-	useEffect(() => {
-		if (!token) router.push("/login");
-	}, [user]);
+	// useEffect(() => {
+	// 	if (!token) router.push("/login");
+	// }, [token]);
 
 	return (
 		<>
@@ -56,7 +56,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 					width: "100%",
 				}}
 			>
-				<Navbar />
+				{pathname === "/dashboard" && <Navbar />}
 				{/* Sidebar and Content body */}
 				<Box
 					sx={{

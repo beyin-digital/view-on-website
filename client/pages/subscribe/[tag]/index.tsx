@@ -7,9 +7,7 @@ import {
 	FormControl,
 	Button,
 	Grid,
-	Container,
 } from "@mui/material";
-// import { NextPage } from "next";
 import Image from "next/image";
 import { BsHash } from "react-icons/bs";
 import {
@@ -17,18 +15,16 @@ import {
 	FiArrowDownRight,
 	FiArrowDownLeft,
 } from "react-icons/fi";
-import CheckIcon from "@mui/icons-material/Check";
 import { AiOutlineCheck } from "react-icons/ai";
-import { ButtonStyle } from "@/components/Button";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { GoPrimitiveDot } from "react-icons/go";
 import FooterMobile from "@/components/Footer/FooterMobile";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
-import { Background } from "@/components/Layout/Background";
+import { KeywordContext } from "@/contexts/keywordContext";
 
 const SubscribePage: NextPage = () => {
 	const { t } = useTranslation("subscribe");
@@ -66,16 +62,19 @@ const SubscribePage: NextPage = () => {
 
 	const [values, setValues] = useState({
 		hashtag: router.query.tag || "",
-		subLinks: "",
+		subLinks: router.query.sublink || "",
 	});
+
+	const { keywordFound, handleSubscription } = useContext(KeywordContext);
+
 	return (
 		<>
 			<Head>
 				<title>{t("meta_title")}</title>
-				<meta name="description" content="" />
-				<meta name="keyword" content="" />
-				<meta property="og:image" content="" />
-				<link rel="icon" href="/images/logo.svg" />
+				<meta name='description' content='' />
+				<meta name='keyword' content='' />
+				<meta property='og:image' content='' />
+				<link rel='icon' href='/images/logo.svg' />
 			</Head>
 			<>
 				<Header />
@@ -99,7 +98,7 @@ const SubscribePage: NextPage = () => {
 					>
 						<>
 							<img
-								src="/images/swirl.svg"
+								src='/images/swirl.svg'
 								style={{
 									position: "absolute",
 									top: "-102rem",
@@ -114,7 +113,12 @@ const SubscribePage: NextPage = () => {
 								position: "relative",
 								left: { xs: "", md: "-5rem" },
 								width: { xs: "100%", md: "100%", xl: "100%" },
-								height: { xs: "100%", sm: "770px", md: "750px", xl: "650px" },
+								height: {
+									xs: "100%",
+									sm: "770px",
+									md: "750px",
+									xl: "650px",
+								},
 								background: "rgba(251, 251, 251, 0.6)",
 								border: "1px solid #FBFBFB",
 								backdropFilter: "blur(100px)",
@@ -129,7 +133,7 @@ const SubscribePage: NextPage = () => {
 								display: "flex",
 								justifyContent: "center",
 							}}
-							className="SubscribePageLayoutBo"
+							className='SubscribePageLayoutBo'
 						>
 							<Grid
 								sx={{
@@ -139,7 +143,12 @@ const SubscribePage: NextPage = () => {
 										md: "140px",
 										xl: "160px",
 									},
-									paddingX: { xs: ".5rem", sm: "1rem", md: "2rem", xl: "rem" },
+									paddingX: {
+										xs: ".5rem",
+										sm: "1rem",
+										md: "2rem",
+										xl: "rem",
+									},
 									height: "100%",
 									transform: {
 										xs: "skewX(0deg)",
@@ -150,7 +159,7 @@ const SubscribePage: NextPage = () => {
 									alignItems: "center",
 									justifyContent: "center",
 								}}
-								className="LayoutTagsPadding"
+								className='LayoutTagsPadding'
 							>
 								<>
 									<Box
@@ -169,7 +178,11 @@ const SubscribePage: NextPage = () => {
 									>
 										<Box
 											sx={{
-												marginY: { xs: "2rem", md: "1rem", xl: "1rem" },
+												marginY: {
+													xs: "2rem",
+													md: "1rem",
+													xl: "1rem",
+												},
 											}}
 										>
 											<Typography
@@ -200,12 +213,22 @@ const SubscribePage: NextPage = () => {
 										</Box>
 										<Box>
 											<FormControl
-												sx={{ width: { xs: "100%", md: "90%", xl: "90%" } }}
+												sx={{
+													width: {
+														xs: "100%",
+														md: "90%",
+														xl: "90%",
+													},
+												}}
 											>
 												<OutlinedInput
 													sx={{
 														width: "100%",
-														height: { xs: "63px", md: "87px", xl: "97px" },
+														height: {
+															xs: "63px",
+															md: "87px",
+															xl: "97px",
+														},
 														fontSize: {
 															xs: "18px",
 															sm: "22px",
@@ -216,46 +239,71 @@ const SubscribePage: NextPage = () => {
 														background: "#FBFBFB",
 														borderRadius: "20px",
 														border: "1px solid ",
-														".MuiOutlinedInput-notchedOutline": {
-															border: "0",
-															padding: "9px",
-														},
-														"&:hover > .MuiOutlinedInput-notchedOutline": {
-															border: "0",
-														},
+														".MuiOutlinedInput-notchedOutline":
+															{
+																border: "0",
+																padding: "9px",
+															},
+														"&:hover > .MuiOutlinedInput-notchedOutline":
+															{
+																border: "0",
+															},
 													}}
-													className="borderSubscribeInput"
+													className='borderSubscribeInput'
 													value={values.hashtag}
-													placeholder={`${t("input_hashtag_one")}`}
-													startAdornment={<BsHash color="#31E716" size={90} />}
+													placeholder={`${t(
+														"input_hashtag_one"
+													)}`}
+													startAdornment={
+														<BsHash
+															color='#31E716'
+															size={90}
+														/>
+													}
 													endAdornment={
-														<FiArrowUpRight color="#343132" size={90} />
+														<FiArrowUpRight
+															color='#343132'
+															size={90}
+														/>
 													}
 												/>
 												{/* <FormHelperText id="outlined-weight-helper-text"> */}
 												<Box
-													width="100%"
-													display="flex"
-													justifyContent="space-between"
+													width='100%'
+													display='flex'
+													justifyContent='space-between'
 												>
-													<Typography
-														sx={{
-															fontSize: {
-																xs: "10px",
-																sm: "20px",
-																md: "24px",
-																xl: "28px",
-															},
-														}}
-													>
-														{t("text_hashtag")}
-													</Typography>
+													{values.hashtag.length >=
+														1 ||
+														(values.hashtag
+															.length <= 3 && (
+															<Typography
+																sx={{
+																	fontSize: {
+																		xs: "10px",
+																		sm: "20px",
+																		md: "24px",
+																		xl: "28px",
+																	},
+																}}
+															>
+																{t(
+																	"text_hashtag"
+																)}
+															</Typography>
+														))}
 													<Box
 														sx={{
-															width: { xs: "28%", md: "25%", xl: "22%" },
+															width: {
+																xs: "28%",
+																md: "25%",
+																xl: "22%",
+															},
 															display: "flex",
-															justifyContent: "space-between",
-															alignItems: "center",
+															justifyContent:
+																"space-between",
+															alignItems:
+																"center",
 															flexDirection: {
 																xs: "column",
 																md: "row",
@@ -265,48 +313,87 @@ const SubscribePage: NextPage = () => {
 													>
 														<Typography
 															onClick={() =>
-																router.push(`${router.asPath}/premium`)
+																router.push(
+																	`${router.asPath}/premium`
+																)
 															}
 															sx={{
 																cursor: "pointer",
 																color: "#31E716 ",
-																backgroundClip: "text",
-																WebkitBackgroundClip: "text",
+																backgroundClip:
+																	"text",
+																WebkitBackgroundClip:
+																	"text",
 																fontSize: {
 																	xs: "18px",
 																	md: "24px",
 																	xl: "28px",
 																},
-																alignItems: "center",
+																alignSelf:
+																	"flex-end",
+																alignItems:
+																	"center",
 																display: "flex",
 															}}
 														>
-															<GoPrimitiveDot size={"20px"} color="#31E816" />
-															{t("available")}
+															{!keywordFound && (
+																<>
+																	<GoPrimitiveDot
+																		size={
+																			"20px"
+																		}
+																		color='#31E816'
+																	/>
+																	{t(
+																		"available"
+																	)}
+																</>
+															)}
 														</Typography>
 														<Typography
 															onClick={() =>
-																router.push(`${router.asPath}/premium`)
+																router.push(
+																	`${router.asPath}/premium`
+																)
 															}
 															sx={{
 																cursor: "pointer",
 																backgroundImage:
 																	"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
-																backgroundClip: "text",
-																WebkitBackgroundClip: "text",
+																backgroundClip:
+																	"text",
+																WebkitBackgroundClip:
+																	"text",
 																color: "transparent",
 																fontSize: {
 																	xs: "18px",
 																	md: "24px",
 																	xl: "28px",
 																},
-																alignItems: "center",
+																alignItems:
+																	"center",
 																display: "flex",
-																marginX: ".3rem",
+																marginX:
+																	".3rem",
 															}}
 														>
-															<GoPrimitiveDot size={"20px"} color="#31E816" />
-															{t("text_premium")}
+															{values.hashtag
+																.length >= 1 ||
+																(values.hashtag
+																	.length <=
+																	3 && (
+																	<>
+																		<GoPrimitiveDot
+																			size={
+																				"20px"
+																			}
+																			color='#31E816'
+																		/>
+																		{t(
+																			"text_premium"
+																		)}
+																	</>
+																))}
 														</Typography>
 													</Box>
 												</Box>
@@ -319,27 +406,43 @@ const SubscribePage: NextPage = () => {
 										>
 											<Box
 												sx={{
-													width: { xs: "100%", md: "90%", xl: "90%" },
+													width: {
+														xs: "100%",
+														md: "90%",
+														xl: "90%",
+													},
 													marginY: "1rem",
 												}}
 											>
 												<Typography
 													sx={{
 														fontSize: {
-															xs: { xs: "20px", md: "24px", xl: "24px" },
+															xs: {
+																xs: "20px",
+																md: "24px",
+																xl: "24px",
+															},
 															md: "30px",
 															xl: "40px",
 														},
-														lineHeight: { xs: "22px", xl: "30px" },
+														lineHeight: {
+															xs: "22px",
+															xl: "30px",
+														},
 														marginY: ".5rem",
 													}}
 												>
 													{t("text_input_sublink")}
 												</Typography>
 												<OutlinedInput
+													value={values.subLinks}
 													sx={{
 														width: "100%",
-														height: { xs: "63px", md: "87px", xl: "97px" },
+														height: {
+															xs: "63px",
+															md: "87px",
+															xl: "97px",
+														},
 														fontSize: {
 															xs: "18px",
 															sm: "22px",
@@ -350,196 +453,292 @@ const SubscribePage: NextPage = () => {
 														borderRadius: "20px",
 														background: "#FBFBFB",
 														paddingX: "10px",
-														boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.05)",
+														boxShadow:
+															"0px 31px 51px rgba(0, 0, 0, 0.05)",
 													}}
-													placeholder={`${t("input_hashtag_two")}`}
+													placeholder={`${t(
+														"input_hashtag_two"
+													)}`}
 												/>
 											</Box>
 										</Box>
-										<Box>
-											<Box
-												sx={{
-													width: "100%",
-													display: "flex",
-													justifyContent: "space-between",
-													marginY: { xs: "2rem", xl: "1rem" },
-													flexDirection: {
-														xs: "column-reverse",
-														md: "column-reverse",
-														xl: "row",
-													},
-													alignItems: "center",
-												}}
-											>
-												<Box
-													sx={{
-														height: { xs: "100%", md: "100px", xl: "100px" },
-														width: { xs: "100%", xl: "70%" },
-														marginY: ".8rem",
-														display: "flex",
-														justifyContent: "space-around",
-														alignItems: "center",
-														flexDirection: {
-															xs: "column",
-															md: "row",
-															xl: "row",
-														},
-													}}
-												>
+										{values.hashtag.length >= 1 ||
+											(values.hashtag.length <= 3 && (
+												<Box>
 													<Box
 														sx={{
-															width: { xs: "100%", md: "50%", xl: "40%" },
+															width: "100%",
 															display: "flex",
-															height: "100%",
-															justifyContent: "space-between",
-															alignItems: "center",
-															marginY: "1rem",
-														}}
-													>
-														{cash.map((item) => (
-															<Box
-																key={item.id}
-																sx={{
-																	width: { xs: "100%", md: "45%", xl: "60%" },
-																	height: "100%",
-																	display: "flex",
-																	alignItems: "center",
-																	justifyContent: "space-evenly",
-																	flexDirection: "column",
-																}}
-															>
-																<Typography
-																	sx={{
-																		fontSize: {
-																			xs: "20px",
-																			sm: "40px",
-																			md: "40px",
-																			xl: "40px",
-																		},
-																		lineHeight: "37px",
-																		fontWeight: "400",
-																		color: "#343132",
-																		textTransform: "uppercase",
-																	}}
-																>
-																	$ {item.num}
-																</Typography>
-																<Typography
-																	sx={{
-																		fontSize: {
-																			xs: "14px",
-																			sm: "16px",
-																			md: "16px",
-																			xl: "16px",
-																		},
-																		lineHeight: "14px",
-																		fontWeight: "400",
-																		color: "#343132",
-																		textTransform: "capitalize",
-																	}}
-																>
-																	{item.title}
-																</Typography>
-															</Box>
-														))}
-													</Box>
-													<Box
-														sx={{
-															width: { xs: "100%", md: "50%", xl: "38%" },
-															height: "100%",
-															display: "flex",
-															alignItems: "center",
-															justifyContent: "center",
+															justifyContent:
+																"space-between",
+															marginY: {
+																xs: "2rem",
+																xl: "1rem",
+															},
+															flexDirection: {
+																xs: "column-reverse",
+																md: "column-reverse",
+																xl: "row",
+															},
+															alignItems:
+																"center",
 														}}
 													>
 														<Box
 															sx={{
-																height: "100%",
+																height: {
+																	xs: "100%",
+																	md: "100px",
+																	xl: "100px",
+																},
+																width: {
+																	xs: "100%",
+																	xl: "70%",
+																},
+																marginY:
+																	".8rem",
 																display: "flex",
-																justifyContent: "center",
-																flexDirection: "column",
+																justifyContent:
+																	"space-around",
+																alignItems:
+																	"center",
+																flexDirection: {
+																	xs: "column",
+																	md: "row",
+																	xl: "row",
+																},
 															}}
 														>
-															{checks.map((item) => (
-																<Box
-																	key={item.id}
-																	sx={{
-																		display: "flex",
-																		alignItems: "center",
-																		justifyContent: "space-between",
-																		height: { xs: "25px", xl: "45px" },
-																	}}
-																>
-																	<AiOutlineCheck
-																		fontSize="small"
-																		color="#455154"
-																	/>
-																	<Box
-																		sx={{
-																			width: "100%",
-																			paddingX: ".5rem",
-																		}}
-																	>
-																		<Typography
+															<Box
+																sx={{
+																	width: {
+																		xs: "100%",
+																		md: "50%",
+																		xl: "40%",
+																	},
+																	display:
+																		"flex",
+																	height: "100%",
+																	justifyContent:
+																		"space-between",
+																	alignItems:
+																		"center",
+																	marginY:
+																		"1rem",
+																}}
+															>
+																{cash.map(
+																	item => (
+																		<Box
+																			key={
+																				item.id
+																			}
 																			sx={{
-																				fontSize: {
-																					xs: "14px",
-																					sm: "16px",
-																					md: "16px",
-																					xl: "16px",
+																				width: {
+																					xs: "100%",
+																					md: "45%",
+																					xl: "60%",
 																				},
-																				fontWeight: "400",
-																				lineHeight: "14px",
-																				color: "#343132",
-																				textTransform: "capitalize",
+																				height: "100%",
+																				display:
+																					"flex",
+																				alignItems:
+																					"center",
+																				justifyContent:
+																					"space-evenly",
+																				flexDirection:
+																					"column",
 																			}}
 																		>
-																			{t(item.tKey)}
-																			{/* {item.title} */}
-																		</Typography>
-																	</Box>
+																			<Typography
+																				sx={{
+																					fontSize:
+																						{
+																							xs: "20px",
+																							sm: "40px",
+																							md: "40px",
+																							xl: "40px",
+																						},
+																					lineHeight:
+																						"37px",
+																					fontWeight:
+																						"400",
+																					color: "#343132",
+																					textTransform:
+																						"uppercase",
+																				}}
+																			>
+																				${" "}
+																				{
+																					item.num
+																				}
+																			</Typography>
+																			<Typography
+																				sx={{
+																					fontSize:
+																						{
+																							xs: "14px",
+																							sm: "16px",
+																							md: "16px",
+																							xl: "16px",
+																						},
+																					lineHeight:
+																						"14px",
+																					fontWeight:
+																						"400",
+																					color: "#343132",
+																					textTransform:
+																						"capitalize",
+																				}}
+																			>
+																				{
+																					item.title
+																				}
+																			</Typography>
+																		</Box>
+																	)
+																)}
+															</Box>
+															<Box
+																sx={{
+																	width: {
+																		xs: "100%",
+																		md: "50%",
+																		xl: "38%",
+																	},
+																	height: "100%",
+																	display:
+																		"flex",
+																	alignItems:
+																		"center",
+																	justifyContent:
+																		"center",
+																}}
+															>
+																<Box
+																	sx={{
+																		height: "100%",
+																		display:
+																			"flex",
+																		justifyContent:
+																			"center",
+																		flexDirection:
+																			"column",
+																	}}
+																>
+																	{checks.map(
+																		item => (
+																			<Box
+																				key={
+																					item.id
+																				}
+																				sx={{
+																					display:
+																						"flex",
+																					alignItems:
+																						"center",
+																					justifyContent:
+																						"space-between",
+																					height: {
+																						xs: "25px",
+																						xl: "45px",
+																					},
+																				}}
+																			>
+																				<AiOutlineCheck
+																					fontSize='small'
+																					color='#455154'
+																				/>
+																				<Box
+																					sx={{
+																						width: "100%",
+																						paddingX:
+																							".5rem",
+																					}}
+																				>
+																					<Typography
+																						sx={{
+																							fontSize:
+																								{
+																									xs: "14px",
+																									sm: "16px",
+																									md: "16px",
+																									xl: "16px",
+																								},
+																							fontWeight:
+																								"400",
+																							lineHeight:
+																								"14px",
+																							color: "#343132",
+																							textTransform:
+																								"capitalize",
+																						}}
+																					>
+																						{t(
+																							item.tKey
+																						)}
+																						{/* {item.title} */}
+																					</Typography>
+																				</Box>
+																			</Box>
+																		)
+																	)}
 																</Box>
-															))}
+															</Box>
 														</Box>
+														<Button
+															sx={{
+																borderRadius:
+																	"16px",
+																paddingX:
+																	"18px",
+																height: "59px",
+																width: {
+																	xs: "100%",
+																	sm: "311px",
+																	md: "311px",
+																	xl: "311px",
+																},
+																display: "flex",
+																background:
+																	"#31E716",
+																// marginRight: { xs: "10rem", xl: "4rem" },
+																justifyContent:
+																	"space-around",
+															}}
+														>
+															<Typography
+																sx={{
+																	letterSpacing:
+																		"0.02em",
+																	fontSize:
+																		"32px",
+																	fontWeight:
+																		"400",
+																	lineHeight:
+																		"40px",
+																	color: "#343132",
+																	textTransform:
+																		"capitalize",
+																}}
+															>
+																{t("button")}
+															</Typography>
+															{locale === "ar" ? (
+																<FiArrowDownLeft
+																	size={42}
+																	color='#343132'
+																/>
+															) : (
+																<FiArrowDownRight
+																	size={42}
+																	color='#343132'
+																/>
+															)}
+														</Button>
 													</Box>
 												</Box>
-												<Button
-													sx={{
-														borderRadius: "16px",
-														paddingX: "18px",
-														height: "59px",
-														width: {
-															xs: "100%",
-															sm: "311px",
-															md: "311px",
-															xl: "311px",
-														},
-														display: "flex",
-														background: "#31E716",
-														// marginRight: { xs: "10rem", xl: "4rem" },
-														justifyContent: "space-around",
-													}}
-												>
-													<Typography
-														sx={{
-															letterSpacing: "0.02em",
-															fontSize: "32px",
-															fontWeight: "400",
-															lineHeight: "40px",
-															color: "#343132",
-															textTransform: "capitalize",
-														}}
-													>
-														{t("button")}
-													</Typography>
-													{locale === "ar" ? (
-														<FiArrowDownLeft size={42} color="#343132" />
-													) : (
-														<FiArrowDownRight size={42} color="#343132" />
-													)}
-												</Button>
-											</Box>
-										</Box>
+											))}
 									</Box>
 								</>
 							</Grid>
@@ -561,12 +760,21 @@ const SubscribePage: NextPage = () => {
 									display: "flex",
 									alignItems: "center",
 									justifyContent: "space-evenly",
-									flexDirection: { xs: "column", md: "row", xl: "row" },
+									flexDirection: {
+										xs: "column",
+										md: "row",
+										xl: "row",
+									},
 								}}
 							>
 								<Box
 									sx={{
-										width: { xs: "90%", sm: "314px", md: "314px", xl: "314px" },
+										width: {
+											xs: "90%",
+											sm: "314px",
+											md: "314px",
+											xl: "314px",
+										},
 										height: "467",
 										display: "flex",
 										alignItems: "center",
@@ -592,7 +800,10 @@ const SubscribePage: NextPage = () => {
 									>
 										<Typography
 											sx={{
-												fontSize: { xs: "24px", xl: "28px" },
+												fontSize: {
+													xs: "24px",
+													xl: "28px",
+												},
 												fontWeight: "600",
 												color: "#58696D",
 											}}
@@ -609,7 +820,11 @@ const SubscribePage: NextPage = () => {
 									>
 										<Typography
 											sx={{
-												fontSize: { xs: "33px", md: "40px", xl: "51px" },
+												fontSize: {
+													xs: "33px",
+													md: "40px",
+													xl: "51px",
+												},
 												fontWeight: "600",
 												color: "#31E716",
 											}}
@@ -628,7 +843,7 @@ const SubscribePage: NextPage = () => {
 											flexDirection: "column",
 										}}
 									>
-										{descCardOne.map((item) => (
+										{descCardOne.map(item => (
 											<Box
 												key={item.id}
 												sx={{
@@ -640,16 +855,23 @@ const SubscribePage: NextPage = () => {
 												}}
 											>
 												<Image
-													src="/icons/check.svg"
-													alt=""
+													src='/icons/check.svg'
+													alt=''
 													width={30}
 													height={30}
 												/>
 												<Typography
 													sx={{
-														fontSize: { xs: "15px", md: "18px", xl: "20px" },
+														fontSize: {
+															xs: "15px",
+															md: "18px",
+															xl: "20px",
+														},
 														fontWeight: "400",
-														marginX: { xs: ".1rem", md: "1rem" },
+														marginX: {
+															xs: ".1rem",
+															md: "1rem",
+														},
 													}}
 												>
 													{item.desc}
@@ -678,12 +900,21 @@ const SubscribePage: NextPage = () => {
 											}}
 										>
 											<Button
+												onClick={() => {
+													handleSubscription(
+														values.hashtag as string,
+														values.subLinks as string,
+														99,
+														"month"
+													);
+												}}
 												sx={{
 													paddingX: "18px",
 													width: "140px",
 													height: "45px",
 													display: "flex",
-													justifyContent: "space-between",
+													justifyContent:
+														"space-between",
 												}}
 											>
 												<Typography
@@ -694,13 +925,17 @@ const SubscribePage: NextPage = () => {
 														fontWeight: 400,
 														lineHeight: "40px",
 														color: "#FBFBFB",
-														textTransform: "uppercase",
+														textTransform:
+															"uppercase",
 													}}
 												>
 													{t("pay")}
 												</Typography>
 
-												<FiArrowUpRight size={42} color="#FBFBFB" />
+												<FiArrowUpRight
+													size={42}
+													color='#FBFBFB'
+												/>
 											</Button>
 										</Box>
 									</Box>
@@ -708,7 +943,12 @@ const SubscribePage: NextPage = () => {
 
 								<Box
 									sx={{
-										width: { xs: "90%", sm: "372px", md: "372px", xl: "371px" },
+										width: {
+											xs: "90%",
+											sm: "372px",
+											md: "372px",
+											xl: "371px",
+										},
 										height: "551px",
 										display: "flex",
 										alignItems: "center",
@@ -719,7 +959,8 @@ const SubscribePage: NextPage = () => {
 										background:
 											" linear-gradient(270deg, rgba(0, 144, 236, 0.1) 0%, rgba(49, 231, 22, 0.1) 100%)",
 										backdropFilter: "blur(117px)",
-										boxShadow: "0px 72px 86px rgba(0, 0, 0, 0.07)",
+										boxShadow:
+											"0px 72px 86px rgba(0, 0, 0, 0.07)",
 										marginY: "1rem",
 										marginX: "1rem",
 										paddingX: "1rem",
@@ -738,7 +979,10 @@ const SubscribePage: NextPage = () => {
 									>
 										<Typography
 											sx={{
-												fontSize: { xs: "24px", xl: "28px" },
+												fontSize: {
+													xs: "24px",
+													xl: "28px",
+												},
 												fontWeight: "600",
 												color: "#58696D",
 											}}
@@ -755,7 +999,11 @@ const SubscribePage: NextPage = () => {
 									>
 										<Typography
 											sx={{
-												fontSize: { xs: "33px", md: "40px", xl: "51px" },
+												fontSize: {
+													xs: "33px",
+													md: "40px",
+													xl: "51px",
+												},
 												fontWeight: "600",
 												color: "#31E716",
 											}}
@@ -774,7 +1022,7 @@ const SubscribePage: NextPage = () => {
 											flexDirection: "column",
 										}}
 									>
-										{descCardTwo.map((item) => (
+										{descCardTwo.map(item => (
 											<Box
 												key={item.id}
 												sx={{
@@ -786,16 +1034,23 @@ const SubscribePage: NextPage = () => {
 												}}
 											>
 												<Image
-													src="/icons/check.svg"
-													alt=""
+													src='/icons/check.svg'
+													alt=''
 													width={30}
 													height={30}
 												/>
 												<Typography
 													sx={{
-														fontSize: { xs: "15px", md: "18px", xl: "20px" },
+														fontSize: {
+															xs: "15px",
+															md: "18px",
+															xl: "20px",
+														},
 														fontWeight: "400",
-														marginX: { xs: ".1rem", md: "1rem" },
+														marginX: {
+															xs: ".1rem",
+															md: "1rem",
+														},
 													}}
 												>
 													{item.desc}
@@ -829,7 +1084,8 @@ const SubscribePage: NextPage = () => {
 													width: "140px",
 													height: "45px",
 													display: "flex",
-													justifyContent: "space-between",
+													justifyContent:
+														"space-between",
 												}}
 											>
 												<Typography
@@ -840,13 +1096,17 @@ const SubscribePage: NextPage = () => {
 														fontWeight: 400,
 														lineHeight: "40px",
 														color: "#FBFBFB",
-														textTransform: "uppercase",
+														textTransform:
+															"uppercase",
 													}}
 												>
 													{t("pay")}
 												</Typography>
 
-												<FiArrowUpRight size={42} color="#FBFBFB" />
+												<FiArrowUpRight
+													size={42}
+													color='#FBFBFB'
+												/>
 											</Button>
 										</Box>
 									</Box>
@@ -854,7 +1114,12 @@ const SubscribePage: NextPage = () => {
 
 								<Box
 									sx={{
-										width: { xs: "90%", sm: "314px", md: "314px", xl: "314px" },
+										width: {
+											xs: "90%",
+											sm: "314px",
+											md: "314px",
+											xl: "314px",
+										},
 										height: "467",
 										display: "flex",
 										alignItems: "center",
@@ -880,7 +1145,10 @@ const SubscribePage: NextPage = () => {
 									>
 										<Typography
 											sx={{
-												fontSize: { xs: "24px", xl: "28px" },
+												fontSize: {
+													xs: "24px",
+													xl: "28px",
+												},
 												fontWeight: "600",
 												color: "#58696D",
 											}}
@@ -897,7 +1165,11 @@ const SubscribePage: NextPage = () => {
 									>
 										<Typography
 											sx={{
-												fontSize: { xs: "33px", md: "40px", xl: "51px" },
+												fontSize: {
+													xs: "33px",
+													md: "40px",
+													xl: "51px",
+												},
 												fontWeight: "600",
 												color: "#31E716",
 											}}
@@ -916,7 +1188,7 @@ const SubscribePage: NextPage = () => {
 											flexDirection: "column",
 										}}
 									>
-										{descCardThree.map((item) => (
+										{descCardThree.map(item => (
 											<Box
 												key={item.id}
 												sx={{
@@ -928,16 +1200,23 @@ const SubscribePage: NextPage = () => {
 												}}
 											>
 												<Image
-													src="/icons/check.svg"
-													alt=""
+													src='/icons/check.svg'
+													alt=''
 													width={30}
 													height={30}
 												/>
 												<Typography
 													sx={{
-														fontSize: { xs: "15px", md: "18px", xl: "20px" },
+														fontSize: {
+															xs: "15px",
+															md: "18px",
+															xl: "20px",
+														},
 														fontWeight: "400",
-														marginX: { xs: ".1rem", md: "1rem" },
+														marginX: {
+															xs: ".1rem",
+															md: "1rem",
+														},
 													}}
 												>
 													{item.desc}
@@ -971,7 +1250,8 @@ const SubscribePage: NextPage = () => {
 													width: "140px",
 													height: "45px",
 													display: "flex",
-													justifyContent: "space-between",
+													justifyContent:
+														"space-between",
 												}}
 											>
 												<Typography
@@ -982,13 +1262,17 @@ const SubscribePage: NextPage = () => {
 														fontWeight: 400,
 														lineHeight: "40px",
 														color: "#FBFBFB",
-														textTransform: "uppercase",
+														textTransform:
+															"uppercase",
 													}}
 												>
 													{t("pay")}
 												</Typography>
 
-												<FiArrowUpRight size={42} color="#FBFBFB" />
+												<FiArrowUpRight
+													size={42}
+													color='#FBFBFB'
+												/>
 											</Button>
 										</Box>
 									</Box>
@@ -1018,7 +1302,10 @@ export async function getStaticPaths({}: any) {
 export async function getStaticProps({ params, locale }: any) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale || "", ["common", "subscribe"])),
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"subscribe",
+			])),
 		},
 	};
 }

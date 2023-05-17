@@ -12,18 +12,29 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
+import { useContext, useEffect } from "react";
+import { UserContext } from "@/contexts/userContext";
+import { useRouter } from "next/router";
 
 const SignUpPage = () => {
 	const { t } = useTranslation("signup");
+	const router = useRouter();
+
+	const { token } = useContext(UserContext);
+	useEffect(() => {
+		if (token) {
+			router.push("/dashboard");
+		}
+	}, [token]);
 
 	return (
 		<>
 			<Head>
 				<title>{t("meta_title")}</title>
-				<meta name="description" content="" />
-				<meta name="keyword" content="" />
-				<meta property="og:image" content="" />
-				<link rel="icon" href="/images/logo.svg" />
+				<meta name='description' content='' />
+				<meta name='keyword' content='' />
+				<meta property='og:image' content='' />
+				<link rel='icon' href='/images/logo.svg' />
 			</Head>
 			<Layout>
 				<Grid
@@ -46,7 +57,12 @@ const SignUpPage = () => {
 							flexDirection: "column",
 							alignItems: "center",
 							justifyContent: "space-evenly",
-							marginY: { xs: "0rem", sm: "0rem", md: "0rem", xl: "1px" },
+							marginY: {
+								xs: "0rem",
+								sm: "0rem",
+								md: "0rem",
+								xl: "1px",
+							},
 							marginX: "1rem",
 							paddingY: "1rem",
 						}}
@@ -63,7 +79,10 @@ const SignUpPage = () => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
 	return {
 		props: {
-			...(await serverSideTranslations(locale || "", ["common", "signup"])),
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"signup",
+			])),
 		},
 	};
 };

@@ -10,10 +10,26 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
+import { UserContext } from "@/contexts/userContext";
+import { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
 	const { t } = useTranslation("login");
 
+	const router = useRouter();
+
+	const { token } = useContext(UserContext);
+
+	useEffect(() => {
+		if (token) {
+			router.push("/dashboard");
+		}
+	}, [token]);
+
+	if (token) {
+		return <div>Redirecting to dashboard</div>;
+	}
 	return (
 		<>
 			<Head>

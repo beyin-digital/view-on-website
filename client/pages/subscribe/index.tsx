@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Layout from "@/components/Layout/Layout";
 import {
@@ -8,8 +8,6 @@ import {
 	FormControl,
 	Button,
 	Grid,
-	Container,
-	InputAdornment,
 } from "@mui/material";
 import { NextPage } from "next";
 import { BsHash } from "react-icons/bs";
@@ -25,17 +23,29 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
+import { UserContext } from "@/contexts/userContext";
+import { KeywordContext } from "@/contexts/keywordContext";
+import useDebounce from "@/hooks/useDebounce";
 
 const SubscribePage: NextPage = () => {
 	const { t } = useTranslation("subscribe");
 
+	const { setValues, values, checkKeywordavailability, keywordFound } =
+		useContext(KeywordContext);
+
+	const keywordDebounce = useDebounce(values.hashtag, 500);
+
 	const router = useRouter();
-	const [values, setValues] = useState({
-		hashtag: "",
-		sublinks: "",
-	});
+
 	const { locale } = useRouter();
-	// const isRTL = locale === "ar";
+
+	useEffect(() => {
+		if (keywordDebounce) {
+			checkKeywordavailability(keywordDebounce);
+		}
+	}, [keywordDebounce]);
+
+	console.log(keywordFound);
 	return (
 		<Layout>
 			<Grid
@@ -197,11 +207,16 @@ const SubscribePage: NextPage = () => {
 										}}
 									>
 										{/* The hashtag keyword you've chosen is premium */}
-										{t("text_hashtag")}
+
+										{values.hashtag.length >= 1 &&
+										values.hashtag.length <= 3
+											? t("text_hashtag")
+											: null}
 									</Typography>
-									{values.hashtag.length === 1 ||
-									values.hashtag.length === 2 ||
-									values.hashtag.length === 3 ? (
+									{(values.hashtag.length === 1 ||
+										values.hashtag.length === 2 ||
+										values.hashtag.length === 3) &&
+									keywordFound === false ? (
 										<Typography
 											sx={{
 												cursor: "pointer",
@@ -219,7 +234,8 @@ const SubscribePage: NextPage = () => {
 										>
 											{t("availableP")}
 										</Typography>
-									) : values.hashtag.length >= 4 ? (
+									) : values.hashtag.length >= 4 &&
+									  keywordFound === false ? (
 										<Typography
 											sx={{
 												cursor: "pointer",
@@ -284,6 +300,12 @@ const SubscribePage: NextPage = () => {
 										boxShadow:
 											"0px 31px 51px rgba(0, 0, 0, 0.05)",
 									}}
+									onChange={e =>
+										setValues({
+											...values,
+											sublink: e.target.value,
+										})
+									}
 									placeholder={`${t("input_hashtag_two")}`}
 								/>
 							</Box>
@@ -316,11 +338,17 @@ const SubscribePage: NextPage = () => {
 										},
 										// marginRight: { xs: "10rem", xl: "4rem" },
 									}}
-									onClick={() =>
-										router.push(
-											`/subscribe/${values.hashtag}`
-										)
-									}
+									onClick={() => {
+										if (
+											!keywordFound &&
+											values.hashtag !== "" &&
+											values.sublink !== ""
+										) {
+											router.push(
+												`/subscribe/${values.hashtag}?sublink=${values.sublink}`
+											);
+										}
+									}}
 								>
 									<Typography
 										sx={{

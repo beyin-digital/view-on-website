@@ -126,7 +126,11 @@ const Navbar = () => {
 					display: { xs: "none", md: "flex", xl: "flex" },
 					alignItems: "center",
 					justifyContent: "flex-end",
-					margin: "0 auto 26px auto",
+					margin: {
+						xs: "0",
+						md: "0",
+						lg: "0 auto 26px auto",
+					},
 				}}
 			>
 				<Box

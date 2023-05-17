@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 import { FaUserAlt } from "react-icons/fa";
@@ -18,7 +18,6 @@ import { UserContext } from "@/contexts/userContext";
 
 const Sidebar = () => {
 	const router = useRouter();
-	const pathname = usePathname();
 
 	const { logout } = useContext(UserContext);
 
@@ -30,13 +29,14 @@ const Sidebar = () => {
 		setOpen(false);
 	};
 
+
 	const links = [
 		{
 			name: "Home Page",
 			icon: (
 				<BiHome
 					size={24}
-					color={pathname === "/dashboard" ? "white" : ""}
+					color={router.pathname === "/dashboard" ? "white" : ""}
 				/>
 			),
 			href: "/dashboard",
@@ -45,7 +45,9 @@ const Sidebar = () => {
 			name: "Profile",
 			icon: (
 				<FaUserAlt
-					color={pathname === "/dashboard/profile" ? "white" : ""}
+					color={
+						router.pathname === "/dashboard/profile" ? "white" : ""
+					}
 					size={24}
 				/>
 			),
@@ -56,7 +58,9 @@ const Sidebar = () => {
 			icon: (
 				<AiFillCreditCard
 					color={
-						pathname === "/dashboard/subscriptions" ? "white" : ""
+						router.pathname === "/dashboard/subscriptions"
+							? "white"
+							: ""
 					}
 					size={24}
 				/>
@@ -67,7 +71,9 @@ const Sidebar = () => {
 			name: "Security",
 			icon: (
 				<BsFillShieldLockFill
-					color={pathname === "/dashboard/security" ? "white" : ""}
+					color={
+						router.pathname === "/dashboard/security" ? "white" : ""
+					}
 					size={24}
 				/>
 			),
@@ -77,7 +83,9 @@ const Sidebar = () => {
 			name: "Logout",
 			icon: (
 				<IoIosLogOut
-					color={pathname === "/dashboard/logout" ? "white" : ""}
+					color={
+						router.pathname === "/dashboard/logout" ? "white" : ""
+					}
 					size={24}
 				/>
 			),
@@ -155,7 +163,9 @@ const Sidebar = () => {
 							onClick={() => {
 								link.name === "Logout"
 									? handleOpen()
-									: router.push(link.href);
+									: router.push(
+											`/${router.locale}/${link.href}`
+									  );
 							}}
 							sx={{
 								cursor: "pointer",
@@ -164,7 +174,9 @@ const Sidebar = () => {
 								justifyContent: "center",
 								height: "60px",
 								background:
-									pathname === link.href ? "#0090EC" : "",
+									router.pathname === link.href
+										? "#0090EC"
+										: "",
 								borderRadius: "2px",
 							}}
 						>
@@ -174,7 +186,9 @@ const Sidebar = () => {
 								fontSize='20px'
 								fontWeight={500}
 								color={
-									pathname === link.href ? "#FBFBFB" : "#000"
+									router.pathname === link.href
+										? "#FBFBFB"
+										: "#000"
 								}
 							>
 								{link.name}

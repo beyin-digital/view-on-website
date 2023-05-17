@@ -195,7 +195,7 @@ const DashboardProfilePage = () => {
 							}}
 						>
 							<Button
-								onClick={updateUser}
+								onClick={handleUpdateUser}
 								disableRipple
 								variant='contained'
 								sx={{
