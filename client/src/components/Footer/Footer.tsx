@@ -1,9 +1,12 @@
 import { Box, Link, Typography } from "@mui/material";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-
+import { useRouter } from "next/router";
+import NextLink from "next/link";
 const Footer = () => {
 	const { t } = useTranslation("common");
+	const { locale } = useRouter();
+	const router = useRouter();
 
 	const icons = [
 		{
@@ -84,8 +87,9 @@ const Footer = () => {
 						justifyContent: "space-around",
 					}}
 				>
-					<Link
+					<NextLink
 						href="/illustration"
+						locale={router.locale}
 						title="View On Website Illustration Page"
 						style={{
 							textDecoration: "none",
@@ -113,7 +117,7 @@ const Footer = () => {
 							</Typography>
 							<Image src="/icons/i.svg" alt="" width={20} height={20} />
 						</Box>
-					</Link>
+					</NextLink>
 
 					{links.map((item) => (
 						<Link

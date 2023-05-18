@@ -67,7 +67,7 @@ const SwiperLabel = ({ selectedKeyword }: any) => {
 				<Box
 					sx={{
 						position: { xs: "relative", md: "absolute" },
-						top: { xs: "", md: "1rem" },
+						top: { xs: "", md: "1.3rem",xl:"-2rem" },
 						right: { xs: "", md: "5rem" },
 					}}
 				>

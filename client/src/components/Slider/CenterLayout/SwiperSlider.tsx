@@ -120,6 +120,7 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
 					spaceBetween={3}
 					modules={[EffectCoverflow, Pagination, Thumbs]}
 					onSlideChange={handleSlideChange}
+					// initialSlide={keywords.length - 1}
 					ref={swiperRef}
 					className="swiper_container"
 					pagination={{

@@ -6,7 +6,7 @@ export const Background = () => {
 		<>
 			<Box
 				sx={{
-					width: "100%",
+					// width: "100%",
 				}}
 			>
 				<Image
@@ -16,10 +16,12 @@ export const Background = () => {
 					title="View On Website Background"
 					style={{
 						top: "-39rem",
+						// bottom: "5rem",
 						position: "absolute",
 					}}
 					className="ImageMobile"
 				/>
+
 			</Box>
 		</>
 	);

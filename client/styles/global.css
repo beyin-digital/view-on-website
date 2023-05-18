@@ -95,8 +95,8 @@ iframe {
 	transition: 0.3s opacity;
 	transform: translate3d(0, 0, 0);
 	z-index: 99999999;
-	bottom: 6.5rem !important;
-	font-size: 32px;
+	bottom: 6rem !important;
+	font-size: 30px;
 	font-weight: 500;
 }
 .swiper-blur {
@@ -516,10 +516,10 @@ iframe {
 	[dir="rtl"] .BoxSignInWith {
 		left: 6rem !important;
 	}
-	.SliderImageMobile {
+	/* .SliderImageMobile {
 		display: block;
 		top: -44rem !important;
-	}
+	} */
 }
 
 @media screen and (max-width: 899px) {
@@ -570,6 +570,9 @@ iframe {
 		display: block;
 		top: -35rem !important;
 	}
+	.SliderImageMobileNone {
+		display: none;
+	}
 }
 @media screen and (max-width: 700px) {
 	.ExampleBoxThreePic {
@@ -619,6 +622,10 @@ iframe {
 	.swiper-pagination {
 		display: none;
 		/* position: inherit; */
+	}
+
+	.SliderImageMobileNone {
+		display: none;
 	}
 }
 @media screen and (max-width: 600px) {
@@ -691,10 +698,6 @@ iframe {
 	}
 	[dir="rtl"] .ExampleBoxTwoMobile {
 		left: -12rem;
-	}
-
-	.SliderImageMobileNone {
-		display: none;
 	}
 }
 @media screen and (max-width: 427px) {

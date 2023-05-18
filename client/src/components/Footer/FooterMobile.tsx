@@ -4,10 +4,12 @@ import Link from "next/link";
 import TextViewOnWeb from "../Home/TextViewOnWeb";
 import { useTranslation } from "next-i18next";
 import { ImageBackground } from "./ImageBackground";
-
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 const FooterMobile = () => {
 	const { t } = useTranslation("common");
-
+	const { locale } = useRouter();
+	const router = useRouter();
 	const links = [
 		{ id: 11, name: "contact", link: "/contact", tKey: "footer_contact" },
 		{ id: 22, name: "Learn More", link: "/", tKey: "footer_learn" },
@@ -46,7 +48,7 @@ const FooterMobile = () => {
 		},
 	];
 	return (
-		<footer>
+		<>
 			<Box
 				sx={{
 					height: { xs: "70vh", sm: "60vh", md: "" },
@@ -255,7 +257,7 @@ const FooterMobile = () => {
 					</Box>
 				</Box>
 			</Box>
-		</footer>
+		</>
 	);
 };
 

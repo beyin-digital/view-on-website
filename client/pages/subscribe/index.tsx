@@ -8,8 +8,6 @@ import {
 	FormControl,
 	Button,
 	Grid,
-	Container,
-	InputAdornment,
 } from "@mui/material";
 import { NextPage } from "next";
 import { BsHash } from "react-icons/bs";
@@ -40,12 +38,7 @@ const SubscribePage: NextPage = () => {
 		<Layout>
 			<Grid
 				sx={{
-					paddingX: {
-						xs: ".5rem",
-						sm: "1rem",
-						md: "2rem",
-						xl: "2rem",
-					},
+					paddingX: { xs: ".5rem", sm: "1rem", md: "2rem", xl: "2rem" },
 					height: "100%",
 					transform: "skew(16deg, 0deg)",
 					display: "flex",
@@ -53,37 +46,29 @@ const SubscribePage: NextPage = () => {
 					justifyContent: { xs: "center", md: "flex-end" },
 					// border: "1px solid",
 				}}
-				className='SubscribePageLayout'
+				className="SubscribePageLayout"
 			>
 				<>
 					<Box
 						sx={{
-							width: "70%",
+							width: { xs: "80%", md: "70%" },
 							height: "100%",
 							display: "flex",
 							flexDirection: "column",
-							justifyContent: {
-								xs: "center",
-								xl: "space-evenly",
-							},
-							// border: "1px solid",
+							justifyContent: { xs: "center", xl: "space-evenly" },
 							marginX: { xs: "1px", md: "5rem" },
 						}}
 					>
 						<Box
 							sx={{
 								marginY: { xs: "2rem", md: "1rem", xl: "0rem" },
-								marginX: { xs: "1rem", md: "1rem", xl: "1rem" },
+								marginX: { xs: ".5rem", md: "1rem", xl: "1rem" },
 							}}
 						>
 							<Typography
 								sx={{
-									fontSize: {
-										xs: "18px",
-										sm: "20px",
-										md: "25px",
-										xl: "40px",
-									},
+									fontSize: { xs: "18px", sm: "20px", md: "25px", xl: "40px" },
+									lineHeight: "92.5%",
 								}}
 							>
 								{/* Reserve your{" "} */}
@@ -97,18 +82,15 @@ const SubscribePage: NextPage = () => {
 											md: "25px",
 											xl: "40px",
 										},
-
-										padding: "2px",
-										margin: "auto 4px",
+										margin: "0 -5px 0 5px",
 										borderRadius: "8px",
 										lineHeight: "92.5%",
 										background:
 											"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 									}}
 								>
-									{/* #keyword */}#{t("text_keyword")}
+									#{t("text_keyword")}
 								</Typography>{" "}
-								{/* before someone else does */}
 								{t("text_two")}
 							</Typography>
 						</Box>
@@ -117,19 +99,11 @@ const SubscribePage: NextPage = () => {
 								marginY: { xs: "2rem", md: "1rem", xl: "1rem" },
 							}}
 						>
-							<FormControl
-								sx={{
-									width: { xs: "100%", md: "90%", xl: "90%" },
-								}}
-							>
+							<FormControl sx={{ width: { xs: "100%", md: "90%", xl: "90%" } }}>
 								<OutlinedInput
 									sx={{
 										width: "100%",
-										height: {
-											xs: "60px",
-											md: "87px",
-											xl: "97px",
-										},
+										height: { xs: "63px", md: "80px", xl: "80px" },
 										fontSize: {
 											xs: "18px",
 											sm: "22px",
@@ -139,37 +113,24 @@ const SubscribePage: NextPage = () => {
 										lineHeight: "28px",
 										background: "#FBFBFB",
 										borderRadius: "20px",
-										// ".MuiOutlinedInput-notchedOutline": {
-										// 	border: "0",
-										// 	padding: "9px",
-										// },
-										"&:hover > .MuiOutlinedInput-notchedOutline":
-											{
-												border: "0",
-											},
+										".MuiOutlinedInput-notchedOutline": {
+											border: "0",
+										},
+										"&:hover > .MuiOutlinedInput-notchedOutline": {
+											border: "0",
+										},
 									}}
 									value={values.hashtag}
-									onChange={e =>
-										setValues({
-											...values,
-											hashtag: e.target.value,
-										})
+									onChange={(e) =>
+										setValues({ ...values, hashtag: e.target.value })
 									}
 									placeholder={`${t("input_hashtag_one")}`}
-									startAdornment={
-										<BsHash color='#31E716' size={90} />
-									}
+									startAdornment={<BsHash color="#31E716" size={90} />}
 									endAdornment={
 										locale === "ar" ? (
-											<FiArrowUpLeft
-												color='#343132'
-												size={90}
-											/>
+											<FiArrowUpLeft color="#343132" size={90} />
 										) : (
-											<FiArrowUpRight
-												color='#343132'
-												size={90}
-											/>
+											<FiArrowUpRight color="#343132" size={90} />
 										)
 									}
 									className={`${
@@ -181,11 +142,7 @@ const SubscribePage: NextPage = () => {
 									}`}
 								/>
 
-								<Box
-									width='100%'
-									display='flex'
-									justifyContent='space-between'
-								>
+								<Box width="100%" display="flex" justifyContent="space-between">
 									<Typography
 										sx={{
 											fontSize: {
@@ -197,7 +154,7 @@ const SubscribePage: NextPage = () => {
 										}}
 									>
 										{/* The hashtag keyword you've chosen is premium */}
-										{t("text_hashtag")}
+										{/* {t("text_hashtag")} */}
 									</Typography>
 									{values.hashtag.length === 1 ||
 									values.hashtag.length === 2 ||
@@ -210,11 +167,7 @@ const SubscribePage: NextPage = () => {
 												backgroundClip: "text",
 												WebkitBackgroundClip: "text",
 												color: "transparent",
-												fontSize: {
-													xs: "20px",
-													md: "24px",
-													xl: "28px",
-												},
+												fontSize: { xs: "20px", md: "24px", xl: "28px" },
 											}}
 										>
 											{t("availableP")}
@@ -228,11 +181,7 @@ const SubscribePage: NextPage = () => {
 												backgroundClip: "text",
 												WebkitBackgroundClip: "text",
 												color: "transparent",
-												fontSize: {
-													xs: "20px",
-													md: "24px",
-													xl: "28px",
-												},
+												fontSize: { xs: "20px", md: "24px", xl: "28px" },
 											}}
 										>
 											{t("available")}
@@ -243,11 +192,7 @@ const SubscribePage: NextPage = () => {
 							</FormControl>
 						</Box>
 						<Box>
-							<Box
-								sx={{
-									width: { xs: "100%", md: "90%", xl: "90%" },
-								}}
-							>
+							<Box sx={{ width: { xs: "100%", md: "90%", xl: "90%" } }}>
 								<Typography
 									sx={{
 										fontSize: {
@@ -263,7 +208,6 @@ const SubscribePage: NextPage = () => {
 									{t("text_input_sublink")}
 								</Typography>
 								<OutlinedInput
-									// label={`${t("input_hashtag_two")}`}
 									sx={{
 										width: "100%",
 										fontSize: {
@@ -273,16 +217,17 @@ const SubscribePage: NextPage = () => {
 											xl: "32px",
 										},
 										lineHeight: "28px",
-										height: {
-											xs: "60px",
-											md: "87px",
-											xl: "97px",
-										},
+										height: { xs: "63px", md: "80px", xl: "80px" },
 										borderRadius: "20px",
 										background: "#FBFBFB",
 										paddingX: "10px",
-										boxShadow:
-											"0px 31px 51px rgba(0, 0, 0, 0.05)",
+										boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.05)",
+										".MuiOutlinedInput-notchedOutline": {
+											border: "0",
+										},
+										"&:hover > .MuiOutlinedInput-notchedOutline": {
+											border: "0",
+										},
 									}}
 									placeholder={`${t("input_hashtag_two")}`}
 								/>
@@ -293,11 +238,7 @@ const SubscribePage: NextPage = () => {
 								sx={{
 									width: "100%",
 									display: "flex",
-									justifyContent: {
-										xs: "center",
-										md: "end",
-										xl: "end",
-									},
+									justifyContent: { xs: "center", md: "end", xl: "end" },
 									marginY: { xs: "2rem", xl: "1rem" },
 								}}
 							>
@@ -314,13 +255,8 @@ const SubscribePage: NextPage = () => {
 											background: "#31E716",
 											color: "#343132",
 										},
-										// marginRight: { xs: "10rem", xl: "4rem" },
 									}}
-									onClick={() =>
-										router.push(
-											`/subscribe/${values.hashtag}`
-										)
-									}
+									onClick={() => router.push(`/subscribe/${values.hashtag}`)}
 								>
 									<Typography
 										sx={{
@@ -336,13 +272,13 @@ const SubscribePage: NextPage = () => {
 									</Typography>
 									<FiArrowDownRight
 										size={42}
-										color='#343132'
-										className='left'
+										color="#343132"
+										className="left"
 									/>
 									<FiArrowDownLeft
 										size={42}
-										color='#343132'
-										className='right'
+										color="#343132"
+										className="right"
 									/>
 								</Button>
 							</Box>
@@ -356,10 +292,7 @@ const SubscribePage: NextPage = () => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
 	return {
 		props: {
-			...(await serverSideTranslations(locale || "", [
-				"common",
-				"subscribe",
-			])),
+			...(await serverSideTranslations(locale || "", ["common", "subscribe"])),
 		},
 	};
 };

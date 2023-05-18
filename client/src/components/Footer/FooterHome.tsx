@@ -1,10 +1,13 @@
 import { Box, Typography, Link } from "@mui/material";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 const Footer = ({ onClick }: any) => {
 	const { t } = useTranslation("common");
-
+	const { locale } = useRouter();
+	const router = useRouter();
 	const links = [
 		{ id: 1, link: "/privacy", title: "footer_privacy" },
 		{ id: 2, link: "/terms", title: "footer_terms" },
@@ -128,8 +131,9 @@ const Footer = ({ onClick }: any) => {
 							justifyContent: "end",
 						}}
 					>
-						<Link
+						<NextLink
 							href="/illustration"
+							locale={router.locale}
 							title="View On Website Illustration Page"
 							style={{
 								textDecoration: "none",
@@ -164,7 +168,7 @@ const Footer = ({ onClick }: any) => {
 									height={20}
 								/>
 							</Box>
-						</Link>
+						</NextLink>
 
 						{links.map((item) => (
 							<Link

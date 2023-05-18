@@ -116,13 +116,13 @@ const RightSide = () => {
 					},
 					display: "flex",
 					alignItems: "center",
-					justifyContent: { xs: "space-between", md: "space-around" },
+					justifyContent: { xs: "center", md: "space-around" },
 					flexDirection: "row-reverse",
 					marginY: { xs: "1rem", md: "", xl: "" },
 					paddingX: "1rem",
 				}}
 			>
-				<Box
+				{/* <Box
 					sx={{
 						width: { xs: "50%", md: "35%", xl: "45%" },
 						height: "100%",
@@ -146,7 +146,6 @@ const RightSide = () => {
 							marginY: ".5rem",
 						}}
 					>
-						{/* {t("text_num")} */}
 						$3.65
 					</Typography>
 					<Typography
@@ -160,7 +159,7 @@ const RightSide = () => {
 					>
 						{t("text_dolor")}
 					</Typography>
-				</Box>
+				</Box> */}
 				<Box
 					sx={{
 						width: { xs: "50%", md: "20%", xl: "45%" },
@@ -184,9 +183,6 @@ const RightSide = () => {
 							marginY: ".5rem",
 						}}
 					>
-						{/* {t("more_dolor")} */}
-						{/* {t("dolor")} */}
-						{/* {t("num_more")} */}
 						$1M
 					</Typography>
 					<Typography

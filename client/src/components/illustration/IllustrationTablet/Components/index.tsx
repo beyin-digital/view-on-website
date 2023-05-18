@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Box, Grid, Link, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-
+import NextLink from "next/link";
 export const HeaderLayoutMobile = () => {
 	const { t } = useTranslation("illustration");
 	const { locale } = useRouter();
@@ -548,6 +548,7 @@ export const ThreeOptionMobile = () => {
 export const ButtonStyleMobile = () => {
 	const { t } = useTranslation("illustration");
 	const { locale } = useRouter();
+	const router = useRouter();
 	return (
 		<>
 			<Box
@@ -574,10 +575,11 @@ export const ButtonStyleMobile = () => {
 						borderRadius: "12px",
 					}}
 				>
-					<Link
+					<NextLink
 						href="/example"
+						locale={router.locale}
 						title="Example View On Website Page"
-						sx={{
+						style={{
 							textDecoration: "none",
 						}}
 					>
@@ -592,7 +594,7 @@ export const ButtonStyleMobile = () => {
 						>
 							{t("button")}
 						</Typography>
-					</Link>
+					</NextLink>
 					{locale === "ar" ? (
 						<svg
 							width="38"

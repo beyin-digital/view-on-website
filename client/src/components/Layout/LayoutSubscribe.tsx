@@ -10,16 +10,15 @@ import { BackgroundImageSlider } from "../Slider/BackgroundImage";
 interface Props {
 	children: React.ReactNode;
 }
-const Layout: React.FC<Props> = ({ children }) => {
+const LayoutSubscribe: React.FC<Props> = ({ children }) => {
 	return (
 		<>
 			<Box
 				sx={{
 					width: "2162px",
 					maxWidth: "100%",
-					// background: "#EAEDED",
 					overflow: "hidden",
-					height: "96vh",
+					height: { xs: "100%", md: "96vh" },
 				}}
 			>
 				<Box
@@ -35,8 +34,6 @@ const Layout: React.FC<Props> = ({ children }) => {
 					<BackgroundImageSlider />
 
 					<Header />
-					{/* background Layout */}
-					{/* <Background /> */}
 					<Box
 						className="LayoutBox"
 						sx={{
@@ -47,9 +44,9 @@ const Layout: React.FC<Props> = ({ children }) => {
 							border: "1px solid #FBFBFB",
 							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
-							transform: "skew(-16deg, 0deg)",
+							transform: { xs: "skew(0deg, 0deg)", sm: "skew(-16deg, 0deg)" },
 							overflow: { xs: "", md: "hidden", xl: "hidden" },
-							margin: "3rem auto",
+							margin: { xs: "5rem auto", sm: "3rem auto" },
 							zIndex: "999",
 							paddingX: "2rem",
 							paddingY: "7px",
@@ -59,10 +56,10 @@ const Layout: React.FC<Props> = ({ children }) => {
 					</Box>
 				</Box>
 			</Box>
-			<Footer />
-			<FooterMobile />
+			{/* <Footer /> */}
+			{/* <FooterMobile /> */}
 		</>
 	);
 };
 
-export default Layout;
+export default LayoutSubscribe;
