@@ -48,7 +48,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
 							transform: "skew(-16deg, 0deg)",
-							overflow: { xs: "", md: "hidden", xl: "hidden" },
+							// overflow: { xs: "", md: "hidden", xl: "hidden" },
 							margin: "3rem auto",
 							zIndex: "999",
 							paddingX: "2rem",

@@ -116,11 +116,10 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
 						modifier: 1,
 						slideShadows: false,
 					}}
-					loop={true}
+					// loop={true}
 					spaceBetween={3}
 					modules={[EffectCoverflow, Pagination, Thumbs]}
 					onSlideChange={handleSlideChange}
-					// initialSlide={keywords.length - 1}
 					ref={swiperRef}
 					className="swiper_container"
 					pagination={{
@@ -140,7 +139,7 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
 					}}
 					autoplay={{ delay: 4000, disableOnInteraction: false }}
 					style={{
-						background: "transparent",
+						// background: "transparent",
 						position: "relative",
 					}}
 				>
@@ -149,10 +148,17 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
 							key={index}
 							style={{
 								width: "100%",
+								// height: "100%",
 								borderRadius: "32px",
 								display: "flex",
 								alignItems: "center",
 								justifyContent: "center",
+								// background: "rgba(251, 251, 251, 0.25)",
+								/* Stroke */
+
+								// border: "1.63722px solid #E3E3E3",
+								// // boxShadow: "0px 4px 168px rgba(0, 59, 97, 0.1)",
+								// backdropFilter: "blur(10px)",
 							}}
 						>
 							<img
@@ -165,7 +171,9 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
 
 							<Box
 								sx={{
+									width: "800px",
 									position: "absolute",
+									zIndex: "999999",
 								}}
 							>
 								<Typography

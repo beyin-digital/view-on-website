@@ -556,7 +556,7 @@ export const ButtonStyleMobile = () => {
 					display: "flex",
 					alginItems: "center",
 					justifyContent: "end",
-					height: "60px",
+					height: "50px",
 					width: "97%",
 					marginX: "1rem",
 					paddingX: "1rem",

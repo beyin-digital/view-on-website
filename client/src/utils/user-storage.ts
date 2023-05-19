@@ -1,4 +1,4 @@
-import { User as User } from "../types/user";
+import { IUser as User } from "../types/user";
 
 const USER_LOCALSTORAGE_KEY = "vow_user";
 

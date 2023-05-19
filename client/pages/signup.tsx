@@ -12,19 +12,14 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
+import Seo from "@/components/Seo";
 
 const SignUpPage = () => {
 	const { t } = useTranslation("signup");
 
 	return (
 		<>
-			<Head>
-				<title>{t("meta_title")}</title>
-				<meta name="description" content="" />
-				<meta name="keyword" content="" />
-				<meta property="og:image" content="" />
-				<link rel="icon" href="/images/logo.svg" />
-			</Head>
+			<Seo title={t("meta_title")} description="" keyword="" />
 			<Layout>
 				<Grid
 					container

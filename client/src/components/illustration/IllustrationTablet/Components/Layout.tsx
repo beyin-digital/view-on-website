@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer/Footer";
 import { Box } from "@mui/material";
 import React from "react";
+import { ButtonStyleMobile } from ".";
 
 interface Props {
 	children: React.ReactNode;
@@ -33,7 +34,7 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
 					sx={{
 						width: "2192px",
 						maxWidth: "100%",
-						height: { xs: "100%", md: "85vh", xl: "89vh" },
+						height: { xs: "100%", md: "88vh", xl: "88vh" },
 						background: "#EAEDED",
 						display: "flex",
 						alignItems: "center",
@@ -89,6 +90,7 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
 						</Box>
 					</Box>
 				</Box>
+
 				<Footer />
 			</Box>
 		</>

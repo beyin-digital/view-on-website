@@ -1,21 +1,19 @@
 import "../styles/global.css";
-
+import Head from "next/head";
 import { AppProps } from "next/app";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ToastContainer } from "react-toastify";
 
 import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
-import { UserProvider } from "@/contexts/userContext";
-import "react-toastify/dist/ReactToastify.css";
+import { StateContextProvider } from "@/contexts";
 
 import { appWithTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import Head from "next/head";
+import Seo from "@/components/Seo";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -35,15 +33,6 @@ export interface MyAppProps extends AppProps {
 	emotionCache?: EmotionCache;
 }
 
-const combineProviders = (providers: any[]) =>
-	providers.reduce((Combined: any, Provider: any) => ({ children }: any) => (
-		<Combined>
-			<Provider>{children}</Provider>
-		</Combined>
-	));
-
-const Providers = combineProviders([UserProvider]);
-
 function MyApp(props: MyAppProps) {
 	const { locale } = useRouter();
 	const isRTL = locale === "ar";
@@ -59,16 +48,19 @@ function MyApp(props: MyAppProps) {
 					rel="stylesheet"
 				/>
 			</Head>
+			<Seo title="VIEW ON WEBSITE" description="" keyword="" />
 			<div dir={isRTL ? "rtl" : "ltr"}>
 				<QueryClientProvider client={queryClient}>
-					<Providers>
+					<StateContextProvider>
 						<ThemeProvider theme={theme}>
+							{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
 							<CssBaseline />
-							<Component {...pageProps} />
-							<ToastContainer />
+							<>
+								<Component {...pageProps} />
+							</>
 						</ThemeProvider>
-					</Providers>
-					<ReactQueryDevtools />
+						<ReactQueryDevtools />
+					</StateContextProvider>
 				</QueryClientProvider>
 			</div>
 		</CacheProvider>

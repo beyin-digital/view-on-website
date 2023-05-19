@@ -50,7 +50,7 @@ const PageDesktop = () => {
 					</Box>
 					<Box
 						sx={{
-							height: { xs: "100%", md: "560px", xl: "590px" },
+							height: { xs: "100%", md: "620px", xl: "590px" },
 							width: { xs: "100%", md: "1920px", xl: "1920px" },
 							maxWidth: "100%",
 							borderTop: "1px solid #FBFBFB",

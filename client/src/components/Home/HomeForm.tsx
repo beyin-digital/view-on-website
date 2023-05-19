@@ -8,13 +8,19 @@ const HomeForm = () => {
 
 	const router = useRouter();
 	const [hashtag, setHashtag] = useState("");
-	const [isCursorVisible, setIsCursorVisible] = useState(true);
-
+	// const [isCursorVisible, setIsCursorVisible] = useState(true);
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		router.push(`/subscribe/${hashtag}`);
 		const { value } = e.target;
-		setIsCursorVisible(value === "");
+		// setIsCursorVisible(value === "");
+	};
+	const [isTyping, setIsTyping] = useState(false);
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setHashtag(e.target.value);
+		// setIsTyping(true);
+		setIsTyping(e.target.value.trim() !== "");
 	};
 
 	return (
@@ -43,16 +49,12 @@ const HomeForm = () => {
 					<Box
 						sx={{
 							width: {
-								xs: "32px",
-								sm: "46px",
-								md: "46px",
-								xl: "66px",
+								xs: "50px",
+								md: "66px",
 							},
 							height: {
-								xs: "32px",
-								sm: "46px",
-								md: "46px",
-								xl: "65px",
+								xs: "50px",
+								md: "66px",
 							},
 						}}
 					>
@@ -69,13 +71,13 @@ const HomeForm = () => {
 					<form onSubmit={handleSubmit} className="cursor">
 						<OutlinedInput
 							value={hashtag}
-							onChange={(e) => setHashtag(e.target.value)}
+							// onChange={(e) => setHashtag(e.target.value)}
 							inputProps={{
 								autoComplete: "off",
 								spellCheck: false,
 							}}
-							// onChange={handleInputChange}
-							style={{ caretColor: isCursorVisible ? "auto" : "transparent" }}
+							onChange={handleInputChange}
+							// style={{ caretColor: isCursorVisible ? "auto" : "transparent" }}
 							sx={{
 								width: "100%",
 								height: { xs: "45px", md: "65px" },
@@ -111,9 +113,10 @@ const HomeForm = () => {
 								},
 							}}
 							placeholder={`${t("keyword")}`}
-							className="l"
+							className="cursorAnimation"
 						/>
-						<Box className="i" />
+						{/* <Box className="i" /> */}
+						<Box className={`i ${isTyping ? "stopAnimation" : ""}`} />
 					</form>
 				</Box>
 				<Box
@@ -121,16 +124,14 @@ const HomeForm = () => {
 					sx={{
 						cursor: "pointer",
 						width: {
-							xs: "32px",
-							sm: "46px",
-							md: "46px",
-							xl: "46px",
+							xs: "40px",
+							md: "49px",
+							xl: "56px",
 						},
 						height: {
-							xs: "32px",
-							sm: "46px",
-							md: "46px",
-							xl: "46px",
+							xs: "40px",
+							md: "49px",
+							xl: "56px",
 						},
 					}}
 				>

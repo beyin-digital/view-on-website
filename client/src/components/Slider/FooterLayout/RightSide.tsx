@@ -162,7 +162,7 @@ const RightSide = () => {
 				</Box> */}
 				<Box
 					sx={{
-						width: { xs: "50%", md: "20%", xl: "45%" },
+						width: { xs: "50%", md: "40%", xl: "45%" },
 						height: "100%",
 						display: "flex",
 						flexDirection: "column",

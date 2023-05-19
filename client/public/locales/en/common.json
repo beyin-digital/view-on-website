@@ -10,7 +10,7 @@
   "nav_signup": "SignUp",
   "nav_getStarted": "get started",
   "footer_contact": "contact",
-  "footer_learn": "learn more",
+  "footer_learn": "Navigate",
   "footer_privacy": "privacy policy",
   "footer_terms": "t&c",
   "footer_text": "Be distantly directed to what you see!",
@@ -18,8 +18,10 @@
   "account": "Don’t have an account?  ",
   "create_account": "Signup",
   "home": "Home",
-  "": "",
-  "": "",
-  "": "",
-  "": ""
+  "button_modal": "see how it works",
+  "subscribe": "subscribe",
+  "modal_title":"Navigate with ease",
+  "modal_text_one":"On Home page click on :",
+  "modal_text_two":"On Illustration page click on :",
+  "modal_text_three":"On Examples page click on :"
 }

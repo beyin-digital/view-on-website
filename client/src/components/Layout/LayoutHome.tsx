@@ -11,6 +11,7 @@ interface Props {
 	onClick: () => void;
 }
 const Layout: React.FC<Props> = ({ children, onClick }) => {
+
 	return (
 		<Box
 			sx={{

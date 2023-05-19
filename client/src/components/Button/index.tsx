@@ -4,6 +4,8 @@ import { FiArrowUpRight, FiArrowUpLeft } from "react-icons/fi";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useState } from "react";
+
 export const ButtonStyle = () => {
 	return (
 		<>
@@ -92,18 +94,23 @@ export const ButtonChange = ({ name, onClick }: any) => {
 };
 
 export const LinkSubscribe = () => {
-	const { t } = useTranslation("example");
+	const { t } = useTranslation(["example", "common"]);
 	const { locale } = useRouter();
 	const router = useRouter();
+	const [hovered, setHovered] = useState(false);
+
+	const handleHover = () => {
+		setHovered(!hovered);
+	};
 
 	return (
 		<Box
 			sx={{
 				width: {
-					xs: "240px",
-					sm: "300px",
-					md: "300px",
-					xl: "300px",
+					xs: "300px",
+					sm: "320px",
+					md: "320px",
+					xl: "350px",
 				},
 				height: "60px",
 				display: "flex",
@@ -111,13 +118,16 @@ export const LinkSubscribe = () => {
 				background: "#31E716",
 				borderRadius: "16px",
 			}}
+			className={`icon-container ${hovered ? "hovered" : ""}`}
+			onMouseEnter={handleHover}
+			onMouseLeave={handleHover}
 		>
 			<Link
 				style={{
 					paddingRight: "18px",
 					paddingLeft: "18px",
 					height: "59px",
-					width: "271px",
+					width: "400px",
 					display: "flex",
 					justifyContent: "space-around",
 					alignItems: "center",
@@ -126,15 +136,13 @@ export const LinkSubscribe = () => {
 				title={`${t("button")}`}
 				href="/subscribe"
 				locale={router.locale}
-				// as={NextLink}
-				// locale={router.locale || "en"}
 			>
 				<Typography
 					sx={{
 						letterSpacing: "0.02em",
 						fontSize: { xs: "20px", md: "25px", xl: "32px" },
-						fontWeight: "500",
-						lineHeight: "40px",
+						fontWeight: "700",
+						lineHeight: "30px",
 						color: "#343132",
 						textTransform: "uppercase",
 					}}
@@ -142,9 +150,9 @@ export const LinkSubscribe = () => {
 					{t("button")}
 				</Typography>
 				{locale === "ar" ? (
-					<AiOutlineArrowLeft size={42} color="#343132" />
+					<AiOutlineArrowLeft size={40} color="#343132" className="icon-left_rtl" />
 				) : (
-					<AiOutlineArrowRight size={42} color="#343132" />
+					<AiOutlineArrowRight size={40} color="#343132" className="icon-left"/>
 				)}
 			</Link>
 		</Box>

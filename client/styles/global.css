@@ -15,7 +15,6 @@ iframe {
 }
 .overlay {
 	overflow-x: auto;
-	/* overflow-y: inherit; */
 }
 
 /* Layout home */
@@ -113,8 +112,27 @@ iframe {
 	background: rgba(251, 251, 251, 0.2);
 	backdrop-filter: blur(10px);
 }
+.modalBlur {
+	background: rgba(255, 255, 255, 0.7);
+	box-shadow: 0px 72px 86px rgba(0, 0, 0, 0.07);
+}
 .SliderImageMobile {
 	display: none;
+}
+.modalSlider {
+	width: 100%;
+	height: 100%;
+}
+.modalSlider .modalSlide {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.modalSlide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 /*  */
 .col {
@@ -175,6 +193,10 @@ iframe {
 	animation-iteration-count: infinite;
 	opacity: 1;
 }
+.stopAnimation {
+	animation: none !important;
+	opacity: 0 !important;
+}
 [dir="ltr"] .cursor .i {
 	left: 5px;
 }
@@ -182,8 +204,8 @@ iframe {
 	right: 5px;
 }
 
-.cursor .l:focus + .i {
-	display: none;
+.cursor .cursorAnimation:focus + .i {
+	display: none !important;
 }
 
 @keyframes blink {
@@ -194,7 +216,111 @@ iframe {
 		opacity: 0;
 	}
 }
+/* animation Reserve */
 
+.ButtonReserve {
+	background: #31e716;
+	transition: background 1.5s ease;
+}
+.ButtonReserve:hover {
+	background: #0091ed;
+	box-shadow: 3px 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.ButtonReserve_ltr:hover .animated-icon {
+	transform: translateX(50%) rotate(45deg);
+	transition: transform 1.6s ease-in;
+}
+.ButtonReserve:hover .ButtonReserve_rtl {
+	transform: translateX(50%) rotate(45deg);
+	transition: transform 1.6s ease-in;
+}
+.ButtonReserve:hover .ButtonReserve_ltr {
+	transform: translateX(50%) rotate(-45deg);
+	transition: transform 1.6s ease-in;
+}
+/* modal Animtion */
+
+.icon-container {
+	position: relative;
+}
+.icon-left {
+	position: absolute;
+	top: 0.5rem;
+	bottom: 0;
+	right: 1.5rem;
+	transition: right 1.5s ease;
+}
+
+.icon-container.hovered .icon-left {
+	right: 0px;
+}
+.icon-left_rtl {
+	position: absolute !important;
+	top: 0.5rem !important;
+	bottom: 0;
+	left: 2rem !important;
+	transition: left 1.5s ease;
+}
+
+.icon-container.hovered .icon-left_rtl {
+	left: 0px !important;
+}
+
+/* button getStarted */
+.animated-icon {
+	transition: transform 1.6s ease;
+	transform: translateX(0);
+}
+.ButtonAnimation {
+	background: linear-gradient(270deg, #0090ec 0%, #31e716 100%);
+	transition: background 1.5s ease;
+	/* overflow: hidden; */
+}
+.ButtonAnimation:hover {
+	background: linear-gradient(270deg, #31e716 0%, #0090ec 100%);
+	box-shadow: 3px 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.SubscribeAnimation:hover {
+	box-shadow: 3px 8px 20px rgba(0, 0, 0, 0.25);
+	border-radius: 16px;
+}
+
+.SubscribeAnimation:hover .animated-icon {
+	transform: translateX(50%) rotate(45deg);
+	transition: transform 1.6s ease-in;
+}
+.animated-icon_rtl {
+	transition: transform 1.6s ease;
+	transform: translateX(0);
+}
+
+.SubscribeAnimation:hover .animated-icon_rtl {
+	transform: translateX(-50%) rotate(-45deg);
+	transition: transform 1.6s ease-in;
+}
+.ButtonAnimation:hover .animated-icon {
+	transform: translateX(50%) rotate(45deg);
+	transition: transform 1.6s ease-in;
+}
+.animated-icon_rtl {
+	transition: transform 1.6s ease;
+	transform: translateX(0);
+}
+
+.ButtonAnimation:hover .animated-icon_rtl {
+	transform: translateX(-50%) rotate(-45deg);
+	transition: transform 1.6s ease-in;
+}
+/* Number Modal */
+.numModal {
+	background: linear-gradient(90deg, #343132 -5.39%, #024660 91.7%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+}
 /* Layout AR / EN */
 
 [dir="ltr"] .BoxHomeLayout {
@@ -521,7 +647,6 @@ iframe {
 		top: -44rem !important;
 	} */
 }
-
 @media screen and (max-width: 899px) {
 	.IllustrationMobile {
 		display: block;

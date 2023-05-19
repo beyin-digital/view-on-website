@@ -2,36 +2,46 @@ import { Box, Link, Typography } from "@mui/material";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import NextLink from "next/link";
+import { useState } from "react";
+import ModalFooter from "./ModalFooter";
+
 const Footer = () => {
+	// translate hook
 	const { t } = useTranslation("common");
 	const { locale } = useRouter();
 	const router = useRouter();
 
+	// modal
+
+	const [open, setOpen] = useState(false);
+	const handleClose = () => setOpen(false);
+	function closeModel() {
+		setOpen(false);
+		// console.log("hi");
+	}
+	function openModel() {
+		setOpen(true);
+		// console.log("hi");
+	}
+
 	const icons = [
 		{
 			id: 1,
-			icon: "/icons/facebook.svg",
-			alt: "Facebook icon",
-			link: "https://facebook.com",
-		},
-		{
-			id: 2,
-			icon: "/icons/twitter.svg",
-			alt: "Twitter icon",
-			link: "https://twitter.com",
-		},
-		{
-			id: 3,
-			icon: "/icons/instagram.svg",
-			alt: "Instagram icon",
+			alt: "youtube",
+			icon: "/icons/youtube.svg",
 			link: "https://instagram.com",
 		},
 		{
+			id: 3,
+			alt: "instagram",
+			link: "https://instagram.com",
+			icon: "/icons/instagram.svg",
+		},
+		{
 			id: 4,
-			icon: "/icons/linkedin.svg",
-			alt: "Instagram icon",
-			link: "https://linkedin.com",
+			alt: "faceBook",
+			link: "https://facebook.com",
+			icon: "/icons/facebook.svg",
 		},
 	];
 	const links = [
@@ -87,13 +97,11 @@ const Footer = () => {
 						justifyContent: "space-around",
 					}}
 				>
-					<NextLink
-						href="/illustration"
-						locale={router.locale}
-						title="View On Website Illustration Page"
+					<Box
 						style={{
 							textDecoration: "none",
 							color: "inherit",
+							cursor: "pointer",
 						}}
 					>
 						<Box
@@ -105,6 +113,7 @@ const Footer = () => {
 								justifyContent: "space-around",
 								width: "143px",
 							}}
+							onClick={openModel}
 						>
 							<Typography
 								fontSize="20px"
@@ -116,8 +125,10 @@ const Footer = () => {
 								{t("footer_learn")}
 							</Typography>
 							<Image src="/icons/i.svg" alt="" width={20} height={20} />
+							{/* modal */}
 						</Box>
-					</NextLink>
+						<ModalFooter open={open} onClick={closeModel} close={handleClose} />
+					</Box>
 
 					{links.map((item) => (
 						<Link

@@ -511,7 +511,7 @@ export const ThreeOptionDesktop = () => {
 };
 
 export const ButtonStyleDesktop = () => {
-	const { t } = useTranslation("illustration");
+	const { t } = useTranslation(["illustration","common"]);
 	const { locale } = useRouter();
 	const router = useRouter();
 	return (
@@ -594,6 +594,7 @@ export const ButtonStyleDesktop = () => {
 		</>
 	);
 };
+
 
 export const BackgroundImage = () => {
 	const { locale } = useRouter();

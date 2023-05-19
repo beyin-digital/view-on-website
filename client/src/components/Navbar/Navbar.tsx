@@ -18,17 +18,25 @@ import { AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
 
-const Header = () => {
+const Header = ({ linkOne, linkTwo, linkThree, linkFour }: any) => {
 	const { t } = useTranslation("common");
 	const router = useRouter();
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const { pathname, query, asPath, locale } = router;
+	const [hoveredButton, setHoveredButton] = useState(false);
 
 	// handle menu click
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
 	};
 
+	const handleHoverButton = () => {
+		setHoveredButton(!hoveredButton);
+	};
+
+	const handleLeave = () => {
+		setHoveredButton(false);
+	};
 	const links = [
 		{
 			tKey: "nav_subscribe",
@@ -229,33 +237,83 @@ const Header = () => {
 					justifyContent: "center",
 				}}
 			>
-				<Button
-					onClick={() => {
-						router.push("/signup");
-					}}
-					sx={{
-						borderRadius: "16px",
-						paddingX: "11px",
-						height: "59px",
-						display: "flex",
-						background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
-					}}
-				>
-					<Typography
-						sx={{
-							letterSpacing: "0.02em",
-							fontSize: "25px",
-							fontWeight: 400,
-							lineHeight: "40px",
-							color: "#343132",
-							textTransform: "uppercase",
+				{locale === "ar" ? (
+					<Button
+						onClick={() => {
+							router.push("/illustration");
 						}}
+						sx={{
+							borderRadius: "16px",
+							paddingX: "11px",
+							height: "59px",
+							display: "flex",
+							width: "313px",
+
+							// background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+							flexDirection: "row-reverse",
+						}}
+						onMouseEnter={handleHoverButton}
+						onMouseLeave={handleLeave}
+						className="ButtonAnimation"
 					>
-						{/* Get Started */}
-						{t("nav_getStarted")}
-					</Typography>
-					<FiArrowUpRight size={42} color="#343132" className="left" />
-				</Button>
+						<Typography
+							sx={{
+								letterSpacing: "0.02em",
+								fontSize: "25px",
+								fontWeight: "700",
+								lineHeight: "40px",
+								color: "#343132",
+								textTransform: "uppercase",
+							}}
+						>
+							{/* Get Started */}
+							{t("nav_getStarted")}
+						</Typography>
+
+						<FiArrowUpLeft
+							size={42}
+							color="#343132"
+							className={hoveredButton ? "animated-icon_rtl" : ""}
+						/>
+					</Button>
+				) : (
+					<Button
+						onClick={() => {
+							router.push("/illustration");
+						}}
+						sx={{
+							borderRadius: "16px",
+							paddingX: "11px",
+							height: "59px",
+							display: "flex",
+							width: "313px",
+
+							background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
+						}}
+						onMouseEnter={handleHoverButton}
+						onMouseLeave={handleLeave}
+						className="ButtonAnimation"
+					>
+						<Typography
+							sx={{
+								letterSpacing: "0.02em",
+								fontSize: "25px",
+								fontWeight: "700",
+								lineHeight: "40px",
+								color: "#343132",
+								textTransform: "uppercase",
+							}}
+						>
+							{/* Get Started */}
+							{t("nav_getStarted")}
+						</Typography>
+						<FiArrowUpRight
+							size={42}
+							color="#343132"
+							className={hoveredButton ? "animated-icon" : ""}
+						/>
+					</Button>
+				)}
 			</Box>
 			<Box
 				sx={{
@@ -361,7 +419,7 @@ const Header = () => {
 						backdropFilter: "blur(100px)",
 						border: "1px solid #FBFBFB",
 						boxShadow: "0px 0px 0px 0px",
-						zIndex:"999999999"
+						zIndex: "999999999",
 					}}
 				>
 					<Toolbar
@@ -370,6 +428,7 @@ const Header = () => {
 							background: "rgba(251, 251, 251, 0.6)",
 							backdropFilter: "blur(100px)",
 							justifyContent: "space-between",
+							minHeight: "80px",
 						}}
 					>
 						<IconButton
@@ -393,7 +452,6 @@ const Header = () => {
 								/>
 							)}
 						</IconButton>
-
 						<Box
 							component="div"
 							sx={{ cursor: "pointer", margin: ".5rem 0" }}
@@ -403,6 +461,7 @@ const Header = () => {
 								<img src="/images/logo.svg" alt="logo" />
 							</Link>
 						</Box>
+
 						<Box
 							sx={{
 								display: { xs: "none", sm: "none", md: "flex", xl: "flex" },
@@ -488,7 +547,7 @@ const Header = () => {
 								</ul>
 							</Box>
 							<Button
-								onClick={() => router.push("/signup")}
+								onClick={() => router.push("/illustration")}
 								sx={{
 									borderRadius: "16px",
 									paddingX: "18px",
@@ -498,6 +557,9 @@ const Header = () => {
 									background:
 										"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 								}}
+								onMouseEnter={handleHoverButton}
+								onMouseLeave={handleLeave}
+								className="ButtonAnimation"
 							>
 								<Typography
 									sx={{
@@ -512,9 +574,17 @@ const Header = () => {
 									{t("nav_getStarted")}
 								</Typography>
 								{locale === "ar" ? (
-									<FiArrowUpLeft size={42} color="#343132" className="" />
+									<FiArrowUpLeft
+										size={42}
+										color="#343132"
+										className={hoveredButton ? "animated-icon_rtl" : ""}
+									/>
 								) : (
-									<FiArrowUpRight size={42} color="#343132" className="" />
+									<FiArrowUpRight
+										size={42}
+										color="#343132"
+										className={hoveredButton ? "animated-icon" : ""}
+									/>
 								)}
 							</Button>
 						</Box>

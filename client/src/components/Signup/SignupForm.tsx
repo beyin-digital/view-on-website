@@ -1,18 +1,30 @@
+import { useEffect, useState } from "react";
 import { Typography, Box, OutlinedInput, Button } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { IconsStyle } from "../Button";
-import { UserContext } from "@/contexts/userContext";
-import { useContext } from "react";
+import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
 
 const SignupForm = () => {
+	// translate
 	const { t } = useTranslation("signup");
+	const { locale } = useRouter();
+
 	const router = useRouter();
 
-	const { values } = useContext(UserContext);
+	// animation
+	const [hoveredButton, setHoveredButton] = useState(false);
+
+	const handleHoverButton = () => {
+		setHoveredButton(!hoveredButton);
+	};
+
+	const handleLeave = () => {
+		setHoveredButton(false);
+	};
 	return (
-		<form>
+		<>
 			<Box
 				sx={{
 					width: "100%",
@@ -41,8 +53,6 @@ const SignupForm = () => {
 					}}
 				>
 					<OutlinedInput
-						value={values.fullName}
-						name='fullName'
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
@@ -56,8 +66,6 @@ const SignupForm = () => {
 						placeholder={`${t("form_name")}`}
 					/>
 					<OutlinedInput
-						value={values.password}
-						name='password'
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
@@ -85,8 +93,6 @@ const SignupForm = () => {
 					}}
 				>
 					<OutlinedInput
-						value={values.email}
-						name='email'
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
@@ -122,11 +128,7 @@ const SignupForm = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
-					flexDirection: {
-						xs: "column-reverse",
-						md: "row",
-						xl: "row",
-					},
+					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
 					marginBottom: { xs: "10rem", md: "5rem", xl: "5rem" },
 					marginTop: { xs: "1rem", md: "2rem", xl: "2rem" },
 					marginY: { xs: "1rem", md: "0", xl: "0" },
@@ -142,7 +144,7 @@ const SignupForm = () => {
 					{t("sign_up_account")}
 
 					<Link
-						href='/login'
+						href="/login"
 						title="View On Website Login Page"
 						style={{
 							textDecoration: "none",
@@ -166,6 +168,9 @@ const SignupForm = () => {
 						background: "#0090EC",
 						borderRadius: "16px",
 					}}
+					onMouseEnter={handleHoverButton}
+					onMouseLeave={handleLeave}
+					className="SubscribeAnimation"
 				>
 					<Button
 						sx={{
@@ -176,17 +181,13 @@ const SignupForm = () => {
 							justifyContent: "space-around",
 						}}
 						onClick={() => router.push("verification")}
-						type='submit'
+						type="submit"
 						title={`${t("sign_up_button")}`}
 					>
 						<Typography
 							sx={{
 								letterSpacing: "0.02em",
-								fontSize: {
-									xs: "20px",
-									md: "25px",
-									xl: "32px",
-								},
+								fontSize: { xs: "20px", md: "25px", xl: "32px" },
 								fontWeight: 400,
 								lineHeight: "40px",
 								color: "#FBFBFB",
@@ -195,11 +196,23 @@ const SignupForm = () => {
 						>
 							{t("sign_up_button")}
 						</Typography>
-						<IconsStyle />
+						{locale === "ar" ? (
+							<FiArrowUpLeft
+								size={42}
+								color="#FBFBFB"
+								className={hoveredButton ? "animated-icon_rtl" : ""}
+							/>
+						) : (
+							<FiArrowUpRight
+								size={42}
+								color="#FBFBFB"
+								className={hoveredButton ? "animated-icon" : ""}
+							/>
+						)}
 					</Button>
 				</Box>
 			</Box>
-		</form>
+		</>
 	);
 };
 
