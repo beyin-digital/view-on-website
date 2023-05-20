@@ -48,6 +48,12 @@ const SubscribePage: NextPage = () => {
 	const handleLeave = () => {
 		setHoveredButton(false);
 	};
+
+	useEffect(() => {
+		if (keywordDebounce.length > 0) {
+			checkKeywordavailability(keywordDebounce);
+		}
+	}, [keywordDebounce]);
 	return (
 		<>
 			<Seo
@@ -233,9 +239,10 @@ const SubscribePage: NextPage = () => {
 											{/* The hashtag keyword you've chosen is premium */}
 											{/* {t("text_hashtag")} */}
 										</Typography>
-										{values.hashtag.length === 1 ||
-										values.hashtag.length === 2 ||
-										values.hashtag.length === 3 ? (
+										{(values.hashtag.length === 1 ||
+											values.hashtag.length === 2 ||
+											values.hashtag.length === 3) &&
+										!keywordFound ? (
 											<Typography
 												sx={{
 													cursor: "pointer",
@@ -256,7 +263,8 @@ const SubscribePage: NextPage = () => {
 												{t("availableP")} <br />
 												{t("prim")}
 											</Typography>
-										) : values.hashtag.length >= 4 ? (
+										) : values.hashtag.length >= 4 &&
+										  !keywordFound ? (
 											<Typography
 												sx={{
 													cursor: "pointer",
@@ -367,18 +375,13 @@ const SubscribePage: NextPage = () => {
 											width: "311px",
 											display: "flex",
 											justifyContent: "space-around",
-											// background: "#31E716",
-											// "&:hover": {
-											// 	background: "#31E716",
-											// 	color: "#343132",
-											// },
 										}}
 										onMouseEnter={handleHoverButton}
 										onMouseLeave={handleLeave}
 										className='ButtonReserve'
 										onClick={() =>
 											router.push(
-												`/subscribe/${values.hashtag}`
+												`/subscribe/${values.hashtag}?sublink=${values.sublinks}`
 											)
 										}
 									>
@@ -406,7 +409,6 @@ const SubscribePage: NextPage = () => {
 										<FiArrowDownLeft
 											size={42}
 											color='#343132'
-											// className="right"
 											className={`right ${
 												hoveredButton
 													? "ButtonReserve_rtl"

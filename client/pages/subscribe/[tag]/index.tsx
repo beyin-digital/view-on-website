@@ -16,15 +16,15 @@ import {
 	FiArrowUpLeft,
 } from "react-icons/fi";
 import { AiOutlineCheck } from "react-icons/ai";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import FooterMobile from "@/components/Footer/FooterMobile";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { NextPage } from "next";
 import { useTranslation } from "next-i18next";
-import Head from "next/head";
 import Layout from "@/components/Layout/LayoutSubscribe";
 import Seo from "@/components/Seo";
+import { KeywordContext } from "@/contexts/keywordContext";
 
 const SubscribePage: NextPage = () => {
 	const { t } = useTranslation("subscribe");
@@ -57,8 +57,10 @@ const SubscribePage: NextPage = () => {
 
 	const [values, setValues] = useState({
 		hashtag: router.query.tag || "",
-		sublinks: "",
+		sublinks: router.query.sublink || "",
 	});
+
+	const { handleSubscription } = useContext(KeywordContext);
 	let price = "";
 	switch (values.hashtag.length) {
 		case 1:
@@ -385,6 +387,7 @@ const SubscribePage: NextPage = () => {
 											{t("text_input_sublink")}
 										</Typography>
 										<OutlinedInput
+											value={values.sublinks}
 											// label={`${t("input_hashtag_two")}`}
 											sx={{
 												width: "100%",
@@ -805,6 +808,14 @@ const SubscribePage: NextPage = () => {
 									}}
 								>
 									<Button
+										onClick={() => {
+											handleSubscription(
+												values.hashtag as string,
+												values.sublinks as string,
+												99,
+												"month"
+											);
+										}}
 										sx={{
 											paddingX: "18px",
 											width: "140px",
@@ -972,6 +983,14 @@ const SubscribePage: NextPage = () => {
 									}}
 								>
 									<Button
+										onClick={() => {
+											handleSubscription(
+												values.hashtag as string,
+												values.sublinks as string,
+												399,
+												"year"
+											);
+										}}
 										sx={{
 											paddingX: "18px",
 											width: "140px",
@@ -1134,6 +1153,14 @@ const SubscribePage: NextPage = () => {
 									}}
 								>
 									<Button
+										onClick={() => {
+											handleSubscription(
+												values.hashtag as string,
+												values.sublinks as string,
+												299,
+												"6 months"
+											);
+										}}
 										sx={{
 											paddingX: "18px",
 											width: "140px",

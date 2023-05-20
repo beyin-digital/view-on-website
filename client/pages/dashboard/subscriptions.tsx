@@ -27,6 +27,7 @@ const DashboardSubscriptionsPage = () => {
 	const router = useRouter();
 	const { getUserSubscriptions, subscriptions } = useContext(KeywordContext);
 	const { token, user } = useContext(UserContext);
+
 	useEffect(() => {
 		if (token) {
 			getUserSubscriptions();
@@ -155,7 +156,7 @@ const DashboardSubscriptionsPage = () => {
 								>
 									<Typography fontSize='32px'>
 										#
-										{subscription.keyword.letters.toUpperCase()}
+										{subscription?.keyword?.letters.toUpperCase()}
 									</Typography>
 								</Box>
 								<Box
