@@ -4,13 +4,29 @@ import Link from "next/link";
 import TextViewOnWeb from "../Home/TextViewOnWeb";
 import { useTranslation } from "next-i18next";
 import { ImageBackground } from "./ImageBackground";
-
+import ModalFooter from "./ModalFooter";
+import { useRouter } from "next/router";
+import { useState } from "react";
 const FooterMobile = () => {
 	const { t } = useTranslation("common");
+	const { locale } = useRouter();
+	const router = useRouter();
+
+	// modal
+	const [open, setOpen] = useState(false);
+	const handleClose = () => setOpen(false);
+	function closeModel() {
+		setOpen(false);
+		// console.log("hi");
+	}
+	function openModel() {
+		setOpen(true);
+		// console.log("hi");
+	}
 
 	const links = [
 		{ id: 11, name: "contact", link: "/contact", tKey: "footer_contact" },
-		{ id: 22, name: "Learn More", link: "/", tKey: "footer_learn" },
+		// { id: 22, name: "Learn More", link: "/example", tKey: "footer_learn" },
 		{
 			id: 33,
 			name: "Privacy Policy",
@@ -22,15 +38,9 @@ const FooterMobile = () => {
 	const icons = [
 		{
 			id: 1,
-			name: "faceBook",
-			link: "https://facebook.com",
-			icon: "/icons/facebook.svg",
-		},
-		{
-			id: 2,
-			name: "twitter",
-			link: "https://twitter.com",
-			icon: "/icons/twitter.svg",
+			name: "youtube",
+			icon: "/icons/youtube.svg",
+			link: "https://instagram.com",
 		},
 		{
 			id: 3,
@@ -46,7 +56,7 @@ const FooterMobile = () => {
 		},
 	];
 	return (
-		<footer>
+		<>
 			<Box
 				sx={{
 					height: { xs: "70vh", sm: "60vh", md: "" },
@@ -223,6 +233,26 @@ const FooterMobile = () => {
 										</Typography>
 									</Link>
 								))}
+								<>
+									<Typography
+										sx={{
+											fontSize: { xs: "14px", sm: "20px" },
+											fontWeight: "400",
+											lineHeight: "25px",
+											textAlign: "center",
+											textTransform: "capitalize",
+											cursor: "pointer",
+										}}
+										onClick={openModel}
+									>
+										{t("footer_learn")}
+									</Typography>
+									<ModalFooter
+										open={open}
+										onClick={closeModel}
+										close={handleClose}
+									/>
+								</>
 							</Box>
 						</Box>
 						<Typography
@@ -255,7 +285,7 @@ const FooterMobile = () => {
 					</Box>
 				</Box>
 			</Box>
-		</footer>
+		</>
 	);
 };
 

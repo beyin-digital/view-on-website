@@ -8,19 +8,14 @@ import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
+import Seo from "@/components/Seo";
 
 const ChangePassword = () => {
 	const { t } = useTranslation("changePassword");
 
 	return (
 		<>
-			<Head>
-				<title>{t("meta_title")}</title>
-				<meta name="description" content="" />
-				<meta name="keyword" content="" />
-				<meta property="og:image" content="" />
-				<link rel="icon" href="/images/logo.svg" />
-			</Head>
+			<Seo title={t("meta_title")} description="" keyword="" />
 			<Layout>
 				<Box
 					sx={{

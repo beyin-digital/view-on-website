@@ -21,7 +21,8 @@ const RightSide = () => {
 			sx={{
 				display: "flex",
 				width: "100%",
-				flexDirection: { xs: "column-reverse",sm:"row", md:"row" },
+				maxWidth: "100%",
+				flexDirection: { xs: "column-reverse", sm: "row", md: "row" },
 				alignItems: "center",
 			}}
 		>
@@ -37,71 +38,71 @@ const RightSide = () => {
 			>
 				{/* Check components */}
 				<>
-				{locale === "ar" ? (
-					<>
-						{check.map((item) => (
-							<Box
-								key={item.id}
-								sx={{
-									display: "flex",
-									alignItems: "center",
-									height: { xs: "30px", xl: "25px" },
-									flexDirection: "row-reverse",
-								}}
-							>
-								<CheckIcon fontSize="small" />
+					{locale === "ar" ? (
+						<>
+							{check.map((item) => (
 								<Box
+									key={item.id}
 									sx={{
-										paddingX: ".5rem",
+										display: "flex",
+										alignItems: "center",
+										height: { xs: "30px", xl: "25px" },
+										flexDirection: "row-reverse",
 									}}
 								>
-									<Typography
+									<CheckIcon fontSize="small" />
+									<Box
 										sx={{
-											fontSize: "16px",
-											fontWeight: "400",
-											lineHeight: "14px",
+											paddingX: ".5rem",
 										}}
 									>
-										{t(item.tKey)}
-									</Typography>
+										<Typography
+											sx={{
+												fontSize: "16px",
+												fontWeight: "400",
+												lineHeight: "14px",
+											}}
+										>
+											{t(item.tKey)}
+										</Typography>
+									</Box>
 								</Box>
-							</Box>
-						))}
-					</>
-				) : (
-					<>
-						{check.map((item) => (
-							<Box
-								key={item.id}
-								sx={{
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "center",
-									height: { xs: "30px", xl: "25px" },
-								}}
-							>
-								<CheckIcon fontSize="small" />
+							))}
+						</>
+					) : (
+						<>
+							{check.map((item) => (
 								<Box
+									key={item.id}
 									sx={{
-										width: "100%",
-										paddingX: ".5rem",
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "center",
+										height: { xs: "30px", xl: "25px" },
 									}}
 								>
-									<Typography
+									<CheckIcon fontSize="small" />
+									<Box
 										sx={{
-											fontSize: "16px",
-											fontWeight: "400",
-											lineHeight: "14px",
-											// textAlign:"right"
+											width: "100%",
+											paddingX: ".5rem",
 										}}
 									>
-										{t(item.tKey)}
-									</Typography>
+										<Typography
+											sx={{
+												fontSize: "16px",
+												fontWeight: "400",
+												lineHeight: "14px",
+												// textAlign:"right"
+											}}
+										>
+											{t(item.tKey)}
+										</Typography>
+									</Box>
 								</Box>
-							</Box>
-						))}
-					</>
-				)}
+							))}
+						</>
+					)}
 				</>
 			</Box>
 			{/*  */}
@@ -115,13 +116,13 @@ const RightSide = () => {
 					},
 					display: "flex",
 					alignItems: "center",
-					justifyContent: { xs: "space-between", md: "space-around" },
+					justifyContent: { xs: "center", md: "space-around" },
 					flexDirection: "row-reverse",
 					marginY: { xs: "1rem", md: "", xl: "" },
 					paddingX: "1rem",
 				}}
 			>
-				<Box
+				{/* <Box
 					sx={{
 						width: { xs: "50%", md: "35%", xl: "45%" },
 						height: "100%",
@@ -145,7 +146,6 @@ const RightSide = () => {
 							marginY: ".5rem",
 						}}
 					>
-						{/* {t("text_num")} */}
 						$3.65
 					</Typography>
 					<Typography
@@ -159,10 +159,10 @@ const RightSide = () => {
 					>
 						{t("text_dolor")}
 					</Typography>
-				</Box>
+				</Box> */}
 				<Box
 					sx={{
-						width: { xs: "50%", md: "20%", xl: "45%" },
+						width: { xs: "50%", md: "40%", xl: "45%" },
 						height: "100%",
 						display: "flex",
 						flexDirection: "column",
@@ -183,9 +183,6 @@ const RightSide = () => {
 							marginY: ".5rem",
 						}}
 					>
-						{/* {t("more_dolor")} */}
-						{/* {t("dolor")} */}
-						{/* {t("num_more")} */}
 						$1M
 					</Typography>
 					<Typography

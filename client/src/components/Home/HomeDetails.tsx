@@ -14,12 +14,7 @@ const HomeDetails = () => {
 					width: "100%",
 					height: "100%",
 					display: "flex",
-					justifyContent: {
-						xs: "center",
-						sm: "end",
-						md: "end",
-						xl: "end",
-					},
+					justifyContent: { xs: "center", sm: "end", md: "end", xl: "end" },
 				}}
 			>
 				<Box
@@ -44,12 +39,7 @@ const HomeDetails = () => {
 					<LayoutHomeBg>
 						<Box
 							sx={{
-								width: {
-									xs: "100%",
-									sm: "70%",
-									md: "70%",
-									xl: "70%",
-								},
+								width: { xs: "100%", sm: "70%", md: "70%", xl: "70%" },
 								height: {
 									xs: "100%",
 									sm: "80%",
@@ -66,7 +56,7 @@ const HomeDetails = () => {
 									xl: "space-evenly",
 								},
 							}}
-							className='boxHomeBlack'
+							className="boxHomeBlack"
 						>
 							<HomeForm />
 							<Box
@@ -81,7 +71,7 @@ const HomeDetails = () => {
 									alignItems: "center",
 									justifyContent: "center",
 								}}
-								className='BoxTextHom'
+								className="BoxTextHom"
 							>
 								<TextViewOnWeb />
 							</Box>

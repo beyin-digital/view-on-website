@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Grid, Link, Typography, Box } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import NextLink from "next/link";
 
 export const HeaderLayoutDesktop = () => {
 	const { t } = useTranslation("illustration");
@@ -139,7 +140,6 @@ export const HeaderLayoutDesktop = () => {
 					<Box
 						sx={{
 							width: "100%",
-							border: "1px solid red",
 							height: "100%",
 						}}
 					>
@@ -511,8 +511,9 @@ export const ThreeOptionDesktop = () => {
 };
 
 export const ButtonStyleDesktop = () => {
-	const { t } = useTranslation("illustration");
+	const { t } = useTranslation(["illustration","common"]);
 	const { locale } = useRouter();
+	const router = useRouter();
 	return (
 		<>
 			<Box
@@ -540,9 +541,11 @@ export const ButtonStyleDesktop = () => {
 						borderRadius: "12px",
 					}}
 				>
-					<Link
-						href=""
-						sx={{
+					<NextLink
+						href="/example"
+						locale={router.locale}
+						title="Example View On Website Page"
+						style={{
 							textDecoration: "none",
 						}}
 					>
@@ -557,12 +560,12 @@ export const ButtonStyleDesktop = () => {
 						>
 							{t("button")}
 						</Typography>
-					</Link>
+					</NextLink>
 
 					{locale === "ar" ? (
 						<svg
-							width="38"
-							height="38"
+							width="26"
+							height="26"
 							viewBox="0 0 38 38"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -591,6 +594,7 @@ export const ButtonStyleDesktop = () => {
 		</>
 	);
 };
+
 
 export const BackgroundImage = () => {
 	const { locale } = useRouter();

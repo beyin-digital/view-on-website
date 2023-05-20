@@ -2,7 +2,7 @@ import { Box, Typography, Grid, Link } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-
+import NextLink from "next/link";
 export const ImageHeader = () => {
 	return (
 		<>
@@ -90,7 +90,7 @@ export const HeaderLayout = () => {
 					<Box
 						sx={{
 							height: "50px",
-							width: {xs:"70%",sm:"85%"},
+							width: { xs: "70%", sm: "85%" },
 							background: " linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 							borderRadius: "7px",
 							display: "flex",
@@ -519,6 +519,7 @@ export const ThreeOption = () => {
 export const ButtonStyle = () => {
 	const { t } = useTranslation("illustration");
 	const { locale } = useRouter();
+	const router = useRouter();
 	return (
 		<>
 			<Box
@@ -545,9 +546,11 @@ export const ButtonStyle = () => {
 						borderRadius: "12px",
 					}}
 				>
-					<Link
-						href=""
-						sx={{
+					<NextLink
+						href="/example"
+						locale={router.locale}
+						title="Example View On Website Page"
+						style={{
 							textDecoration: "none",
 						}}
 					>
@@ -572,7 +575,7 @@ export const ButtonStyle = () => {
 						>
 							{t("button")}
 						</Typography>
-					</Link>
+					</NextLink>
 					{locale === "ar" ? (
 						<svg
 							width="38"

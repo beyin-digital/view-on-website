@@ -12,6 +12,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
+import Seo from "@/components/Seo";
 import { useContext, useEffect } from "react";
 import { UserContext } from "@/contexts/userContext";
 import { useRouter } from "next/router";
@@ -29,6 +30,7 @@ const SignUpPage = () => {
 
 	return (
 		<>
+			<Seo title={t("meta_title")} description='' keyword='' />
 			<Head>
 				<title>{t("meta_title")}</title>
 				<meta name='description' content='' />

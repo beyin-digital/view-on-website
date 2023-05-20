@@ -1,3 +1,4 @@
+import { useContext, useState } from "react";
 import {
 	Typography,
 	Box,
@@ -10,18 +11,18 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { IconsStyle } from "../Button";
+import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
 import { UserContext } from "@/contexts/userContext";
-import { useContext, useEffect, useState } from "react";
-import useDebounce from "@/hooks/useDebounce";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const SignupForm = () => {
+	// translate
 	const { t } = useTranslation("signup");
+	const { locale } = useRouter();
+
 	const router = useRouter();
 
 	const [showPassword, setShowPassword] = useState(false);
-	const { values, handleSignup, handleChange } = useContext(UserContext);
-
 	const handleClickShowPassword = () => setShowPassword(show => !show);
 
 	const handleMouseDownPassword = (
@@ -29,15 +30,19 @@ const SignupForm = () => {
 	) => {
 		event.preventDefault();
 	};
+	const { values, handleChange } = useContext(UserContext);
+	// animation
+	const [hoveredButton, setHoveredButton] = useState(false);
 
-	// useEffect(() => {
-	// 	if (emailDebounce) {
-	// 		console.log(emailDebounce);
-	// 	}
-	// }, [emailDebounce]);
+	const handleHoverButton = () => {
+		setHoveredButton(!hoveredButton);
+	};
 
+	const handleLeave = () => {
+		setHoveredButton(false);
+	};
 	return (
-		<form onSubmit={handleSignup}>
+		<>
 			<Box
 				sx={{
 					width: "100%",
@@ -66,8 +71,6 @@ const SignupForm = () => {
 					}}
 				>
 					<OutlinedInput
-						value={values.fullName}
-						name='fullName'
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
@@ -82,8 +85,6 @@ const SignupForm = () => {
 						placeholder={`${t("form_name")}`}
 					/>
 					<OutlinedInput
-						value={values.password}
-						name='password'
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
@@ -129,8 +130,6 @@ const SignupForm = () => {
 					}}
 				>
 					<OutlinedInput
-						value={values.email}
-						name='email'
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
@@ -208,6 +207,7 @@ const SignupForm = () => {
 
 					<Link
 						href='/login'
+						title='View On Website Login Page'
 						style={{
 							textDecoration: "none",
 							color: "#0090EC",
@@ -230,6 +230,9 @@ const SignupForm = () => {
 						background: "#0090EC",
 						borderRadius: "16px",
 					}}
+					onMouseEnter={handleHoverButton}
+					onMouseLeave={handleLeave}
+					className='SubscribeAnimation'
 				>
 					<Button
 						sx={{
@@ -258,11 +261,25 @@ const SignupForm = () => {
 						>
 							{t("sign_up_button")}
 						</Typography>
-						<IconsStyle />
+						{locale === "ar" ? (
+							<FiArrowUpLeft
+								size={42}
+								color='#FBFBFB'
+								className={
+									hoveredButton ? "animated-icon_rtl" : ""
+								}
+							/>
+						) : (
+							<FiArrowUpRight
+								size={42}
+								color='#FBFBFB'
+								className={hoveredButton ? "animated-icon" : ""}
+							/>
+						)}
 					</Button>
 				</Box>
 			</Box>
-		</form>
+		</>
 	);
 };
 

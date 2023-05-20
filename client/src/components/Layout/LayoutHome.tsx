@@ -1,16 +1,17 @@
 import React from "react";
 import { Box } from "@mui/system";
 
-
 import Header from "../Navbar/Navbar";
 import Footer from "../Footer/FooterHome";
 import { BackgroundHome } from "./Background";
+import { BackgroundImageSlider } from "../Slider/BackgroundImage";
 
 interface Props {
 	children: React.ReactNode;
 	onClick: () => void;
 }
 const Layout: React.FC<Props> = ({ children, onClick }) => {
+
 	return (
 		<Box
 			sx={{
@@ -20,12 +21,13 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 			<Box
 				sx={{
 					height: { xs: "100vh", md: "100vh", xl: "100%" },
-					background: "#EAEDED",
+					// background: "#EAEDED",
 					marginY: "auto",
 				}}
 				className="layoutHomeOverflow"
 			>
 				<BackgroundHome />
+				{/* <BackgroundImageSlider /> */}
 				<Box
 					sx={{
 						maxWidth: "100%",

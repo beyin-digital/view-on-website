@@ -10,19 +10,14 @@ import { useTranslation } from "next-i18next";
 import Layout from "@/components/Layout/Layout";
 import DetailsHeader from "@/components/Request/DetailsHeader";
 import FormRequest from "@/components/Request/FormRequest";
+import Seo from "@/components/Seo";
 
 const Request = () => {
 	const { t } = useTranslation("request");
 
 	return (
 		<>
-			<Head>
-				<title>{t("meta_title")}</title>
-				<meta name="description" content="" />
-				<meta name="keyword" content="" />
-				<meta property="og:image" content="" />
-				<link rel="icon" href="/images/logo.svg" />
-			</Head>
+			<Seo title={t("meta_title")} description="" keyword="" />
 			<Layout>
 				<Grid
 					container

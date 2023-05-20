@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import Head from "next/head";
 
 // components
 import LoginForm from "@/components/Login/LoginForm";
@@ -10,6 +9,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
+import Seo from "@/components/Seo";
 import { UserContext } from "@/contexts/userContext";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -32,14 +32,7 @@ const LoginPage = () => {
 	}
 	return (
 		<>
-			<Head>
-				<title>{t("meta_title")}</title>
-				<meta name='description' content='' />
-				<meta name='keyword' content='' />
-				<meta property='og:image' content='' />
-				<link rel='icon' href='/images/logo.svg' />
-			</Head>
-
+			<Seo title={t("meta_title")} description='' keyword='' />
 			<Layout>
 				<Box
 					sx={{

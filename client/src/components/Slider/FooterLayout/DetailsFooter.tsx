@@ -4,10 +4,21 @@ import { useRouter } from "next/router";
 import { Box, Button, Typography } from "@mui/material";
 import { FiArrowDownRight, FiArrowDownLeft } from "react-icons/fi";
 import RightSide from "./RightSide";
+import { useState } from "react";
 
 const DetailsFooter = () => {
+	// translate hook
 	const { t } = useTranslation("slider");
 	const { locale } = useRouter();
+	// animation
+	const [hoveredButton, setHoveredButton] = useState(false);
+	const handleHoverButton = () => {
+		setHoveredButton(!hoveredButton);
+	};
+
+	const handleLeave = () => {
+		setHoveredButton(false);
+	};
 	return (
 		<>
 			{locale === "ar" ? (
@@ -21,70 +32,35 @@ const DetailsFooter = () => {
 						marginTop: { xs: "3rem", sm: "0", xl: "0" },
 					}}
 				>
-					{/* Right Footer AR / EN */}
-					{locale === "ar" ? (
-						<Box
-							sx={{
-								width: { xs: "100%", md: "80%", xl: "60%" },
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-between",
-								flexDirection: {
-									xs: "column",
-									sm: "row-reverse",
-									md: "row-reverse",
-									xl: "row-reverse",
-								},
-								marginY: { xs: "2rem", md: ".5rem", xl: ".5rem" },
-								border: {
-									xs: "1px solid #FBFBFB",
-									md: "transparent",
-									xl: "transparent",
-								},
-								background: {
-									xs: "#FBFBFB",
-									md: "transparent",
-									xl: "transparent",
-								},
-								borderRadius: "24px",
-								paddingY: "1rem",
-							}}
-						>
-							<RightSide />
-						</Box>
-					) : (
-						<Box
-							sx={{
-								width: { xs: "100%", md: "80%", xl: "60%" },
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-between",
-								flexDirection: {
-									xs: "column",
-									sm: "row",
-									md: "row",
-									xl: "row-reverse",
-								},
-								// marginY: { xs: "2rem", md: ".5rem", xl: ".5rem" },
-								border: {
-									xs: "1px solid #FBFBFB",
-									md: "transparent",
-									xl: "transparent",
-								},
-								background: {
-									xs: "rgba(251, 251, 251, 0.6)",
-									md: "transparent",
-									xl: "transparent",
-								},
-								borderRadius: "24px",
-								backdropFilter: { xs: "blur(100px)", md: "blur(0px)" },
-								paddingY: "1rem",
-							}}
-						>
-							<RightSide />
-						</Box>
-					)}
-					{/* Button AR / EN */}
+					<Box
+						sx={{
+							width: { xs: "100%", md: "80%", xl: "60%" },
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "space-between",
+							flexDirection: {
+								xs: "column",
+								sm: "row-reverse",
+								md: "row-reverse",
+								xl: "row-reverse",
+							},
+							marginY: { xs: "2rem", md: ".5rem", xl: ".5rem" },
+							border: {
+								xs: "1px solid #FBFBFB",
+								md: "transparent",
+								xl: "transparent",
+							},
+							background: {
+								xs: "#FBFBFB",
+								md: "transparent",
+								xl: "transparent",
+							},
+							borderRadius: "24px",
+							paddingY: "1rem",
+						}}
+					>
+						<RightSide />
+					</Box>
 					<Box
 						sx={{
 							width: { xs: "100%", md: "30%", xl: "30%" },
@@ -107,73 +83,39 @@ const DetailsFooter = () => {
 								},
 							}}
 						>
-							{locale === "ar" ? (
-								<Button
+							<Button
+								sx={{
+									borderRadius: "16px",
+									paddingX: "18px",
+									height: "59px",
+									width: "311px",
+									display: "flex",
+
+									justifyContent: "space-around",
+									flexDirection: "row-reverse",
+									alignItems: "center",
+								}}
+								onMouseEnter={handleHoverButton}
+								onMouseLeave={handleLeave}
+								className="ButtonReserve"
+							>
+								<Typography
 									sx={{
-										borderRadius: "16px",
-										paddingX: "18px",
-										height: "59px",
-										width: "311px",
-										display: "flex",
-										background: "#31E716",
-										justifyContent: "space-around",
-										flexDirection: "row-reverse",
-										alignItems: "center",
+										letterSpacing: "0.02em",
+										fontSize: "32px",
+										fontWeight: 400,
+										lineHeight: "40px",
+										color: "#343132",
 									}}
 								>
-									<Typography
-										sx={{
-											fontFamily: "Helvetica Neue",
-											letterSpacing: "0.02em",
-											fontSize: "32px",
-											fontWeight: 400,
-											lineHeight: "40px",
-											color: "#343132",
-										}}
-									>
-										{t("button")}
-									</Typography>
-									{locale === "ar" ? (
-										<FiArrowDownLeft size={42} color="#343132" />
-									) : (
-										<FiArrowDownRight size={42} color="#343132" />
-									)}
-								</Button>
-							) : (
-								<Button
-									sx={{
-										borderRadius: "16px",
-										paddingX: "18px",
-										height: "59px",
-										width: "311px",
-										display: "flex",
-										background: "#31E716",
-										"&:hover": {
-											background: "#31E716",
-											color: "#343132",
-										},
-									}}
-									// variant="contained"
-								>
-									<Typography
-										sx={{
-											fontFamily: "Helvetica Neue",
-											letterSpacing: "0.02em",
-											fontSize: "32px",
-											fontWeight: 400,
-											lineHeight: "40px",
-											color: "#343132",
-										}}
-									>
-										{t("button")}
-									</Typography>
-									{locale === "ar" ? (
-										<FiArrowDownLeft size={42} color="#343132" />
-									) : (
-										<FiArrowDownRight size={42} color="#343132" />
-									)}
-								</Button>
-							)}
+									{t("button")}
+								</Typography>
+								<FiArrowDownLeft
+									size={42}
+									color="#343132"
+									className={hoveredButton ? "ButtonReserve_rtl" : ""}
+								/>
+							</Button>
 						</Box>
 					</Box>
 				</Box>
@@ -186,72 +128,40 @@ const DetailsFooter = () => {
 						flexDirection: { xs: "column-reverse", md: "row" },
 						justifyContent: "center",
 						marginTop: { xs: "3rem", sm: "0", xl: "0" },
+						zIndex: "9999999999",
+						position: "relative",
 					}}
 				>
-					{/* Right Footer AR / EN */}
-					{locale === "ar" ? (
-						<Box
-							sx={{
-								width: { xs: "100%", md: "80%", xl: "60%" },
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-between",
-								flexDirection: {
-									xs: "column",
-									sm: "row-reverse",
-									md: "row-reverse",
-									xl: "row-reverse",
-								},
-								marginY: { xs: "2rem", md: ".5rem", xl: ".5rem" },
-								border: {
-									xs: "1px solid #FBFBFB",
-									md: "transparent",
-									xl: "transparent",
-								},
-								background: {
-									xs: "#FBFBFB",
-									md: "transparent",
-									xl: "transparent",
-								},
-								borderRadius: "24px",
-								paddingY: "1rem",
-							}}
-						>
-							<RightSide />
-						</Box>
-					) : (
-						<Box
-							sx={{
-								width: { xs: "100%", md: "80%", xl: "60%" },
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-between",
-								flexDirection: {
-									xs: "column",
-									sm: "row",
-									md: "row",
-									xl: "row-reverse",
-								},
-								// marginY: { xs: "2rem", md: ".5rem", xl: ".5rem" },
-								border: {
-									xs: "1px solid #FBFBFB",
-									md: "transparent",
-									xl: "transparent",
-								},
-								background: {
-									xs: "rgba(251, 251, 251, 0.6)",
-									md: "transparent",
-									xl: "transparent",
-								},
-								borderRadius: "24px",
-								backdropFilter: { xs: "blur(100px)", md: "blur(0px)" },
-								paddingY: "1rem",
-							}}
-						>
-							<RightSide />
-						</Box>
-					)}
-					{/* Button AR / EN */}
+					<Box
+						sx={{
+							width: { xs: "100%", md: "80%", xl: "60%" },
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "space-between",
+							flexDirection: {
+								xs: "column",
+								sm: "row",
+								md: "row",
+								xl: "row-reverse",
+							},
+							border: {
+								xs: "1px solid #FBFBFB",
+								md: "transparent",
+								xl: "transparent",
+							},
+							background: {
+								xs: "rgba(251, 251, 251, 0.6)",
+								md: "transparent",
+								xl: "transparent",
+							},
+							borderRadius: "24px",
+							backdropFilter: { xs: "blur(100px)", md: "blur(0px)" },
+							paddingY: "1rem",
+						}}
+					>
+						<RightSide />
+					</Box>
+
 					<Box
 						sx={{
 							width: { xs: "100%", md: "30%", xl: "30%" },
@@ -272,73 +182,35 @@ const DetailsFooter = () => {
 								},
 							}}
 						>
-							{locale === "ar" ? (
-								<Button
+							<Button
+								sx={{
+									borderRadius: "16px",
+									paddingX: "18px",
+									height: "59px",
+									width: "311px",
+									display: "flex",
+								}}
+								onMouseEnter={handleHoverButton}
+								onMouseLeave={handleLeave}
+								className="ButtonReserve"
+							>
+								<Typography
 									sx={{
-										borderRadius: "16px",
-										paddingX: "18px",
-										height: "59px",
-										width: "311px",
-										display: "flex",
-										background: "#31E716",
-										justifyContent: "space-around",
-										flexDirection: "row-reverse",
-										alignItems: "center",
+										letterSpacing: "0.02em",
+										fontSize: "32px",
+										fontWeight: 400,
+										lineHeight: "40px",
+										color: "#343132",
 									}}
 								>
-									<Typography
-										sx={{
-											fontFamily: "Helvetica Neue",
-											letterSpacing: "0.02em",
-											fontSize: "32px",
-											fontWeight: 400,
-											lineHeight: "40px",
-											color: "#343132",
-										}}
-									>
-										{t("button")}
-									</Typography>
-									{locale === "ar" ? (
-										<FiArrowDownLeft size={42} color="#343132" />
-									) : (
-										<FiArrowDownRight size={42} color="#343132" />
-									)}
-								</Button>
-							) : (
-								<Button
-									sx={{
-										borderRadius: "16px",
-										paddingX: "18px",
-										height: "59px",
-										width: "311px",
-										display: "flex",
-										background: "#31E716",
-										"&:hover": {
-											background: "#31E716",
-											color: "#343132",
-										},
-									}}
-									// variant="contained"
-								>
-									<Typography
-										sx={{
-											fontFamily: "Helvetica Neue",
-											letterSpacing: "0.02em",
-											fontSize: "32px",
-											fontWeight: 400,
-											lineHeight: "40px",
-											color: "#343132",
-										}}
-									>
-										{t("button")}
-									</Typography>
-									{locale === "ar" ? (
-										<FiArrowDownLeft size={42} color="#343132" />
-									) : (
-										<FiArrowDownRight size={42} color="#343132" />
-									)}
-								</Button>
-							)}
+									{t("button")}
+								</Typography>
+								<FiArrowDownRight
+									size={42}
+									color="#343132"
+									className={hoveredButton ? "ButtonReserve_ltr" : ""}
+								/>
+							</Button>
 						</Box>
 					</Box>
 				</Box>

@@ -6,6 +6,7 @@ import { Background } from "./Background";
 import Header from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import FooterMobile from "../Footer/FooterMobile";
+import { BackgroundImageSlider } from "../Slider/BackgroundImage";
 interface Props {
 	children: React.ReactNode;
 }
@@ -16,7 +17,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 				sx={{
 					width: "2162px",
 					maxWidth: "100%",
-					background: "#EAEDED",
+					// background: "#EAEDED",
 					overflow: "hidden",
 					height: "96vh",
 				}}
@@ -31,9 +32,11 @@ const Layout: React.FC<Props> = ({ children }) => {
 						position: "relative",
 					}}
 				>
+					<BackgroundImageSlider />
+
 					<Header />
 					{/* background Layout */}
-					<Background />
+					{/* <Background /> */}
 					<Box
 						className="LayoutBox"
 						sx={{
@@ -45,7 +48,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
 							transform: "skew(-16deg, 0deg)",
-							overflow: { xs: "", md: "hidden", xl: "hidden" },
+							// overflow: { xs: "", md: "hidden", xl: "hidden" },
 							margin: "3rem auto",
 							zIndex: "999",
 							paddingX: "2rem",

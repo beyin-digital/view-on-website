@@ -1,17 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { Drawer } from "@mui/material";
-import { Box } from "@mui/material";
+import { Drawer, Box } from "@mui/material";
 
 import Layout from "@/components/Layout/LayoutHome";
 import SliderDesktop from "@/components/Slider";
 import HomeDetails from "@/components/Home/HomeDetails";
-import Header from "@/components/Navbar/Navbar";
+import Seo from "@/components/Seo";
 
 type Anchor = "bottom" | "right";
 
@@ -21,6 +20,7 @@ const HomePage = (anchor: Anchor) => {
 	const router = useRouter();
 	const [hashtag, setHashtag] = useState("");
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+	const [isShadowVisible, setIsShadowVisible] = useState(true);
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
@@ -31,34 +31,30 @@ const HomePage = (anchor: Anchor) => {
 		top: false,
 		bottom: false,
 	});
-	const toggleDrawer =
-		(anchor: Anchor, open: boolean) =>
-		(event: React.KeyboardEvent | React.MouseEvent) => {
-			if (
-				event.type === "keydown" &&
-				((event as React.KeyboardEvent).key === "Tab" ||
-					(event as React.KeyboardEvent).key === "Shift")
-			) {
-				return;
-			}
+	const toggleDrawer = (anchor: Anchor, open: boolean) => (
+		event: React.KeyboardEvent | React.MouseEvent,
+	) => {
+		if (
+			event.type === "keydown" &&
+			((event as React.KeyboardEvent).key === "Tab" ||
+				(event as React.KeyboardEvent).key === "Shift")
+		) {
+			return;
+		}
 
-			setState({ ...state, [anchor]: open });
-		};
+		setState({ ...state, [anchor]: open });
+	};
 	function openModel() {
 		setIsDrawerOpen(true);
+		setIsShadowVisible(false);
 	}
 	function closeModel() {
 		setIsDrawerOpen(false);
+		setIsShadowVisible(false);
 	}
 	return (
 		<>
-			<Head>
-				<title>{t("meta_title")}</title>
-				<meta name='description' content='' />
-				<meta name='keyword' content='' />
-				<meta property='og:image' content='' />
-				<link rel='icon' href='/images/logo.svg' />
-			</Head>
+			<Seo title={t("meta_title")} description="" keyword="" />
 			<Box
 				sx={{
 					position: "relative",
@@ -70,13 +66,34 @@ const HomePage = (anchor: Anchor) => {
 					<>
 						<HomeDetails />
 						<Drawer
-							anchor='bottom'
+							variant="temporary"
+							anchor="bottom"
 							open={isDrawerOpen}
 							onClose={() => setIsDrawerOpen(false)}
 							onClick={toggleDrawer(anchor, false)}
 							onKeyDown={toggleDrawer(anchor, false)}
+							sx={{
+								background: "#FBFBFB",
+								".MuiDrawer-root": {
+									boxShadow: "0px 0px 0px 0px",
+									background: "#FBFBFB",
+								},
+								".root-MuiModal-backdrop": {
+									boxShadow: "0px 0px 0px 0px",
+									background: "#FBFBFB",
+								},
+								boxShadow: isShadowVisible ? "0px 0px 0px #fbfbfb" : "",
+								"MuiBackdrop-root": {
+									boxShadow: "0px 0px 0px 0px",
+									background: "#FBFBFB",
+								},
+								".MuiBackdrop-root": {
+									boxShadow: "0px 0px 0px 0px",
+									background: "#FBFBFB",
+								},
+							}}
 						>
-							<Header />
+							{/* <Header /> */}
 							<SliderDesktop onClick={closeModel} />
 						</Drawer>
 					</>

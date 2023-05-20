@@ -1,11 +1,11 @@
+import { useContext, useEffect, useState } from "react";
+
 import Layout from "@/components/Layout/Layout";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { MuiOtpInput } from "mui-one-time-password-input";
-import React, { useContext, useEffect } from "react";
-import { UserContext } from "@/contexts/userContext";
-import useCountdown from "@/hooks/useCountdown";
+import React from "react";
 import Head from "next/head";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -13,16 +13,30 @@ import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
 import { IconsStyle } from "@/components/Button";
+import Seo from "@/components/Seo";
+import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
+import { UserContext } from "@/contexts/userContext";
+import useCountdown from "@/hooks/useCountdown";
 
 const VerificationPage = () => {
+	// translate hook
 	const { t } = useTranslation("verification");
+	const { locale } = useRouter();
 
 	const router = useRouter();
-	const [otp, setOtp] = React.useState("");
+	const [otp, setOtp] = useState("");
 	const handleChange = (newValue: any) => {
 		setOtp(newValue);
 	};
+	// animation
+	const [hoveredButton, setHoveredButton] = useState(false);
+	const handleHoverButton = () => {
+		setHoveredButton(!hoveredButton);
+	};
 
+	const handleLeave = () => {
+		setHoveredButton(false);
+	};
 	const { secondsLeft, start } = useCountdown();
 
 	const { user, values, verifyOtp, resendOTP } = useContext(UserContext);
@@ -33,13 +47,8 @@ const VerificationPage = () => {
 
 	return (
 		<>
-			<Head>
-				<title>{t("meta_title")}</title>
-				<meta name='description' content='' />
-				<meta name='keyword' content='' />
-				<meta property='og:image' content='' />
-				<link rel='icon' href='/images/logo.svg' />
-			</Head>
+			<Seo title={t("meta_title")} description='' keyword='' />
+
 			<Layout>
 				<Grid
 					sx={{
@@ -125,6 +134,7 @@ const VerificationPage = () => {
 									paddingX: ".5rem",
 								}}
 							>
+								{t("desc")}
 								Enter the authenrication code we sent to Your
 								email{" "}
 								{router.query.newUser
@@ -230,6 +240,9 @@ const VerificationPage = () => {
 									background: "#0090EC",
 									borderRadius: "16px",
 								}}
+								onMouseEnter={handleHoverButton}
+								onMouseLeave={handleLeave}
+								className='SubscribeAnimation'
 							>
 								<Button
 									sx={{
@@ -244,7 +257,6 @@ const VerificationPage = () => {
 										justifyContent: "space-around",
 									}}
 									onClick={() => verifyOtp(otp)}
-									type='submit'
 									title={`${t("button")}`}
 								>
 									<Typography
@@ -263,7 +275,28 @@ const VerificationPage = () => {
 									>
 										{t("button")}
 									</Typography>
-									<IconsStyle />
+									{/* <IconsStyle /> */}
+									{locale === "ar" ? (
+										<FiArrowUpLeft
+											size={42}
+											color='#FBFBFB'
+											className={` ${
+												hoveredButton
+													? "animated-icon_rtl"
+													: ""
+											}`}
+										/>
+									) : (
+										<FiArrowUpRight
+											size={42}
+											color='#FBFBFB'
+											className={
+												hoveredButton
+													? "animated-icon"
+													: ""
+											}
+										/>
+									)}
 								</Button>
 							</Box>
 						</Box>

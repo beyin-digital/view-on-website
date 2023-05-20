@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 
 const TextPremium = ({ onClick }: any) => {
+	// Translation hook
 	const { t } = useTranslation("common");
 
 	return (
@@ -10,7 +11,7 @@ const TextPremium = ({ onClick }: any) => {
 				sx={{
 					width: "100%",
 					position: "absolute",
-					top: ".2rem",
+					top: { xs: "4.2rem", md: ".2rem" },
 					display: "flex",
 					alignItems: "start",
 					justifyContent: "center",

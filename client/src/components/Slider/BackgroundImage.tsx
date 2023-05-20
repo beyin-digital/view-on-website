@@ -26,7 +26,7 @@ export const BackgroundImageSlider = () => {
 			<img
 				src="/images/swirl.svg"
 				style={{
-					top: "-65rem",
+					bottom: "10rem",
 					position: "absolute",
 					left: "0rem",
 					zIndex: "-999999999999",

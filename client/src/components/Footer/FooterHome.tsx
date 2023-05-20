@@ -1,40 +1,51 @@
+import { useState } from "react";
 import { Box, Typography, Link } from "@mui/material";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
+
+import ModalFooter from "./ModalFooter";
 
 const Footer = ({ onClick }: any) => {
 	const { t } = useTranslation("common");
+	const router = useRouter();
 
+	// modal
+	const [open, setOpen] = useState(false);
+	const handleClose = () => setOpen(false);
+	function closeModel() {
+		setOpen(false);
+		// console.log("hi");
+	}
+	function openModel() {
+		setOpen(true);
+		// console.log("hi");
+	}
+	const icons = [
+		{
+			id: 1,
+			alt: "youtube",
+			icon: "/icons/youtube.svg",
+			link: "https://instagram.com",
+		},
+		{
+			id: 3,
+			alt: "instagram",
+			link: "https://instagram.com",
+			icon: "/icons/instagram.svg",
+		},
+		{
+			id: 4,
+			alt: "faceBook",
+			link: "https://facebook.com",
+			icon: "/icons/facebook.svg",
+		},
+	];
 	const links = [
 		{ id: 1, link: "/privacy", title: "footer_privacy" },
 		{ id: 2, link: "/terms", title: "footer_terms" },
 		{ id: 3, link: "/contact", title: "footer_contact" },
-	];
-	const icons = [
-		{
-			id: 1,
-			icon: "/icons/facebook.svg",
-			alt: "Facebook icon",
-			link: "https://facebook.com",
-		},
-		{
-			id: 2,
-			icon: "/icons/twitter.svg",
-			alt: "Twitter icon",
-			link: "https://twitter.com",
-		},
-		{
-			id: 3,
-			icon: "/icons/instagram.svg",
-			alt: "Instagram icon",
-			link: "https://instagram.com",
-		},
-		{
-			id: 4,
-			icon: "/icons/linkedin.svg",
-			alt: "Instagram icon",
-			link: "https://linkedin.com",
-		},
 	];
 	return (
 		<footer>
@@ -128,34 +139,52 @@ const Footer = ({ onClick }: any) => {
 							justifyContent: "end",
 						}}
 					>
-						<Box
-							sx={{
-								border: "1px solid #343132",
-								borderRadius: "34px",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-around",
-								width: "143px",
-								margin: "auto .8rem",
+						<NextLink
+							href=""
+							locale={router.locale}
+							title="View On Website  Modal"
+							style={{
+								textDecoration: "none",
+								color: "inherit",
 							}}
+							onClick={openModel}
 						>
-							<Typography
-								fontSize="20px"
-								fontWeight="400"
-								lineHeight="32px"
-								textAlign="center"
-								textTransform={"capitalize"}
+							<Box
+								sx={{
+									border: "1px solid #343132",
+									borderRadius: "34px",
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "space-around",
+									width: "143px",
+									margin: "auto .7rem",
+								}}
 							>
-								{t("footer_learn")}
-							</Typography>
-							<Image
-								src="/icons/i.svg"
-								alt="View On Website Icon more"
-								title="View On Website Icon more"
-								width={20}
-								height={20}
+								<Typography
+									fontSize="20px"
+									fontWeight="400"
+									lineHeight="32px"
+									textAlign="center"
+									textTransform={"capitalize"}
+								>
+									{t("footer_learn")}
+								</Typography>
+								<Image
+									src="/icons/i.svg"
+									alt="View On Website Icon more"
+									title="View On Website Icon more"
+									width={20}
+									height={20}
+								/>
+							</Box>
+						</NextLink>
+						<>
+							<ModalFooter
+								open={open}
+								onClick={closeModel}
+								close={handleClose}
 							/>
-						</Box>
+						</>
 						{links.map((item) => (
 							<Link
 								key={item.id}
