@@ -6,7 +6,6 @@ import { EntityCondition } from 'src/utils/types/entity-condition.type';
 import { NullableType } from 'src/utils/types/nullable.type';
 import { IPaginationOptions } from 'src/utils/types/pagination-options';
 import { UsersService } from 'src/users/users.service';
-import { KeywordsService } from 'src/keywords/keywords.service';
 import { User } from 'src/users/entities/user.entity';
 @Injectable()
 export class SubscriptionsService {
@@ -14,7 +13,6 @@ export class SubscriptionsService {
     @InjectRepository(Subscription)
     private subscriptionsRepository: Repository<Subscription>,
     private usersService: UsersService,
-    private keywordService: KeywordsService,
   ) {}
 
   create(data: DeepPartial<Subscription>): Promise<Subscription> {

@@ -74,8 +74,8 @@ export class StripeService {
     const frontendURL = this.configService.get('app').frontendDomain;
     const checkoutSession = await this.stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      success_url: `${frontendURL}/payment?sessionId={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${frontendURL}/payment?sessionId={CHECKOUT_SESSION_ID}`,
+      success_url: `${frontendURL}/dashboard/subscriptions`,
+      cancel_url: `${frontendURL}/dashboard/subscriptions`,
       customer: foundUser?.stripeCustomerId || '',
       mode: 'subscription',
       line_items: [
@@ -161,9 +161,9 @@ export class StripeService {
     const keyword = (await this.keywordsService.findOne({
       letters: order?.keyword as string,
     })) as Keyword;
-    console.log(keyword);
 
     subscription.keyword = keyword;
+    subscription.letters = keyword.letters as string;
     subscription.stripeSubscriptionStatus =
       updateSubscriptionDto.subscriptionStatus as string;
     subscription.renewalDate = new Date(
