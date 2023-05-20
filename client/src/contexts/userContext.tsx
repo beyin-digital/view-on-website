@@ -24,6 +24,7 @@ export interface IUserContext {
 	logout: () => void;
 	resendOTP: (email: string) => void;
 	verifyOtp: (otp: string) => void;
+	handleGoogleAuth: (idToken: string) => void;
 }
 
 export const UserContext = createContext<IUserContext>({
@@ -48,6 +49,7 @@ export const UserContext = createContext<IUserContext>({
 	logout: () => {},
 	resendOTP: (email: string) => {},
 	verifyOtp: (otp: string) => {},
+	handleGoogleAuth: (idToken: string) => {},
 });
 
 export const UserProvider = ({ children }: any) => {
@@ -106,11 +108,24 @@ export const UserProvider = ({ children }: any) => {
 				confirmPassword: "",
 			});
 			router.push("/dashboard");
-		} catch (err) {
-			toast.error("Error logging in. Please try again.", {
-				position: "top-right",
-				autoClose: 5000,
-			});
+		} catch (err: any) {
+			if (
+				err.response.data.errors.email.startsWith(
+					"needLoginViaProvider"
+				)
+			) {
+				return toast.error(
+					"You logged in using a social provider. Please login using the same provider.",
+					{
+						position: "bottom-right",
+						autoClose: 5000,
+					}
+				);
+			} else
+				toast.error(`Error logging in. Please check credentials`, {
+					position: "bottom-right",
+					autoClose: 5000,
+				});
 		}
 	};
 
@@ -297,6 +312,28 @@ export const UserProvider = ({ children }: any) => {
 		}
 	};
 
+	const handleGoogleAuth = async (idToken: string) => {
+		await api.post("/auth/google/login", { idToken }).then(res => {
+			if (res.status >= 400) {
+				throw new Error();
+			}
+			const data = res.data;
+			setToken(data.token);
+			setRefreshToken(data.refreshToken);
+			setUser(data.user);
+			localStorage.setItem("token", data.token);
+			localStorage.setItem("refreshToken", data.refreshToken);
+			localStorage.setItem("user", JSON.stringify(data.user));
+			setValues({
+				identifier: "",
+				email: "",
+				fullName: "",
+				password: "",
+				confirmPassword: "",
+			});
+			router.push("/dashboard");
+		});
+	};
 	useEffect(() => {
 		const tokenFromStorage = localStorage.getItem("token");
 
@@ -326,6 +363,7 @@ export const UserProvider = ({ children }: any) => {
 				resendOTP,
 				logout,
 				verifyOtp,
+				handleGoogleAuth,
 			}}
 		>
 			{children}

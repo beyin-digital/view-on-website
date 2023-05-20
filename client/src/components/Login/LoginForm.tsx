@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
 	Box,
 	Typography,
@@ -8,24 +8,18 @@ import {
 	Button,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { toast } from "react-toastify";
+import { GoogleLogin } from "@react-oauth/google";
 
 import { useRouter } from "next/router";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { object, string, TypeOf } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery } from "@tanstack/react-query";
-
-import { getMeFn, loginUserFn } from "@/api/authApi";
-import { useStateContext } from "@/contexts";
 
 import LoginTextSignUp from "./LoginTextSignUp";
-import { IconsStyle } from "../Button";
 import Link from "next/link";
 
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
+import { UserContext } from "@/contexts/userContext";
 
 const loginSchema = object({
 	identifier: string().min(1, "Email address or keyword is required"),
@@ -34,8 +28,6 @@ const loginSchema = object({
 		.min(8, "Password must be more than 8 characters")
 		.max(32, "Password must be less than 32 characters"),
 });
-
-export type LoginInput = TypeOf<typeof loginSchema>;
 
 const LoginForm = () => {
 	// translate
@@ -46,11 +38,6 @@ const LoginForm = () => {
 
 	const [showPassword, setShowPassword] = useState(false);
 
-	const [values, setValues] = useState({
-		identifier: "",
-		password: "",
-	});
-
 	const handleClickShowPassword = () => setShowPassword(show => !show);
 
 	const handleMouseDownPassword = (
@@ -59,44 +46,11 @@ const LoginForm = () => {
 		event.preventDefault();
 	};
 
-	const stateContext = useStateContext();
-
-	const query = useQuery(["authUser"], getMeFn, {
-		enabled: false,
-		select: data => data.data.user,
-		retry: 1,
-		onSuccess: data => {
-			stateContext.dispatch({ type: "SET_USER", payload: data });
-		},
-	});
-
-	const { mutate: loginUser, isLoading } = useMutation(
-		(userData: any) => loginUserFn(userData),
-		{
-			onSuccess: () => {
-				query.refetch();
-				toast.success("You successfully logged in");
-				router.push("/");
-			},
-			onError: (error: any) => {
-				if (Array.isArray((error as any).response.data.error)) {
-					(error as any).response.data.error.forEach((el: any) =>
-						toast.error(el.message, {
-							position: "top-right",
-						})
-					);
-				} else {
-					toast.error((error as any).response.data.message, {
-						position: "top-right",
-					});
-				}
-			},
-		}
-	);
-
 	// animation
 	const [hoveredButton, setHoveredButton] = useState(false);
 
+	const { values, handleLogin, handleChange, handleGoogleAuth } =
+		useContext(UserContext);
 	const handleHoverButton = () => {
 		setHoveredButton(!hoveredButton);
 	};
@@ -110,6 +64,7 @@ const LoginForm = () => {
 			icon: "/icons/google.svg",
 			alt: "Google Icon",
 			title: "Google Icon",
+			name: "google",
 			link: "https://google.com",
 		},
 		{
@@ -117,20 +72,13 @@ const LoginForm = () => {
 			icon: "/icons/apple.svg",
 			alt: "Apple Icon",
 			title: "Apple Icon",
+			name: "apple",
 			link: "https://apple.com",
 		},
 	];
 
-	const handleSubmit = () => {
-		console.log(values);
-		loginUser({
-			identifier: values.identifier,
-			password: values.password,
-		});
-	};
-
 	return (
-		<>
+		<form onSubmit={handleLogin}>
 			<Box
 				sx={{
 					display: "flex",
@@ -161,9 +109,7 @@ const LoginForm = () => {
 							border: "0",
 						},
 					}}
-					onChange={e =>
-						setValues({ ...values, identifier: e.target.value })
-					}
+					onChange={handleChange}
 					placeholder={`${t("input_email")}`}
 				/>
 				<OutlinedInput
@@ -206,9 +152,7 @@ const LoginForm = () => {
 							</IconButton>
 						</InputAdornment>
 					}
-					onChange={e =>
-						setValues({ ...values, password: e.target.value })
-					}
+					onChange={handleChange}
 					placeholder={`${t("input_password")}`}
 				/>
 			</Box>
@@ -272,7 +216,6 @@ const LoginForm = () => {
 							display: "flex",
 							justifyContent: "space-around",
 						}}
-						onClick={handleSubmit}
 						type='submit'
 						title={`${t("login")}`}
 					>
@@ -332,24 +275,42 @@ const LoginForm = () => {
 							margin: "auto 1rem",
 						}}
 					>
-						{icon.map(item => (
-							<Link href={item.link} key={item.id}>
-								<Image
-									src={item.icon}
-									alt={item.alt}
-									title={item.title}
-									height={35}
-									width={35}
-									style={{
-										margin: "auto .2rem",
-									}}
-								/>
-							</Link>
-						))}
+						{icon.map(item => {
+							if (item.name === "google") {
+								return (
+									<GoogleLogin
+										type='icon'
+										onSuccess={async credentialResponse => {
+											await handleGoogleAuth(
+												credentialResponse.credential as string
+											);
+										}}
+										onError={() => {
+											console.log("Login Failed");
+										}}
+										useOneTap
+									/>
+								);
+							} else
+								return (
+									<Link href={item.link} key={item.id}>
+										<Image
+											src={item.icon}
+											alt={item.alt}
+											title={item.title}
+											height={35}
+											width={35}
+											style={{
+												margin: "auto .2rem",
+											}}
+										/>
+									</Link>
+								);
+						})}
 					</Box>
 				</Box>
 			</Box>
-		</>
+		</form>
 	);
 };
 
