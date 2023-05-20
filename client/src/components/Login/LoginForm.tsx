@@ -51,10 +51,10 @@ const LoginForm = () => {
 		password: "",
 	});
 
-	const handleClickShowPassword = () => setShowPassword((show) => !show);
+	const handleClickShowPassword = () => setShowPassword(show => !show);
 
 	const handleMouseDownPassword = (
-		event: React.MouseEvent<HTMLButtonElement>,
+		event: React.MouseEvent<HTMLButtonElement>
 	) => {
 		event.preventDefault();
 	};
@@ -63,9 +63,9 @@ const LoginForm = () => {
 
 	const query = useQuery(["authUser"], getMeFn, {
 		enabled: false,
-		select: (data) => data.data.user,
+		select: data => data.data.user,
 		retry: 1,
-		onSuccess: (data) => {
+		onSuccess: data => {
 			stateContext.dispatch({ type: "SET_USER", payload: data });
 		},
 	});
@@ -83,7 +83,7 @@ const LoginForm = () => {
 					(error as any).response.data.error.forEach((el: any) =>
 						toast.error(el.message, {
 							position: "top-right",
-						}),
+						})
 					);
 				} else {
 					toast.error((error as any).response.data.message, {
@@ -91,7 +91,7 @@ const LoginForm = () => {
 					});
 				}
 			},
-		},
+		}
 	);
 
 	// animation
@@ -139,7 +139,7 @@ const LoginForm = () => {
 				}}
 			>
 				<OutlinedInput
-					name="identifier"
+					name='identifier'
 					value={values.identifier}
 					sx={{
 						width: "100",
@@ -150,7 +150,8 @@ const LoginForm = () => {
 						borderRadius: "10px",
 						marginY: ".3rem",
 						border: "1 solid #E3E3E3",
-						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
+						boxShadow:
+							" 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
 
 						".MuiOutlinedInput-notchedOutline": {
 							border: "0",
@@ -160,11 +161,13 @@ const LoginForm = () => {
 							border: "0",
 						},
 					}}
-					onChange={(e) => setValues({ ...values, identifier: e.target.value })}
+					onChange={e =>
+						setValues({ ...values, identifier: e.target.value })
+					}
 					placeholder={`${t("input_email")}`}
 				/>
 				<OutlinedInput
-					name="password"
+					name='password'
 					value={values.password}
 					sx={{
 						width: "100",
@@ -175,7 +178,8 @@ const LoginForm = () => {
 						borderRadius: "10px",
 						border: "1 solid #E3E3E3",
 						marginY: ".3rem",
-						boxShadow: " 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
+						boxShadow:
+							" 0px 27.8156px 45.7611px rgba(0, 0, 0, 0.03)",
 						".MuiOutlinedInput-notchedOutline": {
 							border: "0",
 							padding: "9px",
@@ -184,21 +188,27 @@ const LoginForm = () => {
 							border: "0",
 						},
 					}}
-					className="loginButton"
+					className='loginButton'
 					type={showPassword ? "text" : "password"}
 					endAdornment={
-						<InputAdornment position="end">
+						<InputAdornment position='end'>
 							<IconButton
-								aria-label="toggle password visibility"
+								aria-label='toggle password visibility'
 								onClick={handleClickShowPassword}
 								onMouseDown={handleMouseDownPassword}
-								edge="end"
+								edge='end'
 							>
-								{showPassword ? <VisibilityOff /> : <Visibility />}
+								{showPassword ? (
+									<VisibilityOff />
+								) : (
+									<Visibility />
+								)}
 							</IconButton>
 						</InputAdornment>
 					}
-					onChange={(e) => setValues({ ...values, password: e.target.value })}
+					onChange={e =>
+						setValues({ ...values, password: e.target.value })
+					}
 					placeholder={`${t("input_password")}`}
 				/>
 			</Box>
@@ -211,7 +221,7 @@ const LoginForm = () => {
 				}}
 			>
 				<Link
-					href=""
+					href=''
 					style={{
 						textDecoration: "none",
 						color: "inherit",
@@ -252,7 +262,7 @@ const LoginForm = () => {
 					}}
 					onMouseEnter={handleHoverButton}
 					onMouseLeave={handleLeave}
-					className="SubscribeAnimation"
+					className='SubscribeAnimation'
 				>
 					<Button
 						sx={{
@@ -263,13 +273,17 @@ const LoginForm = () => {
 							justifyContent: "space-around",
 						}}
 						onClick={handleSubmit}
-						type="submit"
+						type='submit'
 						title={`${t("login")}`}
 					>
 						<Typography
 							sx={{
 								letterSpacing: "0.02em",
-								fontSize: { xs: "20px", md: "25px", xl: "32px" },
+								fontSize: {
+									xs: "20px",
+									md: "25px",
+									xl: "32px",
+								},
 								fontWeight: 400,
 								lineHeight: "40px",
 								color: "#FBFBFB",
@@ -282,13 +296,15 @@ const LoginForm = () => {
 						{locale === "ar" ? (
 							<FiArrowUpLeft
 								size={42}
-								color="#FBFBFB"
-								className={hoveredButton ? "animated-icon_rtl" : ""}
+								color='#FBFBFB'
+								className={
+									hoveredButton ? "animated-icon_rtl" : ""
+								}
 							/>
 						) : (
 							<FiArrowUpRight
 								size={42}
-								color="#FBFBFB"
+								color='#FBFBFB'
 								className={hoveredButton ? "animated-icon" : ""}
 							/>
 						)}
@@ -305,7 +321,7 @@ const LoginForm = () => {
 						justifyContent: "center",
 						marginTop: "1rem",
 					}}
-					className="BoxSignInWith"
+					className='BoxSignInWith'
 				>
 					<Typography>{t("sign_up")}</Typography>
 					<Box
@@ -316,7 +332,7 @@ const LoginForm = () => {
 							margin: "auto 1rem",
 						}}
 					>
-						{icon.map((item) => (
+						{icon.map(item => (
 							<Link href={item.link} key={item.id}>
 								<Image
 									src={item.icon}

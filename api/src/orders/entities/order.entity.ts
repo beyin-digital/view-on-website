@@ -21,6 +21,9 @@ export class Order extends EntityHelper {
   keyword: string;
 
   @Column({ nullable: true })
+  sublink: string;
+
+  @Column({ nullable: true })
   subscriptionId: string;
 
   @Column({ default: false })

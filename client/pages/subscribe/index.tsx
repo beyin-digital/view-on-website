@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Layout from "@/components/Layout/Layout";
 import {
@@ -24,15 +24,19 @@ import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
 import Seo from "@/components/Seo";
+import { KeywordContext } from "@/contexts/keywordContext";
+import useDebounce from "@/hooks/useDebounce";
 
 const SubscribePage: NextPage = () => {
 	const { t } = useTranslation("subscribe");
 
+	const { setValues, values, checkKeywordavailability, keywordFound } =
+		useContext(KeywordContext);
+
+	const keywordDebounce = useDebounce(values.hashtag, 500);
+
 	const router = useRouter();
-	const [values, setValues] = useState({
-		hashtag: "",
-		sublinks: "",
-	});
+
 	const { locale } = useRouter();
 	// const isRTL = locale === "ar";
 	// animation
@@ -46,12 +50,21 @@ const SubscribePage: NextPage = () => {
 	};
 	return (
 		<>
-			<Seo title="VIEW ON WEBSITE | Subscribe Page" description="" keyword="" />
+			<Seo
+				title='VIEW ON WEBSITE | Subscribe Page'
+				description=''
+				keyword=''
+			/>
 
 			<Layout>
 				<Grid
 					sx={{
-						paddingX: { xs: ".5rem", sm: "1rem", md: "2rem", xl: "2rem" },
+						paddingX: {
+							xs: ".5rem",
+							sm: "1rem",
+							md: "2rem",
+							xl: "2rem",
+						},
 						height: "100%",
 						transform: "skew(16deg, 0deg)",
 						display: "flex",
@@ -59,7 +72,7 @@ const SubscribePage: NextPage = () => {
 						justifyContent: { xs: "center", md: "flex-end" },
 						// border: "1px solid",
 					}}
-					className="SubscribePageLayout"
+					className='SubscribePageLayout'
 				>
 					<>
 						<Box
@@ -68,14 +81,25 @@ const SubscribePage: NextPage = () => {
 								height: "100%",
 								display: "flex",
 								flexDirection: "column",
-								justifyContent: { xs: "center", xl: "space-evenly" },
+								justifyContent: {
+									xs: "center",
+									xl: "space-evenly",
+								},
 								marginX: { xs: "1px", md: "5rem" },
 							}}
 						>
 							<Box
 								sx={{
-									marginY: { xs: "2rem", md: "1rem", xl: "0rem" },
-									marginX: { xs: ".5rem", md: "1rem", xl: "1rem" },
+									marginY: {
+										xs: "2rem",
+										md: "1rem",
+										xl: "0rem",
+									},
+									marginX: {
+										xs: ".5rem",
+										md: "1rem",
+										xl: "1rem",
+									},
 								}}
 							>
 								<Typography
@@ -114,16 +138,30 @@ const SubscribePage: NextPage = () => {
 							</Box>
 							<Box
 								sx={{
-									marginY: { xs: "2rem", md: "1rem", xl: "1rem" },
+									marginY: {
+										xs: "2rem",
+										md: "1rem",
+										xl: "1rem",
+									},
 								}}
 							>
 								<FormControl
-									sx={{ width: { xs: "100%", md: "90%", xl: "90%" } }}
+									sx={{
+										width: {
+											xs: "100%",
+											md: "90%",
+											xl: "90%",
+										},
+									}}
 								>
 									<OutlinedInput
 										sx={{
 											width: "100%",
-											height: { xs: "63px", md: "80px", xl: "80px" },
+											height: {
+												xs: "63px",
+												md: "80px",
+												xl: "80px",
+											},
 											fontSize: {
 												xs: "18px",
 												sm: "22px",
@@ -133,24 +171,39 @@ const SubscribePage: NextPage = () => {
 											lineHeight: "28px",
 											background: "#FBFBFB",
 											borderRadius: "20px",
-											".MuiOutlinedInput-notchedOutline": {
-												border: "0",
-											},
-											"&:hover > .MuiOutlinedInput-notchedOutline": {
-												border: "0",
-											},
+											".MuiOutlinedInput-notchedOutline":
+												{
+													border: "0",
+												},
+											"&:hover > .MuiOutlinedInput-notchedOutline":
+												{
+													border: "0",
+												},
 										}}
 										value={values.hashtag}
-										onChange={(e) =>
-											setValues({ ...values, hashtag: e.target.value })
+										onChange={e =>
+											setValues({
+												...values,
+												hashtag: e.target.value,
+											})
 										}
-										placeholder={`${t("input_hashtag_one")}`}
-										startAdornment={<BsHash color="#31E716" size={90} />}
+										placeholder={`${t(
+											"input_hashtag_one"
+										)}`}
+										startAdornment={
+											<BsHash color='#31E716' size={90} />
+										}
 										endAdornment={
 											locale === "ar" ? (
-												<FiArrowUpLeft color="#343132" size={90} />
+												<FiArrowUpLeft
+													color='#343132'
+													size={90}
+												/>
 											) : (
-												<FiArrowUpRight color="#343132" size={90} />
+												<FiArrowUpRight
+													color='#343132'
+													size={90}
+												/>
 											)
 										}
 										className={`${
@@ -163,9 +216,9 @@ const SubscribePage: NextPage = () => {
 									/>
 
 									<Box
-										width="100%"
-										display="flex"
-										justifyContent="space-between"
+										width='100%'
+										display='flex'
+										justifyContent='space-between'
 									>
 										<Typography
 											sx={{
@@ -189,9 +242,14 @@ const SubscribePage: NextPage = () => {
 													backgroundImage:
 														"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 													backgroundClip: "text",
-													WebkitBackgroundClip: "text",
+													WebkitBackgroundClip:
+														"text",
 													color: "transparent",
-													fontSize: { xs: "20px", md: "24px", xl: "28px" },
+													fontSize: {
+														xs: "20px",
+														md: "24px",
+														xl: "28px",
+													},
 													paddingX: ".5rem",
 												}}
 											>
@@ -205,9 +263,14 @@ const SubscribePage: NextPage = () => {
 													backgroundImage:
 														"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 													backgroundClip: "text",
-													WebkitBackgroundClip: "text",
+													WebkitBackgroundClip:
+														"text",
 													color: "transparent",
-													fontSize: { xs: "20px", md: "24px", xl: "28px" },
+													fontSize: {
+														xs: "20px",
+														md: "24px",
+														xl: "28px",
+													},
 												}}
 											>
 												{t("available")}
@@ -218,7 +281,15 @@ const SubscribePage: NextPage = () => {
 								</FormControl>
 							</Box>
 							<Box>
-								<Box sx={{ width: { xs: "100%", md: "90%", xl: "90%" } }}>
+								<Box
+									sx={{
+										width: {
+											xs: "100%",
+											md: "90%",
+											xl: "90%",
+										},
+									}}
+								>
 									<Typography
 										sx={{
 											fontSize: {
@@ -243,23 +314,35 @@ const SubscribePage: NextPage = () => {
 												xl: "32px",
 											},
 											lineHeight: "28px",
-											height: { xs: "63px", md: "80px", xl: "80px" },
+											height: {
+												xs: "63px",
+												md: "80px",
+												xl: "80px",
+											},
 											borderRadius: "20px",
 											background: "#FBFBFB",
 											paddingX: "10px",
-											boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.05)",
-											".MuiOutlinedInput-notchedOutline": {
-												border: "0",
-											},
-											"&:hover > .MuiOutlinedInput-notchedOutline": {
-												border: "0",
-											},
+											boxShadow:
+												"0px 31px 51px rgba(0, 0, 0, 0.05)",
+											".MuiOutlinedInput-notchedOutline":
+												{
+													border: "0",
+												},
+											"&:hover > .MuiOutlinedInput-notchedOutline":
+												{
+													border: "0",
+												},
 										}}
-										onChange={(e) =>
-											setValues({ ...values, sublinks: e.target.value })
+										onChange={e =>
+											setValues({
+												...values,
+												sublinks: e.target.value,
+											})
 										}
 										value={values.sublinks}
-										placeholder={`${t("input_hashtag_two")}`}
+										placeholder={`${t(
+											"input_hashtag_two"
+										)}`}
 									/>
 								</Box>
 							</Box>
@@ -268,7 +351,11 @@ const SubscribePage: NextPage = () => {
 									sx={{
 										width: "100%",
 										display: "flex",
-										justifyContent: { xs: "center", md: "end", xl: "end" },
+										justifyContent: {
+											xs: "center",
+											md: "end",
+											xl: "end",
+										},
 										marginY: { xs: "2rem", xl: "1rem" },
 									}}
 								>
@@ -288,8 +375,12 @@ const SubscribePage: NextPage = () => {
 										}}
 										onMouseEnter={handleHoverButton}
 										onMouseLeave={handleLeave}
-										className="ButtonReserve"
-										onClick={() => router.push(`/subscribe/${values.hashtag}`)}
+										className='ButtonReserve'
+										onClick={() =>
+											router.push(
+												`/subscribe/${values.hashtag}`
+											)
+										}
 									>
 										<Typography
 											sx={{
@@ -305,17 +396,21 @@ const SubscribePage: NextPage = () => {
 										</Typography>
 										<FiArrowDownRight
 											size={42}
-											color="#343132"
+											color='#343132'
 											className={`left ${
-												hoveredButton ? "ButtonReserve_ltr" : ""
+												hoveredButton
+													? "ButtonReserve_ltr"
+													: ""
 											}`}
 										/>
 										<FiArrowDownLeft
 											size={42}
-											color="#343132"
+											color='#343132'
 											// className="right"
 											className={`right ${
-												hoveredButton ? "ButtonReserve_rtl" : ""
+												hoveredButton
+													? "ButtonReserve_rtl"
+													: ""
 											}`}
 										/>
 									</Button>
@@ -331,7 +426,10 @@ const SubscribePage: NextPage = () => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
 	return {
 		props: {
-			...(await serverSideTranslations(locale || "", ["common", "subscribe"])),
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"subscribe",
+			])),
 		},
 	};
 };

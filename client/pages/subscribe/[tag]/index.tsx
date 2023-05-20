@@ -1,5 +1,5 @@
 import Footer from "@/components/Footer/Footer";
- import {
+import {
 	Typography,
 	Box,
 	OutlinedInput,
@@ -15,13 +15,12 @@ import {
 	FiArrowDownLeft,
 	FiArrowUpLeft,
 } from "react-icons/fi";
-import CheckIcon from "@mui/icons-material/Check";
 import { AiOutlineCheck } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import FooterMobile from "@/components/Footer/FooterMobile";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import Head from "next/head";
 import Layout from "@/components/Layout/LayoutSubscribe";
@@ -79,8 +78,8 @@ const SubscribePage: NextPage = () => {
 		<>
 			<Seo
 				title={`VIEW ON WEBSITE | Keyword #${values.hashtag}`}
-				description=""
-				keyword=""
+				description=''
+				keyword=''
 			/>
 			<Box
 				sx={{
@@ -89,21 +88,31 @@ const SubscribePage: NextPage = () => {
 					overflow: "hidden",
 					position: "relative",
 					height:
-						values.hashtag.length >= 4 ? "100%" : { xs: "100%", md: "100vh" },
+						values.hashtag.length >= 4
+							? "100%"
+							: { xs: "100%", md: "100vh" },
 				}}
 			>
 				<Layout>
 					<Grid
 						sx={{
-							paddingX: { xs: ".5rem", sm: "1rem", md: "2rem", xl: "2rem" },
+							paddingX: {
+								xs: ".5rem",
+								sm: "1rem",
+								md: "2rem",
+								xl: "2rem",
+							},
 							height: "100%",
-							transform: { xs: "skew(0deg, 0deg)", sm: "skew(16deg, 0deg)" },
+							transform: {
+								xs: "skew(0deg, 0deg)",
+								sm: "skew(16deg, 0deg)",
+							},
 
 							display: "flex",
 							alignItems: "center",
 							justifyContent: { xs: "center", md: "flex-end" },
 						}}
-						className="SubscribePageLayout"
+						className='SubscribePageLayout'
 					>
 						<>
 							<Box
@@ -112,14 +121,25 @@ const SubscribePage: NextPage = () => {
 									height: "100%",
 									display: "flex",
 									flexDirection: "column",
-									justifyContent: { xs: "center", xl: "space-evenly" },
+									justifyContent: {
+										xs: "center",
+										xl: "space-evenly",
+									},
 									marginX: { xs: "1px", md: "5rem" },
 								}}
 							>
 								<Box
 									sx={{
-										marginY: { xs: "2rem", md: "1rem", xl: "0rem" },
-										marginX: { xs: ".5rem", md: "1rem", xl: "1rem" },
+										marginY: {
+											xs: "2rem",
+											md: "1rem",
+											xl: "0rem",
+										},
+										marginX: {
+											xs: ".5rem",
+											md: "1rem",
+											xl: "1rem",
+										},
 									}}
 								>
 									<Typography
@@ -170,12 +190,22 @@ const SubscribePage: NextPage = () => {
 									}}
 								>
 									<FormControl
-										sx={{ width: { xs: "100%", md: "90%", xl: "90%" } }}
+										sx={{
+											width: {
+												xs: "100%",
+												md: "90%",
+												xl: "90%",
+											},
+										}}
 									>
 										<OutlinedInput
 											sx={{
 												width: "100%",
-												height: { xs: "63px", md: "80px", xl: "80px" },
+												height: {
+													xs: "63px",
+													md: "80px",
+													xl: "80px",
+												},
 												fontSize: {
 													xs: "18px",
 													sm: "22px",
@@ -186,23 +216,38 @@ const SubscribePage: NextPage = () => {
 												background: "#FBFBFB",
 												borderRadius: "20px",
 												border: "1px solid #E3E3E3",
-												".MuiOutlinedInput-notchedOutline": {
-													border: "0",
-													padding: "9px",
-												},
-												"&:hover > .MuiOutlinedInput-notchedOutline": {
-													border: "0",
-												},
+												".MuiOutlinedInput-notchedOutline":
+													{
+														border: "0",
+														padding: "9px",
+													},
+												"&:hover > .MuiOutlinedInput-notchedOutline":
+													{
+														border: "0",
+													},
 											}}
 											// className="borderSubscribeInput"
 											value={values.hashtag}
-											placeholder={`${t("input_hashtag_one")}`}
-											startAdornment={<BsHash color="#31E716" size={90} />}
+											placeholder={`${t(
+												"input_hashtag_one"
+											)}`}
+											startAdornment={
+												<BsHash
+													color='#31E716'
+													size={90}
+												/>
+											}
 											endAdornment={
 												locale === "ar" ? (
-													<FiArrowUpLeft color="#343132" size={90} />
+													<FiArrowUpLeft
+														color='#343132'
+														size={90}
+													/>
 												) : (
-													<FiArrowUpRight color="#343132" size={90} />
+													<FiArrowUpRight
+														color='#343132'
+														size={90}
+													/>
 												)
 											}
 											className={`${
@@ -215,9 +260,9 @@ const SubscribePage: NextPage = () => {
 										/>
 
 										<Box
-											width="100%"
-											display="flex"
-											justifyContent="space-between"
+											width='100%'
+											display='flex'
+											justifyContent='space-between'
 										>
 											<Typography
 												sx={{
@@ -234,7 +279,11 @@ const SubscribePage: NextPage = () => {
 											</Typography>
 											<Box
 												sx={{
-													width: { xs: "28%", md: "25%", xl: "22%" },
+													width: {
+														xs: "28%",
+														md: "25%",
+														xl: "22%",
+													},
 													display: "flex",
 													justifyContent: "center",
 													alignItems: "center",
@@ -247,13 +296,16 @@ const SubscribePage: NextPage = () => {
 											>
 												<Typography
 													onClick={() =>
-														router.push(`${router.asPath}/premium`)
+														router.push(
+															`${router.asPath}/premium`
+														)
 													}
 													sx={{
 														cursor: "pointer",
 														color: "#31E716 ",
 														backgroundClip: "text",
-														WebkitBackgroundClip: "text",
+														WebkitBackgroundClip:
+															"text",
 														fontSize: {
 															xs: "18px",
 															md: "24px",
@@ -269,17 +321,23 @@ const SubscribePage: NextPage = () => {
 												</Typography>
 												<Typography
 													onClick={() =>
-														router.push(`${router.asPath}/premium`)
+														router.push(
+															`${router.asPath}/premium`
+														)
 													}
 													sx={{
 														cursor: "pointer",
 														display:
-															values.hashtag.length <= 3 ? "flex" : "none",
+															values.hashtag
+																.length <= 3
+																? "flex"
+																: "none",
 
 														backgroundImage:
 															"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 														backgroundClip: "text",
-														WebkitBackgroundClip: "text",
+														WebkitBackgroundClip:
+															"text",
 														color: "transparent",
 														fontSize: {
 															xs: "18px",
@@ -300,7 +358,15 @@ const SubscribePage: NextPage = () => {
 									</FormControl>
 								</Box>
 								<Box>
-									<Box sx={{ width: { xs: "100%", md: "90%", xl: "90%" } }}>
+									<Box
+										sx={{
+											width: {
+												xs: "100%",
+												md: "90%",
+												xl: "90%",
+											},
+										}}
+									>
 										<Typography
 											sx={{
 												fontSize: {
@@ -309,7 +375,10 @@ const SubscribePage: NextPage = () => {
 													md: "25px",
 													xl: "40px",
 												},
-												marginY: { xs: "1rem", xl: "1rem" },
+												marginY: {
+													xs: "1rem",
+													xl: "1rem",
+												},
 											}}
 										>
 											{/* Please provide your keyword's sub-link */}
@@ -326,19 +395,28 @@ const SubscribePage: NextPage = () => {
 													xl: "32px",
 												},
 												lineHeight: "28px",
-												height: { xs: "63px", md: "80px", xl: "80px" },
+												height: {
+													xs: "63px",
+													md: "80px",
+													xl: "80px",
+												},
 												borderRadius: "20px",
 												background: "#FBFBFB",
 												paddingX: "10px",
-												boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.05)",
-												".MuiOutlinedInput-notchedOutline": {
-													border: "0",
-												},
-												"&:hover > .MuiOutlinedInput-notchedOutline": {
-													border: "0",
-												},
+												boxShadow:
+													"0px 31px 51px rgba(0, 0, 0, 0.05)",
+												".MuiOutlinedInput-notchedOutline":
+													{
+														border: "0",
+													},
+												"&:hover > .MuiOutlinedInput-notchedOutline":
+													{
+														border: "0",
+													},
 											}}
-											placeholder={`${t("input_hashtag_two")}`}
+											placeholder={`${t(
+												"input_hashtag_two"
+											)}`}
 										/>
 									</Box>
 								</Box>
@@ -348,7 +426,10 @@ const SubscribePage: NextPage = () => {
 											width: "100%",
 											display: "flex",
 											justifyContent: "space-between",
-											marginBottom: { xs: "2rem", xl: "1rem" },
+											marginBottom: {
+												xs: "2rem",
+												xl: "1rem",
+											},
 											flexDirection: {
 												xs: "column",
 												md: "column",
@@ -359,8 +440,16 @@ const SubscribePage: NextPage = () => {
 									>
 										<Box
 											sx={{
-												height: { xs: "100%", md: "100%", xl: "100px" },
-												width: { xs: "100%", md: "80%", xl: "90%" },
+												height: {
+													xs: "100%",
+													md: "100%",
+													xl: "100px",
+												},
+												width: {
+													xs: "100%",
+													md: "80%",
+													xl: "90%",
+												},
 												marginY: ".8rem",
 												display: "flex",
 												justifyContent: {
@@ -378,21 +467,31 @@ const SubscribePage: NextPage = () => {
 										>
 											<Box
 												sx={{
-													width: { xs: "100%", md: "40%", xl: "30%" },
+													width: {
+														xs: "100%",
+														md: "40%",
+														xl: "30%",
+													},
 													display: "flex",
 													height: "100%",
-													justifyContent: "space-between",
+													justifyContent:
+														"space-between",
 													alignItems: "center",
 													marginY: "1rem",
 												}}
 											>
 												<Box
 													sx={{
-														width: { xs: "100%", md: "100%", xl: "70%" },
+														width: {
+															xs: "100%",
+															md: "100%",
+															xl: "70%",
+														},
 														height: "100%",
 														display: "flex",
 														alignItems: "center",
-														justifyContent: "space-evenly",
+														justifyContent:
+															"space-evenly",
 														flexDirection: "column",
 													}}
 												>
@@ -407,12 +506,14 @@ const SubscribePage: NextPage = () => {
 															lineHeight: "37px",
 															fontWeight: "400",
 															color: "#343132",
-															textTransform: "uppercase",
+															textTransform:
+																"uppercase",
 														}}
 													>
 														{price}
 													</Typography>
-													{values.hashtag.length < 4 && (
+													{values.hashtag.length <
+														4 && (
 														<Typography
 															sx={{
 																fontSize: {
@@ -421,11 +522,15 @@ const SubscribePage: NextPage = () => {
 																	md: "16px",
 																	xl: "16px",
 																},
-																lineHeight: "14px",
-																fontWeight: "400",
+																lineHeight:
+																	"14px",
+																fontWeight:
+																	"400",
 																color: "#343132",
-																textTransform: "capitalize",
-																marginY: ".6rem",
+																textTransform:
+																	"capitalize",
+																marginY:
+																	".6rem",
 															}}
 														>
 															{t("cash_one")}
@@ -436,57 +541,78 @@ const SubscribePage: NextPage = () => {
 											{values.hashtag.length < 4 && (
 												<Box
 													sx={{
-														width: { xs: "100%", md: "60%", xl: "40%" },
+														width: {
+															xs: "100%",
+															md: "60%",
+															xl: "40%",
+														},
 														height: "100%",
 														display: "flex",
 														alignItems: "center",
-														justifyContent: "center",
+														justifyContent:
+															"center",
 													}}
 												>
 													<Box
 														sx={{
 															height: "100%",
 															display: "flex",
-															justifyContent: "center",
-															flexDirection: "column",
+															justifyContent:
+																"center",
+															flexDirection:
+																"column",
 														}}
 													>
-														{checks.map((item) => (
+														{checks.map(item => (
 															<Box
 																key={item.id}
 																sx={{
-																	display: "flex",
-																	alignItems: "center",
-																	justifyContent: "space-between",
-																	height: { xs: "25px", xl: "45px" },
+																	display:
+																		"flex",
+																	alignItems:
+																		"center",
+																	justifyContent:
+																		"space-between",
+																	height: {
+																		xs: "25px",
+																		xl: "45px",
+																	},
 																}}
 															>
 																<AiOutlineCheck
-																	fontSize="small"
-																	color="#455154"
+																	fontSize='small'
+																	color='#455154'
 																/>
 																<Box
 																	sx={{
 																		width: "100%",
-																		paddingX: ".5rem",
-																		paddingY: ".2rem",
+																		paddingX:
+																			".5rem",
+																		paddingY:
+																			".2rem",
 																	}}
 																>
 																	<Typography
 																		sx={{
-																			fontSize: {
-																				xs: "14px",
-																				sm: "16px",
-																				md: "16px",
-																				xl: "16px",
-																			},
-																			fontWeight: "400",
-																			lineHeight: "14px",
+																			fontSize:
+																				{
+																					xs: "14px",
+																					sm: "16px",
+																					md: "16px",
+																					xl: "16px",
+																				},
+																			fontWeight:
+																				"400",
+																			lineHeight:
+																				"14px",
 																			color: "#343132",
-																			textTransform: "capitalize",
+																			textTransform:
+																				"capitalize",
 																		}}
 																	>
-																		{t(item.tKey)}
+																		{t(
+																			item.tKey
+																		)}
 																	</Typography>
 																</Box>
 															</Box>
@@ -500,19 +626,19 @@ const SubscribePage: NextPage = () => {
 										{values.hashtag.length > 3 && (
 											<ButtonStyle
 												name={`${t("button")}`}
-												color="#343132"
-												bg="#31E716"
+												color='#343132'
+												bg='#31E716'
 												onClick={() => {}}
-												iconColor="#343132"
+												iconColor='#343132'
 											/>
 										)}
 										{values.hashtag.length < 4 && (
 											<ButtonStyle
 												name={`${t("pay")}`}
-												color="#FBFBFB"
-												bg="#0090EC"
+												color='#FBFBFB'
+												bg='#0090EC'
 												onClick={() => {}}
-												iconColor="#FBFBFB"
+												iconColor='#FBFBFB'
 											/>
 										)}
 									</Box>
@@ -541,12 +667,21 @@ const SubscribePage: NextPage = () => {
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "space-evenly",
-							flexDirection: { xs: "column", md: "row", xl: "row" },
+							flexDirection: {
+								xs: "column",
+								md: "row",
+								xl: "row",
+							},
 						}}
 					>
 						<Box
 							sx={{
-								width: { xs: "90%", sm: "314px", md: "314px", xl: "350px" },
+								width: {
+									xs: "90%",
+									sm: "314px",
+									md: "314px",
+									xl: "350px",
+								},
 								height: "467",
 								display: "flex",
 								alignItems: "center",
@@ -589,7 +724,11 @@ const SubscribePage: NextPage = () => {
 							>
 								<Typography
 									sx={{
-										fontSize: { xs: "33px", md: "40px", xl: "51px" },
+										fontSize: {
+											xs: "33px",
+											md: "40px",
+											xl: "51px",
+										},
 										fontWeight: "600",
 										color: "#31E716",
 									}}
@@ -608,7 +747,7 @@ const SubscribePage: NextPage = () => {
 									flexDirection: "column",
 								}}
 							>
-								{descCardOne.map((item) => (
+								{descCardOne.map(item => (
 									<Box
 										key={item.id}
 										sx={{
@@ -620,16 +759,23 @@ const SubscribePage: NextPage = () => {
 										}}
 									>
 										<Image
-											src="/icons/check.svg"
-											alt=""
+											src='/icons/check.svg'
+											alt=''
 											width={30}
 											height={30}
 										/>
 										<Typography
 											sx={{
-												fontSize: { xs: "15px", md: "18px", xl: "20px" },
+												fontSize: {
+													xs: "15px",
+													md: "18px",
+													xl: "20px",
+												},
 												fontWeight: "400",
-												marginX: { xs: ".1rem", md: "1rem" },
+												marginX: {
+													xs: ".1rem",
+													md: "1rem",
+												},
 												width: "90%",
 											}}
 										>
@@ -681,7 +827,10 @@ const SubscribePage: NextPage = () => {
 											{t("pay")}
 										</Typography>
 
-										<FiArrowUpRight size={42} color="#FBFBFB" />
+										<FiArrowUpRight
+											size={42}
+											color='#FBFBFB'
+										/>
 									</Button>
 								</Box>
 							</Box>
@@ -689,7 +838,12 @@ const SubscribePage: NextPage = () => {
 
 						<Box
 							sx={{
-								width: { xs: "90%", sm: "372px", md: "372px", xl: "400px" },
+								width: {
+									xs: "90%",
+									sm: "372px",
+									md: "372px",
+									xl: "400px",
+								},
 								height: "551px",
 								display: "flex",
 								alignItems: "center",
@@ -737,7 +891,11 @@ const SubscribePage: NextPage = () => {
 							>
 								<Typography
 									sx={{
-										fontSize: { xs: "33px", md: "40px", xl: "51px" },
+										fontSize: {
+											xs: "33px",
+											md: "40px",
+											xl: "51px",
+										},
 										fontWeight: "600",
 										color: "#31E716",
 									}}
@@ -756,7 +914,7 @@ const SubscribePage: NextPage = () => {
 									flexDirection: "column",
 								}}
 							>
-								{descCardTwo.map((item) => (
+								{descCardTwo.map(item => (
 									<Box
 										key={item.id}
 										sx={{
@@ -768,16 +926,23 @@ const SubscribePage: NextPage = () => {
 										}}
 									>
 										<Image
-											src="/icons/check.svg"
-											alt=""
+											src='/icons/check.svg'
+											alt=''
 											width={30}
 											height={30}
 										/>
 										<Typography
 											sx={{
-												fontSize: { xs: "15px", md: "18px", xl: "20px" },
+												fontSize: {
+													xs: "15px",
+													md: "18px",
+													xl: "20px",
+												},
 												fontWeight: "400",
-												marginX: { xs: ".1rem", md: "1rem" },
+												marginX: {
+													xs: ".1rem",
+													md: "1rem",
+												},
 												width: "90%",
 											}}
 										>
@@ -829,7 +994,10 @@ const SubscribePage: NextPage = () => {
 											{t("pay")}
 										</Typography>
 
-										<FiArrowUpRight size={42} color="#FBFBFB" />
+										<FiArrowUpRight
+											size={42}
+											color='#FBFBFB'
+										/>
 									</Button>
 								</Box>
 							</Box>
@@ -837,7 +1005,12 @@ const SubscribePage: NextPage = () => {
 
 						<Box
 							sx={{
-								width: { xs: "90%", sm: "314px", md: "314px", xl: "350px" },
+								width: {
+									xs: "90%",
+									sm: "314px",
+									md: "314px",
+									xl: "350px",
+								},
 								height: "467",
 								display: "flex",
 								alignItems: "center",
@@ -880,7 +1053,11 @@ const SubscribePage: NextPage = () => {
 							>
 								<Typography
 									sx={{
-										fontSize: { xs: "33px", md: "40px", xl: "51px" },
+										fontSize: {
+											xs: "33px",
+											md: "40px",
+											xl: "51px",
+										},
 										fontWeight: "600",
 										color: "#31E716",
 									}}
@@ -899,7 +1076,7 @@ const SubscribePage: NextPage = () => {
 									flexDirection: "column",
 								}}
 							>
-								{descCardThree.map((item) => (
+								{descCardThree.map(item => (
 									<Box
 										key={item.id}
 										sx={{
@@ -911,16 +1088,23 @@ const SubscribePage: NextPage = () => {
 										}}
 									>
 										<Image
-											src="/icons/check.svg"
-											alt=""
+											src='/icons/check.svg'
+											alt=''
 											width={30}
 											height={30}
 										/>
 										<Typography
 											sx={{
-												fontSize: { xs: "15px", md: "18px", xl: "20px" },
+												fontSize: {
+													xs: "15px",
+													md: "18px",
+													xl: "20px",
+												},
 												fontWeight: "400",
-												marginX: { xs: ".1rem", md: "1rem" },
+												marginX: {
+													xs: ".1rem",
+													md: "1rem",
+												},
 												width: "90%",
 											}}
 										>
@@ -972,7 +1156,10 @@ const SubscribePage: NextPage = () => {
 											{t("pay")}
 										</Typography>
 
-										<FiArrowUpRight size={42} color="#FBFBFB" />
+										<FiArrowUpRight
+											size={42}
+											color='#FBFBFB'
+										/>
 									</Button>
 								</Box>
 							</Box>
@@ -999,7 +1186,10 @@ export async function getStaticPaths({}: any) {
 export async function getStaticProps({ params, locale }: any) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale || "", ["common", "subscribe"])),
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"subscribe",
+			])),
 		},
 	};
 }
@@ -1038,7 +1228,7 @@ const ButtonStyle = (props: ButtonStyleProps) => {
 					},
 				}}
 				onClick={props.onClick}
-				type="submit"
+				type='submit'
 			>
 				<Typography
 					sx={{

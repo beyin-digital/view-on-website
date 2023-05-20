@@ -50,8 +50,11 @@ export class Keyword extends EntityHelper {
   };
 
   @Column({ default: 0 })
-  @Exclude({ toPlainOnly: true })
   price: number;
+
+  @Index()
+  @Column({ default: false })
+  isPremium: boolean;
 
   @Index()
   @Allow()

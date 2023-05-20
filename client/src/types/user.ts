@@ -2,6 +2,7 @@ export interface IUser {
 	id: string;
 	fullName: string;
 	email: string;
+<<<<<<< HEAD
 	photo?: string;
 	createdAt: string;
 	updatedAt: string;
@@ -24,4 +25,13 @@ export interface IUserResponse {
 	data: {
 		user: IUser;
 	};
+=======
+	createdAt?: Date;
+	updatedAt?: Date;
+	stripeCustomerId?: string;
+	deletedAt?: Date;
+	twoFactorAuth?: boolean;
+	organisation?: any;
+	country?: string;
+>>>>>>> origin/feat-api-integration-final
 }

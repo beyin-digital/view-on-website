@@ -11,6 +11,10 @@ export class CreateOrderDto {
 
   @IsNotEmpty()
   @IsString()
+  sublink?: string;
+
+  @IsNotEmpty()
+  @IsString()
   checkoutSessionId: string;
 
   @IsNotEmpty()

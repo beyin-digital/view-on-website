@@ -10,13 +10,29 @@ import { GetStaticProps } from "next";
 
 import { useTranslation } from "next-i18next";
 import Seo from "@/components/Seo";
+import { UserContext } from "@/contexts/userContext";
+import { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
 	const { t } = useTranslation("login");
 
+	const router = useRouter();
+
+	const { token } = useContext(UserContext);
+
+	useEffect(() => {
+		if (token) {
+			router.push("/dashboard");
+		}
+	}, [token]);
+
+	if (token) {
+		return <div>Redirecting to dashboard</div>;
+	}
 	return (
 		<>
-			<Seo title={t("meta_title")} description="" keyword="" />
+			<Seo title={t("meta_title")} description='' keyword='' />
 			<Layout>
 				<Box
 					sx={{
@@ -35,7 +51,11 @@ const LoginPage = () => {
 							height: "100%",
 							display: "flex",
 							alignItems: "center",
-							justifyContent: { xs: "center", md: "end", xl: "end" },
+							justifyContent: {
+								xs: "center",
+								md: "end",
+								xl: "end",
+							},
 						}}
 					>
 						<Box
@@ -58,7 +78,10 @@ const LoginPage = () => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
 	return {
 		props: {
-			...(await serverSideTranslations(locale || "", ["common", "login"])),
+			...(await serverSideTranslations(locale || "", [
+				"common",
+				"login",
+			])),
 		},
 	};
 };

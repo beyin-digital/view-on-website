@@ -5,7 +5,15 @@ export class CreateCheckoutSessionDto {
   @IsNotEmpty()
   letters: string;
 
+  @IsString()
+  @IsNotEmpty()
+  sublink: string;
+
   @IsNumber()
   @IsNotEmpty()
   price: number;
+
+  @IsString()
+  @IsNotEmpty()
+  interval: string;
 }

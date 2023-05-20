@@ -1,10 +1,19 @@
-import { useEffect, useState } from "react";
-import { Typography, Box, OutlinedInput, Button } from "@mui/material";
+import { useContext, useState } from "react";
+import {
+	Typography,
+	Box,
+	OutlinedInput,
+	Button,
+	InputAdornment,
+	IconButton,
+} from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { IconsStyle } from "../Button";
 import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
+import { UserContext } from "@/contexts/userContext";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const SignupForm = () => {
 	// translate
@@ -13,6 +22,15 @@ const SignupForm = () => {
 
 	const router = useRouter();
 
+	const [showPassword, setShowPassword] = useState(false);
+	const handleClickShowPassword = () => setShowPassword(show => !show);
+
+	const handleMouseDownPassword = (
+		event: React.MouseEvent<HTMLButtonElement>
+	) => {
+		event.preventDefault();
+	};
+	const { values, handleChange } = useContext(UserContext);
 	// animation
 	const [hoveredButton, setHoveredButton] = useState(false);
 
@@ -63,6 +81,7 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: ".2rem",
 						}}
+						onChange={handleChange}
 						placeholder={`${t("form_name")}`}
 					/>
 					<OutlinedInput
@@ -76,6 +95,24 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: ".2rem",
 						}}
+						type={showPassword ? "text" : "password"}
+						endAdornment={
+							<InputAdornment position='end'>
+								<IconButton
+									aria-label='toggle password visibility'
+									onClick={handleClickShowPassword}
+									onMouseDown={handleMouseDownPassword}
+									edge='end'
+								>
+									{showPassword ? (
+										<VisibilityOff />
+									) : (
+										<Visibility />
+									)}
+								</IconButton>
+							</InputAdornment>
+						}
+						onChange={handleChange}
 						placeholder={`${t("form_password")}`}
 					/>
 				</Box>
@@ -103,9 +140,12 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: ".2rem",
 						}}
+						onChange={handleChange}
 						placeholder={`${t("form_email")}`}
 					/>
 					<OutlinedInput
+						value={values.confirmPassword}
+						name='confirmPassword'
 						sx={{
 							width: "100%",
 							height: { xs: "47px", md: "50px", xl: "65px" },
@@ -116,6 +156,24 @@ const SignupForm = () => {
 							boxShadow: "0px 31px 51px rgba(0, 0, 0, 0.04)",
 							marginY: ".2rem",
 						}}
+						type={showPassword ? "text" : "password"}
+						endAdornment={
+							<InputAdornment position='end'>
+								<IconButton
+									aria-label='toggle password visibility'
+									onClick={handleClickShowPassword}
+									onMouseDown={handleMouseDownPassword}
+									edge='end'
+								>
+									{showPassword ? (
+										<VisibilityOff />
+									) : (
+										<Visibility />
+									)}
+								</IconButton>
+							</InputAdornment>
+						}
+						onChange={handleChange}
 						placeholder={`${t("form_confirm")}`}
 					/>
 				</Box>
@@ -128,7 +186,11 @@ const SignupForm = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
-					flexDirection: { xs: "column-reverse", md: "row", xl: "row" },
+					flexDirection: {
+						xs: "column-reverse",
+						md: "row",
+						xl: "row",
+					},
 					marginBottom: { xs: "10rem", md: "5rem", xl: "5rem" },
 					marginTop: { xs: "1rem", md: "2rem", xl: "2rem" },
 					marginY: { xs: "1rem", md: "0", xl: "0" },
@@ -144,8 +206,8 @@ const SignupForm = () => {
 					{t("sign_up_account")}
 
 					<Link
-						href="/login"
-						title="View On Website Login Page"
+						href='/login'
+						title='View On Website Login Page'
 						style={{
 							textDecoration: "none",
 							color: "#0090EC",
@@ -170,7 +232,7 @@ const SignupForm = () => {
 					}}
 					onMouseEnter={handleHoverButton}
 					onMouseLeave={handleLeave}
-					className="SubscribeAnimation"
+					className='SubscribeAnimation'
 				>
 					<Button
 						sx={{
@@ -180,14 +242,17 @@ const SignupForm = () => {
 							display: "flex",
 							justifyContent: "space-around",
 						}}
-						onClick={() => router.push("verification")}
-						type="submit"
+						type='submit'
 						title={`${t("sign_up_button")}`}
 					>
 						<Typography
 							sx={{
 								letterSpacing: "0.02em",
-								fontSize: { xs: "20px", md: "25px", xl: "32px" },
+								fontSize: {
+									xs: "20px",
+									md: "25px",
+									xl: "32px",
+								},
 								fontWeight: 400,
 								lineHeight: "40px",
 								color: "#FBFBFB",
@@ -199,13 +264,15 @@ const SignupForm = () => {
 						{locale === "ar" ? (
 							<FiArrowUpLeft
 								size={42}
-								color="#FBFBFB"
-								className={hoveredButton ? "animated-icon_rtl" : ""}
+								color='#FBFBFB'
+								className={
+									hoveredButton ? "animated-icon_rtl" : ""
+								}
 							/>
 						) : (
 							<FiArrowUpRight
 								size={42}
-								color="#FBFBFB"
+								color='#FBFBFB'
 								className={hoveredButton ? "animated-icon" : ""}
 							/>
 						)}

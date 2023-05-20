@@ -89,8 +89,19 @@ export class StripeService {
               } hashtag`,
             },
             recurring: {
-              interval: 'month',
-              interval_count: 1,
+              interval:
+                createCheckoutSessionDto?.interval === 'year'
+                  ? 'year'
+                  : createCheckoutSessionDto?.interval === 'month' ||
+                    createCheckoutSessionDto?.interval === '6 months'
+                  ? 'month'
+                  : 'month',
+              interval_count:
+                createCheckoutSessionDto?.interval === 'month'
+                  ? 1
+                  : createCheckoutSessionDto?.interval === '6 months'
+                  ? 6
+                  : 1,
             },
             unit_amount: (createCheckoutSessionDto?.price || 0) * 100,
           },
@@ -102,6 +113,7 @@ export class StripeService {
     const newOrder = await this.ordersService.create({
       user: foundUser as User,
       keyword: createCheckoutSessionDto?.letters || '',
+      sublink: createCheckoutSessionDto?.sublink || '',
       total: (checkoutSession?.amount_total || 0) / 100,
       subTotal: (checkoutSession?.amount_subtotal || 0) / 100,
       checkoutSessionId: checkoutSession.id as string,
@@ -180,6 +192,7 @@ export class StripeService {
         user: order?.user as User,
         letters: order?.keyword as string,
         price: order?.total as number,
+        sublink: order?.sublink as string,
       });
     }
   }
