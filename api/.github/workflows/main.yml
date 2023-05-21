@@ -6,7 +6,7 @@ on:
     branches: [dev]
 
 jobs:
-  push_to_vow_api_repo:
+  build:
     runs-on: ubuntu-latest
     container: pandoc/latex
     steps:
