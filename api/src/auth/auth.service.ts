@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from '../users/entities/user.entity';
 import * as bcrypt from 'bcryptjs';
 import slugify from 'slugify';
-import { nanoid } from 'nanoid';
 import { AuthEmailLoginDto } from './dto/auth-email-login.dto';
 import { AuthUpdateDto } from './dto/auth-update.dto';
 import { RoleEnum } from 'src/roles/roles.enum';
@@ -23,10 +22,17 @@ import { KeywordsService } from 'src/keywords/keywords.service';
 import { StripeService } from 'src/stripe/stripe.service';
 import { RefreshService } from 'src/refresh/refresh.service';
 import { AuthRefreshAccessTokenDto } from './dto/auth-refresh-access-token.dto';
+import { Otp } from './entities/otp.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const nanoid = require('nanoid');
 
 @Injectable()
 export class AuthService {
   constructor(
+    @InjectRepository(Otp)
+    private otpRepository: Repository<Otp>,
     private jwtService: JwtService,
     private usersService: UsersService,
     private keywordsService: KeywordsService,
@@ -115,13 +121,11 @@ export class AuthService {
     }
 
     if (foundUser.twoFactorAuth) {
-      const otp = Math.floor(100000 + Math.random() * 900000).toString();
-      foundUser.otp = otp;
-      await foundUser.save();
+      const { otp } = await this.createOtp(foundUser.email as string);
       await this.mailService.twoFactorAuth({
         to: foundUser?.email || '',
         data: {
-          otp,
+          otp: otp as string,
         },
       });
 
@@ -241,11 +245,8 @@ export class AuthService {
 
   // First step of registration
   async register(dto: AuthRegisterLoginDto): Promise<void> {
-    // generate random 6 digit number
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
-    // store hash in db along with user data
-    await this.usersService.create({
+    // Create new User
+    const newUser = await this.usersService.create({
       ...dto,
       email: dto.email,
       role: {
@@ -254,14 +255,16 @@ export class AuthService {
       status: {
         id: StatusEnum.inactive,
       } as Status,
-      otp,
     });
+
+    // generete otp , connect to user and then send email
+    const { otp } = await this.createOtp(newUser.email as string);
 
     // Send email with OTP
     await this.mailService.userSignUp({
       to: dto.email,
       data: {
-        otp,
+        otp: otp as string,
       },
     });
   }
@@ -269,9 +272,26 @@ export class AuthService {
   // Confirm email with OTP
   async confirmEmail(otp: string): Promise<LoginResponseType> {
     // find user by otp
+    const foundOtp = (await this.otpRepository.findOne({
+      where: {
+        otp,
+      },
+    })) as Otp;
+
     const user = await this.usersService.findOne({
-      otp,
+      id: foundOtp?.user.id,
     });
+
+    if (!foundOtp || foundOtp.expiredBy <= new Date()) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+
+          error: `otpExpired`,
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
 
     if (!user) {
       throw new HttpException(
@@ -283,12 +303,13 @@ export class AuthService {
       );
     }
 
-    user.otp = null;
+    foundOtp.otp = null as any;
+    await foundOtp.save();
     user.status = plainToClass(Status, {
       id: StatusEnum.active,
     });
     if (!user.stripeCustomerId) {
-      // Create stripe customer
+      // Create stripe customer if user doesn't have stripe customer id
       const stripeCustomer = await this.stripeService.createCustomer({
         email: user?.email as string,
         name: `${user?.fullName}`,
@@ -368,13 +389,11 @@ export class AuthService {
       );
     }
     // generate random 6 digit number
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    user.otp = otp;
-    await user.save();
+    const otp = await this.createOtp(user.email as string);
     await this.mailService.userSignUp({
       to: email,
       data: {
-        otp,
+        otp: otp.otp as string,
       },
     });
   }
@@ -518,5 +537,21 @@ export class AuthService {
 
   async softDelete(user: User): Promise<void> {
     await this.usersService.softDelete(user.id);
+  }
+
+  private async createOtp(email: string) {
+    const otpToken = Math.floor(100000 + Math.random() * 900000).toString();
+
+    const user = await this.usersService.findOne({
+      email,
+    });
+    const newOtp = this.otpRepository.create({
+      otp: otpToken,
+      user: user as User,
+      expiredBy: new Date(new Date().getTime() + 5 * 60000),
+    });
+
+    await newOtp.save();
+    return { ...newOtp };
   }
 }

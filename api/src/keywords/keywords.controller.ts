@@ -1,4 +1,5 @@
 import {
+  Body,
   //   Body,
   Controller,
   DefaultValuePipe,
@@ -6,10 +7,13 @@ import {
   HttpCode,
   HttpStatus,
   ParseIntPipe,
+  Put,
   //   Post,
   Query,
+  Req,
   //   Req,
   SerializeOptions,
+  UseGuards,
   //   UseGuards,
 } from '@nestjs/common';
 import { Keyword } from './entities/keyword.entity';
@@ -21,31 +25,32 @@ import {
   // ApiBearerAuth,
   ApiTags,
 } from '@nestjs/swagger';
-// import { CreateKeywordDto } from './dto/create-keyword.dto';
+import { UpdateKeywordDto } from './dto/update-keyword.dto';
+import { ThrottlerBehindProxyGuard } from 'src/utils/guards/throttle-behind-proxy.guard';
+import { AnalyticsService } from 'src/analytics/analytics.service';
 
+@UseGuards(ThrottlerBehindProxyGuard)
 @ApiTags('Keywords')
 @Controller({
   path: 'keywords',
   version: '1',
 })
 export class KeywordsController {
-  constructor(private readonly keywordsService: KeywordsService) {}
+  constructor(
+    private readonly keywordsService: KeywordsService,
+    private analyticsService: AnalyticsService,
+  ) {}
 
   @Get('')
-  async findOne(@Query('hashtag') hashtag: string) {
+  async findOne(@Req() req: any, @Query('hashtag') hashtag: string) {
+    await this.analyticsService.createNewKeywordAnalyticsEntry(hashtag);
     return this.keywordsService.findByHashTag(hashtag);
   }
 
-  //   @ApiBearerAuth()
-  //   @UseGuards(AuthGuard('jwt'))
-  //   @Post('')
-  //   @HttpCode(HttpStatus.CREATED)
-  //   async create(
-  //     @Req() request,
-  //     @Body() createKeywordDto: CreateKeywordDto,
-  //   ): Promise<Keyword> {
-  //     return this.keywordsService.create(request.user, createKeywordDto);
-  //   }
+  @Put(':id')
+  async update(@Req() req: any, @Body() updateKeywordDto: UpdateKeywordDto) {
+    return this.keywordsService.update(req.id, updateKeywordDto);
+  }
 
   @SerializeOptions({
     groups: ['admin'],

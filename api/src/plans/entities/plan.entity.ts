@@ -1,35 +1,30 @@
-import { Allow } from 'class-validator';
-import { User } from 'src/users/entities/user.entity';
 import { EntityHelper } from 'src/utils/entity-helper';
 import {
   Column,
   CreateDateColumn,
-  Entity,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  DeleteDateColumn,
+  Entity,
 } from 'typeorm';
 
 @Entity()
-export class Otp extends EntityHelper {
+export class Plan extends EntityHelper {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ nullable: true })
-  otp: string;
+  name: string;
 
   @Column({ nullable: true })
-  expiredBy: Date;
-
-  @Allow()
-  @ManyToOne(() => User, {
-    eager: true,
-  })
-  user: User;
+  price: number;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

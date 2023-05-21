@@ -27,16 +27,50 @@ import { ForgotModule } from './forgot/forgot.module';
 import { MailModule } from './mail/mail.module';
 import { HomeModule } from './home/home.module';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { AllConfigType } from './config/config.type';
 import { KeywordsModule } from './keywords/keywords.module';
 import { StripeModule } from './stripe/stripe.module';
 import { RefreshModule } from './refresh/refresh.module';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 import { OrdersModule } from './orders/orders.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 import stripeConfig from './config/stripe.config';
+import { ThrottlerBehindProxyGuard } from './utils/guards/throttle-behind-proxy.guard';
+import { APP_GUARD } from '@nestjs/core';
+import { PlansModule } from './plans/plans.module';
+// import { User } from './users/entities/user.entity';
+
+async () => {
+  const [AdminJS, AdminJSTypeOrm] = await Promise.all([
+    import('adminjs'),
+    import('@adminjs/typeorm'),
+  ]);
+
+  AdminJS.default.registerAdapter({
+    Resource: AdminJSTypeOrm.Resource,
+    Database: AdminJSTypeOrm.Database,
+  });
+};
+
+const DEFAULT_ADMIN = {
+  email: 'admin@example.com',
+  password: 'password',
+};
+
+const authenticate = async (email: string, password: string) => {
+  if (email === DEFAULT_ADMIN.email && password === DEFAULT_ADMIN.password) {
+    return Promise.resolve(DEFAULT_ADMIN);
+  }
+  return null;
+};
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 50,
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [
@@ -60,6 +94,26 @@ import stripeConfig from './config/stripe.config';
         return dataSource;
       },
     }),
+    import('@adminjs/nestjs').then(({ AdminModule }) =>
+      AdminModule.createAdminAsync({
+        useFactory: () => ({
+          adminJsOptions: {
+            rootPath: '/admin',
+            resources: [],
+          },
+          auth: {
+            authenticate,
+            cookieName: 'adminjs',
+            cookiePassword: 'secret',
+          },
+          sessionOptions: {
+            resave: true,
+            saveUninitialized: true,
+            secret: 'secret',
+          },
+        }),
+      }),
+    ),
     MailerModule.forRootAsync({
       useClass: MailConfigService,
     }),
@@ -97,6 +151,14 @@ import stripeConfig from './config/stripe.config';
     RefreshModule,
     SubscriptionsModule,
     OrdersModule,
+    AnalyticsModule,
+    PlansModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerBehindProxyGuard,
+    },
   ],
 })
 export class AppModule {}

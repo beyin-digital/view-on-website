@@ -14,9 +14,12 @@ import { IsNotExist } from 'src/utils/validators/is-not-exists.validator';
 import { KeywordsModule } from 'src/keywords/keywords.module';
 import { StripeModule } from 'src/stripe/stripe.module';
 import { RefreshModule } from 'src/refresh/refresh.module';
+import { Otp } from './entities/otp.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([Otp]),
     UsersModule,
     KeywordsModule,
     ForgotModule,

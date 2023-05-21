@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUrl,
+} from 'class-validator';
 import { User } from 'src/users/entities/user.entity';
 
 export class CreateOrderDto {
@@ -11,6 +17,7 @@ export class CreateOrderDto {
 
   @IsNotEmpty()
   @IsString()
+  @IsUrl()
   sublink?: string;
 
   @IsNotEmpty()

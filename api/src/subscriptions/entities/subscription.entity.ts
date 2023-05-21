@@ -12,6 +12,7 @@ import { Allow } from 'class-validator';
 import { User } from 'src/users/entities/user.entity';
 import { EntityHelper } from 'src/utils/entity-helper';
 import { Keyword } from 'src/keywords/entities/keyword.entity';
+import { Plan } from 'src/plans/entities/plan.entity';
 
 @Entity({ name: 'subscription' })
 export class Subscription extends EntityHelper {
@@ -41,6 +42,13 @@ export class Subscription extends EntityHelper {
 
   @Column({ nullable: true, default: false })
   isPremium: boolean;
+
+  @Index()
+  @Allow()
+  @ManyToOne(() => Plan, {
+    eager: true,
+  })
+  plan: Plan;
 
   @Index()
   @Column({ nullable: true })

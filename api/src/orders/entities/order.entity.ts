@@ -1,4 +1,5 @@
 import { Allow } from 'class-validator';
+import { Plan } from 'src/plans/entities/plan.entity';
 import { User } from 'src/users/entities/user.entity';
 import { EntityHelper } from 'src/utils/entity-helper';
 import {
@@ -29,6 +30,9 @@ export class Order extends EntityHelper {
   @Column({ default: false })
   fulfilmentStatus: string;
 
+  @Column({ default: false })
+  isPremium: boolean;
+
   @Column({ nullable: true })
   total: number;
 
@@ -50,6 +54,13 @@ export class Order extends EntityHelper {
     eager: true,
   })
   user: User;
+
+  @Index()
+  @Allow()
+  @ManyToOne(() => Plan, {
+    eager: true,
+  })
+  plan?: Plan;
 
   @CreateDateColumn()
   createdAt: Date;

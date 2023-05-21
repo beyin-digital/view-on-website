@@ -43,14 +43,6 @@ export class KeywordsService {
     });
   }
 
-  //   findUserKeywords(user: User): Promise<NullableType<Keyword[]>> {
-  //     return this.keywordsRepository.find({
-  //       where: {
-  //         user: user.id,
-  //       },
-  //     });
-  //   }
-
   findOne(fields: EntityCondition<Keyword>): Promise<NullableType<Keyword>> {
     return this.keywordsRepository.findOne({
       where: fields,

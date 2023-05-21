@@ -62,7 +62,7 @@ export class Keyword extends EntityHelper {
     eager: true,
   })
   @Exclude({ toPlainOnly: true })
-  user: User;
+  user?: User;
 
   @CreateDateColumn()
   createdAt: Date;

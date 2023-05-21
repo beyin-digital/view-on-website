@@ -7,6 +7,8 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { useContainer } from 'class-validator';
+import * as requestIp from 'request-ip';
+// import helmet from 'helmet';
 import { AppModule } from './app.module';
 import validationOptions from './utils/validation-options';
 import { AllConfigType } from './config/config.type';
@@ -27,6 +29,34 @@ async function bootstrap() {
     type: VersioningType.URI,
   });
   app.use(rawBodyMiddleware());
+
+  app.use(requestIp.mw());
+
+  //   Helmet Middleware against known security vulnerabilities
+  //   app.use(
+  //     helmet({
+  //       contentSecurityPolicy: {
+  //         directives: {
+  //           defaultSrc: [`'self'`],
+  //           styleSrc: [
+  //             `'self'`,
+  //             `'unsafe-inline'`,
+  //             'cdn.jsdelivr.net',
+  //             'fonts.googleapis.com',
+  //             'img.icons8.com',
+  //           ],
+  //           fontSrc: [`'self'`, 'fonts.gstatic.com'],
+  //           imgSrc: [`'self'`, 'data:', 'cdn.jsdelivr.net', 'img.icons8.com'],
+  //           scriptSrc: [
+  //             `'self'`,
+  //             `https: 'unsafe-inline'`,
+  //             `cdn.jsdelivr.net`,
+  //             'img.icons8.com',
+  //           ],
+  //         },
+  //       },
+  //     }),
+  //   );
 
   app.useGlobalPipes(new ValidationPipe(validationOptions));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));

@@ -81,13 +81,23 @@ export class User extends EntityHelper {
   })
   status?: Status;
 
-  @Column({ type: String, nullable: true })
-  @Index()
-  @Exclude({ toPlainOnly: true })
-  otp: string | null;
-
   @Column({ type: Boolean, nullable: true, default: false })
   twoFactorAuth: boolean | null;
+
+  @Column({ nullable: true })
+  organisation: string;
+
+  @Column({ nullable: true })
+  city: string;
+
+  @Column({ nullable: true })
+  postCode: string;
+
+  @Column({ nullable: true })
+  designation: string;
+
+  @Column({ nullable: true })
+  lastLogin: Date;
 
   @CreateDateColumn()
   createdAt: Date;
