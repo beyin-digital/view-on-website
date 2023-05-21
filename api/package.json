@@ -34,6 +34,7 @@
         "@adminjs/typeorm": "^5.0.0",
         "@aws-sdk/client-s3": "3.321.1",
         "@nestjs-modules/mailer": "1.8.1",
+        "@nestjs/cli": "9.4.2",
         "@nestjs/common": "9.4.0",
         "@nestjs/config": "2.3.1",
         "@nestjs/core": "^9.4.0",
@@ -77,7 +78,6 @@
         "typeorm": "0.3.15"
     },
     "devDependencies": {
-        "@nestjs/cli": "9.4.2",
         "@nestjs/schematics": "9.1.0",
         "@nestjs/testing": "9.4.0",
         "@types/bcryptjs": "2.4.2",
