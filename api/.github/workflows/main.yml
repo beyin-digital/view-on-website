@@ -1,4 +1,4 @@
-name: PUSH TO "VIEWONWEBSITE"
+name: push to vow-api
 on:
   push:
     branches: [dev]
