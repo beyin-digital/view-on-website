@@ -150,30 +150,37 @@ export class StripeService {
   }
 
   async updateStripeSubscription(updateSubscriptionDto: UpdateSubscriptionDto) {
-    const subscription = (await this.subscriptionsService.findOne({
-      stripeSubscriptionId: updateSubscriptionDto.subscriptionId,
-    })) as Subscription;
+    try {
+      const subscription = (await this.subscriptionsService.findOne({
+        stripeSubscriptionId: updateSubscriptionDto.subscriptionId,
+      })) as Subscription;
 
-    const order = (await this.ordersService.findOne({
-      keyword: subscription?.letters as string,
-    })) as Order;
+      const order = (await this.ordersService.findOne({
+        keyword: subscription?.letters as string,
+      })) as Order;
 
-    const keyword = (await this.keywordsService.findOne({
-      letters: order?.keyword as string,
-    })) as Keyword;
+      const keyword = (await this.keywordsService.findOne({
+        letters: order?.keyword as string,
+      })) as Keyword;
 
-    subscription.keyword = keyword;
-    subscription.letters = keyword.letters as string;
-    subscription.stripeSubscriptionStatus =
-      updateSubscriptionDto.subscriptionStatus as string;
-    subscription.renewalDate = new Date(
-      (updateSubscriptionDto.renewalDate as number) * 1000,
-    );
-    subscription.duration = updateSubscriptionDto.duration as string;
-    await subscription?.save();
+      console.log(subscription);
+      console.log(order);
+      console.log(keyword);
 
-    order.subscriptionId = updateSubscriptionDto.subscriptionId as string;
-    await order.save();
+      subscription.keyword = keyword;
+      subscription.stripeSubscriptionStatus =
+        updateSubscriptionDto.subscriptionStatus as string;
+      subscription.renewalDate = new Date(
+        (updateSubscriptionDto.renewalDate as number) * 1000,
+      );
+      subscription.duration = updateSubscriptionDto.duration as string;
+      await subscription?.save();
+
+      order.subscriptionId = updateSubscriptionDto.subscriptionId as string;
+      await order.save();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async updateOrderAndCreateKeyword(customerId: string, status: string) {
@@ -188,12 +195,14 @@ export class StripeService {
       order.fulfilmentStatus = status;
       await order.save();
 
-      await this.keywordsService.create({
+      const newKeyword = await this.keywordsService.create({
         user: order?.user as User,
         letters: order?.keyword as string,
         price: order?.total as number,
         sublink: order?.sublink as string,
       });
+
+      await newKeyword.save();
     }
   }
 
@@ -231,7 +240,7 @@ export class StripeService {
           subscriptionStatus: subscriptionCreated.status as string,
           purchaseDate: subscriptionCreated.created as number,
         });
-        console.log('customer.subscription.created');
+        console.log('customer.subscription.created', subscriptionCreated);
         break;
       case 'customer.subscription.updated':
         const subscriptionUpdated = event.data.object as Stripe.Subscription;
@@ -244,7 +253,7 @@ export class StripeService {
           duration:
             subscriptionUpdated?.items?.data[0]?.price?.recurring?.interval,
         });
-        console.log('customer.subscription.updated');
+        console.log('customer.subscription.updated', subscriptionUpdated);
         break;
       case 'customer.subscription.deleted':
         const subscriptionDeleted = event.data.object as Stripe.Subscription;

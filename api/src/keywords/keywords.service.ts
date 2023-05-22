@@ -6,14 +6,12 @@ import { EntityCondition } from 'src/utils/types/entity-condition.type';
 import { NullableType } from 'src/utils/types/nullable.type';
 import { IPaginationOptions } from 'src/utils/types/pagination-options';
 import { User } from 'src/users/entities/user.entity';
-import { UsersService } from 'src/users/users.service';
 import slugify from 'slugify';
 @Injectable()
 export class KeywordsService {
   constructor(
     @InjectRepository(Keyword)
     private keywordsRepository: Repository<Keyword>,
-    private usersService: UsersService,
   ) {}
 
   async create(data: DeepPartial<Keyword>): Promise<Keyword> {

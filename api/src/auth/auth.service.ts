@@ -25,8 +25,6 @@ import { AuthRefreshAccessTokenDto } from './dto/auth-refresh-access-token.dto';
 import { Otp } from './entities/otp.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const nanoid = require('nanoid');
 
 @Injectable()
 export class AuthService {
@@ -133,7 +131,7 @@ export class AuthService {
     }
     // Create new refresh token in db and assign it to user
     const refreshToken = await this.refreshService.create({
-      token: nanoid(),
+      token: this.generateString(20),
       user: foundUser,
     });
 
@@ -232,7 +230,7 @@ export class AuthService {
     });
 
     const refreshToken = await this.refreshService.create({
-      token: nanoid(),
+      token: this.generateString(20),
       user: user,
     });
 
@@ -323,7 +321,7 @@ export class AuthService {
     await user.save();
 
     const refreshToken = await this.refreshService.create({
-      token: nanoid(),
+      token: this.generateString(20),
       user: user,
     });
 
@@ -364,7 +362,7 @@ export class AuthService {
     });
 
     const newRefreshToken = await this.refreshService.create({
-      token: nanoid(),
+      token: this.generateString(20),
       user: foundRefreshToken.user,
     });
 
@@ -553,5 +551,18 @@ export class AuthService {
 
     await newOtp.save();
     return { ...newOtp };
+  }
+
+  generateString(length) {
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    let result = ' ';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
   }
 }
