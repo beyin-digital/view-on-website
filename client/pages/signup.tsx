@@ -24,6 +24,7 @@ const SignUpPage = () => {
   const router = useRouter()
 
   const { token } = useContext(UserContext)
+
   useEffect(() => {
     if (token) {
       router.push('/dashboard')
@@ -88,19 +89,7 @@ const SignUpPage = () => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-  res,
-  locale,
-}: any) => {
-  const token = req.cookies.token
-  if (token) {
-    res.setHeader('location', '/dashboard')
-    res.statusCode = 302
-    res.end()
-
-    return { props: {} }
-  }
+export const getStaticProps: GetStaticProps = async ({ locale }: any) => {
   return {
     props: {
       ...(await serverSideTranslations(locale || '', ['common', 'signup'])),
