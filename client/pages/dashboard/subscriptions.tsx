@@ -41,15 +41,14 @@ const DashboardSubscriptionsPage = () => {
     }
   }, [token])
 
-  console.log(subscriptions)
   return (
     <>
       <Head>
-        <title>{t('meta_title')} </title>
+        {/* <title>{t('meta_title')} </title>
         <meta name="description" content="" />
         <meta name="keyword" content="" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" /> */}
       </Head>{' '}
       <Box
         sx={{
@@ -117,7 +116,7 @@ const DashboardSubscriptionsPage = () => {
             </Box>
             <Button
               onClick={() => {
-                router.push('/subscribe')
+                router.push(`/${router.locale}/subscribe`)
               }}
               sx={{
                 background: '#31E816',
@@ -445,7 +444,7 @@ const DashboardSubscriptionsPage = () => {
                   }}
                 >
                   <Typography fontSize="20px" fontWeight={700}>
-                    #{subscription.keyword.letters.toUpperCase()}
+                    #{subscription?.keyword?.letters.toUpperCase()}
                   </Typography>
                 </Box>
                 <Box
