@@ -31,7 +31,7 @@ jobs:
               env:
                   API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
               with:
-                  source-directory: "./api"
+                  source-directory: "./client"
                   destination-github-username: "salihcodes"
                   destination-repository-name: "vow-client"
                   user-email: salih.codes@gmail.com
