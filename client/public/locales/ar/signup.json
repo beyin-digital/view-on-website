@@ -10,5 +10,8 @@
   "form_name": "الإسم بالكامل",
   "form_email": "البريد الإلكتروني",
   "form_password": "كلمة المرور",
-  "form_confirm": "تاكيد كلمة المرور"
+  "form_confirm": "تاكيد كلمة المرور",
+  "nav_examples": "الأمثلة",
+  "nav_login": "تسجيل الدخول",
+  "nav_subscribe": "الاشتراك"
 }

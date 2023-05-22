@@ -1,17 +1,13 @@
 /** @type {import('next').NextConfig} */
 
-// const withPWA = require('next-pwa')
+const withPWA = require('next-pwa')({
+  dest: 'public',
+})
+const { i18n } = require('./next-i18next.config')
 
-const { i18n } = require("./next-i18next.config");
-
-module.exports = {
-	i18n,
-	reactStrictMode: true,
-	experimental: { esmExternals: "loose" },
-	//   pwa: {
-	//     dest: 'public',
-	//     register: true,
-	//     skipWaiting: true,
-	//     disable: process.env.NODE_ENV === 'development',
-	//   },
-};
+module.exports = withPWA({
+  i18n,
+  reactStrictMode: true,
+  experimental: { esmExternals: 'loose' },
+  disable: process.env.NODE_ENV === 'development',
+})

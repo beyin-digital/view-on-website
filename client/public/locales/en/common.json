@@ -20,8 +20,15 @@
   "home": "Home",
   "button_modal": "see how it works",
   "subscribe": "subscribe",
-  "modal_title":"Navigate with ease",
-  "modal_text_one":"On Home page click on :",
-  "modal_text_two":"On Illustration page click on :",
-  "modal_text_three":"On Examples page click on :"
+  "modal_title": "Navigate with ease",
+  "modal_text_one": "On Home page click on :",
+  "modal_text_two": "On Illustration page click on :",
+  "modal_text_three": "On Examples page click on :",
+  "side_title": "Dashboard",
+  "side_home": "Home Page",
+  "side_profile": "Profile",
+  "side_subscribe": "Subscription",
+  "side_security": "Security",
+  "side_logout": "Logout",
+  "side_contact": "Contact Us"
 }

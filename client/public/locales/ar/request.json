@@ -8,5 +8,8 @@
 
   "send": "إرسال",
   "account": "ليس لديك حساب ؟",
-  "signup": "إنشاء حساب"
+  "signup": "إنشاء حساب",
+  "nav_subscribe": "الاشتراك",
+  "nav_examples": "الأمثلة",
+  "nav_login": "تسجيل الدخول"
 }

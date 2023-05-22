@@ -10,9 +10,12 @@
   "text_one": "احجز",
   "text_one_bold": "كلمتك المفتاحية",
   "text_two": "شكلها يالطريقة التي ",
-  "text_two_bold": "تحب أن تراها في كل مكان",
+  "text_two_bold": "تحب أن تراها",
   "text_three": "  استخدم لوحة التحكم",
-  "text_three_bold":  "  لتحسين التحويل ",
+  "text_three_bold": "  لتحسين التحويل ",
   "text_three_text": "",
-  "button": "انظر كيف تعمل"
+  "button": "انظر كيف تعمل",
+  "nav_examples": "الأمثلة",
+  "login": "تسجيل الدخول",
+  "subscribe": "الاشتراك"
 }

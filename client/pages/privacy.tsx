@@ -1,12 +1,30 @@
-import Seo from "@/components/Seo";
-import React from "react";
+import { useRouter } from 'next/router'
+
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { GetStaticProps } from 'next'
+import { useTranslation } from 'next-i18next'
+import dynamic from 'next/dynamic'
+import Head from 'next/head'
 
 const Privacy = () => {
-	return (
-		<>
-			<Seo title="" description="" keyword="" />
-		</>
-	);
-};
+  const { t } = useTranslation('privacy')
 
-export default Privacy;
+  return (
+    <>
+      <Head>
+        <title>{t('meta_title')} </title>
+        <meta name="description" content="" />
+        <meta name="keyword" content="" />
+      </Head>{' '}
+    </>
+  )
+}
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || '', ['common', 'privacy'])),
+    },
+  }
+}
+export default Privacy
