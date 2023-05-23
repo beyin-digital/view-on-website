@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useEffect } from 'react'
+import React, { useState, Suspense, useEffect, useContext } from 'react'
 
 // translate hook
 import { useTranslation } from 'next-i18next'
@@ -7,6 +7,8 @@ import { Drawer, Box } from '@mui/material'
 
 // components
 import dynamic from 'next/dynamic'
+import { KeywordContext } from '@/contexts/keywordContext'
+import useDebounce from '@/hooks/useDebounce'
 const Layout = dynamic(() => import('@/components/Layout/LayoutHome'), {
   ssr: false,
 })
@@ -29,6 +31,10 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
   const [hashtag, setHashtag] = useState('')
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isShadowVisible, setIsShadowVisible] = useState(true)
+
+  const hashtagDebounce = useDebounce(hashtag, 1000)
+
+  const { keywordFound, checkKeywordavailability } = useContext(KeywordContext)
 
   const [state, setState] = useState({
     top: false,
@@ -56,12 +62,12 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
     setIsDrawerOpen(false)
     setIsShadowVisible(false)
   }
-  // Delay the rendering of components until JavaScript is loaded
-  //   const [isJsLoaded, setIsJsLoaded] = useState(false);
 
-  //   useEffect(() => {
-  //     setIsJsLoaded(true);
-  //   }, []);
+  useEffect(() => {
+    if (hashtagDebounce || hashtagDebounce === '') {
+      checkKeywordavailability(hashtagDebounce)
+    }
+  }, [hashtagDebounce])
 
   return (
     <Suspense>
@@ -76,7 +82,11 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
           {/* {isJsLoaded && ( */}
           <Layout onClick={openModel}>
             <>
-              <HomeDetails />
+              <HomeDetails
+                keywordFound={keywordFound as string}
+                hashtag={hashtag}
+                setHashtag={setHashtag}
+              />
               <Drawer
                 variant="temporary"
                 anchor={anchor}

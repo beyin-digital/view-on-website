@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 
-const TextViewOnWeb = () => {
+const TextViewOnWeb = ({ keywordFound }: { keywordFound?: string }) => {
   return (
     <>
       <Box
@@ -30,7 +30,7 @@ const TextViewOnWeb = () => {
           fontWeight="600"
           color="#0090EC"
         >
-          ViewOnWebsite.com
+          {keywordFound !== '' ? keywordFound : 'ViewOnWebsite.com'}
         </Typography>
       </Box>
     </>

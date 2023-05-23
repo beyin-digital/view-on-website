@@ -15,7 +15,15 @@ const HomeForm = dynamic(() => import('./HomeForm'), {
   ssr: false,
 })
 
-const HomeDetails = () => {
+const HomeDetails = ({
+  keywordFound,
+  hashtag,
+  setHashtag,
+}: {
+  keywordFound: string
+  hashtag: string
+  setHashtag: any
+}) => {
   return (
     <>
       <Grid
@@ -68,7 +76,7 @@ const HomeDetails = () => {
               }}
               className="boxHomeBlack"
             >
-              <HomeForm />
+              <HomeForm hashtag={hashtag} setHashtag={setHashtag} />
               <Box
                 sx={{
                   marginBottom: {
@@ -83,7 +91,7 @@ const HomeDetails = () => {
                 }}
                 className="BoxTextHom"
               >
-                <TextViewOnWeb />
+                <TextViewOnWeb keywordFound={keywordFound} />
               </Box>
             </Box>
           </LayoutHomeBg>

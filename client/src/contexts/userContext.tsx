@@ -303,6 +303,7 @@ export const UserProvider = ({ children }: any) => {
         })
         const data = res.data
         setUser(data)
+        console.log(data)
       } catch (err) {
         console.log(err)
       }

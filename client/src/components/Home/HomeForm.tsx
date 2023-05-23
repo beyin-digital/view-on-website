@@ -1,59 +1,19 @@
-import { useContext, useEffect, useState } from 'react'
-import { Grid, Box, OutlinedInput } from '@mui/material'
+import { useState } from 'react'
+import { Box, OutlinedInput } from '@mui/material'
 import { useRouter } from 'next/router'
-import useDebounce from '@/hooks/useDebounce'
 import { useTranslation } from 'next-i18next'
-import { KeywordContext } from '@/contexts/keywordContext'
-import { api } from '@/utils/api'
-const HomeForm = () => {
+
+const HomeForm = ({ handleSubmit, setHashtag, hashtag }: any) => {
   const { t } = useTranslation('home')
 
   const router = useRouter()
-  const [hashtag, setHashtag] = useState('')
-  const hashtagDebounce = useDebounce(hashtag, 1000)
-
-  const { keywordFound, checkKeywordavailability } = useContext(KeywordContext)
-
-  const [foundKeyword, setFoundKeyword] = useState('')
-  // const [isCursorVisible, setIsCursorVisible] = useState(true);
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    if (keywordFound) {
-      if (foundKeyword.startsWith('http') || foundKeyword.startsWith('https')) {
-        window.location.href = foundKeyword
-        return
-      } else {
-        window.location.href = 'https://' + foundKeyword
-        return
-      }
-    }
-    router.push(`/subscribe/${hashtag}`)
-    const { value } = e.target
-    // setIsCursorVisible(value === "");
-  }
 
   const [isTyping, setIsTyping] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHashtag(e.target.value)
-    // setIsTyping(true);
     setIsTyping(e.target.value.trim() !== '')
   }
-
-  useEffect(() => {
-    const checkKeyword = async () => {
-      const res = await api.get(`/keywords?hashtag=${hashtagDebounce}`)
-      setFoundKeyword(res.data?.sublink)
-      console.log(res.data?.sublink)
-    }
-
-    if (hashtagDebounce) {
-      checkKeywordavailability(hashtagDebounce)
-      if (keywordFound) {
-        checkKeyword()
-      }
-    }
-  }, [hashtagDebounce])
 
   return (
     <>
@@ -104,13 +64,11 @@ const HomeForm = () => {
           <form onSubmit={handleSubmit} className="cursor">
             <OutlinedInput
               value={hashtag}
-              // onChange={(e) => setHashtag(e.target.value)}
               inputProps={{
                 autoComplete: 'off',
                 spellCheck: false,
               }}
               onChange={handleInputChange}
-              // style={{ caretColor: isCursorVisible ? "auto" : "transparent" }}
               sx={{
                 width: '100%',
                 height: { xs: '45px', md: '65px' },

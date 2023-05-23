@@ -7,7 +7,7 @@ export const KeywordContext = createContext<{
   values: any
   setValues: React.Dispatch<React.SetStateAction<any>>
   checkKeywordavailability: (keyword: string) => void
-  keywordFound?: boolean
+  keywordFound?: string
   token?: string
   handleSubscription: (
     letters: string,
@@ -21,7 +21,7 @@ export const KeywordContext = createContext<{
   values: '',
   setValues: () => {},
   checkKeywordavailability: async (keyword: string) => {},
-  keywordFound: false,
+  keywordFound: '',
   token: '',
   handleSubscription: async (
     letters: string,
@@ -40,7 +40,7 @@ export const KeywordProvider = ({ children }: any) => {
     sublinks: '',
   })
 
-  const [keywordFound, setKeywordFound] = useState(false)
+  const [keywordFound, setKeywordFound] = useState('')
 
   const [token, setToken] = useState('')
   const [subscriptions, setSubscriptions] = useState([])
@@ -51,12 +51,10 @@ export const KeywordProvider = ({ children }: any) => {
     const data = res.data
 
     if (data) {
-      setKeywordFound(true)
+      setKeywordFound(data.sublink)
       return
     }
-    setKeywordFound(false)
-    // if available, setKeyword
-    // else, show error message
+    setKeywordFound('ViewOnWebsite.com')
   }
 
   const handleSubscription = async (

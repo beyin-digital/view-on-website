@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {
   AppBar,
   Box,
@@ -17,6 +17,7 @@ import { FiArrowUpRight, FiArrowUpLeft } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
 import { IoIosArrowForward } from 'react-icons/io'
 import Image from 'next/image'
+import { UserContext } from '@/contexts/userContext'
 
 const Header = ({
   nameOne,
@@ -34,6 +35,7 @@ const Header = ({
   const { pathname, query, asPath, locale } = router
   const [hoveredButton, setHoveredButton] = useState(false)
 
+  const { user, token } = useContext(UserContext)
   // handle menu click
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -288,6 +290,9 @@ const Header = ({
         {locale === 'ar' ? (
           <Button
             onClick={() => {
+              if (token) {
+                router.push(`/${router.locale}/dashboard`)
+              }
               router.push('/illustration')
             }}
             sx={{
@@ -315,7 +320,7 @@ const Header = ({
               }}
             >
               {/* Get Started */}
-              {t('nav_getStarted')}
+              {token ? t('nav_Dashboard') : t('nav_getStarted')}
             </Typography>
 
             <FiArrowUpLeft
@@ -327,6 +332,9 @@ const Header = ({
         ) : (
           <Button
             onClick={() => {
+              if (token) {
+                router.push(`/${router.locale}/dashboard`)
+              }
               router.push('/illustration')
             }}
             sx={{
@@ -353,8 +361,9 @@ const Header = ({
               }}
             >
               {/* Get Started */}
-              {t('nav_getStarted')}
+              {token ? t('nav_Dashboard') : t('nav_getStarted')}
             </Typography>
+
             <FiArrowUpRight
               size={42}
               color="#343132"
@@ -642,18 +651,33 @@ const Header = ({
                 onMouseLeave={handleLeave}
                 className="ButtonAnimation"
               >
-                <Typography
-                  sx={{
-                    letterSpacing: '0.02em',
-                    fontSize: { xs: '23px', xl: '32px' },
-                    fontWeight: '700',
-                    lineHeight: '40px',
-                    color: '#343132',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {t('nav_getStarted')}
-                </Typography>
+                {user ? (
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', xl: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_Dashboard')}
+                  </Typography>
+                ) : (
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', xl: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_getStarted')}
+                  </Typography>
+                )}
                 {locale === 'ar' ? (
                   <FiArrowUpLeft
                     size={42}
