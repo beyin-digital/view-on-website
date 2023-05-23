@@ -93,7 +93,7 @@ export const HeaderLayoutMobile = () => {
           }}
         >
           <img
-            src="/images/swirlIllustrationLeft.svg"
+            src="/images/swirlIllustrationLeft.webp"
             alt="View On Website swirl Illustration Left icon"
             title="View On Website swirl Illustration Left icon"
             style={{
@@ -103,13 +103,16 @@ export const HeaderLayoutMobile = () => {
               right: '16rem',
               zIndex: '-1',
             }}
+            loading="lazy"
           />
           <img
-            src="/images/illustrationPic.png"
+            src="/images/illustrationPic.webp"
             style={{
               width: '100%',
             }}
-            alt=""
+            alt="View On Website illustration Photo"
+            title="View On Website illustration Photo"
+            loading="lazy"
           />
 
           {locale === 'ar' ? (
@@ -221,6 +224,9 @@ export const MainContainerMobile = () => {
             >
               <img
                 src="/icons/arrowAR.png"
+                loading="lazy"
+                alt="View On Website Arrow "
+                title="View On Website Arrow "
                 style={{
                   width: '100%',
                 }}
@@ -238,6 +244,9 @@ export const MainContainerMobile = () => {
             >
               <img
                 src="/icons/arrow.png"
+                loading="lazy"
+                alt="View On Website Arrow "
+                title="View On Website Arrow "
                 style={{
                   width: '100%',
                 }}
@@ -251,9 +260,19 @@ export const MainContainerMobile = () => {
             }}
           >
             {locale === 'ar' ? (
-              <img src="/images/illustrationPicCenterAR.png" />
+              <img
+                src="/images/illustrationPicCenterAR.png"
+                alt="View On Website illustration Photo Center"
+                title="View On Website illustration Photo Center"
+                loading="lazy"
+              />
             ) : (
-              <img src="/images/illustrationPicCenter.png" />
+              <img
+                src="/images/illustrationPicCenter.png"
+                alt="View On Website illustration Photo Center"
+                title="View On Website illustration Photo Center"
+                loading="lazy"
+              />
             )}
           </Box>
 
@@ -270,6 +289,9 @@ export const MainContainerMobile = () => {
             >
               <img
                 src="/icons/arrowUpAR.png"
+                loading="lazy"
+                alt="View On Website arrow Up"
+                title="View On Website arrow Up"
                 style={{
                   height: '100%',
                 }}
@@ -288,6 +310,9 @@ export const MainContainerMobile = () => {
             >
               <img
                 src="/icons/arrowUp.png"
+                loading="lazy"
+                alt="View On Website arrow Up"
+                title="View On Website arrow Up"
                 style={{
                   height: '100%',
                 }}
@@ -308,6 +333,9 @@ export const MainContainerMobile = () => {
             >
               <img
                 src="/icons/arrowuprightAR.png"
+                loading="lazy"
+                alt="View On Website arrow Up"
+                title="View On Website arrow Up"
                 style={{
                   height: '100%',
                 }}
@@ -329,6 +357,9 @@ export const MainContainerMobile = () => {
                 style={{
                   height: '100%',
                 }}
+                loading="lazy"
+                alt="View On Website arrow Up"
+                title="View On Website arrow Up"
               />
             </Box>
           )}

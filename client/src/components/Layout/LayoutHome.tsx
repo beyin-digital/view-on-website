@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/system'
 
-import Header from '../Navbar/Navbar'
-import Footer from '../Footer/FooterHome'
 import { BackgroundHome } from './Background'
 
 import { useTranslation } from 'next-i18next'
+
+import dynamic from 'next/dynamic'
+const Header = dynamic(() => import('../Navbar/Navbar'), {
+  ssr: false,
+})
+const Footer = dynamic(() => import('../Footer/FooterHome'), {
+  ssr: false,
+})
 
 interface Props {
   children: React.ReactNode

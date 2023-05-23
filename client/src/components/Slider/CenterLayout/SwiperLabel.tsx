@@ -20,12 +20,13 @@ const SwiperLabel = ({ selectedKeyword }: any) => {
           }}
         >
           <img
-            src="/images/cut-out-parallelogram.png"
+            src="/images/cut-out-parallelogram.webp"
             alt=""
             style={{
               width: '230px',
               height: '100px',
             }}
+            loading="lazy"
           />
           <Box
             sx={{
@@ -72,12 +73,13 @@ const SwiperLabel = ({ selectedKeyword }: any) => {
           }}
         >
           <img
-            src="/images/cut-out-parallelogram.png"
+            src="/images/cut-out-parallelogram.webp"
             alt=""
             style={{
               width: '230px',
               height: '100px',
             }}
+            loading="lazy"
           />
           <Box
             sx={{

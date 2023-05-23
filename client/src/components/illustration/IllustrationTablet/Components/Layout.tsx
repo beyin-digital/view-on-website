@@ -20,7 +20,7 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
       >
         <img
           // fill
-          src="/images/swirl.svg"
+          src="/images/swirl.webp"
           alt="Background View On Website"
           title="Background View On Website"
           style={{
@@ -35,7 +35,7 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
             width: '2192px',
             maxWidth: '100%',
             height: { xs: '100%', md: '88vh', xl: '88vh' },
-            background: '#EAEDED',
+            // background: '#EAEDED',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

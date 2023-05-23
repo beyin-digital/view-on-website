@@ -1,0 +1,18 @@
+{
+  "meta_title": "View On Website |  Security ",
+  "meta_desc": "",
+  "meta_keyword": "",
+  "change": "Change your password:",
+  "pass": "Current Password",
+  "new_pass": "New Password",
+  "confirm_pass": "Confirm New Password",
+  "text": "Two factor Authentication",
+  "text_two": "We will send you a verification email overtime you login",
+  "button_security": "Save Changes",
+  "delete_account": "Delete account",
+  "change_info": "Change your account info:",
+  "save_change": "Save Changes",
+  "cancel_security": "Cancel",
+  "sure": "Sure",
+  "modal": "You're about to disable two factor authentication. Are you sure about this action?"
+}

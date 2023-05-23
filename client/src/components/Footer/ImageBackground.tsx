@@ -17,7 +17,7 @@ export const ImageBackground = () => {
               alt="View On Website background Footer"
               title="View On Website background Footer"
               fill
-              src="/images/swirl.svg"
+              src="/images/swirl.webp"
               style={{
                 width: '100%',
                 right: '15rem',
@@ -34,7 +34,7 @@ export const ImageBackground = () => {
               alt="View On Website background Footer"
               title="View On Website background Footer"
               fill
-              src="/images/swirl.svg"
+              src="/images/swirl.webp"
               style={{
                 width: '100%',
                 right: '10rem',
@@ -54,7 +54,7 @@ export const ImageBackground = () => {
               alt="View On Website background Footer"
               title="View On Website background Footer"
               fill
-              src="/images/swirl.svg"
+              src="/images/swirl.webp"
               style={{
                 width: '100%',
                 left: '-21rem',
@@ -71,7 +71,7 @@ export const ImageBackground = () => {
               alt="View On Website background Footer"
               title="View On Website background Footer"
               fill
-              src="/images/swirl.svg"
+              src="/images/swirl.webp"
               style={{
                 width: '100%',
                 left: '-10rem',

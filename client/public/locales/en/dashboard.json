@@ -13,6 +13,7 @@
   "box_two_title": "Hashtag Details",
   "box_two_button": "",
   "box_two_valid": "Valid",
+  "current_location": "Current location",
   "box_two_date_bought": "Date bought ",
   "box_two_date_next": "Next renewal",
   "box_two_download": "Download E-Lable Stamp",
@@ -24,5 +25,6 @@
   "box_four_all": "All-time",
   "box_main_chart_title": "Main Chart",
   "box_main_chart_visit": "Number of visits ",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "go_to_subscriptions": "Go To Subscriptions"
 }

@@ -1,14 +1,20 @@
 import { Container, Grid } from '@mui/material'
 import Head from 'next/head'
 
-// layout
-import Layout from '@/components/Layout/Layout'
-
 // components
 import dynamic from 'next/dynamic'
-
-import SignupForm from '@/components/Signup/SignupForm'
-import SignupDetails from '@/components/Signup/SignupDetails'
+const Layout = dynamic(() => import('@/components/Layout/Layout'), {
+  ssr: false,
+})
+const SignupForm = dynamic(() => import('@/components/Signup/SignupForm'), {
+  ssr: false,
+})
+const SignupDetails = dynamic(
+  () => import('@/components/Signup/SignupDetails'),
+  {
+    ssr: false,
+  }
+)
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetStaticProps } from 'next'

@@ -1,11 +1,15 @@
-import React from 'react'
-import LayoutMobile from './Components/Layout'
 import {
   ButtonStyle,
   HeaderLayout,
   MainContainer,
   ThreeOption,
 } from './Components'
+
+import dynamic from 'next/dynamic'
+
+const LayoutMobile = dynamic(() => import('./Components/Layout'), {
+  ssr: false,
+})
 
 const IllustrationMobile = () => {
   return (

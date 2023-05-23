@@ -6,12 +6,25 @@ import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 
 // components
-import Footer from '@/components/Footer/Footer'
-import Header from '@/components/Navbar/Navbar'
-import PageDesktop from '@/components/Examples/PageDesktop'
-import PageMobile from '@/components/Examples/PageMobile'
-import PageTablet from '@/components/Examples/PageTablet'
-import FooterMobile from '@/components/Footer/FooterMobile'
+import dynamic from 'next/dynamic'
+const Header = dynamic(() => import('@/components/Navbar/Navbar'), {
+  ssr: false,
+})
+const PageDesktop = dynamic(() => import('@/components/Examples/PageDesktop'), {
+  ssr: false,
+})
+const Footer = dynamic(() => import('@/components/Footer/Footer'), {
+  ssr: false,
+})
+const PageMobile = dynamic(() => import('@/components/Examples/PageMobile'), {
+  ssr: false,
+})
+const PageTablet = dynamic(() => import('@/components/Examples/PageTablet'), {
+  ssr: false,
+})
+const FooterMobile = dynamic(() => import('@/components/Footer/FooterMobile'), {
+  ssr: false,
+})
 import Head from 'next/head'
 
 const Example = () => {
@@ -21,8 +34,9 @@ const Example = () => {
     <>
       <Head>
         <title>{t('meta_title')} </title>
-        <meta name="description" content="" />
-        <meta name="keyword" content="" />
+        <meta name="description" content={`${t('meta_description')}`} />
+        <meta name="keyword" content={`${t('meta_keyword')}`} />
+        <link rel="canonical" href="https://website-vow.vercel.app/en/" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>

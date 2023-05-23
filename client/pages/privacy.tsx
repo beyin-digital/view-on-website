@@ -13,8 +13,9 @@ const Privacy = () => {
     <>
       <Head>
         <title>{t('meta_title')} </title>
-        <meta name="description" content="" />
-        <meta name="keyword" content="" />
+        <meta name="description" content={`${t('meta_description')}`} />
+        <meta name="keyword" content={`${t('meta_keyword')}`} />
+        <link rel="canonical" href="https://website-vow.vercel.app/en/" />
       </Head>{' '}
     </>
   )

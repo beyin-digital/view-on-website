@@ -114,9 +114,10 @@ const SubscribePage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{`VIEW ON WEBSITE | Keyword #${values.hashtag}`}</title>
-        <meta name="description" content="" />
-        <meta name="keyword" content="" />
+        <title>{`${t('meta_title')} | Keyword #${values.hashtag}`}</title>
+        <meta name="description" content={`${t('meta_description')}`} />
+        <meta name="keyword" content={`${t('meta_keyword')}`} />
+        <link rel="canonical" href="https://website-vow.vercel.app/en/" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
@@ -1380,12 +1381,7 @@ const SubscribePage: NextPage = () => {
 }
 export async function getStaticPaths({}: any) {
   return {
-    paths: [
-      { params: { tag: 'a', sublinks: 'ww' } },
-      { params: { tag: 'aa', sublinks: 'www' } },
-      { params: { tag: 'aaa', sublinks: 'wwww' } },
-      { params: { tag: 'aaaa', sublinks: 'wwww' } },
-    ],
+    paths: [{ params: { tag: 'a', sublinks: 'ww' } }],
     fallback: true,
   }
 }
@@ -1397,61 +1393,3 @@ export async function getStaticProps({ params, locale }: any) {
   }
 }
 export default SubscribePage
-
-interface ButtonStyleProps {
-  name: string
-  color: any
-  bg: any
-  iconColor: any
-  onClick?: () => void
-}
-
-const ButtonStyle = (props: ButtonStyleProps) => {
-  const router = useRouter()
-  const { locale } = useRouter()
-  return (
-    <>
-      <Button
-        sx={{
-          borderRadius: '16px',
-          paddingX: '18px',
-          height: '59px',
-          width: {
-            xs: '100%',
-            sm: '311px',
-            md: '311px',
-            xl: '311px',
-          },
-          display: 'flex',
-          background: props.bg,
-          justifyContent: 'space-around',
-          '&:hover': {
-            background: props.bg,
-            color: props.color,
-          },
-        }}
-        onClick={props.onClick}
-        type="submit"
-      >
-        <Typography
-          sx={{
-            letterSpacing: '0.02em',
-            fontSize: '32px',
-            fontWeight: '400',
-            lineHeight: '40px',
-            color: props.color,
-            textTransform: 'capitalize',
-          }}
-        >
-          {props.name}
-          {/* {t("button")} */}
-        </Typography>
-        {locale === 'ar' ? (
-          <FiArrowDownLeft size={42} color={props.iconColor} />
-        ) : (
-          <FiArrowDownRight size={42} color={props.iconColor} />
-        )}
-      </Button>
-    </>
-  )
-}

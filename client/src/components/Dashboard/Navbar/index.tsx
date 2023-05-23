@@ -19,7 +19,7 @@ import { UserContext } from '@/contexts/userContext'
 import { useTranslation } from 'react-i18next'
 
 const Navbar = () => {
-  const { t } = useTranslation('dashboard')
+  const { t } = useTranslation('common')
   const [value, setValue] = React.useState(0)
   const pathname = usePathname()
   const router = useRouter()
@@ -125,7 +125,7 @@ const Navbar = () => {
         sx={{
           position: 'sticky',
           top: 0,
-          zIndex: 20,
+          zIndex: '999999',
           width: '100%',
           height: { xs: '60px', md: '60px', xl: '80px' },
           display: { xs: 'none', md: 'flex', xl: 'flex' },
@@ -164,7 +164,7 @@ const Navbar = () => {
             width="20%"
           >
             {/* My #Hashtags */}
-            {/* {t("title")} */}
+            {t('title')}
           </Typography>
           <Tabs
             sx={{
@@ -207,7 +207,7 @@ const Navbar = () => {
         sx={{
           position: 'sticky',
           top: 0,
-          zIndex: 20,
+          zIndex: '99999999999999999999',
           height: '94px',
           display: { xs: 'flex', md: 'none', xl: 'none' },
           alignItems: 'center',
@@ -216,6 +216,7 @@ const Navbar = () => {
           border: '1px solid #FBFBFB',
           backdropFilter: 'blur(100px)',
         }}
+        // className="hhhhhhhh"
       >
         <Box
           sx={{
@@ -253,7 +254,7 @@ const Navbar = () => {
             {t('side_title')}
           </Typography>
           <Image
-            src="/images/logo.svg"
+            src="/images/logo.webp"
             alt="logo"
             width={74}
             height={37}
@@ -269,7 +270,7 @@ const Navbar = () => {
           sx={{
             position: 'absolute',
             display: 'flex',
-            zIndex: 999,
+            zIndex: '9991',
             flexDirection: 'column',
             background: 'rgba(251, 251, 251, 0.6)',
             backdropFilter: 'blur(100px)',

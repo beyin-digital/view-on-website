@@ -3,10 +3,19 @@ import { Box } from '@mui/system'
 
 // components
 import { Background } from './Background'
-import Header from '../Navbar/Navbar'
-import Footer from '../Footer/Footer'
-import FooterMobile from '../Footer/FooterMobile'
 import { BackgroundImageSlider } from '../Slider/BackgroundImage'
+
+import dynamic from 'next/dynamic'
+const Header = dynamic(() => import('../Navbar/Navbar'), {
+  ssr: false,
+})
+const Footer = dynamic(() => import('../Footer/Footer'), {
+  ssr: false,
+})
+const FooterMobile = dynamic(() => import('../Footer/FooterMobile'), {
+  ssr: false,
+})
+
 interface Props {
   children: React.ReactNode
   nameOne?: any

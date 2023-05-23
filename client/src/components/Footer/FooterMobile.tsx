@@ -1,12 +1,21 @@
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
-import TextViewOnWeb from '../Home/TextViewOnWeb'
 import { useTranslation } from 'next-i18next'
 import { ImageBackground } from './ImageBackground'
-import ModalFooter from './ModalFooter'
+
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+
+import dynamic from 'next/dynamic'
+
+const ModalFooter = dynamic(() => import('./ModalFooter'), {
+  ssr: false,
+})
+const TextViewOnWeb = dynamic(() => import('../Home/TextViewOnWeb'), {
+  ssr: false,
+})
+
 const FooterMobile = () => {
   const { t } = useTranslation('common')
   const { locale } = useRouter()

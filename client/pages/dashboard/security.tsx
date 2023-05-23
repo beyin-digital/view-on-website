@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
-
-import RootLayout from '@/components/Dashboard/Layout'
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'react-i18next'
 import { UserContext } from '@/contexts/userContext'
 import {
   Box,
@@ -19,6 +20,12 @@ import { useRouter } from 'next/navigation'
 import Modal from '@/components/Dashboard/Modal'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import Head from 'next/head'
+
+import dynamic from 'next/dynamic'
+import Navbar from '@/components/Dashboard/Navbar'
+const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
+  ssr: false,
+})
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: 'rgba(251, 251, 251, 0.8)',
@@ -75,6 +82,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 }))
 
 const DashboardSecurityPage = () => {
+  const { t } = useTranslation('security')
   const router = useRouter()
   const { updateUser, user, token } = useContext(UserContext)
 
@@ -133,34 +141,277 @@ const DashboardSecurityPage = () => {
   return (
     <>
       <Head>
-        <title>Dashboard - Security</title>
+        <title>{t('meta_title')} </title>
+        <meta name="description" content={`${t('meta_description')}`} />
+        <meta name="keyword" content={`${t('meta_keyword')}`} />
+        <link rel="canonical" href="https://website-vow.vercel.app/en/" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
-      <RootLayout>
-        <Item
+      <>
+        <Box
           sx={{
-            display: {
-              xs: 'none',
-              sm: 'none',
-              md: 'block',
-              lg: 'block',
-              xl: 'block',
-            },
-            height: '822px',
             width: '100%',
+            display: { xs: 'block', md: 'none' },
+            position: 'absolute',
+            top: '0',
+            zIndex: '999999',
           }}
         >
-          {/* Name, profile photo, email  */}
-          <Box
-            style={{
-              display: 'flex',
-              marginTop: '65px',
-              marginLeft: '92px',
-              marginRight: '92px',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+          <Navbar />
+        </Box>
+
+        <RootLayout>
+          {/* <Navbar /> */}
+          <Item
+            sx={{
+              display: {
+                xs: 'none',
+                sm: 'none',
+                md: 'block',
+                lg: 'block',
+                xl: 'block',
+              },
+              height: '822px',
+              width: '100%',
             }}
           >
-            {/* Name and profile photo */}
+            {/* Name, profile photo, email  */}
+            <Box
+              style={{
+                display: 'flex',
+                marginTop: '50px',
+                marginLeft: '92px',
+                marginRight: '92px',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              {/* Name and profile photo */}
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Avatar
+                  sx={{
+                    bgcolor: '#6BBF52',
+                    width: '83px',
+                    height: '83px',
+                    fontSize: '40px',
+                    borderRadius: '21px',
+                  }}
+                  variant="square"
+                >
+                  MA
+                </Avatar>
+                <Typography
+                  sx={{
+                    fontSize: '36px',
+                    fontWeight: 'bold',
+                    marginLeft: '50px',
+                  }}
+                >
+                  {user?.fullName}
+                </Typography>
+              </Box>
+            </Box>
+            <Divider
+              sx={{
+                marginTop: '30px',
+              }}
+            />
+            {/* Input fields */}
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginX: '92px',
+                marginTop: '50px',
+                flexDirection: { xs: 'column-reverse', xl: 'row' },
+              }}
+            >
+              <Box
+                sx={{
+                  width: { xs: '90%', lg: '650px' },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <Typography fontSize="36px">{t('change')}</Typography>
+
+                <OutlinedInput
+                  value={values.currentPassword}
+                  placeholder={`${t('pass')}`}
+                  sx={{
+                    height: '57px',
+                    width: '100%',
+                    marginTop: '30px',
+                    fontSize: '24px',
+                    background: 'white',
+                    borderRadius: '15px',
+                    '.MuiOutlinedInput-notchedOutline': {
+                      border: '0',
+                      padding: '9px',
+                    },
+                    '&:hover > .MuiOutlinedInput-notchedOutline': {
+                      border: '0',
+                    },
+                  }}
+                  type={showPassword ? 'text' : 'password'}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  onChange={(e) => {
+                    setValues({
+                      ...values,
+                      currentPassword: e.target.value,
+                    })
+                  }}
+                />
+                <OutlinedInput
+                  value={values.newPassword}
+                  placeholder={`${t('new_pass')}`}
+                  sx={{
+                    height: '57px',
+                    width: '100%',
+                    marginTop: '24px',
+                    fontSize: '24px',
+                    background: 'white',
+                    borderRadius: '15px',
+                    '.MuiOutlinedInput-notchedOutline': {
+                      border: '0',
+                      padding: '9px',
+                    },
+                    '&:hover > .MuiOutlinedInput-notchedOutline': {
+                      border: '0',
+                    },
+                  }}
+                  onChange={(e) => {
+                    setValues({
+                      ...values,
+                      newPassword: e.target.value,
+                    })
+                  }}
+                />
+                <OutlinedInput
+                  value={values.confirmPassword}
+                  placeholder={`${t('confirm_pass')}`}
+                  sx={{
+                    height: '57px',
+                    width: '100%',
+                    marginTop: '24px',
+                    fontSize: '24px',
+                    background: 'white',
+                    borderRadius: '15px',
+                    '.MuiOutlinedInput-notchedOutline': {
+                      border: '0',
+                      padding: '9px',
+                    },
+                    '&:hover > .MuiOutlinedInput-notchedOutline': {
+                      border: '0',
+                    },
+                  }}
+                  onChange={(e) => {
+                    setValues({
+                      ...values,
+                      confirmPassword: e.target.value,
+                    })
+                  }}
+                />
+                <Box
+                  sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'row-reverse',
+                    marginTop: '32px',
+                  }}
+                >
+                  <Button
+                    onClick={handleChangePassword}
+                    disableRipple
+                    variant="contained"
+                    sx={{
+                      height: '63px',
+                      width: '255px',
+                      background: '#0090EC',
+                      borderRadius: '15px',
+                      color: '#FBFBFB',
+                      fontWeight: 400,
+                      fontSize: '24px',
+                      boxShadow: 'none',
+                      textTransform: 'none',
+                    }}
+                  >
+                    {t('button_security')}
+                  </Button>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  marginBottom: { xs: '20px', lg: '0' },
+                }}
+              >
+                <Box className="TextAlignSecurity">
+                  <Typography fontSize="36px">{t('text')}</Typography>
+                  <Typography fontSize="14px">{t('text_two')}</Typography>
+                </Box>
+                <Switch
+                  className="IconSwitchDashboard"
+                  checked={twoFactorAuth}
+                  onChange={(e) => {
+                    if (user?.twoFactorAuth === true) {
+                      handleOpen()
+                    } else {
+                      handleChangeTwoFactorAuth()
+                      setTwoFactorAuth(true)
+                    }
+                    console.log('Clicked')
+                  }}
+                />
+              </Box>
+            </Box>
+            <Typography
+              textAlign="left"
+              marginLeft="92px"
+              marginTop="100px"
+              sx={{ cursor: 'pointer' }}
+            >
+              {t('delete_account')}
+            </Typography>
+          </Item>
+
+          {/* Mobile Profile View */}
+          <Box
+            sx={{
+              display: {
+                xs: 'block',
+                sm: 'block',
+                md: 'none',
+                lg: 'none',
+                xl: 'none',
+              },
+              width: '100%',
+              // height: "100vh",
+              padding: '0px 27px',
+              position: 'relative',
+              zIndex: '991',
+            }}
+          >
+            {/* Name, profile photo, email */}
             <Box
               sx={{
                 display: 'flex',
@@ -170,56 +421,76 @@ const DashboardSecurityPage = () => {
               <Avatar
                 sx={{
                   bgcolor: '#6BBF52',
-                  width: '83px',
-                  height: '83px',
-                  fontSize: '40px',
-                  borderRadius: '21px',
+                  width: '46px',
+                  height: '43px',
+                  fontSize: '20px',
+                  borderRadius: '8px',
                 }}
                 variant="square"
               >
-                MA
+                {user?.fullName.split(' ')[0].charAt(0)}
+                {user?.fullName.split(' ')[1].charAt(0)}
               </Avatar>
-              <Typography
-                sx={{
-                  fontSize: '36px',
-                  fontWeight: 'bold',
-                  marginLeft: '50px',
-                }}
-              >
-                {user?.fullName}
-              </Typography>
+              <Box>
+                <Typography
+                  sx={{
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    marginLeft: '7px',
+                  }}
+                >
+                  {user?.fullName}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    marginLeft: '7px',
+                    color: '#8C8C8C',
+                  }}
+                >
+                  {user?.email}
+                </Typography>
+              </Box>
             </Box>
-          </Box>
-          <Divider sx={{ marginTop: '38px' }} />
-          {/* Input fields */}
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginX: '92px',
-              marginTop: '66px',
-            }}
-          >
-            <Box
+
+            <Typography
               sx={{
-                width: '650px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
+                fontSize: '20px',
+                fontWeight: '400',
+                margin: '44px  0 22px 0',
               }}
             >
-              <Typography fontSize="36px">Change your password:</Typography>
-
+              {/* {t("change_info")} */}
+              Change your account info:
+            </Typography>
+            {/* Current Password, New Password and confirm new Password */}
+            <Box
+              sx={{
+                width: '100%',
+                height: '353px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
               <OutlinedInput
-                value={values.currentPassword}
-                placeholder="Current Password"
+                value={values?.currentPassword}
+                placeholder={`${t('pass')}`}
                 sx={{
                   height: '57px',
                   width: '100%',
-                  marginTop: '45px',
                   fontSize: '24px',
                   background: 'white',
                   borderRadius: '15px',
+                  '.MuiOutlinedInput-notchedOutline': {
+                    border: '0',
+                    padding: '9px',
+                  },
+                  '&:hover > .MuiOutlinedInput-notchedOutline': {
+                    border: '0',
+                  },
                 }}
                 type={showPassword ? 'text' : 'password'}
                 endAdornment={
@@ -242,15 +513,21 @@ const DashboardSecurityPage = () => {
                 }}
               />
               <OutlinedInput
-                value={values.newPassword}
-                placeholder="New Password"
+                value={values?.newPassword}
+                placeholder={`${t('new_pass')}`}
                 sx={{
                   height: '57px',
                   width: '100%',
-                  marginTop: '24px',
                   fontSize: '24px',
                   background: 'white',
                   borderRadius: '15px',
+                  '.MuiOutlinedInput-notchedOutline': {
+                    border: '0',
+                    padding: '9px',
+                  },
+                  '&:hover > .MuiOutlinedInput-notchedOutline': {
+                    border: '0',
+                  },
                 }}
                 onChange={(e) => {
                   setValues({
@@ -259,16 +536,23 @@ const DashboardSecurityPage = () => {
                   })
                 }}
               />
+
               <OutlinedInput
-                value={values.confirmPassword}
-                placeholder="Confirm Password"
+                value={values?.confirmPassword}
+                placeholder={`${t('confirm_pass')}`}
                 sx={{
                   height: '57px',
                   width: '100%',
-                  marginTop: '24px',
                   fontSize: '24px',
                   background: 'white',
                   borderRadius: '15px',
+                  '.MuiOutlinedInput-notchedOutline': {
+                    border: '0',
+                    padding: '9px',
+                  },
+                  '&:hover > .MuiOutlinedInput-notchedOutline': {
+                    border: '0',
+                  },
                 }}
                 onChange={(e) => {
                   setValues({
@@ -277,281 +561,86 @@ const DashboardSecurityPage = () => {
                   })
                 }}
               />
-              <Box
-                sx={{
-                  width: '100%',
-                  display: 'flex',
-                  flexDirection: 'row-reverse',
-                  marginTop: '32px',
-                }}
-              >
-                <Button
-                  onClick={handleChangePassword}
-                  disableRipple
-                  variant="contained"
-                  sx={{
-                    height: '63px',
-                    width: '255px',
-                    background: '#0090EC',
-                    borderRadius: '15px',
-                    color: '#FBFBFB',
-                    fontWeight: 400,
-                    fontSize: '24px',
-                    boxShadow: 'none',
-                    textTransform: 'none',
-                  }}
-                >
-                  Save Changes
-                </Button>
-              </Box>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-              <Box sx={{ textAlign: 'left' }}>
-                <Typography fontSize="36px">
-                  Two Factor Authentication
-                </Typography>
-                <Typography fontSize="14px">
-                  We will send you a verification email everytime you login
-                </Typography>
-              </Box>
-              <Switch
-                sx={{ marginLeft: '100px' }}
-                checked={twoFactorAuth}
-                onChange={(e) => {
-                  if (user?.twoFactorAuth === true) {
-                    handleOpen()
-                  } else {
-                    handleChangeTwoFactorAuth()
-                    setTwoFactorAuth(true)
-                  }
-                  console.log('Clicked')
-                }}
-              />
-            </Box>
-          </Box>
-          <Typography
-            textAlign="left"
-            marginLeft="92px"
-            marginTop="100px"
-            sx={{ cursor: 'pointer' }}
-          >
-            Delete account
-          </Typography>
-        </Item>
 
-        {/* Mobile Profile View */}
-        <Box
-          sx={{
-            display: {
-              xs: 'block',
-              sm: 'block',
-              md: 'none',
-              lg: 'none',
-              xl: 'none',
-            },
-            width: '100%',
-            height: '100vh',
-            padding: '0px 27px',
-          }}
-        >
-          {/* Name, profile photo, email */}
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar
-              sx={{
-                bgcolor: '#6BBF52',
-                width: '46px',
-                height: '43px',
-                fontSize: '20px',
-                borderRadius: '8px',
-              }}
-              variant="square"
-            >
-              {user?.fullName.split(' ')[0].charAt(0)}
-              {user?.fullName.split(' ')[1].charAt(0)}
-            </Avatar>
-            <Box>
-              <Typography
+              <Button color="error" sx={{ alignSelf: 'flex-start' }}>
+                {/* Delete Account */}
+                {t('delete_account')}
+              </Button>
+
+              <Button
                 sx={{
+                  background: '#0090EC',
+                  height: '44px',
+                  width: '209px',
+                  borderRadius: '13px',
                   fontSize: '20px',
-                  fontWeight: 'bold',
-                  marginLeft: '7px',
+                  fontWeight: 400,
+                  color: 'white',
+                  '&:hover': {
+                    background: '#0090EC',
+                  },
                 }}
               >
-                {user?.fullName}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: '16px',
-                  fontWeight: 'bold',
-                  marginLeft: '7px',
-                  color: '#8C8C8C',
-                }}
-              >
-                {user?.email}
-              </Typography>
+                {/* Save Changes */}
+                {t('save_change')}
+              </Button>
             </Box>
           </Box>
 
-          <Typography
-            sx={{
-              fontSize: '20px',
-              fontWeight: '400',
-              margin: '44px  0 22px 0',
-            }}
+          <Modal
+            title="Two factor Authentication off"
+            open={open}
+            handleClose={handleClose}
           >
-            Change your account info:
-          </Typography>
-          {/* Current Password, New Password and confirm new Password */}
-          <Box
-            sx={{
-              width: '100%',
-              height: '353px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <OutlinedInput
-              value={values?.currentPassword}
-              placeholder="Current Password"
+            <Box>
+              <Typography>{t('modal')}</Typography>
+            </Box>
+            <Box
               sx={{
-                height: '57px',
-                width: '100%',
-                fontSize: '24px',
-                background: 'white',
-                borderRadius: '15px',
-              }}
-              type={showPassword ? 'text' : 'password'}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  currentPassword: e.target.value,
-                })
-              }}
-            />
-            <OutlinedInput
-              value={values?.newPassword}
-              placeholder="New Password"
-              sx={{
-                height: '57px',
-                width: '100%',
-                fontSize: '24px',
-                background: 'white',
-                borderRadius: '15px',
-              }}
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  newPassword: e.target.value,
-                })
-              }}
-            />
-
-            <OutlinedInput
-              value={values?.confirmPassword}
-              placeholder="Confirm New Password"
-              sx={{
-                height: '57px',
-                width: '100%',
-                fontSize: '24px',
-                background: 'white',
-                borderRadius: '15px',
-              }}
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  confirmPassword: e.target.value,
-                })
-              }}
-            />
-
-            <Button color="error" sx={{ alignSelf: 'flex-start' }}>
-              Delete Account
-            </Button>
-
-            <Button
-              sx={{
-                background: '#0090EC',
-                height: '44px',
-                width: '209px',
-                borderRadius: '13px',
-                fontSize: '20px',
-                fontWeight: 400,
-                color: 'white',
+                display: 'flex',
+                position: 'absolute',
+                bottom: 0,
+                width: '90%',
+                justifyContent: 'space-between',
+                margin: '0 auto',
+                paddingBottom: '21px',
               }}
             >
-              Save Changes
-            </Button>
-          </Box>
-        </Box>
-
-        <Modal
-          title="Two factor Authentication off"
-          open={open}
-          handleClose={handleClose}
-        >
-          <Box>
-            <Typography>
-              You're about to disable two factor authentication. Are you sure
-              about this action?
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              position: 'absolute',
-              bottom: 0,
-              width: '90%',
-              justifyContent: 'space-between',
-              margin: '0 auto',
-              paddingBottom: '21px',
-            }}
-          >
-            <Button
-              color="info"
-              variant="contained"
-              sx={{ height: '42px', width: '154px' }}
-              onClick={() => {
-                handleChangeTwoFactorAuth(false)
-                handleClose()
-              }}
-            >
-              Sure
-            </Button>
-            <Button
-              color="error"
-              variant="contained"
-              sx={{ height: '42px', width: '154px' }}
-              onClick={() => {
-                handleClose()
-                setTwoFactorAuth(false)
-              }}
-            >
-              Cancel
-            </Button>
-          </Box>
-        </Modal>
-      </RootLayout>
+              <Button
+                color="info"
+                variant="contained"
+                sx={{ height: '42px', width: '154px' }}
+                onClick={() => {
+                  handleChangeTwoFactorAuth(false)
+                  handleClose()
+                }}
+              >
+                {t('sure')}
+              </Button>
+              <Button
+                color="error"
+                variant="contained"
+                sx={{ height: '42px', width: '154px' }}
+                onClick={() => {
+                  handleClose()
+                  setTwoFactorAuth(false)
+                }}
+              >
+                {/* Cancel */}
+                {t('cancel_security')}
+              </Button>
+            </Box>
+          </Modal>
+        </RootLayout>
+      </>
     </>
   )
 }
-
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || '', ['common', 'security'])),
+    },
+  }
+}
 export default DashboardSecurityPage

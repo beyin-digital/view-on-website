@@ -7,10 +7,22 @@ import { useTranslation } from 'next-i18next'
 
 // components
 import dynamic from 'next/dynamic'
+const Layout = dynamic(() => import('@/components/Layout/Layout'), {
+  ssr: false,
+})
+const DetailsHeader = dynamic(
+  () => import('@/components/Request/DetailsHeader'),
+  {
+    ssr: false,
+  }
+)
+const FormRequest = dynamic(() => import('@/components/Request/FormRequest'), {
+  ssr: false,
+})
 
-import Layout from '@/components/Layout/Layout'
-import DetailsHeader from '@/components/Request/DetailsHeader'
-import FormRequest from '@/components/Request/FormRequest'
+// import Layout from '@/components/Layout/Layout'
+// import DetailsHeader from '@/components/Request/DetailsHeader'
+// import FormRequest from '@/components/Request/FormRequest'
 
 const Request = () => {
   const { t } = useTranslation('request')
@@ -19,8 +31,9 @@ const Request = () => {
     <>
       <Head>
         <title>{t('meta_title')} </title>
-        <meta name="description" content="" />
-        <meta name="keyword" content="" />
+        <meta name="description" content={`${t('meta_description')}`} />
+        <meta name="keyword" content={`${t('meta_keyword')}`} />
+        <link rel="canonical" href="https://website-vow.vercel.app/en/" />
       </Head>{' '}
       <Layout
         nameOne={t('nav_subscribe')}

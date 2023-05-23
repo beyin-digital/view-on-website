@@ -1,10 +1,19 @@
 import { Box } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
-import OneBox from './OneBox'
-import TwoBox from './TwoBox'
-import ThreeBox from './ThreeBox'
 import { LinkSubscribe } from '@/components/Button'
+
+import dynamic from 'next/dynamic'
+
+const OneBox = dynamic(() => import('./OneBox'), {
+  ssr: false,
+})
+const TwoBox = dynamic(() => import('./TwoBox'), {
+  ssr: false,
+})
+const ThreeBox = dynamic(() => import('./ThreeBox'), {
+  ssr: false,
+})
 
 const PageTablet = () => {
   const { t } = useTranslation('example')
@@ -31,7 +40,7 @@ const PageTablet = () => {
         >
           <Image
             fill
-            src="/images/swirl.svg"
+            src="/images/swirl.webp"
             alt=""
             className="ImageMobil"
             style={{
@@ -48,7 +57,7 @@ const PageTablet = () => {
         >
           <Image
             fill
-            src="/images/swirl.svg"
+            src="/images/swirl.webp"
             alt="Background Example Page"
             title="Background Example Page"
             style={{

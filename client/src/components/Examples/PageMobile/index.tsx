@@ -1,11 +1,12 @@
 import { Box } from '@mui/material'
 
 // components
+import dynamic from 'next/dynamic'
+
+import { LinkSubscribe } from '@/components/Button'
 import OneBox from './OneBox'
 import TwoBox from './TwoBox'
 import ThreeBox from './ThreeBox'
-
-import { LinkSubscribe } from '@/components/Button'
 const PageMobile = () => {
   return (
     <Box
@@ -33,7 +34,7 @@ const PageMobile = () => {
           }}
         >
           <img
-            src="/images/swirl.png"
+            src="/images/swirl.webp"
             alt="Background View On Website"
             title="Background View On Website"
             loading="lazy"

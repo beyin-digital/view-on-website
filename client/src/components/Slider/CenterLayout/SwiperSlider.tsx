@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
-import 'swiper/css/navigation'
 
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
@@ -20,8 +19,6 @@ import { useTranslation } from 'next-i18next'
 import 'swiper/swiper-bundle.min.css'
 
 import SwiperLabel from './SwiperLabel'
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import Image from 'next/image'
 
 SwiperCore.use([Navigation, Thumbs, Keyboard])
@@ -125,6 +122,9 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
             alt=""
             width={40}
             height={40}
+            placeholder="blur"
+            blurDataURL="/icons/sliderArrowLeft.svg"
+            loading="lazy"
           />
         </div>
         <Swiper
@@ -184,10 +184,11 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
               }}
             >
               <img
-                src="/images/card.png"
+                src="/images/card.webp"
                 style={{
                   width: '800px',
                 }}
+                loading="lazy"
                 className="ImageSlider"
               />
               <Box

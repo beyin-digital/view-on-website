@@ -107,13 +107,14 @@ const Header = ({
       >
         <Box
           sx={{ cursor: 'pointer', margin: '.5rem 0', textAlign: 'center' }}
-          onClick={() => router.push('/')}
+          //   onClick={() => router.push('/')}
         >
-          <Link href="/">
+          <Link href="/" title="logo View On Website">
             <img
               src="/images/logo.svg"
               alt="logo View On Website"
               title="logo View On Website"
+              loading="lazy"
             />
           </Link>
         </Box>
@@ -253,6 +254,7 @@ const Header = ({
           style={{
             textDecoration: 'none',
           }}
+          title="Lang EN"
         >
           <Box
             sx={{
@@ -503,8 +505,13 @@ const Header = ({
               sx={{ cursor: 'pointer', margin: '.5rem 0' }}
               // onClick={() => router.push("/")}
             >
-              <Link href="/">
-                <img src="/images/logo.svg" alt="logo" />
+              <Link href="/" title="Home View On Website">
+                <img
+                  src="/images/logo.svg"
+                  alt="logo View On Website"
+                  title="logo View On Website"
+                  loading="lazy"
+                />
               </Link>
             </Box>
 

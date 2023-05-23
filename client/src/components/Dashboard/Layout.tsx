@@ -5,7 +5,6 @@ import Navbar from '@/components/Dashboard/Navbar'
 import Sidebar from '@/components/Dashboard/Sidebar'
 import { UserContext } from '@/contexts/userContext'
 import FooterMobile from '../Footer/FooterMobile'
-import Footer from '../Footer/Footer'
 import { useRouter } from 'next/router'
 interface RootLayoutProps {
   children: React.ReactNode
@@ -34,7 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           display: 'flex',
           flexDirection: 'column',
 
-          background: "url('/images/swirl.svg')",
+          background: "url('/images/swirl.webp')",
           backgroundPositionY: '-1000px',
           backgroundPositionX: '-500px',
           backgroundRepeat: 'no-repeat',
@@ -60,13 +59,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           minHeight: '100vh',
           width: '100%',
           maxWidth: '1920px',
-          // display: "flex",
-          // alignItems: "end",
-          // justifyContent: "space-between",
-          // flexDirection: "column",
         }}
       >
         {pathname === '/dashboard' && <Navbar />}
+        {/* <Navbar /> */}
         {/* Sidebar and Content body */}
         <Box
           sx={{
@@ -128,24 +124,29 @@ export default function RootLayout({ children }: RootLayoutProps) {
             }}
           >
             {children}
-            <Box
-              sx={{
-                position: 'absolute',
-                zIndex: '999999999',
-                width: '100%',
-                bottom: '0',
-              }}
-            >
-              <Box
-                sx={{
-                  height: '100vh',
-                  display: 'flex',
-                  alignItems: 'end',
-                }}
-              >
-                {/* <FooterMobile /> */}
-              </Box>
-            </Box>
+            {/*
+						<>
+
+							<Box
+								sx={{
+									position: "absolute",
+									zIndex: "999999999",
+									width: "100%",
+									bottom: "0",
+									marginTop: "auto",
+								}}
+							>
+								<Box
+									sx={{
+										height: "50vh",
+										display: "flex",
+										alignItems: "end",
+									}}
+								>
+									<FooterMobile />
+								</Box>
+							</Box>
+						</> */}
           </Box>
         </Box>
       </Box>

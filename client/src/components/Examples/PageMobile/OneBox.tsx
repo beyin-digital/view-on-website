@@ -1,7 +1,12 @@
 import { useTranslation } from 'next-i18next'
-import SliderSwiper from '../SliderSwiper'
 
 import { Box, Typography } from '@mui/material'
+
+import dynamic from 'next/dynamic'
+
+const SliderSwiper = dynamic(() => import('../SliderSwiper'), {
+  ssr: false,
+})
 
 const OneBox = () => {
   const { t } = useTranslation('example')
@@ -19,7 +24,7 @@ const OneBox = () => {
           backdropFilter: 'blur(48.4848px)',
           borderRadius: '14.5455px',
           position: 'relative',
-          height: '360px',
+          height: '430px',
         }}
         className="OneBoxMobile"
       >
@@ -32,7 +37,7 @@ const OneBox = () => {
             transform: 'skew(16deg, 0deg)',
             alignItems: 'center',
             justifyContent: {
-              xs: 'center',
+              xs: 'start',
               sm: 'center',
               md: 'center',
               xl: 'center',
@@ -46,7 +51,7 @@ const OneBox = () => {
           <Box
             sx={{
               width: { xs: '100%', sm: '70%', md: '60%' },
-              height: { xs: '170px', sm: '200px', md: '210px' },
+              height: { xs: '228px', sm: '200px', md: '210px' },
               marginBottom: '1rem',
               position: { xs: 'relative', sm: '' },
               overflow: 'hidden',
@@ -108,7 +113,7 @@ const OneBox = () => {
           }}
         >
           <img
-            src="/images/phone.png"
+            src="/images/phone.webp"
             alt="View On Website Man Look at Phone"
             title="View On Website Man Look at Phone"
             style={{

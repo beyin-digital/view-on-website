@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import { Grid, Link, Typography, Box } from '@mui/material'
+import { Grid, Typography, Box } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
@@ -83,7 +82,7 @@ export const HeaderLayoutDesktop = () => {
             }}
           >
             <img
-              src="/images/swirlIllustration.svg"
+              src="/images/swirlIllustration.webp"
               alt="View On Website swirl Illustration Right icon"
               title="View On Website swirl Illustration Right icon"
               style={{
@@ -92,6 +91,7 @@ export const HeaderLayoutDesktop = () => {
                 width: '300px',
                 left: '9rem',
               }}
+              loading="lazy"
             />
             <Box
               sx={{
@@ -103,13 +103,14 @@ export const HeaderLayoutDesktop = () => {
               }}
             >
               <img
-                src="/images/illustrationPicAR.png"
+                src="/images/illustrationPicAR.webp"
                 alt="View On Website swirl Illustration photo"
                 title="View On Website swirl Illustration photo"
                 style={{
                   width: '100%',
                   objectFit: 'cover',
                 }}
+                loading="lazy"
               />
               <Box
                 sx={{
@@ -144,7 +145,7 @@ export const HeaderLayoutDesktop = () => {
             }}
           >
             <img
-              src="/images/swirlIllustrationLeft.svg"
+              src="/images/swirlIllustrationLeft.webp"
               alt="View On Website swirl Illustration Left icon"
               title="View On Website swirl Illustration Left icon"
               style={{
@@ -153,6 +154,7 @@ export const HeaderLayoutDesktop = () => {
                 width: '300px',
                 right: '9rem',
               }}
+              loading="lazy"
             />
             <Box
               sx={{
@@ -164,13 +166,14 @@ export const HeaderLayoutDesktop = () => {
               }}
             >
               <img
-                src="/images/illustrationPic.png"
+                src="/images/illustrationPic.webp"
                 alt="View On Website swirl Illustration photo"
                 title="View On Website swirl Illustration photo"
                 style={{
                   width: '100%',
                   objectFit: 'cover',
                 }}
+                loading="lazy"
               />
               <Box
                 sx={{
@@ -255,6 +258,7 @@ export const MainContainerDesktop = () => {
                 style={{
                   width: '100%',
                 }}
+                loading="lazy"
               />
             </Box>
           ) : (
@@ -274,6 +278,7 @@ export const MainContainerDesktop = () => {
                 style={{
                   width: '100%',
                 }}
+                loading="lazy"
               />
             </Box>
           )}
@@ -285,9 +290,9 @@ export const MainContainerDesktop = () => {
             }}
           >
             {locale === 'ar' ? (
-              <img src="/images/illustrationPicCenterAR.png" />
+              <img src="/images/illustrationPicCenterAR.png" loading="lazy" />
             ) : (
-              <img src="/images/illustrationPicCenter.png" />
+              <img src="/images/illustrationPicCenter.png" loading="lazy" />
             )}
           </Box>
 
@@ -303,6 +308,7 @@ export const MainContainerDesktop = () => {
               <img
                 src="/icons/arrowUpAR.png"
                 alt="arrow icon View On Website"
+                loading="lazy"
                 title="arrow icon View On Website"
               />
             </Box>
@@ -319,6 +325,7 @@ export const MainContainerDesktop = () => {
                 src="/icons/arrowUp.png"
                 alt="arrow icon View On Website"
                 title="arrow icon View On Website"
+                loading="lazy"
               />
             </Box>
           )}
@@ -602,7 +609,7 @@ export const BackgroundImage = () => {
       {locale === 'ar' ? (
         <>
           <img
-            src="/images/swirl.svg"
+            src="/images/swirl.webp"
             alt="Background View On Website"
             title="Background View On Website"
             style={{
@@ -611,12 +618,13 @@ export const BackgroundImage = () => {
               position: 'absolute',
               width: '1100px',
             }}
+            loading="lazy"
           />
         </>
       ) : (
         <>
           <img
-            src="/images/swirl.svg"
+            src="/images/swirl.webp"
             alt="Background View On Website"
             title="Background View On Website"
             style={{
@@ -625,6 +633,7 @@ export const BackgroundImage = () => {
               position: 'absolute',
               width: '1100px',
             }}
+            loading="lazy"
           />
         </>
       )}

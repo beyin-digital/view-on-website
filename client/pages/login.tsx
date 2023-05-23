@@ -5,17 +5,22 @@ import { GetStaticProps } from 'next'
 import { GetServerSideProps } from 'next'
 
 import { useTranslation } from 'next-i18next'
-// import Seo from "@/components/Seo";
 import { UserContext } from '@/contexts/userContext'
 import { useContext, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
-import dynamic from 'next/dynamic'
 // import LazyLoad from "react-lazyload";
 
 // components
-import LoginForm from '@/components/Login/LoginForm'
-import LoginDetails from '@/components/Login/LoginHeader'
-import Layout from '@/components/Layout/Layout'
+import dynamic from 'next/dynamic'
+const LoginForm = dynamic(() => import('@/components/Login/LoginForm'), {
+  ssr: false,
+})
+const LoginDetails = dynamic(() => import('@/components/Login/LoginHeader'), {
+  ssr: false,
+})
+const Layout = dynamic(() => import('@/components/Layout/Layout'), {
+  ssr: false,
+})
 import Head from 'next/head'
 
 const LoginPage = () => {

@@ -1,9 +1,19 @@
 import { Grid, Box } from '@mui/material'
-import Header from '@/components/Home/HeaderHome'
-import TextViewOnWeb from '@/components/Home/TextViewOnWeb'
-import LayoutHomeBg from '@/components/Home/LayoutHomeBg'
 
-import HomeForm from './HomeForm'
+// components
+import dynamic from 'next/dynamic'
+const Header = dynamic(() => import('@/components/Home/HeaderHome'), {
+  ssr: false,
+})
+const TextViewOnWeb = dynamic(() => import('@/components/Home/TextViewOnWeb'), {
+  ssr: false,
+})
+const LayoutHomeBg = dynamic(() => import('@/components/Home/LayoutHomeBg'), {
+  ssr: false,
+})
+const HomeForm = dynamic(() => import('./HomeForm'), {
+  ssr: false,
+})
 
 const HomeDetails = () => {
   return (

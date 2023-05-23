@@ -14,7 +14,7 @@ export const ImageHeader = () => {
       >
         <Image
           fill
-          src="/images/swirl.svg"
+          src="/images/swirl.webp"
           alt=""
           style={{
             top: '-63rem',
@@ -30,7 +30,7 @@ export const ImageHeader = () => {
       >
         <Image
           fill
-          src="/images/swirl.svg"
+          src="/images/swirl.webp"
           alt=""
           style={{
             top: '-57rem',
@@ -155,7 +155,12 @@ export const HeaderLayout = () => {
                 height: { xs: '100px', sm: '100px', md: '200px' },
               }}
             >
-              <img src="/icons/arrowDown.png" />
+              <img
+                src="/icons/arrowDown.png"
+                alt="View On Website Arrow Down"
+                title="View On Website Arrow Down"
+                loading="lazy"
+              />
             </Box>
           </Box>
         </Box>
@@ -186,6 +191,9 @@ export const HeaderLayout = () => {
                 style={{
                   width: '100%',
                 }}
+                loading="lazy"
+                alt="View On Website illustration Photo Center AR"
+                title="View On Website illustration Photo Center AR"
               />
             ) : (
               <img
@@ -193,6 +201,9 @@ export const HeaderLayout = () => {
                 style={{
                   width: '100%',
                 }}
+                loading="lazy"
+                alt="View On Website illustration Photo Center AR"
+                title="View On Website illustration Photo Center AR"
               />
             )}
           </Box>
@@ -238,7 +249,12 @@ export const MainContainer = () => {
             }}
             className="arrowDownLeft"
           >
-            <img src="/icons/arrowDownLeft.png" />
+            <img
+              src="/icons/arrowDownLeft.png"
+              loading="lazy"
+              alt="View On Website arrow Down Left"
+              title="View On Website arrow Down Left"
+            />
           </Box>
 
           <Box
@@ -248,7 +264,12 @@ export const MainContainer = () => {
             }}
             className="swirlSmall"
           >
-            <img src="/images/swirlSmall.svg" />
+            <img
+              src="/images/swirlSmall.webp"
+              loading="lazy"
+              alt="View On Website swirl Small"
+              title="View On Website swirl Small"
+            />
           </Box>
           <Box
             sx={{
@@ -262,7 +283,10 @@ export const MainContainer = () => {
             }}
           >
             <img
-              src="/images/illustrationPicMobile.png"
+              src="/images/illustrationPicMobile.webp"
+              loading="lazy"
+              alt="View On Website illustration Photo Mobile"
+              title="View On Website illustration Photo Mobile"
               style={{
                 width: '100%',
                 objectFit: 'cover',

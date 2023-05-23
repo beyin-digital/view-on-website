@@ -96,7 +96,7 @@ const Sidebar = () => {
           display: { xs: 'none', md: 'block' },
           position: 'fixed',
           height: '821px',
-          width: { xs: '100%', md: '260px', xl: '319px' },
+          width: { xs: '100%', md: '300px', xl: '319px' },
           maxWidth: '100%',
           background: 'rgba(251, 251, 251, 0.9)',
           border: '1px solid #E3E3E3',
@@ -114,21 +114,25 @@ const Sidebar = () => {
             marginBottom: '19px',
             alignItems: 'center',
             justifyContent: 'center',
-            paddingLeft: '20px',
-            flexDirection: { md: 'column', xl: 'row' },
+            // paddingLeft: '20px',
+            // flexDirection: { md: "column", xl: "row" },
           }}
+          className="ImageDashboardPadding"
         >
-          <Image src="/images/logo.svg" width={74} height={50} alt="logo" />
+          <Image src="/images/logo.webp" width={74} height={50} alt="logo" />
           <Box
             style={{
-              marginLeft: '20px',
+              // marginRight: '20px',
               display: 'flex',
               flexDirection: 'column',
               height: '50px',
               alignItems: 'flex-start',
             }}
+            className="ImageDashboardPadding"
           >
-            <Typography fontSize="32px">{t('side_title')}</Typography>
+            <Typography fontSize="32px" fontWeight={'700'}>
+              {t('side_title')}
+            </Typography>
             <Link
               href="/"
               style={{
@@ -180,10 +184,16 @@ const Sidebar = () => {
             >
               {link.icon}
               <Typography
-                sx={{ width: '200px', marginLeft: '10px' }}
+                // sx={{ width: "200px" }}
                 fontSize="20px"
-                fontWeight={500}
-                color={router.pathname === link.href ? '#FBFBFB' : '#000'}
+                // fontWeight={router.pathname === link.href ? "500" : "400"}
+                // color={router.pathname === link.href ? "#FBFBFB" : "#000"}
+                className="SideBarDashboardIcon"
+                sx={{
+                  fontWeight: router.pathname === link.href ? 500 : 400,
+                  color: router.pathname === link.href ? '#FBFBFB' : '#000',
+                  width: '200px',
+                }}
               >
                 {t(link.tKey)}
               </Typography>

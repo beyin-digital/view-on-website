@@ -1,22 +1,57 @@
-import Header from '@/components/Navbar/Navbar'
+// import Header from '@/components/Navbar/Navbar'
 import { Box } from '@mui/material'
 
-// layout
-import Footer from '@/components/Footer/Footer'
-import FooterMobile from '@/components/Footer/FooterMobile'
+// // layout
+// import Footer from '@/components/Footer/Footer'
+// import FooterMobile from '@/components/Footer/FooterMobile'
 
-// components
-import SwiperSlider from './CenterLayout/SwiperSlider'
-import FooterLayout from './FooterLayout/FooterLayout'
-import HeaderLayout from './TopLayout/HeaderLayout'
-import TextPremium from './TopLayout/TextPremium'
-import TextAndButton from './TextAndButton'
+// // components
+// import SwiperSlider from './CenterLayout/SwiperSlider'
+// import FooterLayout from './FooterLayout/FooterLayout'
+// import HeaderLayout from './TopLayout/HeaderLayout'
+// import TextPremium from './TopLayout/TextPremium'
+// import TextAndButton from './TextAndButton'
 import { BackgroundImageSlider } from './BackgroundImage'
 import { useRouter } from 'next/router'
+import React, { useState, useEffect } from 'react'
+// components
+import dynamic from 'next/dynamic'
+const Header = dynamic(() => import('@/components/Navbar/Navbar'), {
+  ssr: false,
+})
+const Footer = dynamic(() => import('@/components/Footer/Footer'), {
+  ssr: false,
+})
+const FooterMobile = dynamic(() => import('@/components/Footer/FooterMobile'), {
+  ssr: false,
+})
+const SwiperSlider = dynamic(() => import('./CenterLayout/SwiperSlider'), {
+  ssr: false,
+})
+const FooterLayout = dynamic(() => import('./FooterLayout/FooterLayout'), {
+  ssr: false,
+})
+const HeaderLayout = dynamic(() => import('./TopLayout/HeaderLayout'), {
+  ssr: false,
+})
+const TextPremium = dynamic(() => import('./TopLayout/TextPremium'), {
+  ssr: false,
+})
+const TextAndButton = dynamic(() => import('./TextAndButton'), {
+  ssr: false,
+})
 
 const SliderDesktop = ({ onClick, selectedImage }: any) => {
   const { locale } = useRouter()
+  const [showSlider, setShowSlider] = useState(false)
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSlider(true)
+    }, 300)
+
+    return () => clearTimeout(timer)
+  }, [])
   return (
     <Box
       sx={{
@@ -37,7 +72,7 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
           position: 'relative',
         }}
       >
-        <BackgroundImageSlider />
+        {showSlider && <BackgroundImageSlider />}
         <Box
           sx={{
             position: 'relative',

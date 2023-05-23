@@ -1,10 +1,15 @@
-import LayoutDesktop from './Components/Layout'
 import {
   ButtonStyleDesktop,
   HeaderLayoutDesktop,
   MainContainerDesktop,
   ThreeOptionDesktop,
 } from './Components'
+
+import dynamic from 'next/dynamic'
+
+const LayoutDesktop = dynamic(() => import('./Components/Layout'), {
+  ssr: false,
+})
 
 const IllustrationDesktop = () => {
   return (

@@ -45,7 +45,7 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
               position: 'relative',
               transform: 'skew(16deg, 0deg)',
               xl: 'skew(16deg, 0deg)',
-              backgroundImage: "url('/images/cut-out-parallelogram.png')",
+              backgroundImage: "url('/images/cut-out-parallelogram.webp')",
             }}
             className="parallelogram"
           >

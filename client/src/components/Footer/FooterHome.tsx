@@ -5,7 +5,11 @@ import { useTranslation } from 'next-i18next'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
-import ModalFooter from './ModalFooter'
+import dynamic from 'next/dynamic'
+
+const ModalFooter = dynamic(() => import('./ModalFooter'), {
+  ssr: false,
+})
 
 const Footer = ({ onClick }: any) => {
   const { t } = useTranslation('common')

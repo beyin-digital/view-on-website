@@ -33,6 +33,7 @@ const Header = () => {
           }}
         >
           <Typography
+            component={'h1'}
             sx={{
               fontSize: {
                 xs: '36px',
@@ -91,6 +92,7 @@ const Header = () => {
             style={{
               width: '100%',
             }}
+            loading="lazy"
           />
         </Box>
         <>

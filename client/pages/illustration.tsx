@@ -3,11 +3,36 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 
 // components
-import Header from '@/components/Navbar/Navbar'
-import FooterMobile from '@/components/Footer/FooterMobile'
-import IllustrationTablet from '@/components/illustration/IllustrationTablet/IllustrationTablet'
-import IllustrationDesktop from '@/components/illustration/IllustrationDesktop/IllustrationDesktop'
-import IllustrationMobile from '@/components/illustration/IllustrationMobile/IllustrationMobile'
+import dynamic from 'next/dynamic'
+const Header = dynamic(() => import('@/components/Navbar/Navbar'), {
+  ssr: false,
+})
+const FooterMobile = dynamic(() => import('@/components/Footer/FooterMobile'), {
+  ssr: false,
+})
+const IllustrationTablet = dynamic(
+  () =>
+    import('@/components/illustration/IllustrationTablet/IllustrationTablet'),
+  {
+    ssr: false,
+  }
+)
+
+const IllustrationDesktop = dynamic(
+  () =>
+    import('@/components/illustration/IllustrationDesktop/IllustrationDesktop'),
+  {
+    ssr: false,
+  }
+)
+const IllustrationMobile = dynamic(
+  () =>
+    import('@/components/illustration/IllustrationMobile/IllustrationMobile'),
+  {
+    ssr: false,
+  }
+)
+
 import Head from 'next/head'
 
 const Illustration = () => {
@@ -17,8 +42,9 @@ const Illustration = () => {
     <>
       <Head>
         <title>{t('meta_title')} </title>
-        <meta name="description" content="" />
-        <meta name="keyword" content="" />
+        <meta name="description" content={`${t('meta_description')}`} />
+        <meta name="keyword" content={`${t('meta_keyword')}`} />
+        <link rel="canonical" href="https://website-vow.vercel.app/en/" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>{' '}

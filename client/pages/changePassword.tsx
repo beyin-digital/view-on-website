@@ -6,9 +6,23 @@ import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 
 // components
-import Layout from '@/components/Layout/Layout'
-import ChangePasswordDetails from '@/components/ChangePassword/ChangePasswordDetails'
-import ChangePasswordForm from '@/components/ChangePassword/ChangePasswordForm'
+import dynamic from 'next/dynamic'
+const Layout = dynamic(() => import('@/components/Layout/Layout'), {
+  ssr: false,
+})
+const ChangePasswordDetails = dynamic(
+  () => import('@/components/ChangePassword/ChangePasswordDetails'),
+  {
+    ssr: false,
+  }
+)
+const ChangePasswordForm = dynamic(
+  () => import('@/components/ChangePassword/ChangePasswordForm'),
+  {
+    ssr: false,
+  }
+)
+
 import Head from 'next/head'
 
 const ChangePassword = () => {
@@ -18,8 +32,9 @@ const ChangePassword = () => {
     <>
       <Head>
         <title>{t('meta_title')} </title>
-        <meta name="description" content="" />
-        <meta name="keyword" content="" />
+        <meta name="description" content={`${t('meta_description')}`} />
+        <meta name="keyword" content={`${t('meta_keyword')}`} />
+        <link rel="canonical" href="https://website-vow.vercel.app/en/" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>

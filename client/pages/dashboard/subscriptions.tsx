@@ -1,5 +1,3 @@
-import RootLayout from '@/components/Dashboard/Layout'
-import Navbar from '@/components/Dashboard/Navbar'
 import { KeywordContext } from '@/contexts/keywordContext'
 import { UserContext } from '@/contexts/userContext'
 import {
@@ -18,6 +16,14 @@ import { useTranslation } from 'react-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
+
+import dynamic from 'next/dynamic'
+const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
+  ssr: false,
+})
+const Navbar = dynamic(() => import('@/components/Dashboard/Navbar'), {
+  ssr: false,
+})
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: 'rgba(251, 251, 251, 0.8)',
@@ -44,11 +50,12 @@ const DashboardSubscriptionsPage = () => {
   return (
     <>
       <Head>
-        {/* <title>{t('meta_title')} </title>
-        <meta name="description" content="" />
-        <meta name="keyword" content="" />
+        <title>{t('meta_title')} </title>
+        <meta name="description" content={`${t('meta_description')}`} />
+        <meta name="keyword" content={`${t('meta_keyword')}`} />
+        <link rel="canonical" href="https://website-vow.vercel.app/en/" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="shortcut icon" href="/favicon.ico" /> */}
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>{' '}
       <Box
         sx={{

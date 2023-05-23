@@ -8,13 +8,13 @@ import { Autoplay } from 'swiper'
 
 const SliderLearnMore = () => {
   const images = [
-    '/images/phone.png',
-    '/images/phone.png',
-    '/images/phone.png',
-    '/images/phone.png',
-    '/images/phone.png',
-    '/images/phone.png',
-    '/images/phone.png',
+    '/images/phone.webp',
+    '/images/phone.webp',
+    '/images/phone.webp',
+    '/images/phone.webp',
+    '/images/phone.webp',
+    '/images/phone.webp',
+    '/images/phone.webp',
   ]
   return (
     <>

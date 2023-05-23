@@ -46,7 +46,7 @@ const ThreeBox = () => {
             className="ExampleBoxThreePi"
           >
             <img
-              src="/images/pic.png"
+              src="/images/pic.webp"
               title="Your costumers in a Blink will be automatically redirected to your Sub-link-URL"
               alt="Your costumers in a Blink will be automatically redirected to your Sub-link-URL, your dashboard will show you all the conversions of your #keyword, it is your opportunity to optimize"
               style={{

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Box } from '@mui/material'
 import Footer from '@/components/Footer/Footer'
-import { BackgroundImage, ButtonStyleDesktop } from '.'
 import { useRouter } from 'next/router'
+import { BackgroundImage } from '@/components/Slider/BackgroundImage'
+import { ButtonStyleDesktop } from '.'
 
 interface Props {
   children: React.ReactNode
@@ -17,11 +18,12 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
           width: '2192px',
           maxWidth: '100%',
           height: { xs: '100%', md: '100vh', xl: '89vh' },
-          background: '#EAEDED',
-          // overflow: "hidden",
+          // background: '#EAEDED',
+          overflow: 'hidden',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          maxHeight: '95vh',
         }}
         className="IllustrationDesktop"
       >
@@ -97,6 +99,7 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
             </Box>
           )}
         </Box>
+        {/* <Footer /> */}
       </Box>
       <Footer />
     </div>

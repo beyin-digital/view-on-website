@@ -3,8 +3,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 export const Background = () => {
-  const { locale } = useRouter()
-
   return (
     <>
       <Box
@@ -16,7 +14,7 @@ export const Background = () => {
       >
         <Image
           fill
-          src="/images/swirl.svg"
+          src="/images/swirl.webp"
           alt="View On Website Background"
           title="View On Website Background"
           style={{
@@ -45,7 +43,7 @@ export const BackgroundHome = () => {
         }}
       >
         <img
-          src="/images/swirl.svg"
+          src="/images/swirl.webp"
           alt="View On Website Background"
           title="View On Website Background"
           style={{
@@ -54,6 +52,7 @@ export const BackgroundHome = () => {
             position: 'absolute',
             width: '800px',
           }}
+          loading="lazy"
           className="BackgroundHome"
         />
       </Box>
@@ -67,7 +66,7 @@ export const BackgroundHome = () => {
       >
         {locale === 'ar' ? (
           <img
-            src="/images/swirl.svg"
+            src="/images/swirl.webp"
             alt="View On Website Background"
             title="View On Website Background"
             style={{
@@ -76,10 +75,11 @@ export const BackgroundHome = () => {
               position: 'absolute',
               width: '100%',
             }}
+            loading="lazy"
           />
         ) : (
           <img
-            src="/images/swirl.svg"
+            src="/images/swirl.webp"
             alt="View On Website Background"
             title="View On Website Background"
             style={{
@@ -88,6 +88,7 @@ export const BackgroundHome = () => {
               position: 'absolute',
               width: '100%',
             }}
+            loading="lazy"
           />
         )}
       </Box>
@@ -100,7 +101,7 @@ export const BackgroundHome = () => {
       >
         {locale === 'ar' ? (
           <img
-            src="/images/swirl.svg"
+            src="/images/swirl.webp"
             alt="View On Website Background"
             title="View On Website Background"
             style={{
@@ -109,10 +110,11 @@ export const BackgroundHome = () => {
               position: 'absolute',
               width: '100%',
             }}
+            loading="lazy"
           />
         ) : (
           <img
-            src="/images/swirl.svg"
+            src="/images/swirl.webp"
             alt="View On Website Background"
             title="View On Website Background"
             style={{
@@ -121,6 +123,7 @@ export const BackgroundHome = () => {
               position: 'absolute',
               width: '100%',
             }}
+            loading="lazy"
           />
         )}
       </Box>
@@ -133,7 +136,7 @@ export const BackgroundHome = () => {
       >
         {locale === 'ar' ? (
           <img
-            src="/images/swirl.svg"
+            src="/images/swirl.webp"
             alt="View On Website Background"
             title="View On Website Background"
             style={{
@@ -142,10 +145,11 @@ export const BackgroundHome = () => {
               position: 'absolute',
               width: '100%',
             }}
+            loading="lazy"
           />
         ) : (
           <img
-            src="/images/swirl.svg"
+            src="/images/swirl.webp"
             alt="View On Website Background"
             title="View On Website Background"
             style={{
@@ -154,6 +158,7 @@ export const BackgroundHome = () => {
               position: 'absolute',
               width: '800px',
             }}
+            loading="lazy"
           />
         )}
       </Box>

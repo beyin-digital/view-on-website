@@ -106,7 +106,11 @@ const PaymentDetails = () => {
                       mx: { xs: '.2rem', md: '.5rem', xl: '1rem' },
                     }}
                   >
-                    <img src="/icons/avatar.svg" alt="Avatar Icon" />
+                    <img
+                      src="/icons/avatar.svg"
+                      alt="Avatar Icon"
+                      loading="lazy"
+                    />
                   </InputAdornment>
                 }
                 placeholder="Cardholder name"
@@ -136,7 +140,11 @@ const PaymentDetails = () => {
                       mx: { xs: '.2rem', md: '.5rem', xl: '1rem' },
                     }}
                   >
-                    <img src="/icons/card.svg" alt="Card Number" />
+                    <img
+                      src="/icons/card.svg"
+                      alt="Card Number"
+                      loading="lazy"
+                    />
                   </InputAdornment>
                 }
                 placeholder="4592 7890 1425 7849"
@@ -172,7 +180,11 @@ const PaymentDetails = () => {
                         mx: { xs: '.2rem', md: '.5rem', xl: '1rem' },
                       }}
                     >
-                      <img src="/icons/date.svg" alt="Date Icon" />
+                      <img
+                        src="/icons/date.svg"
+                        alt="Date Icon"
+                        loading="lazy"
+                      />
                     </InputAdornment>
                   }
                   // type="date"
@@ -212,7 +224,7 @@ const PaymentDetails = () => {
                         mx: { xs: '.2rem', md: '.5rem', xl: '1rem' },
                       }}
                     >
-                      <img src="/icons/cvc.svg" alt="CVC Icon" />
+                      <img src="/icons/cvc.svg" alt="CVC Icon" loading="lazy" />
                     </InputAdornment>
                   }
                   placeholder="CVC"

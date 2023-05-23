@@ -98,6 +98,7 @@ const HomeForm = () => {
                 width: '100%',
                 height: '100%',
               }}
+              loading="lazy"
             />
           </Box>
           <form onSubmit={handleSubmit} className="cursor">
@@ -175,6 +176,7 @@ const HomeForm = () => {
               width: '100%',
               height: '100%',
             }}
+            loading="lazy"
             className="left"
           />
           <img
@@ -185,6 +187,7 @@ const HomeForm = () => {
               width: '100%',
               height: '100%',
             }}
+            loading="lazy"
             className="right"
           />
         </Box>

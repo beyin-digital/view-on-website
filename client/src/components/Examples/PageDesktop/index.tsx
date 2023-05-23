@@ -3,10 +3,19 @@ import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
 
 // components
-import OneBox from './OneBox'
-import TwoBox from './TwoBox'
-import ThreeBox from './ThreeBox'
 import { LinkSubscribe } from '@/components/Button'
+
+import dynamic from 'next/dynamic'
+
+const OneBox = dynamic(() => import('./OneBox'), {
+  ssr: false,
+})
+const TwoBox = dynamic(() => import('./TwoBox'), {
+  ssr: false,
+})
+const ThreeBox = dynamic(() => import('./ThreeBox'), {
+  ssr: false,
+})
 
 const PageDesktop = () => {
   const { locale } = useRouter()
@@ -32,6 +41,7 @@ const PageDesktop = () => {
             overflow: 'hidden',
             position: 'relative',
             flexDirection: 'column',
+            maxHeight: '88vh',
           }}
           className="PageDesktopMargin"
         >
@@ -42,7 +52,7 @@ const PageDesktop = () => {
             }}
           >
             <img
-              src="/images/swirl.png"
+              src="/images/swirl.webp"
               alt="Background Example Page"
               title="Background Example Page"
               loading="lazy"
@@ -115,7 +125,7 @@ const PageDesktop = () => {
                   top: { md: '20rem', xl: '18rem' },
                   right: {
                     // md: "55rem",
-                    lg: '59rem',
+                    lg: '56rem',
                     xl: '65rem',
                   },
                   zIndex: '99999',

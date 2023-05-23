@@ -1,6 +1,11 @@
 import { Box, Typography } from '@mui/material'
 import { useTranslation } from 'next-i18next'
-import SliderSwiper from '../SliderSwiper'
+
+import dynamic from 'next/dynamic'
+
+const SliderSwiper = dynamic(() => import('../SliderSwiper'), {
+  ssr: false,
+})
 
 const OneBox = () => {
   const { t } = useTranslation('example')
@@ -86,7 +91,7 @@ const OneBox = () => {
               }}
             >
               <img
-                src="/images/phone.png"
+                src="/images/phone.webp"
                 alt="View On Website Man Look at Phone"
                 title="View On Website Man Look at Phone"
                 style={{

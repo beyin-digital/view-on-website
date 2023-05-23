@@ -1,4 +1,4 @@
-import { Box, Button, ButtonBaseProps, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
 import { FiArrowUpRight, FiArrowUpLeft } from 'react-icons/fi'
 import { useTranslation } from 'next-i18next'
@@ -127,7 +127,7 @@ export const LinkSubscribe = () => {
           paddingRight: '18px',
           paddingLeft: '18px',
           height: '59px',
-          width: '400px',
+          width: '380px',
           display: 'flex',
           justifyContent: 'space-around',
           alignItems: 'center',

@@ -4,8 +4,12 @@ import { useRouter } from 'next/router'
 import { Box, Typography } from '@mui/material'
 
 // components
-import SliderSwiper from '../SliderSwiper'
+// import SliderSwiper from '../SliderSwiper'
+import dynamic from 'next/dynamic'
 
+const SliderSwiper = dynamic(() => import('../SliderSwiper'), {
+  ssr: false,
+})
 const OneBox = () => {
   const { t } = useTranslation('example')
   const { locale } = useRouter()
@@ -100,7 +104,7 @@ const OneBox = () => {
               className="OneBoxDesktopLayoutImage"
             >
               <img
-                src="/images/exampleBoxOneIconRight.png"
+                src="/images/exampleBoxOneIconRight.webp"
                 alt="Example Box One Icon Right View On Website"
                 title="Example Box One Icon Right View On Website"
                 style={{
@@ -112,7 +116,7 @@ const OneBox = () => {
                 loading="lazy"
               />
               <img
-                src="/images/phoneAR.png"
+                src="/images/phoneAR.webp"
                 alt="Phone Vow Left"
                 title="Phone Vow Left"
                 style={{
@@ -133,7 +137,7 @@ const OneBox = () => {
               className="OneBoxDesktopLayoutImage"
             >
               <img
-                src="/images/exampleBoxOneIconLeft.png"
+                src="/images/exampleBoxOneIconLeft.webp"
                 alt="Example Box One Icon Left View On Website"
                 title="Example Box One Icon Left View On Website"
                 style={{
@@ -144,7 +148,7 @@ const OneBox = () => {
                 loading="lazy"
               />
               <img
-                src="/images/phone.png"
+                src="/images/phone.webp"
                 alt="Phone Vow Left View On Website"
                 title="Phone Vow Left View On Website"
                 style={{
