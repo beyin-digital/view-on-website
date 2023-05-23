@@ -996,8 +996,8 @@ const SubscribePage: NextPage = () => {
                   }}
                 >
                   <Button
-                    onClick={() => {
-                      handleSubscription(
+                    onClick={async () => {
+                      await handleSubscription(
                         values.hashtag as string,
                         values.sublinks as string,
                         99,
