@@ -5,7 +5,7 @@ import { lowerCaseTransformer } from 'src/utils/transformers/lower-case.transfor
 import { IsExist } from 'src/utils/validators/is-exists.validator';
 
 export class FindKeywordDto {
-  @ApiProperty({ example: 'Keyword' })
+  @ApiProperty({ example: 'Hello world' })
   @Transform(lowerCaseTransformer)
   @Validate(IsExist, ['Keyword'], {
     message: 'keyword does not exist',

@@ -16,6 +16,7 @@ import { UpdateSubscriptionDto } from 'src/subscriptions/dto/update-subscription
 import { Order } from 'src/orders/entities/order.entity';
 import { Subscription } from 'src/subscriptions/entities/subscription.entity';
 import { Keyword } from 'src/keywords/entities/keyword.entity';
+import { UnsubscribeDto } from './dto/unsubscribe.dto';
 
 @Injectable()
 export class StripeService {
@@ -142,7 +143,7 @@ export class StripeService {
     });
     await this.subscriptionsService.create({
       user: foundUser as User,
-      stripeSubscriptionId: createSubscriptionDto.subscriptionId,
+      stripeSubscriptionId: createSubscriptionDto.stripeSubscriptionId,
       stripeSubscriptionStatus: createSubscriptionDto.subscriptionStatus,
       purchaseDate: new Date(createSubscriptionDto.purchaseDate * 1000),
       amount: createSubscriptionDto.amount,
@@ -206,6 +207,43 @@ export class StripeService {
     }
   }
 
+  async unsubscribeFromKeyword(user: User, unsubscribeDto: UnsubscribeDto) {
+    try {
+      const foundUser = await this.usersService.findOne({
+        id: user.id,
+      });
+
+      if (!foundUser) {
+        throw new ConflictException('User does not exist');
+      }
+
+      const foundKeyword = await this.keywordsService.findOne({
+        letters: unsubscribeDto.keyword,
+      });
+
+      if (foundKeyword?.user?.id !== user.id) {
+        throw new ConflictException(
+          'You are not authorized to unsubscribe from this keyword',
+        );
+      }
+
+      const foundSubscription = await this.subscriptionsService.findOne({
+        letters: unsubscribeDto.subscriptionId,
+      });
+
+      if (foundKeyword) {
+        await this.stripe.subscriptions.cancel(
+          foundSubscription?.stripeSubscriptionId as string,
+        );
+        await foundKeyword.remove();
+      }
+
+      if (foundSubscription) {
+        await foundSubscription.remove();
+      }
+    } catch (error) {}
+  }
+
   //  Process Events returned from stripe webhooks event
   async processEvent(event: Stripe.Event) {
     switch (event.type) {
@@ -236,7 +274,7 @@ export class StripeService {
           amount:
             (subscriptionCreated?.items?.data[0].price?.unit_amount || 0) /
               100 || 0,
-          subscriptionId: subscriptionCreated.id as string,
+          stripeSubscriptionId: subscriptionCreated.id as string,
           subscriptionStatus: subscriptionCreated.status as string,
           purchaseDate: subscriptionCreated.created as number,
         });

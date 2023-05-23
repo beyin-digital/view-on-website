@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
 import { AuthAppleService } from './auth-apple.service';
 import { AuthAppleLoginDto } from './dto/auth-apple-login.dto';
@@ -16,6 +16,7 @@ export class AuthAppleController {
     private readonly authAppleService: AuthAppleService,
   ) {}
 
+  @ApiOperation({ summary: 'Logins in user with apple account' })
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(@Body() loginDto: AuthAppleLoginDto): Promise<LoginResponseType> {

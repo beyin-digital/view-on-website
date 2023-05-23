@@ -14,7 +14,9 @@ import { InfinityPaginationResultType } from 'src/utils/types/infinity-paginatio
 import { KeywordViewCount } from './entities/keyword-count.entity';
 import { infinityPagination } from 'src/utils/infinity-pagination';
 import { GetAnalyticsDto } from './dto/get-analytics.dto';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Analytics')
 @Controller({
   path: 'analytics',
   version: '1',
@@ -22,6 +24,9 @@ import { GetAnalyticsDto } from './dto/get-analytics.dto';
 export class AnalyticsController {
   constructor(private readonly analyticsService: AnalyticsService) {}
 
+  @ApiOperation({
+    summary: 'Endpoint to get analytics for a keyword',
+  })
   @UseGuards(AuthGuard('jwt'))
   @Get('')
   async getKeywordAnalytics(

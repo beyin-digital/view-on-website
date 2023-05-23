@@ -49,7 +49,17 @@ export class KeywordsService {
 
   findManyWithPagination(
     paginationOptions: IPaginationOptions,
+    user?: User,
   ): Promise<Keyword[]> {
+    if (user) {
+      return this.keywordsRepository.find({
+        where: {
+          user: { id: user.id },
+        },
+        skip: (paginationOptions.page - 1) * paginationOptions.limit,
+        take: paginationOptions.limit,
+      });
+    }
     return this.keywordsRepository.find({
       skip: (paginationOptions.page - 1) * paginationOptions.limit,
       take: paginationOptions.limit,

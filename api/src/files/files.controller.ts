@@ -9,7 +9,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { FilesService } from './files.service';
 
@@ -21,6 +27,7 @@ import { FilesService } from './files.service';
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
 
+  @ApiOperation({ summary: 'Endpoint for uploading files' })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Post('upload')

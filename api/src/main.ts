@@ -8,6 +8,8 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { useContainer } from 'class-validator';
 import * as requestIp from 'request-ip';
+import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
+
 // import helmet from 'helmet';
 import { AppModule } from './app.module';
 import validationOptions from './utils/validation-options';
@@ -15,7 +17,10 @@ import { AllConfigType } from './config/config.type';
 import rawBodyMiddleware from './stripe/middleware/raw-body.middleware';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule, {
+    cors: true,
+    bufferLogs: true,
+  });
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   const configService = app.get(ConfigService<AllConfigType>);
   app.enableShutdownHooks();
@@ -31,6 +36,7 @@ async function bootstrap() {
   app.use(rawBodyMiddleware());
 
   app.use(requestIp.mw());
+  app.useLogger(app.get(Logger));
 
   //   Helmet Middleware against known security vulnerabilities
   //   app.use(
@@ -60,6 +66,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe(validationOptions));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+  app.useGlobalInterceptors(new LoggerErrorInterceptor());
 
   const options = new DocumentBuilder()
     .setTitle('VOW API')

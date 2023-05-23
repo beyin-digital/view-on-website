@@ -17,7 +17,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/roles/roles.decorator';
 import { RoleEnum } from 'src/roles/roles.enum';
 import { AuthGuard } from '@nestjs/passport';
@@ -38,6 +38,9 @@ import { NullableType } from '../utils/types/nullable.type';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiOperation({
+    summary: 'endpoint to create a new user',
+  })
   @SerializeOptions({
     groups: ['admin'],
   })
@@ -47,6 +50,10 @@ export class UsersController {
     return this.usersService.create(createProfileDto);
   }
 
+  @ApiOperation({
+    summary:
+      'Admin endpoint to retrieve all users that the user owns or all users in the database if admin',
+  })
   @SerializeOptions({
     groups: ['admin'],
   })
@@ -69,6 +76,9 @@ export class UsersController {
     );
   }
 
+  @ApiOperation({
+    summary: 'Endpoint to retrieve a single user by id',
+  })
   @SerializeOptions({
     groups: ['admin'],
   })
@@ -78,6 +88,9 @@ export class UsersController {
     return this.usersService.findOne({ id: +id });
   }
 
+  @ApiOperation({
+    summary: 'Endpoint to update a single user by id',
+  })
   @SerializeOptions({
     groups: ['admin'],
   })
@@ -90,6 +103,9 @@ export class UsersController {
     return this.usersService.update(id, updateProfileDto);
   }
 
+  @ApiOperation({
+    summary: 'Endpoint to delete a single user by id',
+  })
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: number): Promise<void> {

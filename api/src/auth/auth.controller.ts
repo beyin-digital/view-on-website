@@ -13,7 +13,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthEmailLoginDto } from './dto/auth-email-login.dto';
 import { AuthForgotPasswordDto } from './dto/auth-forgot-password.dto';
 import { AuthConfirmEmailDto } from './dto/auth-confirm-email.dto';
@@ -35,12 +35,17 @@ import { AuthRefreshAccessTokenDto } from './dto/auth-refresh-access-token.dto';
 export class AuthController {
   constructor(private readonly service: AuthService) {}
 
+  //   @ApiBody({
+  //     description: 'Checks if email already exists',
+  //   })
+  @ApiOperation({ summary: 'Checks if email already exists' })
   @Get('email/check')
   @HttpCode(HttpStatus.OK)
   async checkEmail(@Query('email') email: string): Promise<boolean> {
     return this.service.checkEmail(email);
   }
 
+  @ApiOperation({ summary: 'Signs in user based on provided object' })
   @SerializeOptions({
     groups: ['me'],
   })
@@ -52,6 +57,7 @@ export class AuthController {
     return this.service.validateLogin(loginDto, false);
   }
 
+  @ApiOperation({ summary: 'Login for admin' })
   @SerializeOptions({
     groups: ['me'],
   })
@@ -63,12 +69,14 @@ export class AuthController {
     return this.service.validateLogin(loginDTO, true);
   }
 
+  @ApiOperation({ summary: 'Registers new user with email and password' })
   @Post('email/register')
   @HttpCode(HttpStatus.NO_CONTENT)
   async register(@Body() createUserDto: AuthRegisterLoginDto): Promise<void> {
     return this.service.register(createUserDto);
   }
 
+  @ApiOperation({ summary: 'Confirms email based on otp passed in body' })
   @Post('email/confirm')
   @HttpCode(HttpStatus.OK)
   async confirmEmail(
@@ -77,18 +85,24 @@ export class AuthController {
     return this.service.confirmEmail(confirmEmailDto.otp);
   }
 
+  @ApiOperation({ summary: 'Sends new otp on request' })
   @Post('email/resend/otp')
   @HttpCode(HttpStatus.NO_CONTENT)
   async resendOtp(@Body() resendOtpDto: AuthResendOTPDto): Promise<void> {
     return this.service.resendOtp(resendOtpDto.email);
   }
 
-  @Post('refresh/')
+  @ApiOperation({
+    summary:
+      'Accepts refresh token pased on bosy and returns new access token and refresh token if valid',
+  })
+  @Post('refresh')
   @HttpCode(HttpStatus.OK)
   async refreshAccessToken(@Body() refreshTokenDto: AuthRefreshAccessTokenDto) {
     return this.service.refreshAccessToken(refreshTokenDto);
   }
 
+  @ApiOperation({ summary: 'First step of password reset' })
   @Post('forgot/password')
   @HttpCode(HttpStatus.NO_CONTENT)
   async forgotPassword(
@@ -97,6 +111,7 @@ export class AuthController {
     return this.service.forgotPassword(forgotPasswordDto.email);
   }
 
+  @ApiOperation({ summary: 'Changes password based on otp provided in body' })
   @Post('reset/password')
   @HttpCode(HttpStatus.NO_CONTENT)
   resetPassword(@Body() resetPasswordDto: AuthResetPasswordDto): Promise<void> {
@@ -107,6 +122,9 @@ export class AuthController {
   }
 
   @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Returns user details based on jwt passed on authorization header',
+  })
   @SerializeOptions({
     groups: ['me'],
   })
@@ -118,6 +136,9 @@ export class AuthController {
   }
 
   @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Updates user details based on properties that are sent in body',
+  })
   @SerializeOptions({
     groups: ['me'],
   })
@@ -131,6 +152,7 @@ export class AuthController {
     return this.service.update(request.user, userDto);
   }
 
+  @ApiOperation({ summary: 'Runs soft delete operation on user' })
   @ApiBearerAuth()
   @Delete('me')
   @UseGuards(AuthGuard('jwt'))

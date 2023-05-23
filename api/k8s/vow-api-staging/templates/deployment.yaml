@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vow-api-staging
+  name: vow-api-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vow-api-staging
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: vow-api-staging
+    spec:
+      containers:
+        - image: bitbysalih/vow-api-staging
+          name: vow-api-staging
+          ports:
+            - containerPort: 4000
+          resources: {}
+
+        - image: postgres:latest
+          name: postgres
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: '12345'
+            - name: POSTGRES_DB
+              value: vow_dev_dev
+          ports:
+            - containerPort: 5432

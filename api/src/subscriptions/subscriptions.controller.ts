@@ -9,7 +9,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { SubscriptionsService } from './subscriptions.service';
 import { AuthGuard } from '@nestjs/passport';
 import { InfinityPaginationResultType } from 'src/utils/types/infinity-pagination-result.type';
@@ -24,6 +24,7 @@ import { infinityPagination } from 'src/utils/infinity-pagination';
 export class SubscriptionsController {
   constructor(private readonly subscriptionsService: SubscriptionsService) {}
 
+  @ApiOperation({ summary: "Endpoint to get all of user's subscriptions" })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Get()

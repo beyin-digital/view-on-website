@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
 import { AuthTwitterService } from './auth-twitter.service';
 import { AuthTwitterLoginDto } from './dto/auth-twitter-login.dto';
@@ -16,6 +16,7 @@ export class AuthTwitterController {
     private readonly authTwitterService: AuthTwitterService,
   ) {}
 
+  @ApiOperation({ summary: 'Logs in user with twitter account' })
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(

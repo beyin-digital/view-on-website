@@ -17,4 +17,7 @@ WORKDIR /usr/src/app
 RUN cp env-example .env
 RUN npm run build
 
+
+EXPOSE 4000
+
 CMD ["/opt/startup.dev.sh"]

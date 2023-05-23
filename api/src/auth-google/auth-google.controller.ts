@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
 import { AuthGoogleService } from './auth-google.service';
 import { AuthGoogleLoginDto } from './dto/auth-google-login.dto';
@@ -16,6 +16,7 @@ export class AuthGoogleController {
     private readonly authGoogleService: AuthGoogleService,
   ) {}
 
+  @ApiOperation({ summary: 'Logs in user with google account' })
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(

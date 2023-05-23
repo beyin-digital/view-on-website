@@ -11,7 +11,10 @@ import { Transform } from 'class-transformer';
 import { lowerCaseTransformer } from 'src/utils/transformers/lower-case.transformer';
 
 export class AuthRegisterLoginDto {
-  @ApiProperty({ example: 'test1@example.com' })
+  @ApiProperty({
+    example: 'test1@example.com',
+    description: "User's email address",
+  })
   @Transform(lowerCaseTransformer)
   @Validate(IsNotExist, ['User'], {
     message: 'emailAlreadyExists',
@@ -19,17 +22,12 @@ export class AuthRegisterLoginDto {
   @IsEmail()
   email: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: 'secretPassword123*',
+    description: "User's password",
+  })
   @MinLength(8)
   @IsNotEmpty()
-
-  //   regex for password with letters, special characters and numbers
-  // (?=.*[0-9])       # a digit must occur at least once
-  // (?=.*[a-z])       # a lower case letter must occur at least once
-  // (?=.*[A-Z])       # an upper case letter must occur at least once
-  // (?=.*[@#$%^&+=])  # a special character must occur at least once
-  // (?=\S+$)          # no whitespace allowed in the entire string
-  // .{8,}             # anything, at least eight places though
   @Matches(
     /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^*&+=])(?=\S+$).{8,}$/,
     {
@@ -38,7 +36,7 @@ export class AuthRegisterLoginDto {
   )
   password: string;
 
-  @ApiProperty({ example: 'John Doe' })
+  @ApiProperty({ example: 'John Doe', description: "User's Full name" })
   @IsNotEmpty()
   fullName: string;
 }

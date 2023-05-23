@@ -25,6 +25,7 @@ export class CreateUserDto {
   @IsEmail()
   email: string | null;
 
+  @ApiProperty({ example: 'google' })
   provider?: string;
 
   socialId?: string | null;
@@ -33,7 +34,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   fullName?: string | null;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'secretPassword123**' })
   @MinLength(8)
   @IsNotEmpty()
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
@@ -41,6 +42,10 @@ export class CreateUserDto {
   })
   password?: string;
 
+  @ApiProperty({
+    example: 'cus_Nwm3mQDOBmEegT',
+    description: 'Stripe customer id',
+  })
   @IsNotEmpty()
   stripeCustomerId?: string | null;
 
@@ -62,6 +67,4 @@ export class CreateUserDto {
     message: 'statusNotExists',
   })
   status?: Status;
-
-  otp?: string | null;
 }

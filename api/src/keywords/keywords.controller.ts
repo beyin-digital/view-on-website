@@ -22,12 +22,14 @@ import { InfinityPaginationResultType } from 'src/utils/types/infinity-paginatio
 import { infinityPagination } from 'src/utils/infinity-pagination';
 // import { AuthGuard } from '@nestjs/passport';
 import {
+  ApiOperation,
   // ApiBearerAuth,
   ApiTags,
 } from '@nestjs/swagger';
 import { UpdateKeywordDto } from './dto/update-keyword.dto';
 import { ThrottlerBehindProxyGuard } from 'src/utils/guards/throttle-behind-proxy.guard';
 import { AnalyticsService } from 'src/analytics/analytics.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @UseGuards(ThrottlerBehindProxyGuard)
 @ApiTags('Keywords')
@@ -41,20 +43,33 @@ export class KeywordsController {
     private analyticsService: AnalyticsService,
   ) {}
 
+  @ApiOperation({
+    summary:
+      "Returns an object with the details of the hashtag that's passed to it as a query param",
+  })
   @Get('')
   async findOne(@Req() req: any, @Query('hashtag') hashtag: string) {
     await this.analyticsService.createNewKeywordAnalyticsEntry(hashtag);
     return this.keywordsService.findByHashTag(hashtag);
   }
 
+  @ApiOperation({
+    summary:
+      "Edits the keyword's properties, For now only location can be editted",
+  })
   @Put(':id')
   async update(@Req() req: any, @Body() updateKeywordDto: UpdateKeywordDto) {
     return this.keywordsService.update(req.id, updateKeywordDto);
   }
 
+  @ApiOperation({
+    summary:
+      'Admin endpoint to retrieve all keywords that the user owns or all keywords in the database if admin',
+  })
   @SerializeOptions({
     groups: ['admin'],
   })
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   @HttpCode(HttpStatus.OK)
   async findAll(

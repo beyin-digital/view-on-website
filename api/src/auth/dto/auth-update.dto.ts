@@ -4,35 +4,39 @@ import { IsExist } from '../../utils/validators/is-exists.validator';
 import { FileEntity } from '../../files/entities/file.entity';
 
 export class AuthUpdateDto {
-  @ApiProperty({ type: () => FileEntity })
+  @ApiProperty({
+    type: () => FileEntity,
+    description: 'Miage file user wants to use as profile photo',
+  })
   @IsOptional()
   @Validate(IsExist, ['FileEntity', 'id'], {
     message: 'imageNotExists',
   })
   photo?: FileEntity;
 
-  @ApiProperty({ example: 'John' })
+  @ApiProperty({ example: 'John Doe', description: "User's Full name" })
   @IsOptional()
   @IsNotEmpty({ message: 'mustBeNotEmpty' })
-  firstName?: string;
+  fullName?: string;
 
-  @ApiProperty({ example: 'Doe' })
-  @IsOptional()
-  @IsNotEmpty({ message: 'mustBeNotEmpty' })
-  lastName?: string;
-
-  @ApiProperty({ example: true })
+  @ApiProperty({ example: true, description: "User's  account's 2FA status" })
   @IsOptional()
   @IsNotEmpty({ message: 'mustBeNotEmpty' })
   twoFactorAuth: boolean;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: 'secretPassword123*',
+    description: "User's new password",
+  })
   @IsOptional()
   @IsNotEmpty()
   @MinLength(6)
   password?: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: 'secretPassword12',
+    description: "User's previous password",
+  })
   @IsOptional()
   @IsNotEmpty({ message: 'mustBeNotEmpty' })
   oldPassword: string;

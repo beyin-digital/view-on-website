@@ -27,7 +27,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsEmail()
   email?: string | null;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'secretPassword123*' })
   @IsOptional()
   @MinLength(8)
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
@@ -35,11 +35,12 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   })
   password?: string;
 
+  @ApiProperty({ example: 'google' })
   provider?: string;
 
   socialId?: string | null;
 
-  @ApiProperty({ example: 'Doe' })
+  @ApiProperty({ example: 'John Doe' })
   @IsOptional()
   fullName?: string | null;
 
@@ -63,6 +64,4 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     message: 'statusNotExists',
   })
   status?: Status;
-
-  hash?: string | null;
 }

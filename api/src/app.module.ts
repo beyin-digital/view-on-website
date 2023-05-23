@@ -13,6 +13,10 @@ import twitterConfig from './config/twitter.config';
 import appleConfig from './config/apple.config';
 import * as path from 'path';
 import { MailerModule } from '@nestjs-modules/mailer';
+import {
+  PrometheusModule,
+  makeCounterProvider,
+} from '@willsoto/nestjs-prometheus';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthAppleModule } from './auth-apple/auth-apple.module';
@@ -39,7 +43,7 @@ import stripeConfig from './config/stripe.config';
 import { ThrottlerBehindProxyGuard } from './utils/guards/throttle-behind-proxy.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { PlansModule } from './plans/plans.module';
-// import { User } from './users/entities/user.entity';
+import { LoggerModule } from 'nestjs-pino';
 
 async () => {
   const [AdminJS, AdminJSTypeOrm] = await Promise.all([
@@ -67,9 +71,26 @@ const authenticate = async (email: string, password: string) => {
 
 @Module({
   imports: [
+    PrometheusModule.register({
+      path: '/metrics',
+    }),
     ThrottlerModule.forRoot({
       ttl: 60,
       limit: 50,
+    }),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        customProps: (_req, _res) => ({
+          context: 'HTTP',
+        }),
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            singleLine: true,
+          },
+        },
+      },
     }),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -159,6 +180,10 @@ const authenticate = async (email: string, password: string) => {
       provide: APP_GUARD,
       useClass: ThrottlerBehindProxyGuard,
     },
+    makeCounterProvider({
+      name: 'metric_name',
+      help: 'metric_help',
+    }),
   ],
 })
 export class AppModule {}

@@ -9,7 +9,7 @@ export class StripeCreateCustomerDto {
   @IsEmail()
   email: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'John doe', description: "User's name" })
   @IsNotEmpty()
   name: string;
 }
