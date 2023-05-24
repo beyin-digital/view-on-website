@@ -1,5 +1,4 @@
 import {
-  ConflictException,
   Injectable,
   UnauthorizedException,
   //   UnauthorizedException,
@@ -21,24 +20,20 @@ export class AnalyticsService {
     private keywordsRepository: Repository<Keyword>,
   ) {}
 
-  async createNewKeywordAnalyticsEntry(
-    keyword: string,
-  ): Promise<KeywordViewCount> {
+  async createNewKeywordAnalyticsEntry(keyword: string): Promise<any> {
     const slug = keyword.toLowerCase().replace(/ /g, '-');
     const foundKeyword = await this.keywordsRepository.findOne({
       where: {
         slug,
       },
     });
-    if (!foundKeyword) {
-      throw new ConflictException('Keyword does not exist');
+    if (foundKeyword) {
+      return this.keywordCountRepository.save(
+        this.keywordCountRepository.create({
+          keyword: foundKeyword as Keyword,
+        }),
+      );
     }
-
-    return this.keywordCountRepository.save(
-      this.keywordCountRepository.create({
-        keyword: foundKeyword as Keyword,
-      }),
-    );
   }
 
   async getIndividualKeywordAnalytics(

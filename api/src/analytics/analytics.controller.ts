@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   DefaultValuePipe,
   Get,
@@ -31,7 +30,7 @@ export class AnalyticsController {
   @Get('')
   async getKeywordAnalytics(
     @Req() req: any,
-    @Body() getAnalyticsDto: GetAnalyticsDto,
+    @Query('keyword') getAnalyticsDto: GetAnalyticsDto,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
   ): Promise<InfinityPaginationResultType<KeywordViewCount>> {

@@ -48,7 +48,7 @@ export class KeywordsController {
       "Returns an object with the details of the hashtag that's passed to it as a query param",
   })
   @Get('')
-  async findOne(@Req() req: any, @Query('hashtag') hashtag: string) {
+  async findByHashtag(@Query('hashtag') hashtag: string) {
     await this.analyticsService.createNewKeywordAnalyticsEntry(hashtag);
     return this.keywordsService.findByHashTag(hashtag);
   }
@@ -64,15 +64,16 @@ export class KeywordsController {
 
   @ApiOperation({
     summary:
-      'Admin endpoint to retrieve all keywords that the user owns or all keywords in the database if admin',
+      'Endpoint to retrieve all keywords that the user owns or all keywords in the database if admin',
   })
   @SerializeOptions({
-    groups: ['admin'],
+    groups: ['me', 'admin'],
   })
   @UseGuards(AuthGuard('jwt'))
-  @Get()
+  @Get('all')
   @HttpCode(HttpStatus.OK)
   async findAll(
+    @Req() req: any,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
   ): Promise<InfinityPaginationResultType<Keyword>> {
@@ -81,10 +82,13 @@ export class KeywordsController {
     }
 
     return infinityPagination(
-      await this.keywordsService.findManyWithPagination({
-        page,
-        limit,
-      }),
+      await this.keywordsService.findManyWithPagination(
+        {
+          page,
+          limit,
+        },
+        req.user,
+      ),
       { page, limit },
     );
   }

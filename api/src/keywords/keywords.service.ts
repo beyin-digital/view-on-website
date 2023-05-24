@@ -36,7 +36,9 @@ export class KeywordsService {
   findByHashTag(hashtag: string): Promise<any> {
     return this.keywordsRepository.findOne({
       where: {
-        slug: hashtag,
+        slug: slugify(hashtag, {
+          lower: true,
+        }),
       },
     });
   }
@@ -56,6 +58,7 @@ export class KeywordsService {
         where: {
           user: { id: user.id },
         },
+
         skip: (paginationOptions.page - 1) * paginationOptions.limit,
         take: paginationOptions.limit,
       });
