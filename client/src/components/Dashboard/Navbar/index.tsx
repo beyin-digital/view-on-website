@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Box, Button, Tab, Tabs, Typography } from '@mui/material'
 import Image from 'next/image'
@@ -17,6 +17,7 @@ import Link from 'next/link'
 import Modal from '../Modal'
 import { UserContext } from '@/contexts/userContext'
 import { useTranslation } from 'react-i18next'
+import { KeywordContext } from '@/contexts/keywordContext'
 
 const Navbar = () => {
   const { t } = useTranslation('common')
@@ -26,6 +27,8 @@ const Navbar = () => {
   const [mobileNavOpen, setMobileNavOpen] = React.useState(false)
 
   const { logout } = useContext(UserContext)
+  const { getUsersKeywords, keywords, selectedKeyword, setSelectedKeyword } =
+    useContext(KeywordContext)
 
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
@@ -35,8 +38,11 @@ const Navbar = () => {
     setOpen(false)
   }
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: any) => {
+    const keyword = keywords.find((keyword) => keyword.letters === newValue)
+    setSelectedKeyword(keyword)
     setValue(newValue)
+    console.log(selectedKeyword)
   }
 
   const links = [
@@ -96,28 +102,10 @@ const Navbar = () => {
       href: '/dashboard/logout',
     },
   ]
-  const hashtags = [
-    {
-      keyword: 'VOW',
-      slug: 'vow',
-    },
-    {
-      keyword: 'BE',
-      slug: 'be',
-    },
-    {
-      keyword: 'AI',
-      slug: 'ai',
-    },
-    {
-      keyword: 'Pro',
-      slug: 'pro',
-    },
-    {
-      keyword: 'Smart Device',
-      slug: 'smart-device',
-    },
-  ]
+
+  useEffect(() => {
+    getUsersKeywords()
+  }, [])
   return (
     <>
       {/* Desktop Navbar */}
@@ -177,7 +165,7 @@ const Navbar = () => {
             variant="scrollable"
             scrollButtons={false}
           >
-            {hashtags.map((hashtag, index) => (
+            {keywords.map((keyword, index) => (
               <Tab
                 sx={{
                   minWidth: '15%',
@@ -194,8 +182,9 @@ const Navbar = () => {
                   fontWeight: value === index ? 600 : 400,
                   color: 'black',
                 }}
-                key={index}
-                label={`#` + hashtag.keyword}
+                value={keyword.letters}
+                key={keyword.id}
+                label={`#` + keyword.letters}
               />
             ))}
           </Tabs>

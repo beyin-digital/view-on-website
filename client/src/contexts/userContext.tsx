@@ -171,7 +171,6 @@ export const UserProvider = ({ children }: any) => {
         email: values.email,
         password: values.password,
       })
-      const data = res.data
 
       if (res.status >= 400) {
         throw new Error()

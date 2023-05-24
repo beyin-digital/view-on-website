@@ -9,6 +9,7 @@ import { UserContext } from '@/contexts/userContext'
 
 // components
 import dynamic from 'next/dynamic'
+import { KeywordContext } from '@/contexts/keywordContext'
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
 })

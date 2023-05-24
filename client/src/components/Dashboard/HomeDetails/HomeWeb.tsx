@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { styled } from '@mui/material/styles'
 import {
   Grid,
@@ -10,6 +10,8 @@ import {
   MenuItem,
   Button,
 } from '@mui/material'
+import html2canvas from 'html2canvas'
+import { renderToStaticMarkup } from 'react-dom/server'
 
 import Head from 'next/head'
 import { useRouter } from 'next/navigation'
@@ -19,6 +21,9 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'react-i18next'
 import { MdLocationOn } from 'react-icons/md'
 import dynamic from 'next/dynamic'
+import { KeywordContext } from '@/contexts/keywordContext'
+import { api } from '@/utils/api'
+import { countries } from '@/utils/countries'
 
 const PieChart = dynamic(() => import('@/components/Dashboard/Home/PieChart'), {
   ssr: false,
@@ -95,16 +100,100 @@ const HomeWeb = () => {
   const { t } = useTranslation('dashboard')
   const router = useRouter()
   const { updateUser, user, token } = useContext(UserContext)
+  const {
+    selectedKeyword,
+    setSelectedKeyword,
+    subscriptions,
+    getUserSubscriptions,
+    getKeywordAnalytics,
+  } = useContext(KeywordContext)
 
+  const svgRef = useRef<SVGSVGElement>(null)
+
+  const handleDownloadClick = () => {
+    const svgCode = generateSVGCode()
+
+    const tempElement = document.createElement('div')
+    tempElement.innerHTML = svgCode
+
+    html2canvas(tempElement.firstChild as HTMLElement).then((canvas) => {
+      const link = document.createElement('a')
+      link.href = canvas.toDataURL('image/png')
+      link.download = 'custom-svg.png'
+      link.click()
+    })
+  }
+
+  const generateSVGCode = () => {
+    const svgMarkup = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+        <rect width="200" height="200" fill="#f2f2f2" />
+        <text x="100" y="100" text-anchor="middle" alignment-baseline="central" font-size="20">
+          ${selectedKeyword?.letters?.toUpperCase()}
+        </text>
+      </svg>
+    `
+    return svgMarkup
+  }
   const [values, setValues] = React.useState({
     hashtag: '',
+    sublink: '',
     organization: '',
     location: {
       country: '',
-      city: '',
+      state: '',
     },
   })
   const [timeline, setTimeline] = React.useState('today')
+
+  const getLocation = async () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        console.log('location', position)
+
+        const res = await api.get(
+          `https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=ebb95c6b3fcd4c46a5fe97994c6f9d07`
+        )
+        const data = res.data.features
+        setValues({
+          ...values,
+          location: {
+            country: data[0].properties.country,
+            state: data[0].properties.city,
+          },
+        })
+        console.log(values)
+      })
+    } else {
+      alert('Geolocation is not supported by this browser.')
+    }
+  }
+
+  useEffect(() => {
+    getUserSubscriptions()
+    getKeywordAnalytics()
+    if (selectedKeyword) {
+      setValues({
+        ...values,
+        hashtag: selectedKeyword.letters,
+        sublink: selectedKeyword.sublink,
+        organization: selectedKeyword.organization,
+        // location: {
+        //   country: selectedKeyword.country,
+        //   city: selectedKeyword.city,
+        // },
+      })
+      const foundSubscription = subscriptions.find(
+        (subscription) => subscription.keyword.id === selectedKeyword.id
+      )
+      setSelectedKeyword({
+        ...selectedKeyword,
+        subscription: { ...foundSubscription },
+      })
+      console.log(selectedKeyword)
+    }
+  }, [])
+
   return (
     <>
       <Grid
@@ -147,6 +236,7 @@ const HomeWeb = () => {
               {/* Sublink input */}
               <OutlinedInput
                 placeholder={`${t('box_one_input')}`}
+                value={values?.sublink}
                 sx={{
                   height: '42px',
                   width: '100%',
@@ -203,6 +293,7 @@ const HomeWeb = () => {
                   <Button
                     disableRipple
                     variant="contained"
+                    onClick={getLocation}
                     sx={{
                       height: '32px',
                       width: '160px',
@@ -235,10 +326,21 @@ const HomeWeb = () => {
                 <Select
                   displayEmpty
                   value={values.location.country}
+                  onChange={(e) =>
+                    setValues({
+                      ...values,
+                      location: {
+                        state: '',
+                        country: e.target.value,
+                      },
+                    })
+                  }
                   renderValue={(selected: any) => {
                     if (selected.length === 0) {
                       return 'Country'
                     }
+
+                    return selected
                   }}
                   sx={{
                     height: '42px',
@@ -252,16 +354,30 @@ const HomeWeb = () => {
                     {/* Country */}
                     {t('box_one_location_country')}
                   </MenuItem>
-                  <MenuItem value={1}>One</MenuItem>
+                  {countries.map((country) => (
+                    <MenuItem key={country.country} value={country.country}>
+                      {country.country}
+                    </MenuItem>
+                  ))}
                 </Select>
                 {/* State Select */}
                 <Select
                   displayEmpty
-                  value={values.location.country}
+                  onChange={(e) =>
+                    setValues({
+                      ...values,
+                      location: {
+                        ...values.location,
+                        state: e.target.value,
+                      },
+                    })
+                  }
+                  value={values.location.state}
                   renderValue={(selected: any) => {
                     if (selected.length === 0) {
                       return 'State'
                     }
+                    return selected
                   }}
                   sx={{
                     height: '42px',
@@ -275,7 +391,15 @@ const HomeWeb = () => {
                     {/* State */}
                     {t('box_one_location_state')}
                   </MenuItem>
-                  <MenuItem value={1}>One</MenuItem>
+                  {countries
+                    .find(
+                      (country) => country.country === values.location.country
+                    )
+                    ?.states.map((state) => (
+                      <MenuItem key={state} value={state}>
+                        {state}
+                      </MenuItem>
+                    ))}
                 </Select>
               </Box>
             </Box>
@@ -341,7 +465,7 @@ const HomeWeb = () => {
               }}
             >
               <Typography fontSize="32px" fontWeight={500}>
-                #VOW
+                #{selectedKeyword?.letters?.toUpperCase()}
               </Typography>
             </Box>
 
@@ -369,14 +493,26 @@ const HomeWeb = () => {
                 borderRadius: '24px',
               }}
             >
-              <Typography>{t('box_two_date_bought')} : 1/2/2023</Typography>
-              <Typography>{t('box_two_date_next')} : 2/8/2023</Typography>
+              <Typography>
+                {t('box_two_date_bought')} :{' '}
+                {new Date(
+                  selectedKeyword?.subscription?.purchaseDate
+                ).toLocaleDateString()}
+              </Typography>
+              <Typography>
+                {t('box_two_date_next')} :{' '}
+                {new Date(
+                  selectedKeyword?.subscription?.renewalDate
+                ).toLocaleDateString()}
+              </Typography>
             </Box>
             <Typography
+              sx={{ cursor: 'pointer' }}
               fontSize="14px"
               fontWeight={400}
               align="center"
               marginY="18px"
+              onClick={handleDownloadClick}
             >
               {/* Download E-label stamp */}
               {t('box_two_download')}

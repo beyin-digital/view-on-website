@@ -10,7 +10,6 @@ import {
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
-import { IconsStyle } from '../Button'
 import { FiArrowUpLeft, FiArrowUpRight } from 'react-icons/fi'
 import { UserContext } from '@/contexts/userContext'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
@@ -20,8 +19,6 @@ const SignupForm = () => {
   const { t } = useTranslation('signup')
   const { locale } = useRouter()
 
-  const router = useRouter()
-
   const [showPassword, setShowPassword] = useState(false)
   const handleClickShowPassword = () => setShowPassword((show) => !show)
 
@@ -30,7 +27,7 @@ const SignupForm = () => {
   ) => {
     event.preventDefault()
   }
-  const { values, handleChange } = useContext(UserContext)
+  const { values, handleChange, handleSignup } = useContext(UserContext)
   // animation
   const [hoveredButton, setHoveredButton] = useState(false)
 
@@ -42,7 +39,7 @@ const SignupForm = () => {
     setHoveredButton(false)
   }
   return (
-    <>
+    <form onSubmit={handleSignup}>
       <Box
         sx={{
           width: '100%',
@@ -71,6 +68,8 @@ const SignupForm = () => {
           }}
         >
           <OutlinedInput
+            value={values.fullName}
+            name="fullName"
             sx={{
               width: '100%',
               height: { xs: '47px', md: '50px', xl: '65px' },
@@ -94,6 +93,8 @@ const SignupForm = () => {
             placeholder={`${t('form_name')}`}
           />
           <OutlinedInput
+            value={values.password}
+            name="password"
             sx={{
               width: '100%',
               height: { xs: '47px', md: '50px', xl: '65px' },
@@ -144,6 +145,8 @@ const SignupForm = () => {
           }}
         >
           <OutlinedInput
+            value={values.email}
+            name="email"
             sx={{
               width: '100%',
               height: { xs: '47px', md: '50px', xl: '65px' },
@@ -305,7 +308,7 @@ const SignupForm = () => {
           </Button>
         </Box>
       </Box>
-    </>
+    </form>
   )
 }
 

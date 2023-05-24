@@ -1,7 +1,7 @@
 import { api } from '@/utils/api'
 import { useRouter } from 'next/router'
 import { createContext, useEffect, useState } from 'react'
-
+import slugify from 'slugify'
 // create a context for the keyword
 export const KeywordContext = createContext<{
   values: any
@@ -15,8 +15,13 @@ export const KeywordContext = createContext<{
     price: number,
     interval: string
   ) => void
+  getUsersKeywords: () => void
   getUserSubscriptions: () => void
   subscriptions: any[]
+  keywords: any[]
+  selectedKeyword: any
+  setSelectedKeyword: React.Dispatch<React.SetStateAction<any>>
+  getKeywordAnalytics: () => void
 }>({
   values: '',
   setValues: () => {},
@@ -29,8 +34,13 @@ export const KeywordContext = createContext<{
     price: number,
     interval: string
   ) => {},
+  getUsersKeywords: async () => {},
   getUserSubscriptions: async () => {},
   subscriptions: [],
+  keywords: [],
+  selectedKeyword: {},
+  setSelectedKeyword: () => {},
+  getKeywordAnalytics: async () => {},
 })
 
 export const KeywordProvider = ({ children }: any) => {
@@ -41,7 +51,8 @@ export const KeywordProvider = ({ children }: any) => {
   })
 
   const [keywordFound, setKeywordFound] = useState('')
-
+  const [keywords, setKeywords] = useState([])
+  const [selectedKeyword, setSelectedKeyword] = useState<any>({})
   const [token, setToken] = useState('')
   const [subscriptions, setSubscriptions] = useState([])
 
@@ -76,6 +87,15 @@ export const KeywordProvider = ({ children }: any) => {
     window.location.href = data.url
   }
 
+  const getUsersKeywords = async () => {
+    const res = await api.get('/keywords/all', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    const data = res.data
+    setKeywords(data.data)
+    setSelectedKeyword(data.data[0])
+  }
+
   const getUserSubscriptions = async () => {
     const res = await api.get('/subscriptions', {
       headers: { Authorization: `Bearer ${token}` },
@@ -85,6 +105,20 @@ export const KeywordProvider = ({ children }: any) => {
       console.log(data)
       setSubscriptions(data)
     }
+  }
+
+  const getKeywordAnalytics = async () => {
+    const res = await api.get(
+      `/analytics?keyword=${slugify(selectedKeyword?.letters, {
+        lower: true,
+      })}`,
+
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    const data = res.data
+    console.log(data)
   }
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -99,8 +133,13 @@ export const KeywordProvider = ({ children }: any) => {
         keywordFound,
         token,
         handleSubscription,
+        getUsersKeywords,
         getUserSubscriptions,
         subscriptions,
+        keywords,
+        selectedKeyword,
+        setSelectedKeyword,
+        getKeywordAnalytics,
       }}
     >
       {children}
