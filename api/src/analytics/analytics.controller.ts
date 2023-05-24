@@ -39,12 +39,12 @@ export class AnalyticsController {
     }
     return infinityPagination(
       await this.analyticsService.getIndividualKeywordAnalytics(
-        req.user,
         getAnalyticsDto,
         {
           page,
           limit,
         },
+        req.user,
       ),
       { page, limit },
     );

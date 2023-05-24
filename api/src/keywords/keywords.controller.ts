@@ -26,7 +26,7 @@ import {
   // ApiBearerAuth,
   ApiTags,
 } from '@nestjs/swagger';
-import { UpdateKeywordDto } from './dto/update-keyword.dto';
+// import { UpdateKeywordDto } from './dto/update-keyword.dto';
 import { ThrottlerBehindProxyGuard } from 'src/utils/guards/throttle-behind-proxy.guard';
 import { AnalyticsService } from 'src/analytics/analytics.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -58,8 +58,9 @@ export class KeywordsController {
       "Edits the keyword's properties, For now only location can be editted",
   })
   @Put(':id')
-  async update(@Req() req: any, @Body() updateKeywordDto: UpdateKeywordDto) {
-    return this.keywordsService.update(req.id, updateKeywordDto);
+  async update(@Req() req: any, @Body() data: any) {
+    console.log(req.params.id);
+    return this.keywordsService.update(req.params.id, data);
   }
 
   @ApiOperation({

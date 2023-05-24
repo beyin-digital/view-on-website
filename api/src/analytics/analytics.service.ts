@@ -37,9 +37,9 @@ export class AnalyticsService {
   }
 
   async getIndividualKeywordAnalytics(
-    user: User,
     getAnalyticsDto: GetAnalyticsDto,
     paginationOptions: IPaginationOptions,
+    user?: User,
   ) {
     const slug = getAnalyticsDto.keyword.toLowerCase().replace(/ /g, '-');
     const keywordCount = await this.keywordCountRepository.find({
@@ -50,11 +50,12 @@ export class AnalyticsService {
       take: paginationOptions.limit,
     });
 
-    if (user.role?.id !== 1 || keywordCount[0].keyword?.user?.id !== user.id) {
+    if (user?.role?.id !== 1 || keywordCount[0].keyword?.user?.id !== user.id) {
       throw new UnauthorizedException(
         'You are not authorized to view this data',
       );
     }
+
     return keywordCount;
   }
 }

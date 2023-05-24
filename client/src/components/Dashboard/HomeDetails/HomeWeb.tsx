@@ -106,6 +106,7 @@ const HomeWeb = () => {
     subscriptions,
     getUserSubscriptions,
     getKeywordAnalytics,
+    updateKeywordDetails,
   } = useContext(KeywordContext)
 
   const svgRef = useRef<SVGSVGElement>(null)
@@ -171,27 +172,25 @@ const HomeWeb = () => {
 
   useEffect(() => {
     getUserSubscriptions()
-    getKeywordAnalytics()
-    if (selectedKeyword) {
-      setValues({
-        ...values,
-        hashtag: selectedKeyword.letters,
-        sublink: selectedKeyword.sublink,
-        organization: selectedKeyword.organization,
-        // location: {
-        //   country: selectedKeyword.country,
-        //   city: selectedKeyword.city,
-        // },
-      })
-      const foundSubscription = subscriptions.find(
-        (subscription) => subscription.keyword.id === selectedKeyword.id
-      )
-      setSelectedKeyword({
-        ...selectedKeyword,
-        subscription: { ...foundSubscription },
-      })
-      console.log(selectedKeyword)
-    }
+
+    const foundSubscription = subscriptions.find(
+      (subscription) => subscription.keyword.id === selectedKeyword.id
+    )
+    setSelectedKeyword({
+      ...selectedKeyword,
+      subscription: { ...foundSubscription },
+    })
+    setValues({
+      ...values,
+      hashtag: selectedKeyword.letters,
+      sublink: selectedKeyword.sublink,
+      organization: selectedKeyword.organization,
+      location: {
+        country: selectedKeyword.location.country || '',
+        state: selectedKeyword.location.state || '',
+      },
+    })
+    // }
   }, [])
 
   return (
@@ -235,8 +234,11 @@ const HomeWeb = () => {
             >
               {/* Sublink input */}
               <OutlinedInput
-                placeholder={`${t('box_one_input')}`}
                 value={values?.sublink}
+                onChange={(e) =>
+                  setValues({ ...values, sublink: e.target.value })
+                }
+                placeholder={`${t('box_one_input')}`}
                 sx={{
                   height: '42px',
                   width: '100%',
@@ -246,6 +248,10 @@ const HomeWeb = () => {
               />
               {/* Organisation input */}
               <OutlinedInput
+                value={values?.organization}
+                onChange={(e) =>
+                  setValues({ ...values, organization: e.target.value })
+                }
                 placeholder={`${t('box_one_input_two')}`}
                 sx={{
                   height: '42px',
@@ -412,6 +418,18 @@ const HomeWeb = () => {
               }}
             >
               <Button
+                disabled={
+                  JSON.stringify(values?.location) ===
+                  JSON.stringify(selectedKeyword?.location)
+                }
+                onClick={() => {
+                  console.log(selectedKeyword.id)
+                  updateKeywordDetails(selectedKeyword?.id, {
+                    location: values.location,
+                    organisation: values.organization,
+                    sublink: values.sublink,
+                  })
+                }}
                 disableRipple
                 variant="contained"
                 sx={{
@@ -548,7 +566,10 @@ const HomeWeb = () => {
                 {t('box_three_two')}
               </Typography>
               <Typography marginTop="10px" marginBottom="8px" fontSize="14px">
-                {t('box_three_to')} : 20/06/2023
+                {t('box_three_to')} :
+                {new Date(
+                  selectedKeyword?.createdAt
+                ).toLocaleDateString()}
               </Typography>
               <Typography fontSize="36px" fontWeight={600} lineHeight="40px">
                 13,846,847

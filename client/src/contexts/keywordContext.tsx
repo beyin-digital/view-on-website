@@ -1,6 +1,7 @@
 import { api } from '@/utils/api'
 import { useRouter } from 'next/router'
 import { createContext, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import slugify from 'slugify'
 // create a context for the keyword
 export const KeywordContext = createContext<{
@@ -22,6 +23,7 @@ export const KeywordContext = createContext<{
   selectedKeyword: any
   setSelectedKeyword: React.Dispatch<React.SetStateAction<any>>
   getKeywordAnalytics: () => void
+  updateKeywordDetails: (id: number, values: any) => void
 }>({
   values: '',
   setValues: () => {},
@@ -41,6 +43,7 @@ export const KeywordContext = createContext<{
   selectedKeyword: {},
   setSelectedKeyword: () => {},
   getKeywordAnalytics: async () => {},
+  updateKeywordDetails: async (id: number, values: any) => {},
 })
 
 export const KeywordProvider = ({ children }: any) => {
@@ -93,6 +96,7 @@ export const KeywordProvider = ({ children }: any) => {
     })
     const data = res.data
     setKeywords(data.data)
+
     setSelectedKeyword(data.data[0])
   }
 
@@ -120,6 +124,29 @@ export const KeywordProvider = ({ children }: any) => {
     const data = res.data
     console.log(data)
   }
+
+  const updateKeywordDetails = async (id: number, values: any) => {
+    try {
+      const res = await api.put(
+        `/keywords/${id}`,
+        { ...values },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+
+      if (res.status >= 400) {
+        throw new Error()
+      }
+
+      toast.success('Keyword updated successfully')
+      getUsersKeywords()
+    } catch (error) {
+      toast.error('Error updating keyword')
+    }
+  }
   useEffect(() => {
     const token = localStorage.getItem('token')
     setToken(token || '')
@@ -140,6 +167,7 @@ export const KeywordProvider = ({ children }: any) => {
         selectedKeyword,
         setSelectedKeyword,
         getKeywordAnalytics,
+        updateKeywordDetails,
       }}
     >
       {children}

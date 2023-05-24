@@ -8,7 +8,7 @@ import {
   IsUrl,
 } from 'class-validator';
 import { lowerCaseTransformer } from 'src/utils/transformers/lower-case.transformer';
-import { LocationData } from 'src/utils/types/location.type';
+// import { LocationData } from 'src/utils/types/location.type';
 
 export class CreateKeywordDto {
   @ApiProperty({ example: 'Hello World' })
@@ -26,15 +26,11 @@ export class CreateKeywordDto {
     example: {
       state: 'California',
       country: 'United States',
-      coordinates: {
-        lat: 34.052235,
-        lng: -118.243683,
-      },
     },
   })
   @IsObject()
   @IsOptional()
-  location?: LocationData;
+  location?: any;
 
   @ApiProperty({ example: 2000 })
   @IsNumber()

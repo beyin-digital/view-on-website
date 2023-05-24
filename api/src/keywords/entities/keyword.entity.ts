@@ -7,8 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   Index,
-  BeforeInsert,
-  BeforeUpdate,
+  AfterLoad,
 } from 'typeorm';
 import { EntityHelper } from 'src/utils/entity-helper';
 import { Allow } from 'class-validator';
@@ -27,10 +26,11 @@ export class Keyword extends EntityHelper {
   @Column({ type: String, unique: true })
   slug?: string;
 
-  @BeforeInsert()
-  @BeforeUpdate()
-  setKeywordSlug() {
-    this.slug = slugify(this.letters, { lower: true, strict: true });
+  @AfterLoad()
+  public loadSlug(): void {
+    this.slug = slugify(this.letters, {
+      lower: true,
+    });
   }
 
   @Column({ default: false })
@@ -43,7 +43,7 @@ export class Keyword extends EntityHelper {
   location?: {
     state: string;
     country: string;
-    coordinates: {
+    coordinates?: {
       lat: number;
       lng: number;
     };

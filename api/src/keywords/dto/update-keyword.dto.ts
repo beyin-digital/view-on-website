@@ -1,17 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsOptional } from 'class-validator';
 
 export class UpdateKeywordDto {
   @ApiProperty({
     example: {
       state: 'California',
       country: 'United States',
-      coordinates: {
-        lat: 34.052235,
-        lng: -118.243683,
-      },
     },
   })
-  @IsNotEmpty()
-  location: any;
+  @IsOptional()
+  location?: any;
+
+  @ApiProperty({ example: 'https://hellword.com', description: 'sublink' })
+  @IsOptional()
+  sublink?: string;
+
+  @ApiProperty({
+    example: 'ACE Corp',
+    description: 'Organisation associated with the keyword',
+  })
+  @IsOptional()
+  organisation?: string;
 }

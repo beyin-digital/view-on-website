@@ -17,6 +17,7 @@ import { Order } from 'src/orders/entities/order.entity';
 import { Subscription } from 'src/subscriptions/entities/subscription.entity';
 import { Keyword } from 'src/keywords/entities/keyword.entity';
 import { UnsubscribeDto } from './dto/unsubscribe.dto';
+import slugify from 'slugify';
 
 @Injectable()
 export class StripeService {
@@ -201,6 +202,7 @@ export class StripeService {
         letters: order?.keyword as string,
         price: order?.total as number,
         sublink: order?.sublink as string,
+        slug: slugify(order?.keyword, { lower: true }),
       });
 
       await newKeyword.save();

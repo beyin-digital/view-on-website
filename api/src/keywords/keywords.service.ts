@@ -69,13 +69,18 @@ export class KeywordsService {
     });
   }
 
-  update(id: number, payload: DeepPartial<Keyword>): Promise<Keyword> {
-    return this.keywordsRepository.save(
-      this.keywordsRepository.create({
+  async update(id: number, payload: DeepPartial<Keyword>): Promise<Keyword> {
+    const keyword = (await this.keywordsRepository.findOne({
+      where: {
         id,
-        ...payload,
-      }),
-    );
+      },
+    })) as Keyword;
+
+    keyword.sublink = payload.sublink || keyword.sublink;
+    keyword.price = payload.price || keyword.price;
+    keyword.location = payload.location || (keyword.location as any);
+
+    return await keyword.save();
   }
 
   async softDelete(id: number): Promise<void> {
