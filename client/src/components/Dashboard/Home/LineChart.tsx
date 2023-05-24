@@ -1,7 +1,12 @@
 import { ResponsiveLine } from '@nivo/line'
+import { useTranslation } from "react-i18next";
 
-const LineChart = ({ data /* see data tab */ }: any) => (
-  <ResponsiveLine
+const LineChart = ({ data /* see data tab */ }: any) => {
+	const { t } = useTranslation("dashboard");
+  return (
+    <>
+
+     <ResponsiveLine
     data={data}
     curve="monotoneX"
     margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -14,7 +19,7 @@ const LineChart = ({ data /* see data tab */ }: any) => (
     }}
     yFormat=" >-.2f"
     axisTop={{
-      legend: 'Number of Visits',
+      legend: `${t("box_main_chart_visit")}`,
       legendPosition: 'start',
       legendOffset: -36,
       // @ts-ignore
@@ -25,8 +30,8 @@ const LineChart = ({ data /* see data tab */ }: any) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: 'Day',
-      legendOffset: 36,
+      legend: `${t("day")}`,
+      legendOffset: 20,
       legendPosition: 'end',
     }}
     axisLeft={{
@@ -72,6 +77,10 @@ const LineChart = ({ data /* see data tab */ }: any) => (
       },
     ]}
   />
-)
+    </>
+  )
+
+
+}
 
 export default LineChart

@@ -6,6 +6,7 @@ import { Box, Typography } from '@mui/material'
 // components
 // import SliderSwiper from '../SliderSwiper'
 import dynamic from 'next/dynamic'
+// import Test from "../SliderSwiper/test";
 
 const SliderSwiper = dynamic(() => import('../SliderSwiper'), {
   ssr: false,

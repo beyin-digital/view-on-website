@@ -119,7 +119,7 @@ const Sidebar = () => {
           }}
           className="ImageDashboardPadding"
         >
-          <Image src="/images/logo.webp" width={74} height={50} alt="logo" />
+          <Image src="/images/logo.svg" width={74} height={50} alt="logo" />
           <Box
             style={{
               // marginRight: '20px',

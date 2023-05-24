@@ -1,8 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
-import dynamic from 'next/dynamic'
-
+ 
 import Layout from '@/components/Layout/Layout'
 import Head from 'next/head'
 

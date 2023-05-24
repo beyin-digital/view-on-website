@@ -10,6 +10,7 @@ const TwoBox = () => {
         sx={{
           position: 'relative',
           top: '0rem',
+          background: '#EAEDED',
         }}
         className="ExampleBoxTwo"
       >
@@ -33,7 +34,8 @@ const TwoBox = () => {
               sx={{
                 width: { xs: '100%', md: '50%' },
                 position: 'absolute',
-                left: { xs: '.5rem', sm: '2rem' },
+                left: { xs: '.5rem', sm: '8rem' },
+                transform: 'skew(16deg, 0deg)',
 
                 zIndex: '9999',
               }}
@@ -77,11 +79,11 @@ const TwoBox = () => {
             </Box>
             <Box
               sx={{
-                width: { xs: '75%', sm: '70%', md: '60%' },
+                width: { xs: '65%', sm: '100%', md: '60%' },
                 height: '100%',
                 backdropFilter: 'blur(48px)',
                 background:
-                  'radial-gradient(35.03% 67.6% at 17.29% 50.07%, rgba(49, 231, 22, 0.3) 0%, rgba(49, 231, 22, 0.012) 100%)',
+                  ' linear-gradient(48.32deg, rgba(34, 71, 23, 0.3) 2.06%, rgba(49, 231, 22, 0.012) 57.16%)',
                 backgroundRepeat: 'no-repeat',
                 borderRadius: '14px',
                 border: '1px solid #FBFBFB',

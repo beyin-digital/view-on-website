@@ -26,6 +26,7 @@ const FooterMobile = dynamic(() => import('@/components/Footer/FooterMobile'), {
   ssr: false,
 })
 import Head from 'next/head'
+import { BackgroundHome } from '@/components/Layout/Background'
 
 const Example = () => {
   const { t } = useTranslation('example')
@@ -40,27 +41,61 @@ const Example = () => {
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
-      <Header
-        nameOne={t('nav_subscribe')}
-        linkOne="/subscribe"
-        nameTwo={t('illustration')}
-        linkTwo="/illustration"
-        nameThree={t('nav_login')}
-        linkThree="/login"
-        nameFour={t('nav_signup')}
-        linkFour="/signup"
-      />
       <Box
         sx={{
-          height: { xs: '100%', xl: '89vh' },
+          height: { xs: '100%', xl: '100vh' },
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          maxHeight: '100%',
+          position: 'relative',
+          width: '100%',
+          overflow: 'hidden',
         }}
       >
-        <PageDesktop />
-        <PageTablet />
-        <PageMobile />
+        {/* <Box
+					sx={{
+						position: "absolute",
+						bottom: { xs: "95rem", md: "90rem", xl: "15rem" },
+						zIndex: "1",
+						display: { xs: "", xl: "block" },
+					}}
+				>
+					<img
+						src="/images/swirl.webp"
+						alt="Background Example Page"
+						title="Background Example Page"
+						loading="lazy"
+						style={{
+							// width: "100vw",
+						}}
+					/>
+				</Box> */}
+        <BackgroundHome />
+        <Header
+          nameOne={t('nav_subscribe')}
+          linkOne="/subscribe"
+          nameTwo={t('illustration')}
+          linkTwo="/illustration"
+          nameThree={t('nav_login')}
+          linkThree="/login"
+          nameFour={t('nav_signup')}
+          linkFour="/signup"
+        />
+        <Box
+          sx={{
+            position: 'relative',
+            zIndex: '999',
+          }}
+        >
+          <PageDesktop />
+          <PageTablet />
+          <PageMobile />
+        </Box>
+
+        <Footer />
+        <FooterMobile />
       </Box>
-      <Footer />
-      <FooterMobile />
     </>
   )
 }

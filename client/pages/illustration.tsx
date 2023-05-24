@@ -55,6 +55,8 @@ const Illustration = () => {
         linkTwo="/example"
         nameThree={t('login')}
         linkThree="/login"
+        nameFour={t('signup')}
+        linkFour="/signup"
       />
       <IllustrationTablet />
       <IllustrationDesktop />

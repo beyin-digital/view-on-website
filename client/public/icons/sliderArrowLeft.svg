@@ -1,10 +1,4 @@
 <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="66" height="66" rx="16" transform="matrix(-2.0349e-05 -1 -1 2.0349e-05 67.001 67)" fill="url(#paint0_linear_1595_1275)"/>
-<path d="M32.5767 52.465L35.6468 49.3949L22.4605 36.2091L51.9026 36.2085L51.9025 31.8797L22.4604 31.8803L35.6461 18.6941L32.576 15.6241L14.1559 34.0449L32.5767 52.465Z" fill="white"/>
-<defs>
-<linearGradient id="paint0_linear_1595_1275" x1="66" y1="32.9999" x2="-85.5" y2="32.9999" gradientUnits="userSpaceOnUse">
-<stop stop-color="#0090EC"/>
-<stop offset="1" stop-color="#31E716"/>
-</linearGradient>
-</defs>
+<rect width="66" height="66" rx="16" transform="matrix(-2.0349e-05 -1 -1 2.0349e-05 67.001 67)" fill="#31E716"/>
+<path d="M32.5767 52.465L35.6468 49.3949L22.4605 36.2091L51.9026 36.2085L51.9025 31.8797L22.4604 31.8803L35.6461 18.6941L32.576 15.6241L14.1559 34.0449L32.5767 52.465Z" fill="#343132"/>
 </svg>

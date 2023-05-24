@@ -99,7 +99,7 @@ export const HeaderLayoutDesktop = () => {
                 height: '240px',
                 position: 'absolute',
                 left: '-12%',
-                top: '-10%',
+                top: '-22%',
               }}
             >
               <img
@@ -121,7 +121,7 @@ export const HeaderLayoutDesktop = () => {
                   alignItems: '',
                   justifyContent: 'end',
                   position: 'absolute',
-                  bottom: { xs: '', md: '-10rem', xl: '-5rem' },
+                  bottom: { xs: '', md: '-10rem', xl: '-6rem' },
                   left: { md: '9rem', xl: '9rem' },
                 }}
               >
@@ -162,7 +162,7 @@ export const HeaderLayoutDesktop = () => {
                 height: '240px',
                 position: 'absolute',
                 right: '-10%',
-                top: '-10%',
+                top: '-22%',
               }}
             >
               <img
@@ -183,7 +183,7 @@ export const HeaderLayoutDesktop = () => {
                   alignItems: '',
                   justifyContent: 'end',
                   position: 'absolute',
-                  bottom: { xs: '', md: '-10rem', xl: '-5rem' },
+                  bottom: { xs: '', md: '-10rem', xl: '-6rem' },
                   right: { md: '9rem', xl: '9rem' },
                 }}
               >

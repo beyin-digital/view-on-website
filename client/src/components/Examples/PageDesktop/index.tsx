@@ -25,9 +25,9 @@ const PageDesktop = () => {
       <Box
         className="PageDesktop"
         sx={{
-          width: '1920',
-          maxWidth: '100%',
-          overflow: 'hidden',
+          width: '1920px',
+          // maxWidth: "100%",
+          // overflow: "hidden",
         }}
       >
         <Box
@@ -45,19 +45,6 @@ const PageDesktop = () => {
           }}
           className="PageDesktopMargin"
         >
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '-95rem',
-            }}
-          >
-            <img
-              src="/images/swirl.webp"
-              alt="Background Example Page"
-              title="Background Example Page"
-              loading="lazy"
-            />
-          </Box>
           <Box
             sx={{
               height: { xs: '100%', md: '620px', xl: '590px' },
@@ -82,12 +69,12 @@ const PageDesktop = () => {
               <Box
                 sx={{
                   position: 'absolute',
-                  top: { xs: '0rem', lg: '10rem', xl: '15rem' },
+                  top: { xs: '0rem', lg: '18rem', xl: '17rem' },
                   right: {
                     xs: '0',
                     sm: '',
-                    md: '0rem',
-                    lg: '50rem',
+                    md: '40rem',
+                    lg: '44rem',
                     xl: '60rem',
                   },
                   zIndex: '91',
@@ -106,7 +93,7 @@ const PageDesktop = () => {
                     xl: '300px',
                   },
                 }}
-                className="sliderArrowsOne"
+                className="sliderArrowsOn"
               >
                 <img
                   src="/icons/arrowLeftExampleAR.png"

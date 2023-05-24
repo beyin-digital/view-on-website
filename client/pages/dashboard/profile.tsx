@@ -1,14 +1,17 @@
+import Head from 'next/head'
 import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { UserContext } from '@/contexts/userContext'
 import { GetStaticProps } from 'next'
 import { Box, styled, Paper } from '@mui/material'
-import Head from 'next/head'
+
+
 import { useTranslation } from 'react-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-import dynamic from 'next/dynamic'
 
+// components
+import dynamic from 'next/dynamic'
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
 })

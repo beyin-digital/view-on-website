@@ -26,5 +26,6 @@
   "box_main_chart_title": "Main Chart",
   "box_main_chart_visit": "Number of visits ",
   "cancel": "Cancel",
-  "go_to_subscriptions": "Go To Subscriptions"
+  "go_to_subscriptions": "Go To Subscriptions",
+  "day":"day"
 }

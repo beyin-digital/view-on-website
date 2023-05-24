@@ -20,8 +20,9 @@ import 'swiper/swiper-bundle.min.css'
 
 import SwiperLabel from './SwiperLabel'
 import Image from 'next/image'
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 
-SwiperCore.use([Navigation, Thumbs, Keyboard])
+SwiperCore.use([Thumbs, Keyboard])
 
 type ReactIdSwiperRef = {
   swiper: any
@@ -107,25 +108,30 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
         className="imported"
       >
         <div className="swiper-button image-swiper-button-next">
-          {/* <IoIosArrowForward /> */}
-          <Image
-            src="/icons/sliderArrowRight.svg"
-            alt=""
-            width={40}
-            height={40}
-          />
+          {/* <Image
+						src="/icons/sliderArrowRight.svg"
+						alt=""
+						width={40}
+						height={40}
+						placeholder="blur"
+						blurDataURL="/icons/sliderArrowLeft.svg"
+						loading="lazy"
+						className="hover"
+					/> */}
+          <AiOutlineArrowRight size="20px" />
         </div>
         <div className="swiper-button image-swiper-button-prev">
-          {/* <IoIosArrowBack /> */}
-          <Image
-            src="/icons/sliderArrowLeft.svg"
-            alt=""
-            width={40}
-            height={40}
-            placeholder="blur"
-            blurDataURL="/icons/sliderArrowLeft.svg"
-            loading="lazy"
-          />
+          {/* <Image
+						src="/icons/sliderArrowLeft.svg"
+						alt=""
+						width={40}
+						height={40}
+						placeholder="blur"
+						blurDataURL="/icons/sliderArrowLeft.svg"
+						loading="lazy"
+						className="hover"
+					/> */}
+          <AiOutlineArrowLeft />
         </div>
         <Swiper
           direction={isVertical ? 'vertical' : 'horizontal'}
@@ -143,7 +149,6 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
           }}
           keyboard={true}
           spaceBetween={2}
-          // navigation={true}
           navigation={{
             nextEl: '.image-swiper-button-next',
             prevEl: '.image-swiper-button-prev',

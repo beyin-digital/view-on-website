@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/system'
 
 // components
-import { Background } from './Background'
 import { BackgroundImageSlider } from '../Slider/BackgroundImage'
 
 import dynamic from 'next/dynamic'

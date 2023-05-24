@@ -11,7 +11,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { GoogleLogin } from '@react-oauth/google'
 
 import { useRouter } from 'next/router'
-import { object, string } from 'zod'
+import { object, string, TypeOf } from 'zod'
 
 import LoginTextSignUp from './LoginTextSignUp'
 import Link from 'next/link'

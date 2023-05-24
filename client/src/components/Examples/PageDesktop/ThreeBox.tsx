@@ -19,9 +19,9 @@ const ThreeBox = () => {
             borderTop: '1px solid #FBFBFB',
             // border: "1px solid red",
             borderTopLeftRadius: '35px',
-            borderBottomLeftRadius: '35px',
+            // borderBottomLeftRadius: '35px',
             background:
-              'radial-gradient(28.05% 49.93% at 21.95% 50.07%, rgba(0, 144, 236, 0.3) 0%, rgba(0, 144, 236, 0.015) 100%)',
+              'linear-gradient(53.34deg, rgba(0, 144, 236, 0.3) 4.06%, rgba(0, 144, 236, 0.015) 63.3%)',
             // "radial-gradient(98.05% 99.93% at 91.95% 90.07%, rgba(0, 144, 236, 0.3) 0%, rgba(0, 144, 236, 0.015) 100%)",
             backdropFilter: 'blur(100px)',
             position: 'relative',
@@ -32,7 +32,7 @@ const ThreeBox = () => {
             sx={{
               transform: 'skew(-16deg, 0deg)',
               position: 'absolute',
-              top: '-1rem',
+              top: { xs: '3rem', xl: '1rem' },
               left: { xs: '', md: '0rem', xl: '3rem' },
               width: { md: '550px', xl: '550px' },
               height: { md: '550px', xl: '550px' },
@@ -91,7 +91,7 @@ const ThreeBox = () => {
             borderTopLeftRadius: '35px',
             borderBottomLeftRadius: '35px',
             background:
-              'radial-gradient(28.05% 49.93% at 21.95% 50.07%, rgba(0, 144, 236, 0.3) 0%, rgba(0, 144, 236, 0.015) 100%)',
+              'linear-gradient(53.34deg, rgba(0, 144, 236, 0.3) 4.06%, rgba(0, 144, 236, 0.015) 63.3%)',
             backdropFilter: 'blur(100px)',
           }}
         >

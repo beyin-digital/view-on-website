@@ -1,7 +1,6 @@
 import { Box, Typography, Modal } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
-import ReactPlayer from 'react-player'
 import { AiFillCloseCircle } from 'react-icons/ai'
 
 const Header = () => {
@@ -122,11 +121,21 @@ const Header = () => {
                   transform: 'translate(-50%, -50%)',
                 }}
               >
-                <ReactPlayer
+                {/* <ReactPlayer
                   url="https://www.youtube.com/watch?v=ryUxrFUk6MY"
                   width="100%"
                   height="100%"
                   playing={true}
+                /> */}
+
+                <iframe
+                  src="https://thedxi.com/video/home"
+                  // autoplay
+                  width="100%"
+                  height="100%"
+                  style={{
+                    border: '0',
+                  }}
                 />
                 <Box
                   sx={{

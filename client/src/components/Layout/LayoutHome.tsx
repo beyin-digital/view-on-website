@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/system'
 
 import { BackgroundHome } from './Background'
-
 import { useTranslation } from 'next-i18next'
 
 import dynamic from 'next/dynamic'
@@ -61,12 +60,14 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
           className="LayoutHomeMobil"
         >
           <Header
-            nameOne={t('nav_subscribe')}
-            linkOne="/subscribe"
-            nameTwo={t('nav_examples')}
-            linkTwo="/example"
-            nameThree={t('nav_login')}
-            linkThree="/login"
+            nameOne=""
+            linkOne=""
+            nameTwo={t('nav_subscribe')}
+            linkTwo="/subscribe"
+            nameThree={t('nav_examples')}
+            linkThree="/example"
+            nameFour={t('nav_login')}
+            linkFour="/login"
           />
           <Box
             sx={{
