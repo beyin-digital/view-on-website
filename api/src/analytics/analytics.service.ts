@@ -1,15 +1,12 @@
 import {
   Injectable,
-  UnauthorizedException,
-  //   UnauthorizedException,
+  //  UnauthorizedException
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { KeywordViewCount } from './entities/keyword-count.entity';
 import { Repository } from 'typeorm';
 import { Keyword } from 'src/keywords/entities/keyword.entity';
 import { User } from 'src/users/entities/user.entity';
-import { IPaginationOptions } from 'src/utils/types/pagination-options';
-import { GetAnalyticsDto } from './dto/get-analytics.dto';
 
 @Injectable()
 export class AnalyticsService {
@@ -36,25 +33,15 @@ export class AnalyticsService {
     }
   }
 
-  async getIndividualKeywordAnalytics(
-    getAnalyticsDto: GetAnalyticsDto,
-    paginationOptions: IPaginationOptions,
-    user?: User,
-  ) {
-    const slug = getAnalyticsDto.keyword.toLowerCase().replace(/ /g, '-');
+  async getIndividualKeywordAnalytics(keyword: any, user?: User) {
+    const slug = keyword.toLowerCase().replace(/ /g, '-');
     const keywordCount = await this.keywordCountRepository.find({
       where: {
-        keyword: { slug },
+        keyword: { slug: slug },
       },
-      skip: (paginationOptions.page - 1) * paginationOptions.limit,
-      take: paginationOptions.limit,
     });
-
-    if (user?.role?.id !== 1 || keywordCount[0].keyword?.user?.id !== user.id) {
-      throw new UnauthorizedException(
-        'You are not authorized to view this data',
-      );
-    }
+    console.log(user);
+    console.log(keywordCount);
 
     return keywordCount;
   }

@@ -1,18 +1,6 @@
-import {
-  Controller,
-  DefaultValuePipe,
-  Get,
-  ParseIntPipe,
-  Query,
-  Req,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Query, Req, UseGuards } from '@nestjs/common';
 import { AnalyticsService } from './analytics.service';
 import { AuthGuard } from '@nestjs/passport';
-import { InfinityPaginationResultType } from 'src/utils/types/infinity-pagination-result.type';
-import { KeywordViewCount } from './entities/keyword-count.entity';
-import { infinityPagination } from 'src/utils/infinity-pagination';
-import { GetAnalyticsDto } from './dto/get-analytics.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Analytics')
@@ -27,26 +15,14 @@ export class AnalyticsController {
     summary: 'Endpoint to get analytics for a keyword',
   })
   @UseGuards(AuthGuard('jwt'))
-  @Get('')
+  @Get('keyword')
   async getKeywordAnalytics(
     @Req() req: any,
-    @Query('keyword') getAnalyticsDto: GetAnalyticsDto,
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
-  ): Promise<InfinityPaginationResultType<KeywordViewCount>> {
-    if (limit > 50) {
-      limit = 50;
-    }
-    return infinityPagination(
-      await this.analyticsService.getIndividualKeywordAnalytics(
-        getAnalyticsDto,
-        {
-          page,
-          limit,
-        },
-        req.user,
-      ),
-      { page, limit },
+    @Query('keyword') keyword: any,
+  ): Promise<any> {
+    return await this.analyticsService.getIndividualKeywordAnalytics(
+      keyword,
+      req.user,
     );
   }
 }
