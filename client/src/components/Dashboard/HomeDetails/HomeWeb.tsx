@@ -46,39 +46,6 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
-const viewsTimeGraphData = [
-  {
-    id: '1 may',
-    color: 'hsla(203, 100%, 46%, 1)',
-    data: [
-      {
-        x: '10 jan',
-        y: 298,
-      },
-      {
-        x: '20 jan',
-        y: 63,
-      },
-      {
-        x: '30 jan',
-        y: 218,
-      },
-      {
-        x: '10 feb',
-        y: 142,
-      },
-      {
-        x: '20 feb',
-        y: 291,
-      },
-      {
-        x: '30 feb',
-        y: 269,
-      },
-    ],
-  },
-]
-
 const HomeWeb = () => {
   const { t } = useTranslation('dashboard')
   const router = useRouter()
@@ -91,6 +58,8 @@ const HomeWeb = () => {
     getKeywordAnalytics,
     updateKeywordDetails,
     analyticsData,
+    lineChartDataType,
+    setLineChartDataType,
   } = useContext(KeywordContext)
 
   const svgRef = useRef<SVGSVGElement>(null)
@@ -129,7 +98,6 @@ const HomeWeb = () => {
       state: '',
     },
   })
-  const [timeline, setTimeline] = React.useState('today')
 
   const [pieChartData, setPieChartData] = React.useState([
     {
@@ -145,6 +113,38 @@ const HomeWeb = () => {
       tKey: 'box_four_all',
       value: 0,
       color: 'hsla(203, 100%, 46%, 1)',
+    },
+  ])
+  const [lineChartData, setLineChartData] = React.useState([
+    {
+      id: '1 may',
+      color: 'hsla(203, 100%, 46%, 1)',
+      data: [
+        {
+          x: '10 jan',
+          y: 298,
+        },
+        {
+          x: '20 jan',
+          y: 63,
+        },
+        {
+          x: '30 jan',
+          y: 218,
+        },
+        {
+          x: '10 feb',
+          y: 142,
+        },
+        {
+          x: '20 feb',
+          y: 291,
+        },
+        {
+          x: '30 feb',
+          y: 269,
+        },
+      ],
     },
   ])
   const getLocation = async () => {
@@ -207,9 +207,14 @@ const HomeWeb = () => {
         color: 'hsla(203, 100%, 46%, 1)',
       },
     ])
-  }, [])
-
-  console.log(analyticsData)
+    setLineChartData([
+      {
+        id: 'Visits',
+        color: 'hsla(203, 100%, 46%, 1)',
+        data: analyticsData.lineChartData,
+      },
+    ])
+  }, [lineChartDataType])
 
   return (
     <>
@@ -634,11 +639,15 @@ const HomeWeb = () => {
               {/* Time Selection */}
               <Select
                 displayEmpty
-                value={timeline}
+                onChange={(e) => {
+                  setLineChartDataType(e.target.value as any)
+                }}
+                value={lineChartDataType}
                 renderValue={(selected: any) => {
                   if (selected.length === 0) {
                     return 'Duration'
                   }
+                  return selected
                 }}
                 sx={{
                   height: '42px',
@@ -650,21 +659,13 @@ const HomeWeb = () => {
                   },
                 }}
               >
-                <MenuItem disabled value="today">
-                  last 24 hours
-                </MenuItem>
-                <MenuItem disabled value="week">
-                  last 7 days
-                </MenuItem>
-                <MenuItem disabled value="month">
-                  last 30 days
-                </MenuItem>
-                <MenuItem disabled value="year">
-                  Past year
-                </MenuItem>
+                <MenuItem value="day">24 hours</MenuItem>
+                <MenuItem value="week">7 days</MenuItem>
+                <MenuItem value="month">30 days</MenuItem>
+                <MenuItem value="year">year</MenuItem>
               </Select>
             </Box>
-            <LineChart data={viewsTimeGraphData} />
+            <LineChart data={lineChartData} />
           </Item>
         </Grid>
       </Grid>

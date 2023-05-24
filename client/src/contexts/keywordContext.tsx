@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { createContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import slugify from 'slugify'
+import { array } from 'zod'
 // create a context for the keyword
 export const KeywordContext = createContext<{
   values: any
@@ -27,7 +28,12 @@ export const KeywordContext = createContext<{
   analyticsData: {
     totalVisitsToday: number
     totalVisitsAllTime: number
+    lineChartData: any[]
   }
+  setLineChartDataType: React.Dispatch<
+    React.SetStateAction<'day' | 'week' | 'month' | 'year'>
+  >
+  lineChartDataType: string
 }>({
   values: '',
   setValues: () => {},
@@ -51,7 +57,10 @@ export const KeywordContext = createContext<{
   analyticsData: {
     totalVisitsToday: 0,
     totalVisitsAllTime: 0,
+    lineChartData: [],
   },
+  setLineChartDataType: () => {},
+  lineChartDataType: '',
 })
 
 export const KeywordProvider = ({ children }: any) => {
@@ -69,8 +78,11 @@ export const KeywordProvider = ({ children }: any) => {
   const [analyticsData, setAnalyticsData] = useState({
     totalVisitsToday: 0,
     totalVisitsAllTime: 0,
+    lineChartData: [{}],
   })
-
+  const [lineChartDataType, setLineChartDataType] = useState<
+    'day' | 'week' | 'month' | 'year'
+  >('day')
   const checkKeywordavailability = async (keyword: string) => {
     // check if keyword is available
     const res = await api.get(`/keywords?hashtag=${keyword}`)
@@ -122,6 +134,98 @@ export const KeywordProvider = ({ children }: any) => {
     }
   }
 
+  function sortAndCountVisits(
+    arr: any[],
+    timeParameter: 'day' | 'week' | 'month' | 'year'
+  ): { x: string; y: number }[] {
+    const visitsMap: Map<string, number> = new Map()
+
+    arr.forEach((obj) => {
+      const createdAt = new Date(obj.createdAt)
+      let key: string
+
+      switch (timeParameter) {
+        case 'day':
+          key = createdAt.toLocaleString(undefined, {
+            hour: 'numeric',
+            hour12: true,
+          })
+          break
+        case 'week':
+          key = createdAt.toLocaleDateString(undefined, { weekday: 'long' })
+          break
+        case 'month':
+          key = createdAt.toLocaleDateString(undefined, { day: 'numeric' })
+          break
+        case 'year':
+          key = createdAt.toLocaleDateString(undefined, { month: 'long' })
+          break
+        default:
+          throw new Error('Invalid time parameter.')
+      }
+
+      visitsMap.set(key, (visitsMap.get(key) || 0) + 1)
+    })
+
+    const result: { x: string; y: number }[] = []
+
+    switch (timeParameter) {
+      case 'day':
+        for (let i = 0; i < 24; i++) {
+          const hour = i.toString().padStart(2, '0')
+          const key = `${hour}:00`
+          const visits = visitsMap.get(key) || 0
+          result.push({ x: key, y: visits })
+        }
+        break
+      case 'week':
+        const weekdays = [
+          'Sunday',
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+        ]
+        weekdays.forEach((weekday) => {
+          const visits = visitsMap.get(weekday) || 0
+          result.push({ x: weekday, y: visits })
+        })
+        break
+      case 'month':
+        for (let i = 1; i <= 31; i++) {
+          const day = i.toString().padStart(2, '0')
+          const key = `${day}`
+          const visits = visitsMap.get(key) || 0
+          result.push({ x: key, y: visits })
+        }
+        break
+      case 'year':
+        const months = [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
+        ]
+        months.forEach((month, index) => {
+          const visits = visitsMap.get(month) || 0
+          result.push({ x: month, y: visits })
+        })
+        break
+    }
+
+    return result
+  }
+
   const getKeywordAnalytics = async () => {
     const res = await api.get(
       `/analytics/keyword?keyword=${slugify(selectedKeyword?.letters, {
@@ -140,6 +244,7 @@ export const KeywordProvider = ({ children }: any) => {
           new Date().toLocaleDateString()
       ).length,
       totalVisitsAllTime: data?.length,
+      lineChartData: sortAndCountVisits(data, lineChartDataType),
     })
   }
 
@@ -187,6 +292,8 @@ export const KeywordProvider = ({ children }: any) => {
         getKeywordAnalytics,
         updateKeywordDetails,
         analyticsData,
+        lineChartDataType,
+        setLineChartDataType,
       }}
     >
       {children}
