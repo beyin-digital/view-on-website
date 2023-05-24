@@ -46,23 +46,6 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
-const viewsData = [
-  {
-    id: 'today',
-    label: 'Today',
-    tKey: 'box_four_today',
-    value: 1658874,
-    color: 'hsla(112, 81%, 52%, 1)',
-  },
-  {
-    id: 'all-time',
-    label: 'All time',
-    tKey: 'box_four_all',
-    value: 13846847,
-    color: 'hsla(203, 100%, 46%, 1)',
-  },
-]
-
 const viewsTimeGraphData = [
   {
     id: '1 may',
@@ -107,6 +90,7 @@ const HomeWeb = () => {
     getUserSubscriptions,
     getKeywordAnalytics,
     updateKeywordDetails,
+    analyticsData,
   } = useContext(KeywordContext)
 
   const svgRef = useRef<SVGSVGElement>(null)
@@ -147,6 +131,22 @@ const HomeWeb = () => {
   })
   const [timeline, setTimeline] = React.useState('today')
 
+  const [pieChartData, setPieChartData] = React.useState([
+    {
+      id: 'today',
+      label: 'Today',
+      tKey: 'box_four_today',
+      value: 0,
+      color: 'hsla(112, 81%, 52%, 1)',
+    },
+    {
+      id: 'all-time',
+      label: 'All time',
+      tKey: 'box_four_all',
+      value: 0,
+      color: 'hsla(203, 100%, 46%, 1)',
+    },
+  ])
   const getLocation = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
@@ -182,16 +182,34 @@ const HomeWeb = () => {
     })
     setValues({
       ...values,
-      hashtag: selectedKeyword.letters,
-      sublink: selectedKeyword.sublink,
-      organization: selectedKeyword.organization,
+      hashtag: selectedKeyword?.letters,
+      sublink: selectedKeyword?.sublink,
+      organization: selectedKeyword?.organization,
       location: {
-        country: selectedKeyword.location.country || '',
-        state: selectedKeyword.location.state || '',
+        country: selectedKeyword?.location?.country || '',
+        state: selectedKeyword?.location?.state || '',
       },
     })
-    // }
+    getKeywordAnalytics()
+    setPieChartData([
+      {
+        id: 'today',
+        label: 'Today',
+        tKey: 'box_four_today',
+        value: analyticsData.totalVisitsToday,
+        color: 'hsla(112, 81%, 52%, 1)',
+      },
+      {
+        id: 'all-time',
+        label: 'All time',
+        tKey: 'box_four_all',
+        value: analyticsData.totalVisitsAllTime,
+        color: 'hsla(203, 100%, 46%, 1)',
+      },
+    ])
   }, [])
+
+  console.log(analyticsData)
 
   return (
     <>
@@ -550,7 +568,7 @@ const HomeWeb = () => {
                 {t('box_three_one')}
               </Typography>
               <Typography fontSize="36px" fontWeight={600} lineHeight="40px">
-                16,584
+                {analyticsData?.totalVisitsToday?.toLocaleString() as any}
               </Typography>
             </Item>
           </Grid>
@@ -567,12 +585,10 @@ const HomeWeb = () => {
               </Typography>
               <Typography marginTop="10px" marginBottom="8px" fontSize="14px">
                 {t('box_three_to')} :
-                {new Date(
-                  selectedKeyword?.createdAt
-                ).toLocaleDateString()}
+                {new Date(selectedKeyword?.createdAt).toLocaleDateString()}
               </Typography>
               <Typography fontSize="36px" fontWeight={600} lineHeight="40px">
-                13,846,847
+                {analyticsData?.totalVisitsAllTime?.toLocaleString() as any}
               </Typography>
             </Item>
           </Grid>
@@ -588,7 +604,7 @@ const HomeWeb = () => {
               {/* Today VS All-time */}
               {t('box_four_title')}
             </Typography>
-            <PieChart data={viewsData} />
+            <PieChart data={pieChartData} />
           </Item>
         </Grid>
         {/* Second Row */}

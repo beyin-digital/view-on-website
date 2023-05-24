@@ -24,6 +24,10 @@ export const KeywordContext = createContext<{
   setSelectedKeyword: React.Dispatch<React.SetStateAction<any>>
   getKeywordAnalytics: () => void
   updateKeywordDetails: (id: number, values: any) => void
+  analyticsData: {
+    totalVisitsToday: number
+    totalVisitsAllTime: number
+  }
 }>({
   values: '',
   setValues: () => {},
@@ -44,6 +48,10 @@ export const KeywordContext = createContext<{
   setSelectedKeyword: () => {},
   getKeywordAnalytics: async () => {},
   updateKeywordDetails: async (id: number, values: any) => {},
+  analyticsData: {
+    totalVisitsToday: 0,
+    totalVisitsAllTime: 0,
+  },
 })
 
 export const KeywordProvider = ({ children }: any) => {
@@ -58,6 +66,10 @@ export const KeywordProvider = ({ children }: any) => {
   const [selectedKeyword, setSelectedKeyword] = useState<any>({})
   const [token, setToken] = useState('')
   const [subscriptions, setSubscriptions] = useState([])
+  const [analyticsData, setAnalyticsData] = useState({
+    totalVisitsToday: 0,
+    totalVisitsAllTime: 0,
+  })
 
   const checkKeywordavailability = async (keyword: string) => {
     // check if keyword is available
@@ -106,23 +118,29 @@ export const KeywordProvider = ({ children }: any) => {
     })
     const data = res.data.data
     if (data.length > 0) {
-      console.log(data)
       setSubscriptions(data)
     }
   }
 
   const getKeywordAnalytics = async () => {
     const res = await api.get(
-      `/analytics?keyword=${slugify(selectedKeyword?.letters, {
+      `/analytics/keyword?keyword=${slugify(selectedKeyword?.letters, {
         lower: true,
       })}`,
-
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     )
     const data = res.data
-    console.log(data)
+    setAnalyticsData({
+      ...analyticsData,
+      totalVisitsToday: data?.filter(
+        (keyword: { createdAt: string | number | Date }) =>
+          new Date(keyword.createdAt).toLocaleDateString() ===
+          new Date().toLocaleDateString()
+      ).length,
+      totalVisitsAllTime: data?.length,
+    })
   }
 
   const updateKeywordDetails = async (id: number, values: any) => {
@@ -168,6 +186,7 @@ export const KeywordProvider = ({ children }: any) => {
         setSelectedKeyword,
         getKeywordAnalytics,
         updateKeywordDetails,
+        analyticsData,
       }}
     >
       {children}
