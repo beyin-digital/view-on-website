@@ -32,7 +32,7 @@ const PageTablet = () => {
         }}
         className="PageTablet"
       >
-        <Box
+        {/* <Box
           sx={{
             width: '100%',
             display: { xs: 'block', sm: 'block', md: 'none', xl: 'none' },
@@ -51,7 +51,7 @@ const PageTablet = () => {
 
         <Box
           sx={{
-            width: '100%',
+            // width: '100%',
             display: { xs: 'none', sm: 'none', md: 'block', xl: 'block' },
           }}
         >
@@ -61,11 +61,11 @@ const PageTablet = () => {
             alt="Background Example Page"
             title="Background Example Page"
             style={{
-              top: '-36rem',
+              top: '-90rem',
               position: 'absolute',
             }}
           />
-        </Box>
+        </Box> */}
         <Box
           sx={{
             width: '100%',

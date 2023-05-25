@@ -136,7 +136,6 @@ const ModalFooter = (props: IntrinsicAttributes) => {
                     <Box
                       sx={{
                         width: '20%',
-                        // marginX: "1rem",
                       }}
                     >
                       <Typography

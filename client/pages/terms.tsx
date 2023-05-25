@@ -5,6 +5,7 @@ import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import Layout from '@/components/Layout/Layout'
 
 const Terms = () => {
   const { t } = useTranslation('terms')
@@ -19,6 +20,9 @@ const Terms = () => {
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>{' '}
+      <Layout>
+        <h1></h1>
+      </Layout>
     </>
   )
 }

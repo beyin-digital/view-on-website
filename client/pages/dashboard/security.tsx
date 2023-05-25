@@ -126,17 +126,17 @@ const DashboardSecurityPage = () => {
     })
   }
 
-  useEffect(() => {
-    if (user) {
-      if (user.twoFactorAuth === true) {
-        setTwoFactorAuth(true)
-      }
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (user) {
+  //     if (user.twoFactorAuth === true) {
+  //       setTwoFactorAuth(true)
+  //     }
+  //   }
+  // }, [])
 
-  if (!user) {
-    return <div>loading...</div>
-  }
+  // if (!user) {
+  //   return <div>loading...</div>
+  // }
 
   return (
     <>

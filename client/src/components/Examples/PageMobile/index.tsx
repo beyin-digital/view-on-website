@@ -27,7 +27,7 @@ const PageMobile = () => {
           position: 'relative',
         }}
       >
-        <Box
+        {/* <Box
           sx={{
             position: 'absolute',
             top: '-100rem',
@@ -39,7 +39,7 @@ const PageMobile = () => {
             title="Background View On Website"
             loading="lazy"
           />
-        </Box>
+        </Box> */}
         <Box
           m="auto"
           sx={{

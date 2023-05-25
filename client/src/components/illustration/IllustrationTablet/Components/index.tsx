@@ -100,7 +100,7 @@ export const HeaderLayoutMobile = () => {
               position: 'absolute',
               top: '-5rem',
               width: '300px',
-              right: '16rem',
+              right: '6rem',
               zIndex: '-1',
             }}
             loading="lazy"

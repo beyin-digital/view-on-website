@@ -17,7 +17,7 @@ const ThreeBox = () => {
           border: '0.484848px solid #FBFBFB',
           backdropFilter: 'blur(48.4848px)',
           background:
-            'radial-gradient(28.05% 49.93% at 21.95% 50.07%, rgba(0, 144, 236, 0.3) 0%, rgba(0, 144, 236, 0.015) 100%) ',
+            'linear-gradient(53.34deg, rgba(0, 144, 236, 0.3) 4.06%, rgba(0, 144, 236, 0.015) 63.3%)',
         }}
         className="ThreeBoxTablet"
       >

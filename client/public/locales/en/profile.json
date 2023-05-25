@@ -6,5 +6,8 @@
   "name": "Change your account info:",
   "organization": "Organization (optional)",
   "country": "country",
-  "button_profile": "Save Changes"
+  "button_profile": "Save Changes",
+  "cancel": "Cancel",
+
+  "log_out": "You're about to Log out of your View On Website Dashboard?"
 }

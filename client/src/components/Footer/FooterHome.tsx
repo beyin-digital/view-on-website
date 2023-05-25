@@ -141,6 +141,7 @@ const Footer = ({ onClick }: any) => {
               display: { xs: 'none', md: 'flex' },
               alignItems: 'center',
               justifyContent: 'end',
+              height: '100%',
             }}
           >
             <NextLink

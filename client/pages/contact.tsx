@@ -5,6 +5,7 @@ import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 
 import Head from 'next/head'
+import Layout from '@/components/Layout/Layout'
 
 const Contact = () => {
   const { t } = useTranslation('contact')
@@ -17,6 +18,9 @@ const Contact = () => {
         <meta name="keyword" content={`${t('meta_keyword')}`} />
         <link rel="canonical" href="https://website-vow.vercel.app/en/" />
       </Head>
+      <Layout>
+        <h1></h1>
+      </Layout>
     </>
   )
 }

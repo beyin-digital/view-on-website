@@ -12,7 +12,6 @@ const Footer = () => {
   const router = useRouter()
 
   // modal
-
   const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
   function closeModel() {
@@ -62,8 +61,8 @@ const Footer = () => {
             md: 'space-between',
             xl: 'space-between',
           },
-          top: '-.3rem',
-          position: 'relative',
+
+          marginY: '5px',
         }}
       >
         <Box
@@ -71,7 +70,6 @@ const Footer = () => {
             width: '100%',
             display: { xs: 'flex', md: 'flex', xl: 'flex' },
             alignItems: 'center',
-            justifyContent: { xs: 'center', md: 'start', xl: 'start' },
           }}
         >
           {icons.map((item) => (

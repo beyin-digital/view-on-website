@@ -8,5 +8,6 @@
   "button": "Verify",
   "nav_subscribe": "Subscribe",
   "nav_examples": "Examples",
-  "nav_login": "Login"
+  "nav_login": "Login",
+  "back": "BACK"
 }

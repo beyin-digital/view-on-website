@@ -6,5 +6,8 @@
   "name": "الاسم كامل",
   "organization": "إسم المنظمة (إختياري)",
   "country": "الدولة",
-  "button_profile": "حفظ التعديلات"
+  "button_profile": "حفظ التعديلات",
+  "cancel": "إلغاء",
+
+  "log_out": "أنت على وشك تسجيل الخروج من لوحة تحكم View On Website. هل ترغب في الخروج؟"
 }

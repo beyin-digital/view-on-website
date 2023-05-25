@@ -18,6 +18,7 @@ const Layout = dynamic(() => import('@/components/Layout/Layout'), {
 // icons
 import { FiArrowUpLeft, FiArrowUpRight } from 'react-icons/fi'
 import Image from 'next/image'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 const VerificationDetails = () => {
   // translate hook
@@ -201,87 +202,108 @@ const VerificationDetails = () => {
                 : t('resend')}
             </Typography>
           </Box>
+
           <Box
             sx={{
-              width: '300px',
               display: 'flex',
-              justifyContent: {
-                xs: 'center',
-                md: 'end',
-                xl: 'end',
-              },
-              position: {
-                xs: 'absolute',
-                md: 'absolute',
-                xl: 'absolute',
-              },
-              bottom: { xs: '0rem', md: '1rem', xl: '1rem' },
-              right: { xs: '', md: '-5rem', xl: '-5rem' },
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              width: '100%',
+              // border:"1px solid red",
+              flexDirection: { xs: 'column-reverse', md: 'row' },
             }}
           >
             <Box
               sx={{
-                width: {
-                  xs: '240px',
-                  sm: '300px',
-                  md: '300px',
-                  xl: '320px',
-                },
                 display: 'flex',
-                justifyContent: 'end',
-                background: '#0090EC',
-                borderRadius: '16px',
+                alignItems: 'center',
+                marginTop: { xs: '20px', md: '0' },
               }}
-              onMouseEnter={handleHoverButton}
-              onMouseLeave={handleLeave}
-              className="SubscribeAnimation"
             >
-              <Button
+              <AiOutlineArrowLeft size="16px" />
+              <Typography
+                fontSize={'20px'}
+                fontWeight={'400'}
+                textTransform={'uppercase'}
+              >
+                {t('back')}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                width: '300px',
+                display: 'flex',
+                justifyContent: {
+                  xs: 'center',
+                  md: 'end',
+                  xl: 'end',
+                },
+              }}
+            >
+              <Box
                 sx={{
-                  paddingX: '18px',
-                  height: '59px',
                   width: {
-                    xs: '220px',
-                    md: '231px',
-                    xl: '271px',
+                    xs: '240px',
+                    sm: '300px',
+                    md: '300px',
+                    xl: '320px',
                   },
                   display: 'flex',
-                  justifyContent: 'space-around',
+                  justifyContent: 'end',
+                  background: '#0090EC',
+                  borderRadius: '16px',
                 }}
-                onClick={() => verifyOtp(otp)}
-                title={`${t('button')}`}
+                onMouseEnter={handleHoverButton}
+                onMouseLeave={handleLeave}
+                className="SubscribeAnimation"
               >
-                <Typography
+                <Button
                   sx={{
-                    letterSpacing: '0.02em',
-                    fontSize: {
-                      xs: '20px',
-                      md: '25px',
-                      xl: '32px',
+                    paddingX: '18px',
+                    height: '59px',
+                    width: {
+                      xs: '220px',
+                      md: '231px',
+                      xl: '271px',
                     },
-                    fontWeight: 400,
-                    lineHeight: '40px',
-                    color: '#FBFBFB',
-                    textTransform: 'uppercase',
+                    display: 'flex',
+                    justifyContent: 'space-around',
                   }}
+                  onClick={() => verifyOtp(otp)}
+                  title={`${t('button')}`}
                 >
-                  {t('button')}
-                </Typography>
-                {/* <IconsStyle /> */}
-                {locale === 'ar' ? (
-                  <FiArrowUpLeft
-                    size={42}
-                    color="#FBFBFB"
-                    className={` ${hoveredButton ? 'animated-icon_rtl' : ''}`}
-                  />
-                ) : (
-                  <FiArrowUpRight
-                    size={42}
-                    color="#FBFBFB"
-                    className={hoveredButton ? 'animated-icon' : ''}
-                  />
-                )}
-              </Button>
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: {
+                        xs: '20px',
+                        md: '25px',
+                        xl: '32px',
+                      },
+                      fontWeight: 400,
+                      lineHeight: '40px',
+                      color: '#FBFBFB',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('button')}
+                  </Typography>
+                  {/* <IconsStyle /> */}
+                  {locale === 'ar' ? (
+                    <FiArrowUpLeft
+                      size={42}
+                      color="#FBFBFB"
+                      className={` ${hoveredButton ? 'animated-icon_rtl' : ''}`}
+                    />
+                  ) : (
+                    <FiArrowUpRight
+                      size={42}
+                      color="#FBFBFB"
+                      className={hoveredButton ? 'animated-icon' : ''}
+                    />
+                  )}
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Container>

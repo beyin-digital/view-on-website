@@ -2,14 +2,9 @@ import { Typography, Box } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
-import { GoogleLogin } from '@react-oauth/google'
-import { useContext } from 'react'
-import { UserContext } from '@/contexts/userContext'
 
 const SignupDetails = () => {
   const { t } = useTranslation('signup')
-
-  const { handleGoogleAuth } = useContext(UserContext)
 
   const icon = [
     {
@@ -17,15 +12,29 @@ const SignupDetails = () => {
       icon: '/icons/google.svg',
       alt: 'Google Icon',
       title: 'Google Icon',
-      name: 'google',
+      link: 'https://google.com',
     },
     {
       id: 2,
       icon: '/icons/apple.svg',
       alt: 'Apple Icon',
       title: 'Apple Icon',
-      name: 'apple',
+      link: 'https://apple.com',
     },
+    // {
+    // 	id: 3,
+    // 	icon: "/icons/facebookColor.svg",
+    // 	alt: "Facebook Icon",
+    // 	title: "Facebook Icon",
+    // 	link: "https://facebook.com",
+    // },
+    // {
+    // 	id: 4,
+    // 	icon: "/icons/linkedin.svg",
+    // 	alt: "LinkedIn Icon",
+    // 	title: "LinkedIn Icon",
+    // 	link: "https://linkedin.com",
+    // },
   ]
   return (
     <>
@@ -54,7 +63,7 @@ const SignupDetails = () => {
               fontSize: { xs: '20px', md: '30px', xl: '40px' },
               fontWight: '300',
               lineHeight: { xs: '24px', xl: '37px' },
-              textAlign: { xs: 'center', md: 'left', xl: 'left' },
+              // textAlign: { xs: 'center', md: 'left', xl: 'left' },
               marginY: { xs: '1rem', md: '0', xl: '0' },
             }}
           >
@@ -141,39 +150,20 @@ const SignupDetails = () => {
               justifyContent: 'center',
             }}
           >
-            {icon.map((item) => {
-              if (item.name === 'google') {
-                return (
-                  <GoogleLogin
-                    type="icon"
-                    onSuccess={async (credentialResponse) => {
-                      await handleGoogleAuth(
-                        credentialResponse.credential as string
-                      )
-                    }}
-                    onError={() => {
-                      console.log('Login Failed')
-                    }}
-                    useOneTap
-                  />
-                )
-              } else {
-                return (
-                  <Link href={item.name} key={item.id}>
-                    <Image
-                      src={item.icon}
-                      alt={item.alt}
-                      title={item.title}
-                      height={37}
-                      width={37}
-                      style={{
-                        margin: 'auto .2rem',
-                      }}
-                    />
-                  </Link>
-                )
-              }
-            })}
+            {icon.map((item) => (
+              <Link href={item.link} key={item.id}>
+                <Image
+                  src={item.icon}
+                  alt={item.alt}
+                  title={item.title}
+                  height={37}
+                  width={37}
+                  style={{
+                    margin: 'auto .2rem',
+                  }}
+                />
+              </Link>
+            ))}
           </Box>
           <Box
             sx={{

@@ -20,7 +20,7 @@ const TwoBox = () => {
             borderBottomLeftRadius: '30px',
             backdropFilter: 'blur(100px)',
             background:
-              'radial-gradient(19.29% 37.23% at 20.86% 80.45%, rgba(34, 71, 23, 0.3) 0%, rgba(49, 231, 22, 0.012) 100%)',
+              ' linear-gradient(48.32deg, rgba(34, 71, 23, 0.3) 2.06%, rgba(49, 231, 22, 0.012) 57.16%)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -92,7 +92,7 @@ const TwoBox = () => {
             borderBottomLeftRadius: '30px',
             backdropFilter: 'blur(100px)',
             background:
-              'radial-gradient(19.29% 37.23% at 20.86% 80.45%, rgba(34, 71, 23, 0.3) 0%, rgba(49, 231, 22, 0.012) 100%)',
+              ' linear-gradient(48.32deg, rgba(34, 71, 23, 0.3) 2.06%, rgba(49, 231, 22, 0.012) 57.16%)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',

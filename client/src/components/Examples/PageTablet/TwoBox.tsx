@@ -14,6 +14,8 @@ const TwoBox = () => {
           position: 'relative',
           display: 'flex',
           alignItems: 'center',
+          background: '',
+          //   backdropFilter: 'blur(48px)',
         }}
         className="TwoBoxTabletLayout"
       >
@@ -51,7 +53,7 @@ const TwoBox = () => {
             height: '597px',
             backdropFilter: 'blur(48px)',
             background:
-              'radial-gradient(35.03% 67.6% at 17.29% 50.07%, rgba(49, 231, 22, 0.3) 0%, rgba(49, 231, 22, 0.012) 100%)',
+              ' linear-gradient(48.32deg, rgba(34, 71, 23, 0.3) 2.06%, rgba(49, 231, 22, 0.012) 57.16%)',
             border: ' 0.484848px solid #FBFBFB',
             borderRadius: '14.5455px',
             position: 'relative',

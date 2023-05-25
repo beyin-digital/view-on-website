@@ -60,14 +60,14 @@ const LoginPage = () => {
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>{' '}
       <Layout
-        nameOne={t('subscribe')}
-        linkOne="/subscribe"
-        nameTwo={t('nav_examples')}
-        linkTwo="/example"
-        nameThree=""
-        linkThree=""
-        nameFour=""
-        linkFour=""
+       nameOne=""
+        linkOne=""
+        nameTwo=""
+        linkTwo=""
+        nameThree={t('subscribe')}
+        linkThree="/subscribe"
+        nameFour={t('nav_examples')}
+        linkFour="/example"
       >
         <Box sx={boxStyle}>
           <Box

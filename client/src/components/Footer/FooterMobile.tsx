@@ -68,7 +68,7 @@ const FooterMobile = () => {
     <>
       <Box
         sx={{
-          height: { xs: '70vh', sm: '60vh', md: '' },
+          height: { xs: '50vh', sm: '60vh', md: '' },
           width: '100%',
           display: { xs: 'flex', sm: 'flex', md: 'none', xl: 'none' },
           alignItems: 'end',

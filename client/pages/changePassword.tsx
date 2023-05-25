@@ -39,12 +39,14 @@ const ChangePassword = () => {
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <Layout
-        nameOne={t('nav_subscribe')}
-        linkOne="/subscribe"
-        nameTwo={t('nav_examples')}
-        linkTwo="/example"
-        nameThree={t('nav_login')}
-        linkThree="/login"
+        nameOne=""
+        linkOne=""
+        nameTwo={t('nav_subscribe')}
+        linkTwo="/subscribe"
+        nameThree={t('nav_examples')}
+        linkThree="/example"
+        nameFour={t('nav_login')}
+        linkFour="/login"
       >
         <Box
           sx={{

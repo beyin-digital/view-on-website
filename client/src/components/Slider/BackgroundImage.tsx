@@ -39,7 +39,7 @@ export const BackgroundImageSlider = () => {
       <img
         src="/images/swirl.webp"
         style={{
-          top: '-20rem',
+          bottom: '40rem',
           position: 'absolute',
           left: '0rem',
           zIndex: '-9',
