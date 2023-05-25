@@ -11,11 +11,8 @@ import {
 	Button,
 } from "@mui/material";
 
-import Head from "next/head";
-import { useRouter } from "next/navigation";
+ import { useRouter } from "next/navigation";
 import { UserContext } from "@/contexts/userContext";
-import { GetStaticProps } from "next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "react-i18next";
 import { MdLocationOn } from "react-icons/md";
 
@@ -211,7 +208,6 @@ const HomeMobile = () => {
 						fontSize="20px"
 						marginX="37px"
 					>
-						{/* Redirections Last 24 Hours */}
 						{t("box_three_one")}
 					</Typography>
 					<Typography fontSize="36px" fontWeight={600} lineHeight="54px">
@@ -363,13 +359,13 @@ const HomeMobile = () => {
 								background: "white",
 								borderRadius: "10px",
 								marginY: "7px",
-                ".MuiOutlinedInput-notchedOutline": {
-											border: "0",
-											padding: "9px",
-										},
-										"&:hover > .MuiOutlinedInput-notchedOutline": {
-											border: "0",
-										},
+								".MuiOutlinedInput-notchedOutline": {
+									border: "0",
+									padding: "9px",
+								},
+								"&:hover > .MuiOutlinedInput-notchedOutline": {
+									border: "0",
+								},
 							}}
 						/>
 						<OutlinedInput
@@ -380,13 +376,13 @@ const HomeMobile = () => {
 								background: "white",
 								borderRadius: "10px",
 								marginY: "7px",
-                ".MuiOutlinedInput-notchedOutline": {
-											border: "0",
-											padding: "9px",
-										},
-										"&:hover > .MuiOutlinedInput-notchedOutline": {
-											border: "0",
-										},
+								".MuiOutlinedInput-notchedOutline": {
+									border: "0",
+									padding: "9px",
+								},
+								"&:hover > .MuiOutlinedInput-notchedOutline": {
+									border: "0",
+								},
 							}}
 						/>
 						{/* Location input */}
@@ -423,6 +419,13 @@ const HomeMobile = () => {
 										width: "40%",
 										background: "white",
 										borderRadius: "15px",
+										".MuiOutlinedInput-notchedOutline": {
+											border: "0",
+											padding: "9px",
+										},
+										"&:hover > .MuiOutlinedInput-notchedOutline": {
+											border: "0",
+										},
 									}}
 								>
 									<MenuItem disabled value="">
@@ -445,6 +448,13 @@ const HomeMobile = () => {
 										width: "40%",
 										background: "white",
 										borderRadius: "15px",
+										".MuiOutlinedInput-notchedOutline": {
+											border: "0",
+											padding: "9px",
+										},
+										"&:hover > .MuiOutlinedInput-notchedOutline": {
+											border: "0",
+										},
 									}}
 								>
 									<MenuItem disabled value="">
@@ -473,6 +483,9 @@ const HomeMobile = () => {
 										fontSize: "16px",
 										boxShadow: "none",
 										textTransform: "none",
+										"&:hover": {
+											background: "#0090EC",
+										},
 									}}
 								>
 									{/* Update */}

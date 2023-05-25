@@ -42,7 +42,7 @@ const Item = styled(Paper)(({ theme }) => ({
 	padding: theme.spacing(1),
 	textAlign: "center",
 	height: "100%",
-	borderRadius: "16px",
+	borderRadius: "15px",
 	color: theme.palette.text.secondary,
 }));
 
@@ -507,6 +507,7 @@ const HomeWeb = () => {
 						</Box>
 					</Item>
 				</Grid>
+				{/* box two */}
 				<Grid item md={6} xl={3} height={380}>
 					<Item sx={{ paddingX: "18px" }}>
 						<Typography
@@ -588,7 +589,8 @@ const HomeWeb = () => {
 						</Typography>
 					</Item>
 				</Grid>
-				<Grid container item md={6} xl={3} height={380} rowGap={4}>
+				{/* box three */}
+				<Grid container item md={6} xl={3} height={380} rowGap={2}>
 					<Grid item xs={12} height={165}>
 						<Item>
 							<Typography
@@ -605,7 +607,7 @@ const HomeWeb = () => {
 							</Typography>
 						</Item>
 					</Grid>
-					<Grid item xs={12} height={165}>
+					<Grid item xs={12} height={200}>
 						<Item>
 							<Typography
 								align="center"
@@ -645,9 +647,9 @@ const HomeWeb = () => {
 					item
 					md={12}
 					xl={12}
-					height={419}
+					height={402}
 					sx={{
-						minHeight: "50vh",
+						minHeight: "40vh",
 					}}
 				>
 					<Item sx={{ background: "rgba(251, 251, 251, 0.3)" }}>

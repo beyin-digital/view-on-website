@@ -11,7 +11,7 @@ const PieChart = ({ data }: any) => (
     }
     innerRadius={0.7}
     padAngle={0.7}
-    cornerRadius={3}
+    cornerRadius={0}
     activeOuterRadiusOffset={8}
     borderWidth={1}
     borderColor={{
