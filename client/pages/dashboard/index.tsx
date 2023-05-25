@@ -29,9 +29,9 @@ const DashboardHomePage = () => {
 	const { t } = useTranslation("dashboard");
 	const { updateUser, user, token } = useContext(UserContext);
 
-	// if (!token) {
-	// 	return <div>loading...</div>;
-	// }
+	if (!token) {
+		return <div>loading...</div>;
+	}
 	return (
 		<>
 			<Head>
