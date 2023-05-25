@@ -41,11 +41,11 @@ const DashboardSubscriptionsPage = () => {
   const { getUserSubscriptions, subscriptions } = useContext(KeywordContext)
   const { token, user } = useContext(UserContext)
 
-  useEffect(() => {
-    if (token) {
-      getUserSubscriptions()
-    }
-  }, [token])
+  // useEffect(() => {
+  //   if (token) {
+  //     getUserSubscriptions()
+  //   }
+  // }, [token])
 
   return (
     <>

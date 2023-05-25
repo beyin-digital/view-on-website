@@ -63,13 +63,13 @@ const DashboardProfilePage = () => {
     }
   }, [])
 
-  if (!user) {
-    return <div>loading...</div>
-  }
+  // if (!user) {
+  //   return <div>loading...</div>
+  // }
 
-  const handleUpdateUser = async () => {
-    updateUser({ ...values })
-  }
+  // const handleUpdateUser = async () => {
+  //   updateUser({ ...values })
+  // }
   return (
     <>
       <Head>

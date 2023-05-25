@@ -240,6 +240,7 @@ const HomeWeb = () => {
 							component="div"
 							fontSize="20px"
 							fontWeight={400}
+							color="#343132"
 						>
 							{/* Hashtag Info */}
 							{t("box_one_title")}
@@ -518,6 +519,7 @@ const HomeWeb = () => {
 							fontSize="20px"
 							height="35px"
 							fontWeight={400}
+							color="#343132"
 						>
 							{/* Hashtag Details */}
 							{t("box_two_title")}
@@ -598,6 +600,7 @@ const HomeWeb = () => {
 								marginTop="10px"
 								fontSize="20px"
 								marginX="37px"
+								color="#343132"
 							>
 								{/* Redirections Last 24 Hours */}
 								{t("box_three_one")}
@@ -614,6 +617,7 @@ const HomeWeb = () => {
 								marginTop="10px"
 								fontSize="20px"
 								marginX="37px"
+								color="#343132"
 							>
 								{/* Total Number of Redirections */}
 								{t("box_three_two")}
@@ -635,6 +639,7 @@ const HomeWeb = () => {
 							marginTop="18px"
 							fontSize="20px"
 							marginX="37px"
+							color="#343132"
 						>
 							{/* Today VS All-time */}
 							{t("box_four_title")}
@@ -656,11 +661,12 @@ const HomeWeb = () => {
 						<Box
 							sx={{
 								width: "90%",
-								height: "24px",
+								height: "29px",
 								margin: "0 auto",
 								display: "flex",
 								justifyContent: "space-between",
 								paddingX: "18px",
+								color:"#343132"
 							}}
 						>
 							<Typography fontSize="20px">

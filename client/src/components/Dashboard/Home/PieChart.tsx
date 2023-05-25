@@ -3,7 +3,7 @@ import { ResponsivePie } from '@nivo/pie'
 const PieChart = ({ data }: any) => (
   <ResponsivePie
     data={data}
-    margin={{ top: 10, right: 80, bottom: 120, left: 80 }}
+    margin={{ top: 16, right: 80, bottom: 120, left: 80 }}
     valueFormat={(value) =>
       `${Number(value).toLocaleString('en-GB', {
         minimumFractionDigits: 2,
