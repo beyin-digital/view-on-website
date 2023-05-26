@@ -32,8 +32,9 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
     setIsInputFocused(false)
   }
 
-  const handleSubmit = () => {
-    if (foundSublink) {
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    if (foundSublink.length > 0) {
       window.open(`${foundSublink}`, '_blank')
     }
   }
@@ -135,8 +136,11 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
           </form>
         </Box>
         <Box
-          onClick={() => router.push(`/subscribe/${hashtag}`)}
+          component="button"
+          type="submit"
           sx={{
+            background: 'none',
+            border: 'none',
             cursor: 'pointer',
             width: {
               xs: '40px',
