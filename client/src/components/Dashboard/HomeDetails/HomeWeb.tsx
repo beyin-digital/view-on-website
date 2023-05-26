@@ -109,7 +109,7 @@ const HomeWeb = () => {
 
   useEffect(() => {
     api
-      .get(`/analytics/keyword?keyword=${selectedKeyword.letters}`)
+      .get(`/analytics/keyword?keyword=${selectedKeyword?.letters}`)
       .then((res) => {
         setAnalyticsData({
           ...analyticsData,
