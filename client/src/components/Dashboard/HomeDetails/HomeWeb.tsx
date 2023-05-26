@@ -20,7 +20,8 @@ import { api } from '@/utils/api'
 import { countries } from '@/utils/countries'
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:4000/analytics')
+const url = process.env.NEXT_PUBLIC_WEBSOCKET_URL
+const socket = io(`${url}/analytics`)
 
 const PieChart = dynamic(() => import('@/components/Dashboard/Home/PieChart'), {
   ssr: false,
@@ -45,8 +46,6 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const HomeWeb = () => {
   const { t } = useTranslation('dashboard')
-  const router = useRouter()
-  const { updateUser, user, token } = useContext(UserContext)
 
   const {
     selectedKeyword,
@@ -517,9 +516,6 @@ const HomeWeb = () => {
                 {/* Update */}
                 {t('box_one_button')}
               </Button>
-              {/* "&:hover > 	.MuiButton-root": {
-												background: "#31E716",
-											}, */}
             </Box>
           </Item>
         </Grid>
