@@ -115,6 +115,7 @@ export const KeywordProvider = ({ children }: any) => {
     if (data) {
       setKeywordFound(true)
       setFoundSublink(data.sublink)
+      console.log(data.sublink)
       setIsSearching(false)
       return
     }
