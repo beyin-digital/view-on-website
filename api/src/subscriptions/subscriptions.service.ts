@@ -44,7 +44,7 @@ export class SubscriptionsService {
 
       return this.subscriptionsRepository.find({
         where: {
-          user: !!foundUser,
+          user: { id: foundUser.id },
         },
         skip: (paginationOptions.page - 1) * paginationOptions.limit,
         take: paginationOptions.limit,
