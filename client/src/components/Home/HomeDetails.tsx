@@ -19,10 +19,12 @@ const HomeDetails = ({
   keywordFound,
   hashtag,
   setHashtag,
+  foundSublink,
 }: {
   keywordFound: boolean
   hashtag: string
   setHashtag: any
+  foundSublink: string
 }) => {
   return (
     <>
@@ -76,7 +78,12 @@ const HomeDetails = ({
               }}
               className="boxHomeBlack"
             >
-              <HomeForm hashtag={hashtag} setHashtag={setHashtag} />
+              <HomeForm
+                foundSublink={foundSublink}
+                hashtag={hashtag}
+                setHashtag={setHashtag}
+                keywordFound={keywordFound}
+              />
               <Box
                 sx={{
                   marginBottom: {

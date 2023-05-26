@@ -39,6 +39,7 @@ export const KeywordContext = createContext<{
   isSearching: boolean
   checkPremiumKeyword: () => {}
   sortedKeywords: string[]
+  foundSublink: string
 }>({
   values: '',
   setValues: () => {},
@@ -72,6 +73,7 @@ export const KeywordContext = createContext<{
   isSearching: false,
   checkPremiumKeyword: async () => {},
   sortedKeywords: [],
+  foundSublink: '',
 })
 
 export const KeywordProvider = ({ children }: any) => {
@@ -97,9 +99,13 @@ export const KeywordProvider = ({ children }: any) => {
     totalVisitsByDaysOfTheWeek: [],
     totalVisitsByDaysOfTheMonth: [],
   })
+
+  const [foundSublink, setFoundSublink] = useState('')
+
   const [lineChartDataType, setLineChartDataType] = useState<
     'day' | 'week' | 'month' | 'year'
   >('day')
+
   const checkKeywordavailability = async (keyword: string) => {
     // check if keyword is available
     setIsSearching(true)
@@ -108,6 +114,7 @@ export const KeywordProvider = ({ children }: any) => {
 
     if (data) {
       setKeywordFound(true)
+      setFoundSublink(data.sublink)
       setIsSearching(false)
       return
     }
@@ -168,6 +175,7 @@ export const KeywordProvider = ({ children }: any) => {
       })
     }
   }
+
   const updateKeywordDetails = async (id: number, values: any) => {
     try {
       const res = await api.put(
@@ -217,6 +225,7 @@ export const KeywordProvider = ({ children }: any) => {
         checkPremiumKeyword,
         sortedKeywords,
         setAnalyticsData,
+        foundSublink,
       }}
     >
       {children}

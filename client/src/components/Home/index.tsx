@@ -39,7 +39,8 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
 
   const hashtagDebounce = useDebounce(hashtag, 1000)
 
-  const { keywordFound, checkKeywordavailability } = useContext(KeywordContext)
+  const { keywordFound, checkKeywordavailability, foundSublink } =
+    useContext(KeywordContext)
 
   const [state, setState] = useState({
     top: false,
@@ -91,6 +92,7 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
           <Layout onClick={openModel}>
             <>
               <HomeDetails
+                foundSublink={foundSublink}
                 keywordFound={keywordFound}
                 hashtag={hashtag}
                 setHashtag={setHashtag}

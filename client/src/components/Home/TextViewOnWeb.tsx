@@ -30,7 +30,7 @@ const TextViewOnWeb = ({ keywordFound }: { keywordFound?: string }) => {
           fontWeight="600"
           color="#0090EC"
         >
-          {keywordFound !== '' ? keywordFound : 'ViewOnWebsite.com'}
+          ViewOnWebsite.com
         </Typography>
       </Box>
     </>
