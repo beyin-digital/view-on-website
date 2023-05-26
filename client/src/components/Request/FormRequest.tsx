@@ -3,9 +3,14 @@ import LoginTextSignUp from '../Login/LoginTextSignUp'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { IconsStyle } from '../Button'
+import { useContext, useState } from 'react'
+import { UserContext } from '@/contexts/userContext'
 
 const FormRequest = () => {
   const { t } = useTranslation('request')
+  const [identifier, setIdentifier] = useState('')
+
+  const { forgotPassword } = useContext(UserContext)
 
   return (
     <>
@@ -19,6 +24,7 @@ const FormRequest = () => {
         }}
       >
         <OutlinedInput
+          value={identifier}
           sx={{
             width: '100%',
             height: { xs: '45px', md: '50px', xl: '65px' },
@@ -41,6 +47,7 @@ const FormRequest = () => {
             },
           }}
           placeholder={`${t('input')}`}
+          onChange={(e) => setIdentifier(e.target.value)}
         />
       </Box>
       <Box
@@ -61,6 +68,9 @@ const FormRequest = () => {
           }}
         >
           <Button
+            onClick={() => {
+              identifier && forgotPassword(identifier)
+            }}
             sx={{
               paddingX: '18px',
               height: '59px',

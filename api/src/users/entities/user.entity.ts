@@ -88,6 +88,9 @@ export class User extends EntityHelper {
   organisation: string;
 
   @Column({ nullable: true })
+  country: string;
+
+  @Column({ nullable: true })
   city: string;
 
   @Column({ nullable: true })

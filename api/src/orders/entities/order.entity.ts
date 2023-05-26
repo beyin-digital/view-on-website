@@ -48,6 +48,15 @@ export class Order extends EntityHelper {
   @Column({ nullable: true })
   checkoutSessionId: string;
 
+  @Column({ nullable: true })
+  invoiceId: string;
+
+  @Column({ nullable: true })
+  invoiceUrl: string;
+
+  @Column({ type: 'decimal', nullable: true })
+  renewalPrice: number;
+
   @Index()
   @Allow()
   @ManyToOne(() => User, {

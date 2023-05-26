@@ -49,8 +49,16 @@ export class KeywordsController {
   })
   @Get('')
   async findByHashtag(@Query('hashtag') hashtag: string) {
-    await this.analyticsService.createNewKeywordAnalyticsEntry(hashtag);
+    // await this.analyticsService.createNewKeywordAnalyticsEntry(hashtag);
     return this.keywordsService.findByHashTag(hashtag);
+  }
+
+  @ApiOperation({
+    summary: 'Returns an array with app premium keyword',
+  })
+  @Get('check/premium')
+  async checkPremiumKeyword() {
+    return this.keywordsService.checkPremiumKeyword();
   }
 
   @ApiOperation({

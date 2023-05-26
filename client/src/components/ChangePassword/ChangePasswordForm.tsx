@@ -1,9 +1,19 @@
 import { useTranslation } from 'next-i18next'
 import { Box, Typography, OutlinedInput, Button } from '@mui/material'
+import { useRouter } from 'next/router'
+import { useContext, useState } from 'react'
+import { UserContext } from '@/contexts/userContext'
+import { toast } from 'react-toastify'
 
 const ChangePasswordForm = () => {
   const { t } = useTranslation('changePassword')
+  const { query } = useRouter()
 
+  const [values, setValues] = useState({
+    password: '',
+    confirmPassword: '',
+  })
+  const { resetPassword } = useContext(UserContext)
   return (
     <>
       <Box
@@ -15,6 +25,7 @@ const ChangePasswordForm = () => {
         }}
       >
         <OutlinedInput
+          value={values.password}
           sx={{
             width: '100%',
             height: { xs: '47px', md: '50px', xl: '65px' },
@@ -41,8 +52,10 @@ const ChangePasswordForm = () => {
             },
           }}
           placeholder={`${t('password')}`}
+          onChange={(e) => setValues({ ...values, password: e.target.value })}
         />
         <OutlinedInput
+          value={values.confirmPassword}
           sx={{
             width: '100%',
             height: { xs: '47px', md: '50px', xl: '65px' },
@@ -70,6 +83,9 @@ const ChangePasswordForm = () => {
             },
           }}
           placeholder={`${t('repeat_password')}`}
+          onChange={(e) =>
+            setValues({ ...values, confirmPassword: e.target.value })
+          }
         />
       </Box>
       <Box
@@ -96,6 +112,19 @@ const ChangePasswordForm = () => {
           }}
         >
           <Button
+            onClick={() => {
+              if (
+                values.password === values.confirmPassword ||
+                values.password.length > 8 ||
+                values.confirmPassword.length > 8
+              ) {
+                resetPassword(values.password, query.token as string)
+              }
+              if (values.password !== values.confirmPassword) {
+                toast.error('Passwords do not match')
+              }
+              return
+            }}
             sx={{
               paddingX: '0rem',
               height: '59px',

@@ -1,5 +1,7 @@
 {
     "confirmEmail": "Confirm email",
     "twoFactorAuthentication": "Two factor Authentication",
-    "resetPassword": "Reset password"
+    "resetPassword": "Reset password",
+    "paymentConfirmation": "Payment confirmation",
+    "helloAnd": "Hello and "
 }

@@ -108,7 +108,7 @@ export class AuthController {
   async forgotPassword(
     @Body() forgotPasswordDto: AuthForgotPasswordDto,
   ): Promise<void> {
-    return this.service.forgotPassword(forgotPasswordDto.email);
+    return this.service.forgotPassword(forgotPasswordDto.identifier);
   }
 
   @ApiOperation({ summary: 'Changes password based on otp provided in body' })
@@ -116,7 +116,7 @@ export class AuthController {
   @HttpCode(HttpStatus.NO_CONTENT)
   resetPassword(@Body() resetPasswordDto: AuthResetPasswordDto): Promise<void> {
     return this.service.resetPassword(
-      resetPasswordDto.hash,
+      resetPasswordDto.token,
       resetPasswordDto.password,
     );
   }

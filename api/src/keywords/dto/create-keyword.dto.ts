@@ -1,12 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsObject,
-  IsOptional,
-  IsUrl,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsUrl } from 'class-validator';
+import { User } from 'src/users/entities/user.entity';
 import { lowerCaseTransformer } from 'src/utils/transformers/lower-case.transformer';
 // import { LocationData } from 'src/utils/types/location.type';
 
@@ -22,17 +17,15 @@ export class CreateKeywordDto {
   @IsUrl()
   sublink: string;
 
-  @ApiProperty({
-    example: {
-      state: 'California',
-      country: 'United States',
-    },
-  })
-  @IsObject()
-  @IsOptional()
-  location?: any;
-
   @ApiProperty({ example: 2000 })
   @IsNumber()
   price: number;
+
+  @ApiProperty({
+    example: 1,
+    description:
+      'User Entity that will be connected after order is completed by stripe',
+  })
+  @IsNotEmpty()
+  user: User;
 }

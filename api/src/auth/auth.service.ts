@@ -47,109 +47,104 @@ export class AuthService {
     loginDto: AuthEmailLoginDto,
     onlyAdmin: boolean,
   ): Promise<LoginResponseType> {
-    try {
-      this.logger.log('Logging user in');
-      // temp variable to store user
-      let foundUser: User | undefined;
+    this.logger.log('Logging user in');
+    // temp variable to store user
+    let foundUser: User | undefined;
 
-      // Find user by email
-      const user = await this.usersService.findOne({
-        email: loginDto.identifier,
+    // Find user by email
+    const user = await this.usersService.findOne({
+      email: loginDto.identifier,
+    });
+
+    if (user) {
+      // If user is found, assign it to temp variable
+      foundUser = user;
+    } else if (!user) {
+      // If user is not found by email, find user by keyword
+      const keyword = await this.keywordsService.findOne({
+        slug: slugify(loginDto.identifier),
       });
-
-      if (user) {
-        // If user is found, assign it to temp variable
-        foundUser = user;
-      } else if (!user) {
-        // If user is not found by email, find user by keyword
-        const keyword = await this.keywordsService.findOne({
-          slug: slugify(loginDto.identifier),
-        });
-        if (keyword) {
-          // If user is found by keyword, assign it to temp variable
-          foundUser = keyword.user;
-        }
+      if (keyword) {
+        // If user is found by keyword, assign it to temp variable
+        foundUser = keyword.user;
       }
-
-      // If user is not found, throw error
-      if (
-        !foundUser ||
-        (foundUser?.role &&
-          !(onlyAdmin ? [RoleEnum.admin] : [RoleEnum.user]).includes(
-            foundUser.role.id,
-          ))
-      ) {
-        throw new HttpException(
-          {
-            status: HttpStatus.UNPROCESSABLE_ENTITY,
-            errors: {
-              email: 'notFound',
-            },
-          },
-          HttpStatus.UNPROCESSABLE_ENTITY,
-        );
-      }
-
-      // if user provider is not email, throw error
-      if (foundUser.provider !== AuthProvidersEnum.email) {
-        throw new HttpException(
-          {
-            status: HttpStatus.UNPROCESSABLE_ENTITY,
-            errors: {
-              email: `needLoginViaProvider:${foundUser.provider}`,
-            },
-          },
-          HttpStatus.UNPROCESSABLE_ENTITY,
-        );
-      }
-
-      // Check password validity
-      const isValidPassword = await bcrypt.compare(
-        loginDto.password,
-        foundUser.password,
-      );
-
-      // Throw error if password is not valid
-      if (!isValidPassword) {
-        throw new HttpException(
-          {
-            status: HttpStatus.UNPROCESSABLE_ENTITY,
-            errors: {
-              password: 'incorrectPassword',
-            },
-          },
-          HttpStatus.UNPROCESSABLE_ENTITY,
-        );
-      }
-
-      if (foundUser.twoFactorAuth) {
-        const { otp } = await this.createOtp(foundUser.email as string);
-        await this.mailService.twoFactorAuth({
-          to: foundUser?.email || '',
-          data: {
-            otp: otp as string,
-          },
-        });
-
-        return { user: foundUser };
-      }
-      // Create new refresh token in db and assign it to user
-      const refreshToken = await this.refreshService.create({
-        token: this.generateString(20),
-        user: foundUser,
-      });
-
-      // Create new access token
-      const token = this.jwtService.sign({
-        id: foundUser.id,
-        role: foundUser.role,
-      });
-
-      return { token, refreshToken: refreshToken.token, user: foundUser };
-    } catch (error) {
-      this.logger.error({ id: `user-login-error` }, error);
-      throw new Error(error);
     }
+
+    // If user is not found, throw error
+    if (
+      !foundUser ||
+      (foundUser?.role &&
+        !(onlyAdmin ? [RoleEnum.admin] : [RoleEnum.user]).includes(
+          foundUser.role.id,
+        ))
+    ) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            email: 'user_not_found',
+          },
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+
+    // if user provider is not email, throw error
+    if (foundUser.provider !== AuthProvidersEnum.email) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            email: `you_need_to_login_with ${foundUser.provider}`,
+          },
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+
+    // Check password validity
+    const isValidPassword = await bcrypt.compare(
+      loginDto.password,
+      foundUser.password,
+    );
+
+    // Throw error if password is not valid
+    if (!isValidPassword) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            password: 'Password_was_incorrect',
+          },
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+
+    if (foundUser.twoFactorAuth) {
+      const { otp } = await this.createOtp(foundUser.email as string);
+      await this.mailService.twoFactorAuth({
+        to: foundUser?.email || '',
+        data: {
+          otp: otp as string,
+        },
+      });
+
+      return { user: foundUser };
+    }
+    // Create new refresh token in db and assign it to user
+    const refreshToken = await this.refreshService.create({
+      token: this.generateString(20),
+      user: foundUser,
+    });
+
+    // Create new access token
+    const token = this.jwtService.sign({
+      id: foundUser.id,
+      role: foundUser.role,
+    });
+
+    return { token, refreshToken: refreshToken.token, user: foundUser };
   }
 
   // Social Login
@@ -157,102 +152,97 @@ export class AuthService {
     authProvider: string,
     socialData: SocialInterface,
   ): Promise<LoginResponseType> {
-    try {
-      this.logger.log(`Logging user in with ${authProvider}`);
-      // temp variable to store user
-      let user: NullableType<User>;
+    this.logger.log(`Logging user in with ${authProvider}`);
+    // temp variable to store user
+    let user: NullableType<User>;
 
-      // Check if social email is provided
-      const socialEmail = socialData.email?.toLowerCase();
+    // Check if social email is provided
+    const socialEmail = socialData.email?.toLowerCase();
 
-      // Find user by email
-      const userByEmail = await this.usersService.findOne({
-        email: socialEmail,
+    // Find user by email
+    const userByEmail = await this.usersService.findOne({
+      email: socialEmail,
+    });
+
+    user = await this.usersService.findOne({
+      socialId: socialData.id,
+      provider: authProvider,
+    });
+
+    if (user) {
+      if (socialEmail && !userByEmail) {
+        user.email = socialEmail;
+
+        // Update stripe customer id if user doesn't have stripe customer id (precautionary measure lol :D)
+        if (!user.stripeCustomerId) {
+          // Create stripe customer if user doesn't have stripe customer id
+          const stripeCustomer = await this.stripeService.createCustomer({
+            email: socialEmail as string,
+            name: `${socialData.firstName} ${socialData.lastName}`,
+          });
+          user.stripeCustomerId = stripeCustomer.id;
+        }
+      }
+      await this.usersService.update(user.id, user);
+    } else if (userByEmail) {
+      user = userByEmail;
+    } else {
+      const role = plainToClass(Role, {
+        id: RoleEnum.user,
+      });
+      const status = plainToClass(Status, {
+        id: StatusEnum.active,
+      });
+
+      // Create stripe customer if user is not found
+      const stripeCustomer = await this.stripeService.createCustomer({
+        email: socialEmail as string,
+        name: `${socialData.firstName} ${socialData.lastName}`,
+      });
+
+      // Create new user
+      user = await this.usersService.create({
+        email: socialEmail ?? null,
+        fullName: socialData.firstName + ' ' + socialData.lastName ?? null,
+        socialId: socialData.id,
+        provider: authProvider,
+        role,
+        status,
+        stripeCustomerId: stripeCustomer.id,
       });
 
       user = await this.usersService.findOne({
-        socialId: socialData.id,
-        provider: authProvider,
-      });
-
-      if (user) {
-        if (socialEmail && !userByEmail) {
-          user.email = socialEmail;
-
-          // Update stripe customer id if user doesn't have stripe customer id (precautionary measure lol :D)
-          if (!user.stripeCustomerId) {
-            // Create stripe customer if user doesn't have stripe customer id
-            const stripeCustomer = await this.stripeService.createCustomer({
-              email: socialEmail as string,
-              name: `${socialData.firstName} ${socialData.lastName}`,
-            });
-            user.stripeCustomerId = stripeCustomer.id;
-          }
-        }
-        await this.usersService.update(user.id, user);
-      } else if (userByEmail) {
-        user = userByEmail;
-      } else {
-        const role = plainToClass(Role, {
-          id: RoleEnum.user,
-        });
-        const status = plainToClass(Status, {
-          id: StatusEnum.active,
-        });
-
-        // Create stripe customer if user is not found
-        const stripeCustomer = await this.stripeService.createCustomer({
-          email: socialEmail as string,
-          name: `${socialData.firstName} ${socialData.lastName}`,
-        });
-
-        // Create new user
-        user = await this.usersService.create({
-          email: socialEmail ?? null,
-          fullName: socialData.firstName + ' ' + socialData.lastName ?? null,
-          socialId: socialData.id,
-          provider: authProvider,
-          role,
-          status,
-          stripeCustomerId: stripeCustomer.id,
-        });
-
-        user = await this.usersService.findOne({
-          id: user.id,
-        });
-      }
-
-      if (!user) {
-        throw new HttpException(
-          {
-            status: HttpStatus.UNPROCESSABLE_ENTITY,
-            errors: {
-              user: 'userNotFound',
-            },
-          },
-          HttpStatus.UNPROCESSABLE_ENTITY,
-        );
-      }
-
-      const jwtToken = this.jwtService.sign({
         id: user.id,
-        role: user.role,
       });
-
-      const refreshToken = await this.refreshService.create({
-        token: this.generateString(20),
-        user: user,
-      });
-
-      return {
-        token: jwtToken,
-        refreshToken: refreshToken.token,
-        user,
-      };
-    } catch (error) {
-      this.logger.error({ id: `social-login-error` }, error);
-      throw new Error(error);
     }
+
+    if (!user) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            user: 'user_not_found',
+          },
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+
+    const jwtToken = this.jwtService.sign({
+      id: user.id,
+      role: user.role,
+    });
+
+    const refreshToken = await this.refreshService.create({
+      token: this.generateString(20),
+      user: user,
+    });
+
+    return {
+      token: jwtToken,
+      refreshToken: refreshToken.token,
+      user,
+    };
   }
 
   // First step of registration
@@ -283,75 +273,78 @@ export class AuthService {
       });
     } catch (error) {
       this.logger.error({ id: `user-registration-error` }, error);
-      throw new Error(error);
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            email: `error_during_registration`,
+          },
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
     }
   }
 
   // Confirm email with OTP
   async confirmEmail(otp: string): Promise<LoginResponseType> {
-    try {
-      this.logger.log('Confirming email with OTP');
-      // find user by otp
-      const foundOtp = (await this.otpRepository.findOne({
-        where: {
-          otp,
+    this.logger.log('Confirming email with OTP');
+    // find user by otp
+    const foundOtp = (await this.otpRepository.findOne({
+      where: {
+        otp,
+      },
+    })) as Otp;
+
+    const user = await this.usersService.findOne({
+      id: foundOtp?.user.id,
+    });
+
+    if (!foundOtp || foundOtp.expiredBy <= new Date()) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+
+          error: `otp_expired`,
         },
-      })) as Otp;
-
-      const user = await this.usersService.findOne({
-        id: foundOtp?.user.id,
-      });
-
-      if (!foundOtp || foundOtp.expiredBy <= new Date()) {
-        throw new HttpException(
-          {
-            status: HttpStatus.UNPROCESSABLE_ENTITY,
-
-            error: `otpExpired`,
-          },
-          HttpStatus.UNPROCESSABLE_ENTITY,
-        );
-      }
-
-      if (!user) {
-        throw new HttpException(
-          {
-            status: HttpStatus.NOT_FOUND,
-            error: `notFound`,
-          },
-          HttpStatus.NOT_FOUND,
-        );
-      }
-
-      foundOtp.otp = null as any;
-      await foundOtp.save();
-      user.status = plainToClass(Status, {
-        id: StatusEnum.active,
-      });
-      if (!user.stripeCustomerId) {
-        // Create stripe customer if user doesn't have stripe customer id
-        const stripeCustomer = await this.stripeService.createCustomer({
-          email: user?.email as string,
-          name: `${user?.fullName}`,
-        });
-        user.stripeCustomerId = stripeCustomer.id;
-      }
-      const token = this.jwtService.sign({
-        id: user.id,
-        role: user.role,
-      });
-      await user.save();
-
-      const refreshToken = await this.refreshService.create({
-        token: this.generateString(20),
-        user: user,
-      });
-
-      return { token, refreshToken: refreshToken.token, user };
-    } catch (error) {
-      this.logger.error({ id: `confirm-email-error` }, error);
-      throw new Error(error);
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
     }
+
+    if (!user) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: `user_not_found`,
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    foundOtp.otp = null as any;
+    await foundOtp.save();
+    user.status = plainToClass(Status, {
+      id: StatusEnum.active,
+    });
+    if (!user.stripeCustomerId) {
+      // Create stripe customer if user doesn't have stripe customer id
+      const stripeCustomer = await this.stripeService.createCustomer({
+        email: user?.email as string,
+        name: `${user?.fullName}`,
+      });
+      user.stripeCustomerId = stripeCustomer.id;
+    }
+    const token = this.jwtService.sign({
+      id: user.id,
+      role: user.role,
+    });
+    await user.save();
+
+    const refreshToken = await this.refreshService.create({
+      token: this.generateString(20),
+      user: user,
+    });
+
+    return { token, refreshToken: refreshToken.token, user };
   }
 
   //Generate new access token with refresh token
@@ -375,7 +368,7 @@ export class AuthService {
           {
             status: HttpStatus.UNAUTHORIZED,
 
-            error: `invalidRefreshToken`,
+            error: `invalid_refresh_token`,
           },
           HttpStatus.UNAUTHORIZED,
         );
@@ -415,7 +408,7 @@ export class AuthService {
         throw new HttpException(
           {
             status: HttpStatus.NOT_FOUND,
-            error: `notFound`,
+            error: `user_not_found`,
           },
           HttpStatus.NOT_FOUND,
         );
@@ -434,53 +427,58 @@ export class AuthService {
     }
   }
 
-  async forgotPassword(email: string): Promise<void> {
-    try {
-      this.logger.log('Forgot password');
-      const user = await this.usersService.findOne({
-        email,
-      });
+  async forgotPassword(identifier: string): Promise<void> {
+    this.logger.log('Forgot password');
+    let foundUser: User | undefined;
 
-      if (!user) {
-        throw new HttpException(
-          {
-            status: HttpStatus.UNPROCESSABLE_ENTITY,
-            errors: {
-              email: 'emailNotExists',
-            },
-          },
-          HttpStatus.UNPROCESSABLE_ENTITY,
-        );
-      }
-      // generate random 6 digit number
-      const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const user = await this.usersService.findOne({
+      email: identifier,
+    });
 
-      // Create new forgot password record
-      await this.forgotService.create({
-        otp: otp,
-        user,
+    if (user) {
+      foundUser = user;
+    } else {
+      const keyword = await this.keywordsService.findOne({
+        slug: slugify(identifier) as string,
       });
-
-      // Send email with otp to user
-      await this.mailService.forgotPassword({
-        to: email,
-        data: {
-          otp,
-        },
-      });
-    } catch (error) {
-      this.logger.error({ id: `forgot-password` }, error);
-      throw new Error(error);
+      foundUser = keyword?.user;
     }
+
+    if (!foundUser) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            email: 'user_not_found',
+          },
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+    // generate random 6 digit number
+    const token = this.generateString(30);
+    // Create new forgot password record
+    await this.forgotService.create({
+      token,
+      user: foundUser as User,
+    });
+
+    // Send email with otp to user
+    await this.mailService.forgotPassword({
+      to: foundUser?.email as string,
+      data: {
+        token,
+      },
+    });
   }
 
-  async resetPassword(otp: string, password: string): Promise<void> {
+  async resetPassword(token: string, password: string): Promise<void> {
     try {
       this.logger.log('Resetting password');
       // Find email with matching otp in forgot password table
       const forgot = await this.forgotService.findOne({
         where: {
-          otp,
+          token,
         },
       });
 
@@ -490,7 +488,7 @@ export class AuthService {
           {
             status: HttpStatus.UNPROCESSABLE_ENTITY,
             errors: {
-              hash: `notFound`,
+              hash: `forgot_password_not_found`,
             },
           },
           HttpStatus.UNPROCESSABLE_ENTITY,
@@ -554,7 +552,7 @@ export class AuthService {
               {
                 status: HttpStatus.UNPROCESSABLE_ENTITY,
                 errors: {
-                  user: 'userNotFound',
+                  user: 'user_not_found',
                 },
               },
               HttpStatus.UNPROCESSABLE_ENTITY,
@@ -571,7 +569,7 @@ export class AuthService {
               {
                 status: HttpStatus.UNPROCESSABLE_ENTITY,
                 errors: {
-                  oldPassword: 'incorrectOldPassword',
+                  oldPassword: 'incorrect_old_password',
                 },
               },
               HttpStatus.UNPROCESSABLE_ENTITY,
@@ -582,7 +580,7 @@ export class AuthService {
             {
               status: HttpStatus.UNPROCESSABLE_ENTITY,
               errors: {
-                oldPassword: 'missingOldPassword',
+                oldPassword: 'missing_old_password',
               },
             },
             HttpStatus.UNPROCESSABLE_ENTITY,

@@ -9,12 +9,33 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { useContainer } from 'class-validator';
 import * as requestIp from 'request-ip';
 import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
+import { IoAdapter } from '@nestjs/platform-socket.io';
+import { ServerOptions } from 'socket.io';
 
 // import helmet from 'helmet';
 import { AppModule } from './app.module';
 import validationOptions from './utils/validation-options';
 import { AllConfigType } from './config/config.type';
 import rawBodyMiddleware from './stripe/middleware/raw-body.middleware';
+
+class SocketAdapter extends IoAdapter {
+  createIOServer(
+    port: number,
+    options?: ServerOptions & {
+      namespace?: string;
+      server?: any;
+    },
+  ) {
+    const server = super.createIOServer(port, {
+      ...options,
+      cors: {
+        origin: 'http://localhost:3000',
+        methods: ['GET', 'POST'],
+      },
+    });
+    return server;
+  }
+}
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -37,6 +58,7 @@ async function bootstrap() {
 
   app.use(requestIp.mw());
   app.useLogger(app.get(Logger));
+  app.useWebSocketAdapter(new SocketAdapter(app));
 
   //   Helmet Middleware against known security vulnerabilities
   //   app.use(

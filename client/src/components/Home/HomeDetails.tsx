@@ -20,7 +20,7 @@ const HomeDetails = ({
   hashtag,
   setHashtag,
 }: {
-  keywordFound: string
+  keywordFound: boolean
   hashtag: string
   setHashtag: any
 }) => {
@@ -91,7 +91,7 @@ const HomeDetails = ({
                 }}
                 className="BoxTextHom"
               >
-                <TextViewOnWeb keywordFound={keywordFound} />
+                <TextViewOnWeb />
               </Box>
             </Box>
           </LayoutHomeBg>

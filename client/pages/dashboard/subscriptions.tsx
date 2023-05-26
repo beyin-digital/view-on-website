@@ -18,6 +18,7 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import dynamic from 'next/dynamic'
+import { nFormatter } from '@/utils/nFormatter'
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
 })
@@ -41,11 +42,11 @@ const DashboardSubscriptionsPage = () => {
   const { getUserSubscriptions, subscriptions } = useContext(KeywordContext)
   const { token, user } = useContext(UserContext)
 
-  // useEffect(() => {
-  //   if (token) {
-  //     getUserSubscriptions()
-  //   }
-  // }, [token])
+  useEffect(() => {
+    if (token) {
+      getUserSubscriptions()
+    }
+  }, [token])
 
   return (
     <>
@@ -173,6 +174,7 @@ const DashboardSubscriptionsPage = () => {
                 display: 'flex',
                 width: '100%',
                 justifyContent: 'flex-start',
+                overflowX: 'scroll',
               }}
             >
               {/* Regular sub card */}
@@ -194,11 +196,13 @@ const DashboardSubscriptionsPage = () => {
                       alignItems: 'center',
                       width: '100%',
                       height: '59px',
-                      backgroundColor: '#31E716',
+                      background: subscription.isPremium
+                        ? 'linear-gradient(270deg, #0090EC 0%, #31E716 100%)'
+                        : '#31E716',
                       borderRadius: '16px',
                     }}
                   >
-                    <Typography fontSize="32px">
+                    <Typography fontSize="32px" fontWeight="bold">
                       #{subscription?.keyword?.letters.toUpperCase()}
                     </Typography>
                   </Box>
@@ -225,21 +229,35 @@ const DashboardSubscriptionsPage = () => {
                       {/* Price */}
                       <Box>
                         <Typography fontSize="32px" textAlign="left">
-                          ${subscription.amount}
+                          $
+                          {subscription.price >= 999999
+                            ? '1m'
+                            : subscription.price === 100000
+                            ? nFormatter(subscription.price, 3)
+                            : subscription.price === 10000
+                            ? nFormatter(subscription.price, 3)
+                            : nFormatter(subscription.price, 3)}
                         </Typography>
-                        <Typography textAlign="left">
-                          {subscription.stripeSubscriptionStatus}
-                        </Typography>
+
+                        <Typography textAlign="left">Paid</Typography>
                       </Box>
                       {/* Length */}
                       <Box>
-                        <Typography fontSize="20px">
-                          {subscription.duration} <br />
-                        </Typography>
-                        <Typography>
-                          {subscription.duration} <br />
-                          package
-                        </Typography>
+                        {subscription.isPremium ? (
+                          <>
+                            <Typography fontSize="32px">
+                              ${subscription.renewalPrice} <br />
+                            </Typography>
+                            <Typography>yearly renewal</Typography>
+                          </>
+                        ) : (
+                          <>
+                            <Typography fontSize="20px">
+                              {subscription.duration}ly <br />
+                            </Typography>
+                            <Typography>package</Typography>
+                          </>
+                        )}
                       </Box>
                     </Box>
                     <Box

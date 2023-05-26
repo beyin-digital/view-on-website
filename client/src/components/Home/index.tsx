@@ -9,6 +9,9 @@ import { Drawer, Box } from '@mui/material'
 import dynamic from 'next/dynamic'
 import { KeywordContext } from '@/contexts/keywordContext'
 import useDebounce from '@/hooks/useDebounce'
+import io from 'socket.io-client'
+
+const socket = io('http://localhost:4000/analytics')
 const Layout = dynamic(() => import('@/components/Layout/LayoutHome'), {
   ssr: false,
 })
@@ -64,8 +67,11 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
   }
 
   useEffect(() => {
-    if (hashtagDebounce || hashtagDebounce === '') {
+    if (hashtagDebounce) {
       checkKeywordavailability(hashtagDebounce)
+      if (keywordFound) {
+        socket.emit('add_new_record', { hashtag: hashtagDebounce })
+      }
     }
   }, [hashtagDebounce])
 
@@ -83,7 +89,7 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
           <Layout onClick={openModel}>
             <>
               <HomeDetails
-                keywordFound={keywordFound as string}
+                keywordFound={keywordFound}
                 hashtag={hashtag}
                 setHashtag={setHashtag}
               />

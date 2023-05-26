@@ -6,6 +6,7 @@ import { UsersModule } from 'src/users/users.module';
 import { OrdersModule } from 'src/orders/orders.module';
 import { SubscriptionsModule } from 'src/subscriptions/subscriptions.module';
 import { KeywordsModule } from 'src/keywords/keywords.module';
+import { MailModule } from 'src/mail/mail.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { KeywordsModule } from 'src/keywords/keywords.module';
     OrdersModule,
     SubscriptionsModule,
     KeywordsModule,
+    MailModule,
   ],
   controllers: [StripeController],
   providers: [StripeService],

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
@@ -19,8 +19,8 @@ import { useTranslation } from 'next-i18next'
 import 'swiper/swiper-bundle.min.css'
 
 import SwiperLabel from './SwiperLabel'
-import Image from 'next/image'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
+import { KeywordContext } from '@/contexts/keywordContext'
 
 SwiperCore.use([Thumbs, Keyboard])
 
@@ -31,44 +31,17 @@ type ReactIdSwiperRef = {
 const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
   const { t } = useTranslation('slider')
   const [isVertical, setIsVertical] = useState(true)
-  const [sliderValue, setSliderValue] = useState(0) // حالة لتخزين قيمة السلايدر الأول
+  const [sliderValue, setSliderValue] = useState(0)
+  const { checkPremiumKeyword, sortedKeywords } = useContext(KeywordContext)
 
-  const keywords = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z',
-  ]
-  const [selectedKeyword, setSelectedKeyword] = useState(keywords[0])
+  const [selectedKeyword, setSelectedKeyword] = useState(sortedKeywords[0])
 
   const swiperRef = useRef<ReactIdSwiperRef>(null)
   const handleSlideChange = (swiper: SwiperCore) => {
     if (swiperRef.current) {
       const swiperInstance = swiperRef.current.swiper
       const currentIndex = swiperInstance.realIndex
-      setSelectedKeyword(keywords[currentIndex])
+      setSelectedKeyword(sortedKeywords[currentIndex])
     }
   }
 
@@ -82,6 +55,8 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
     }
     handleResize()
     window.addEventListener('resize', handleResize)
+
+    checkPremiumKeyword()
 
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -177,69 +152,73 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
             position: 'relative',
           }}
         >
-          {keywords.map((keyword, index) => (
-            <SwiperSlide
-              key={index}
-              style={{
-                width: '100%',
-                borderRadius: '32px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <img
-                src="/images/card.webp"
-                style={{
-                  width: '800px',
-                }}
-                loading="lazy"
-                className="ImageSlider"
-              />
-              <Box
-                sx={{
-                  width: '800px',
-                  position: 'absolute',
-                  zIndex: '999999',
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: {
-                      xs: '50px',
-                      sm: '60px',
-                      md: '70px',
-                      xl: '96px',
-                    },
-                    fontWeight: '500',
-                    color: '#31E716',
-                    lineHeight: { xs: '48px', md: '88.8px' },
-                    textAlign: 'center',
-                    textTransform: 'uppercase',
-                    marginY: '.2rem',
+          {sortedKeywords?.map((keyword, index) => {
+            if (1 == 1) {
+              return (
+                <SwiperSlide
+                  key={index}
+                  style={{
+                    width: '100%',
+                    borderRadius: '32px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
                 >
-                  #{keyword}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: {
-                      xs: '16px',
-                      sm: '20px',
-                      md: '20px',
-                      xl: '20px',
-                    },
-                    fontWeight: '500',
-                    color: '#0091ED',
-                    lineHeight: '18.8px',
-                    textAlign: 'center',
-                  }}
-                >
-                  ViewOnWebsite.Com
-                </Typography>
-              </Box>
-            </SwiperSlide>
-          ))}
+                  <img
+                    src="/images/card.webp"
+                    style={{
+                      width: '800px',
+                    }}
+                    loading="lazy"
+                    className="ImageSlider"
+                  />
+                  <Box
+                    sx={{
+                      width: '800px',
+                      position: 'absolute',
+                      zIndex: '999999',
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: {
+                          xs: '50px',
+                          sm: '60px',
+                          md: '70px',
+                          xl: '96px',
+                        },
+                        fontWeight: '500',
+                        color: '#31E716',
+                        lineHeight: { xs: '48px', md: '88.8px' },
+                        textAlign: 'center',
+                        textTransform: 'uppercase',
+                        marginY: '.2rem',
+                      }}
+                    >
+                      #{keyword}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: {
+                          xs: '16px',
+                          sm: '20px',
+                          md: '20px',
+                          xl: '20px',
+                        },
+                        fontWeight: '500',
+                        color: '#0091ED',
+                        lineHeight: '18.8px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      ViewOnWebsite.Com
+                    </Typography>
+                  </Box>
+                </SwiperSlide>
+              )
+            }
+          })}
         </Swiper>
 
         <SwiperLabel selectedKeyword={selectedKeyword} />

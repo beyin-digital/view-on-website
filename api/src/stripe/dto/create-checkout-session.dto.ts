@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateCheckoutSessionDto {
   @ApiProperty({
@@ -24,8 +24,8 @@ export class CreateCheckoutSessionDto {
     description: 'Price of the subscription',
   })
   @IsNumber()
-  @IsNotEmpty()
-  price: number;
+  @IsOptional()
+  price?: number;
 
   @ApiProperty({
     example: 'month || 6 months || year',
@@ -33,6 +33,6 @@ export class CreateCheckoutSessionDto {
       "Duration of user's subscription. The values are per stripe's documentation",
   })
   @IsString()
-  @IsNotEmpty()
-  interval: string;
+  @IsOptional()
+  interval?: string;
 }

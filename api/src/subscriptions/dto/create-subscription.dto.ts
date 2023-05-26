@@ -13,7 +13,7 @@ export class CreateSubscriptionDto {
   @ApiProperty({ example: 200, description: 'Price of the subscription' })
   @IsNotEmpty()
   @IsNumber()
-  amount: number;
+  price: number;
 
   @ApiProperty({
     example: 'active',

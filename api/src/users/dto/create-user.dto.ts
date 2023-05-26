@@ -20,7 +20,7 @@ export class CreateUserDto {
   @Transform(lowerCaseTransformer)
   @IsNotEmpty()
   @Validate(IsNotExist, ['User'], {
-    message: 'emailAlreadyExists',
+    message: 'email_already_exists',
   })
   @IsEmail()
   email: string | null;
@@ -38,7 +38,7 @@ export class CreateUserDto {
   @MinLength(8)
   @IsNotEmpty()
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
-    message: 'passwordTooWeak',
+    message: 'password_too_weak_or_does_not_requirement',
   })
   password?: string;
 
@@ -52,19 +52,19 @@ export class CreateUserDto {
   @ApiProperty({ type: () => FileEntity })
   @IsOptional()
   @Validate(IsExist, ['FileEntity', 'id'], {
-    message: 'imageNotExists',
+    message: 'image_not_found',
   })
   photo?: FileEntity | null;
 
   @ApiProperty({ type: Role })
   @Validate(IsExist, ['Role', 'id'], {
-    message: 'roleNotExists',
+    message: 'role_not_found',
   })
   role?: Role | null;
 
   @ApiProperty({ type: Status })
   @Validate(IsExist, ['Status', 'id'], {
-    message: 'statusNotExists',
+    message: 'status_not_found',
   })
   status?: Status;
 }

@@ -1,6 +1,12 @@
-import { Controller, Get, Query, Req, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Req,
+  //  UseGuards
+} from '@nestjs/common';
 import { AnalyticsService } from './analytics.service';
-import { AuthGuard } from '@nestjs/passport';
+// import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Analytics')
@@ -14,7 +20,7 @@ export class AnalyticsController {
   @ApiOperation({
     summary: 'Endpoint to get analytics for a keyword',
   })
-  @UseGuards(AuthGuard('jwt'))
+  //   @UseGuards(AuthGuard('jwt'))
   @Get('keyword')
   async getKeywordAnalytics(
     @Req() req: any,
@@ -22,7 +28,7 @@ export class AnalyticsController {
   ): Promise<any> {
     return await this.analyticsService.getIndividualKeywordAnalytics(
       keyword,
-      req.user,
+      //   req.user,
     );
   }
 }

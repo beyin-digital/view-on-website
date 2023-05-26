@@ -26,6 +26,10 @@ export class CreateOrderDto {
 
   @IsNotEmpty()
   @IsString()
+  invoiceId: string;
+
+  @IsNotEmpty()
+  @IsString()
   fulfilmentStatus?: string;
 
   @IsNotEmpty()

@@ -126,13 +126,11 @@ const DashboardSecurityPage = () => {
     })
   }
 
-  // useEffect(() => {
-  //   if (user) {
-  //     if (user.twoFactorAuth === true) {
-  //       setTwoFactorAuth(true)
-  //     }
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (user?.twoFactorAuth === true) {
+      setTwoFactorAuth(true)
+    }
+  }, [user?.twoFactorAuth])
 
   // if (!user) {
   //   return <div>loading...</div>
@@ -204,7 +202,8 @@ const DashboardSecurityPage = () => {
                   }}
                   variant="square"
                 >
-                  MA
+                  {user?.fullName.split(' ')[0].charAt(0)}
+                  {user?.fullName.split(' ')[1].charAt(0)}
                 </Avatar>
                 <Typography
                   sx={{
@@ -373,13 +372,14 @@ const DashboardSecurityPage = () => {
                   className="IconSwitchDashboard"
                   checked={twoFactorAuth}
                   onChange={(e) => {
-                    if (user?.twoFactorAuth === true) {
-                      handleOpen()
-                    } else {
-                      handleChangeTwoFactorAuth()
-                      setTwoFactorAuth(true)
-                    }
-                    console.log('Clicked')
+                    console.log(e.target.checked)
+                    // if (user?.twoFactorAuth === true) {
+                    //   handleOpen()
+                    // } else {
+                    //   handleChangeTwoFactorAuth()
+                    //   setTwoFactorAuth(true)
+                    // }
+                    // console.log('Clicked')
                   }}
                 />
               </Box>
@@ -405,7 +405,6 @@ const DashboardSecurityPage = () => {
                 xl: 'none',
               },
               width: '100%',
-              // height: "100vh",
               padding: '0px 27px',
               position: 'relative',
               zIndex: '991',

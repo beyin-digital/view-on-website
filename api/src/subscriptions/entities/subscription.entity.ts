@@ -1,4 +1,6 @@
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -37,6 +39,9 @@ export class Subscription extends EntityHelper {
   @Column({ nullable: true })
   renewalDate: Date;
 
+  @Column({ type: 'decimal', nullable: true })
+  renewalPrice: number;
+
   @Column({ nullable: true })
   stripeSubscriptionId: string;
 
@@ -49,6 +54,14 @@ export class Subscription extends EntityHelper {
     eager: true,
   })
   plan: Plan;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  public setToPremium(): void {
+    if (this.price >= 10000) {
+      this.isPremium = true;
+    }
+  }
 
   @Index()
   @Column({ nullable: true })
@@ -63,8 +76,8 @@ export class Subscription extends EntityHelper {
   @Column({ nullable: true })
   duration: string;
 
-  @Column({ nullable: true })
-  amount: number;
+  @Column({ type: 'decimal', nullable: true })
+  price: number;
 
   @CreateDateColumn()
   createdAt: Date;

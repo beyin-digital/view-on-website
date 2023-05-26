@@ -25,6 +25,8 @@ export interface IUserContext {
   resendOTP: (email: string) => void
   verifyOtp: (otp: string) => void
   handleGoogleAuth: (idToken: string) => void
+  forgotPassword: (email: string) => void
+  resetPassword: (password: string, confirmPassword: string) => void
 }
 
 export const UserContext = createContext<IUserContext>({
@@ -50,6 +52,8 @@ export const UserContext = createContext<IUserContext>({
   resendOTP: (email: string) => {},
   verifyOtp: (otp: string) => {},
   handleGoogleAuth: (idToken: string) => {},
+  forgotPassword: (email: string) => {},
+  resetPassword: (password: string, confirmPassword: string) => {},
 })
 
 export const UserProvider = ({ children }: any) => {
@@ -109,19 +113,13 @@ export const UserProvider = ({ children }: any) => {
       })
       router.push('/dashboard')
     } catch (err: any) {
-      if (err.response.data.errors.email.startsWith('needLoginViaProvider')) {
-        return toast.error(
-          'You logged in using a social provider. Please login using the same provider.',
-          {
-            position: 'bottom-right',
-            autoClose: 5000,
-          }
-        )
-      } else
-        toast.error(`Error logging in. Please check credentials`, {
+      toast.error(
+        `Error logging in. Please check credentials or try social buttons provided`,
+        {
           position: 'bottom-right',
           autoClose: 5000,
-        })
+        }
+      )
     }
   }
 
@@ -235,6 +233,51 @@ export const UserProvider = ({ children }: any) => {
         .catch((err) => {
           console.log(err)
         })
+    }
+  }
+
+  const forgotPassword = async (identifier: string) => {
+    try {
+      const res = await api.post('/auth/forgot/password', {
+        identifier,
+      })
+      if (res.status >= 400) {
+        throw new Error()
+      }
+      toast.success('Password reset link sent to email', {
+        position: 'top-right',
+        autoClose: 5000,
+      })
+    } catch (err) {
+      toast.error(
+        'Error sending password reset link. Perhaps you need to create an account or use social login',
+        {
+          position: 'top-right',
+          autoClose: 5000,
+        }
+      )
+    }
+  }
+
+  const resetPassword = async (password: string, token: string) => {
+    try {
+      const res = await api.post('/auth/reset/password', {
+        password,
+        token,
+      })
+      if (res.status >= 400) {
+        throw new Error()
+      }
+      toast.success('Password reset successfully', {
+        position: 'top-right',
+        autoClose: 5000,
+      })
+      router.push('/login')
+    } catch (err) {
+      toast.error('Error resetting password', {
+        position: 'top-right',
+        autoClose: 5000,
+      })
     }
   }
 
@@ -361,6 +404,8 @@ export const UserProvider = ({ children }: any) => {
         logout,
         verifyOtp,
         handleGoogleAuth,
+        forgotPassword,
+        resetPassword,
       }}
     >
       {children}

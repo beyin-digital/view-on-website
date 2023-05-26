@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Keyword } from './entities/keyword.entity';
 import { DeepPartial, Repository } from 'typeorm';
@@ -7,6 +7,7 @@ import { NullableType } from 'src/utils/types/nullable.type';
 import { IPaginationOptions } from 'src/utils/types/pagination-options';
 import { User } from 'src/users/entities/user.entity';
 import slugify from 'slugify';
+import { CreateKeywordDto } from './dto/create-keyword.dto';
 @Injectable()
 export class KeywordsService {
   constructor(
@@ -14,21 +15,10 @@ export class KeywordsService {
     private keywordsRepository: Repository<Keyword>,
   ) {}
 
-  async create(data: DeepPartial<Keyword>): Promise<Keyword> {
-    const checkExistingKeyword = await this.findOne({
-      slug: slugify(data.letters as string, {
-        lower: true,
-      }),
-    });
-
-    if (checkExistingKeyword) {
-      throw new ConflictException('Keyword already exists');
-    }
-
+  async create(createKeywordDto: CreateKeywordDto): Promise<Keyword> {
     return this.keywordsRepository.save(
       this.keywordsRepository.create({
-        user: data.user as User,
-        ...data,
+        ...createKeywordDto,
       }),
     );
   }
@@ -43,9 +33,18 @@ export class KeywordsService {
     });
   }
 
+  checkPremiumKeyword(): Promise<any> {
+    return this.keywordsRepository.query(
+      `SELECT * FROM keyword WHERE "isPremium" = true AND LENGTH(letters) < 2`,
+    );
+  }
+
   findOne(fields: EntityCondition<Keyword>): Promise<NullableType<Keyword>> {
     return this.keywordsRepository.findOne({
       where: fields,
+      relations: {
+        subscription: true,
+      },
     });
   }
 
@@ -58,7 +57,9 @@ export class KeywordsService {
         where: {
           user: { id: user.id },
         },
-
+        relations: {
+          subscription: true,
+        },
         skip: (paginationOptions.page - 1) * paginationOptions.limit,
         take: paginationOptions.limit,
       });
@@ -79,7 +80,7 @@ export class KeywordsService {
     keyword.sublink = payload.sublink || keyword.sublink;
     keyword.price = payload.price || keyword.price;
     keyword.location = payload.location || (keyword.location as any);
-
+    keyword.organisation = payload.organisation || keyword.organisation;
     return await keyword.save();
   }
 

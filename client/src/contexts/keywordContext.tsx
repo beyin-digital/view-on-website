@@ -3,19 +3,18 @@ import { useRouter } from 'next/router'
 import { createContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import slugify from 'slugify'
-import { array } from 'zod'
 // create a context for the keyword
 export const KeywordContext = createContext<{
   values: any
   setValues: React.Dispatch<React.SetStateAction<any>>
   checkKeywordavailability: (keyword: string) => void
-  keywordFound?: string
+  keywordFound: boolean
   token?: string
   handleSubscription: (
     letters: string,
     sublink: string,
-    price: number,
-    interval: string
+    interval?: string,
+    price?: number
   ) => void
   getUsersKeywords: () => void
   getUserSubscriptions: () => void
@@ -23,28 +22,34 @@ export const KeywordContext = createContext<{
   keywords: any[]
   selectedKeyword: any
   setSelectedKeyword: React.Dispatch<React.SetStateAction<any>>
-  getKeywordAnalytics: () => void
+  setAnalyticsData: React.Dispatch<React.SetStateAction<any>>
   updateKeywordDetails: (id: number, values: any) => void
   analyticsData: {
+    totalVisits: number
     totalVisitsToday: number
-    totalVisitsAllTime: number
-    lineChartData: any[]
+    totalDailyVisitsByHoursOfTheDay: any[]
+    totalVisitsByMonthsOfTheYear: any[]
+    totalVisitsByDaysOfTheWeek: any[]
+    totalVisitsByDaysOfTheMonth: any[]
   }
   setLineChartDataType: React.Dispatch<
     React.SetStateAction<'day' | 'week' | 'month' | 'year'>
   >
   lineChartDataType: string
+  isSearching: boolean
+  checkPremiumKeyword: () => {}
+  sortedKeywords: string[]
 }>({
   values: '',
   setValues: () => {},
   checkKeywordavailability: async (keyword: string) => {},
-  keywordFound: '',
+  keywordFound: false,
   token: '',
   handleSubscription: async (
     letters: string,
     sublink: string,
-    price: number,
-    interval: string
+    interval?: string,
+    price?: number
   ) => {},
   getUsersKeywords: async () => {},
   getUserSubscriptions: async () => {},
@@ -52,15 +57,21 @@ export const KeywordContext = createContext<{
   keywords: [],
   selectedKeyword: {},
   setSelectedKeyword: () => {},
-  getKeywordAnalytics: async () => {},
+  setAnalyticsData: () => {},
   updateKeywordDetails: async (id: number, values: any) => {},
   analyticsData: {
+    totalVisits: 0,
     totalVisitsToday: 0,
-    totalVisitsAllTime: 0,
-    lineChartData: [],
+    totalDailyVisitsByHoursOfTheDay: [],
+    totalVisitsByMonthsOfTheYear: [],
+    totalVisitsByDaysOfTheWeek: [],
+    totalVisitsByDaysOfTheMonth: [],
   },
   setLineChartDataType: () => {},
   lineChartDataType: '',
+  isSearching: false,
+  checkPremiumKeyword: async () => {},
+  sortedKeywords: [],
 })
 
 export const KeywordProvider = ({ children }: any) => {
@@ -70,36 +81,45 @@ export const KeywordProvider = ({ children }: any) => {
     sublinks: '',
   })
 
-  const [keywordFound, setKeywordFound] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
+  const [premiumKeywords, setPremiumKeywords] = useState<any>([])
+  const [sortedKeywords, setSortedKeywords] = useState<string[]>([])
+  const [keywordFound, setKeywordFound] = useState(false)
   const [keywords, setKeywords] = useState([])
   const [selectedKeyword, setSelectedKeyword] = useState<any>({})
   const [token, setToken] = useState('')
   const [subscriptions, setSubscriptions] = useState([])
   const [analyticsData, setAnalyticsData] = useState({
+    totalVisits: 0,
     totalVisitsToday: 0,
-    totalVisitsAllTime: 0,
-    lineChartData: [{}],
+    totalDailyVisitsByHoursOfTheDay: [],
+    totalVisitsByMonthsOfTheYear: [],
+    totalVisitsByDaysOfTheWeek: [],
+    totalVisitsByDaysOfTheMonth: [],
   })
   const [lineChartDataType, setLineChartDataType] = useState<
     'day' | 'week' | 'month' | 'year'
   >('day')
   const checkKeywordavailability = async (keyword: string) => {
     // check if keyword is available
+    setIsSearching(true)
     const res = await api.get(`/keywords?hashtag=${keyword}`)
     const data = res.data
 
     if (data) {
-      setKeywordFound(data.sublink)
+      setKeywordFound(true)
+      setIsSearching(false)
       return
     }
-    setKeywordFound('ViewOnWebsite.com')
+    setKeywordFound(false)
+    setIsSearching(false)
   }
 
   const handleSubscription = async (
     letters: string,
     sublink: string,
-    price: number,
-    interval: string
+    interval?: string,
+    price?: number
   ) => {
     if (token === '') {
       router.push('/login')
@@ -107,7 +127,7 @@ export const KeywordProvider = ({ children }: any) => {
     }
     const res = await api.post(
       '/stripe/payment',
-      { letters, sublink, price, interval },
+      { letters, sublink, interval, price },
       { headers: { Authorization: `Bearer ${token}` } }
     )
     const data = res.data
@@ -134,120 +154,18 @@ export const KeywordProvider = ({ children }: any) => {
     }
   }
 
-  function sortAndCountVisits(
-    arr: any[],
-    timeParameter: 'day' | 'week' | 'month' | 'year'
-  ): { x: string; y: number }[] {
-    const visitsMap: Map<string, number> = new Map()
-
-    arr.forEach((obj) => {
-      const createdAt = new Date(obj.createdAt)
-      let key: string
-
-      switch (timeParameter) {
-        case 'day':
-          key = createdAt.toLocaleString(undefined, {
-            hour: 'numeric',
-            hour12: true,
-          })
-          break
-        case 'week':
-          key = createdAt.toLocaleDateString(undefined, { weekday: 'long' })
-          break
-        case 'month':
-          key = createdAt.toLocaleDateString(undefined, { day: 'numeric' })
-          break
-        case 'year':
-          key = createdAt.toLocaleDateString(undefined, { month: 'long' })
-          break
-        default:
-          throw new Error('Invalid time parameter.')
-      }
-
-      visitsMap.set(key, (visitsMap.get(key) || 0) + 1)
-    })
-
-    const result: { x: string; y: number }[] = []
-
-    switch (timeParameter) {
-      case 'day':
-        for (let i = 0; i < 24; i++) {
-          const hour = i.toString().padStart(2, '0')
-          const key = `${hour}:00`
-          const visits = visitsMap.get(key) || 0
-          result.push({ x: key, y: visits })
-        }
-        break
-      case 'week':
-        const weekdays = [
-          'Sunday',
-          'Monday',
-          'Tuesday',
-          'Wednesday',
-          'Thursday',
-          'Friday',
-          'Saturday',
-        ]
-        weekdays.forEach((weekday) => {
-          const visits = visitsMap.get(weekday) || 0
-          result.push({ x: weekday, y: visits })
-        })
-        break
-      case 'month':
-        for (let i = 1; i <= 31; i++) {
-          const day = i.toString().padStart(2, '0')
-          const key = `${day}`
-          const visits = visitsMap.get(key) || 0
-          result.push({ x: key, y: visits })
-        }
-        break
-      case 'year':
-        const months = [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
-        ]
-        months.forEach((month, index) => {
-          const visits = visitsMap.get(month) || 0
-          result.push({ x: month, y: visits })
-        })
-        break
-    }
-
-    return result
-  }
-
-  const getKeywordAnalytics = async () => {
-    const res = await api.get(
-      `/analytics/keyword?keyword=${slugify(selectedKeyword?.letters, {
-        lower: true,
-      })}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+  const checkPremiumKeyword = async () => {
+    const res = await api.get(`/keywords/check/premium`)
     const data = res.data
-    setAnalyticsData({
-      ...analyticsData,
-      totalVisitsToday: data?.filter(
-        (keyword: { createdAt: string | number | Date }) =>
-          new Date(keyword.createdAt).toLocaleDateString() ===
-          new Date().toLocaleDateString()
-      ).length,
-      totalVisitsAllTime: data?.length,
-      lineChartData: sortAndCountVisits(data, lineChartDataType),
-    })
-  }
 
+    if (data.length > 0) {
+      setPremiumKeywords(data)
+      const alphabets = 'abcdefghijklmnopqrstuvwxyz'.split('')
+      alphabets.map((letter, i) => {
+        console.log(letter.localeCompare(premiumKeywords[i]?.letters) === 0)
+      })
+    }
+  }
   const updateKeywordDetails = async (id: number, values: any) => {
     try {
       const res = await api.put(
@@ -273,7 +191,7 @@ export const KeywordProvider = ({ children }: any) => {
   useEffect(() => {
     const token = localStorage.getItem('token')
     setToken(token || '')
-  }, [keywordFound, token])
+  }, [keywordFound, token, lineChartDataType])
   return (
     <KeywordContext.Provider
       value={{
@@ -289,11 +207,14 @@ export const KeywordProvider = ({ children }: any) => {
         keywords,
         selectedKeyword,
         setSelectedKeyword,
-        getKeywordAnalytics,
         updateKeywordDetails,
         analyticsData,
         lineChartDataType,
         setLineChartDataType,
+        isSearching,
+        checkPremiumKeyword,
+        sortedKeywords,
+        setAnalyticsData,
       }}
     >
       {children}

@@ -17,7 +17,7 @@ export class AuthRegisterLoginDto {
   })
   @Transform(lowerCaseTransformer)
   @Validate(IsNotExist, ['User'], {
-    message: 'emailAlreadyExists',
+    message: 'email_already_exists',
   })
   @IsEmail()
   email: string;
@@ -31,7 +31,7 @@ export class AuthRegisterLoginDto {
   @Matches(
     /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^*&+=])(?=\S+$).{8,}$/,
     {
-      message: 'passwordTooWeak',
+      message: 'password_too_weak_or_does_not_requirement',
     },
   )
   password: string;

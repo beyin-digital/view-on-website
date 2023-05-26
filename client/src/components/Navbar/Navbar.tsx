@@ -35,7 +35,7 @@ const Header = ({
   const { pathname, query, asPath, locale } = router
   const [hoveredButton, setHoveredButton] = useState(false)
 
-  const { user, token } = useContext(UserContext)
+  const { token } = useContext(UserContext)
   // handle menu click
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -333,9 +333,10 @@ const Header = ({
           <Button
             onClick={() => {
               if (token) {
-                router.push(`/${router.locale}/dashboard`)
+                router.push('/dashboard')
+              } else {
+                router.push('/illustrations')
               }
-              router.push('/illustration')
             }}
             sx={{
               borderRadius: '16px',
@@ -639,7 +640,13 @@ const Header = ({
                 </ul>
               </Box>
               <Button
-                onClick={() => router.push('/illustration')}
+                onClick={() => {
+                  if (token) {
+                    router.push('/dashboard')
+                  } else {
+                    router.push('/signup')
+                  }
+                }}
                 sx={{
                   borderRadius: '16px',
                   paddingX: '18px',
@@ -651,7 +658,7 @@ const Header = ({
                 onMouseLeave={handleLeave}
                 className="ButtonAnimation"
               >
-                {user ? (
+                {token ? (
                   <Typography
                     sx={{
                       letterSpacing: '0.02em',

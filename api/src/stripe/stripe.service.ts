@@ -17,6 +17,7 @@ import { Order } from 'src/orders/entities/order.entity';
 import { Subscription } from 'src/subscriptions/entities/subscription.entity';
 import { Keyword } from 'src/keywords/entities/keyword.entity';
 import { UnsubscribeDto } from './dto/unsubscribe.dto';
+import { MailService } from 'src/mail/mail.service';
 import slugify from 'slugify';
 
 @Injectable()
@@ -29,6 +30,7 @@ export class StripeService {
     private subscriptionsService: SubscriptionsService,
     private keywordsService: KeywordsService,
     private ordersService: OrdersService,
+    private mailService: MailService,
   ) {
     this.stripe = new Stripe(this.configService.get('stripe').secretKey, {
       apiVersion: '2022-11-15',
@@ -62,6 +64,7 @@ export class StripeService {
     user: User,
     createCheckoutSessionDto?: CreateCheckoutSessionDto,
   ) {
+    let createdCheckoutSession: Stripe.Checkout.Session;
     const foundUser = await this.usersService.findOne({
       id: user.id,
     });
@@ -74,55 +77,115 @@ export class StripeService {
     }
 
     const frontendURL = this.configService.get('app').frontendDomain;
-    const checkoutSession = await this.stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      success_url: `${frontendURL}/dashboard/subscriptions`,
-      cancel_url: `${frontendURL}/dashboard/subscriptions`,
-      customer: foundUser?.stripeCustomerId || '',
-      mode: 'subscription',
-      line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: createCheckoutSessionDto?.letters || '',
-              description: `Subscription for the rights to use the #${
-                createCheckoutSessionDto?.letters || ''
-              } hashtag`,
+
+    if ((createCheckoutSessionDto?.letters?.length as number) > 3) {
+      const normalCheckoutSession = await this.stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        success_url: `${frontendURL}/dashboard/subscriptions`,
+        cancel_url: `${frontendURL}/dashboard/subscriptions`,
+        customer: foundUser?.stripeCustomerId || '',
+        mode: 'subscription',
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: createCheckoutSessionDto?.letters || '',
+                description: `Subscription for the rights to use the #${
+                  createCheckoutSessionDto?.letters || ''
+                } hashtag`,
+              },
+              recurring: {
+                interval:
+                  createCheckoutSessionDto?.interval === 'year'
+                    ? 'year'
+                    : 'month',
+                interval_count:
+                  createCheckoutSessionDto?.price === 399 ||
+                  createCheckoutSessionDto?.price === 99
+                    ? 1
+                    : 6,
+              },
+              unit_amount: (createCheckoutSessionDto?.price || 0) * 100,
             },
-            recurring: {
-              interval:
-                createCheckoutSessionDto?.interval === 'year'
-                  ? 'year'
-                  : createCheckoutSessionDto?.interval === 'month' ||
-                    createCheckoutSessionDto?.interval === '6 months'
-                  ? 'month'
-                  : 'month',
-              interval_count:
-                createCheckoutSessionDto?.interval === 'month'
-                  ? 1
-                  : createCheckoutSessionDto?.interval === '6 months'
-                  ? 6
-                  : 1,
-            },
-            unit_amount: (createCheckoutSessionDto?.price || 0) * 100,
+            quantity: 1,
           },
-          quantity: 1,
+        ],
+      });
+      createdCheckoutSession = normalCheckoutSession;
+    } else {
+      const premiumCheckoutSession = await this.stripe.checkout.sessions.create(
+        {
+          payment_method_types: ['card'],
+          success_url: `${frontendURL}/dashboard/subscriptions`,
+          cancel_url: `${frontendURL}/dashboard/subscriptions`,
+          customer: foundUser?.stripeCustomerId || '',
+          mode: 'subscription',
+          locale: 'en',
+          payment_intent_data: {},
+          line_items: [
+            {
+              price_data: {
+                currency: 'usd',
+                product_data: {
+                  name: `#${createCheckoutSessionDto?.letters}` || '',
+                  description: `Purchase of the rights to use the #${
+                    createCheckoutSessionDto?.letters || ''
+                  } premium hashtag`,
+                },
+                unit_amount:
+                  (createCheckoutSessionDto?.letters.length as number) >= 1
+                    ? 999995.35 * 100
+                    : (createCheckoutSessionDto?.letters.length as number) === 2
+                    ? 100000 * 100
+                    : 10000 * 100,
+              },
+              quantity: 1,
+            },
+            {
+              price_data: {
+                currency: 'usd',
+                product_data: {
+                  name: createCheckoutSessionDto?.letters || '',
+                  description: `Yearly renewal fee for using the #${
+                    createCheckoutSessionDto?.letters || ''
+                  } premium hashtag`,
+                },
+                recurring: {
+                  interval: 'year',
+                  interval_count: 1,
+                },
+                unit_amount: 3.65 * 100,
+              },
+              quantity: 1,
+            },
+          ],
         },
-      ],
+      );
+      createdCheckoutSession = premiumCheckoutSession;
+    }
+
+    const keywordExists = await this.keywordsService.findOne({
+      slug: slugify(createCheckoutSessionDto?.letters as string, {
+        lower: true,
+      }),
     });
+    if (keywordExists) {
+      throw new ConflictException('Keyword already exists');
+    }
 
     const newOrder = await this.ordersService.create({
+      invoiceId: createdCheckoutSession.invoice as string,
       user: foundUser as User,
       keyword: createCheckoutSessionDto?.letters || '',
       sublink: createCheckoutSessionDto?.sublink || '',
-      total: (checkoutSession?.amount_total || 0) / 100,
-      subTotal: (checkoutSession?.amount_subtotal || 0) / 100,
-      checkoutSessionId: checkoutSession.id as string,
-      discount: checkoutSession.total_details?.amount_discount || 0,
-      fulfilmentStatus: checkoutSession.payment_status,
+      total: (createdCheckoutSession?.amount_total || 0) / 100,
+      subTotal: (createdCheckoutSession?.amount_subtotal || 0) / 100,
+      checkoutSessionId: createdCheckoutSession.id as string,
+      discount: createdCheckoutSession.total_details?.amount_discount || 0,
+      fulfilmentStatus: createdCheckoutSession.payment_status,
     });
-    return { ...checkoutSession, order: newOrder };
+    return { ...createdCheckoutSession, order: newOrder };
   }
 
   public webhooks(stripeSignature: string, stripeEvent: any) {
@@ -147,54 +210,64 @@ export class StripeService {
       stripeSubscriptionId: createSubscriptionDto.stripeSubscriptionId,
       stripeSubscriptionStatus: createSubscriptionDto.subscriptionStatus,
       purchaseDate: new Date(createSubscriptionDto.purchaseDate * 1000),
-      amount: createSubscriptionDto.amount,
+      price: createSubscriptionDto.price,
     });
   }
 
   async updateStripeSubscription(updateSubscriptionDto: UpdateSubscriptionDto) {
-    try {
-      const subscription = (await this.subscriptionsService.findOne({
-        stripeSubscriptionId: updateSubscriptionDto.subscriptionId,
-      })) as Subscription;
+    const subscription = (await this.subscriptionsService.findOne({
+      stripeSubscriptionId: updateSubscriptionDto.subscriptionId,
+    })) as Subscription;
 
-      const order = (await this.ordersService.findOne({
-        keyword: subscription?.letters as string,
-      })) as Order;
+    const order = (await this.ordersService.findOne({
+      subscriptionId: updateSubscriptionDto.subscriptionId,
+    })) as Order;
 
-      const keyword = (await this.keywordsService.findOne({
-        letters: order?.keyword as string,
-      })) as Keyword;
+    const keyword = (await this.keywordsService.findOne({
+      letters: order?.keyword as string,
+    })) as Keyword;
 
-      console.log(subscription);
-      console.log(order);
-      console.log(keyword);
+    subscription.keyword = keyword;
+    subscription.letters = keyword.letters;
+    subscription.stripeSubscriptionStatus =
+      updateSubscriptionDto.subscriptionStatus as string;
+    subscription.renewalDate = new Date(
+      (updateSubscriptionDto.renewalDate as number) * 1000,
+    );
+    subscription.duration = updateSubscriptionDto.duration as string;
+    subscription.renewalPrice = order.renewalPrice;
+    subscription.price = order.total;
+    await subscription?.save();
 
-      subscription.keyword = keyword;
-      subscription.stripeSubscriptionStatus =
-        updateSubscriptionDto.subscriptionStatus as string;
-      subscription.renewalDate = new Date(
-        (updateSubscriptionDto.renewalDate as number) * 1000,
-      );
-      subscription.duration = updateSubscriptionDto.duration as string;
-      await subscription?.save();
-
-      order.subscriptionId = updateSubscriptionDto.subscriptionId as string;
-      await order.save();
-    } catch (error) {
-      console.log(error);
-    }
+    await this.mailService.paymentConfirmation({
+      to: subscription.user.email as string,
+      data: {
+        amount: order?.total,
+        keyword: order?.keyword,
+        renewalDate: new Date(subscription?.renewalDate).toLocaleDateString(),
+        receiptUrl: order?.invoiceUrl,
+        renewalPrice: order?.renewalPrice,
+      },
+    });
   }
 
-  async updateOrderAndCreateKeyword(customerId: string, status: string) {
-    const foundUser = await this.usersService.findOne({
-      stripeCustomerId: customerId,
-    });
+  async updateOrderAndCreateKeyword(
+    checkoutSessionId: string,
+    invoiceId: string,
+    status: string,
+    renewalPrice: number,
+    subscriptionId: string,
+  ) {
+    const invoiceDetails = await this.stripe.invoices.retrieve(invoiceId);
     if (status === 'paid') {
       const order = (await this.ordersService.findOne({
-        user: { id: foundUser?.id },
+        checkoutSessionId,
       })) as Order;
 
       order.fulfilmentStatus = status;
+      order.invoiceUrl = invoiceDetails.hosted_invoice_url as string;
+      order.renewalPrice = renewalPrice;
+      order.subscriptionId = subscriptionId;
       await order.save();
 
       const newKeyword = await this.keywordsService.create({
@@ -202,7 +275,6 @@ export class StripeService {
         letters: order?.keyword as string,
         price: order?.total as number,
         sublink: order?.sublink as string,
-        slug: slugify(order?.keyword, { lower: true }),
       });
 
       await newKeyword.save();
@@ -254,15 +326,20 @@ export class StripeService {
         break;
       case 'checkout.session.completed':
         // Fulfill the purchase...
-        break;
-      case 'invoice.paid':
-        const invoice = event.data.object as Stripe.Invoice;
-        // Fulfill the purchase...
+        const checkoutSession = event.data.object as Stripe.Checkout.Session;
+        const renewalPrice =
+          (checkoutSession?.amount_total as number) > 399 * 100
+            ? 3.65
+            : (checkoutSession?.amount_total as number) / 100;
         await this.updateOrderAndCreateKeyword(
-          invoice?.customer as string,
-          invoice.status as string,
+          checkoutSession?.id as string,
+          checkoutSession.invoice as string,
+          checkoutSession.payment_status as string,
+          renewalPrice,
+          checkoutSession.subscription as string,
         );
         break;
+
       case 'invoice.payment_failed':
         const invoicePaymentFailed = event.data.object as Stripe.Invoice;
         // Send notification to customer...
@@ -273,14 +350,13 @@ export class StripeService {
         // Send notification to customer...
         await this.createNewStripeSubscription({
           stripeCustomerId: subscriptionCreated.customer as string,
-          amount:
+          price:
             (subscriptionCreated?.items?.data[0].price?.unit_amount || 0) /
               100 || 0,
           stripeSubscriptionId: subscriptionCreated.id as string,
           subscriptionStatus: subscriptionCreated.status as string,
           purchaseDate: subscriptionCreated.created as number,
         });
-        console.log('customer.subscription.created', subscriptionCreated);
         break;
       case 'customer.subscription.updated':
         const subscriptionUpdated = event.data.object as Stripe.Subscription;
@@ -293,7 +369,6 @@ export class StripeService {
           duration:
             subscriptionUpdated?.items?.data[0]?.price?.recurring?.interval,
         });
-        console.log('customer.subscription.updated', subscriptionUpdated);
         break;
       case 'customer.subscription.deleted':
         const subscriptionDeleted = event.data.object as Stripe.Subscription;

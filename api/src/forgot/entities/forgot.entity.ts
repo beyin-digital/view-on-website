@@ -17,7 +17,7 @@ export class Forgot extends EntityHelper {
 
   @Allow()
   @Column()
-  otp: string;
+  token: string;
 
   @Allow()
   @ManyToOne(() => User, {

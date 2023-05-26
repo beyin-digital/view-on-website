@@ -75,8 +75,8 @@ const authenticate = async (email: string, password: string) => {
       path: '/metrics',
     }),
     ThrottlerModule.forRoot({
-      ttl: 60,
-      limit: 50,
+      ttl: 200,
+      limit: 2000,
     }),
     LoggerModule.forRoot({
       pinoHttp: {

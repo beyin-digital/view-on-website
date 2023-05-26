@@ -165,7 +165,8 @@ const LoginForm = () => {
         }}
       >
         <Link
-          href=""
+          locale={locale}
+          href="/forgot-password"
           style={{
             textDecoration: 'none',
             color: 'inherit',
