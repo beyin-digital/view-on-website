@@ -220,7 +220,7 @@ export class StripeService {
     })) as Subscription;
 
     const order = (await this.ordersService.findOne({
-      subscriptionId: subscription.stripeSubscriptionId,
+      subscriptionId: updateSubscriptionDto.subscriptionId,
     })) as Order;
 
     const keyword = (await this.keywordsService.findOne({
@@ -235,8 +235,8 @@ export class StripeService {
       (updateSubscriptionDto.renewalDate as number) * 1000,
     );
     subscription.duration = updateSubscriptionDto.duration as string;
-    subscription.renewalPrice = order.renewalPrice;
-    subscription.price = order.total;
+    subscription.renewalPrice = order?.renewalPrice || 3.65;
+    subscription.price = order?.total || 3.65;
     await subscription?.save();
 
     await this.mailService.paymentConfirmation({

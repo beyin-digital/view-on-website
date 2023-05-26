@@ -55,17 +55,13 @@ export class Keyword extends EntityHelper {
     };
   };
 
-  @Column({ default: 0 })
+  @Column({ type: 'decimal', default: 0 })
   price: number;
 
   @BeforeInsert()
   @BeforeUpdate()
   public setToPremium(): void {
-    if (
-      this.price === 10000 ||
-      this.price === 100000 ||
-      this.price === 999999
-    ) {
+    if (this.price > 1000) {
       this.isPremium = true;
     }
   }
