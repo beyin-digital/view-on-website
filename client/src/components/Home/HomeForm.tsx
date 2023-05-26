@@ -138,6 +138,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
         <Box
           component="button"
           type="submit"
+          disabled={!foundSublink}
           sx={{
             background: 'none',
             border: 'none',
