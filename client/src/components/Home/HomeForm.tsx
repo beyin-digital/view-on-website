@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Box, OutlinedInput } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import { MdOutlineArrowOutward } from 'react-icons/md'
+import { KeywordContext } from '@/contexts/keywordContext'
 
-const HomeForm = ({ foundSublink, setHashtag, hashtag }: any) => {
+const HomeForm = ({ setHashtag, hashtag }: any) => {
   const { t } = useTranslation('home')
 
   const router = useRouter()
+
+  const { foundSublink } = useContext(KeywordContext)
 
   const [isTyping, setIsTyping] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(true)
