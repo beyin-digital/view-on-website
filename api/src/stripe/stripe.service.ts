@@ -175,7 +175,7 @@ export class StripeService {
     }
 
     const newOrder = await this.ordersService.create({
-      subscriptionId: createdCheckoutSession.subscription as string,
+      invoiceId: createdCheckoutSession.invoice as string,
       user: foundUser as User,
       keyword: createCheckoutSessionDto?.letters || '',
       sublink: createCheckoutSessionDto?.sublink || '',
@@ -256,7 +256,7 @@ export class StripeService {
     invoiceId: string,
     status: string,
     renewalPrice: number,
-    // subscriptionId: string,
+    subscriptionId: string,
   ) {
     const invoiceDetails = await this.stripe.invoices.retrieve(invoiceId);
     if (status === 'paid') {
@@ -267,17 +267,17 @@ export class StripeService {
       order.fulfilmentStatus = status;
       order.invoiceUrl = invoiceDetails.hosted_invoice_url as string;
       order.renewalPrice = renewalPrice;
-      //   order.subscriptionId = subscriptionId;
+      order.subscriptionId = subscriptionId;
       await order.save();
 
-      const newKeyword = await this.keywordsService.create({
+      await this.keywordsService.create({
         user: order?.user as User,
         letters: order?.keyword as string,
         price: order?.total as number,
         sublink: order?.sublink as string,
       });
 
-      await newKeyword.save();
+      //   await newKeyword.save();
     }
   }
 
@@ -336,7 +336,7 @@ export class StripeService {
           checkoutSession.invoice as string,
           checkoutSession.payment_status as string,
           renewalPrice,
-          //   checkoutSession.subscription as string,
+          checkoutSession.subscription as string,
         );
         break;
 
