@@ -149,10 +149,8 @@ const SignupDetails = () => {
                 return (
                   <GoogleLogin
                     type="icon"
-                    onSuccess={async (credentialResponse) => {
-                      await handleGoogleAuth(
-                        credentialResponse.credential as string
-                      )
+                    onSuccess={(credentialResponse) => {
+                      handleGoogleAuth(credentialResponse.credential as string)
                     }}
                     onError={() => {
                       toast.error('Login Failed')

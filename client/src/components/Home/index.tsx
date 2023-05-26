@@ -11,7 +11,9 @@ import { KeywordContext } from '@/contexts/keywordContext'
 import useDebounce from '@/hooks/useDebounce'
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:4000/analytics')
+const url = process.env.NEXT_PUBLIC_WEBSOCKET_URL
+const socket = io(`${url}/analytics`)
+
 const Layout = dynamic(() => import('@/components/Layout/LayoutHome'), {
   ssr: false,
 })

@@ -29,7 +29,7 @@ class SocketAdapter extends IoAdapter {
     const server = super.createIOServer(port, {
       ...options,
       cors: {
-        origin: ['http://localhost:3000', 'https://vow-client.vercel.app/'],
+        origin: ['http://localhost:3000', 'https://vow-client.vercel.app'],
         methods: ['GET', 'POST'],
       },
     });
@@ -40,7 +40,7 @@ class SocketAdapter extends IoAdapter {
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
-      origin: ['http://localhost:3000', 'https://vow-client.vercel.app/'],
+      origin: ['http://localhost:3000', 'https://vow-client.vercel.app'],
     },
     bufferLogs: true,
   });

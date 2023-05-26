@@ -279,10 +279,8 @@ const LoginForm = () => {
                 return (
                   <GoogleLogin
                     type="icon"
-                    onSuccess={async (credentialResponse) => {
-                      await handleGoogleAuth(
-                        credentialResponse.credential as string
-                      )
+                    onSuccess={(credentialResponse) => {
+                      handleGoogleAuth(credentialResponse.credential as string)
                     }}
                     onError={() => {
                       console.log('Login Failed')
