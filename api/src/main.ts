@@ -39,7 +39,9 @@ class SocketAdapter extends IoAdapter {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    cors: true,
+    cors: {
+      origin: ['http://localhost:3000', 'https://vow-client.vercel.app/'],
+    },
     bufferLogs: true,
   });
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
