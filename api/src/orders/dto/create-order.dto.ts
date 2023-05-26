@@ -24,9 +24,9 @@ export class CreateOrderDto {
   @IsString()
   checkoutSessionId: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  invoiceId: string;
+  invoiceId?: string;
 
   @IsNotEmpty()
   @IsString()
