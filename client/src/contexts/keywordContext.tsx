@@ -193,7 +193,7 @@ export const KeywordProvider = ({ children }: any) => {
   useEffect(() => {
     const token = localStorage.getItem('token')
     setToken(token || '')
-  }, [keywordFound, token, lineChartDataType])
+  }, [keywordFound, lineChartDataType])
   return (
     <KeywordContext.Provider
       value={{
