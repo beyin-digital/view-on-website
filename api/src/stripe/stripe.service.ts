@@ -68,6 +68,7 @@ export class StripeService {
     const foundUser = await this.usersService.findOne({
       id: user.id,
     });
+    foundUser;
 
     const existingKeyword = await this.keywordsService.findOne({
       letters: createCheckoutSessionDto?.letters,
