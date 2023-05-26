@@ -571,7 +571,7 @@ const HomeWeb = () => {
               {t('box_two_valid')}
             </Typography>
             {/* Dates */}
-            {(selectedKeyword.subscription.length > 0 ||
+            {/* {(selectedKeyword.subscription.length > 0 ||
               selectedKeyword.subscription[0] !== undefined) && (
               <Box
                 sx={{
@@ -600,7 +600,7 @@ const HomeWeb = () => {
                   ).toLocaleDateString()}
                 </Typography>
               </Box>
-            )}
+            )} */}
             <Typography
               sx={{ cursor: 'pointer' }}
               fontSize="14px"
