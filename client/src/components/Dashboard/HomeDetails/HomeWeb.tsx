@@ -161,8 +161,8 @@ const HomeWeb = () => {
         ])
       })
 
-    socket.on('notify_client', async () => {
-      await socket.emit(
+    socket.on('notify_client', () => {
+      socket.emit(
         'get_new_records',
         { hashtag: selectedKeyword.letters },
         (data: any) => {

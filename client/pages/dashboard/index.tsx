@@ -1,15 +1,13 @@
 import { Box } from '@mui/material'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'react-i18next'
-import { UserContext } from '@/contexts/userContext'
 
 // components
 import dynamic from 'next/dynamic'
-import { KeywordContext } from '@/contexts/keywordContext'
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
 })
@@ -25,6 +23,7 @@ const HomeMobile = dynamic(
     ssr: false,
   }
 )
+
 const DashboardHomePage = () => {
   const { t } = useTranslation('dashboard')
 

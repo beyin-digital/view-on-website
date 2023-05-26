@@ -121,7 +121,7 @@ export const KeywordProvider = ({ children }: any) => {
     interval?: string,
     price?: number
   ) => {
-    if (token === '') {
+    if (token === '' || token === null) {
       router.push('/login')
       return
     }
