@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { styled } from "@mui/material/styles";
 import {
-	Grid,
 	Typography,
 	Box,
 	Paper,
@@ -11,10 +10,9 @@ import {
 	Button,
 } from "@mui/material";
 
- import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { UserContext } from "@/contexts/userContext";
 import { useTranslation } from "react-i18next";
-import { MdLocationOn } from "react-icons/md";
 
 import dynamic from "next/dynamic";
 
@@ -134,7 +132,7 @@ const HomeMobile = () => {
 								paddingX: "18px",
 							}}
 						>
-							<Typography fontSize="20px">
+							<Typography fontSize="20px" color="#343132">
 								{t("box_main_chart_title")}
 							</Typography>
 							{/* Time Selection */}
@@ -189,8 +187,8 @@ const HomeMobile = () => {
 						marginTop="18px"
 						fontSize="20px"
 						marginX="37px"
+						color="#343132"
 					>
-						{/* Today VS All-time */}
 						{t("box_four_title")}
 					</Typography>
 					<PieChart data={viewsData} />
@@ -207,6 +205,7 @@ const HomeMobile = () => {
 						marginTop="18px"
 						fontSize="20px"
 						marginX="37px"
+						color="#343132"
 					>
 						{t("box_three_one")}
 					</Typography>
@@ -226,6 +225,7 @@ const HomeMobile = () => {
 						marginTop="10px"
 						fontSize="20px"
 						marginX="37px"
+						color="#343132"
 					>
 						{/* Total Number of Redirections */}
 						{t("box_three_two")}
@@ -251,8 +251,8 @@ const HomeMobile = () => {
 						fontSize="16px"
 						height="47px"
 						fontWeight={400}
+						color="#343132"
 					>
-						{/* Hashtag Details */}
 						{t("box_two_title")}
 					</Typography>
 					<Box
@@ -289,8 +289,8 @@ const HomeMobile = () => {
 							fontWeight={400}
 							align="center"
 							marginY="18px"
+							color="#343132"
 						>
-							{/* Valid */}
 							{t("box_two_valid")}
 						</Typography>
 						{/* Subscription dates */}
@@ -316,7 +316,7 @@ const HomeMobile = () => {
 								height: "15%",
 							}}
 						>
-							<Typography fontSize="11px">
+							<Typography fontSize="11px" color="#343132">
 								{t("go_to_subscriptions")}
 							</Typography>
 							<Typography fontSize="11px">{t("box_two_download")}</Typography>
@@ -337,6 +337,7 @@ const HomeMobile = () => {
 						component="div"
 						fontSize="20px"
 						fontWeight={400}
+						color="#343132"
 					>
 						{/* Hashtag Info */}
 						{t("box_one_title")}
@@ -394,8 +395,8 @@ const HomeMobile = () => {
 								variant="h5"
 								textAlign="start"
 								component="div"
+								color="#343132"
 							>
-								{/* Location */}
 								{t("box_one_location")}
 							</Typography>
 							{/* Second inputs container */}
@@ -429,7 +430,6 @@ const HomeMobile = () => {
 									}}
 								>
 									<MenuItem disabled value="">
-										{/* Country */}
 										{"box_one_location_country"}
 									</MenuItem>
 									<MenuItem value={1}>One</MenuItem>
@@ -488,7 +488,6 @@ const HomeMobile = () => {
 										},
 									}}
 								>
-									{/* Update */}
 									{t("box_one_button")}
 								</Button>
 							</Box>

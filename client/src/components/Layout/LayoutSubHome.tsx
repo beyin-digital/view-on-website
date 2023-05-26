@@ -4,8 +4,9 @@ import { Box } from "@mui/system";
 // components
 import { BackgroundImageSlider } from "../Slider/BackgroundImage";
 
+// components
 import dynamic from "next/dynamic";
-const Header = dynamic(() => import("../Navbar/Navbar"), {
+const Header = dynamic(() => import("../Navbar/NavbarSubscribe"), {
 	ssr: false,
 });
 const Footer = dynamic(() => import("../Footer/Footer"), {
@@ -17,8 +18,26 @@ const FooterMobile = dynamic(() => import("../Footer/FooterMobile"), {
 
 interface Props {
 	children: React.ReactNode;
+	nameOne?: any;
+	linkOne?: any;
+	nameTwo?: any;
+	linkTwo?: any;
+	nameThree?: any;
+	linkThree?: any;
+	nameFour?: any;
+	linkFour?: any;
 }
-const LayoutSubscribe: React.FC<Props> = ({ children }) => {
+const LayoutSubHome: React.FC<Props> = ({
+	children,
+	nameOne,
+	linkOne,
+	nameTwo,
+	linkTwo,
+	nameThree,
+	linkThree,
+	nameFour,
+	linkFour,
+}) => {
 	const [showSlider, setShowSlider] = useState(false);
 
 	useEffect(() => {
@@ -33,24 +52,35 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
 		<>
 			<Box
 				sx={{
-					width: "2162px",
 					maxWidth: "100%",
 					overflow: "hidden",
-					height: { xs: "100%", md: "96vh" },
 				}}
 			>
 				<Box
 					sx={{
 						margin: "auto",
-						height: { xs: "100%", md: "90vh", xl: "96vh" },
+						width: "100%",
+						position: { xs: "relative", md: "fixed" },
+						height: { xs: "", md: "100vh", xl: "100vh" },
 						display: "flex",
 						flexDirection: "column",
-						justifyContent: "center",
-						position: "relative",
+						justifyContent: "space-between",
+						// position: "relative",
 					}}
 				>
 					<BackgroundImageSlider />
-					<Header />
+					<Header
+						nameOne={nameOne}
+						linkOne={linkOne}
+						nameTwo={nameTwo}
+						linkTwo={linkTwo}
+						nameThree={nameThree}
+						linkThree={linkThree}
+						nameFour={nameFour}
+						linkFour={linkFour}
+					/>
+					{/* background Layout */}
+
 					<Box
 						className="LayoutBox"
 						sx={{
@@ -61,9 +91,8 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
 							border: "1px solid #FBFBFB",
 							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
-							transform: { xs: "skew(0deg, 0deg)", sm: "skew(-16deg, 0deg)" },
-							// overflow: { xs: "", md: "hidden", xl: "hidden" },
-							margin: { xs: "5rem auto", sm: "3rem auto" },
+							transform: "skew(-16deg, 0deg)",
+							margin: "3rem auto",
 							zIndex: "999",
 							paddingX: "2rem",
 							paddingY: "7px",
@@ -71,10 +100,14 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
 					>
 						{children}
 					</Box>
+
+					<Footer />
+					<FooterMobile />
 				</Box>
 			</Box>
+			<Footer />
 		</>
 	);
 };
 
-export default LayoutSubscribe;
+export default LayoutSubHome;

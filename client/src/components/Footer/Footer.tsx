@@ -63,6 +63,8 @@ const Footer = () => {
           },
 
           marginY: '5px',
+          position:"relative",
+          zIndex:"9"
         }}
       >
         <Box

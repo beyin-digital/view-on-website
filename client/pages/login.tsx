@@ -2,13 +2,11 @@ import { Box } from '@mui/material'
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetStaticProps } from 'next'
-import { GetServerSideProps } from 'next'
 
 import { useTranslation } from 'next-i18next'
 import { UserContext } from '@/contexts/userContext'
 import { useContext, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
-// import LazyLoad from "react-lazyload";
 
 // components
 import dynamic from 'next/dynamic'
@@ -52,22 +50,19 @@ const LoginPage = () => {
   }
   return (
     <>
-      <Head>
-        <title>{t('meta_title')} </title>
-        <meta name="description" content="" />
-        <meta name="keyword" content="" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-      </Head>{' '}
+     <Head>
+				<title>{t("meta_title")} </title>
+				<meta name="description" content={`${t("meta_description")}`} />
+				<meta name="keyword" content={`${t("meta_keyword")}`} />
+				<link
+					rel="canonical"
+					href="https://wiewonwebsite.com/en/illustration"
+				/>
+				<link rel="icon" href="/favicon.ico" />
+				<link rel="shortcut icon" href="/favicon.ico" />
+			</Head>
       <Layout
-       nameOne=""
-        linkOne=""
-        nameTwo=""
-        linkTwo=""
-        nameThree={t('subscribe')}
-        linkThree="/subscribe"
-        nameFour={t('nav_examples')}
-        linkFour="/example"
+       
       >
         <Box sx={boxStyle}>
           <Box

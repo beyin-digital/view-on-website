@@ -5,12 +5,32 @@
 // import Link from '@/components/Link'
 // import ProTip from '@/components/ProTip'
 // import Copyright from '@/components/Copyright'
-import Layout from '@/components/Layout/Layout'
+import dynamic from "next/dynamic";
+
+const Layout = dynamic(() => import("@/components/Layout/Layout"), {
+	ssr: false,
+});
+import Head from "next/head";
+import { useTranslation } from "next-i18next";
 
 const AboutPage = () => {
-  return (
-    <Layout>
-      {/* <Container maxWidth="lg">
+	const { t } = useTranslation("about");
+
+	return (
+		<>
+			<Head>
+				<title>{t("meta_title")} </title>
+				<meta name="description" content={`${t("meta_desc")}`} />
+				<meta name="keyword" content={`${t("meta_keyword")}`} />
+				<link
+					rel="canonical"
+					href="https://wiewonwebsite.com/en/illustration"
+				/>
+				<link rel="icon" href="/favicon.ico" />
+				<link rel="shortcut icon" href="/favicon.ico" />
+			</Head>
+			<Layout>
+				{/* <Container maxWidth="lg">
         <Box
           sx={{
             my: 4,
@@ -32,8 +52,9 @@ const AboutPage = () => {
           <Copyright />
         </Box>
       </Container> */}
-    </Layout>
-  )
-}
+			</Layout>
+		</>
+	);
+};
 
-export default AboutPage
+export default AboutPage;

@@ -21,9 +21,11 @@ const OneBox = () => {
         width: '1243.72px',
         maxWidth: '100%',
         height: '100%',
+        
       }}
       className="OneBoxDesktop"
       id="anime"
+
     >
       <Box
         sx={{

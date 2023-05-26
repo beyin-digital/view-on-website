@@ -35,7 +35,20 @@ const MobileProfile = () => {
 		}
 	}, []);
 	return (
-		<>
+		<Box
+			sx={{
+				marginX: { sm: "15px" },
+				width: "100%",
+				maxWidth: "100%",
+				maxHeight: { xs: "100vh", sm: "100%" },
+				height: { xs: "", sm: "100vh" },
+				display: {
+					xs: "block",
+					sm: "flex",
+					lg: "none",
+				},
+			}}
+		>
 			<Box
 				sx={{
 					display: {
@@ -43,10 +56,13 @@ const MobileProfile = () => {
 						sm: "block",
 						lg: "none",
 					},
+					flexDirection: "column",
+					justifyContent: "center",
 					width: "100%",
-					height: "100vh",
+					maxWidth: "100%",
+					maxHeight: { xs: "100vh", sm: "100%" },
+					height: { xs: "", sm: "100vh" },
 					padding: "27px",
-					marginX: { sm: "15px" },
 					borderRadius: { xs: "0", sm: "16px" },
 					backgroundColor: { xs: "0", sm: "rgba(251, 251, 251, 0.8)" },
 					border: { xs: "0", sm: "1px solid #E3E3E3" },
@@ -197,14 +213,14 @@ const MobileProfile = () => {
 							fontSize: "20px",
 							fontWeight: 400,
 							color: "white",
-						}}
+ 						}}
 					>
 						{/* Save Changes */}
 						{t("button_profile")}
 					</Button>
 				</Box>
 			</Box>
-		</>
+		</Box>
 	);
 };
 

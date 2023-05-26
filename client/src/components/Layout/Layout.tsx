@@ -18,26 +18,8 @@ const FooterMobile = dynamic(() => import("../Footer/FooterMobile"), {
 
 interface Props {
 	children: React.ReactNode;
-	nameOne?: any;
-	linkOne?: any;
-	nameTwo?: any;
-	linkTwo?: any;
-	nameThree?: any;
-	linkThree?: any;
-	nameFour?: any;
-	linkFour?: any;
 }
-const Layout: React.FC<Props> = ({
-	children,
-	nameOne,
-	linkOne,
-	nameTwo,
-	linkTwo,
-	nameThree,
-	linkThree,
-	nameFour,
-	linkFour,
-}) => {
+const Layout: React.FC<Props> = ({ children }) => {
 	const [showSlider, setShowSlider] = useState(false);
 
 	useEffect(() => {
@@ -68,18 +50,9 @@ const Layout: React.FC<Props> = ({
 						// position: "relative",
 					}}
 				>
-					{showSlider && <BackgroundImageSlider />}
+					<BackgroundImageSlider />
 
-					<Header
-						nameOne={nameOne}
-						linkOne={linkOne}
-						nameTwo={nameTwo}
-						linkTwo={linkTwo}
-						nameThree={nameThree}
-						linkThree={linkThree}
-						nameFour={nameFour}
-						linkFour={linkFour}
-					/>
+					<Header />
 					{/* background Layout */}
 
 					<Box
@@ -93,7 +66,6 @@ const Layout: React.FC<Props> = ({
 							backdropFilter: "blur(100px)",
 							borderRadius: "30px",
 							transform: "skew(-16deg, 0deg)",
-							// overflow: { xs: "", md: "hidden", xl: "hidden" },
 							margin: "3rem auto",
 							zIndex: "999",
 							paddingX: "2rem",
@@ -107,7 +79,7 @@ const Layout: React.FC<Props> = ({
 					<FooterMobile />
 				</Box>
 			</Box>
-			<Footer />
+			{/* <Footer /> */}
 		</>
 	);
 };

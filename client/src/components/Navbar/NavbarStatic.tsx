@@ -19,7 +19,16 @@ import { IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
 import { UserContext } from "@/contexts/userContext";
 
-const Header = () => {
+const NavbarStatic = ({
+	nameOne,
+	linkOne,
+	nameTwo,
+	linkTwo,
+	nameThree,
+	linkThree,
+	nameFour,
+	linkFour,
+}: any) => {
 	const { t } = useTranslation("common");
 	const router = useRouter();
 	const [mobileOpen, setMobileOpen] = useState(false);
@@ -117,8 +126,8 @@ const Header = () => {
 				}}
 			>
 				<Link
-					title={`${t("nav_subscribe")}`}
-					href="/subscribe"
+					title={nameOne}
+					href={`${linkOne}`}
 					style={{
 						textDecoration: "none",
 					}}
@@ -139,14 +148,14 @@ const Header = () => {
 							color="#343132"
 							textTransform={"capitalize"}
 						>
-							{t("nav_subscribe")}
+							{nameOne}
 						</Typography>
 						<IoIosArrowForward color="#343132" />
 					</Box>
 				</Link>
 				<Link
-					title={`${t("nav_examples")}`}
-					href="/example"
+					title={nameTwo}
+					href={`${linkTwo}`}
 					style={{
 						textDecoration: "none",
 					}}
@@ -167,15 +176,15 @@ const Header = () => {
 							color="#343132"
 							textTransform={"capitalize"}
 						>
-							{t("nav_examples")}
+							{nameTwo}
 						</Typography>
 						<IoIosArrowForward color="#343132" />
 					</Box>
 				</Link>
 
 				<Link
-					title={`${t("nav_login")}`}
-					href="/login"
+					title={nameThree}
+					href={`${linkThree}`}
 					style={{
 						textDecoration: "none",
 					}}
@@ -196,7 +205,7 @@ const Header = () => {
 							color="#343132"
 							textTransform={"capitalize"}
 						>
-							{t("nav_login")}
+							{nameThree}
 						</Typography>
 						<IoIosArrowForward color="#343132" />
 					</Box>
@@ -365,6 +374,16 @@ const Header = () => {
 						margin: "0 .5rem",
 					}}
 				/>
+				{/* <Image
+					src="/icons/linkedin.svg"
+					alt="View On Website Icon Linkedin"
+					title="View On Website Icon Linkedin"
+					height={18}
+					width={18}
+					style={{
+						margin: "0 .5rem",
+					}}
+				/> */}
 			</Box>
 			<Box
 				sx={{
@@ -476,8 +495,8 @@ const Header = () => {
 								<ul className="navigation-menu">
 									<li>
 										<Link
-											href="/subscribe"
-											title={`${t("nav_subscribe")}`}
+											href={`${linkOne}`}
+											title={nameOne}
 											style={{ textDecoration: "none" }}
 										>
 											<Typography
@@ -487,14 +506,14 @@ const Header = () => {
 												color="#343132"
 												textTransform={"capitalize"}
 											>
-												{t("nav_subscribe")}
+												{nameOne}
 											</Typography>
 										</Link>
 									</li>
 									<li>
 										<Link
-											href="/example"
-											title={`${t("nav_examples")}`}
+											href={`${linkTwo}`}
+											title={nameTwo}
 											style={{ textDecoration: "none" }}
 										>
 											<Typography
@@ -504,15 +523,15 @@ const Header = () => {
 												color="#343132"
 												textTransform={"capitalize"}
 											>
-												{t("nav_examples")}
+												{nameTwo}
 											</Typography>
 										</Link>
 									</li>
 
 									<li>
 										<Link
-											href="/login"
-											title={`${t("nav_login")}`}
+											href={`${linkThree}`}
+											title={nameThree}
 											style={{ textDecoration: "none" }}
 										>
 											<Typography
@@ -522,11 +541,27 @@ const Header = () => {
 												color="#343132"
 												textTransform={"capitalize"}
 											>
-												{t("nav_login")}
+												{nameThree}
 											</Typography>
 										</Link>
 									</li>
-
+									<li>
+										<Link
+											href={`${linkFour}`}
+											title={nameFour}
+											style={{ textDecoration: "none" }}
+										>
+											<Typography
+												fontSize="32px"
+												fontWeight={400}
+												lineHeight="37px"
+												color="#343132"
+												textTransform={"capitalize"}
+											>
+												{nameFour}
+											</Typography>
+										</Link>
+									</li>
 									<li>
 										<Link
 											href={asPath}
@@ -640,4 +675,4 @@ const Header = () => {
 	);
 };
 
-export default Header;
+export default NavbarStatic;

@@ -3,14 +3,19 @@ import { useRouter } from "next/router";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 import { FaUserAlt } from "react-icons/fa";
-import { AiFillCreditCard, AiFillInstagram } from "react-icons/ai";
+import {
+	AiFillCreditCard,
+	AiFillHome,
+	AiFillInstagram,
+	AiFillYoutube,
+} from "react-icons/ai";
 import {
 	BsFacebook,
 	BsFillShieldLockFill,
 	BsLinkedin,
 	BsTwitter,
 } from "react-icons/bs";
-import { IoIosLogOut } from "react-icons/io";
+import { RiLogoutBoxFill } from "react-icons/ri";
 import { BiHome } from "react-icons/bi";
 import { useContext, useState } from "react";
 import Modal from "../Modal";
@@ -37,7 +42,7 @@ const Sidebar = () => {
 			name: "Home Page",
 			tKey: "side_home",
 			icon: (
-				<BiHome
+				<AiFillHome
 					size={24}
 					color={router.pathname === "/dashboard" ? "white" : ""}
 				/>
@@ -81,7 +86,7 @@ const Sidebar = () => {
 			name: "Logout",
 			tKey: "side_logout",
 			icon: (
-				<IoIosLogOut
+				<RiLogoutBoxFill
 					color={router.pathname === "/dashboard/logout" ? "white" : ""}
 					size={24}
 				/>
@@ -101,7 +106,6 @@ const Sidebar = () => {
 					background: "rgba(251, 251, 251, 0.9)",
 					border: "1px solid #E3E3E3",
 					backdropFilter: "blur(100px)",
-					// borderRadius: "0px 30px 30px 0px",
 				}}
 				className="SideBarDashboard"
 			>
@@ -114,20 +118,19 @@ const Sidebar = () => {
 						marginBottom: "19px",
 						alignItems: "center",
 						justifyContent: "center",
-						// paddingLeft: '20px',
-						// flexDirection: { md: "column", xl: "row" },
 					}}
 					className="ImageDashboardPadding"
 				>
 					<Image src="/images/logo.svg" width={74} height={50} alt="logo" />
 					<Box
-						style={{
-							// marginRight: '20px',
-							display: "flex",
-							flexDirection: "column",
-							height: "50px",
-							alignItems: "flex-start",
-						}}
+						style={
+							{
+								// display: "flex",
+								// flexDirection: "column",
+								// height: "50px",
+								// alignItems: "flex-start",
+							}
+						}
 						className="ImageDashboardPadding"
 					>
 						<Typography fontSize="32px" fontWeight={"700"}>
@@ -184,10 +187,7 @@ const Sidebar = () => {
 						>
 							{link.icon}
 							<Typography
-								// sx={{ width: "200px" }}
 								fontSize="20px"
-								// fontWeight={router.pathname === link.href ? "500" : "400"}
-								// color={router.pathname === link.href ? "#FBFBFB" : "#000"}
 								className="SideBarDashboardIcon"
 								sx={{
 									fontWeight: router.pathname === link.href ? 500 : 400,
@@ -233,13 +233,10 @@ const Sidebar = () => {
 							<BsFacebook size={20} color="#343132" />
 						</Link>
 						<Link href="https://instagram.com/vow" target="_blank">
-							<BsTwitter size={20} color="#343132" />
+							<AiFillYoutube size={20} color="#343132" />
 						</Link>
 						<Link href="https://instagram.com/vow" target="_blank">
 							<AiFillInstagram size={20} color="#343132" />
-						</Link>
-						<Link href="https://instagram.com/vow" target="_blank">
-							<BsLinkedin size={20} color="#343132" />
 						</Link>
 					</Box>
 				) : (
@@ -257,13 +254,10 @@ const Sidebar = () => {
 							<BsFacebook size={20} color="#343132" />
 						</Link>
 						<Link href="https://instagram.com/vow" target="_blank">
-							<BsTwitter size={20} color="#343132" />
+							<AiFillYoutube size={20} color="#343132" />
 						</Link>
 						<Link href="https://instagram.com/vow" target="_blank">
 							<AiFillInstagram size={20} color="#343132" />
-						</Link>
-						<Link href="https://instagram.com/vow" target="_blank">
-							<BsLinkedin size={20} color="#343132" />
 						</Link>
 					</Box>
 				)}
@@ -291,7 +285,6 @@ const Sidebar = () => {
 							logout();
 						}}
 					>
-						{/* Log out */}
 						{t("side_logout")}
 					</Button>
 					<Button

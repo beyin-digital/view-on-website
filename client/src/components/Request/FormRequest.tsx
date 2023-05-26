@@ -1,8 +1,7 @@
 import { Box, Button, OutlinedInput, Typography } from '@mui/material'
 import LoginTextSignUp from '../Login/LoginTextSignUp'
 import { useTranslation } from 'next-i18next'
-import { useRouter } from 'next/router'
-import { IconsStyle } from '../Button'
+ import { IconsStyle } from '../Button'
 import { useContext, useState } from 'react'
 import { UserContext } from '@/contexts/userContext'
 

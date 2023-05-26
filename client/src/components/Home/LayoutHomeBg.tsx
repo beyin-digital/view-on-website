@@ -19,6 +19,7 @@ const LayoutHomeBg: React.FC<Props> = ({ children }) => {
         <Box
           sx={{
             width: { xs: '100%', md: '100%', xl: '100%' },
+            height:"100%"
           }}
           className="BoxHomeLayoutCenter"
         >

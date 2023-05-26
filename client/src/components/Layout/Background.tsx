@@ -23,6 +23,8 @@ export const Background = () => {
             position: 'absolute',
           }}
           className="ImageMobile"
+          placeholder="blur"
+          blurDataURL="/images/swirl.webp"
         />
       </Box>
     </>

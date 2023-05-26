@@ -12,18 +12,15 @@ const ThreeBox = () => {
       {locale === 'ar' ? (
         <Box
           sx={{
-            width: '1200.72px',
+            width: '1250.72px',
             maxWidth: '100%',
             borderLeft: '1px solid #FBFBFB',
             borderBottom: '1px solid #FBFBFB',
             borderTop: '1px solid #FBFBFB',
-            // border: "1px solid red",
-            borderTopLeftRadius: '35px',
-            // borderBottomLeftRadius: '35px',
-            background:
+             borderTopLeftRadius: '35px',
+             background:
               'linear-gradient(53.34deg, rgba(0, 144, 236, 0.3) 4.06%, rgba(0, 144, 236, 0.015) 63.3%)',
-            // "radial-gradient(98.05% 99.93% at 91.95% 90.07%, rgba(0, 144, 236, 0.3) 0%, rgba(0, 144, 236, 0.015) 100%)",
-            backdropFilter: 'blur(100px)',
+             backdropFilter: 'blur(100px)',
             position: 'relative',
             right: '-2rem',
           }}
@@ -32,10 +29,10 @@ const ThreeBox = () => {
             sx={{
               transform: 'skew(-16deg, 0deg)',
               position: 'absolute',
-              top: { xs: '3rem', xl: '1rem' },
+              top: { xs: '3rem', xl: '2rem' },
               left: { xs: '', md: '0rem', xl: '3rem' },
-              width: { md: '550px', xl: '550px' },
-              height: { md: '550px', xl: '550px' },
+              width: { md: '550px', xl: '530px' },
+              height: { md: '550px', xl: '540px' },
             }}
           >
             <img
@@ -98,15 +95,15 @@ const ThreeBox = () => {
           <Box
             sx={{
               transform: {
-                xs: 'skew(15deg, 0deg)',
-                xl: 'skew(15deg, 0deg)',
+                xs: 'skew(16deg, 0deg)',
+                xl: 'skew(16deg, 0deg)',
               },
               position: 'absolute',
               top: '0',
-              bottom: { xs: '', md: '-1rem', xl: '-1rem' },
-              right: { xs: '', md: '0rem', xl: '-5rem' },
-              width: { md: '500px', xl: '650px' },
-              height: { md: '500px', xl: '650px' },
+              bottom: { xs: '', md: '-1rem', xl: '1rem' },
+              right: { xs: '', md: '0rem', xl: '-5.5rem' },
+              width: { md: '500px', xl: '630px' },
+              height: { md: '500px', xl: '630px' },
             }}
           >
             <img
@@ -124,8 +121,8 @@ const ThreeBox = () => {
             sx={{
               width: '277px',
               transform: {
-                xs: 'skew(15deg, 0deg)',
-                xl: 'skew(15deg, 0deg)',
+                xs: 'skew(16deg, 0deg)',
+                xl: 'skew(16deg, 0deg)',
               },
               position: 'absolute',
               bottom: '1rem',

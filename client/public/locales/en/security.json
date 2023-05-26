@@ -7,7 +7,7 @@
   "new_pass": "New Password",
   "confirm_pass": "Confirm New Password",
   "text": "Two factor Authentication",
-  "text_two": "We will send you a verification email overtime you login",
+  "text_two": "We will send you a verification email every time you login",
   "button_security": "Save Changes",
   "delete_account": "Delete account",
   "change_info": "Change your account info:",
