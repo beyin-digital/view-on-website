@@ -135,13 +135,15 @@ export const KeywordProvider = ({ children }: any) => {
   }
 
   const getUsersKeywords = async () => {
-    const res = await api.get('/keywords/all', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    const data = res.data
-    setKeywords(data.data)
+    if (token !== '' && token !== null) {
+      const res = await api.get('/keywords/all', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      const data = res.data
+      setKeywords(data.data)
 
-    setSelectedKeyword(data.data[0])
+      setSelectedKeyword(data.data[0])
+    }
   }
 
   const getUserSubscriptions = async () => {

@@ -33,13 +33,13 @@ export class Order extends EntityHelper {
   @Column({ default: false })
   isPremium: boolean;
 
-  @Column({ nullable: true })
+  @Column({ type: 'decimal', nullable: true })
   total: number;
 
-  @Column({ nullable: true })
+  @Column({ type: 'decimal', nullable: true })
   subTotal: number;
 
-  @Column({ nullable: true })
+  @Column({ type: 'decimal', nullable: true })
   discount: number;
 
   @Column({ nullable: true })

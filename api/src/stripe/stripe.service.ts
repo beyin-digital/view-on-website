@@ -122,7 +122,6 @@ export class StripeService {
           customer: foundUser?.stripeCustomerId || '',
           mode: 'subscription',
           locale: 'en',
-          payment_intent_data: {},
           line_items: [
             {
               price_data: {
@@ -134,7 +133,7 @@ export class StripeService {
                   } premium hashtag`,
                 },
                 unit_amount:
-                  (createCheckoutSessionDto?.letters.length as number) >= 1
+                  (createCheckoutSessionDto?.letters.length as number) <= 1
                     ? 999995.35 * 100
                     : (createCheckoutSessionDto?.letters.length as number) === 2
                     ? 100000 * 100

@@ -165,9 +165,9 @@ const Navbar = () => {
             onChange={handleChange}
             variant="scrollable"
             scrollButtons={false}
-            defaultValue={keywords?.[0]?.letters}
+            defaultValue={keywords[0]?.letters}
           >
-            {keywords?.map((keyword, index) => (
+            {keywords?.map((keyword) => (
               <Tab
                 sx={{
                   minWidth: '15%',

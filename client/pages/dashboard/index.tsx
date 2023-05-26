@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { useContext, useEffect } from 'react'
+import { Suspense, useContext, useEffect } from 'react'
 
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next'
 
 // components
 import dynamic from 'next/dynamic'
+import { UserContext } from '@/contexts/userContext'
+import { useRouter } from 'next/router'
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
 })
@@ -26,6 +28,13 @@ const HomeMobile = dynamic(
 
 const DashboardHomePage = () => {
   const { t } = useTranslation('dashboard')
+  const router = useRouter()
+  const { token } = useContext(UserContext)
+
+  //   useEffect(() => {
+  //     if (token) return
+  //     router.push(`${router.locale}/login`)
+  //   }, [])
 
   return (
     <>

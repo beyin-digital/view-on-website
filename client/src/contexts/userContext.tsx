@@ -173,8 +173,6 @@ export const UserProvider = ({ children }: any) => {
       if (res.status >= 400) {
         throw new Error()
       }
-      router.push(`/verification?newUser=${values.email}`)
-
       setValues({
         identifier: '',
         email: '',
@@ -182,6 +180,7 @@ export const UserProvider = ({ children }: any) => {
         password: '',
         confirmPassword: '',
       })
+      router.push(`/verification?email=${values.email}`)
     } catch (err) {
       toast.error('Error signing up. Please try again.', {
         position: 'bottom-right',
@@ -345,7 +344,6 @@ export const UserProvider = ({ children }: any) => {
         })
         const data = res.data
         setUser(data)
-        console.log(data)
       } catch (err) {
         console.log(err)
       }

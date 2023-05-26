@@ -134,9 +134,9 @@ const VerificationDetails = () => {
                 paddingX: '.5rem',
               }}
             >
-              {t('desc')}
+              {/* {t('desc')} */}
               Enter the authenrication code we sent to Your email{' '}
-              {router.query.newUser ? router.query.newUser : user?.email} below:
+              {router.query.email ? router.query.email : user?.email} below:
               {/* {t("desc")} */}
             </Typography>
             <Box

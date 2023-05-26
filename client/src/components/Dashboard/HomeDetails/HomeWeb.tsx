@@ -10,7 +10,7 @@ import {
   MenuItem,
   Button,
 } from '@mui/material'
-import { useRouter } from 'next/navigation'
+import { LoadingButton } from '@mui/lab'
 import { UserContext } from '@/contexts/userContext'
 import { useTranslation } from 'react-i18next'
 import { MdLocationOn } from 'react-icons/md'
@@ -53,6 +53,7 @@ const HomeWeb = () => {
     updateKeywordDetails,
     analyticsData,
   } = useContext(KeywordContext)
+  const { token } = useContext(UserContext)
 
   const [lineChartType, setLineChartType] = useState(1)
 
@@ -83,24 +84,27 @@ const HomeWeb = () => {
     },
   ])
   const [lineChartData, setLineChartData] = React.useState<any>(null)
-
+  const [locationIsLoading, setLocationIsLoading] = useState(false)
   const getLocation = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         console.log('location', position)
-
+        setLocationIsLoading(true)
         const res = await api.get(
           `https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=ebb95c6b3fcd4c46a5fe97994c6f9d07`
         )
-        const data = res.data.features
-        setValues({
-          ...values,
-          location: {
-            country: data[0].properties.country,
-            state: data[0].properties.city,
-          },
-        })
-        console.log(values)
+        if (res.status === 200) {
+          const data = res.data.features
+          setValues({
+            ...values,
+            location: {
+              country: data[0].properties.country,
+              state: data[0].properties.city,
+            },
+          })
+          setLocationIsLoading(false)
+        }
+        setLocationIsLoading(false)
       })
     } else {
       alert('Geolocation is not supported by this browser.')
@@ -111,54 +115,56 @@ const HomeWeb = () => {
     api
       .get(`/analytics/keyword?keyword=${selectedKeyword?.letters}`)
       .then((res) => {
-        setAnalyticsData({
-          ...analyticsData,
-          totalVisits: res.data.totalVisits,
-          totalVisitsToday: res.data.totalVisitsToday,
-          totalDailyVisitsByHoursOfTheDay:
-            res.data.totalDailyVisitsByHoursOfTheDay,
-          totalVisitsByMonthsOfTheYear: res.data.totalVisitsByMonthsOfTheYear,
-          totalVisitsByDaysOfTheWeek: res.data.totalVisitsByDaysOfTheWeek,
-          totalVisitsByDaysOfTheMonth: res.data.totalVisitsByDaysOfTheMonth,
-        })
-        setPieChartData([
-          {
-            id: 'today',
-            label: `${t('box_four_today')}`,
-            tKey: 'box_four_today',
-            value: res.data.totalVisitsToday,
-            color: 'hsla(112, 81%, 52%, 1)',
-          },
-          {
-            id: 'all-time',
-            label: `${t('box_four_all')}`,
-            tKey: 'box_four_all',
-            value: res.data.totalVisits,
-            color: 'hsla(203, 100%, 46%, 1)',
-          },
-        ])
-        setLineChartData([
-          {
-            id: "Today's visits",
-            color: 'hsla(203, 100%, 46%, 1)',
-            data: res.data.totalDailyVisitsByHoursOfTheDay,
-          },
-          {
-            id: "This Week's visits",
-            color: 'hsla(203, 100%, 46%, 1)',
-            data: res.data.totalVisitsByDaysOfTheWeek,
-          },
-          {
-            id: "This month's visits",
-            color: 'hsla(203, 100%, 46%, 1)',
-            data: res.data.totalVisitsByDaysOfTheMonth,
-          },
-          {
-            id: "This year's visits",
-            color: 'hsla(203, 100%, 46%, 1)',
-            data: res.data.totalVisitsByMonthsOfTheYear,
-          },
-        ])
+        if (res.status === 200) {
+          setAnalyticsData({
+            ...analyticsData,
+            totalVisits: res.data.totalVisits,
+            totalVisitsToday: res.data.totalVisitsToday,
+            totalDailyVisitsByHoursOfTheDay:
+              res.data.totalDailyVisitsByHoursOfTheDay,
+            totalVisitsByMonthsOfTheYear: res.data.totalVisitsByMonthsOfTheYear,
+            totalVisitsByDaysOfTheWeek: res.data.totalVisitsByDaysOfTheWeek,
+            totalVisitsByDaysOfTheMonth: res.data.totalVisitsByDaysOfTheMonth,
+          })
+          setPieChartData([
+            {
+              id: 'today',
+              label: `${t('box_four_today')}`,
+              tKey: 'box_four_today',
+              value: res.data.totalVisitsToday,
+              color: 'hsla(112, 81%, 52%, 1)',
+            },
+            {
+              id: 'all-time',
+              label: `${t('box_four_all')}`,
+              tKey: 'box_four_all',
+              value: res.data.totalVisits,
+              color: 'hsla(203, 100%, 46%, 1)',
+            },
+          ])
+          setLineChartData([
+            {
+              id: "Today's visits",
+              color: 'hsla(203, 100%, 46%, 1)',
+              data: res.data.totalDailyVisitsByHoursOfTheDay,
+            },
+            {
+              id: "This Week's visits",
+              color: 'hsla(203, 100%, 46%, 1)',
+              data: res.data.totalVisitsByDaysOfTheWeek,
+            },
+            {
+              id: "This month's visits",
+              color: 'hsla(203, 100%, 46%, 1)',
+              data: res.data.totalVisitsByDaysOfTheMonth,
+            },
+            {
+              id: "This year's visits",
+              color: 'hsla(203, 100%, 46%, 1)',
+              data: res.data.totalVisitsByMonthsOfTheYear,
+            },
+          ])
+        }
       })
 
     socket.on('notify_client', () => {
@@ -230,6 +236,7 @@ const HomeWeb = () => {
     })
   }, [selectedKeyword])
 
+  console.log(selectedKeyword)
   return (
     <>
       <Grid
@@ -348,8 +355,9 @@ const HomeWeb = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <Button
+                  <LoadingButton
                     disableRipple
+                    loading={locationIsLoading}
                     variant="contained"
                     onClick={getLocation}
                     sx={{
@@ -368,8 +376,8 @@ const HomeWeb = () => {
                       },
                     }}
                   >
-                    {t('current_location')}
-                  </Button>
+                    <span>{t('current_location')}</span>
+                  </LoadingButton>
                   <MdLocationOn size={25} />
                 </Box>
               </Box>
@@ -383,7 +391,7 @@ const HomeWeb = () => {
                 {/* Country select */}
                 <Select
                   displayEmpty
-                  value={values.location.country}
+                  value={values?.location?.country}
                   onChange={(e) =>
                     setValues({
                       ...values,
@@ -419,9 +427,9 @@ const HomeWeb = () => {
                     {/* Country */}
                     {t('box_one_location_country')}
                   </MenuItem>
-                  {countries.map((country) => (
-                    <MenuItem key={country.country} value={country.country}>
-                      {country.country}
+                  {countries?.map((country) => (
+                    <MenuItem key={country?.country} value={country?.country}>
+                      {country?.country}
                     </MenuItem>
                   ))}
                 </Select>
@@ -432,14 +440,14 @@ const HomeWeb = () => {
                     setValues({
                       ...values,
                       location: {
-                        ...values.location,
+                        ...values?.location,
                         state: e.target.value,
                       },
                     })
                   }
-                  value={values.location.state}
+                  value={values?.location?.state}
                   renderValue={(selected: any) => {
-                    if (selected.length === 0) {
+                    if (selected?.length === 0) {
                       return 'State'
                     }
                     return selected
@@ -465,7 +473,8 @@ const HomeWeb = () => {
                   </MenuItem>
                   {countries
                     .find(
-                      (country) => country.country === values.location.country
+                      (country) =>
+                        country?.country === values?.location?.country
                     )
                     ?.states.map((state) => (
                       <MenuItem key={state} value={state}>
@@ -491,9 +500,9 @@ const HomeWeb = () => {
                 onClick={() => {
                   console.log(selectedKeyword.id)
                   updateKeywordDetails(selectedKeyword?.id, {
-                    location: values.location,
-                    organisation: values.organisation,
-                    sublink: values.sublink,
+                    location: values?.location,
+                    organisation: values?.organisation,
+                    sublink: values?.sublink,
                   })
                 }}
                 disableRipple
@@ -562,33 +571,36 @@ const HomeWeb = () => {
               {t('box_two_valid')}
             </Typography>
             {/* Dates */}
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
-                width: '100%',
-                height: '106px',
-                background: 'rgba(251, 251, 251, 0.6)',
-                border: '1px solid #FBFBFB',
-                backdropFilter: 'blur(100px)',
-                borderRadius: '24px',
-              }}
-            >
-              <Typography>
-                {t('box_two_date_bought')} :{' '}
-                {new Date(
-                  selectedKeyword?.subscription[0]?.purchaseDate
-                ).toLocaleDateString()}
-              </Typography>
-              <Typography>
-                {t('box_two_date_next')} :{' '}
-                {new Date(
-                  selectedKeyword?.subscription[0]?.renewalDate
-                ).toLocaleDateString()}
-              </Typography>
-            </Box>
+            {(selectedKeyword.subscription.length > 0 ||
+              selectedKeyword.subscription[0] !== undefined) && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                  width: '100%',
+                  height: '106px',
+                  background: 'rgba(251, 251, 251, 0.6)',
+                  border: '1px solid #FBFBFB',
+                  backdropFilter: 'blur(100px)',
+                  borderRadius: '24px',
+                }}
+              >
+                <Typography>
+                  {t('box_two_date_bought')}:
+                  {new Date(
+                    selectedKeyword?.subscription[0]?.purchaseDate
+                  ).toLocaleDateString()}
+                </Typography>
+                <Typography>
+                  {t('box_two_date_next')}:
+                  {new Date(
+                    selectedKeyword?.subscription[0]?.renewalDate
+                  ).toLocaleDateString()}
+                </Typography>
+              </Box>
+            )}
             <Typography
               sx={{ cursor: 'pointer' }}
               fontSize="14px"
@@ -719,7 +731,7 @@ const HomeWeb = () => {
                 <MenuItem value={4}>year</MenuItem>
               </Select>
             </Box>
-            {lineChartData &&
+            {lineChartData !== null &&
               lineChartData.length >= 4 &&
               (lineChartType == 1 ? (
                 <LineChart data={lineChartData[0]} />

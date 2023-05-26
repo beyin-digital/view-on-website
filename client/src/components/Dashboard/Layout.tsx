@@ -16,10 +16,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
   const { locale } = useRouter()
 
   const { token } = useContext(UserContext)
-  useEffect(() => {
-    if (token) return
-    router.push(`${router.locale}/login`)
-  }, [token])
 
   if (!token)
     return (
