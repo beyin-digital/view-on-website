@@ -39,8 +39,7 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
 
   const hashtagDebounce = useDebounce(hashtag, 1000)
 
-  const { keywordFound, checkKeywordavailability } =
-    useContext(KeywordContext)
+  const { keywordFound, checkKeywordavailability } = useContext(KeywordContext)
 
   const [state, setState] = useState({
     top: false,
@@ -70,13 +69,13 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
   }
 
   useEffect(() => {
-    if (hashtagDebounce) {
+    if (hashtagDebounce || hashtagDebounce === '') {
       checkKeywordavailability(hashtagDebounce)
       if (keywordFound) {
         socket.emit('add_new_record', { hashtag: hashtagDebounce })
       }
     }
-  }, [hashtagDebounce])
+  }, [hashtagDebounce, keywordFound])
 
   return (
     <Suspense>
