@@ -31,7 +31,7 @@ const HomeForm = ({ foundSublink, setHashtag, hashtag }: any) => {
 
   const handleSubmit = () => {
     if (foundSublink) {
-      window.location.href = foundSublink
+      window.open(`${foundSublink}`, '_blank')
     }
   }
   return (
