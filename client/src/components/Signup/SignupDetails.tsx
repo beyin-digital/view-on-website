@@ -2,9 +2,15 @@ import { Typography, Box } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
+import { GoogleLogin } from '@react-oauth/google'
+import { UserContext } from '@/contexts/userContext'
+import { useContext } from 'react'
+import { toast } from 'react-toastify'
 
 const SignupDetails = () => {
   const { t } = useTranslation('signup')
+
+  const { handleGoogleAuth } = useContext(UserContext)
 
   const icon = [
     {
@@ -13,6 +19,7 @@ const SignupDetails = () => {
       alt: 'Google Icon',
       title: 'Google Icon',
       link: 'https://google.com',
+      name: 'google',
     },
     {
       id: 2,
@@ -20,21 +27,8 @@ const SignupDetails = () => {
       alt: 'Apple Icon',
       title: 'Apple Icon',
       link: 'https://apple.com',
+      name: 'apple',
     },
-    // {
-    // 	id: 3,
-    // 	icon: "/icons/facebookColor.svg",
-    // 	alt: "Facebook Icon",
-    // 	title: "Facebook Icon",
-    // 	link: "https://facebook.com",
-    // },
-    // {
-    // 	id: 4,
-    // 	icon: "/icons/linkedin.svg",
-    // 	alt: "LinkedIn Icon",
-    // 	title: "LinkedIn Icon",
-    // 	link: "https://linkedin.com",
-    // },
   ]
   return (
     <>
@@ -150,20 +144,38 @@ const SignupDetails = () => {
               justifyContent: 'center',
             }}
           >
-            {icon.map((item) => (
-              <Link href={item.link} key={item.id}>
-                <Image
-                  src={item.icon}
-                  alt={item.alt}
-                  title={item.title}
-                  height={37}
-                  width={37}
-                  style={{
-                    margin: 'auto .2rem',
-                  }}
-                />
-              </Link>
-            ))}
+            {icon.map((item) => {
+              if (item.name === 'google') {
+                return (
+                  <GoogleLogin
+                    type="icon"
+                    onSuccess={async (credentialResponse) => {
+                      await handleGoogleAuth(
+                        credentialResponse.credential as string
+                      )
+                    }}
+                    onError={() => {
+                      toast.error('Login Failed')
+                    }}
+                    useOneTap
+                  />
+                )
+              }
+              return (
+                <Link href={item.link} key={item.id}>
+                  <Image
+                    src={item.icon}
+                    alt={item.alt}
+                    title={item.title}
+                    height={37}
+                    width={37}
+                    style={{
+                      margin: 'auto .2rem',
+                    }}
+                  />
+                </Link>
+              )
+            })}
           </Box>
           <Box
             sx={{
