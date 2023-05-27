@@ -1,11 +1,20 @@
 import React, { useContext } from "react";
 import { Box } from "@mui/material";
 import { usePathname } from "next/navigation";
-import Navbar from "@/components/Dashboard/Navbar";
-import Sidebar from "@/components/Dashboard/Sidebar";
 import { UserContext } from "@/contexts/userContext";
-import FooterMobile from "../Footer/FooterMobile";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
+const Navbar = dynamic(() => import("@/components/Dashboard/Navbar"), {
+	ssr: false,
+});
+const Sidebar = dynamic(() => import("@/components/Dashboard/Sidebar"), {
+	ssr: false,
+});
+const FooterMobile = dynamic(() => import("../Footer/FooterMobile"), {
+	ssr: false,
+});
+
 interface RootLayoutProps {
 	children: React.ReactNode;
 }
@@ -50,7 +59,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
 				/>
 			</>
 		);
-
 	return (
 		<>
 			{/* Background */}

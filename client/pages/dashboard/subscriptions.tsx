@@ -10,7 +10,7 @@ import {
 	Divider,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -41,6 +41,7 @@ const DashboardSubscriptionsPage = () => {
 	const { locale } = useRouter();
 	const { getUserSubscriptions, subscriptions } = useContext(KeywordContext);
 	const { token, user } = useContext(UserContext);
+	const [isScrollable, setIsScrollable] = useState(subscriptions.length > 3);
 
 	useEffect(() => {
 		if (token) {
@@ -176,7 +177,10 @@ const DashboardSubscriptionsPage = () => {
 								display: "flex",
 								width: "100%",
 								justifyContent: "flex-start",
-								overflowX: "scroll",
+								// overflowX: "scroll",
+								height: "100%",
+								overflowY: isScrollable ? "scroll" : "initial",
+								maxHeight: isScrollable ? "100%" : "auto",
 							}}
 						>
 							{/* Regular sub card */}

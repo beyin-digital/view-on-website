@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import useDebounce from "@/hooks/useDebounce";
 import { isValidUrl } from "@/utils/checkUrl";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -14,6 +14,7 @@ import {
 	Button,
 	Grid,
 	CircularProgress,
+	Fade,
 } from "@mui/material";
 
 // translate hook
@@ -59,11 +60,12 @@ const SubscribePage: NextPage = () => {
 	const { t } = useTranslation("subscribe");
 	const router = useRouter();
 	const { locale } = useRouter();
-
+	const [isInputValid, setIsInputValid] = useState(true);
 	const [values, setValues] = useState({
 		hashtag: "",
 		sublink: "",
 	});
+	const allowedCharacters = /^[a-zA-Z\u0600-\u06FF\s.,،]+$/;
 
 	const hashtagDebounce = useDebounce(values.hashtag, 1000);
 	const {
@@ -102,7 +104,10 @@ const SubscribePage: NextPage = () => {
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const inputValue = e.target.value;
+
 		setValues({ ...values, [e.target.name]: e.target.value });
+		setIsInputValid(!/\d/.test(inputValue));
 	};
 
 	// »arrow down
@@ -203,6 +208,13 @@ const SubscribePage: NextPage = () => {
 										}}
 									>
 										<OutlinedInput
+											// inputProps={{
+											// 	pattern: "[a-zA-Z\u0600-\u06FFs]+",
+											// }}
+											inputProps={{
+												pattern: allowedCharacters.test(values.hashtag),
+											}}
+											// className={``}
 											name="hashtag"
 											sx={{
 												width: "100%",
@@ -240,7 +252,7 @@ const SubscribePage: NextPage = () => {
 												isSearching ? (
 													<CircularProgress
 														sx={{ color: "#343132" }}
-														size={60}
+														size={40}
 													/>
 												) : locale === "ar" ? (
 													<FiArrowUpLeft color="#343132" size={90} />
@@ -248,7 +260,7 @@ const SubscribePage: NextPage = () => {
 													<FiArrowUpRight color="#343132" size={90} />
 												)
 											}
-											className={`${
+											className={`${!isInputValid ? "inputError" : ""} ${
 												(values.hashtag.length === 1 ||
 													values.hashtag.length === 2 ||
 													values.hashtag.length === 3) &&
@@ -258,7 +270,11 @@ const SubscribePage: NextPage = () => {
 											}`}
 											onChange={handleChange}
 										/>
-
+										{!isInputValid && (
+											<Typography sx={{ color: "red" }}>
+												{t("error")}
+											</Typography>
+										)}
 										<Box
 											width="100%"
 											display="flex"
@@ -292,33 +308,37 @@ const SubscribePage: NextPage = () => {
 														md: "row",
 														xl: "row",
 													},
+													height: "60px",
 												}}
 											>
-												{values.hashtag.length >= 1 && !keywordFound && (
-													<Typography
-														sx={{
-															cursor: "pointer",
-															color: "#000",
-															backgroundClip: "text",
-															WebkitBackgroundClip: "text",
-															fontSize: {
-																xs: "18px",
-																md: "24px",
-																xl: "28px",
-															},
-															alignItems: "center",
-															display: "flex",
-															paddingX: ".6rem",
-														}}
-													>
-														{t("available")}
-													</Typography>
-												)}
+												{values.hashtag.length >= 1 &&
+													!keywordFound &&
+													!/^[\p{N}\d\s]+$/u.test(values.hashtag) && (
+														<Typography
+															sx={{
+																cursor: "pointer",
+																color: "#000",
+																backgroundClip: "text",
+																WebkitBackgroundClip: "text",
+																fontSize: {
+																	xs: "18px",
+																	md: "24px",
+																	xl: "28px",
+																},
+																alignItems: "center",
+																display: "flex",
+																paddingX: ".6rem",
+															}}
+														>
+															{t("available")}
+														</Typography>
+													)}
 
 												{(values.hashtag.length === 1 ||
 													values.hashtag.length === 2 ||
 													values.hashtag.length === 3) &&
-													!keywordFound && (
+													!keywordFound &&
+													!/^[\p{N}\d\s]+$/u.test(values.hashtag) && (
 														<Typography
 															onClick={() =>
 																router.push(`${router.asPath}/premium`)
@@ -331,10 +351,6 @@ const SubscribePage: NextPage = () => {
 																		? "flex"
 																		: "none",
 
-																// backgroundImage:
-																// 	"linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
-																// backgroundClip: "text",
-																// WebkitBackgroundClip: "text",
 																color: "#000",
 																fontSize: {
 																	xs: "18px",
@@ -342,7 +358,6 @@ const SubscribePage: NextPage = () => {
 																	xl: "28px",
 																},
 																alignItems: "center",
-																// display: "flex",
 																paddingX: ".6rem",
 															}}
 														>
@@ -424,7 +439,7 @@ const SubscribePage: NextPage = () => {
 											justifyContent: "space-between",
 											marginBottom: {
 												xs: "2rem",
-												xl: "1rem",
+												xl: ".1rem",
 											},
 											flexDirection: {
 												xs: "column",
@@ -432,270 +447,319 @@ const SubscribePage: NextPage = () => {
 												xl: "row",
 											},
 											alignItems: "center",
+											transition: "1 ease",
 										}}
 									>
-										<Box
-											sx={{
-												height: {
-													xs: "100%",
-													md: "100%",
-													xl: "100px",
-												},
-												width: {
-													xs: "100%",
-													md: "80%",
-													xl: "90%",
-												},
-												marginY: ".8rem",
-												display: "flex",
-												justifyContent: {
-													xs: "",
-													md: "space-around",
-													xl: "space-around",
-												},
-												alignItems: "center",
-												flexDirection: {
-													xs: "column",
-													md: "row",
-													xl: "row",
-												},
-											}}
-										>
+										<>
 											<Box
 												sx={{
+													height: {
+														xs: "100%",
+														md: "100%",
+														xl: "100px",
+													},
 													width: {
 														xs: "100%",
-														md: "40%",
-														xl: "30%",
+														md: "80%",
+														xl: "90%",
 													},
+													marginY: ".2rem",
 													display: "flex",
-													height: "100%",
-													justifyContent: "space-between",
+													justifyContent: {
+														xs: "",
+														md: "space-around",
+														xl: "space-around",
+													},
 													alignItems: "center",
-													marginY: "1rem",
+													flexDirection: {
+														xs: "column",
+														md: "row",
+														xl: "row",
+													},
 												}}
 											>
 												<Box
 													sx={{
 														width: {
 															xs: "100%",
-															md: "100%",
-															xl: "70%",
+															md: "40%",
+															xl: "30%",
 														},
-														height: "100%",
 														display: "flex",
-														alignItems: "center",
-														justifyContent: "space-evenly",
-														flexDirection: "column",
-													}}
-												>
-													<Typography
-														sx={{
-															fontSize: {
-																xs: "20px",
-																sm: "40px",
-																md: "40px",
-																xl: "40px",
-															},
-															lineHeight: "37px",
-															fontWeight: "400",
-															color: "#343132",
-															textTransform: "uppercase",
-														}}
-													>
-														{price}
-													</Typography>
-													{/* {values.hashtag.length < 4 && ( */}
-													<Typography
-														sx={{
-															fontSize: {
-																xs: "14px",
-																sm: "16px",
-																md: "16px",
-																xl: "16px",
-															},
-															lineHeight: "14px",
-															fontWeight: "400",
-															color: "#343132",
-															textTransform: "capitalize",
-															marginY: ".6rem",
-															display:
-																values.hashtag.length === 1 ||
-																values.hashtag.length === 2 ||
-																values.hashtag.length === 3
-																	? "block"
-																	: "none",
-														}}
-													>
-														{t("cash_one")}
-													</Typography>
-													{/* )} */}
-												</Box>
-											</Box>
-											{/* Check  */}
-											{values.hashtag.length < 4 && (
-												<Box
-													sx={{
-														width: {
-															xs: "100%",
-															md: "60%",
-															xl: "40%",
-														},
 														height: "100%",
-														display:
-															values.hashtag.length === 1 ||
-															values.hashtag.length === 2 ||
-															values.hashtag.length === 3
-																? "flex"
-																: "none",
+														justifyContent: "space-between",
 														alignItems: "center",
-														justifyContent: "center",
+														marginY: "1rem",
 													}}
 												>
-													<Checks />
+													<Box
+														sx={{
+															width: {
+																xs: "100%",
+																md: "100%",
+																xl: "70%",
+															},
+															height: "100%",
+															display:
+																values.hashtag.length >= 1 &&
+																values.hashtag.length <= 3 &&
+																!/^[\p{N}\d\s]+$/u.test(values.hashtag)
+																	? "flex"
+																	: "none",
+															alignItems: "center",
+															justifyContent: "space-evenly",
+															flexDirection: "column",
+														}}
+													>
+														<Typography
+															sx={{
+																fontSize: {
+																	xs: "20px",
+																	sm: "40px",
+																	md: "40px",
+																	xl: "40px",
+																},
+																lineHeight: "37px",
+																fontWeight: "400",
+																color: "#343132",
+																textTransform: "uppercase",
+															}}
+														>
+															{price}
+														</Typography>
+														{/* {values.hashtag.length < 4 && ( */}
+														<Typography
+															sx={{
+																fontSize: {
+																	xs: "14px",
+																	sm: "16px",
+																	md: "16px",
+																	xl: "16px",
+																},
+																lineHeight: "14px",
+																fontWeight: "400",
+																color: "#343132",
+																textTransform: "capitalize",
+																marginY: ".6rem",
+																display:
+																	values.hashtag.length === 1 ||
+																	values.hashtag.length === 2 ||
+																	values.hashtag.length === 3
+																		? "block"
+																		: "none",
+															}}
+														>
+															{t("cash_one")}
+														</Typography>
+														{/* )} */}
+													</Box>
 												</Box>
-											)}
-										</Box>
-										{/* Button Reserve Or Pay || Button Inder Code !!  */}
+												{/* Check  */}
+												{values.hashtag.length < 4 &&
+													!/^[\p{N}\d\s]+$/u.test(values.hashtag) && (
+														<Box
+															sx={{
+																width: {
+																	xs: "100%",
+																	md: "60%",
+																	xl: "40%",
+																},
+																height: "100%",
+																display:
+																	values.hashtag.length === 1 ||
+																	values.hashtag.length === 2 ||
+																	values.hashtag.length === 3
+																		? "flex"
+																		: "none",
+																alignItems: "center",
+																justifyContent: "center",
+															}}
+														>
+															<Checks />
+														</Box>
+													)}
+											</Box>
+										</>
 
 										{/* Button Reserve Or Pay  !!  */}
-										{values.hashtag.length > 3 && (
+
+										{/* Button Pay  */}
+
+										{values.hashtag.length <= 3 ? (
+											<>
+												{values.hashtag.length >= 1 &&
+													!/^[\p{N}\d\s]+$/u.test(values.hashtag) && (
+														<>
+															<Button
+																sx={{
+																	borderRadius: "16px",
+																	paddingX: "18px",
+																	height: "59px",
+																	width: {
+																		xs: "100%",
+																		sm: "311px",
+																		md: "311px",
+																		xl: "311px",
+																	},
+																	display: "flex",
+																	background: "#0090EC",
+																	justifyContent: "space-around",
+																}}
+																onClick={() => {
+																	if (
+																		values.hashtag.length > 3 &&
+																		values.sublink.length === 0 &&
+																		!isValidUrl(values.sublink)
+																	) {
+																		alert("Please enter a valid hashtag");
+																		return;
+																	}
+																	if (keywordFound) {
+																		toast.error(
+																			"This hashtag is already in use",
+																		);
+																	}
+																	console.log("values", values);
+																	handleSubscription(
+																		values.hashtag,
+																		values.sublink,
+																	);
+																}}
+																type="submit"
+																className="ButtonPay"
+																onMouseEnter={handleHoverButton}
+																onMouseLeave={handleLeave}
+															>
+																<Typography
+																	sx={{
+																		letterSpacing: "0.02em",
+																		fontSize: "32px",
+																		fontWeight: "400",
+																		lineHeight: "40px",
+																		color: "#343132",
+																		textTransform: "uppercase",
+																	}}
+																>
+																	{t("pay")}
+																</Typography>
+																{locale === "ar" ? (
+																	<FiArrowDownLeft
+																		size={42}
+																		color="#343132"
+																		className={
+																			hoveredButton ? "ButtonReserve_rtl" : ""
+																		}
+																	/>
+																) : (
+																	<FiArrowDownRight
+																		size={42}
+																		color="#343132"
+																		className={
+																			hoveredButton ? "ButtonReserve_ltr" : ""
+																		}
+																	/>
+																)}
+															</Button>
+														</>
+													)}
+											</>
+										) : (
 											<Box
 												sx={{
 													width: "100%",
-													display: "flex",
-													alignItems: "center",
-													justifyContent: "space-between",
-													flexDirection: { xs: "column-reverse", sm: "row" },
 												}}
 											>
-												{/* Icon Scroll */}
-												{values.hashtag.length >= 4 && showArrow && (
-													<IconScroll />
-												)}
-												<Button
-													sx={{
-														borderRadius: "16px",
-														paddingX: "18px",
-														height: "59px",
-														width: {
-															xs: "100%",
-															sm: "311px",
-															md: "311px",
-															xl: "311px",
-														},
-														display: "flex",
-														background: "#31E716",
-														justifyContent: "space-around",
-														marginBottom: { xs: "2rem", sm: "0" },
-													}}
-													onClick={() => {}}
-													type="submit"
-													className="ButtonReserve"
-													onMouseEnter={handleHoverButton}
-													onMouseLeave={handleLeave}
-												>
-													<Typography
-														sx={{
-															letterSpacing: "0.02em",
-															fontSize: "32px",
-															fontWeight: "400",
-															lineHeight: "40px",
-															color: "#343132",
-															textTransform: "uppercase",
-														}}
-													>
-														{t("button")}
-													</Typography>
-													{locale === "ar" ? (
-														<FiArrowDownLeft
-															size={42}
-															color="#343132"
-															className={
-																hoveredButton ? "ButtonReserve_rtl" : ""
-															}
-														/>
-													) : (
-														<FiArrowDownRight
-															size={42}
-															color="#343132"
-															className={
-																hoveredButton ? "ButtonReserve_ltr" : ""
-															}
-														/>
+												{values.hashtag.length > 3 &&
+													!/^[\p{N}\d\s]+$/u.test(values.hashtag) && (
+														<Box
+															sx={{
+																width: "100%",
+																display: "flex",
+																alignItems: "center",
+																justifyContent: "space-between",
+																flexDirection: {
+																	xs: "column-reverse",
+																	sm: "row",
+																},
+															}}
+														>
+															{/* Icon Scroll */}
+															<Box
+																sx={{
+																	width: "100%",
+																	display: "flex",
+																	alignItems: "center",
+																	justifyContent: "start",
+																}}
+															>
+																{values.hashtag.length >= 4 && showArrow && (
+																	<IconScroll />
+																)}
+															</Box>
+															<Box
+																sx={{
+																	width: "100%",
+																	display: "flex",
+																	alignItems: "center",
+																	justifyContent: "end",
+																}}
+															>
+																<Button
+																	sx={{
+																		borderRadius: "16px",
+																		paddingX: "18px",
+																		height: "59px",
+																		width: {
+																			xs: "100%",
+																			sm: "311px",
+																			md: "311px",
+																			xl: "311px",
+																		},
+																		display: "flex",
+																		background: "#31E716",
+																		justifyContent: "space-around",
+																		marginBottom: { xs: "2rem", sm: "0" },
+																	}}
+																	onClick={() => {}}
+																	type="submit"
+																	className="ButtonReserve"
+																	onMouseEnter={handleHoverButton}
+																	onMouseLeave={handleLeave}
+																>
+																	<Typography
+																		sx={{
+																			letterSpacing: "0.02em",
+																			fontSize: "32px",
+																			fontWeight: "400",
+																			lineHeight: "40px",
+																			color: "#343132",
+																			textTransform: "uppercase",
+																		}}
+																	>
+																		{t("button")}
+																	</Typography>
+																	{locale === "ar" ? (
+																		<FiArrowDownLeft
+																			size={42}
+																			color="#343132"
+																			className={
+																				hoveredButton ? "ButtonReserve_rtl" : ""
+																			}
+																		/>
+																	) : (
+																		<FiArrowDownRight
+																			size={42}
+																			color="#343132"
+																			className={
+																				hoveredButton ? "ButtonReserve_ltr" : ""
+																			}
+																		/>
+																	)}
+																</Button>
+															</Box>
+														</Box>
 													)}
-												</Button>
 											</Box>
-										)}
-										{/* Button  */}
-										{values.hashtag.length < 4 && (
-											<>
-												<Button
-													sx={{
-														borderRadius: "16px",
-														paddingX: "18px",
-														height: "59px",
-														width: {
-															xs: "100%",
-															sm: "311px",
-															md: "311px",
-															xl: "311px",
-														},
-														display: "flex",
-														background: "#0090EC",
-														justifyContent: "space-around",
-													}}
-													onClick={() => {
-														if (
-															values.hashtag.length > 3 &&
-															values.sublink.length === 0 &&
-															!isValidUrl(values.sublink)
-														) {
-															alert("Please enter a valid hashtag");
-															return;
-														}
-														if (keywordFound) {
-															toast.error("This hashtag is already in use");
-														}
-														console.log("values", values);
-														handleSubscription(values.hashtag, values.sublink);
-													}}
-													type="submit"
-													className="ButtonPay"
-													onMouseEnter={handleHoverButton}
-													onMouseLeave={handleLeave}
-												>
-													<Typography
-														sx={{
-															letterSpacing: "0.02em",
-															fontSize: "32px",
-															fontWeight: "400",
-															lineHeight: "40px",
-															color: "#343132",
-															textTransform: "uppercase",
-														}}
-													>
-														{t("pay")}
-													</Typography>
-													{locale === "ar" ? (
-														<FiArrowDownLeft
-															size={42}
-															color="#343132"
-															className={
-																hoveredButton ? "ButtonReserve_rtl" : ""
-															}
-														/>
-													) : (
-														<FiArrowDownRight
-															size={42}
-															color="#343132"
-															className={
-																hoveredButton ? "ButtonReserve_ltr" : ""
-															}
-														/>
-													)}
-												</Button>
-											</>
 										)}
 									</Box>
 								</Box>
@@ -709,7 +773,12 @@ const SubscribePage: NextPage = () => {
 					sx={{
 						width: "100%",
 						height: { xs: "100%", xl: "100vh" },
-						display: values.hashtag.length >= 4 ? "flex" : "none",
+						display:
+							values.hashtag.length >= 4 &&
+							!/^[\p{N}\d\s]+$/u.test(values.hashtag)
+								? "flex"
+								: "none",
+
 						alignItems: "center",
 						justifyContent: "center",
 					}}

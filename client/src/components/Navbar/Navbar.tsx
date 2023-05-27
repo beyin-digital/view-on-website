@@ -435,6 +435,7 @@ const Header = () => {
 								background: "transparent",
 							}}
 							onClick={handleDrawerToggle}
+							className="navbarIcon"
 						>
 							{mobileOpen ? (
 								<AiOutlineClose color="#343132" size="25px" />
@@ -463,9 +464,10 @@ const Header = () => {
 
 						<Box
 							sx={{
-								display: { xs: "none", sm: "none", md: "none", xl: "flex" },
+								display: "flex",
 								background: "transparent",
 							}}
+							className="navbarItems"
 						>
 							<Box
 								sx={{

@@ -374,16 +374,6 @@ const NavbarStatic = ({
 						margin: "0 .5rem",
 					}}
 				/>
-				{/* <Image
-					src="/icons/linkedin.svg"
-					alt="View On Website Icon Linkedin"
-					title="View On Website Icon Linkedin"
-					height={18}
-					width={18}
-					style={{
-						margin: "0 .5rem",
-					}}
-				/> */}
 			</Box>
 			<Box
 				sx={{
@@ -450,10 +440,11 @@ const NavbarStatic = ({
 							edge="start"
 							sx={{
 								mr: 2,
-								display: { xl: "none" },
+								// display: { xl: "none" },
 								background: "transparent",
 							}}
 							onClick={handleDrawerToggle}
+							className="navbarIcon"
 						>
 							{mobileOpen ? (
 								<AiOutlineClose color="#343132" size="25px" />
@@ -482,9 +473,10 @@ const NavbarStatic = ({
 
 						<Box
 							sx={{
-								display: { xs: "none", sm: "none", md: "none", xl: "flex" },
+								display: "flex",
 								background: "transparent",
 							}}
+							className="navbarItems"
 						>
 							<Box
 								sx={{

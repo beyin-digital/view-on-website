@@ -56,12 +56,12 @@ const PageDesktop = () => {
 							borderBottom: "1px solid #FBFBFB",
 							display: "flex",
 							flexDirection: { xs: "column", md: "row", xl: "row" },
-							overflow: 'hidden',
+							overflow: "hidden",
 							background: "rgba(251, 251, 251, 0.6)",
 							marginX: { xs: "", md: "0rem", xl: "0" },
 							position: "absolute",
 							left: "0",
-
+							marginBottom: "4rem",
 							// marginLeft:"-11rem"
 						}}
 						className="PageDesktopLayout"

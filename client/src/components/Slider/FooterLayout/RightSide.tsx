@@ -50,14 +50,15 @@ const RightSide = () => {
 									key={item.id}
 									sx={{
 										display: "flex",
-										alignItems: "center",
+										alignItems: "start",
+										justifyContent: "end",
 										height: { xs: "30px", xl: "25px" },
-										flexDirection: "row-reverse",
+										width: { xs: "100%", sm: "90%", md: "100%" },
 									}}
 								>
-									<CheckIcon fontSize="small" />
 									<Box
 										sx={{
+											width: "100%",
 											paddingX: ".5rem",
 										}}
 									>
@@ -66,11 +67,13 @@ const RightSide = () => {
 												fontSize: "16px",
 												fontWeight: "400",
 												lineHeight: "14px",
+												textAlign: "right",
 											}}
 										>
 											{t(item.tKey)}
 										</Typography>
 									</Box>
+									<CheckIcon fontSize="small" />
 								</Box>
 							))}
 						</>

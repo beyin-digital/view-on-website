@@ -41,5 +41,6 @@
   "nav_examples": "Examples",
   "nav_login": "Login",
   "nav_signup": "SignUp",
-  "subscribe": "subscribe"
+  "subscribe": "subscribe",
+  "error": "Keywords can only use letters, Spaces, and underscores."
 }

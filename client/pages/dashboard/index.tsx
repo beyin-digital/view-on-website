@@ -37,7 +37,7 @@ const DashboardHomePage = () => {
 	//   }, [])
 
 	return (
-		<Suspense>
+		<>
 			<Head>
 				<title>{t("meta_title")}</title>
 				<meta name="description" content={`${t("meta_description")}`} />
@@ -56,7 +56,7 @@ const DashboardHomePage = () => {
 				{/* Mobile boxes */}
 				<HomeMobile />
 			</RootLayout>
-		</Suspense>
+		</>
 	);
 };
 

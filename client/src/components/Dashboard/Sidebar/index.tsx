@@ -278,9 +278,18 @@ const Sidebar = () => {
 					}}
 				>
 					<Button
-						color="info"
 						variant="contained"
-						sx={{ height: "42px", width: "154px" }}
+						sx={{
+							height: "42px",
+							width: "154px",
+							borderRadius: "7px",
+							fontSize: "20px",
+							fontWeight: "700",
+							background: "#0090EC",
+							"&:hover": {
+								background: "#0090EC",
+							},
+						}}
 						onClick={() => {
 							logout();
 						}}
@@ -288,9 +297,19 @@ const Sidebar = () => {
 						{t("side_logout")}
 					</Button>
 					<Button
-						color="error"
+						// color="error"
 						variant="contained"
-						sx={{ height: "42px", width: "154px" }}
+						sx={{
+							height: "42px",
+							width: "154px",
+							borderRadius: "7px",
+							fontSize: "20px",
+							fontWeight: "700",
+							background: "#CF4444",
+							"&:hover": {
+								background: "#CF4444",
+							},
+						}}
 						onClick={() => {
 							handleClose();
 						}}

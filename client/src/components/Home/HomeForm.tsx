@@ -1,34 +1,31 @@
 import { useContext, useState } from "react";
-import { Box, OutlinedInput } from "@mui/material";
-import { useRouter } from "next/router";
+import { Box, OutlinedInput, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { KeywordContext } from "@/contexts/keywordContext";
+import { ToastContainer, toast } from "react-toastify";
 
 const HomeForm = ({ setHashtag, hashtag }: any) => {
 	const { t } = useTranslation("home");
-
-	const router = useRouter();
-
+	const notify = () => toast("Wow so easy!");
 	const { foundSublink } = useContext(KeywordContext);
 
 	const [isTyping, setIsTyping] = useState(false);
 	const [isInputEmpty, setIsInputEmpty] = useState(true);
 	const [isInputFocused, setIsInputFocused] = useState(false);
+	const [isInputValid, setIsInputValid] = useState(true);
 
+	const allowedCharacters = /^[a-zA-Z\u0600-\u06FF\s.,،]+$/;
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const inputValue = e.target.value;
 
 		setHashtag(e.target.value);
 		setIsTyping(e.target.value.trim() !== "");
 		setIsInputEmpty(inputValue.trim() === "");
+		setIsInputValid(!/\d/.test(inputValue));
 	};
 
 	const handleInputFocus = () => {
 		setIsInputFocused(true);
-	};
-
-	const handleInputBlur = () => {
-		setIsInputFocused(false);
 	};
 
 	const handleSubmit = (e: any) => {
@@ -37,6 +34,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
 			window.open(`${foundSublink}`, "_blank");
 		}
 	};
+
 	return (
 		<form
 			onSubmit={handleSubmit}
@@ -94,10 +92,10 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
 						<OutlinedInput
 							value={hashtag}
 							onFocus={handleInputFocus}
-							onBlur={handleInputBlur}
 							inputProps={{
 								autoComplete: "off",
 								spellCheck: false,
+								pattern: allowedCharacters.test(hashtag),
 							}}
 							onChange={handleInputChange}
 							sx={{
@@ -132,14 +130,20 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
 								},
 								"& .MuiInputBase-input": {
 									caretColor: "#000",
+									color: isInputFocused ? "#2BEA0F" : "",
 								},
-								color: isInputFocused && !isInputEmpty ? "#2BEA0F" : "none",
+								"& .MuiOutlinedInput-input": {
+									"&::placeholder": {
+										color: isInputFocused ? "#000" : "",
+									},
+								},
 							}}
 							placeholder={`${t("keyword")}`}
 							className="cursorAnimation"
 						/>
-						{/* <Box className="i" /> */}
 						<Box className={`i ${isTyping ? "stopAnimation" : ""}`} />
+						{/* {!isInputValid && <>{toast.error("Error Message")}</>} */}
+						{/* // <Typography sx={{ color: "red" }}>{t("error")}</Typography> */}
 					</form>
 				</Box>
 				<Box
