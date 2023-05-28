@@ -573,7 +573,7 @@ const Header = () => {
                       color: '#343132',
                       textTransform: 'uppercase',
                     }}
-                    onClick={() => router.push('/dashboard')}
+                    onClick={() => router.push(`/${router.locale}/dashboard`)}
                   >
                     {t('nav_Dashboard')}
                   </Typography>
