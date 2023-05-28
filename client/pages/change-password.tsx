@@ -36,7 +36,7 @@ const ChangePassword = () => {
 				<meta name="keyword" content={`${t("meta_keyword")}`} />
 				<link
 					rel="canonical"
-					href="https://wiewonwebsite.com/en/illustration"
+					href="https://viewonwebsite.com/en/illustration"
 				/>
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="shortcut icon" href="/favicon.ico" />

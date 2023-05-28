@@ -114,9 +114,8 @@ const ChangePasswordForm = () => {
           <Button
             onClick={() => {
               if (
-                values.password === values.confirmPassword ||
-                values.password.length > 8 ||
-                values.confirmPassword.length > 8
+                values.password === values.confirmPassword &&
+                values.password.length > 8
               ) {
                 resetPassword(values.password, query.token as string)
               }

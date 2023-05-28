@@ -1,62 +1,13 @@
 import { createContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
-import jwt from 'jsonwebtoken'
 import { User } from '@/types/user'
 import { api } from '@/utils/api'
-import useDebounce from '@/hooks/useDebounce'
 
-export interface IUserContext {
-  token: string | null
-  refreshToken: string | null
-  user: User | null
-  values: {
-    identifier: string
-    password: string
-    confirmPassword: string
-    fullName: string
-    email: string
-  }
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  handleLogin?: (e: React.FormEvent<HTMLFormElement>) => void
-  handleSignup?: (e: React.FormEvent<HTMLFormElement>) => void
-  updateUser: (values: any) => void
-  logout: () => void
-  resendOTP: (email: string) => void
-  verifyOtp: (otp: string) => void
-  handleGoogleAuth: (idToken: string) => void
-  forgotPassword: (email: string) => void
-  resetPassword: (password: string, confirmPassword: string) => void
-}
-
-export const UserContext = createContext<IUserContext>({
-  token: null,
-  refreshToken: null,
-  user: null,
-  values: {
-    identifier: '',
-    password: '',
-    fullName: '',
-    email: '',
-    confirmPassword: '',
-  },
-  handleChange: (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {},
-  handleLogin: (e: React.FormEvent<HTMLFormElement>) => {},
-  handleSignup: (e: React.FormEvent<HTMLFormElement>) => {},
-  updateUser: (values: any) => {},
-  logout: () => {},
-  resendOTP: (email: string) => {},
-  verifyOtp: (otp: string) => {},
-  handleGoogleAuth: (idToken: string) => {},
-  forgotPassword: (email: string) => {},
-  resetPassword: (password: string, confirmPassword: string) => {},
-})
+export const UserContext = createContext<any>({})
 
 export const UserProvider = ({ children }: any) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const router = useRouter()
   const [values, setValues] = useState({
     identifier: '',
@@ -65,8 +16,6 @@ export const UserProvider = ({ children }: any) => {
     password: '',
     confirmPassword: '',
   })
-
-  const emailDebounceValue = useDebounce(values.email, 500)
 
   const [token, setToken] = useState<string | null>(null)
   const [refreshToken, setRefreshToken] = useState<string | null>(null)
@@ -81,80 +30,131 @@ export const UserProvider = ({ children }: any) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
+  // Login Function
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    // Prevent default pge reload after form submission
     e.preventDefault()
     try {
-      const res = await api.post('/auth/email/login', {
-        identifier: values.identifier,
-        password: values.password,
+      // initial login request to get token and refresh token
+      const response = await fetch(`${apiUrl}/auth/email/login`, {
+        method: 'POST',
+        body: JSON.stringify({
+          identifier: values.identifier,
+          password: values.password,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      const data = res.data
-
-      if (res.status >= 400) {
-        throw new Error()
+      //  check request response status
+      if (!response.ok) {
+        //  throw error to catch block
+        throw new Error('Error logging in')
       }
-      if (data.user.twoFactorAuth) {
-        setUser(data.user)
-        router.push('/verification')
-        return
-      }
-      setToken(data.token)
-      setRefreshToken(data.refreshToken)
-      setUser(data.user)
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('refreshToken', data.refreshToken)
-      localStorage.setItem('user', JSON.stringify(data.user))
-      setValues({
-        identifier: '',
-        email: '',
-        fullName: '',
-        password: '',
-        confirmPassword: '',
-      })
+      //  get data from response
+      const data = await response.json()
+      //   get token and refresh token from data
+      const { token, refreshToken } = data
+      //   set token and refresh token in local storage
+      localStorage.setItem('token', token)
+      localStorage.setItem('refreshToken', refreshToken)
+      //   set token and refresh token in state
+      setToken(token)
+      setRefreshToken(refreshToken)
+      // Redirect user to dashboard page
       router.push('/dashboard')
-    } catch (err: any) {
-      toast.error(
-        `Error logging in. Please check credentials or try social buttons provided`,
-        {
-          position: 'bottom-right',
-          autoClose: 5000,
-        }
-      )
-    }
-  }
-
-  const verifyOtp = async (otp: string) => {
-    try {
-      const res = await api.post('/auth/email/confirm', {
-        otp,
-      })
-      const data = res.data
-      if (res.status >= 400) {
-        throw new Error()
-      }
-
-      setToken(data.token)
-      setRefreshToken(data.refreshToken)
-      setUser(data.user)
-
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('refreshToken', data.refreshToken)
-      localStorage.setItem('user', JSON.stringify(data.user))
-      setValues({
-        identifier: '',
-        email: '',
-        fullName: '',
-        password: '',
-        confirmPassword: '',
-      })
-      toast.success('Email verified successfully', {
+    } catch (error) {
+      console.log(error)
+      //   show toast if error
+      toast.error('Error logging in. Please check credentials and try again.', {
         position: 'top-right',
         autoClose: 5000,
       })
+    }
+  }
 
+  //   Login with google function
+  const handleGoogleAuth = async (idToken: string) => {
+    try {
+      // initial login request to get token and refresh token from google
+      const response = await fetch(`${apiUrl}/auth/google/login`, {
+        method: 'POST',
+        body: JSON.stringify({ idToken }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      //   check request response status
+      if (!response.ok) {
+        // throw error to catch block
+        throw new Error('Error logging in')
+      }
+      //   get data from response
+      const data = await response.json()
+      //   get token and refresh token from data
+      const { token, refreshToken } = data
+      //   set token and refresh token in local storage
+      localStorage.setItem('token', token)
+      localStorage.setItem('refreshToken', refreshToken)
+      //   set token and refresh token in state
+      setToken(token)
+      setRefreshToken(refreshToken)
+    } catch (error) {
+      //   show toast if error
+      toast.error('Error logging in. Please try again.', {
+        position: 'top-right',
+        autoClose: 5000,
+      })
+    }
+  }
+
+  const handleVerifyOtp = async (otp: string) => {
+    try {
+      // Send OTP to server for verification
+      const response = await fetch(`${apiUrl}/auth/email/confirm`, {
+        method: 'POST',
+        body: JSON.stringify({ otp }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      // Check response status
+      if (!response.ok) {
+        throw new Error('Error verifying otp')
+      }
+      // Get data from response
+      const data = await response.json()
+      // Get token and refresh token from data
+      const { token, refreshToken } = data
+      // Set token and refresh token in local storage
+      localStorage.setItem('token', token)
+      localStorage.setItem('refreshToken', refreshToken)
+      // Set token and refresh token in state
+      setToken(token)
+      setRefreshToken(refreshToken)
+      // Redirect user to dashboard page
       router.push('/dashboard')
-    } catch (e) {
-      toast.error('Error verifying otp. Please try again.', {
+    } catch (error) {}
+  }
+
+  const checkEmail = async (email: string) => {
+    try {
+      const response = await fetch(`${apiUrl}/auth/email/check`, {
+        method: 'POST',
+        body: JSON.stringify({ email }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      if (!response.ok) {
+        throw new Error('Error checking email')
+      }
+      const data = await response.json()
+      console.log(data)
+
+      return data
+    } catch (error) {
+      toast.error('Error checking email. Please try again.', {
         position: 'top-right',
         autoClose: 5000,
       })
@@ -162,88 +162,83 @@ export const UserProvider = ({ children }: any) => {
   }
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
+    //Prevent default pge reload after form submission
     e.preventDefault()
     try {
-      const res = await api.post('/auth/email/register', {
-        fullName: values.fullName,
-        email: values.email,
-        password: values.password,
-      })
-
-      if (res.status >= 400) {
-        throw new Error()
-      }
-      setValues({
-        identifier: '',
-        email: '',
-        fullName: '',
-        password: '',
-        confirmPassword: '',
-      })
-      router.push(`/verification?email=${values.email}`)
-    } catch (err) {
-      toast.error('Error signing up. Please try again.', {
-        position: 'bottom-right',
-        autoClose: 5000,
-      })
-    }
-  }
-
-  const checkEmail = async (email: string) => {
-    try {
-      const res = await api.get('/auth/email/check', {
-        params: {
-          email,
+      // initial login request to get token and refresh token
+      const response = await fetch(`${apiUrl}/auth/email/register`, {
+        method: 'POST',
+        body: JSON.stringify({
+          email: values.email,
+          fullName: values.fullName,
+          password: values.password,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
         },
       })
-      const data = res.data
-      if (res.status >= 400) {
-        throw new Error()
+      if (!response.ok) {
+        throw new Error('Error signing up')
       }
-      if (data.exists) {
-        toast.error('Email already exists', {
-          position: 'bottom-right',
-          autoClose: 5000,
-        })
-      }
-    } catch (err) {
-      toast.error('Error checking email', {
+      router.push('/verification?email=' + values.email)
+    } catch (error) {
+      toast.error('Error signing up. Please try again.', {
         position: 'top-right',
         autoClose: 5000,
       })
     }
   }
 
-  const refreshAccessToken = async () => {
-    const refreshToken = localStorage.getItem('refreshToken')
-    if (refreshToken) {
-      api
-        .post('/auth/refreshToken', { refreshToken })
-        .then((res) => {
-          if (res.status >= 400) {
-            throw new Error()
-          }
-          const data = res.data
-          setToken(data.token)
-          setRefreshToken(data.refreshToken)
-          localStorage.setItem('token', data.token)
-          localStorage.setItem('refreshToken', data.refreshToken)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+  const handleRefreshToken = async () => {
+    try {
+      // Initiate token refresh request
+      const response = await fetch(`${apiUrl}/auth/refresh`, {
+        method: 'POST',
+        body: JSON.stringify({
+          refreshToken,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      if (!response.ok) {
+        throw new Error('Error refreshing access token')
+      }
+      // Get data from response
+      const data = await response.json()
+      // Get token and refresh token from data
+      const { token, refreshToken: newRefreshToken } = data
+      // Set token and refresh token in local storage
+      localStorage.setItem('token', token)
+      localStorage.setItem('refreshToken', newRefreshToken)
+      // Set token and refresh token in state
+      setToken(token)
+      setRefreshToken(newRefreshToken)
+      // Redirect user to dashboard page
+      router.push('/dashboard')
+    } catch (error) {
+      // Redirect to login page if error
+      router.push('/login')
     }
   }
 
   const forgotPassword = async (identifier: string) => {
     try {
-      const res = await api.post('/auth/forgot/password', {
-        identifier,
+      // Initiate request to send password reset link
+      const response = await fetch(`${apiUrl}/auth/forgot/password`, {
+        method: 'POST',
+        body: JSON.stringify({
+          identifier,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      if (res.status >= 400) {
-        throw new Error()
+      // Check response status
+      if (!response.ok) {
+        throw new Error('Error sending password reset link')
       }
-      toast.success('Password reset link sent to email', {
+      toast.success('Password reset link sent successfully', {
         position: 'top-right',
         autoClose: 5000,
       })
@@ -258,21 +253,30 @@ export const UserProvider = ({ children }: any) => {
     }
   }
 
-  const resetPassword = async (password: string, token: string) => {
+  const resetPassword = async (password: string, hash: string) => {
     try {
-      const res = await api.post('/auth/reset/password', {
-        password,
-        token,
+      // Send new password request to server
+      const response = await fetch(`${apiUrl}/auth/reset/password`, {
+        method: 'POST',
+        body: JSON.stringify({
+          password,
+          hash,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      if (res.status >= 400) {
-        throw new Error()
+      // Check response status
+      if (!response.ok) {
+        throw new Error('Error resetting password')
       }
       toast.success('Password reset successfully', {
         position: 'top-right',
         autoClose: 5000,
       })
+
       router.push('/login')
-    } catch (err) {
+    } catch (error) {
       toast.error('Error resetting password', {
         position: 'top-right',
         autoClose: 5000,
@@ -281,35 +285,40 @@ export const UserProvider = ({ children }: any) => {
   }
 
   const logout = () => {
-    setToken(null)
-    setRefreshToken(null)
-    setUser(null)
+    //  remove token and refresh token from local storage
     localStorage.removeItem('token')
     localStorage.removeItem('refreshToken')
-    localStorage.removeItem('user')
-    router.push('/login')
+    // set token and refresh token to null
+    setToken(null)
+    setRefreshToken(null)
   }
 
   const updateUser = async (values: any) => {
     try {
-      const res = await api.patch(
-        '/auth/me',
-        { ...values },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      if (res.status >= 400) {
-        throw new Error()
+      const response = await fetch(`${apiUrl}/auth/me`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          fullName: values.fullName,
+          email: values.email,
+          country: values.country,
+          organisation: values.organisation,
+          twoFactorAuthEnabled: values.twoFactorAuthEnabled,
+          password: values.password,
+          oldPassword: values.oldPassword,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (!response.ok) {
+        throw new Error('Error updating user')
       }
-
-      const data = res.data
       toast.success('User updated successfully', {
         position: 'top-right',
         autoClose: 5000,
       })
+      handleGetUserDetails()
     } catch (error) {
       toast.error('Error updating user', {
         position: 'top-right',
@@ -320,72 +329,90 @@ export const UserProvider = ({ children }: any) => {
 
   const resendOTP = async (email: string) => {
     try {
-      const res = await api.post('/auth/email/resend/otp', {
-        email,
+      const response = await fetch(`${apiUrl}/auth/email/resend-otp`, {
+        method: 'POST',
+        body: JSON.stringify({
+          email,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      if (res.status >= 400) {
-        throw new Error()
+      if (!response.ok) {
+        throw new Error('Error resending OTP')
       }
       toast.success('OTP sent successfully', {
-        position: 'bottom-right',
+        position: 'top-right',
+        autoClose: 5000,
       })
+      router.push('/verification?email=' + email + '&resend=true')
     } catch (error) {
-      toast.error('Error sending OTP', {})
+      toast.error('Error resending OTP', {
+        position: 'top-right',
+        autoClose: 5000,
+      })
     }
   }
 
-  const getUserDetails = async () => {
+  const handleDeleteUser = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/auth/me`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (!response.ok) {
+        throw new Error('Error deleting user')
+      }
+      toast.success('User deleted successfully', {
+        position: 'top-right',
+        autoClose: 5000,
+      })
+
+      router.push('/login')
+    } catch (error) {
+      toast.error('Error deleting user', {
+        position: 'top-right',
+        autoClose: 5000,
+      })
+    }
+  }
+
+  const handleGetUserDetails = async () => {
     if (token) {
       try {
-        const res = await api.get('/auth/me', {
+        const response = await fetch(`${apiUrl}/auth/me`, {
+          method: 'GET',
           headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
         })
-        const data = res.data
+        if (!response.ok) {
+          throw new Error('Error getting user details')
+        }
+        const data = await response.json()
         setUser(data)
-      } catch (err) {
-        console.log(err)
+      } catch (error) {
+        toast.error('Error getting user details', {
+          position: 'top-right',
+          autoClose: 5000,
+        })
       }
     }
   }
 
-  const handleGoogleAuth = async (idToken: string) => {
-    await api.post('/auth/google/login', { idToken }).then((res) => {
-      if (res.status >= 400) {
-        throw new Error()
-      }
-      const data = res.data
-      setToken(data.token)
-      setRefreshToken(data.refreshToken)
-      setUser(data.user)
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('refreshToken', data.refreshToken)
-      localStorage.setItem('user', JSON.stringify(data.user))
-      setValues({
-        identifier: '',
-        email: '',
-        fullName: '',
-        password: '',
-        confirmPassword: '',
-      })
-      router.push('/dashboard')
-    })
-  }
   useEffect(() => {
-    const tokenFromStorage = localStorage.getItem('token')
-
-    if (tokenFromStorage) {
-      setToken(tokenFromStorage)
-      getUserDetails()
+    const savedToken = localStorage.getItem('token')
+    const savedRefreshToken = localStorage.getItem('refreshToken')
+    if (savedToken && savedRefreshToken) {
+      setToken(savedToken)
+      setRefreshToken(savedRefreshToken)
+      handleGetUserDetails()
     }
-
-    if (emailDebounceValue) {
-      if (emailDebounceValue.match(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/)) {
-        checkEmail(emailDebounceValue)
-      }
-    }
-  }, [token, emailDebounceValue])
+  }, [token])
 
   return (
     <UserContext.Provider
@@ -396,14 +423,17 @@ export const UserProvider = ({ children }: any) => {
         values,
         handleChange,
         handleLogin,
+        checkEmail,
         handleSignup,
         updateUser,
         resendOTP,
         logout,
-        verifyOtp,
+        handleVerifyOtp,
         handleGoogleAuth,
+        handleRefreshToken,
         forgotPassword,
         resetPassword,
+        handleDeleteUser,
       }}
     >
       {children}

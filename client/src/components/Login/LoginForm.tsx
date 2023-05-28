@@ -21,20 +21,10 @@ import Image from 'next/image'
 import { FiArrowUpLeft, FiArrowUpRight } from 'react-icons/fi'
 import { UserContext } from '@/contexts/userContext'
 
-const loginSchema = object({
-  identifier: string().min(1, 'Email address or keyword is required'),
-  password: string()
-    .min(1, 'Password is required')
-    .min(8, 'Password must be more than 8 characters')
-    .max(32, 'Password must be less than 32 characters'),
-})
-
 const LoginForm = () => {
   // translate
   const { t } = useTranslation('login')
   const { locale } = useRouter()
-
-  const router = useRouter()
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -51,6 +41,7 @@ const LoginForm = () => {
 
   const { values, handleLogin, handleChange, handleGoogleAuth } =
     useContext(UserContext)
+
   const handleHoverButton = () => {
     setHoveredButton(!hoveredButton)
   }
@@ -252,7 +243,6 @@ const LoginForm = () => {
             )}
           </Button>
         </Box>
-     
 
         <LoginTextSignUp />
         {/*  */}

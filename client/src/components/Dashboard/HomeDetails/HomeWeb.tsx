@@ -18,10 +18,8 @@ import dynamic from 'next/dynamic'
 import { KeywordContext } from '@/contexts/keywordContext'
 import { api } from '@/utils/api'
 import { countries } from '@/utils/countries'
-import io from 'socket.io-client'
 
-const url = process.env.NEXT_PUBLIC_WEBSOCKET_URL
-const socket = io(`${url}/analytics`)
+const geoApifyKey = process.env.NEXT_PUBLIC_GEOAPIFY_KEY
 
 const PieChart = dynamic(() => import('@/components/Dashboard/Home/PieChart'), {
   ssr: false,
@@ -61,10 +59,8 @@ const HomeWeb = () => {
     hashtag: '',
     sublink: '',
     organisation: '',
-    location: {
-      country: '',
-      state: '',
-    },
+    country: '',
+    state: '',
   })
 
   const [pieChartData, setPieChartData] = React.useState([
@@ -91,16 +87,14 @@ const HomeWeb = () => {
         console.log('location', position)
         setLocationIsLoading(true)
         const res = await api.get(
-          `https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=ebb95c6b3fcd4c46a5fe97994c6f9d07`
+          `https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=${geoApifyKey}`
         )
         if (res.status === 200) {
           const data = res.data.features
           setValues({
             ...values,
-            location: {
-              country: data[0].properties.country,
-              state: data[0].properties.city,
-            },
+            country: data[0].properties.country,
+            state: data[0].properties.city,
           })
           setLocationIsLoading(false)
         }
@@ -113,7 +107,9 @@ const HomeWeb = () => {
 
   useEffect(() => {
     api
-      .get(`/analytics/keyword?keyword=${selectedKeyword?.letters}`)
+      .get(`/analytics/keyword?keyword=${selectedKeyword?.letters}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         if (res.status === 200) {
           setAnalyticsData({
@@ -166,77 +162,72 @@ const HomeWeb = () => {
           ])
         }
       })
-
-    socket.on('notify_client', () => {
-      socket.emit(
-        'get_new_records',
-        { hashtag: selectedKeyword.letters },
-        (data: any) => {
-          setAnalyticsData({
-            ...analyticsData,
-            totalVisits: data.totalVisits,
-            totalVisitsToday: data.totalVisitsToday,
-            totalDailyVisitsByHoursOfTheDay:
-              data.totalDailyVisitsByHoursOfTheDay,
-            totalVisitsByMonthsOfTheYear: data.totalVisitsByMonthsOfTheYear,
-            totalVisitsByDaysOfTheWeek: data.totalVisitsByDaysOfTheWeek,
-            totalVisitsByDaysOfTheMonth: data.totalVisitsByDaysOfTheMonth,
-          })
-          setPieChartData([
-            {
-              id: 'today',
-              label: `${t('box_four_today')}`,
-              tKey: 'box_four_today',
-              value: data.totalVisitsToday,
-              color: 'hsla(112, 81%, 52%, 1)',
-            },
-            {
-              id: 'all-time',
-              label: `${t('box_four_all')}`,
-              tKey: 'box_four_all',
-              value: data.totalVisits,
-              color: 'hsla(203, 100%, 46%, 1)',
-            },
-          ])
-          setLineChartData([
-            {
-              id: "Today's visits",
-              color: 'hsla(203, 100%, 46%, 1)',
-              data: data.totalDailyVisitsByHoursOfTheDay,
-            },
-            {
-              id: "This Week's visits",
-              color: 'hsla(203, 100%, 46%, 1)',
-              data: data.totalVisitsByDaysOfTheWeek,
-            },
-            {
-              id: "This month's visits",
-              color: 'hsla(203, 100%, 46%, 1)',
-              data: data.totalVisitsByDaysOfTheMonth,
-            },
-            {
-              id: "This year's visits",
-              color: 'hsla(203, 100%, 46%, 1)',
-              data: data.totalVisitsByMonthsOfTheYear,
-            },
-          ])
-        }
-      )
-    })
-
+    // socket.on('notify_client', () => {
+    //   socket.emit(
+    //     'get_new_records',
+    //     { hashtag: selectedKeyword.letters },
+    //     (data: any) => {
+    //       setAnalyticsData({
+    //         ...analyticsData,
+    //         totalVisits: data.totalVisits,
+    //         totalVisitsToday: data.totalVisitsToday,
+    //         totalDailyVisitsByHoursOfTheDay:
+    //           data.totalDailyVisitsByHoursOfTheDay,
+    //         totalVisitsByMonthsOfTheYear: data.totalVisitsByMonthsOfTheYear,
+    //         totalVisitsByDaysOfTheWeek: data.totalVisitsByDaysOfTheWeek,
+    //         totalVisitsByDaysOfTheMonth: data.totalVisitsByDaysOfTheMonth,
+    //       })
+    //       setPieChartData([
+    //         {
+    //           id: 'today',
+    //           label: `${t('box_four_today')}`,
+    //           tKey: 'box_four_today',
+    //           value: data.totalVisitsToday,
+    //           color: 'hsla(112, 81%, 52%, 1)',
+    //         },
+    //         {
+    //           id: 'all-time',
+    //           label: `${t('box_four_all')}`,
+    //           tKey: 'box_four_all',
+    //           value: data.totalVisits,
+    //           color: 'hsla(203, 100%, 46%, 1)',
+    //         },
+    //       ])
+    //       setLineChartData([
+    //         {
+    //           id: "Today's visits",
+    //           color: 'hsla(203, 100%, 46%, 1)',
+    //           data: data.totalDailyVisitsByHoursOfTheDay,
+    //         },
+    //         {
+    //           id: "This Week's visits",
+    //           color: 'hsla(203, 100%, 46%, 1)',
+    //           data: data.totalVisitsByDaysOfTheWeek,
+    //         },
+    //         {
+    //           id: "This month's visits",
+    //           color: 'hsla(203, 100%, 46%, 1)',
+    //           data: data.totalVisitsByDaysOfTheMonth,
+    //         },
+    //         {
+    //           id: "This year's visits",
+    //           color: 'hsla(203, 100%, 46%, 1)',
+    //           data: data.totalVisitsByMonthsOfTheYear,
+    //         },
+    //       ])
+    //     }
+    //   )
+    // })
     setValues({
       ...values,
       hashtag: selectedKeyword?.letters,
       sublink: selectedKeyword?.sublink,
       organisation: selectedKeyword?.organisation || '',
-      location: {
-        country: selectedKeyword?.location?.country || '',
-        state: selectedKeyword?.location?.state || '',
-      },
+      country: selectedKeyword?.country || '',
+      state: selectedKeyword?.state || '',
     })
   }, [selectedKeyword])
 
-  console.log(selectedKeyword)
   return (
     <>
       <Grid
@@ -391,14 +382,12 @@ const HomeWeb = () => {
                 {/* Country select */}
                 <Select
                   displayEmpty
-                  value={values?.location?.country}
+                  value={values?.country}
                   onChange={(e) =>
                     setValues({
                       ...values,
-                      location: {
-                        state: '',
-                        country: e.target.value,
-                      },
+                      state: '',
+                      country: e.target.value,
                     })
                   }
                   renderValue={(selected: any) => {
@@ -439,13 +428,10 @@ const HomeWeb = () => {
                   onChange={(e) =>
                     setValues({
                       ...values,
-                      location: {
-                        ...values?.location,
-                        state: e.target.value,
-                      },
+                      state: e.target.value,
                     })
                   }
-                  value={values?.location?.state}
+                  value={values?.state}
                   renderValue={(selected: any) => {
                     if (selected?.length === 0) {
                       return 'State'
@@ -472,10 +458,7 @@ const HomeWeb = () => {
                     {t('box_one_location_state')}
                   </MenuItem>
                   {countries
-                    .find(
-                      (country) =>
-                        country?.country === values?.location?.country
-                    )
+                    .find((country) => country?.country === values?.country)
                     ?.states.map((state) => (
                       <MenuItem key={state} value={state}>
                         {state}
@@ -493,14 +476,15 @@ const HomeWeb = () => {
               }}
             >
               <Button
-                disabled={
-                  JSON.stringify(values?.location) ===
-                  JSON.stringify(selectedKeyword?.location)
-                }
+                // disabled={
+                //   JSON.stringify(values) ===
+                //   JSON.stringify(selectedKeyword)
+                // }
                 onClick={() => {
                   console.log(selectedKeyword.id)
                   updateKeywordDetails(selectedKeyword?.id, {
-                    location: values?.location,
+                    country: values?.country,
+                    state: values?.state,
                     organisation: values?.organisation,
                     sublink: values?.sublink,
                   })
@@ -571,8 +555,7 @@ const HomeWeb = () => {
               {t('box_two_valid')}
             </Typography>
             {/* Dates */}
-            {/* {(selectedKeyword.subscription.length > 0 ||
-              selectedKeyword.subscription[0] !== undefined) && (
+            {selectedKeyword.subscription && (
               <Box
                 sx={{
                   display: 'flex',
@@ -590,17 +573,17 @@ const HomeWeb = () => {
                 <Typography>
                   {t('box_two_date_bought')}:
                   {new Date(
-                    selectedKeyword?.subscription[0]?.purchaseDate
+                    selectedKeyword?.subscription?.purchaseDate
                   ).toLocaleDateString()}
                 </Typography>
                 <Typography>
                   {t('box_two_date_next')}:
                   {new Date(
-                    selectedKeyword?.subscription[0]?.renewalDate
+                    selectedKeyword?.subscription?.renewalDate
                   ).toLocaleDateString()}
                 </Typography>
               </Box>
-            )} */}
+            )}
             <Typography
               sx={{ cursor: 'pointer' }}
               fontSize="14px"

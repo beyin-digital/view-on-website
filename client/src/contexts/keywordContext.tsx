@@ -1,82 +1,14 @@
 import { api } from '@/utils/api'
+import { t } from 'i18next'
 import { useRouter } from 'next/router'
 import { createContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import slugify from 'slugify'
 // create a context for the keyword
-export const KeywordContext = createContext<{
-  values: any
-  setValues: React.Dispatch<React.SetStateAction<any>>
-  checkKeywordavailability: (keyword: string) => void
-  keywordFound: boolean
-  token?: string
-  handleSubscription: (
-    letters: string,
-    sublink: string,
-    interval?: string,
-    price?: number
-  ) => void
-  getUsersKeywords: () => void
-  getUserSubscriptions: () => void
-  subscriptions: any[]
-  keywords: any[]
-  selectedKeyword: any
-  setSelectedKeyword: React.Dispatch<React.SetStateAction<any>>
-  setAnalyticsData: React.Dispatch<React.SetStateAction<any>>
-  updateKeywordDetails: (id: number, values: any) => void
-  analyticsData: {
-    totalVisits: number
-    totalVisitsToday: number
-    totalDailyVisitsByHoursOfTheDay: any[]
-    totalVisitsByMonthsOfTheYear: any[]
-    totalVisitsByDaysOfTheWeek: any[]
-    totalVisitsByDaysOfTheMonth: any[]
-  }
-  setLineChartDataType: React.Dispatch<
-    React.SetStateAction<'day' | 'week' | 'month' | 'year'>
-  >
-  lineChartDataType: string
-  isSearching: boolean
-  checkPremiumKeyword: () => {}
-  sortedKeywords: string[]
-  foundSublink: string
-}>({
-  values: '',
-  setValues: () => {},
-  checkKeywordavailability: async (keyword: string) => {},
-  keywordFound: false,
-  token: '',
-  handleSubscription: async (
-    letters: string,
-    sublink: string,
-    interval?: string,
-    price?: number
-  ) => {},
-  getUsersKeywords: async () => {},
-  getUserSubscriptions: async () => {},
-  subscriptions: [],
-  keywords: [],
-  selectedKeyword: {},
-  setSelectedKeyword: () => {},
-  setAnalyticsData: () => {},
-  updateKeywordDetails: async (id: number, values: any) => {},
-  analyticsData: {
-    totalVisits: 0,
-    totalVisitsToday: 0,
-    totalDailyVisitsByHoursOfTheDay: [],
-    totalVisitsByMonthsOfTheYear: [],
-    totalVisitsByDaysOfTheWeek: [],
-    totalVisitsByDaysOfTheMonth: [],
-  },
-  setLineChartDataType: () => {},
-  lineChartDataType: '',
-  isSearching: false,
-  checkPremiumKeyword: async () => {},
-  sortedKeywords: [],
-  foundSublink: '',
-})
+export const KeywordContext = createContext<any>({})
 
 export const KeywordProvider = ({ children }: any) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const router = useRouter()
   const [values, setValues] = useState({
     hashtag: '',
@@ -100,115 +32,158 @@ export const KeywordProvider = ({ children }: any) => {
     totalVisitsByDaysOfTheMonth: [],
   })
 
-  const [foundSublink, setFoundSublink] = useState('')
+  const [foundKeyword, setFoundKeyword] = useState({})
 
   const [lineChartDataType, setLineChartDataType] = useState<
     'day' | 'week' | 'month' | 'year'
   >('day')
 
-  const checkKeywordavailability = async (keyword: string) => {
+  const handleCheckKeyword = async (keyword: string) => {
     // check if keyword is available
-    setIsSearching(true)
-    const res = await api.get(`/keywords?hashtag=${keyword}`)
-    const data = res.data
+    try {
+      setIsSearching(true)
+      const response = await fetch(
+        `${apiUrl}/keywords/letters?letters=${keyword}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
 
-    if (data) {
+      setFoundKeyword(data)
       setKeywordFound(true)
-      setFoundSublink(data.sublink)
-      console.log(data.sublink)
       setIsSearching(false)
-      return
+    } catch (error) {
+      console.log(error)
+      setKeywordFound(false)
+      setIsSearching(false)
+    } finally {
+      setIsSearching(false)
     }
-    setKeywordFound(false)
-    setIsSearching(false)
   }
 
   const handleSubscription = async (
     letters: string,
     sublink: string,
-    interval?: string,
-    price?: number
+    interval?: string
   ) => {
-    if (token === '' || token === null) {
-      router.push('/login')
-      return
+    try {
+      if (token === '' || token === null) {
+        router.push('/login')
+        return
+      }
+      const response = await fetch(`${apiUrl}/payment/pay`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ letters, sublink, interval }),
+      })
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
+      const data = await response.json()
+      window.location.href = data.url
+    } catch (error) {
+      toast.error('Error subscribing to keyword')
     }
-    const res = await api.post(
-      '/stripe/payment',
-      { letters, sublink, interval, price },
-      { headers: { Authorization: `Bearer ${token}` } }
-    )
-    const data = res.data
-    window.location.href = data.url
   }
 
   const getUsersKeywords = async () => {
-    if (token !== '' && token !== null) {
-      const res = await api.get('/keywords/all', {
+    try {
+      const response = await fetch(`${apiUrl}/keywords?page=1&limit=10`, {
+        method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       })
-      const data = res.data
-      setKeywords(data.data)
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
 
-      setSelectedKeyword(data.data[0])
+      const { data } = await response.json()
+      console.log(data)
+      setKeywords(data)
+      setSelectedKeyword(data[0])
+    } catch (error) {
+      toast.error('Error fetching keywords')
     }
   }
 
   const getUserSubscriptions = async () => {
-    const res = await api.get('/subscriptions', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    const data = res.data.data
-    if (data.length > 0) {
+    try {
+      const response = await fetch(`${apiUrl}/subscriptions?page=1&limit=10`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
+      const { data } = await response.json()
       setSubscriptions(data)
+    } catch (error) {
+      toast.error('Error fetching subscriptions')
     }
   }
 
   const checkPremiumKeyword = async () => {
-    const res = await api.get(`/keywords/check/premium`)
-    const data = res.data
+    const response = await fetch(`${apiUrl}/keywords/check/premium`, {
+      method: 'GET',
+    })
 
-    if (data.length > 0) {
-      setPremiumKeywords(data)
-      const alphabets = 'abcdefghijklmnopqrstuvwxyz'.split('')
-      alphabets.map((letter, i) => {
-        console.log(letter.localeCompare(premiumKeywords[i]?.letters) === 0)
-      })
+    if (!response.ok) {
+      throw new Error('Error fetching data')
     }
+
+    const data = await response.json()
+    console.log(data)
+    const alphabets = 'abcdefghijklmnopqrstuvwxyz'.split('')
+    // compare the alphabets array with the data array which contains objects with the value pair of slug and a letter of the english alphabet. Find matching letters and omit them from the alphabets array
+    const filteredAlphabets = alphabets.filter(
+      (alphabet) => !data.some((item: any) => item.slug === alphabet)
+    )
+    setSortedKeywords(filteredAlphabets)
+    return filteredAlphabets
   }
 
   const updateKeywordDetails = async (id: number, values: any) => {
     try {
-      const res = await api.put(
-        `/keywords/${id}`,
-        { ...values },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-
-      if (res.status >= 400) {
-        throw new Error()
+      const response = await fetch(`${apiUrl}/keywords/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(values),
+      })
+      if (!response.ok) {
+        throw new Error('Error fetching data')
       }
-
+      const data = await response.json()
       toast.success('Keyword updated successfully')
       getUsersKeywords()
     } catch (error) {
       toast.error('Error updating keyword')
     }
   }
+
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    setToken(token || '')
-  }, [keywordFound, lineChartDataType])
+    const savedToken = localStorage.getItem('token')
+    if (savedToken) {
+      setToken(savedToken)
+    }
+  }, [keywordFound])
   return (
     <KeywordContext.Provider
       value={{
         values,
         setValues,
-        checkKeywordavailability,
+        handleCheckKeyword,
         keywordFound,
         token,
         handleSubscription,
@@ -226,7 +201,7 @@ export const KeywordProvider = ({ children }: any) => {
         checkPremiumKeyword,
         sortedKeywords,
         setAnalyticsData,
-        foundSublink,
+        foundKeyword,
       }}
     >
       {children}
