@@ -114,8 +114,8 @@ const DashboardSubscriptionsPage = () => {
                 }}
                 variant="square"
               >
-                {user?.fullName.split(' ')[0].charAt(0).toUpperCase()}
-                {user?.fullName.split(' ')[1].charAt(0).toUpperCase()}
+                {/* {user?.fullName.split(' ')[0].charAt(0).toUpperCase()}
+                {user?.fullName.split(' ')[1].charAt(0).toUpperCase()} */}
               </Avatar>
               <Typography
                 sx={{
@@ -328,8 +328,8 @@ const DashboardSubscriptionsPage = () => {
               }}
               variant="square"
             >
-              {user?.fullName.split(' ')[0].charAt(0)}
-              {user?.fullName.split(' ')[1].charAt(0)}
+              {/* {user?.fullName.split(' ')[0].charAt(0)}
+              {user?.fullName.split(' ')[1].charAt(0)} */}
             </Avatar>
             <Box>
               <Typography

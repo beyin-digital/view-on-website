@@ -86,8 +86,8 @@ const MobileProfile = () => {
 						}}
 						variant="square"
 					>
-						{user?.fullName.split(" ")[0].charAt(0)}
-						{user?.fullName.split(" ")[1].charAt(0)}
+						{/* {user?.fullName.split(" ")[0].charAt(0)}
+						{user?.fullName.split(" ")[1].charAt(0)} */}
 					</Avatar>
 					<Box>
 						<Typography
