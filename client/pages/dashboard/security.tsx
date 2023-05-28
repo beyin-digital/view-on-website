@@ -711,4 +711,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     },
   }
 }
-export default withAuth(DashboardSecurityPage)
+export default DashboardSecurityPage

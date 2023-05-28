@@ -19,7 +19,6 @@ import Head from 'next/head'
 
 import dynamic from 'next/dynamic'
 import { nFormatter } from '@/utils/nFormatter'
-import withAuth from '@/hooks/withAuth'
 
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
@@ -470,4 +469,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }: any) => {
   }
 }
 
-export default withAuth(DashboardSubscriptionsPage)
+export default DashboardSubscriptionsPage

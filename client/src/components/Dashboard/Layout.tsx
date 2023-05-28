@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { UserContext } from "@/contexts/userContext";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import withAuth from "@/hooks/withAuth";
 
 const Navbar = dynamic(() => import("@/components/Dashboard/Navbar"), {
 	ssr: false,
@@ -19,7 +20,7 @@ interface RootLayoutProps {
 	children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+function RootLayout({ children }: RootLayoutProps) {
 	const pathname = usePathname();
 	const router = useRouter();
 	const { locale } = useRouter();
@@ -186,3 +187,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
 		</>
 	);
 }
+
+export default withAuth(RootLayout);
