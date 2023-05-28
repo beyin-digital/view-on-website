@@ -564,19 +564,21 @@ const Header = () => {
                 className="ButtonAnimation"
               >
                 {token ? (
-                  <Typography
-                    sx={{
-                      letterSpacing: '0.02em',
-                      fontSize: { xs: '23px', xl: '32px' },
-                      fontWeight: '700',
-                      lineHeight: '40px',
-                      color: '#343132',
-                      textTransform: 'uppercase',
-                    }}
-                    onClick={() => router.push(`/${router.locale}/dashboard`)}
-                  >
-                    {t('nav_Dashboard')}
-                  </Typography>
+                  <Link href={`/${router.locale}/dashboard`}>
+                    <Typography
+                      sx={{
+                        letterSpacing: '0.02em',
+                        fontSize: { xs: '23px', xl: '32px' },
+                        fontWeight: '700',
+                        lineHeight: '40px',
+                        color: '#343132',
+                        textTransform: 'uppercase',
+                      }}
+                      onClick={() => router.push(`/${router.locale}/dashboard`)}
+                    >
+                      {t('nav_Dashboard')}
+                    </Typography>
+                  </Link>
                 ) : (
                   <Typography
                     sx={{
