@@ -555,7 +555,7 @@ const HomeWeb = () => {
               {t('box_two_valid')}
             </Typography>
             {/* Dates */}
-            {selectedKeyword.subscription && (
+            {selectedKeyword?.subscription && (
               <Box
                 sx={{
                   display: 'flex',
