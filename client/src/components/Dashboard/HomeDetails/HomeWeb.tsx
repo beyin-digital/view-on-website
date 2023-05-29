@@ -534,12 +534,14 @@ const HomeWeb = () => {
                     selectedKeyword?.subscription?.purchaseDate
                   ).toLocaleDateString()}
                 </Typography>
-                <Typography>
-                  {t('box_two_date_next')}:
-                  {new Date(
-                    selectedKeyword?.subscription?.renewalDate
-                  ).toLocaleDateString()}
-                </Typography>
+                {selectedKeyword.isPremium && (
+                  <Typography>
+                    {t('box_two_date_next')}:
+                    {new Date(
+                      selectedKeyword?.subscription?.renewalDate
+                    ).toLocaleDateString()}
+                  </Typography>
+                )}
               </Box>
             )}
             <Typography
