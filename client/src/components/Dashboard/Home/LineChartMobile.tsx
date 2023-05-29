@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@nivo/line'
 import { useTranslation } from 'react-i18next'
 
-const LineChart = ({ data }: any) => {
+const LineChartMobile = ({ data }: any) => {
   const { t } = useTranslation('dashboard')
   return (
     <>
@@ -9,7 +9,7 @@ const LineChart = ({ data }: any) => {
         <ResponsiveLine
           data={[data]}
           curve="catmullRom"
-          margin={{ top: 45, right: 120, bottom: 60, left: 60 }}
+          margin={{ top: 45, right: 10, bottom: 60, left: 60 }}
           xScale={{ type: 'point' }}
           yScale={{
             type: 'linear',
@@ -76,4 +76,4 @@ const LineChart = ({ data }: any) => {
   )
 }
 
-export default LineChart
+export default LineChartMobile

@@ -6,10 +6,10 @@ import { FiArrowDownRight, FiArrowDownLeft } from 'react-icons/fi'
 import RightSide from './RightSide'
 import { useState } from 'react'
 
-const DetailsFooter = () => {
+const DetailsFooter = ({ hashtag }: any) => {
   // translate hook
   const { t } = useTranslation('slider')
-  const { locale } = useRouter()
+  const { locale, push } = useRouter()
   // animation
   const [hoveredButton, setHoveredButton] = useState(false)
   const handleHoverButton = () => {
@@ -84,6 +84,7 @@ const DetailsFooter = () => {
               }}
             >
               <Button
+                onClick={() => push(`/subscribe?hashtag=${hashtag}`)}
                 sx={{
                   borderRadius: '16px',
                   paddingX: '18px',
@@ -183,6 +184,7 @@ const DetailsFooter = () => {
               }}
             >
               <Button
+                onClick={() => push(`/subscribe?hashtag=${hashtag}`)}
                 sx={{
                   borderRadius: '16px',
                   paddingX: '18px',

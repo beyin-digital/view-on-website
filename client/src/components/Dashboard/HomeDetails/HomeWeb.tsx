@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import {
   Grid,
@@ -18,7 +18,10 @@ import dynamic from 'next/dynamic'
 import { KeywordContext } from '@/contexts/keywordContext'
 import { api } from '@/utils/api'
 import { countries } from '@/utils/countries'
+import { downloadSvg } from '@/utils/downloadSvg'
 
+import io from 'socket.io-client'
+const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
 const geoApifyKey = process.env.NEXT_PUBLIC_GEOAPIFY_KEY
 
 const PieChart = dynamic(() => import('@/components/Dashboard/Home/PieChart'), {
@@ -51,7 +54,6 @@ const HomeWeb = () => {
     updateKeywordDetails,
     analyticsData,
   } = useContext(KeywordContext)
-  const { token } = useContext(UserContext)
 
   const [lineChartType, setLineChartType] = useState(1)
 
@@ -84,7 +86,6 @@ const HomeWeb = () => {
   const getLocation = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
-        console.log('location', position)
         setLocationIsLoading(true)
         const res = await api.get(
           `https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=${geoApifyKey}`
@@ -106,118 +107,76 @@ const HomeWeb = () => {
   }
 
   useEffect(() => {
-    api
-      .get(`/analytics/keyword?keyword=${selectedKeyword?.letters}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setAnalyticsData({
-            ...analyticsData,
-            totalVisits: res.data.totalVisits,
-            totalVisitsToday: res.data.totalVisitsToday,
-            totalDailyVisitsByHoursOfTheDay:
-              res.data.totalDailyVisitsByHoursOfTheDay,
-            totalVisitsByMonthsOfTheYear: res.data.totalVisitsByMonthsOfTheYear,
-            totalVisitsByDaysOfTheWeek: res.data.totalVisitsByDaysOfTheWeek,
-            totalVisitsByDaysOfTheMonth: res.data.totalVisitsByDaysOfTheMonth,
-          })
-          setPieChartData([
-            {
-              id: 'today',
-              label: `${t('box_four_today')}`,
-              tKey: 'box_four_today',
-              value: res.data.totalVisitsToday,
-              color: 'hsla(112, 81%, 52%, 1)',
-            },
-            {
-              id: 'all-time',
-              label: `${t('box_four_all')}`,
-              tKey: 'box_four_all',
-              value: res.data.totalVisits,
-              color: 'hsla(203, 100%, 46%, 1)',
-            },
-          ])
-          setLineChartData([
-            {
-              id: "Today's visits",
-              color: 'hsla(203, 100%, 46%, 1)',
-              data: res.data.totalDailyVisitsByHoursOfTheDay,
-            },
-            {
-              id: "This Week's visits",
-              color: 'hsla(203, 100%, 46%, 1)',
-              data: res.data.totalVisitsByDaysOfTheWeek,
-            },
-            {
-              id: "This month's visits",
-              color: 'hsla(203, 100%, 46%, 1)',
-              data: res.data.totalVisitsByDaysOfTheMonth,
-            },
-            {
-              id: "This year's visits",
-              color: 'hsla(203, 100%, 46%, 1)',
-              data: res.data.totalVisitsByMonthsOfTheYear,
-            },
-          ])
-        }
-      })
-    // socket.on('notify_client', () => {
-    //   socket.emit(
-    //     'get_new_records',
-    //     { hashtag: selectedKeyword.letters },
-    //     (data: any) => {
-    //       setAnalyticsData({
-    //         ...analyticsData,
-    //         totalVisits: data.totalVisits,
-    //         totalVisitsToday: data.totalVisitsToday,
-    //         totalDailyVisitsByHoursOfTheDay:
-    //           data.totalDailyVisitsByHoursOfTheDay,
-    //         totalVisitsByMonthsOfTheYear: data.totalVisitsByMonthsOfTheYear,
-    //         totalVisitsByDaysOfTheWeek: data.totalVisitsByDaysOfTheWeek,
-    //         totalVisitsByDaysOfTheMonth: data.totalVisitsByDaysOfTheMonth,
-    //       })
-    //       setPieChartData([
-    //         {
-    //           id: 'today',
-    //           label: `${t('box_four_today')}`,
-    //           tKey: 'box_four_today',
-    //           value: data.totalVisitsToday,
-    //           color: 'hsla(112, 81%, 52%, 1)',
-    //         },
-    //         {
-    //           id: 'all-time',
-    //           label: `${t('box_four_all')}`,
-    //           tKey: 'box_four_all',
-    //           value: data.totalVisits,
-    //           color: 'hsla(203, 100%, 46%, 1)',
-    //         },
-    //       ])
-    //       setLineChartData([
-    //         {
-    //           id: "Today's visits",
-    //           color: 'hsla(203, 100%, 46%, 1)',
-    //           data: data.totalDailyVisitsByHoursOfTheDay,
-    //         },
-    //         {
-    //           id: "This Week's visits",
-    //           color: 'hsla(203, 100%, 46%, 1)',
-    //           data: data.totalVisitsByDaysOfTheWeek,
-    //         },
-    //         {
-    //           id: "This month's visits",
-    //           color: 'hsla(203, 100%, 46%, 1)',
-    //           data: data.totalVisitsByDaysOfTheMonth,
-    //         },
-    //         {
-    //           id: "This year's visits",
-    //           color: 'hsla(203, 100%, 46%, 1)',
-    //           data: data.totalVisitsByMonthsOfTheYear,
-    //         },
-    //       ])
-    //     }
-    //   )
-    // })
+    if (selectedKeyword == null) return
+    const updateData = (data: any) => {
+      if (data?.keywordId === selectedKeyword?.id) {
+        setAnalyticsData({
+          ...analyticsData,
+          totalVisits: data?.totalVisits,
+          totalVisitsToday: data?.totalVisitsToday,
+          totalDailyVisitsByHoursOfTheDay:
+            data?.totalDailyVisitsByHoursOfTheDay,
+          totalVisitsByMonthsOfTheYear: data?.totalVisitsByMonthsOfTheYear,
+          totalVisitsByDaysOfTheWeek: data?.totalVisitsByDaysOfTheWeek,
+          totalVisitsByDaysOfTheMonth: data?.totalVisitsByDaysOfTheMonth,
+        })
+        setPieChartData([
+          {
+            id: 'today',
+            label: `${t('box_four_today')}`,
+            tKey: 'box_four_today',
+            value: data?.totalVisitsToday,
+            color: 'hsla(112, 81%, 52%, 1)',
+          },
+          {
+            id: 'all-time',
+            label: `${t('box_four_all')}`,
+            tKey: 'box_four_all',
+            value: data?.totalVisits,
+            color: 'hsla(203, 100%, 46%, 1)',
+          },
+        ])
+        setLineChartData([
+          {
+            id: "Today's visits",
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalDailyVisitsByHoursOfTheDay,
+          },
+          {
+            id: "This Week's visits",
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalVisitsByDaysOfTheWeek,
+          },
+          {
+            id: "This month's visits",
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalVisitsByDaysOfTheMonth,
+          },
+          {
+            id: "This year's visits",
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalVisitsByMonthsOfTheYear,
+          },
+        ])
+      }
+    }
+
+    socket.emit(
+      'createConnection',
+      { keywordId: selectedKeyword?.id },
+      (data: any) => updateData(data)
+    )
+
+    socket.emit(
+      'getNewRecords',
+      { keywordId: selectedKeyword?.id },
+      (data: any) => {
+        updateData(data)
+      }
+    )
+
+    socket.on('getNewRecords', (data: any) => updateData(data))
+
     setValues({
       ...values,
       hashtag: selectedKeyword?.letters,
@@ -481,7 +440,6 @@ const HomeWeb = () => {
                 //   JSON.stringify(selectedKeyword)
                 // }
                 onClick={() => {
-                  console.log(selectedKeyword.id)
                   updateKeywordDetails(selectedKeyword?.id, {
                     country: values?.country,
                     state: values?.state,
@@ -590,7 +548,9 @@ const HomeWeb = () => {
               fontWeight={400}
               align="center"
               marginY="18px"
-              //   onClick={}
+              onClick={() => {
+                downloadSvg(selectedKeyword.letters.toUpperCase())
+              }}
             >
               {/* Download E-label stamp */}
               {t('box_two_download')}
@@ -667,7 +627,7 @@ const HomeWeb = () => {
             <Box
               sx={{
                 width: '90%',
-                height: '29px',
+                height: '10px',
                 margin: '0 auto',
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -681,15 +641,9 @@ const HomeWeb = () => {
               {/* Time Selection */}
               <Select
                 displayEmpty
+                value={lineChartType}
                 onChange={(e) => {
                   setLineChartType(e.target.value as number)
-                }}
-                value={lineChartType}
-                renderValue={(selected: any) => {
-                  if (selected === 0) {
-                    return 'Duration'
-                  }
-                  return selected
                 }}
                 sx={{
                   height: '42px',
@@ -708,10 +662,11 @@ const HomeWeb = () => {
                   },
                 }}
               >
+                <MenuItem value={0}>Duration</MenuItem>
                 <MenuItem value={1}>24 hours</MenuItem>
                 <MenuItem value={2}>7 days</MenuItem>
                 <MenuItem value={3}>30 days</MenuItem>
-                <MenuItem value={4}>year</MenuItem>
+                <MenuItem value={4}>Year</MenuItem>
               </Select>
             </Box>
             {lineChartData !== null &&
@@ -722,9 +677,9 @@ const HomeWeb = () => {
                 <LineChart data={lineChartData[1]} />
               ) : lineChartType == 3 ? (
                 <LineChart data={lineChartData[2]} />
-              ) : (
+              ) : lineChartType == 4 ? (
                 <LineChart data={lineChartData[3]} />
-              ))}
+              ) : null)}
           </Item>
         </Grid>
       </Grid>

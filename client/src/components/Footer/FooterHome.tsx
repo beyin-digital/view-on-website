@@ -20,11 +20,9 @@ const Footer = ({ onClick }: any) => {
 	const handleClose = () => setOpen(false);
 	function closeModel() {
 		setOpen(false);
-		// console.log("hi");
 	}
 	function openModel() {
 		setOpen(true);
-		// console.log("hi");
 	}
 	const icons = [
 		{

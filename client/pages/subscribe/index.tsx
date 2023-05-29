@@ -129,7 +129,6 @@ const SubscribePage: NextPage = () => {
     }
   }, [hashtagDebounce, keywordFound])
 
-  console.log('keywordFound', keywordFound)
   return (
     <>
       <Head>
@@ -619,7 +618,6 @@ const SubscribePage: NextPage = () => {
                                       'This hashtag is already in use'
                                     )
                                   }
-                                  console.log('values', values)
                                   handleSubscription(
                                     values.hashtag,
                                     values.sublink

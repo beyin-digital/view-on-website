@@ -5,9 +5,8 @@ import { KeywordContext } from '@/contexts/keywordContext'
 import { toast } from 'react-toastify'
 import io from 'socket.io-client'
 
-// const socket = io('http://localhost:4000/analytics', {
-//   query: { userId: 'user123' },
-// }) // Replace with your NestJS server URL and
+const socket = io('http://localhost:4000')
+
 const HomeForm = ({ setHashtag, hashtag }: any) => {
   const { t } = useTranslation('home')
   const notify = () => toast('Wow so easy!')
@@ -35,24 +34,14 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
     if (foundKeyword) {
+      socket.emit('redirectionAdded', { keywordId: foundKeyword.id })
       window.open(`${foundKeyword.sublink}`, '_blank')
     }
   }
 
   useEffect(() => {
-    // const handleAnalyticsUpdate = ({ keywordId, newCount }: any) => {
-    //   console.log(`keyword with ID ${keywordId}`)
-    //   console.log('newCount', newCount)
-    // }
-    // socket.on('analyticsUpdate', handleAnalyticsUpdate)
-
     if (foundKeyword) {
-      //   socket.emit('keywordFound', { keywordId: foundKeyword.id })
     }
-
-    // return () => {
-    //   socket.off('analyticsUpdate', handleAnalyticsUpdate)
-    // }
   }, [foundKeyword])
 
   return (

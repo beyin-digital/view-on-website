@@ -2,11 +2,11 @@ import { Box, Button, Typography } from '@mui/material'
 
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
- 
+
 import { useState } from 'react'
 import { FiArrowUpLeft, FiArrowUpRight } from 'react-icons/fi'
 
-const TextAndButton = () => {
+const TextAndButton = ({ selectedImage }: any) => {
   // Translation hook
   const { t } = useTranslation('slider')
   const { locale } = useRouter()

@@ -19,6 +19,7 @@ import Head from 'next/head'
 
 import dynamic from 'next/dynamic'
 import { nFormatter } from '@/utils/nFormatter'
+import Modal from '@/components/Dashboard/Modal'
 
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
@@ -40,7 +41,8 @@ const DashboardSubscriptionsPage = () => {
   const { t } = useTranslation('subscriptionsDash')
   const router = useRouter()
   const { locale } = useRouter()
-  const { getUserSubscriptions, subscriptions } = useContext(KeywordContext)
+  const { getUserSubscriptions, subscriptions, handleUnsubscribe } =
+    useContext(KeywordContext)
   const { token, user } = useContext(UserContext)
   const [isScrollable, setIsScrollable] = useState(subscriptions.length > 3)
 
@@ -49,6 +51,18 @@ const DashboardSubscriptionsPage = () => {
       getUserSubscriptions()
     }
   }, [token])
+
+  const [open, setOpen] = useState(false)
+  const [selectedKeyword, setSelectedKeyword] = useState<any>({})
+
+  const handleOpen = (keyword: any) => {
+    setOpen(true)
+    setSelectedKeyword(keyword)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   return (
     <>
@@ -114,8 +128,8 @@ const DashboardSubscriptionsPage = () => {
                 }}
                 variant="square"
               >
-                {/* {user?.fullName.split(' ')[0].charAt(0).toUpperCase()}
-                {user?.fullName.split(' ')[1].charAt(0).toUpperCase()} */}
+                {user?.fullName?.split(' ')[0]?.charAt(0)?.toUpperCase()}
+                {user?.fullName?.split(' ')[1]?.charAt(0)?.toUpperCase()}
               </Avatar>
               <Typography
                 sx={{
@@ -180,6 +194,7 @@ const DashboardSubscriptionsPage = () => {
                 justifyContent: 'flex-start',
                 height: '100%',
                 overflowX: 'auto',
+                overflowY: isScrollable ? 'hidden' : 'auto',
                 maxHeight: isScrollable ? '100%' : 'auto',
               }}
             >
@@ -202,7 +217,7 @@ const DashboardSubscriptionsPage = () => {
                       alignItems: 'center',
                       width: '100%',
                       height: '59px',
-                      background: subscription.isPremium
+                      background: subscription?.isPremium
                         ? 'linear-gradient(270deg, #0090EC 0%, #31E716 100%)'
                         : '#31E716',
                       borderRadius: '16px',
@@ -249,17 +264,17 @@ const DashboardSubscriptionsPage = () => {
                       </Box>
                       {/* Length */}
                       <Box>
-                        {subscription.isPremium ? (
+                        {subscription?.isPremium ? (
                           <>
-                            <Typography fontSize="32px">
-                              ${subscription.renewalAmount} <br />
+                            <Typography fontSize="20px">
+                              Premium
+                              <br /> letter
                             </Typography>
-                            <Typography>yearly renewal</Typography>
                           </>
                         ) : (
                           <>
                             <Typography fontSize="20px">
-                              {subscription.duration}ly <br />
+                              {subscription?.duration}ly <br />
                             </Typography>
                             <Typography>package</Typography>
                           </>
@@ -276,20 +291,32 @@ const DashboardSubscriptionsPage = () => {
                       }}
                     >
                       <Typography>
-                        {t('date_bought')} :
+                        {t('date_next')} :
                         {new Date(subscription.purchaseDate).toLocaleDateString(
                           'en-GB'
                         )}
                       </Typography>
-                      <Typography>
-                        {t('date_next')} :
-                        {new Date(subscription.renewalDate).toLocaleDateString(
-                          'en-GB'
-                        )}
-                      </Typography>
+                      {!subscription?.isPremium && (
+                        <Typography>
+                          {t('date_bought')} :
+                          {new Date(
+                            subscription.renewalDate
+                          ).toLocaleDateString('en-GB')}
+                        </Typography>
+                      )}
                     </Box>
                   </Box>
-                  <Typography fontSize="14px">{t('unsubscribe')}</Typography>
+                  {!subscription.isPremium && (
+                    <Typography
+                      sx={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        handleOpen(subscription)
+                      }}
+                      fontSize="14px"
+                    >
+                      {t('unsubscribe')}
+                    </Typography>
+                  )}
                 </Box>
               ))}
             </Box>
@@ -328,8 +355,8 @@ const DashboardSubscriptionsPage = () => {
               }}
               variant="square"
             >
-              {/* {user?.fullName.split(' ')[0].charAt(0)}
-              {user?.fullName.split(' ')[1].charAt(0)} */}
+              {user?.fullName?.split(' ')[0]?.charAt(0)}
+              {user?.fullName?.split(' ')[1]?.charAt(0)}
             </Avatar>
             <Box>
               <Typography
@@ -449,11 +476,65 @@ const DashboardSubscriptionsPage = () => {
                     </Typography>
                   </Box>
                 </Box>
-                <Typography fontSize="14px">{t('unsubscribe')}</Typography>
+                {!subscription.isPremium && (
+                  <Typography
+                    sx={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      handleOpen(subscription)
+                    }}
+                    fontSize="14px"
+                  >
+                    {t('unsubscribe')}
+                  </Typography>
+                )}
               </Box>
             ))}
           </Box>
         </Item>
+        <Modal
+          title="unsubscribe from keyword"
+          open={open}
+          handleClose={handleClose}
+        >
+          <Box>
+            <Typography>
+              you're about to unsubscribe from keyword #
+              {selectedKeyword?.letters}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              position: 'absolute',
+              bottom: 0,
+              width: '90%',
+              justifyContent: 'space-between',
+              margin: '0 auto',
+              paddingBottom: '21px',
+            }}
+          >
+            <Button
+              color="info"
+              variant="contained"
+              sx={{ height: '42px', width: '154px' }}
+              onClick={() => {
+                handleUnsubscribe(selectedKeyword?.id)
+              }}
+            >
+              Unsubscribe
+            </Button>
+            <Button
+              color="error"
+              variant="contained"
+              sx={{ height: '42px', width: '154px' }}
+              onClick={() => {
+                handleClose()
+              }}
+            >
+              {t('cancel_security')}
+            </Button>
+          </Box>
+        </Modal>
       </RootLayout>
     </>
   )

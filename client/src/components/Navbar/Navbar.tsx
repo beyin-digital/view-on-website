@@ -23,7 +23,7 @@ const Header = () => {
   const { t } = useTranslation('common')
   const router = useRouter()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const { pathname, query, asPath, locale } = router
+  const { pathname, query, asPath, locale, push } = router
   const [hoveredButton, setHoveredButton] = useState(false)
 
   const { token } = useContext(UserContext)
@@ -242,7 +242,7 @@ const Header = () => {
           <Button
             onClick={() => {
               if (token) {
-                router.push(`/${router.locale}/dashboard`)
+                router.push(`/${locale}/dashboard`)
               }
               router.push('/illustration')
             }}
@@ -281,7 +281,7 @@ const Header = () => {
           <Button
             onClick={() => {
               if (token) {
-                router.push(`/${router.locale}/dashboard`)
+                router.push(`/${locale}/dashboard`)
               }
               router.push('/illustration')
             }}
@@ -564,21 +564,19 @@ const Header = () => {
                 className="ButtonAnimation"
               >
                 {token ? (
-                  <Link href={`/${router.locale}/dashboard`}>
-                    <Typography
-                      sx={{
-                        letterSpacing: '0.02em',
-                        fontSize: { xs: '23px', xl: '32px' },
-                        fontWeight: '700',
-                        lineHeight: '40px',
-                        color: '#343132',
-                        textTransform: 'uppercase',
-                      }}
-                      onClick={() => router.push(`/${router.locale}/dashboard`)}
-                    >
-                      {t('nav_Dashboard')}
-                    </Typography>
-                  </Link>
+                  <Typography
+                    onClick={() => router.push(`${locale}/dashboard`)}
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', xl: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_Dashboard')}
+                  </Typography>
                 ) : (
                   <Typography
                     sx={{

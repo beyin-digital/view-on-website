@@ -257,7 +257,7 @@ const DashboardSecurityPage = () => {
                 <Typography fontSize="36px">{t('change')}</Typography>
 
                 <OutlinedInput
-                  value={values.currentPassword}
+                  value={values?.currentPassword}
                   placeholder={`${t('pass')}`}
                   sx={{
                     height: '57px',
@@ -320,7 +320,7 @@ const DashboardSecurityPage = () => {
                   }}
                 />
                 <OutlinedInput
-                  value={values.confirmPassword}
+                  value={values?.confirmPassword}
                   placeholder={`${t('confirm_pass')}`}
                   sx={{
                     height: '57px',
@@ -394,7 +394,6 @@ const DashboardSecurityPage = () => {
                       handleChangeTwoFactorAuth()
                       setTwoFactorAuth(true)
                     }
-                    console.log('Clicked')
                   }}
                   sx={{
                     '.mui-style-15wmqzy-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track ':
@@ -456,8 +455,8 @@ const DashboardSecurityPage = () => {
                 }}
                 variant="square"
               >
-                {/* {user?.fullName.split(' ')[0].charAt(0)}
-                {user?.fullName.split(' ')[1].charAt(0)} */}
+                {user?.fullName?.split(' ')[0]?.charAt(0)}
+                {user?.fullName?.split(' ')[1]?.charAt(0)}
               </Avatar>
               <Box>
                 <Typography

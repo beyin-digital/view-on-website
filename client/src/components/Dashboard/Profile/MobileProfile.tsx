@@ -16,8 +16,7 @@ import { useTranslation } from 'react-i18next'
 const MobileProfile = () => {
   const { t } = useTranslation('profile')
 
-  const router = useRouter()
-  const { updateUser, user, token } = useContext(UserContext)
+  const { updateUser, user } = useContext(UserContext)
 
   const [values, setValues] = useState({
     fullName: '',

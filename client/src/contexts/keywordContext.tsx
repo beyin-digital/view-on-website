@@ -60,7 +60,6 @@ export const KeywordProvider = ({ children }: any) => {
       setKeywordFound(true)
       setIsSearching(false)
     } catch (error) {
-      console.log(error)
       setKeywordFound(false)
       setIsSearching(false)
     } finally {
@@ -96,6 +95,27 @@ export const KeywordProvider = ({ children }: any) => {
     }
   }
 
+  const handleUnsubscribe = async (id: string) => {
+    try {
+      const response = await fetch(`${apiUrl}/payment/unsubscribe`, {
+        method: 'DELETE',
+        body: JSON.stringify({ id }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
+      const data = await response.json()
+      toast.success('Unsubscribed successfully')
+      getUsersKeywords()
+    } catch (error) {
+      toast.error('Error unsubscribing')
+    }
+  }
+
   const getUsersKeywords = async () => {
     try {
       const response = await fetch(`${apiUrl}/keywords?page=1&limit=10`, {
@@ -107,7 +127,6 @@ export const KeywordProvider = ({ children }: any) => {
       }
 
       const { data } = await response.json()
-      console.log(data)
       setKeywords(data)
       setSelectedKeyword(data[0])
     } catch (error) {
@@ -141,7 +160,6 @@ export const KeywordProvider = ({ children }: any) => {
     }
 
     const data = await response.json()
-    console.log(data)
     const alphabets = 'abcdefghijklmnopqrstuvwxyz'.split('')
     // compare the alphabets array with the data array which contains objects with the value pair of slug and a letter of the english alphabet. Find matching letters and omit them from the alphabets array
     const filteredAlphabets = alphabets.filter(
@@ -202,6 +220,7 @@ export const KeywordProvider = ({ children }: any) => {
         sortedKeywords,
         setAnalyticsData,
         foundKeyword,
+        handleUnsubscribe,
       }}
     >
       {children}

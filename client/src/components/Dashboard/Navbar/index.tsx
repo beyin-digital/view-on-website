@@ -13,11 +13,15 @@ import {
   BsLinkedin,
   BsTwitter,
 } from 'react-icons/bs'
+import io from 'socket.io-client'
+
 import Link from 'next/link'
 import Modal from '../Modal'
 import { UserContext } from '@/contexts/userContext'
 import { useTranslation } from 'react-i18next'
 import { KeywordContext } from '@/contexts/keywordContext'
+
+const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
 
 const Navbar = () => {
   const { t } = useTranslation('common')
@@ -100,7 +104,6 @@ const Navbar = () => {
     const selectedKeyword = keywords?.find(
       (keyword: any) => keyword.letters === newValue
     )
-
     setSelectedKeyword(selectedKeyword)
   }
 
@@ -269,7 +272,6 @@ const Navbar = () => {
                 }
                 router.push(link.href)
                 setMobileNavOpen(false)
-                console.log('Clicked')
               }}
               sx={{
                 display: 'flex',
