@@ -125,37 +125,6 @@ const Header = () => {
             <IoIosArrowForward color="#343132" />
           </Box>
         </Link>
-
-        {!token && (
-          <Link
-            title={`${t('nav_login')}`}
-            href="/login"
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-            <Box
-              sx={{
-                marginX: '1rem',
-                height: '55px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Typography
-                fontSize="24px"
-                fontWeight={'400'}
-                lineHeight="37px"
-                color="#343132"
-                textTransform={'capitalize'}
-              >
-                {t('nav_login')}
-              </Typography>
-              <IoIosArrowForward color="#343132" />
-            </Box>
-          </Link>
-        )}
         <Link
           href={asPath}
           locale={locale === 'en' ? 'ar' : 'en'}
@@ -456,27 +425,6 @@ const Header = () => {
                       </Typography>
                     </Link>
                   </li>
-
-                  {!token && (
-                    <li>
-                      <Link
-                        href="/login"
-                        title={`${t('nav_login')}`}
-                        style={{ textDecoration: 'none' }}
-                      >
-                        <Typography
-                          fontSize="32px"
-                          fontWeight={400}
-                          lineHeight="37px"
-                          color="#343132"
-                          textTransform={'capitalize'}
-                        >
-                          {t('nav_login')}
-                        </Typography>
-                      </Link>
-                    </li>
-                  )}
-
                   <li>
                     <Link
                       href={asPath}

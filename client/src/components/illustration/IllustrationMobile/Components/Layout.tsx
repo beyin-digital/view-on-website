@@ -1,7 +1,7 @@
 import React from 'react'
-
 import { Box } from '@mui/material'
 import { ImageHeader } from './index'
+import dynamic from 'next/dynamic'
 
 interface Props {
   children: React.ReactNode
@@ -55,6 +55,7 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
           </Box>
         </Box>
       </Box>
+      {/* <FooterMobile /> */}
     </>
   )
 }

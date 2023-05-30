@@ -9,6 +9,7 @@ const TwoBox = () => {
 
   return (
     <>
+      {/* translate AR */}
       {locale === 'ar' ? (
         <Box
           sx={{

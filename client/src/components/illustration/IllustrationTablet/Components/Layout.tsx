@@ -2,13 +2,14 @@ import Footer from '@/components/Footer/Footer'
 import { Box } from '@mui/material'
 import React from 'react'
 import { ButtonStyleMobile } from '.'
+import { Background } from '@/components/Layout/Background'
 
 interface Props {
   children: React.ReactNode
 }
 const LayoutMobile: React.FC<Props> = ({ children }) => {
   return (
-    <>
+    <Box className="IllustrationTablet">
       <Box
         sx={{
           position: 'fixed',
@@ -16,26 +17,14 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
           width: '2192px',
           maxWidth: '100%',
         }}
-        className="IllustrationTablet"
       >
-        <img
-          // fill
-          src="/images/swirl.webp"
-          alt="Background View On Website"
-          title="Background View On Website"
-          style={{
-            top: '-25rem',
-            left: '-7rem',
-            position: 'absolute',
-            width: '900px',
-          }}
-        />
+        <Background />
+
         <Box
           sx={{
             width: '2192px',
             maxWidth: '100%',
             height: { xs: '100%', md: '88vh', xl: '88vh' },
-            // background: '#EAEDED',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -56,7 +45,7 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
                 position: 'relative',
                 maxWidth: '100%',
                 width: '100%',
-                height: { xs: '100%', sm: '100%', md: '75vh', xl: '650px' },
+                height: { xs: '100%', sm: '100%', md: '70vh', xl: '650px' },
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -79,7 +68,7 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
             >
               <Box
                 sx={{
-                  height: '69vh',
+                  height: '68vh',
                   width: { xs: '98%', xl: '80%' },
                   display: 'flex',
                   flexDirection: 'column',
@@ -90,10 +79,17 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
             </Box>
           </Box>
         </Box>
-
+      </Box>
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '0',
+          width: '100%',
+        }}
+      >
         <Footer />
       </Box>
-    </>
+    </Box>
   )
 }
 

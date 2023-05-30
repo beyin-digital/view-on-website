@@ -57,8 +57,8 @@ export const ImageBackground = () => {
               src="/images/swirl.webp"
               style={{
                 width: '100%',
-                left: '-21rem',
-                top: '5rem',
+                left: '-15rem',
+                top: '2rem',
               }}
             />
           </Box>

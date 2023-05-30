@@ -7,6 +7,7 @@ import { LinkSubscribe } from '@/components/Button'
 import OneBox from './OneBox'
 import TwoBox from './TwoBox'
 import ThreeBox from './ThreeBox'
+
 const PageMobile = () => {
   return (
     <Box
@@ -27,19 +28,6 @@ const PageMobile = () => {
           position: 'relative',
         }}
       >
-        {/* <Box
-          sx={{
-            position: 'absolute',
-            top: '-100rem',
-          }}
-        >
-          <img
-            src="/images/swirl.webp"
-            alt="Background View On Website"
-            title="Background View On Website"
-            loading="lazy"
-          />
-        </Box> */}
         <Box
           m="auto"
           sx={{

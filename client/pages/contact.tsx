@@ -4,9 +4,39 @@ import { useTranslation } from "next-i18next";
 
 import Head from "next/head";
 import Layout from "@/components/Layout/Layout";
+import ContactDetails from "@/components/ContactDetails";
 
 const Contact = () => {
 	const { t } = useTranslation("contact");
+	const cards = [
+		{
+			id: 1,
+			name: "Technical Support",
+			text: "For technical support please contact us through:",
+			iconEmail: "",
+			email: "Support@viewonwebsite.com",
+			iconPhone: "",
+			phone: "+971 50 1234 567",
+		},
+		{
+			id: 2,
+			name: "Technical Support",
+			text: "For technical support please contact us through:",
+			iconEmail: "",
+			email: "Support@viewonwebsite.com",
+			iconPhone: "",
+			phone: "+971 50 1234 567",
+		},
+		{
+			id: 3,
+			name: "Technical Support",
+			text: "For technical support please contact us through:",
+			iconEmail: "",
+			email: "Support@viewonwebsite.com",
+			iconPhone: "",
+			phone: "+971 50 1234 567",
+		},
+	];
 
 	return (
 		<>
@@ -22,7 +52,8 @@ const Contact = () => {
 				<link rel="shortcut icon" href="/favicon.ico" />
 			</Head>
 			<Layout>
-				<h1></h1>
+				<h1 />
+				{/* <ContactDetails /> */}
 			</Layout>
 		</>
 	);

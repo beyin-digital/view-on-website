@@ -1,11 +1,12 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
-import Link from "next/link";
-import { useState } from "react";
+
+import { Box, Button, Modal, Typography } from "@mui/material";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
+
 type IntrinsicAttributes = {
 	open: boolean;
 	close: () => void;
@@ -451,7 +452,7 @@ const ModalFooter = (props: IntrinsicAttributes) => {
 														onMouseLeave={handleHover}
 													>
 														<NextLink
-															href="/illustration"
+															href="/example"
 															locale={router.locale}
 															title="illustration View On Website Page"
 															style={{
@@ -518,7 +519,7 @@ const ModalFooter = (props: IntrinsicAttributes) => {
 														onMouseLeave={handleHover}
 													>
 														<NextLink
-															href="/illustration"
+															href="/example"
 															locale={router.locale}
 															title="illustration View On Website Page"
 															style={{
@@ -714,7 +715,7 @@ const ModalFooter = (props: IntrinsicAttributes) => {
 														onMouseLeave={handleHoverTwo}
 													>
 														<NextLink
-															href="/example"
+															href="/subscribe"
 															locale={router.locale}
 															title="Example View On Website Page"
 															style={{
@@ -780,7 +781,7 @@ const ModalFooter = (props: IntrinsicAttributes) => {
 														onMouseLeave={handleHoverTwo}
 													>
 														<NextLink
-															href="/example"
+															href="/subscribe"
 															locale={router.locale}
 															title="Example View On Website Page"
 															style={{

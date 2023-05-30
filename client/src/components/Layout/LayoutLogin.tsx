@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
 
 // components
-import { BackgroundImageSlider } from "../Slider/BackgroundImage";
-
-// components
 import dynamic from "next/dynamic";
-const Header = dynamic(() => import("../Navbar/NavbarSubscribe"), {
+import { Background } from "./Background";
+const Header = dynamic(() => import("../Navbar/NavbarLogin"), {
 	ssr: false,
 });
 const Footer = dynamic(() => import("../Footer/Footer"), {
@@ -18,26 +16,8 @@ const FooterMobile = dynamic(() => import("../Footer/FooterMobile"), {
 
 interface Props {
 	children: React.ReactNode;
-	nameOne?: any;
-	linkOne?: any;
-	nameTwo?: any;
-	linkTwo?: any;
-	nameThree?: any;
-	linkThree?: any;
-	nameFour?: any;
-	linkFour?: any;
 }
-const LayoutSubHome: React.FC<Props> = ({
-	children,
-	nameOne,
-	linkOne,
-	nameTwo,
-	linkTwo,
-	nameThree,
-	linkThree,
-	nameFour,
-	linkFour,
-}) => {
+const Layout: React.FC<Props> = ({ children }) => {
 	const [showSlider, setShowSlider] = useState(false);
 
 	useEffect(() => {
@@ -65,21 +45,12 @@ const LayoutSubHome: React.FC<Props> = ({
 						display: "flex",
 						flexDirection: "column",
 						justifyContent: "space-between",
-						// position: "relative",
 					}}
 				>
-					<BackgroundImageSlider />
-					<Header
-						nameOne={nameOne}
-						linkOne={linkOne}
-						nameTwo={nameTwo}
-						linkTwo={linkTwo}
-						nameThree={nameThree}
-						linkThree={linkThree}
-						nameFour={nameFour}
-						linkFour={linkFour}
-					/>
 					{/* background Layout */}
+					<Background />
+
+					<Header />
 
 					<Box
 						className="LayoutBox"
@@ -105,9 +76,9 @@ const LayoutSubHome: React.FC<Props> = ({
 					<FooterMobile />
 				</Box>
 			</Box>
-			<Footer />
+			{/* <Footer /> */}
 		</>
 	);
 };
 
-export default LayoutSubHome;
+export default Layout;

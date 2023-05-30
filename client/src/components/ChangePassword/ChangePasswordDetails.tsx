@@ -1,6 +1,8 @@
+// translate hooks
 import { useTranslation } from 'next-i18next'
-import Image from 'next/image'
+
 import { Box, Typography } from '@mui/material'
+import Image from 'next/image'
 
 const ChangePasswordDetails = () => {
   const { t } = useTranslation('changePassword')
@@ -22,6 +24,8 @@ const ChangePasswordDetails = () => {
           title="Logo View On Website"
           width={150}
           height={80}
+          placeholder="blur"
+          blurDataURL="/images/logo.svg"
         />
         <Typography
           sx={{

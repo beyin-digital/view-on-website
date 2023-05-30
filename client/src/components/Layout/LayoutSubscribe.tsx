@@ -2,16 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
 
 // components
-import { BackgroundImageSlider } from "../Slider/BackgroundImage";
 
 import dynamic from "next/dynamic";
-const Header = dynamic(() => import("../Navbar/Navbar"), {
-	ssr: false,
-});
-const Footer = dynamic(() => import("../Footer/Footer"), {
-	ssr: false,
-});
-const FooterMobile = dynamic(() => import("../Footer/FooterMobile"), {
+import Image from "next/image";
+const Header = dynamic(() => import("../Navbar/NavbarSubscribe"), {
 	ssr: false,
 });
 
@@ -33,7 +27,7 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
 		<>
 			<Box
 				sx={{
-					width: "2162px",
+					// maxWidth: "2162px",
 					maxWidth: "100%",
 					overflow: "hidden",
 					height: { xs: "100%", md: "96vh" },
@@ -49,7 +43,38 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
 						position: "relative",
 					}}
 				>
-					<BackgroundImageSlider />
+					<Box
+						sx={{
+							position: "fixed",
+							height: "100vh",
+							width: "100%",
+							maxWidth: "100%",
+							minHeight: "100%",
+							background: "url('/images/swirl.webp')",
+							backgroundPositionY: {
+								xs: "-1250px",
+								sm: "-1100px",
+								md: "-1100px",
+								xl: "-1000px",
+							},
+							backgroundPositionX: { xs: "-800px", md: "-600px", xl: "-300px" },
+							backgroundRepeat: "no-repeat",
+						}}
+						className="ImageBgHome"
+					/>
+					<Image
+						alt=""
+						style={{
+							top: "-1rem",
+							left: "-11rem",
+							position: "absolute",
+						}}
+						src="/images/swirl.webp"
+						width={600}
+						height={500}
+						className="ImageHome"
+					/>
+
 					<Header />
 					<Box
 						className="LayoutBox"

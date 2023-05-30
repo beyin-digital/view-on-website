@@ -45,6 +45,7 @@ const PieChart = ({ data }: any) => (
       },
     ]}
     enableArcLabels={false}
+    enableArcLinkLabels={false}
     legends={[
       {
         anchor: 'bottom',

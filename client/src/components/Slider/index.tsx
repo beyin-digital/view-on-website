@@ -1,11 +1,11 @@
 // import Header from '@/components/Navbar/Navbar'
 import { Box } from '@mui/material'
 
-import { BackgroundImageSlider } from './BackgroundImage'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 // components
 import dynamic from 'next/dynamic'
+import { Background } from '../Layout/Background'
 const Header = dynamic(() => import('@/components/Navbar/Navbar'), {
   ssr: false,
 })
@@ -62,7 +62,7 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
           position: 'relative',
         }}
       >
-        {showSlider && <BackgroundImageSlider />}
+        {showSlider && <Background />}
         <Box
           sx={{
             position: 'relative',

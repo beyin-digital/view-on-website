@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { Box, OutlinedInput, Typography } from '@mui/material'
+import { Box, OutlinedInput } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { KeywordContext } from '@/contexts/keywordContext'
 import { toast } from 'react-toastify'
@@ -140,10 +140,12 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
                 '& .MuiInputBase-input': {
                   caretColor: '#000',
                   color: isInputFocused ? '#2BEA0F' : '',
+                  fontWeight: '800',
                 },
                 '& .MuiOutlinedInput-input': {
                   '&::placeholder': {
                     color: isInputFocused ? '#000' : '',
+                    fontWeight: '400',
                   },
                 },
               }}
@@ -151,12 +153,11 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
               className="cursorAnimation"
             />
             <Box className={`i ${isTyping ? 'stopAnimation' : ''}`} />
-            {/* {!isInputValid && <>{toast.error("Error Message")}</>} */}
-            {/* // <Typography sx={{ color: "red" }}>{t("error")}</Typography> */}
           </form>
         </Box>
         <Box
           component="button"
+          title="Button Arrow View On Website"
           type="submit"
           disabled={!keywordFound}
           sx={{

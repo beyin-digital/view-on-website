@@ -15,7 +15,7 @@
   "cancel_security": "Cancel",
   "sure": "Sure",
   "cancel": "Cancel",
-
+  "delete_accont": "you're about to delete you account and all it's contents",
   "modal": "You're about to disable two factor authentication. Are you sure about this action?",
   "log_out": "You're about to Log out of your View On Website Dashboard?"
 }

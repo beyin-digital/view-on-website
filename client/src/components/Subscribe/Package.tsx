@@ -8,9 +8,10 @@ import { AiOutlineCheck } from "react-icons/ai";
 
 interface Props {
 	onClick: () => void;
+	name?: any;
 }
 
-export const PackageBoxOne: React.FC<Props> = ({ onClick }) => {
+export const PackageBoxOne: React.FC<Props> = ({ onClick, name }) => {
 	const { t } = useTranslation("subscribe");
 	const { locale } = useRouter();
 
@@ -151,7 +152,7 @@ export const PackageBoxOne: React.FC<Props> = ({ onClick }) => {
 						sx={{
 							width: "200px",
 							display: "flex",
-							justifyContent: "end",
+							justifyContent: "start",
 							// background: "#0090EC",
 							borderRadius: "11px",
 						}}
@@ -162,8 +163,8 @@ export const PackageBoxOne: React.FC<Props> = ({ onClick }) => {
 						<Button
 							onClick={onClick}
 							sx={{
-								paddingX: "18px",
-								width: "150px",
+								paddingX: "10px",
+								width: "190px",
 								height: "45px",
 								display: "flex",
 								justifyContent: "space-between",
@@ -172,16 +173,15 @@ export const PackageBoxOne: React.FC<Props> = ({ onClick }) => {
 						>
 							<Typography
 								sx={{
-									// fontFamily: "Helvetica Neue",
 									letterSpacing: "0.02em",
-									fontSize: "32px",
+									fontSize: "30px",
 									fontWeight: 400,
 									lineHeight: "40px",
 									color: "#FBFBFB",
 									textTransform: "uppercase",
 								}}
 							>
-								{t("pay")}
+								{name}
 							</Typography>
 
 							{locale === "ar" ? (
@@ -205,7 +205,7 @@ export const PackageBoxOne: React.FC<Props> = ({ onClick }) => {
 	);
 };
 
-export const PackageBoxTwo: React.FC<Props> = ({ onClick }) => {
+export const PackageBoxTwo: React.FC<Props> = ({ onClick, name }) => {
 	const { t } = useTranslation("subscribe");
 	const { locale } = useRouter();
 
@@ -351,7 +351,7 @@ export const PackageBoxTwo: React.FC<Props> = ({ onClick }) => {
 						sx={{
 							width: "200px",
 							display: "flex",
-							justifyContent: "end",
+							justifyContent: "start",
 							background: "#0090EC",
 							borderRadius: "11px",
 						}}
@@ -362,26 +362,26 @@ export const PackageBoxTwo: React.FC<Props> = ({ onClick }) => {
 						<Button
 							onClick={onClick}
 							sx={{
-								paddingX: "18px",
-								width: "150px",
+								paddingX: "10px",
+								width: "190px",
 								height: "45px",
 								display: "flex",
 								justifyContent: "space-between",
-								marginRight: "7px",
+								marginRight: "8px",
 							}}
 						>
 							<Typography
 								sx={{
 									// fontFamily: "Helvetica Neue",
 									letterSpacing: "0.02em",
-									fontSize: "32px",
+									fontSize: "30px",
 									fontWeight: 400,
 									lineHeight: "40px",
 									color: "#FBFBFB",
 									textTransform: "uppercase",
 								}}
 							>
-								{t("pay")}
+								{name}
 							</Typography>
 
 							{locale === "ar" ? (
@@ -405,7 +405,7 @@ export const PackageBoxTwo: React.FC<Props> = ({ onClick }) => {
 	);
 };
 
-export const PackageBoxThree: React.FC<Props> = ({ onClick }) => {
+export const PackageBoxThree: React.FC<Props> = ({ onClick, name }) => {
 	const { t } = useTranslation("subscribe");
 	const { locale } = useRouter();
 
@@ -545,7 +545,7 @@ export const PackageBoxThree: React.FC<Props> = ({ onClick }) => {
 						sx={{
 							width: "200px",
 							display: "flex",
-							justifyContent: "end",
+							justifyContent: "start",
 							background: "#0090EC",
 							borderRadius: "11px",
 						}}
@@ -556,26 +556,26 @@ export const PackageBoxThree: React.FC<Props> = ({ onClick }) => {
 						<Button
 							onClick={onClick}
 							sx={{
-								paddingX: "18px",
-								width: "150px",
+								paddingX: "10px",
+								width: "190px",
 								height: "45px",
 								display: "flex",
 								justifyContent: "space-between",
-								marginRight: "7px",
+								marginRight: "8px",
 							}}
 						>
 							<Typography
 								sx={{
 									// fontFamily: "Helvetica Neue",
 									letterSpacing: "0.02em",
-									fontSize: "32px",
+									fontSize: "30px",
 									fontWeight: 400,
 									lineHeight: "40px",
 									color: "#FBFBFB",
 									textTransform: "uppercase",
 								}}
 							>
-								{t("pay")}
+								{name}
 							</Typography>
 							{locale === "ar" ? (
 								<FiArrowUpLeft

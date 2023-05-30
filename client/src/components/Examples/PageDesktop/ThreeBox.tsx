@@ -9,6 +9,7 @@ const ThreeBox = () => {
 
   return (
     <>
+      {/* translate AR */}
       {locale === 'ar' ? (
         <Box
           sx={{
@@ -17,10 +18,10 @@ const ThreeBox = () => {
             borderLeft: '1px solid #FBFBFB',
             borderBottom: '1px solid #FBFBFB',
             borderTop: '1px solid #FBFBFB',
-             borderTopLeftRadius: '35px',
-             background:
+            borderTopLeftRadius: '35px',
+            background:
               'linear-gradient(53.34deg, rgba(0, 144, 236, 0.3) 4.06%, rgba(0, 144, 236, 0.015) 63.3%)',
-             backdropFilter: 'blur(100px)',
+            backdropFilter: 'blur(100px)',
             position: 'relative',
             right: '-2rem',
           }}
@@ -29,10 +30,10 @@ const ThreeBox = () => {
             sx={{
               transform: 'skew(-16deg, 0deg)',
               position: 'absolute',
-              top: { xs: '3rem', xl: '2rem' },
+              top: { xs: '3rem', xl: '-1rem' },
               left: { xs: '', md: '0rem', xl: '3rem' },
-              width: { md: '550px', xl: '530px' },
-              height: { md: '550px', xl: '540px' },
+              width: { md: '550px', xl: '578px' },
+              height: { md: '550px', xl: '583px' },
             }}
           >
             <img
@@ -101,8 +102,8 @@ const ThreeBox = () => {
               position: 'absolute',
               top: '0',
               bottom: { xs: '', md: '-1rem', xl: '1rem' },
-              right: { xs: '', md: '0rem', xl: '-5.5rem' },
-              width: { md: '500px', xl: '630px' },
+              right: { xs: '', md: '13rem', xl: '-5.5rem' },
+              width: { md: '514px', xl: '630px' },
               height: { md: '500px', xl: '630px' },
             }}
           >
