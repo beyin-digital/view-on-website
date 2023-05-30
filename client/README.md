@@ -1,3 +1,7 @@
+---
+marp:true
+---
+
 # View on Website (Client)
 
 This is the Client application for the View On Website Platform. This project was bootstrapped with create-next-app and is making use of Material UI as it's component library
