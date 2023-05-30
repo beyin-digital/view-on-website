@@ -181,7 +181,7 @@ const SignupDetails = () => {
           <Box
             sx={{
               alignItems: 'center',
-              display: { xs: 'flex', md: 'none', xl: 'none' },
+              display: { xs: 'none', md: 'none', xl: 'none' },
             }}
           >
             <Typography

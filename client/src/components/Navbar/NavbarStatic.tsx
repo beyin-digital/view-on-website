@@ -433,11 +433,7 @@ const NavbarStatic = ({
 								/>
 							)}
 						</IconButton>
-						<Box
-							component="div"
-							sx={{ cursor: "pointer", margin: ".5rem 0" }}
-							// onClick={() => router.push("/")}
-						>
+						<Box component="div" sx={{ cursor: "pointer", margin: ".5rem 0" }}>
 							<Link href="/" title="Home View On Website">
 								<img
 									src="/images/logo.svg"
