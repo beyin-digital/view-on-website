@@ -22,6 +22,8 @@ const DetailsHeader = () => {
           title="Logo View On Website"
           width={150}
           height={80}
+          placeholder="blur"
+          blurDataURL="/images/logo.svg"
         />
         <Box
           sx={{

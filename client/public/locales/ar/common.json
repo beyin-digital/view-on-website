@@ -12,7 +12,7 @@
   "nav_Dashboard": "لوحة التحكم",
   "footer_contact": "تواصل معنا",
   "footer_learn": "اعرف المزيد",
-  "footer_privacy": "الشروط والاحكام",
+  "footer_privacy": "الشروط الاأحكام",
   "footer_terms": "سياسة الخصوصية",
   "footer_text": "كن موجهًا بعيدًا إلى ما تراه!",
   "premium": "حجز متميز",
@@ -33,6 +33,7 @@
   "side_logout": "تسجيل الخروج",
   "side_contact": "اتصل بنا",
   "title": "#كلماتي المفتاحية",
-  "cancel":"إلغاء",
-  "log_out":"أنت على وشك تسجيل الخروج من لوحة تحكم View On Website. هل ترغب في الخروج؟"
+  "cancel": "إلغاء",
+  "log_out": "أنت على وشك تسجيل الخروج من لوحة تحكم View On Website. هل ترغب في الخروج؟",
+  "more": "اعرف المزيد"
 }

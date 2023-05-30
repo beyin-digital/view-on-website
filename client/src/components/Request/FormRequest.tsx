@@ -1,7 +1,7 @@
 import { Box, Button, OutlinedInput, Typography } from '@mui/material'
 import LoginTextSignUp from '../Login/LoginTextSignUp'
 import { useTranslation } from 'next-i18next'
- import { IconsStyle } from '../Button'
+import { IconsStyle } from '../Button'
 import { useContext, useState } from 'react'
 import { UserContext } from '@/contexts/userContext'
 
@@ -77,7 +77,6 @@ const FormRequest = () => {
               display: 'flex',
               justifyContent: 'space-around',
             }}
-            // onClick={}
             type="submit"
           >
             <Typography

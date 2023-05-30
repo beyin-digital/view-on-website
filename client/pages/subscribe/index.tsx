@@ -141,7 +141,7 @@ const SubscribePage: NextPage = () => {
       </Head>
       <Box
         sx={{
-          width: '2162px',
+          // width: '2162px',
           maxWidth: '100%',
           overflow: 'hidden',
           position: 'relative',
@@ -277,6 +277,7 @@ const SubscribePage: NextPage = () => {
                       width="100%"
                       display="flex"
                       justifyContent="space-between"
+                      alignItems="center"
                     >
                       <Typography
                         sx={{
@@ -287,10 +288,25 @@ const SubscribePage: NextPage = () => {
                             xl: '28px',
                           },
                         }}
-                      >
-                        {/* The hashtag keyword you've chosen is premium */}
-                        {/* {t("text_hashtag")} */}
-                      </Typography>
+                      />
+                      {(values.hashtag.length === 1 ||
+                        values.hashtag.length === 2 ||
+                        values.hashtag.length === 3) &&
+                        !keywordFound &&
+                        !/^[\p{N}\d\s]+$/u.test(values.hashtag) && (
+                          <Typography
+                            sx={{
+                              fontSize: {
+                                xs: '13px',
+                                sm: '20px',
+                                md: '22px',
+                                xl: '28px',
+                              },
+                            }}
+                          >
+                            {t('text_hashtag')}
+                          </Typography>
+                        )}
                       <Box
                         sx={{
                           width: {
@@ -395,7 +411,6 @@ const SubscribePage: NextPage = () => {
                     <OutlinedInput
                       name="sublink"
                       value={values.sublink}
-                      // label={`${t("input_hashtag_two")}`}
                       sx={{
                         width: '100%',
                         fontSize: {
@@ -435,10 +450,6 @@ const SubscribePage: NextPage = () => {
                       width: '100%',
                       display: 'flex',
                       justifyContent: 'space-between',
-                      marginBottom: {
-                        xs: '2rem',
-                        xl: '.1rem',
-                      },
                       flexDirection: {
                         xs: 'column',
                         md: 'column',
@@ -446,6 +457,8 @@ const SubscribePage: NextPage = () => {
                       },
                       alignItems: 'center',
                       transition: '1 ease',
+                      height: { xs: '', md: '200px', xl: '140px' },
+                      marginY: { xs: '1rem', md: '2rem', xl: '.2rem' },
                     }}
                   >
                     <>
@@ -525,7 +538,6 @@ const SubscribePage: NextPage = () => {
                             >
                               {price}
                             </Typography>
-                            {/* {values.hashtag.length < 4 && ( */}
                             <Typography
                               sx={{
                                 fontSize: {
@@ -549,7 +561,6 @@ const SubscribePage: NextPage = () => {
                             >
                               {t('cash_one')}
                             </Typography>
-                            {/* )} */}
                           </Box>
                         </Box>
                         {/* Check  */}

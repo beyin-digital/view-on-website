@@ -18,7 +18,7 @@ const Layout = dynamic(() => import('@/components/Layout/Layout'), {
 // icons
 import { FiArrowUpLeft, FiArrowUpRight } from 'react-icons/fi'
 import Image from 'next/image'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 
 const VerificationDetails = () => {
   // translate hook
@@ -221,12 +221,15 @@ const VerificationDetails = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                marginTop: { xs: '20px', md: '0' },
                 cursor: 'pointer',
               }}
               onClick={handleGoBack}
             >
-              <AiOutlineArrowLeft size="16px" />
+              {locale === 'ar' ? (
+                <AiOutlineArrowRight size="16px" />
+              ) : (
+                <AiOutlineArrowLeft size="16px" />
+              )}
               <Typography
                 fontSize={'20px'}
                 fontWeight={'400'}

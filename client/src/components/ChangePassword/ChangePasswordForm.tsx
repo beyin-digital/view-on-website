@@ -1,11 +1,13 @@
-import { useTranslation } from 'next-i18next'
-import { Box, Typography, OutlinedInput, Button } from '@mui/material'
-import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import { UserContext } from '@/contexts/userContext'
+
+import { Box, Typography, OutlinedInput, Button } from '@mui/material'
 import { toast } from 'react-toastify'
 
 const ChangePasswordForm = () => {
+  //  translate hooks
   const { t } = useTranslation('changePassword')
   const { query } = useRouter()
 

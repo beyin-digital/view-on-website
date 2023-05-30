@@ -158,6 +158,7 @@ function RootLayout({ children }: RootLayoutProps) {
               width: '100%',
               minHeight: '100%',
               height: '100vh',
+              flexDirection: 'column',
             }}
           >
             {children}

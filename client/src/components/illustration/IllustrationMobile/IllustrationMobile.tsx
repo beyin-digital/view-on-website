@@ -1,3 +1,4 @@
+import FooterMobile from '@/components/Footer/FooterMobile'
 import {
   ButtonStyle,
   HeaderLayout,
@@ -6,7 +7,6 @@ import {
 } from './Components'
 
 import dynamic from 'next/dynamic'
-
 const LayoutMobile = dynamic(() => import('./Components/Layout'), {
   ssr: false,
 })
@@ -24,6 +24,7 @@ const IllustrationMobile = () => {
         {/* Buttom */}
         <ButtonStyle />
       </LayoutMobile>
+      <FooterMobile />
     </>
   )
 }

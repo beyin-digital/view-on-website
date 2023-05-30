@@ -1,14 +1,13 @@
 import React, { useState, Suspense, useEffect, useContext } from 'react'
-
 // translate hook
 import { useTranslation } from 'next-i18next'
+import useDebounce from '@/hooks/useDebounce'
 
 import { Drawer, Box } from '@mui/material'
 
 // components
 import dynamic from 'next/dynamic'
 import { KeywordContext } from '@/contexts/keywordContext'
-import useDebounce from '@/hooks/useDebounce'
 
 const Layout = dynamic(() => import('@/components/Layout/LayoutHome'), {
   ssr: false,

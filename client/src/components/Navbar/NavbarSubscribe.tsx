@@ -16,6 +16,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { IoIosArrowForward } from 'react-icons/io'
 import Image from 'next/image'
 import { UserContext } from '@/contexts/userContext'
+import { icons, links } from '../Layout/GLobal'
 
 const NavbarSubscribe = ({
   nameOne,
@@ -46,53 +47,6 @@ const NavbarSubscribe = ({
   const handleLeave = () => {
     setHoveredButton(false)
   }
-  const links = [
-    {
-      tKey: 'nav_subscribe',
-      label: 'Subscribe',
-      href: '/subscribe',
-    },
-    {
-      tKey: 'nav_examples',
-
-      label: 'Examples',
-      href: '/example',
-    },
-    {
-      tKey: 'ar',
-
-      label: 'AR',
-      href: '/ar',
-      sublinks: '/ar/1',
-    },
-    {
-      tKey: 'nav_login',
-      label: 'Login',
-      href: '/login',
-    },
-  ]
-  const link = [
-    {
-      tKey: 'footer_contact',
-      label: 'Contact',
-      href: '/contact',
-    },
-    {
-      tKey: 'footer_learn',
-      label: 'Learn More',
-      href: '/',
-    },
-    {
-      tKey: 'footer_privacy',
-      label: 'Privacy Policy',
-      href: '/privacy',
-    },
-    {
-      tKey: 'footer_terms',
-      label: 'T&C',
-      href: '/terms',
-    },
-  ]
 
   //menu drawer
   const drawer = (
@@ -283,57 +237,38 @@ const NavbarSubscribe = ({
           margin: { xs: ' 2rem 0', xl: '0' },
         }}
       >
-        <Image
-          src="/icons/facebook.svg"
-          alt="View On Website Icon Facebook"
-          title="View On Website Icon Facebook"
-          height={18}
-          width={18}
-          style={{
-            margin: '0 .5rem',
-          }}
-        />
-        <Image
-          src="/icons/youtube.svg"
-          alt="View On Website Icon Twitter"
-          title="View On Website Icon Twitter"
-          height={18}
-          width={18}
-          style={{
-            margin: '0 .5rem',
-          }}
-        />
-        <Image
-          src="/icons/instagram.svg"
-          alt="View On Website Icon Instagram "
-          title="View On Website Icon Instagram "
-          height={18}
-          width={18}
-          style={{
-            margin: '0 .5rem',
-          }}
-        />
-        {/* <Image
-					src="/icons/linkedin.svg"
-					alt="View On Website Icon Linkedin"
-					title="View On Website Icon Linkedin"
-					height={18}
-					width={18}
-					style={{
-						margin: "0 .5rem",
-					}}
-				/> */}
+        {icons.map((item) => (
+          <Link
+            href={item.link}
+            title={item.alt}
+            style={{
+              textDecoration: 'none',
+            }}
+            key={item.id}
+          >
+            <Image
+              src={item.icon}
+              alt={item.alt}
+              title={item.alt}
+              height={25}
+              width={25}
+              style={{
+                margin: '0 .5rem',
+              }}
+            />
+          </Link>
+        ))}
       </Box>
       <Box
         sx={{
           marginX: '1rem',
         }}
       >
-        {link.map((link) => (
+        {links.map((link) => (
           <Link
-            key={t(link.tKey)}
-            title={`${t(link.tKey)}`}
-            href={link.href}
+            key={t(link.title)}
+            title={`${t(link.title)}`}
+            href={link.link}
             style={{
               textDecoration: 'none',
             }}
@@ -353,7 +288,7 @@ const NavbarSubscribe = ({
                 color="#343132"
                 textTransform={'capitalize'}
               >
-                {t(link.tKey)}
+                {t(link.title)}
               </Typography>
             </Box>
           </Link>
