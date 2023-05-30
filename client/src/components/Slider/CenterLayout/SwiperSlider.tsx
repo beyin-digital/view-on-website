@@ -57,6 +57,7 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
     window.addEventListener('resize', handleResize)
 
     checkPremiumKeyword()
+    setSelectedKeyword(sortedKeywords[0])
 
     return () => {
       window.removeEventListener('resize', handleResize)

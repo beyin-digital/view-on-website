@@ -13,11 +13,15 @@ const LineChart = ({ data }: any) => {
           xScale={{ type: 'point' }}
           yScale={{
             type: 'linear',
-            min: 'auto',
+            min: 0,
             max: 'auto',
             reverse: false,
           }}
-          yFormat=">-.2x"
+          yFormat={(value) =>
+            `${
+              (value as number) > 1000 ? `${(value as number) / 1000}k` : value
+            }`
+          }
           enableGridX={false}
           enableGridY={false}
           axisRight={null}
@@ -33,6 +37,7 @@ const LineChart = ({ data }: any) => {
             legend: `${t('box_main_chart_visit')}`,
             legendPosition: 'middle',
             legendOffset: -40,
+            tickValues: 5,
             tickRotation: 0,
             tickPadding: 5,
           }}

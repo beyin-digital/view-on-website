@@ -1,9 +1,6 @@
-import { api } from '@/utils/api'
-import { t } from 'i18next'
 import { useRouter } from 'next/router'
 import { createContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import slugify from 'slugify'
 // create a context for the keyword
 export const KeywordContext = createContext<any>({})
 
@@ -20,7 +17,7 @@ export const KeywordProvider = ({ children }: any) => {
   const [sortedKeywords, setSortedKeywords] = useState<string[]>([])
   const [keywordFound, setKeywordFound] = useState(false)
   const [keywords, setKeywords] = useState([])
-  const [selectedKeyword, setSelectedKeyword] = useState<any>({})
+  const [selectedKeyword, setSelectedKeyword] = useState<any>(null)
   const [token, setToken] = useState('')
   const [subscriptions, setSubscriptions] = useState([])
   const [analyticsData, setAnalyticsData] = useState({
@@ -86,7 +83,7 @@ export const KeywordProvider = ({ children }: any) => {
         body: JSON.stringify({ letters, sublink, interval }),
       })
       if (!response.ok) {
-        throw new Error('Error fetching data')
+        throw new Error()
       }
       const data = await response.json()
       window.location.href = data.url
@@ -118,17 +115,22 @@ export const KeywordProvider = ({ children }: any) => {
 
   const getUsersKeywords = async () => {
     try {
-      const response = await fetch(`${apiUrl}/keywords?page=1&limit=10`, {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      if (!response.ok) {
-        throw new Error('Error fetching data')
-      }
+      if (token !== '') {
+        const response = await fetch(`${apiUrl}/keywords?page=1&limit=10`, {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        if (!response.ok) {
+          throw new Error('Error fetching data')
+        }
 
-      const { data } = await response.json()
-      setKeywords(data)
-      setSelectedKeyword(data[0])
+        const { data } = await response.json()
+        console.log(data)
+        setKeywords(data)
+        if (selectedKeyword === null) {
+          setSelectedKeyword(data[0])
+        }
+      }
     } catch (error) {
       toast.error('Error fetching keywords')
     }
@@ -136,15 +138,20 @@ export const KeywordProvider = ({ children }: any) => {
 
   const getUserSubscriptions = async () => {
     try {
-      const response = await fetch(`${apiUrl}/subscriptions?page=1&limit=10`, {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      if (!response.ok) {
-        throw new Error('Error fetching data')
+      if (token !== '') {
+        const response = await fetch(
+          `${apiUrl}/subscriptions?page=1&limit=10`,
+          {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+        if (!response.ok) {
+          throw new Error('Error fetching data')
+        }
+        const { data } = await response.json()
+        setSubscriptions(data)
       }
-      const { data } = await response.json()
-      setSubscriptions(data)
     } catch (error) {
       toast.error('Error fetching subscriptions')
     }
@@ -195,7 +202,7 @@ export const KeywordProvider = ({ children }: any) => {
     if (savedToken) {
       setToken(savedToken)
     }
-  }, [keywordFound])
+  }, [keywordFound, token])
   return (
     <KeywordContext.Provider
       value={{
