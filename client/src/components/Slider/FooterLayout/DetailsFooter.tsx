@@ -92,46 +92,81 @@ const DetailsFooter = () => {
                 },
               }}
             >
-              <Button
-                onClick={() => {
-                  if (token) {
-                    push(`/subscribe?keyword=${swiperSelectedtedKeyword}`)
-                    return
+              {token ? (
+                <Button
+                  onClick={() =>
+                    push(
+                      `${locale}/subscribe?keyword=${swiperSelectedtedKeyword}`
+                    )
                   }
-                  push('/login')
-                }}
-                sx={{
-                  borderRadius: '16px',
-                  paddingX: '18px',
-                  height: '59px',
-                  width: '311px',
-                  display: 'flex',
-
-                  justifyContent: 'space-around',
-                  flexDirection: 'row-reverse',
-                  alignItems: 'center',
-                }}
-                onMouseEnter={handleHoverButton}
-                onMouseLeave={handleLeave}
-                className="ButtonReserve"
-              >
-                <Typography
                   sx={{
-                    letterSpacing: '0.02em',
-                    fontSize: '32px',
-                    fontWeight: 400,
-                    lineHeight: '40px',
-                    color: '#343132',
+                    borderRadius: '16px',
+                    paddingX: '18px',
+                    height: '59px',
+                    width: '311px',
+                    display: 'flex',
+
+                    justifyContent: 'space-around',
+                    flexDirection: 'row-reverse',
+                    alignItems: 'center',
                   }}
+                  onMouseEnter={handleHoverButton}
+                  onMouseLeave={handleLeave}
+                  className="ButtonReserve"
                 >
-                  {`${token ? t('pay') : t('button')}`}
-                </Typography>
-                <FiArrowDownLeft
-                  size={42}
-                  color="#343132"
-                  className={hoveredButton ? 'ButtonReserve_rtl' : ''}
-                />
-              </Button>
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: '32px',
+                      fontWeight: 400,
+                      lineHeight: '40px',
+                      color: '#343132',
+                    }}
+                  >
+                    {t('pay')}
+                  </Typography>
+                  <FiArrowDownLeft
+                    size={42}
+                    color="#343132"
+                    className={hoveredButton ? 'ButtonReserve_rtl' : ''}
+                  />
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => push('/login')}
+                  sx={{
+                    borderRadius: '16px',
+                    paddingX: '18px',
+                    height: '59px',
+                    width: '311px',
+                    display: 'flex',
+
+                    justifyContent: 'space-around',
+                    flexDirection: 'row-reverse',
+                    alignItems: 'center',
+                  }}
+                  onMouseEnter={handleHoverButton}
+                  onMouseLeave={handleLeave}
+                  className="ButtonReserve"
+                >
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: '32px',
+                      fontWeight: 400,
+                      lineHeight: '40px',
+                      color: '#343132',
+                    }}
+                  >
+                    {t('button')}
+                  </Typography>
+                  <FiArrowDownLeft
+                    size={42}
+                    color="#343132"
+                    className={hoveredButton ? 'ButtonReserve_rtl' : ''}
+                  />
+                </Button>
+              )}
             </Box>
           </Box>
         </Box>
