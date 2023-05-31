@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import DetailsFooter from './DetailsFooter'
 
-const FooterLayout = ({ hashtag }: any) => {
+const FooterLayout = () => {
   return (
     <>
-      <DetailsFooter hashtag={hashtag} />
+      <DetailsFooter />
     </>
   )
 }

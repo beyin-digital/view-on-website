@@ -119,7 +119,7 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
                     {/* slider swipre */}
                     <SwiperSlider swiper="" />
                     {/* footer layout And Button Reserve   */}
-                    <FooterLayout hashtag={selectedImage} />
+                    <FooterLayout />
                   </Box>
                 ) : (
                   <Box
@@ -138,7 +138,7 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
                     {/* slider swipre */}
                     <SwiperSlider swiper="" />
                     {/* footer layout And Button Reserve   */}
-                    <FooterLayout hashtag={selectedImage} />
+                    <FooterLayout />
                   </Box>
                 )}
               </Box>
