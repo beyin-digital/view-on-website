@@ -91,10 +91,10 @@ const DetailsFooter = ({ hashtag }: any) => {
             >
               <Button
                 onClick={() => {
-                  //   if (token) {
-                  push(`/subscribe?keyword=${swiperSelectedtedKeyword}`)
-                  //   }
-                  //   push('/login')
+                  if (token) {
+                    push(`/subscribe?keyword=${swiperSelectedtedKeyword}`)
+                  }
+                  push('/login')
                 }}
                 sx={{
                   borderRadius: '16px',
