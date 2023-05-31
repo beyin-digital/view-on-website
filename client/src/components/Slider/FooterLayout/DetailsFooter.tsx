@@ -27,8 +27,6 @@ const DetailsFooter = () => {
     setHoveredButton(false)
   }
 
-  useEffect(() => {}, [token])
-
   return (
     <>
       {locale === 'ar' ? (
@@ -234,41 +232,73 @@ const DetailsFooter = () => {
                 },
               }}
             >
-              <Button
-                onClick={() => {
-                  if (token) {
-                    push(`${locale}/subscribe`)
+              {token ? (
+                <Button
+                  onClick={() =>
+                    router.push(
+                      `${locale}/subscribe?keyword=${swiperSelectedtedKeyword}}`
+                    )
                   }
-                  push(`/${locale}/login`)
-                }}
-                sx={{
-                  borderRadius: '16px',
-                  paddingX: '18px',
-                  height: '59px',
-                  width: '311px',
-                  display: 'flex',
-                }}
-                onMouseEnter={handleHoverButton}
-                onMouseLeave={handleLeave}
-                className="ButtonReserve"
-              >
-                <Typography
                   sx={{
-                    letterSpacing: '0.02em',
-                    fontSize: '32px',
-                    fontWeight: 400,
-                    lineHeight: '40px',
-                    color: '#343132',
+                    borderRadius: '16px',
+                    paddingX: '18px',
+                    height: '59px',
+                    width: '311px',
+                    display: 'flex',
                   }}
+                  onMouseEnter={handleHoverButton}
+                  onMouseLeave={handleLeave}
+                  className="ButtonReserve"
                 >
-                  {`${token ? t('pay') : t('button')}`}
-                </Typography>
-                <FiArrowDownRight
-                  size={42}
-                  color="#343132"
-                  className={hoveredButton ? 'ButtonReserve_ltr' : ''}
-                />
-              </Button>
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: '32px',
+                      fontWeight: 400,
+                      lineHeight: '40px',
+                      color: '#343132',
+                    }}
+                  >
+                    {t('pay')}
+                  </Typography>
+                  <FiArrowDownRight
+                    size={42}
+                    color="#343132"
+                    className={hoveredButton ? 'ButtonReserve_ltr' : ''}
+                  />
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => router.push(`/${locale}/login`)}
+                  sx={{
+                    borderRadius: '16px',
+                    paddingX: '18px',
+                    height: '59px',
+                    width: '311px',
+                    display: 'flex',
+                  }}
+                  onMouseEnter={handleHoverButton}
+                  onMouseLeave={handleLeave}
+                  className="ButtonReserve"
+                >
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: '32px',
+                      fontWeight: 400,
+                      lineHeight: '40px',
+                      color: '#343132',
+                    }}
+                  >
+                    {`${token ? t('pay') : t('button')}`}
+                  </Typography>
+                  <FiArrowDownRight
+                    size={42}
+                    color="#343132"
+                    className={hoveredButton ? 'ButtonReserve_ltr' : ''}
+                  />
+                </Button>
+              )}
             </Box>
           </Box>
         </Box>
