@@ -13,6 +13,7 @@ const DetailsFooter = () => {
   const { t } = useTranslation('slider')
   const { locale, push } = useRouter()
 
+  const router = useRouter()
   const { token } = useContext(UserContext)
   const { swiperSelectedtedKeyword } = useContext(KeywordContext)
 
@@ -95,8 +96,8 @@ const DetailsFooter = () => {
               {token ? (
                 <Button
                   onClick={() =>
-                    push(
-                      `${locale}/subscribe?keyword=${swiperSelectedtedKeyword}`
+                    router.push(
+                      `${router.locale}/subscribe?keyword=${swiperSelectedtedKeyword}`
                     )
                   }
                   sx={{
@@ -133,7 +134,7 @@ const DetailsFooter = () => {
                 </Button>
               ) : (
                 <Button
-                  onClick={() => push('/login')}
+                  onClick={() => router.push('/login')}
                   sx={{
                     borderRadius: '16px',
                     paddingX: '18px',
