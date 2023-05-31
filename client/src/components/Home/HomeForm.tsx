@@ -36,6 +36,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
     if (foundKeyword) {
       socket.emit('redirectionAdded', { keywordId: foundKeyword.id })
       window.open(`${foundKeyword.sublink}`, '_blank')
+      setHashtag('')
     }
   }
 
@@ -163,7 +164,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
           sx={{
             background: 'none',
             border: 'none',
-            cursor: 'pointer',
+            cursor: keywordFound && 'pointer',
             width: {
               xs: '40px',
               md: '49px',

@@ -32,7 +32,7 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isShadowVisible, setIsShadowVisible] = useState(true)
 
-  const hashtagDebounce = useDebounce(hashtag, 1000)
+  const hashtagDebounce = useDebounce(hashtag, 500)
 
   const { keywordFound, handleCheckKeyword } = useContext(KeywordContext)
 

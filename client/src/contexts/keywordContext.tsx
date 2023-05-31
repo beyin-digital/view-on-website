@@ -11,7 +11,8 @@ export const KeywordProvider = ({ children }: any) => {
     hashtag: '',
     sublinks: '',
   })
-
+  const [swiperSelectedtedKeyword, setSwiperSelectedtedKeyword] =
+    useState<any>('')
   const [isSearching, setIsSearching] = useState(false)
   const [premiumKeywords, setPremiumKeywords] = useState<any>([])
   const [sortedKeywords, setSortedKeywords] = useState<string[]>([])
@@ -173,7 +174,7 @@ export const KeywordProvider = ({ children }: any) => {
       (alphabet) => !data.some((item: any) => item.slug === alphabet)
     )
     setSortedKeywords(filteredAlphabets)
-    return filteredAlphabets
+    setSwiperSelectedtedKeyword(filteredAlphabets[0])
   }
 
   const updateKeywordDetails = async (id: number, values: any) => {
@@ -227,6 +228,8 @@ export const KeywordProvider = ({ children }: any) => {
         sortedKeywords,
         setAnalyticsData,
         foundKeyword,
+        swiperSelectedtedKeyword,
+        setSwiperSelectedtedKeyword,
         handleUnsubscribe,
       }}
     >

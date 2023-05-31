@@ -31,17 +31,19 @@ type ReactIdSwiperRef = {
 const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
   const { t } = useTranslation('slider')
   const [isVertical, setIsVertical] = useState(true)
-  const [sliderValue, setSliderValue] = useState(0)
-  const { checkPremiumKeyword, sortedKeywords } = useContext(KeywordContext)
-
-  const [selectedKeyword, setSelectedKeyword] = useState(sortedKeywords[0])
+  const {
+    checkPremiumKeyword,
+    sortedKeywords,
+    swiperSelectedtedKeyword,
+    setSwiperSelectedtedKeyword,
+  } = useContext(KeywordContext)
 
   const swiperRef = useRef<ReactIdSwiperRef>(null)
   const handleSlideChange = (swiper: SwiperCore) => {
     if (swiperRef.current) {
       const swiperInstance = swiperRef.current.swiper
       const currentIndex = swiperInstance.realIndex
-      setSelectedKeyword(sortedKeywords[currentIndex])
+      setSwiperSelectedtedKeyword(sortedKeywords[currentIndex])
     }
   }
 
@@ -57,7 +59,7 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
     window.addEventListener('resize', handleResize)
 
     checkPremiumKeyword()
-    setSelectedKeyword(sortedKeywords[0])
+    setSwiperSelectedtedKeyword(sortedKeywords[0])
 
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -204,7 +206,7 @@ const SwiperSlider: React.FC<ReactIdSwiperRef> = () => {
           })}
         </Swiper>
 
-        <SwiperLabel selectedKeyword={selectedKeyword} />
+        <SwiperLabel selectedKeyword={swiperSelectedtedKeyword} />
       </Box>
     </>
   )

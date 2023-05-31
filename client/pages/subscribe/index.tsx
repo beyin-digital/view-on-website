@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import useDebounce from '@/hooks/useDebounce'
 import { isValidUrl } from '@/utils/checkUrl'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -14,7 +14,6 @@ import {
   Button,
   Grid,
   CircularProgress,
-  Fade,
 } from '@mui/material'
 
 // translate hook
@@ -63,12 +62,14 @@ const SubscribePage: NextPage = () => {
   const { locale } = useRouter()
   const [isInputValid, setIsInputValid] = useState(true)
   const [values, setValues] = useState({
-    hashtag: '',
+    hashtag: (router.query.keyword as string)
+      ? (router.query.keyword as string)
+      : '',
     sublink: '',
   })
   const allowedCharacters = /^[a-zA-Z\u0600-\u06FF\s.,،]+$/
 
-  const hashtagDebounce = useDebounce(values.hashtag, 1000)
+  const hashtagDebounce = useDebounce(values.hashtag, 500)
   const { handleSubscription, handleCheckKeyword, keywordFound, isSearching } =
     useContext(KeywordContext)
   const { token } = useContext(UserContext)
@@ -107,8 +108,9 @@ const SubscribePage: NextPage = () => {
 
     setValues({ ...values, [e.target.name]: e.target.value })
     setIsInputValid(!/\d/.test(inputValue))
+    setShowAngledArrow(false)
   }
-
+  const [showAngledArrow, setShowAngledArrow] = useState(false)
   // »arrow down
   const [showArrow, setShowArrow] = useState(true)
   useEffect(() => {
@@ -122,6 +124,15 @@ const SubscribePage: NextPage = () => {
 
     if (hashtagDebounce || hashtagDebounce === '') {
       handleCheckKeyword(hashtagDebounce)
+    }
+
+    if (hashtagDebounce === '') {
+      setShowAngledArrow(false)
+    }
+    if (!keywordFound && hashtagDebounce !== '') {
+      setShowAngledArrow(true)
+    } else {
+      setShowAngledArrow(false)
     }
 
     return () => {
@@ -141,7 +152,6 @@ const SubscribePage: NextPage = () => {
       </Head>
       <Box
         sx={{
-          // width: '2162px',
           maxWidth: '100%',
           overflow: 'hidden',
           position: 'relative',
@@ -206,13 +216,9 @@ const SubscribePage: NextPage = () => {
                     }}
                   >
                     <OutlinedInput
-                      // inputProps={{
-                      // 	pattern: "[a-zA-Z\u0600-\u06FFs]+",
-                      // }}
                       inputProps={{
                         pattern: allowedCharacters.test(values.hashtag),
                       }}
-                      // className={``}
                       name="hashtag"
                       sx={{
                         width: '100%',
@@ -253,9 +259,13 @@ const SubscribePage: NextPage = () => {
                             size={40}
                           />
                         ) : locale === 'ar' ? (
-                          <FiArrowUpLeft color="#343132" size={90} />
+                          showAngledArrow && (
+                            <FiArrowUpLeft color="#343132" size={90} />
+                          )
                         ) : (
-                          <FiArrowUpRight color="#343132" size={90} />
+                          showAngledArrow && (
+                            <FiArrowUpRight color="#343132" size={90} />
+                          )
                         )
                       }
                       className={`${!isInputValid ? 'inputError' : ''} ${
@@ -325,9 +335,10 @@ const SubscribePage: NextPage = () => {
                           height: '60px',
                         }}
                       >
-                        {values.hashtag.length >= 1 &&
-                          !keywordFound &&
-                          !/^[\p{N}\d\s]+$/u.test(values.hashtag) && (
+                        {!keywordFound &&
+                          showAngledArrow &&
+                          !/^[\p{N}\d\s]+$/u.test(values.hashtag) &&
+                          values.hashtag.length >= 1 && (
                             <Typography
                               sx={{
                                 cursor: 'pointer',
@@ -705,67 +716,6 @@ const SubscribePage: NextPage = () => {
                                   <IconScroll />
                                 )}
                               </Box>
-                              {/* <Box
-                                sx={{
-                                  width: '100%',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'end',
-                                }}
-                              >
-                                <Button
-                                  sx={{
-                                    borderRadius: '16px',
-                                    paddingX: '18px',
-                                    height: '59px',
-                                    width: {
-                                      xs: '100%',
-                                      sm: '311px',
-                                      md: '311px',
-                                      xl: '311px',
-                                    },
-                                    display: 'flex',
-                                    background: '#31E716',
-                                    justifyContent: 'space-around',
-                                    marginBottom: { xs: '2rem', sm: '0' },
-                                  }}
-                                  onClick={() => {}}
-                                  type="submit"
-                                  className="ButtonReserve"
-                                  onMouseEnter={handleHoverButton}
-                                  onMouseLeave={handleLeave}
-                                >
-                                  <Typography
-                                    sx={{
-                                      letterSpacing: '0.02em',
-                                      fontSize: '32px',
-                                      fontWeight: '400',
-                                      lineHeight: '40px',
-                                      color: '#343132',
-                                      textTransform: 'uppercase',
-                                    }}
-                                  >
-                                    {t('button')}
-                                  </Typography>
-                                  {locale === 'ar' ? (
-                                    <FiArrowDownLeft
-                                      size={42}
-                                      color="#343132"
-                                      className={
-                                        hoveredButton ? 'ButtonReserve_rtl' : ''
-                                      }
-                                    />
-                                  ) : (
-                                    <FiArrowDownRight
-                                      size={42}
-                                      color="#343132"
-                                      className={
-                                        hoveredButton ? 'ButtonReserve_ltr' : ''
-                                      }
-                                    />
-                                  )}
-                                </Button>
-                              </Box> */}
                             </Box>
                           )}
                       </Box>
