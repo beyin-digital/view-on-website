@@ -51,10 +51,10 @@ const Contact = () => {
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="shortcut icon" href="/favicon.ico" />
 			</Head>
-			<Layout>
+			{/* <Layout>
 				<h1 />
-				{/* <ContactDetails /> */}
-			</Layout>
+				<ContactDetails />
+			</Layout> */}
 		</>
 	);
 };

@@ -24,9 +24,9 @@ const Privacy = () => {
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      {/* <Layout>
         <h1></h1>
-      </Layout>
+      </Layout> */}
     </>
   )
 }

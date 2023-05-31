@@ -24,7 +24,7 @@ const IllustrationMobile = () => {
         {/* Buttom */}
         <ButtonStyle />
       </LayoutMobile>
-      <FooterMobile />
+      {/* <FooterMobile /> */}
     </>
   )
 }

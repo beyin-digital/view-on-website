@@ -90,7 +90,7 @@ export const HeaderLayout = () => {
           <Box
             sx={{
               height: '50px',
-              width: { xs: '70%', sm: '85%' },
+              width: { xs: '100%', sm: '85%' },
               background: ' linear-gradient(270deg, #0090EC 0%, #31E716 100%)',
               borderRadius: '7px',
               display: 'flex',
@@ -101,7 +101,7 @@ export const HeaderLayout = () => {
           >
             <Typography
               sx={{
-                fontSize: { xs: '25px', sm: '30px' },
+                fontSize: { xs: '22px', sm: '30px' },
                 fontWeight: '600',
                 lineHeight: '37px',
                 color: '#FBFBFB',
