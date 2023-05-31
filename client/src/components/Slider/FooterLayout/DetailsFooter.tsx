@@ -4,11 +4,11 @@ import { useRouter } from 'next/router'
 import { Box, Button, Typography } from '@mui/material'
 import { FiArrowDownRight, FiArrowDownLeft } from 'react-icons/fi'
 import RightSide from './RightSide'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '@/contexts/userContext'
 import { KeywordContext } from '@/contexts/keywordContext'
 
-const DetailsFooter = ({ hashtag }: any) => {
+const DetailsFooter = () => {
   // translate hook
   const { t } = useTranslation('slider')
   const { locale, push } = useRouter()
@@ -25,6 +25,9 @@ const DetailsFooter = ({ hashtag }: any) => {
   const handleLeave = () => {
     setHoveredButton(false)
   }
+
+  useEffect(() => {}, [token])
+
   return (
     <>
       {locale === 'ar' ? (
