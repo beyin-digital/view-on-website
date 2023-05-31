@@ -93,6 +93,7 @@ const DetailsFooter = ({ hashtag }: any) => {
                 onClick={() => {
                   if (token) {
                     push(`/subscribe?keyword=${swiperSelectedtedKeyword}`)
+                    return
                   }
                   push('/login')
                 }}
