@@ -236,7 +236,7 @@ const DetailsFooter = () => {
                 <Button
                   onClick={() =>
                     router.push(
-                      `${locale}/subscribe?keyword=${swiperSelectedtedKeyword}}`
+                      `${locale}/subscribe?keyword=${swiperSelectedtedKeyword}`
                     )
                   }
                   sx={{
