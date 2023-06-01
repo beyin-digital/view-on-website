@@ -1,17 +1,20 @@
-import { Grid, Box } from '@mui/material'
-
-// components
+import React from 'react'
 import dynamic from 'next/dynamic'
+import { Box } from '@mui/material'
+import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
+
 const Header = dynamic(() => import('@/components/Home/HeaderHome'), {
+  ssr: false,
+})
+
+const HomeForm = dynamic(() => import('@/components/Home/HomeForm'), {
   ssr: false,
 })
 const TextViewOnWeb = dynamic(() => import('@/components/Home/TextViewOnWeb'), {
   ssr: false,
 })
-const LayoutHomeBg = dynamic(() => import('@/components/Home/LayoutHomeBg'), {
-  ssr: false,
-})
-const HomeForm = dynamic(() => import('./HomeForm'), {
+const Layout = dynamic(() => import('./Layout'), {
   ssr: false,
 })
 
@@ -19,81 +22,144 @@ const HomeDetails = ({
   keywordFound,
   hashtag,
   setHashtag,
+  onClick,
 }: {
   keywordFound: boolean
   hashtag: string
   setHashtag: any
+  onClick: any
 }) => {
+  const { t } = useTranslation('home')
+  const { locale } = useRouter()
+
   return (
-    <>
-      <Grid
+    <Layout onClick={onClick}>
+      <Box
         sx={{
-          width: '100%',
+          width: { xs: '95%', sm: '80%', md: '75%', xl: '70%' },
           height: '100%',
+
+          transform: 'skew(16deg, 0deg)',
           display: 'flex',
-          justifyContent: { xs: 'center', sm: 'end', md: 'end', xl: 'end' },
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+          paddingY: '.8rem',
         }}
       >
         <Box
           sx={{
-            width: '80%',
-            margin: '.4rem',
+            height: { xs: '40%', md: '30%', xl: '30%' },
+            width: '100%',
+            marginY: { xs: '2rem', md: '0' },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
+        >
+          <Header />
+        </Box>
+        <Box
+          sx={{
+            height: { xs: '40%', sm: '50%', md: '50%', xl: '70%' },
+            width: { xs: '100%', md: '90%', xl: '100%' },
+            // marginY: { xs: '2rem', md: '0' },
+          }}
+          className="boxBlueLayout"
         >
           <Box
             sx={{
-              width: '100%',
-              height: { xs: 'auto', sm: '220px' },
-              transform: 'skew(16deg, 0deg)',
+              height: '100%',
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: { xs: '10px', sm: '1rem', md: '2rem' },
+              alignItems: { xs: 'center', sm: 'center', md: 'center' },
+              justifyContent: { xs: 'center', sm: 'center', md: 'center' },
+              flexDirection: 'column',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'contain',
+              position: 'relative',
+              backgroundImage: "url('/images/cut-out-parallelogram.webp')",
             }}
+            className="parallelogra"
           >
-            {/* text header  */}
-            <Header />
-          </Box>
-          <LayoutHomeBg>
-            <Box
-              sx={{
-                width: { xs: '100%', sm: '100%', md: '80%', xl: '70%' },
-                height: {
-                  xs: '145px',
-                  sm: '179px',
-                  md: '200px',
-                  xl: '300px',
-                },
-                display: 'flex',
-                alignItems: 'center',
-                flexDirection: 'column',
-                justifyContent: 'space-evenly',
-                position: 'absolute',
-                top: { xs: '1.5rem', md: '3rem' },
-                bottom: '0',
-              }}
-              className="boxHomeBlack"
-            >
-              <HomeForm
-                hashtag={hashtag}
-                setHashtag={setHashtag}
-                keywordFound={keywordFound}
-              />
+            {locale === 'ar' ? (
               <Box
                 sx={{
+                  width: '70%',
+                  height: { xs: '70%', sm: '60%', md: '75%', xl: '85%' },
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  flexDirection: 'column',
+                  paddingX: '1rem',
+                  marginRight: { xs: '3rem', sm: '2rem', md: '3rem' },
                 }}
-                className="BoxTextHom"
+                className="boxGreenLayout"
               >
-                <TextViewOnWeb />
+                <Box
+                  sx={{
+                    width: '90%',
+                    height: '90%',
+
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-evenly',
+                    flexDirection: 'column',
+                  }}
+                  className="boxRedLayout"
+                >
+                  <HomeForm
+                    hashtag={hashtag}
+                    setHashtag={setHashtag}
+                    keywordFound={keywordFound}
+                  />
+                  <TextViewOnWeb />
+                </Box>
               </Box>
-            </Box>
-          </LayoutHomeBg>
+            ) : (
+              <Box
+                sx={{
+                  width: '70%',
+                  height: { xs: '70%', sm: '60%', md: '75%', xl: '85%' },
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  paddingX: '1rem',
+                  marginLeft: {
+                    xs: '-3rem',
+                    sm: '3rem',
+                    md: '-3rem',
+                    lg: '-16rem',
+                    xl: '-3rem',
+                  },
+                }}
+                className="boxGreenLayout"
+              >
+                <Box
+                  sx={{
+                    width: '90%',
+                    height: '90%',
+
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-evenly',
+                    flexDirection: 'column',
+                  }}
+                  className="boxRedLayout"
+                >
+                  <HomeForm
+                    hashtag={hashtag}
+                    setHashtag={setHashtag}
+                    keywordFound={keywordFound}
+                  />
+                  <TextViewOnWeb />
+                </Box>
+              </Box>
+            )}
+          </Box>
         </Box>
-      </Grid>
-    </>
+      </Box>
+    </Layout>
   )
 }
 
