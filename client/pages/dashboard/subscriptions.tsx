@@ -554,7 +554,7 @@ const DashboardSubscriptionsPage = () => {
                 handleClose()
               }}
             >
-              {t('cancel_security')}
+              {t('cancel')}
             </Button>
           </Box>
         </Modal>
