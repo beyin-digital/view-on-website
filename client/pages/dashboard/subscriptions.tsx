@@ -52,12 +52,30 @@ const DashboardSubscriptionsPage = () => {
   const { locale } = useRouter()
   const { getUserSubscriptions, subscriptions, handleUnsubscribe } =
     useContext(KeywordContext)
+<<<<<<< HEAD
+=======
+  // const subscriptions = [
+  // 	{ id: 1, title: "name" },
+  // 	{ id: 2, title: "name" },
+  // 	{ id: 3, title: "name" },
+  // 	{ id: 4, title: "name" },
+  // 	{ id: 5, title: "name" },
+  // 	{ id: 5, title: "name" },
+  // ];
+>>>>>>> origin/feat-update-ui
   const { token, user } = useContext(UserContext)
   const [isScrollable, setIsScrollable] = useState(subscriptions.length > 3)
 
   useEffect(() => {
+<<<<<<< HEAD
     getUserSubscriptions()
   }, [subscriptions])
+=======
+    if (token) {
+      getUserSubscriptions()
+    }
+  }, [token])
+>>>>>>> origin/feat-update-ui
 
   const [open, setOpen] = useState(false)
   const [selectedKeyword, setSelectedKeyword] = useState<any>({})
@@ -200,9 +218,17 @@ const DashboardSubscriptionsPage = () => {
                 width: '100%',
                 justifyContent: 'flex-start',
                 height: '100%',
+<<<<<<< HEAD
                 overflowX: 'auto',
                 overflowY: isScrollable ? 'hidden' : 'auto',
                 maxHeight: isScrollable ? '100%' : 'auto',
+=======
+              }}
+              style={{
+                overflow: 'hidden',
+                overflowX: isScrollable ? 'scroll' : 'auto',
+                // pointerEvents: "none", // added scroll
+>>>>>>> origin/feat-update-ui
               }}
             >
               {/* Regular sub card */}
@@ -211,7 +237,11 @@ const DashboardSubscriptionsPage = () => {
                   sx={{
                     display: 'flex',
                     flexDirection: 'column',
+<<<<<<< HEAD
                     justifyContent: 'items-start',
+=======
+                    justifyContent: 'space-between',
+>>>>>>> origin/feat-update-ui
                     height: '343px',
                     width: '300px',
                     marginRight: '50px',
@@ -227,6 +257,7 @@ const DashboardSubscriptionsPage = () => {
                       background: subscription?.isPremium
                         ? 'linear-gradient(270deg, #0090EC 0%, #31E716 100%)'
                         : '#31E716',
+<<<<<<< HEAD
                       marginBottom: '20px',
                       borderRadius: '16px',
                     }}
@@ -392,6 +423,172 @@ const DashboardSubscriptionsPage = () => {
             </Box>
           </Box>
 
+=======
+
+                      borderRadius: '16px',
+                    }}
+                  >
+                    <Typography fontSize="32px" fontWeight="bold">
+                      #{subscription?.letters.toUpperCase()}
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      height: '222px',
+                      width: '300px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      background: '#FBFBFB99',
+                      borderRadius: '24px',
+                    }}
+                  >
+                    {/* Price and duration */}
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        marginX: '38px',
+                        marginTop: '28px',
+                        alignItems: 'center',
+                      }}
+                    >
+                      {/* Price */}
+                      <Box>
+                        <Typography fontSize="32px" textAlign="left">
+                          $
+                          {subscription.purchaseAmount >= 999999
+                            ? '1m'
+                            : subscription.purchaseAmount === 100000
+                            ? nFormatter(subscription.purchaseAmount, 3)
+                            : subscription.purchaseAmount === 10000
+                            ? nFormatter(subscription.purchaseAmount, 3)
+                            : nFormatter(subscription.purchaseAmount, 3)}
+                        </Typography>
+
+                        <Typography textAlign="left">{t('paid')}</Typography>
+                      </Box>
+                      {/* Length */}
+                      <Box>
+                        {subscription?.isPremium ? (
+                          <>
+                            <Typography fontSize="20px">
+                              Premium
+                              <br /> letter
+                            </Typography>
+                          </>
+                        ) : (
+                          <>
+                            <Typography fontSize="20px">
+                              {subscription?.duration}
+                              ly <br />
+                            </Typography>
+                            <Typography>{t('package')}</Typography>
+                          </>
+                        )}
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        marginTop: '32px',
+                        height: '48px',
+                      }}
+                    >
+                      <Typography>
+                        {t('date_next')} :
+                        {new Date(subscription.purchaseDate).toLocaleDateString(
+                          'en-GB'
+                        )}
+                      </Typography>
+                      {/* {!subscription?.isPremium && (
+												<Typography>
+													{t("date_bought")} :
+													{new Date(
+														subscription.renewalDate,
+													).toLocaleDateString("en-GB")}
+												</Typography>
+											)} */}
+                    </Box>
+                  </Box>
+                  {!subscription.isPremium && (
+                    <Typography
+                      sx={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        handleOpen(subscription)
+                      }}
+                      fontSize="14px"
+                    >
+                      {t('unsubscribe')}
+                    </Typography>
+                  )}
+                  {t('unsubscribe')}
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Item>
+        {/* Mobile */}
+        <ItemMobile
+          sx={{
+            display: {
+              xs: 'block',
+              md: 'flex',
+              lg: 'none',
+            },
+            width: { md: '100%' },
+            padding: '17px',
+            marginX: { xs: '10px', sm: '15px' },
+            flexDirection: 'column',
+          }}
+        >
+          {/* Name avatar and email */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              marginTop: '44px',
+            }}
+          >
+            <Avatar
+              sx={{
+                bgcolor: '#6BBF52',
+                width: '46px',
+                height: '43px',
+                fontSize: '20px',
+                borderRadius: '8px',
+                textTransform: 'uppercase',
+              }}
+              variant="square"
+            >
+              {user?.fullName?.split(' ')[0]?.charAt(0)}
+              {user?.fullName?.split(' ')[1]?.charAt(0)}
+            </Avatar>
+            <Box>
+              <Typography
+                sx={{
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  marginLeft: '7px',
+                }}
+              >
+                {user?.fullName}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  marginLeft: '7px',
+                  color: '#8C8C8C',
+                }}
+              >
+                {user?.email}
+              </Typography>
+            </Box>
+          </Box>
+
+>>>>>>> origin/feat-update-ui
           <Box
             sx={{
               display: 'flex',
@@ -425,7 +622,12 @@ const DashboardSubscriptionsPage = () => {
                   }}
                 >
                   <Typography fontSize="24px" fontWeight={700}>
+<<<<<<< HEAD
                     #{subscription?.keyword?.letters.toUpperCase()}
+=======
+                    {/* #{subscription?.keyword?.letters.toUpperCase()} */}#
+                    {subscription?.letters.toUpperCase()}
+>>>>>>> origin/feat-update-ui
                   </Typography>
                 </Box>
                 <Box
@@ -483,10 +685,17 @@ const DashboardSubscriptionsPage = () => {
                       )}
                     </Typography>
                     <Typography>
+<<<<<<< HEAD
                       {t('date_next')} :{' '}
                       {new Date(subscription.renewalDate).toLocaleDateString(
                         'en-GB'
                       )}
+=======
+                      {/* {t("date_next")} :{" "}
+											{new Date(subscription.renewalDate).toLocaleDateString(
+												"en-GB",
+											)} */}
+>>>>>>> origin/feat-update-ui
                     </Typography>
                   </Box>
                 </Box>
@@ -501,6 +710,18 @@ const DashboardSubscriptionsPage = () => {
                     {t('unsubscribe')}
                   </Typography>
                 )}
+<<<<<<< HEAD
+=======
+                <Typography
+                  sx={{ cursor: 'pointer' }}
+                  onClick={() => {
+                    handleOpen(subscription)
+                  }}
+                  fontSize="14px"
+                >
+                  {t('unsubscribe')}
+                </Typography>
+>>>>>>> origin/feat-update-ui
               </Box>
             ))}
           </Box>
@@ -512,8 +733,12 @@ const DashboardSubscriptionsPage = () => {
         >
           <Box>
             <Typography>
+<<<<<<< HEAD
               you're about to unsubscribe from keyword #
               {selectedKeyword?.letters}
+=======
+              {t('unsubscribe_text')} #{selectedKeyword?.letters}
+>>>>>>> origin/feat-update-ui
             </Typography>
           </Box>
           <Box
@@ -531,9 +756,14 @@ const DashboardSubscriptionsPage = () => {
               color="info"
               variant="contained"
               sx={{ height: '42px', width: '154px' }}
+<<<<<<< HEAD
               onClick={async () => {
                 await handleUnsubscribe(selectedKeyword?.id)
                 handleClose()
+=======
+              onClick={() => {
+                handleUnsubscribe(selectedKeyword?.id)
+>>>>>>> origin/feat-update-ui
               }}
             >
               Unsubscribe

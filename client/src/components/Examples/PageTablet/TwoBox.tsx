@@ -14,7 +14,7 @@ const TwoBox = () => {
           position: 'relative',
           display: 'flex',
           alignItems: 'center',
-          background: '',
+          background: '#EAEDED',
           //   backdropFilter: 'blur(48px)',
         }}
         className="TwoBoxTabletLayout"

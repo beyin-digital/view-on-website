@@ -195,76 +195,95 @@ const Header = () => {
       >
         {locale === 'ar' ? (
           <Button
-            onClick={() => {
-              if (token) {
-                router.push(`/${locale}/dashboard`)
-              }
-              router.push('/illustration')
-            }}
             sx={{
               borderRadius: '16px',
-              paddingX: '11px',
+              paddingX: '18px',
               height: '59px',
-              display: 'flex',
-              width: '313px',
-              flexDirection: 'row-reverse',
+              width: { xs: '300px', xl: '311px' },
+              display: { xs: 'flex', xl: 'none' },
             }}
             onMouseEnter={handleHoverButton}
             onMouseLeave={handleLeave}
             className="ButtonAnimation"
           >
-            <Typography
-              sx={{
-                letterSpacing: '0.02em',
-                fontSize: '25px',
-                fontWeight: '700',
-                lineHeight: '40px',
-                color: '#343132',
-                textTransform: 'uppercase',
-              }}
-            >
-              {token ? t('nav_Dashboard') : t('nav_getStarted')}
-            </Typography>
-
             <FiArrowUpLeft
               size={42}
               color="#343132"
               className={hoveredButton ? 'animated-icon_rtl' : ''}
             />
+
+            {token ? (
+              <Typography
+                onClick={() => router.push(`${locale}/dashboard`)}
+                sx={{
+                  letterSpacing: '0.02em',
+                  fontSize: { xs: '23px', xl: '32px' },
+                  fontWeight: '700',
+                  lineHeight: '40px',
+                  color: '#343132',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {t('nav_Dashboard')}
+              </Typography>
+            ) : (
+              <Typography
+                sx={{
+                  letterSpacing: '0.02em',
+                  fontSize: { xs: '23px', xl: '32px' },
+                  fontWeight: '700',
+                  lineHeight: '40px',
+                  color: '#343132',
+                  textTransform: 'uppercase',
+                }}
+                onClick={() => router.push('/illustration')}
+              >
+                {t('nav_getStarted')}
+              </Typography>
+            )}
           </Button>
         ) : (
           <Button
-            onClick={() => {
-              if (token) {
-                router.push(`/${locale}/dashboard`)
-              }
-              router.push('/illustration')
-            }}
             sx={{
               borderRadius: '16px',
-              paddingX: '11px',
+              paddingX: '18px',
               height: '59px',
-              display: 'flex',
-              width: '313px',
-
-              background: 'linear-gradient(270deg, #0090EC 0%, #31E716 100%)',
+              width: { xs: '300px', xl: '311px' },
+              display: { xs: 'flex', xl: 'none' },
             }}
             onMouseEnter={handleHoverButton}
             onMouseLeave={handleLeave}
             className="ButtonAnimation"
           >
-            <Typography
-              sx={{
-                letterSpacing: '0.02em',
-                fontSize: '25px',
-                fontWeight: '700',
-                lineHeight: '40px',
-                color: '#343132',
-                textTransform: 'uppercase',
-              }}
-            >
-              {token ? t('nav_Dashboard') : t('nav_getStarted')}
-            </Typography>
+            {token ? (
+              <Typography
+                onClick={() => router.push(`${locale}/dashboard`)}
+                sx={{
+                  letterSpacing: '0.02em',
+                  fontSize: { xs: '23px', xl: '32px' },
+                  fontWeight: '700',
+                  lineHeight: '40px',
+                  color: '#343132',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {t('nav_Dashboard')}
+              </Typography>
+            ) : (
+              <Typography
+                sx={{
+                  letterSpacing: '0.02em',
+                  fontSize: { xs: '23px', xl: '32px' },
+                  fontWeight: '700',
+                  lineHeight: '40px',
+                  color: '#343132',
+                  textTransform: 'uppercase',
+                }}
+                onClick={() => router.push('/illustration')}
+              >
+                {t('nav_getStarted')}
+              </Typography>
+            )}
 
             <FiArrowUpRight
               size={42}

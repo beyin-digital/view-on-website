@@ -12,6 +12,7 @@ import {
   BsFillShieldLockFill,
   BsLinkedin,
   BsTwitter,
+  BsYoutube,
 } from 'react-icons/bs'
 import io from 'socket.io-client'
 
@@ -36,6 +37,7 @@ const Navbar = () => {
 
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
+    setMobileNavOpen(false)
     setOpen(true)
   }
   const handleClose = () => {
@@ -235,15 +237,17 @@ const Navbar = () => {
           <Typography fontSize="24px" fontWeight="600">
             {t('side_title')}
           </Typography>
-          <Image
-            src="/images/logo.webp"
-            alt="logo"
-            width={74}
-            height={37}
-            style={{
-              cursor: 'pointer',
-            }}
-          />
+          <Link href="/dashboard">
+            <Image
+              src="/images/logo.webp"
+              alt="logo"
+              width={74}
+              height={37}
+              style={{
+                cursor: 'pointer',
+              }}
+            />
+          </Link>
         </Box>
       </Box>
       {/* Menu List */}
@@ -321,27 +325,32 @@ const Navbar = () => {
               justifyContent: 'space-between',
             }}
           >
-            <Link href="https://instagram.com/vow" target="_blank">
+            <Link href="https://facebook.com/vow" target="_blank">
               <BsFacebook size={17.5} color="#343132" />
             </Link>
-            <Link href="https://instagram.com/vow" target="_blank">
-              <BsTwitter size={17.5} color="#343132" />
-            </Link>
+
             <Link href="https://instagram.com/vow" target="_blank">
               <AiFillInstagram size={17.5} color="#343132" />
             </Link>
-            <Link href="https://instagram.com/vow" target="_blank">
-              <BsLinkedin size={17.5} color="#343132" />
+            <Link href="https://youtube.com/vow" target="_blank">
+              <BsYoutube size={17.5} color="#343132" />
             </Link>
           </Box>
         </Box>
       )}
-      <Modal title="Log Out" open={open} handleClose={handleClose}>
+      <Modal
+        title="Log Out"
+        open={open}
+        handleClose={handleClose}
+        sx={{
+          zIndex: '99999999999999',
+          position: 'relative',
+        }}
+      >
         <Box>
-          <Typography>
-            You're about to Log out of your View On Website Dashboard?
-          </Typography>
+          <Typography>{t('log_out')}</Typography>
         </Box>
+
         <Box
           sx={{
             display: 'flex',
@@ -371,7 +380,7 @@ const Navbar = () => {
               handleClose()
             }}
           >
-            Cancel
+            {t('cancel')}
           </Button>
         </Box>
       </Modal>

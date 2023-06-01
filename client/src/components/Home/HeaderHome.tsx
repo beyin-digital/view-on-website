@@ -21,11 +21,12 @@ const Header = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
+        className="HeaderBoxHome"
       >
         <Box
           sx={{
             width: { xs: '85%', sm: '80%', md: '100%', xl: '90%' },
-            px: { xs: '.5rem', sm: '1.5rem', md: '0rem', xl: '1.5rem' },
+            px: { xs: '1rem', sm: '1.5rem', md: '0rem', xl: '1.5rem' },
           }}
         >
           <Typography

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { Box, OutlinedInput } from '@mui/material'
+import { Box, OutlinedInput, TextField } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { KeywordContext } from '@/contexts/keywordContext'
 import { toast } from 'react-toastify'
@@ -46,18 +46,11 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
   }, [foundKeyword])
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
+    <>
       <Box
         sx={{
           display: 'flex',
-          width: { xs: '70%', md: '100%', xl: '100%' },
+          width: { xs: '100%', sm: '80%', md: '100%', xl: '100%' },
           justifyContent: {
             xs: 'center',
             md: 'space-evenly',
@@ -65,7 +58,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
           },
           alignItems: 'baseline',
         }}
-        className="BoxInputHom"
+        className="BoxInputHome"
       >
         <Box
           sx={{
@@ -73,7 +66,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
             alignItems: 'center',
             marginTop: { xs: '.1rem' },
           }}
-          className="InputHomeMargin"
+          className="InputHomeMargi"
         >
           <Box
             sx={{
@@ -110,7 +103,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
               onChange={handleInputChange}
               sx={{
                 width: '100%',
-                height: { xs: '45px', md: '65px' },
+                height: { xs: '', md: '65px' },
                 fontSize: {
                   xs: '18px',
                   sm: '22px',
@@ -129,7 +122,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
                     borderWidth: '2px',
-                    transition: 'border-width 0.5s',
+                    // transition: "border-width 0.5s",
                   },
                   '&:hover fieldset': {
                     borderWidth: '2px',
@@ -213,7 +206,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
           </svg>
         </Box>
       </Box>
-    </form>
+    </>
   )
 }
 

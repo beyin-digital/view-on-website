@@ -1,38 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://www.viewonwebsite.com</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/about</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/change-password</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/contact</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/dashboard</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/dashboard/profile</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/dashboard/security</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/dashboard/subscriptions</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/example</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/forgot-password</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/illustration</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/login</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/privacy</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/signup</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/subscribe</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/terms</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/verification</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/404</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/404</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/contact</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/dashboard</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/dashboard/profile</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/change-password</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/example</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/forgot-password</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/login</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/illustration</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/dashboard/security</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/privacy</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/dashboard/subscriptions</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/terms</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/signup</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/verification</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.viewonwebsite.com/en/subscribe</loc><lastmod>2023-05-31T12:50:57.275Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+    xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    <url>
+        <loc>https://www.viewonwebsite.com</loc>
+        <lastmod>2023-06-01T06:09:54.916Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/about</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/change-password</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/contact</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/dashboard</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/dashboard/profile</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/dashboard/security</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/dashboard/subscriptions</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/example</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/forgot-password</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/illustration</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/login</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/privacy</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/signup</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/subscribe</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/terms</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/verification</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/404</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/404</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/contact</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/change-password</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/dashboard/profile</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/dashboard</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/dashboard/subscriptions</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/example</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/forgot-password</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/dashboard/security</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/illustration</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/login</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/signup</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/privacy</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/terms</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/verification</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.viewonwebsite.com/en/subscribe</loc>
+        <lastmod>2023-06-01T06:09:54.917Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
 </urlset>

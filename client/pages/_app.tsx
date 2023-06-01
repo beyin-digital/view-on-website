@@ -26,20 +26,23 @@ function MyApp(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta charSet="utf-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* <meta httpEquiv="X-UA-Compatible" content="IE=edge" /> */}
+        <meta
+          name="viewport"
+          content="width=device-width,500=device-height, initial-scale=1.0"
+        />
         <title>VIEW ON WEBSITE</title>
         <meta name="description" content="" />
         <meta name="keyword" content="" />
         <meta name="application-name" content="VIEW ON WEBSITE" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        {/* <meta name="apple-mobile-web-app-capable" content="yes" /> */}
+        {/* <meta name="apple-mobile-web-app-status-bar-style" content="default" /> */}
         <meta name="apple-mobile-web-app-title" content="VIEW ON WEBSITE" />
         <meta name="description" content="" />
         <meta name="keyword" content="" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <meta name="mobile-web-app-capable" content="yes" />
+        {/* <meta name="mobile-web-app-capable" content="yes" /> */}
         <meta name="msapplication-config" content="/pwa/browserconfig.xml" />
         <link
           rel="apple-touch-icon"

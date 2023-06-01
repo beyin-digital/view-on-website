@@ -32,6 +32,8 @@ const TextAndButton = ({ selectedImage }: any) => {
           flexDirection: 'column',
           marginY: { xs: '3rem', md: '1rem', xl: '1rem' },
           paddingX: '1rem',
+          position: 'relative',
+          zIndex: '999999',
         }}
       >
         {locale === 'ar' ? (

@@ -4,7 +4,18 @@ import { useTranslation } from 'next-i18next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-const Layout = dynamic(() => import('@/components/Layout/Layout'), {
+// import TermsDetails from "@/components/TermsDetails";
+
+const Navbar = dynamic(() => import('@/components/Navbar/Navbar'), {
+  ssr: false,
+})
+const Footer = dynamic(() => import('@/components/Footer/FooterHome'), {
+  ssr: false,
+})
+const FooterMobile = dynamic(() => import('@/components/Footer/FooterMobile'), {
+  ssr: false,
+})
+const TermsDetails = dynamic(() => import('@/components/TermsDetails'), {
   ssr: false,
 })
 const Terms = () => {
@@ -23,9 +34,17 @@ const Terms = () => {
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      {/* <Layout>
         <h1></h1>
-      </Layout>
+      </Layout> */}
+      <>
+        <Navbar />
+        <>
+          <TermsDetails />
+        </>
+        <Footer />
+        {/* <FooterMobile /> */}
+      </>
     </>
   )
 }

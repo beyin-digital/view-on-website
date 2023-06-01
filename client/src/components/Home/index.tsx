@@ -3,15 +3,13 @@ import React, { useState, Suspense, useEffect, useContext } from 'react'
 import { useTranslation } from 'next-i18next'
 import useDebounce from '@/hooks/useDebounce'
 
-import { Drawer, Box } from '@mui/material'
+import { Drawer } from '@mui/material'
 
 // components
 import dynamic from 'next/dynamic'
 import { KeywordContext } from '@/contexts/keywordContext'
+import Header from '@/components/Navbar/Navbar'
 
-const Layout = dynamic(() => import('@/components/Layout/LayoutHome'), {
-  ssr: false,
-})
 const SliderDesktop = dynamic(() => import('@/components/Slider'), {
   ssr: false,
 })
@@ -71,20 +69,16 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
 
   return (
     <Suspense>
-      <Box
-        sx={{
-          position: 'relative',
-          height: '100%',
-          width: '100%',
-        }}
-      >
+      <>
         <Suspense fallback={<div>Loading...</div>}>
-          <Layout onClick={openModel}>
+          <>
+            {/* <Header  /> */}
             <>
               <HomeDetails
                 keywordFound={keywordFound}
                 hashtag={hashtag}
                 setHashtag={setHashtag}
+                onClick={openModel}
               />
               <Drawer
                 variant="temporary"
@@ -119,9 +113,9 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
                 </Suspense>
               </Drawer>
             </>
-          </Layout>
+          </>
         </Suspense>
-      </Box>
+      </>
     </Suspense>
   )
 }

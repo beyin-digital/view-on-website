@@ -2,7 +2,11 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import useDebounce from '@/hooks/useDebounce'
 import { isValidUrl } from '@/utils/checkUrl'
+<<<<<<< HEAD
 import { toast } from 'react-toastify'
+=======
+import { ToastContainer, toast } from 'react-toastify'
+>>>>>>> origin/feat-update-ui
 import { useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -14,6 +18,10 @@ import {
   Button,
   Grid,
   CircularProgress,
+<<<<<<< HEAD
+=======
+  Fade,
+>>>>>>> origin/feat-update-ui
 } from '@mui/material'
 
 // translate hook
@@ -62,14 +70,22 @@ const SubscribePage: NextPage = () => {
   const { locale } = useRouter()
   const [isInputValid, setIsInputValid] = useState(true)
   const [values, setValues] = useState({
+<<<<<<< HEAD
     hashtag: (router.query.keyword as string)
       ? (router.query.keyword as string)
       : '',
+=======
+    hashtag: '',
+>>>>>>> origin/feat-update-ui
     sublink: '',
   })
   const allowedCharacters = /^[a-zA-Z\u0600-\u06FF\s.,،]+$/
 
+<<<<<<< HEAD
   const hashtagDebounce = useDebounce(values.hashtag, 500)
+=======
+  const hashtagDebounce = useDebounce(values.hashtag, 1000)
+>>>>>>> origin/feat-update-ui
   const { handleSubscription, handleCheckKeyword, keywordFound, isSearching } =
     useContext(KeywordContext)
   const { token } = useContext(UserContext)
@@ -108,6 +124,7 @@ const SubscribePage: NextPage = () => {
 
     setValues({ ...values, [e.target.name]: e.target.value })
     setIsInputValid(!/\d/.test(inputValue))
+<<<<<<< HEAD
     setShowAngledArrow(false)
   }
   const [showAngledArrow, setShowAngledArrow] = useState(false)
@@ -133,6 +150,23 @@ const SubscribePage: NextPage = () => {
       setShowAngledArrow(true)
     } else {
       setShowAngledArrow(false)
+=======
+  }
+
+  // »arrow down
+  const [showArrow, setShowArrow] = useState(true)
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowArrow(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    if (hashtagDebounce || hashtagDebounce === '') {
+      handleCheckKeyword(hashtagDebounce)
+>>>>>>> origin/feat-update-ui
     }
 
     return () => {
@@ -152,6 +186,10 @@ const SubscribePage: NextPage = () => {
       </Head>
       <Box
         sx={{
+<<<<<<< HEAD
+=======
+          // width: '2162px',
+>>>>>>> origin/feat-update-ui
           maxWidth: '100%',
           overflow: 'hidden',
           position: 'relative',
@@ -216,9 +254,19 @@ const SubscribePage: NextPage = () => {
                     }}
                   >
                     <OutlinedInput
+<<<<<<< HEAD
                       inputProps={{
                         pattern: allowedCharacters.test(values.hashtag),
                       }}
+=======
+                      // inputProps={{
+                      // 	pattern: "[a-zA-Z\u0600-\u06FFs]+",
+                      // }}
+                      inputProps={{
+                        pattern: allowedCharacters.test(values.hashtag),
+                      }}
+                      // className={``}
+>>>>>>> origin/feat-update-ui
                       name="hashtag"
                       sx={{
                         width: '100%',
@@ -259,6 +307,7 @@ const SubscribePage: NextPage = () => {
                             size={40}
                           />
                         ) : locale === 'ar' ? (
+<<<<<<< HEAD
                           showAngledArrow && (
                             <FiArrowUpLeft color="#343132" size={90} />
                           )
@@ -266,6 +315,11 @@ const SubscribePage: NextPage = () => {
                           showAngledArrow && (
                             <FiArrowUpRight color="#343132" size={90} />
                           )
+=======
+                          <FiArrowUpLeft color="#343132" size={90} />
+                        ) : (
+                          <FiArrowUpRight color="#343132" size={90} />
+>>>>>>> origin/feat-update-ui
                         )
                       }
                       className={`${!isInputValid ? 'inputError' : ''} ${
@@ -299,6 +353,7 @@ const SubscribePage: NextPage = () => {
                           },
                         }}
                       />
+<<<<<<< HEAD
                       {(values.hashtag.length === 1 ||
                         values.hashtag.length === 2 ||
                         values.hashtag.length === 3) &&
@@ -317,6 +372,26 @@ const SubscribePage: NextPage = () => {
                             {t('text_hashtag')}
                           </Typography>
                         )}
+=======
+                      {/* {(values.hashtag.length === 1 ||
+												values.hashtag.length === 2 ||
+												values.hashtag.length === 3) &&
+												!keywordFound &&
+												!/^[\p{N}\d\s]+$/u.test(values.hashtag) && (
+													<Typography
+														sx={{
+															fontSize: {
+																xs: "13px",
+																sm: "20px",
+																md: "22px",
+																xl: "28px",
+															},
+														}}
+													>
+														{t("text_hashtag")}
+													</Typography>
+												)} */}
+>>>>>>> origin/feat-update-ui
                       <Box
                         sx={{
                           width: {
@@ -335,10 +410,16 @@ const SubscribePage: NextPage = () => {
                           height: '60px',
                         }}
                       >
+<<<<<<< HEAD
                         {!keywordFound &&
                           showAngledArrow &&
                           !/^[\p{N}\d\s]+$/u.test(values.hashtag) &&
                           values.hashtag.length >= 1 && (
+=======
+                        {values.hashtag.length >= 1 &&
+                          !keywordFound &&
+                          !/^[\p{N}\d\s]+$/u.test(values.hashtag) && (
+>>>>>>> origin/feat-update-ui
                             <Typography
                               sx={{
                                 cursor: 'pointer',
@@ -705,6 +786,8 @@ const SubscribePage: NextPage = () => {
                             >
                               {/* Icon Scroll */}
                               <Box
+<<<<<<< HEAD
+=======
                                 sx={{
                                   width: '100%',
                                   display: 'flex',
@@ -716,6 +799,75 @@ const SubscribePage: NextPage = () => {
                                   <IconScroll />
                                 )}
                               </Box>
+                              {/* <Box
+>>>>>>> origin/feat-update-ui
+                                sx={{
+                                  width: '100%',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'start',
+                                }}
+                              >
+<<<<<<< HEAD
+                                {values.hashtag.length >= 4 && showArrow && (
+                                  <IconScroll />
+                                )}
+                              </Box>
+=======
+                                <Button
+                                  sx={{
+                                    borderRadius: '16px',
+                                    paddingX: '18px',
+                                    height: '59px',
+                                    width: {
+                                      xs: '100%',
+                                      sm: '311px',
+                                      md: '311px',
+                                      xl: '311px',
+                                    },
+                                    display: 'flex',
+                                    background: '#31E716',
+                                    justifyContent: 'space-around',
+                                    marginBottom: { xs: '2rem', sm: '0' },
+                                  }}
+                                  onClick={() => {}}
+                                  type="submit"
+                                  className="ButtonReserve"
+                                  onMouseEnter={handleHoverButton}
+                                  onMouseLeave={handleLeave}
+                                >
+                                  <Typography
+                                    sx={{
+                                      letterSpacing: '0.02em',
+                                      fontSize: '32px',
+                                      fontWeight: '400',
+                                      lineHeight: '40px',
+                                      color: '#343132',
+                                      textTransform: 'uppercase',
+                                    }}
+                                  >
+                                    {t('button')}
+                                  </Typography>
+                                  {locale === 'ar' ? (
+                                    <FiArrowDownLeft
+                                      size={42}
+                                      color="#343132"
+                                      className={
+                                        hoveredButton ? 'ButtonReserve_rtl' : ''
+                                      }
+                                    />
+                                  ) : (
+                                    <FiArrowDownRight
+                                      size={42}
+                                      color="#343132"
+                                      className={
+                                        hoveredButton ? 'ButtonReserve_ltr' : ''
+                                      }
+                                    />
+                                  )}
+                                </Button>
+                              </Box> */}
+>>>>>>> origin/feat-update-ui
                             </Box>
                           )}
                       </Box>

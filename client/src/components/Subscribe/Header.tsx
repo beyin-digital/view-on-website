@@ -27,7 +27,7 @@ const Header = () => {
               md: '25px',
               xl: '40px',
             },
-            lineHeight: '92.5%',
+            lineHeight: '25px',
           }}
         >
           {t('text_one')}

@@ -55,7 +55,7 @@ const PageDesktop = () => {
               flexDirection: { xs: 'column', md: 'row', xl: 'row' },
               overflow: 'hidden',
               background: 'rgba(251, 251, 251, 0.6)',
-              marginLeft: "-6rem",
+              marginLeft: '-6rem',
               position: 'absolute',
               left: '0',
               marginBottom: '4rem',

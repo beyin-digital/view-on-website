@@ -49,7 +49,9 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
         zIndex: '9999999',
       }}
     >
-      {/* <Header /> */}
+      {showSlider && <Background />}
+
+      <Header />
 
       <Box
         sx={{
@@ -62,7 +64,6 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
           position: 'relative',
         }}
       >
-        {showSlider && <Background />}
         <Box
           sx={{
             position: 'relative',
