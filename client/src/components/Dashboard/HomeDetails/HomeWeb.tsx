@@ -65,20 +65,20 @@ const HomeWeb = () => {
   })
 
   const [pieChartData, setPieChartData] = React.useState([
-   {
-			id: "today",
-			label: `${t("box_four_today")}`,
-			tKey: "box_four_today",
-			value: 0,
-			color: "hsla(112, 81%, 52%, 1)",
-		},
-		{
-			id: "all-time",
-			label: `${t("box_four_all")}`,
-			tKey: "box_four_all",
-			value: 0,
-			color: "hsla(203, 100%, 46%, 1)",
-		},
+    {
+      id: 'today',
+      label: `${t('box_four_today')}`,
+      tKey: 'box_four_today',
+      value: 0,
+      color: 'hsla(112, 81%, 52%, 1)',
+    },
+    {
+      id: 'all-time',
+      label: `${t('box_four_all')}`,
+      tKey: 'box_four_all',
+      value: 0,
+      color: 'hsla(203, 100%, 46%, 1)',
+    },
   ])
   const [lineChartData, setLineChartData] = React.useState<any>(null)
   const [locationIsLoading, setLocationIsLoading] = useState(false)
@@ -350,7 +350,7 @@ const HomeWeb = () => {
                   }
                   renderValue={(selected: any) => {
                     if (selected.length === 0) {
-                     return `${t("box_one_location_country")}`;
+                      return `${t('box_one_location_country')}`
                     }
 
                     return selected
@@ -392,7 +392,7 @@ const HomeWeb = () => {
                   value={values?.state}
                   renderValue={(selected: any) => {
                     if (selected?.length === 0) {
-                      return `${t("box_one_location_state")}`;
+                      return `${t('box_one_location_state')}`
                     }
                     return selected
                   }}
@@ -675,7 +675,9 @@ const HomeWeb = () => {
                   },
                 }}
               >
-                <MenuItem value={0}>Duration</MenuItem>
+                <MenuItem value={0} disabled>
+                  Duration
+                </MenuItem>
                 <MenuItem value={1}>24 hours</MenuItem>
                 <MenuItem value={2}>7 days</MenuItem>
                 <MenuItem value={3}>30 days</MenuItem>
