@@ -44,5 +44,5 @@
     "subscribe": "subscribe",
     "cancel": "cancel",
     "not_available": "Not Available",
-    "error": "Keywords can only use letters, Spaces, and underscores."
+    "error": "spaces aren't allowed in hashtags"
 }
