@@ -9,7 +9,7 @@
     "text_hashtag": "The hashtag keyword you've chosen is premium",
     "text_premium": "Premium",
     "text_input_sublink": "Please provide your keyword's sub-link",
-    "input_hashtag_two": "Enter your Sub-Link URL, for example: Brandname.com/item",
+    "input_hashtag_two": "https:// Enter your Sub-Link URL, for example: Brandname.com/item",
     "button": "reserve",
     "available": " Available ",
     "availableP": " Available ",

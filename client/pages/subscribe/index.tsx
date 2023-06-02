@@ -686,7 +686,8 @@ const SubscribePage: NextPage = () => {
 																		textTransform: "uppercase",
 																	}}
 																>
-																	{t("pay")}
+																	{`${token ? t("pay") : t("button")}`}
+																	{/* {t("pay")} */}
 																</Typography>
 																{locale === "ar" ? (
 																	<FiArrowDownLeft
@@ -738,9 +739,7 @@ const SubscribePage: NextPage = () => {
 																	justifyContent: "start",
 																}}
 															>
-																{values.hashtag.length >= 4  && (
-																	<IconScroll />
-																)}
+																{values.hashtag.length >= 4 && <IconScroll />}
 															</Box>
 														</Box>
 													)}
