@@ -16,7 +16,7 @@ export const KeywordProvider = ({ children }: any) => {
   const [isSearching, setIsSearching] = useState(false)
   const [sortedKeywords, setSortedKeywords] = useState<string[]>([])
   const [keywordFound, setKeywordFound] = useState(false)
-  const [keywords, setKeywords] = useState([])
+  const [keywords, setKeywords] = useState<any>({})
   const [selectedKeyword, setSelectedKeyword] = useState<any>(null)
   const [token, setToken] = useState('')
   const [subscriptions, setSubscriptions] = useState<any>({})
@@ -113,9 +113,9 @@ export const KeywordProvider = ({ children }: any) => {
     }
   }
 
-  const getUsersKeywords = async (page?: number, limit?: number) => {
+  const getUsersKeywords = async (page?: number) => {
     try {
-      const response = await fetch(`${apiUrl}/keywords?page=1&limit=10`, {
+      const response = await fetch(`${apiUrl}/keywords?page=${page}&limit=10`, {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -123,12 +123,21 @@ export const KeywordProvider = ({ children }: any) => {
         throw new Error('Error fetching data')
       }
 
-      const { data } = await response.json()
-      console.log(data)
-      setKeywords(data)
-      if (selectedKeyword === null) {
-        setSelectedKeyword(data[0])
+      const data = await response.json()
+      if (data.data.length <= 0) {
+        return
       }
+      if (page === 1) {
+        setKeywords(data)
+      }
+      if (selectedKeyword === null) {
+        setSelectedKeyword(keywords?.data[0])
+      }
+      setKeywords({
+        ...keywords,
+        data: [...keywords.data, ...data.data],
+        hasNextPage: data.hasNextPage,
+      })
     } catch (error) {
       toast.error('Error fetching keywords')
     }

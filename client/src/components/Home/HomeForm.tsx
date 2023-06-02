@@ -46,7 +46,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
   }, [foundKeyword])
 
   return (
-    <form onSubmit={handleSubmit} className="cursor">
+    <>
       <Box
         sx={{
           display: 'flex',
@@ -91,66 +91,69 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
               loading="lazy"
             />
           </Box>
-          <OutlinedInput
-            value={hashtag}
-            onFocus={handleInputFocus}
-            inputProps={{
-              autoComplete: 'off',
-              spellCheck: false,
-              pattern: allowedCharacters.test(hashtag),
-            }}
-            onChange={handleInputChange}
-            sx={{
-              width: '100%',
-              height: { xs: '', md: '65px' },
-              fontSize: {
-                xs: '18px',
-                sm: '22px',
-                md: '28px',
-                xl: '38px',
-              },
-              lineHeight: '28px',
-              marginY: '.5rem',
-              '.MuiOutlinedInput-notchedOutline': {
-                border: '0',
-                padding: '9px',
-              },
-              '&:hover > .MuiOutlinedInput-notchedOutline': {
-                border: '0',
-              },
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderWidth: '2px',
-                  // transition: "border-width 0.5s",
+          <form onSubmit={handleSubmit} className="cursor">
+            <OutlinedInput
+              value={hashtag}
+              onFocus={handleInputFocus}
+              inputProps={{
+                autoComplete: 'off',
+                spellCheck: false,
+                pattern: allowedCharacters.test(hashtag),
+              }}
+              onChange={handleInputChange}
+              sx={{
+                width: '100%',
+                height: { xs: '', md: '65px' },
+                fontSize: {
+                  xs: '18px',
+                  sm: '22px',
+                  md: '28px',
+                  xl: '38px',
                 },
-                '&:hover fieldset': {
-                  borderWidth: '2px',
+                lineHeight: '28px',
+                marginY: '.5rem',
+                '.MuiOutlinedInput-notchedOutline': {
+                  border: '0',
+                  padding: '9px',
                 },
-                '&.Mui-focused fieldset': {
-                  borderWidth: '2px',
+                '&:hover > .MuiOutlinedInput-notchedOutline': {
+                  border: '0',
                 },
-              },
-              '& .MuiInputBase-input': {
-                caretColor: '#000',
-                color: isInputFocused ? '#2BEA0F' : '',
-                fontWeight: '800',
-              },
-              '& .MuiOutlinedInput-input': {
-                '&::placeholder': {
-                  color: isInputFocused ? '#000' : '',
-                  fontWeight: '400',
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderWidth: '2px',
+                    // transition: "border-width 0.5s",
+                  },
+                  '&:hover fieldset': {
+                    borderWidth: '2px',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderWidth: '2px',
+                  },
                 },
-              },
-            }}
-            placeholder={`${t('keyword')}`}
-            className="cursorAnimation"
-          />
-          <Box className={`i ${isTyping ? 'stopAnimation' : ''}`} />
+                '& .MuiInputBase-input': {
+                  caretColor: '#000',
+                  color: isInputFocused ? '#2BEA0F' : '',
+                  fontWeight: '800',
+                },
+                '& .MuiOutlinedInput-input': {
+                  '&::placeholder': {
+                    color: isInputFocused ? '#000' : '',
+                    fontWeight: '400',
+                  },
+                },
+              }}
+              placeholder={`${t('keyword')}`}
+              className="cursorAnimation"
+            />
+            <Box className={`i ${isTyping ? 'stopAnimation' : ''}`} />
+          </form>
         </Box>
         <Box
           component="button"
           title="Button Arrow View On Website"
           type="submit"
+          onClick={handleSubmit}
           disabled={!keywordFound}
           sx={{
             background: 'none',
@@ -204,7 +207,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
           </svg>
         </Box>
       </Box>
-    </form>
+    </>
   )
 }
 
