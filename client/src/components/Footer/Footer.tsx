@@ -58,7 +58,8 @@ const Footer = () => {
           }}
         >
           {icons.map((item) => (
-            <Link key={item.id} title={item.alt} href={item.link}>
+            <Link key={item.id} title={item.alt} href={item.link}
+             target="_blank">
               <Image
                 src={item.icon}
                 alt={item.alt}
@@ -123,7 +124,7 @@ const Footer = () => {
                 textDecoration: 'none',
                 color: 'inherit',
               }}
-              target="_blank"
+              // target="_blank"
             >
               <Typography
                 fontSize="20px"

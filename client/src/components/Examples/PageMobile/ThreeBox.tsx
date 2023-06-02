@@ -81,7 +81,7 @@ const ThreeBox = () => {
               sx={{
                 width: { xs: '100%', md: '100%' },
                 fontSize: { xs: '13px', sm: '20px', md: '20px' },
-                lineHeight: { xs: '12px', sm: '20px', md: '20px' },
+                lineHeight: { xs: '15px', sm: '20px', md: '20px' },
                 fontWeight: '300',
               }}
             >

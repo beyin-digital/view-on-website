@@ -52,7 +52,7 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
               minHeight: '100%',
               background: "url('/images/swirl.webp')",
               backgroundPositionY: {
-                xs: '-1250px',
+                xs: '-1500px',
                 sm: '-1100px',
                 md: '-1100px',
                 xl: '-1000px',
@@ -60,9 +60,9 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
               backgroundPositionX: { xs: '-800px', md: '-600px', xl: '-300px' },
               backgroundRepeat: 'no-repeat',
             }}
-            className="ImageBgHome"
+            className="ImageBgHom"
           />
-          <Image
+          {/* <Image
             alt=""
             style={{
               top: '-1rem',
@@ -73,7 +73,7 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
             width={600}
             height={500}
             className="ImageHome"
-          />
+          /> */}
 
           <Header />
           <Box

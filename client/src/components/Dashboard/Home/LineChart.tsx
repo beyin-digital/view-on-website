@@ -28,7 +28,7 @@ const LineChart = ({ data }: any) => {
           axisBottom={{
             tickSize: 5,
             tickPadding: 15,
-            tickRotation: 0,
+            tickRotation: -90,
             legend: `${t('day')}`,
             legendOffset: 0,
             legendPosition: 'end',

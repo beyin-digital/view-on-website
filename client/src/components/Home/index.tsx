@@ -106,6 +106,7 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
                     boxShadow: '0px 0px 0px 0px',
                     background: '#FBFBFB',
                   },
+                  maxHeight:"auto"
                 }}
               >
                 <Suspense>

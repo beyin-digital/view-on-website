@@ -15,7 +15,7 @@ const Header = () => {
     <>
       <Box
         sx={{
-          width: { xs: '100%', md: '90%', xl: '90%' },
+          width: { xs: '100%', md: '90%', xl: '100%' },
           // height: "200px",
           display: 'flex',
           alignItems: 'center',
@@ -25,8 +25,8 @@ const Header = () => {
       >
         <Box
           sx={{
-            width: { xs: '85%', sm: '80%', md: '100%', xl: '90%' },
-            px: { xs: '1rem', sm: '1.5rem', md: '0rem', xl: '1.5rem' },
+            width: { xs: '85%', sm: '80%', md: '100%', xl: '100%' },
+            px: { xs: '1rem', sm: '1.5rem', md: '0rem', xl: '.1rem' },
           }}
         >
           <Typography

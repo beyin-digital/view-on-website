@@ -15,7 +15,11 @@
   "cancel_security": "Cancel",
   "sure": "Sure",
   "cancel": "Cancel",
+  "delete":"Delete",
   "delete_accont": "you're about to delete you account and all it's contents",
   "modal": "You're about to disable two factor authentication. Are you sure about this action?",
-  "log_out": "You're about to Log out of your View On Website Dashboard?"
+  "log_out": "You're about to Log out of your View On Website Dashboard?",
+  "seems":"Seems you don't have a password currently",
+  "setPassword":"Click the button below to set a password",
+  "setTitle":"Set a Password"
 }

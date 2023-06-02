@@ -67,7 +67,7 @@ const TwoBox = () => {
                     width: { xs: '50%', sm: '40%', md: '80%' },
                     height: '100%',
                     fontSize: { xs: '13px', sm: '20px', md: '20px' },
-                    lineHeight: { xs: '15px', sm: '20px', md: '20px' },
+                    lineHeight: { xs: '18px', sm: '20px', md: '20px' },
                     fontWeight: '300',
                     marginY: '1rem',
                     paddingRight: '.5rem',

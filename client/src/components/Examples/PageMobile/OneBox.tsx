@@ -90,7 +90,7 @@ const OneBox = () => {
               <Typography
                 sx={{
                   fontSize: { xs: '13px', sm: '16px', md: '20px' },
-                  lineHeight: { xs: '12px', sm: '20px', md: '20px' },
+                  lineHeight: { xs: '18px', sm: '20px', md: '20px' },
                   fontWeight: '300',
                   marginY: '.8rem',
                 }}

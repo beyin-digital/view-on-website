@@ -344,7 +344,7 @@ export const ThreeOption = () => {
               }
             }
             sm={12}
-            className="optionOne"
+            className="optionOn"
           >
             <Box
               sx={{
@@ -406,10 +406,10 @@ export const ThreeOption = () => {
             item
             md={4}
             sx={{
-              height: '80px',
+              // height: '80px',
             }}
             sm={12}
-            className="optionTwo"
+            className="optionTw"
           >
             <Box
               sx={{
@@ -472,9 +472,9 @@ export const ThreeOption = () => {
             md={4}
             sx={{
               // marginLeft: "2rem",
-              height: '80px',
+              // height: '80px',
             }}
-            className="optionThree"
+            className="optionThre"
             sm={12}
           >
             <Box
