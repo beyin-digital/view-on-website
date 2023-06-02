@@ -105,6 +105,7 @@ const Navbar = () => {
       getUsersKeywords(page)
     }
   }, [token])
+  
   return (
     <>
       {/* Desktop Navbar */}

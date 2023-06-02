@@ -736,7 +736,8 @@ const SubscribePage: NextPage = () => {
                                   justifyContent: 'start',
                                 }}
                               >
-                                {values.hashtag.length >= 4 && <IconScroll />}
+                                {values.hashtag.length >= 4 &&
+                                  !keywordFound && <IconScroll />}
                               </Box>
                             </Box>
                           )}
@@ -758,6 +759,7 @@ const SubscribePage: NextPage = () => {
               values.hashtag.length >= 4 &&
               values.sublink.length > 0 &&
               isValidUrl(values.sublink) &&
+              !keywordFound &&
               allowedCharacters.test(values.hashtag)
                 ? 'flex'
                 : 'none',

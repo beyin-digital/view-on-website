@@ -139,7 +139,7 @@ export const KeywordProvider = ({ children }: any) => {
         hasNextPage: data.hasNextPage,
       })
     } catch (error) {
-      toast.error('Error fetching keywords')
+      console.error('Error fetching keywords')
     }
   }
 
@@ -169,7 +169,7 @@ export const KeywordProvider = ({ children }: any) => {
         hasNextPage: data.hasNextPage,
       })
     } catch (error) {
-      toast.error('Error fetching subscriptions')
+      console.error('Error fetching subscriptions')
     }
   }
 
@@ -217,7 +217,7 @@ export const KeywordProvider = ({ children }: any) => {
     if (savedToken) {
       setToken(savedToken)
     }
-  }, [keywordFound, token])
+  }, [keywordFound])
   return (
     <KeywordContext.Provider
       value={{
