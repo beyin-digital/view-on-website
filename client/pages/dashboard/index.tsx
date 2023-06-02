@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 import dynamic from 'next/dynamic'
 import { UserContext } from '@/contexts/userContext'
 import { useRouter } from 'next/router'
+import withAuth from '@/hooks/withAuth'
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
 })
@@ -31,11 +32,7 @@ const DashboardHomePage = () => {
   const router = useRouter()
   const { token } = useContext(UserContext)
 
-  //   useEffect(() => {
-  //     if (token) return
-  //     router.push(`${router.locale}/login`)
-  //   }, [])
-
+  if (!token) return <></>
   return (
     <>
       <Head>
@@ -68,4 +65,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   }
 }
 
-export default DashboardHomePage
+export default withAuth(DashboardHomePage)

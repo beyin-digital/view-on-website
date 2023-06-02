@@ -36,6 +36,10 @@ const WebProfile = () => {
       })
     }
   }, [])
+
+  if (!token) {
+    return <></>
+  }
   return (
     <>
       <Box

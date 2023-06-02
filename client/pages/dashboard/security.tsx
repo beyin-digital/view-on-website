@@ -23,6 +23,7 @@ import Head from 'next/head'
 
 import dynamic from 'next/dynamic'
 import withAuth from '@/hooks/withAuth'
+
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
 })
@@ -90,7 +91,8 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 const DashboardSecurityPage = () => {
   const { t } = useTranslation('security')
   const router = useRouter()
-  const { updateUser, user, handleDeleteUser } = useContext(UserContext)
+  const { updateUser, user, handleDeleteUser, token, forgotPassword } =
+    useContext(UserContext)
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -148,6 +150,9 @@ const DashboardSecurityPage = () => {
     }
   }, [])
 
+  if (!token) {
+    return <></>
+  }
   return (
     <>
       <Head>
@@ -217,8 +222,8 @@ const DashboardSecurityPage = () => {
                   }}
                   variant="square"
                 >
-                  {/* {user?.fullName.split(' ')[0].charAt(0)} */}
-                  {/* {user?.fullName.split(' ')[1].charAt(0)} */}
+                  {user?.fullName?.split(' ')[0]?.charAt(0)}
+                  {user?.fullName?.split(' ')[1]?.charAt(0)}
                 </Avatar>
                 <Typography
                   sx={{
@@ -256,124 +261,140 @@ const DashboardSecurityPage = () => {
               >
                 <Typography fontSize="36px">{t('change')}</Typography>
 
-                <OutlinedInput
-                  value={values?.currentPassword}
-                  placeholder={`${t('pass')}`}
-                  sx={{
-                    height: '57px',
-                    width: '100%',
-                    marginTop: '30px',
-                    fontSize: '24px',
-                    background: 'white',
-                    borderRadius: '15px',
-                    '.MuiOutlinedInput-notchedOutline': {
-                      border: '0',
-                      padding: '9px',
-                    },
-                    '&:hover > .MuiOutlinedInput-notchedOutline': {
-                      border: '0',
-                    },
-                  }}
-                  type={showPassword ? 'text' : 'password'}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
+                {user?.hasPassword ? (
+                  <>
+                    <OutlinedInput
+                      value={values?.currentPassword}
+                      placeholder={`${t('pass')}`}
+                      sx={{
+                        height: '57px',
+                        width: '100%',
+                        marginTop: '30px',
+                        fontSize: '24px',
+                        background: 'white',
+                        borderRadius: '15px',
+                        '.MuiOutlinedInput-notchedOutline': {
+                          border: '0',
+                          padding: '9px',
+                        },
+                        '&:hover > .MuiOutlinedInput-notchedOutline': {
+                          border: '0',
+                        },
+                      }}
+                      type={showPassword ? 'text' : 'password'}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      onChange={(e) => {
+                        setValues({
+                          ...values,
+                          currentPassword: e.target.value,
+                        })
+                      }}
+                    />
+                    <OutlinedInput
+                      value={values.newPassword}
+                      placeholder={`${t('new_pass')}`}
+                      sx={{
+                        height: '57px',
+                        width: '100%',
+                        marginTop: '24px',
+                        fontSize: '24px',
+                        background: 'white',
+                        borderRadius: '15px',
+                        '.MuiOutlinedInput-notchedOutline': {
+                          border: '0',
+                          padding: '9px',
+                        },
+                        '&:hover > .MuiOutlinedInput-notchedOutline': {
+                          border: '0',
+                        },
+                      }}
+                      onChange={(e) => {
+                        setValues({
+                          ...values,
+                          newPassword: e.target.value,
+                        })
+                      }}
+                    />
+                    <OutlinedInput
+                      value={values?.confirmPassword}
+                      placeholder={`${t('confirm_pass')}`}
+                      sx={{
+                        height: '57px',
+                        width: '100%',
+                        marginTop: '24px',
+                        fontSize: '24px',
+                        background: 'white',
+                        borderRadius: '15px',
+                        '.MuiOutlinedInput-notchedOutline': {
+                          border: '0',
+                          padding: '9px',
+                        },
+                        '&:hover > .MuiOutlinedInput-notchedOutline': {
+                          border: '0',
+                        },
+                      }}
+                      onChange={(e) => {
+                        setValues({
+                          ...values,
+                          confirmPassword: e.target.value,
+                        })
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'row-reverse',
+                        marginTop: '32px',
+                      }}
+                    >
+                      <Button
+                        onClick={handleChangePassword}
+                        disableRipple
+                        variant="contained"
+                        sx={{
+                          height: '63px',
+                          width: '255px',
+                          background: '#0090EC',
+                          borderRadius: '15px',
+                          color: '#FBFBFB',
+                          fontWeight: 400,
+                          fontSize: '24px',
+                          boxShadow: 'none',
+                          textTransform: 'none',
+                          '&: hover': {
+                            background: '#0090EC',
+                          },
+                        }}
                       >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  onChange={(e) => {
-                    setValues({
-                      ...values,
-                      currentPassword: e.target.value,
-                    })
-                  }}
-                />
-                <OutlinedInput
-                  value={values.newPassword}
-                  placeholder={`${t('new_pass')}`}
-                  sx={{
-                    height: '57px',
-                    width: '100%',
-                    marginTop: '24px',
-                    fontSize: '24px',
-                    background: 'white',
-                    borderRadius: '15px',
-                    '.MuiOutlinedInput-notchedOutline': {
-                      border: '0',
-                      padding: '9px',
-                    },
-                    '&:hover > .MuiOutlinedInput-notchedOutline': {
-                      border: '0',
-                    },
-                  }}
-                  onChange={(e) => {
-                    setValues({
-                      ...values,
-                      newPassword: e.target.value,
-                    })
-                  }}
-                />
-                <OutlinedInput
-                  value={values?.confirmPassword}
-                  placeholder={`${t('confirm_pass')}`}
-                  sx={{
-                    height: '57px',
-                    width: '100%',
-                    marginTop: '24px',
-                    fontSize: '24px',
-                    background: 'white',
-                    borderRadius: '15px',
-                    '.MuiOutlinedInput-notchedOutline': {
-                      border: '0',
-                      padding: '9px',
-                    },
-                    '&:hover > .MuiOutlinedInput-notchedOutline': {
-                      border: '0',
-                    },
-                  }}
-                  onChange={(e) => {
-                    setValues({
-                      ...values,
-                      confirmPassword: e.target.value,
-                    })
-                  }}
-                />
-                <Box
-                  sx={{
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'row-reverse',
-                    marginTop: '32px',
-                  }}
-                >
-                  <Button
-                    onClick={handleChangePassword}
-                    disableRipple
-                    variant="contained"
-                    sx={{
-                      height: '63px',
-                      width: '255px',
-                      background: '#0090EC',
-                      borderRadius: '15px',
-                      color: '#FBFBFB',
-                      fontWeight: 400,
-                      fontSize: '24px',
-                      boxShadow: 'none',
-                      textTransform: 'none',
-                      '&: hover': {
-                        background: '#0090EC',
-                      },
-                    }}
-                  >
-                    {t('button_security')}
-                  </Button>
-                </Box>
+                        {t('button_security')}
+                      </Button>
+                    </Box>
+                  </>
+                ) : (
+                  <Box>
+                    <Typography>
+                      Seems you don't have a password currently
+                    </Typography>
+                    <Typography>
+                      Click the button below to set a password
+                    </Typography>
+                    <Button onClick={() => forgotPassword(user.email)}>
+                      Set a Password
+                    </Button>
+                  </Box>
+                )}
               </Box>
               <Box
                 sx={{
@@ -711,4 +732,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     },
   }
 }
-export default DashboardSecurityPage
+export default withAuth(DashboardSecurityPage)

@@ -43,5 +43,6 @@
     "nav_signup": "SignUp",
     "subscribe": "subscribe",
     "cancel": "cancel",
+    "not_available": "Not Available",
     "error": "Keywords can only use letters, Spaces, and underscores."
 }

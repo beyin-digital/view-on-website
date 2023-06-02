@@ -11,7 +11,6 @@ import {
   Button,
 } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
-import { UserContext } from '@/contexts/userContext'
 import { useTranslation } from 'react-i18next'
 import { MdLocationOn } from 'react-icons/md'
 import dynamic from 'next/dynamic'
@@ -297,7 +296,7 @@ const HomeWeb = () => {
                 <Box
                   sx={{
                     height: '32px',
-                    width: '175px',
+                    width: '200px',
                     background: '#31E716',
                     borderRadius: '7px',
                     display: 'flex',
@@ -312,12 +311,12 @@ const HomeWeb = () => {
                     onClick={getLocation}
                     sx={{
                       height: '32px',
-                      width: '160px',
+                      width: '100%',
                       background: '#31E716',
                       // borderRadius: "7px",
                       color: '#343132',
                       fontWeight: 400,
-                      fontSize: '16px',
+                      fontSize: '15px',
                       boxShadow: 'none',
                       textTransform: 'none',
                       lineHeight: '14px',

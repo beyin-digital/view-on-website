@@ -20,17 +20,12 @@ const Layout = dynamic(() => import('@/components/Layout/LayoutLogin'), {
   ssr: false,
 })
 import Head from 'next/head'
+import withAuth from '@/hooks/withAuth'
 
 const LoginPage = () => {
   const { t } = useTranslation('login')
   const router = useRouter()
   const { token } = useContext(UserContext)
-
-  useEffect(() => {
-    if (token) {
-      router.push('/dashboard')
-    }
-  }, [token])
 
   const boxStyle = useMemo(
     () => ({
@@ -44,6 +39,19 @@ const LoginPage = () => {
     }),
     []
   )
+
+  useEffect(() => {
+    if (token) {
+      if ((router.query.redirect as string) === 'subscribe') {
+        router.push(
+          `/${router.locale}/${router.query.redirect as string}?hashtag=${
+            router.query.hashtag
+          }&sublink=${router.query.sublink}`
+        )
+        return
+      }
+    }
+  }, [token])
 
   return (
     <>

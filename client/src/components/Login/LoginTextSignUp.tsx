@@ -1,10 +1,11 @@
 import { Box, Typography } from '@mui/material'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 
 const LoginTextSignUp = () => {
   const { t } = useTranslation('common')
-
+  const router = useRouter()
   return (
     <>
       <Box>
@@ -19,7 +20,10 @@ const LoginTextSignUp = () => {
         >
           {t('account')}
           <Link
-            href={'/signup'}
+            href={`/signup${
+              router.query.redirect === 'subscribe' &&
+              `?redirect=subscribe&hashtag=${router.query.hashtag}&sublink=${router.query.sublink}`
+            }`}
             style={{
               textDecoration: 'none',
               color: '#0090EC',

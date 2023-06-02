@@ -63,10 +63,12 @@ const SubscribePage: NextPage = () => {
   const { locale } = useRouter()
   const [isInputValid, setIsInputValid] = useState(true)
   const [values, setValues] = useState({
-    hashtag: (router.query.keyword as string)
-      ? (router.query.keyword as string)
+    hashtag: (router.query.hashtag as string)
+      ? (router.query.hashtag as string)
       : '',
-    sublink: '',
+    sublink: (router.query.sublink as string)
+      ? (router.query.sublink as string)
+      : '',
   })
   const allowedCharacters = /^[a-zA-Z0-9_-]*$/
 
@@ -300,24 +302,7 @@ const SubscribePage: NextPage = () => {
                           },
                         }}
                       />
-                      {(values.hashtag.length === 1 ||
-                        values.hashtag.length === 2 ||
-                        values.hashtag.length === 3) &&
-                        !keywordFound &&
-                        allowedCharacters.test(values.hashtag) && (
-                          <Typography
-                            sx={{
-                              fontSize: {
-                                xs: '13px',
-                                sm: '20px',
-                                md: '22px',
-                                xl: '28px',
-                              },
-                            }}
-                          >
-                            {t('text_hashtag')}
-                          </Typography>
-                        )}
+
                       <Box
                         sx={{
                           width: {
@@ -336,59 +321,82 @@ const SubscribePage: NextPage = () => {
                           height: '60px',
                         }}
                       >
-                        {!keywordFound &&
-                          showAngledArrow &&
-                          allowedCharacters.test(values.hashtag) && (
-                            <Typography
-                              sx={{
-                                cursor: 'pointer',
-                                color: '#000',
-                                backgroundClip: 'text',
-                                WebkitBackgroundClip: 'text',
-                                fontSize: {
-                                  xs: '18px',
-                                  md: '24px',
-                                  xl: '28px',
-                                },
-                                alignItems: 'center',
-                                display: 'flex',
-                                paddingX: '.6rem',
-                              }}
-                            >
-                              {t('available')}
-                            </Typography>
-                          )}
+                        {allowedCharacters.test(values.hashtag) &&
+                        !keywordFound &&
+                        !isSearching &&
+                        values.hashtag.length > 1 ? (
+                          <Typography
+                            sx={{
+                              cursor: 'pointer',
+                              color: '#000',
+                              backgroundClip: 'text',
+                              WebkitBackgroundClip: 'text',
+                              fontSize: {
+                                xs: '18px',
+                                md: '24px',
+                                xl: '28px',
+                              },
+                              alignItems: 'center',
+                              display: 'flex',
+                              paddingX: '.6rem',
+                            }}
+                          >
+                            {t('available')}
+                          </Typography>
+                        ) : allowedCharacters.test(values.hashtag) &&
+                          keywordFound &&
+                          !isSearching &&
+                          values.hashtag.length >= 1 ? (
+                          <Typography
+                            sx={{
+                              cursor: 'pointer',
+                              color: '#000',
+                              backgroundClip: 'text',
+                              WebkitBackgroundClip: 'text',
+                              fontSize: {
+                                xs: '18px',
+                                md: '24px',
+                                xl: '28px',
+                              },
+                              alignItems: 'center',
+                              display: 'flex',
+                              paddingX: '.6rem',
+                            }}
+                          >
+                            {t('not_available')}
+                          </Typography>
+                        ) : null}
 
-                        {!keywordFound &&
-                          (values.hashtag.length === 1 ||
-                            values.hashtag.length === 2 ||
-                            values.hashtag.length === 3) &&
-                          allowedCharacters.test(values.hashtag) && (
-                            <Typography
-                              onClick={() =>
-                                router.push(`${router.asPath}/premium`)
-                              }
-                              sx={{
-                                cursor: 'pointer',
-                                display:
-                                  values.hashtag.length <= 3 &&
-                                  values.hashtag.length >= 1
-                                    ? 'flex'
-                                    : 'none',
+                        {allowedCharacters.test(values.hashtag) &&
+                        !keywordFound &&
+                        !isSearching &&
+                        (values.hashtag.length >= 1 ||
+                          values.hashtag.length <= 3) ? (
+                          <Typography
+                            onClick={() =>
+                              router.push(`${router.asPath}/premium`)
+                            }
+                            sx={{
+                              cursor: 'pointer',
+                              display:
+                                values.hashtag.length <= 3 &&
+                                values.hashtag.length >= 1
+                                  ? 'flex'
+                                  : 'none',
 
-                                color: '#000',
-                                fontSize: {
-                                  xs: '18px',
-                                  md: '24px',
-                                  xl: '28px',
-                                },
-                                alignItems: 'center',
-                                paddingX: '.6rem',
-                              }}
-                            >
-                              {t('text_premium')}
-                            </Typography>
-                          )}
+                              color: '#000',
+                              fontSize: {
+                                xs: '18px',
+                                md: '24px',
+                                xl: '28px',
+                              },
+                              alignItems: 'center',
+                              paddingX: '.6rem',
+                            }}
+                          >
+                            {t('text_premium')}
+                          </Typography>
+                        ) : null}
                       </Box>
                     </Box>
                   </FormControl>
@@ -451,7 +459,9 @@ const SubscribePage: NextPage = () => {
                         },
                       }}
                       placeholder={`${t('input_hashtag_two')}`}
-                      onChange={handleChange}
+                      onChange={(e) =>
+                        setValues({ ...values, sublink: e.target.value })
+                      }
                     />
                   </Box>
                 </Box>
@@ -523,9 +533,11 @@ const SubscribePage: NextPage = () => {
                               },
                               height: '100%',
                               display:
+                                !keywordFound &&
+                                !isSearching &&
                                 values.hashtag.length >= 1 &&
                                 values.hashtag.length <= 3 &&
-                                !allowedCharacters.test(values.hashtag)
+                                allowedCharacters.test(values.hashtag)
                                   ? 'flex'
                                   : 'none',
                               alignItems: 'center',
@@ -563,9 +575,11 @@ const SubscribePage: NextPage = () => {
                                 textTransform: 'capitalize',
                                 marginY: '.6rem',
                                 display:
-                                  values.hashtag.length === 1 ||
-                                  values.hashtag.length === 2 ||
-                                  values.hashtag.length === 3
+                                  !keywordFound &&
+                                  !isSearching &&
+                                  (values.hashtag.length === 1 ||
+                                    values.hashtag.length === 2 ||
+                                    values.hashtag.length === 3)
                                     ? 'block'
                                     : 'none',
                               }}
@@ -575,7 +589,9 @@ const SubscribePage: NextPage = () => {
                           </Box>
                         </Box>
                         {/* Check  */}
-                        {values.hashtag.length < 4 &&
+                        {!keywordFound &&
+                          !isSearching &&
+                          values.hashtag.length < 4 &&
                           allowedCharacters.test(values.hashtag) && (
                             <Box
                               sx={{
@@ -605,7 +621,9 @@ const SubscribePage: NextPage = () => {
 
                     {/* Button Pay  */}
 
-                    {values.hashtag.length <= 3 ? (
+                    {values.hashtag.length <= 3 &&
+                    !keywordFound &&
+                    !isSearching ? (
                       <>
                         {values.hashtag.length >= 1 &&
                           allowedCharacters.test(values.hashtag) && (
@@ -626,21 +644,25 @@ const SubscribePage: NextPage = () => {
                                   background: '#0090EC',
                                   justifyContent: 'space-around',
                                 }}
-                                onClick={() => {
+                                onClick={async () => {
+                                  if (values.sublink.length < 4) {
+                                    toast.error('Add your sublink to proceed')
+                                    return
+                                  }
                                   if (
-                                    values.hashtag.length > 3 &&
-                                    values.sublink.length === 0 &&
+                                    values.sublink.length > 4 &&
                                     !isValidUrl(values.sublink)
                                   ) {
-                                    alert('Please enter a valid hashtag')
+                                    toast.error('Please enter a valid hashtag')
                                     return
                                   }
                                   if (keywordFound) {
                                     toast.error(
                                       'This hashtag is already in use'
                                     )
+                                    return
                                   }
-                                  handleSubscription(
+                                  await handleSubscription(
                                     values.hashtag,
                                     values.sublink
                                   )
@@ -734,7 +756,9 @@ const SubscribePage: NextPage = () => {
             height: { xs: '100%', xl: '100vh' },
             display:
               values.hashtag.length >= 4 &&
-              !/^[\p{N}\d\s]+$/u.test(values.hashtag)
+              values.sublink.length > 0 &&
+              isValidUrl(values.sublink) &&
+              allowedCharacters.test(values.hashtag)
                 ? 'flex'
                 : 'none',
 
@@ -759,34 +783,67 @@ const SubscribePage: NextPage = () => {
             {/* Package one */}
             <PackageBoxOne
               onClick={async () => {
-                handleSubscription(
-                  values.hashtag as string,
-                  values.sublink as string,
-                  'month'
-                )
+                if (!token) {
+                  router.push('/login')
+                  return
+                } else {
+                  if (
+                    values.hashtag.length >= 4 &&
+                    values.sublink.length > 0 &&
+                    isValidUrl(values.sublink)
+                  ) {
+                    await handleSubscription(
+                      values.hashtag as string,
+                      values.sublink as string,
+                      'month'
+                    )
+                  }
+                }
               }}
               // name="pay"
               name={`${token ? t('pay') : t('button')}`}
             />
             {/* Package two */}
             <PackageBoxTwo
-              onClick={() => {
-                handleSubscription(
-                  values.hashtag as string,
-                  values.sublink as string,
-                  'year'
-                )
+              onClick={async () => {
+                if (!token) {
+                  router.push('/login')
+                  return
+                } else {
+                  if (
+                    values.hashtag.length >= 4 &&
+                    values.sublink.length > 0 &&
+                    isValidUrl(values.sublink)
+                  ) {
+                    await handleSubscription(
+                      values.hashtag as string,
+                      values.sublink as string,
+                      'year'
+                    )
+                  }
+                }
               }}
               name={`${token ? t('pay') : t('button')}`}
             />
             {/* Package three */}
             <PackageBoxThree
-              onClick={() => {
-                handleSubscription(
-                  values.hashtag as string,
-                  values.sublink as string,
-                  '6-months'
-                )
+              onClick={async () => {
+                if (!token) {
+                  router.push('/login')
+                  return
+                } else {
+                  if (
+                    values.hashtag.length >= 4 &&
+                    values.sublink.length > 0 &&
+                    isValidUrl(values.sublink)
+                  ) {
+                    await handleSubscription(
+                      values.hashtag as string,
+                      values.sublink as string,
+                      '6-months'
+                    )
+                  }
+                }
               }}
               name={`${token ? t('pay') : t('button')}`}
             />

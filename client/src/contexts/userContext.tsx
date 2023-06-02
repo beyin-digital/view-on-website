@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { User } from '@/types/user'
 import { api } from '@/utils/api'
 
@@ -62,14 +62,21 @@ export const UserProvider = ({ children }: any) => {
       setToken(token)
       setRefreshToken(refreshToken)
       // Redirect user to dashboard page
-      router.push('/dashboard')
+      if ((router.query.redirect as string) === 'subscribe') {
+        router.push(
+          `/${router.locale}/${router.query.redirect as string}?hashtag=${
+            router.query.hashtag
+          }&sublink=${router.query.sublink}`
+        )
+        return
+      } else {
+        router.push('/dashboard')
+        return
+      }
     } catch (error) {
       console.log(error)
       //   show toast if error
-      toast.error('Error logging in. Please check credentials and try again.', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.error('Error logging in. Please check credentials and try again.')
     }
   }
 
@@ -101,10 +108,7 @@ export const UserProvider = ({ children }: any) => {
       setRefreshToken(refreshToken)
     } catch (error) {
       //   show toast if error
-      toast.error('Error logging in. Please try again.', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.error('Error logging in. Please try again.')
     }
   }
 
@@ -133,8 +137,20 @@ export const UserProvider = ({ children }: any) => {
       setToken(token)
       setRefreshToken(refreshToken)
       // Redirect user to dashboard page
-      router.push('/dashboard')
-    } catch (error) {}
+      if ((router.query.redirect as string) === 'subscribe') {
+        router.push(
+          `/${router.locale}/${router.query.redirect as string}?hashtag=${
+            router.query.hashtag
+          }&sublink=${router.query.sublink}`
+        )
+        return
+      } else {
+        router.push('/dashboard')
+        return
+      }
+    } catch (error) {
+      toast.error('Error verifying otp. Please try again.')
+    }
   }
 
   const checkEmail = async (email: string) => {
@@ -154,10 +170,7 @@ export const UserProvider = ({ children }: any) => {
 
       return data
     } catch (error) {
-      toast.error('Error checking email. Please try again.', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.error('Error checking email. Please try again.')
     }
   }
 
@@ -180,12 +193,19 @@ export const UserProvider = ({ children }: any) => {
       if (!response.ok) {
         throw new Error('Error signing up')
       }
-      router.push('/verification?email=' + values.email)
+      if ((router.query.redirect as string) === 'subscribe') {
+        router.push(
+          `/${router.locale}/verification?email=${values.email}&redirect=${
+            router.query.redirect as string
+          }&hashtag=${router.query.hashtag}&sublink=${router.query.sublink}`
+        )
+        return
+      } else {
+        router.push('/verification?email=' + values.email)
+        return
+      }
     } catch (error) {
-      toast.error('Error signing up. Please try again.', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.error('Error signing up. Please try again.')
     }
   }
 
@@ -238,17 +258,10 @@ export const UserProvider = ({ children }: any) => {
       if (!response.ok) {
         throw new Error('Error sending password reset link')
       }
-      toast.success('Password reset link sent successfully', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.success('Password reset link sent successfully')
     } catch (err) {
       toast.error(
-        'Error sending password reset link. Perhaps you need to create an account or use social login',
-        {
-          position: 'top-right',
-          autoClose: 5000,
-        }
+        'Error sending password reset link. Perhaps you need to create an account or use social login'
       )
     }
   }
@@ -271,14 +284,12 @@ export const UserProvider = ({ children }: any) => {
         throw new Error('Error resetting password')
       }
       toast.success('Password reset successfully', {
-        position: 'top-right',
         autoClose: 5000,
       })
 
       router.push('/login')
     } catch (error) {
       toast.error('Error resetting password', {
-        position: 'top-right',
         autoClose: 5000,
       })
     }

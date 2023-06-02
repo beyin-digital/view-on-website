@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { createContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-// create a context for the keyword
+
 export const KeywordContext = createContext<any>({})
 
 export const KeywordProvider = ({ children }: any) => {
@@ -14,13 +14,12 @@ export const KeywordProvider = ({ children }: any) => {
   const [swiperSelectedtedKeyword, setSwiperSelectedtedKeyword] =
     useState<any>('')
   const [isSearching, setIsSearching] = useState(false)
-  const [premiumKeywords, setPremiumKeywords] = useState<any>([])
   const [sortedKeywords, setSortedKeywords] = useState<string[]>([])
   const [keywordFound, setKeywordFound] = useState(false)
   const [keywords, setKeywords] = useState([])
   const [selectedKeyword, setSelectedKeyword] = useState<any>(null)
   const [token, setToken] = useState('')
-  const [subscriptions, setSubscriptions] = useState([])
+  const [subscriptions, setSubscriptions] = useState<any>({})
   const [analyticsData, setAnalyticsData] = useState({
     totalVisits: 0,
     totalVisitsToday: 0,
@@ -37,7 +36,6 @@ export const KeywordProvider = ({ children }: any) => {
   >('day')
 
   const handleCheckKeyword = async (keyword: string) => {
-    // check if keyword is available
     try {
       setIsSearching(true)
       const response = await fetch(
@@ -71,8 +69,10 @@ export const KeywordProvider = ({ children }: any) => {
     interval?: string
   ) => {
     try {
-      if (token === '' || token === null) {
-        router.push('/login')
+      if (token.length <= 0 || token === null || token === undefined) {
+        router.push(
+          `/login?redirect=subscribe&hashtag=${letters}&sublink=${sublink}`
+        )
         return
       }
       const response = await fetch(`${apiUrl}/payment/pay`, {
@@ -106,7 +106,6 @@ export const KeywordProvider = ({ children }: any) => {
       if (!response.ok) {
         throw new Error('Error fetching data')
       }
-      const data = await response.json()
       toast.success('Unsubscribed successfully')
       getUsersKeywords()
     } catch (error) {
@@ -114,45 +113,52 @@ export const KeywordProvider = ({ children }: any) => {
     }
   }
 
-  const getUsersKeywords = async () => {
+  const getUsersKeywords = async (page?: number, limit?: number) => {
     try {
-      if (token !== '') {
-        const response = await fetch(`${apiUrl}/keywords?page=1&limit=10`, {
-          method: 'GET',
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        if (!response.ok) {
-          throw new Error('Error fetching data')
-        }
+      const response = await fetch(`${apiUrl}/keywords?page=1&limit=10`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
 
-        const { data } = await response.json()
-        console.log(data)
-        setKeywords(data)
-        if (selectedKeyword === null) {
-          setSelectedKeyword(data[0])
-        }
+      const { data } = await response.json()
+      console.log(data)
+      setKeywords(data)
+      if (selectedKeyword === null) {
+        setSelectedKeyword(data[0])
       }
     } catch (error) {
       toast.error('Error fetching keywords')
     }
   }
 
-  const getUserSubscriptions = async () => {
+  const getUserSubscriptions = async (page: number) => {
     try {
-      if (token !== '') {
-        const response = await fetch(
-          `${apiUrl}/subscriptions?page=1&limit=10`,
-          {
-            method: 'GET',
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-        if (!response.ok) {
-          throw new Error('Error fetching data')
+      const response = await fetch(
+        `${apiUrl}/subscriptions?page=${page}&limit=10`,
+        {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${token}` },
         }
-        const { data } = await response.json()
-        setSubscriptions(data)
+      )
+      if (!response.ok) {
+        throw new Error('Error fetching data')
       }
+      const data = await response.json()
+      if (data.data.length <= 0) {
+        return
+      }
+      if (page === 1) {
+        setSubscriptions(data)
+        return
+      }
+      setSubscriptions({
+        ...subscriptions,
+        data: [...subscriptions.data, ...data.data],
+        hasNextPage: data.hasNextPage,
+      })
     } catch (error) {
       toast.error('Error fetching subscriptions')
     }
@@ -169,7 +175,6 @@ export const KeywordProvider = ({ children }: any) => {
 
     const data = await response.json()
     const alphabets = 'abcdefghijklmnopqrstuvwxyz'.split('')
-    // compare the alphabets array with the data array which contains objects with the value pair of slug and a letter of the english alphabet. Find matching letters and omit them from the alphabets array
     const filteredAlphabets = alphabets.filter(
       (alphabet) => !data.some((item: any) => item.slug === alphabet)
     )

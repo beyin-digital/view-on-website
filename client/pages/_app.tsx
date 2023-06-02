@@ -6,6 +6,8 @@ import createEmotionCache from '../src/createEmotionCache'
 import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import { KeywordProvider } from '@/contexts/keywordContext'
+import { UserProvider } from '@/contexts/userContext'
 
 const Layout = dynamic(() => import('@/Layout'), {
   ssr: false,
@@ -16,6 +18,15 @@ const clientSideEmotionCache = createEmotionCache()
 export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache
 }
+
+const combineProviders = (providers: any[]) =>
+  providers.reduce((Combined: any, Provider: any) => ({ children }: any) => (
+    <Combined>
+      <Provider>{children}</Provider>
+    </Combined>
+  ))
+
+const Providers = combineProviders([UserProvider, KeywordProvider])
 
 function MyApp(props: MyAppProps) {
   const { locale } = useRouter()
@@ -90,11 +101,11 @@ function MyApp(props: MyAppProps) {
         />
       </Head>
       <div dir={isRTL ? 'rtl' : 'ltr'}>
-        <>
+        <Providers>
           <Layout>
             <Component {...pageProps} />
           </Layout>
-        </>
+        </Providers>
       </div>
     </CacheProvider>
   )

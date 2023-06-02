@@ -48,7 +48,7 @@ const VerificationDetails = () => {
   const { user, handleVerifyOtp, resendOTP } = useContext(UserContext)
 
   useEffect(() => {
-    start(300)
+    start(60)
   }, [user])
 
   return (

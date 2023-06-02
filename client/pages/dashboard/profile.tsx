@@ -69,6 +69,9 @@ const DashboardProfilePage = () => {
   // const handleUpdateUser = async () => {
   //   updateUser({ ...values })
   // }
+
+  if (!token) return <></>
+
   return (
     <>
       <Head>
@@ -127,4 +130,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   }
 }
 
-export default DashboardProfilePage
+export default withAuth(DashboardProfilePage)

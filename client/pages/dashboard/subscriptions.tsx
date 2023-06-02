@@ -20,6 +20,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { nFormatter } from '@/utils/nFormatter'
 import Modal from '@/components/Dashboard/Modal'
+import withAuth from '@/hooks/withAuth'
 
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
@@ -54,10 +55,13 @@ const DashboardSubscriptionsPage = () => {
     useContext(KeywordContext)
   const { token, user } = useContext(UserContext)
   const [isScrollable, setIsScrollable] = useState(subscriptions.length > 3)
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
-    getUserSubscriptions()
-  }, [subscriptions])
+    if (token) {
+      getUserSubscriptions(page)
+    }
+  }, [token])
 
   const [open, setOpen] = useState(false)
   const [selectedKeyword, setSelectedKeyword] = useState<any>({})
@@ -69,6 +73,10 @@ const DashboardSubscriptionsPage = () => {
 
   const handleClose = () => {
     setOpen(false)
+  }
+
+  if (!token) {
+    return <></>
   }
 
   return (
@@ -199,6 +207,7 @@ const DashboardSubscriptionsPage = () => {
                 display: 'flex',
                 width: '100%',
                 justifyContent: 'flex-start',
+                alignItems: 'center',
                 height: '100%',
                 overflowX: 'auto',
                 overflowY: isScrollable ? 'hidden' : 'auto',
@@ -206,7 +215,7 @@ const DashboardSubscriptionsPage = () => {
               }}
             >
               {/* Regular sub card */}
-              {subscriptions?.map((subscription: any) => (
+              {subscriptions?.data?.map((subscription: any) => (
                 <Box
                   sx={{
                     display: 'flex',
@@ -260,13 +269,13 @@ const DashboardSubscriptionsPage = () => {
                       <Box>
                         <Typography fontSize="32px" textAlign="left">
                           $
-                          {subscription.purchaseAmount >= 999999
+                          {subscription?.purchaseAmount >= 999999
                             ? '1m'
-                            : subscription.purchaseAmount === 100000
-                            ? nFormatter(subscription.purchaseAmount, 3)
-                            : subscription.purchaseAmount === 10000
-                            ? nFormatter(subscription.purchaseAmount, 3)
-                            : nFormatter(subscription.purchaseAmount, 3)}
+                            : subscription?.purchaseAmount === 100000
+                            ? nFormatter(subscription?.purchaseAmount, 3)
+                            : subscription?.purchaseAmount === 10000
+                            ? nFormatter(subscription?.purchaseAmount, 3)
+                            : nFormatter(subscription?.purchaseAmount, 3)}
                         </Typography>
 
                         <Typography textAlign="left">{t('paid')}</Typography>
@@ -302,7 +311,7 @@ const DashboardSubscriptionsPage = () => {
                     >
                       <Typography>
                         {t('date_next')} :
-                        {new Date(subscription.purchaseDate).toLocaleDateString(
+                        {new Date(subscription?.purchaseDate).toLocaleDateString(
                           'en-GB'
                         )}
                       </Typography>
@@ -310,13 +319,13 @@ const DashboardSubscriptionsPage = () => {
                         <Typography>
                           {t('date_bought')} :
                           {new Date(
-                            subscription.renewalDate
+                            subscription?.renewalDate
                           ).toLocaleDateString('en-GB')}
                         </Typography>
                       )}
                     </Box>
                   </Box>
-                  {!subscription.isPremium && (
+                  {!subscription?.isPremium && (
                     <Typography
                       sx={{ cursor: 'pointer' }}
                       onClick={() => {
@@ -330,6 +339,25 @@ const DashboardSubscriptionsPage = () => {
                   {/* {t('unsubscribe')} */}
                 </Box>
               ))}
+              {/* Load more button */}
+              <Button
+                disabled={subscriptions?.hasNextPage === false}
+                variant="contained"
+                sx={{
+                  height: '52px',
+                  width: '199px',
+                  color: '#FBFBFB',
+                  background: '#0090EC',
+                  borderRadius: '12px',
+                  fontSize: '24px',
+                }}
+                onClick={() => {
+                  setPage(page + 1)
+                  getUserSubscriptions(page + 1)
+                }}
+              >
+                Load more
+              </Button>
             </Box>
           </Box>
         </Item>
@@ -402,7 +430,7 @@ const DashboardSubscriptionsPage = () => {
               maxHeight: isScrollable ? '100%' : 'auto',
             }}
           >
-            {subscriptions?.map((subscription: any) => (
+            {subscriptions?.data?.map((subscription: any) => (
               <Box
                 sx={{
                   display: 'flex',
@@ -501,15 +529,6 @@ const DashboardSubscriptionsPage = () => {
                     {t('unsubscribe')}
                   </Typography>
                 )}
-                <Typography
-                  sx={{ cursor: 'pointer' }}
-                  onClick={() => {
-                    handleOpen(subscription)
-                  }}
-                  fontSize="14px"
-                >
-                  {t('unsubscribe')}
-                </Typography>
               </Box>
             ))}
           </Box>
@@ -541,6 +560,7 @@ const DashboardSubscriptionsPage = () => {
               sx={{ height: '42px', width: '154px' }}
               onClick={async () => {
                 await handleUnsubscribe(selectedKeyword?.id)
+                window.location.reload()
                 handleClose()
               }}
             >
@@ -573,4 +593,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }: any) => {
   }
 }
 
-export default DashboardSubscriptionsPage
+export default withAuth(DashboardSubscriptionsPage)

@@ -16,11 +16,29 @@ const VerificationDetails = dynamic(
 )
 
 import Head from 'next/head'
+import { useContext, useEffect } from 'react'
+import { UserContext } from '@/contexts/userContext'
+import { useRouter } from 'next/router'
 
 const VerificationPage = () => {
   // translate hook
   const { t } = useTranslation('verification')
+  const { token } = useContext(UserContext)
 
+  const router = useRouter()
+
+  useEffect(() => {
+    if (token) {
+      if ((router.query.redirect as string) === 'subscribe') {
+        router.push(
+          `/${router.locale}/${router.query.redirect as string}?hashtag=${
+            router.query.hashtag
+          }&sublink=${router.query.sublink}`
+        )
+        return
+      }
+    }
+  }, [token])
   return (
     <>
       <Head>
