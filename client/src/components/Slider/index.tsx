@@ -56,9 +56,9 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
 			<Box
 				sx={{
 					maxWidth: "100%",
-					maxHeight: "auto",
+					maxHeight: "100%",
 					margin: "auto",
-					height: { xs: "", md: "95vh" },
+					height: { xs: "", md: "89vh" },
 					display: "flex",
 					flexDirection: "column",
 					justifyContent: "center",
@@ -68,8 +68,6 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
 				<Box
 					sx={{
 						position: "relative",
-						// marginTop: '2.5rem',
-						// marginBottom: "1rem",
 					}}
 				>
 					{/* Text Premium top layout */}

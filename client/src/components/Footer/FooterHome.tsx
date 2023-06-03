@@ -46,7 +46,7 @@ const Footer = ({ onClick }: any) => {
 					sx={{
 						display: "flex",
 						alignItems: "center",
-						width: "60%",
+						width: "50%",
 						justifyContent: "space-between",
 						flexDirection: { xs: "column", md: "row", xl: "row" },
 					}}

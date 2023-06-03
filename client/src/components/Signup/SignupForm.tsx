@@ -286,7 +286,7 @@ const SignupForm = () => {
 
         <Typography
           sx={{
-            fontSize: { xs: '13px', xl: '16px' },
+            fontSize: "18px",
             fontWight: '300',
             marginY: { xs: '.5rem', md: '', xl: '' },
           }}
