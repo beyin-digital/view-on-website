@@ -55,7 +55,6 @@ const DashboardSubscriptionsPage = () => {
     useContext(KeywordContext)
   const { token, user } = useContext(UserContext)
   const [isScrollable, setIsScrollable] = useState(subscriptions.length > 3)
-  const [page, setPage] = useState(1)
 
   useEffect(() => {
     if (token) {
@@ -65,7 +64,7 @@ const DashboardSubscriptionsPage = () => {
 
   const [open, setOpen] = useState(false)
   const [selectedKeyword, setSelectedKeyword] = useState<any>({})
-
+  const [page, setPage] = useState(1)
   const handleOpen = (keyword: any) => {
     setOpen(true)
     setSelectedKeyword(keyword)

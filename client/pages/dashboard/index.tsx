@@ -33,7 +33,6 @@ const DashboardHomePage = () => {
   const { token } = useContext(UserContext)
 
   if (!token) return <></>
-  console.log(token)
   return (
     <>
       <Head>

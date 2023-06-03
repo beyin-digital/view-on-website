@@ -129,9 +129,10 @@ export const KeywordProvider = ({ children }: any) => {
       }
       if (page === 1) {
         setKeywords(data)
-      }
-      if (selectedKeyword === null) {
-        setSelectedKeyword(keywords?.data[0])
+        if (selectedKeyword === null) {
+          setSelectedKeyword(data?.data[0])
+        }
+        return
       }
       setKeywords({
         ...keywords,
@@ -143,7 +144,7 @@ export const KeywordProvider = ({ children }: any) => {
     }
   }
 
-  const getUserSubscriptions = async (page: number) => {
+  const getUserSubscriptions = async (page?: number) => {
     try {
       const response = await fetch(
         `${apiUrl}/subscriptions?page=${page}&limit=10`,
@@ -156,6 +157,7 @@ export const KeywordProvider = ({ children }: any) => {
         throw new Error('Error fetching data')
       }
       const data = await response.json()
+      console.log(data.data)
       if (data.data.length <= 0) {
         return
       }
@@ -191,7 +193,11 @@ export const KeywordProvider = ({ children }: any) => {
     setSwiperSelectedtedKeyword(filteredAlphabets[0])
   }
 
-  const updateKeywordDetails = async (id: number, values: any) => {
+  const updateKeywordDetails = async (
+    id: number,
+    page: number,
+    values: any
+  ) => {
     try {
       const response = await fetch(`${apiUrl}/keywords/${id}`, {
         method: 'PATCH',
@@ -206,7 +212,7 @@ export const KeywordProvider = ({ children }: any) => {
       }
       const data = await response.json()
       toast.success('Keyword updated successfully')
-      getUsersKeywords()
+      getUsersKeywords(page)
     } catch (error) {
       toast.error('Error updating keyword')
     }
@@ -217,7 +223,7 @@ export const KeywordProvider = ({ children }: any) => {
     if (savedToken) {
       setToken(savedToken)
     }
-  }, [keywordFound])
+  }, [keywordFound, token])
   return (
     <KeywordContext.Provider
       value={{

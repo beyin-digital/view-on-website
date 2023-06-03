@@ -26,6 +26,7 @@ const Navbar = () => {
     useContext(KeywordContext)
 
   const [open, setOpen] = useState(false)
+  const [page, setPage] = useState(1)
   const handleOpen = () => {
     setMobileNavOpen(false)
     setOpen(true)
@@ -98,14 +99,13 @@ const Navbar = () => {
     )
     setSelectedKeyword(selectedKeyword)
   }
-  const [page, setPage] = useState(1)
 
   useEffect(() => {
     if (token) {
       getUsersKeywords(page)
     }
   }, [token])
-  
+
   return (
     <>
       {/* Desktop Navbar */}
@@ -144,49 +144,48 @@ const Navbar = () => {
           >
             {t('title')}
           </Typography>
-          {keywords?.data?.length > 0 && (
-            <Tabs
-              sx={{
-                height: '100%',
-                width: '75%',
+
+          <Tabs
+            sx={{
+              height: '100%',
+              width: '75%',
+              color: '#0090EC',
+            }}
+            TabIndicatorProps={{
+              sx: {
+                background: '#0090EC',
                 color: '#0090EC',
-              }}
-              TabIndicatorProps={{
-                sx: {
-                  background: '#0090EC',
-                  color: '#0090EC',
-                },
-              }}
-              value={selectedKeyword?.letters}
-              onChange={handleChange}
-              variant="scrollable"
-              scrollButtons="auto"
-              defaultValue={keywords?.data[0]?.letters}
-            >
-              {keywords?.data?.map((keyword: any) => (
-                <Tab
-                  sx={{
-                    minWidth: '15%',
-                    fontSize: {
-                      xs: '16px',
-                      md: '16px',
-                      xl: '24px',
-                    },
-                    marginTop: {
-                      xs: '10px',
-                      md: '10px',
-                      xl: '20px',
-                    },
-                    fontWeight: selectedKeyword === keyword ? 600 : 400,
-                    color: 'black',
-                  }}
-                  value={keyword.letters}
-                  key={keyword.id}
-                  label={`#` + keyword.letters}
-                />
-              ))}
-            </Tabs>
-          )}
+              },
+            }}
+            value={selectedKeyword?.letters}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="auto"
+            defaultValue={selectedKeyword?.letters}
+          >
+            {keywords?.data?.map((keyword: any) => (
+              <Tab
+                sx={{
+                  minWidth: '15%',
+                  fontSize: {
+                    xs: '16px',
+                    md: '16px',
+                    xl: '24px',
+                  },
+                  marginTop: {
+                    xs: '10px',
+                    md: '10px',
+                    xl: '20px',
+                  },
+                  fontWeight: selectedKeyword === keyword ? 600 : 400,
+                  color: 'black',
+                }}
+                value={keyword.letters}
+                key={keyword.id}
+                label={`#` + keyword.letters}
+              />
+            ))}
+          </Tabs>
           {keywords.hasNextPage && (
             <Button
               onClick={() => {

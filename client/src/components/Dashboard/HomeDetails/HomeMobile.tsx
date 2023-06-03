@@ -201,7 +201,9 @@ const HomeMobile = () => {
           marginX: { xs: '15px', sm: '29px' },
         }}
       >
-        <HashtagListMobile />
+        <Box sx={{ display: { xs: 'block', md: 'none' }, width: '100%' }}>
+          <HashtagListMobile />
+        </Box>
         {/* Main chart */}
         <Item
           sx={{

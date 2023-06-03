@@ -8,7 +8,6 @@ import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { KeywordProvider } from '@/contexts/keywordContext'
 import { UserProvider } from '@/contexts/userContext'
-
 const Layout = dynamic(() => import('@/Layout'), {
   ssr: false,
 })

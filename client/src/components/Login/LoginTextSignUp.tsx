@@ -11,7 +11,7 @@ const LoginTextSignUp = () => {
       <Box>
         <Typography
           sx={{
-            fontSize: { xs: '13px', xl: '16px' },
+            fontSize: { xs: '14px', xl: '18px' },
             fontWeight: '300',
             lineHeight: '14px',
             marginY: '1rem',

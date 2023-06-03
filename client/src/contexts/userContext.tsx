@@ -54,25 +54,23 @@ export const UserProvider = ({ children }: any) => {
       //  get data from response
       const data = await response.json()
       //   get token and refresh token from data
-      const { token, refreshToken } = data
-      //   set token and refresh token in local storage
-      localStorage.setItem('token', token)
-      localStorage.setItem('refreshToken', refreshToken)
-      //   set token and refresh token in state
-      setToken(token)
-      setRefreshToken(refreshToken)
-      // Redirect user to dashboard page
-      if ((router.query.redirect as string) === 'subscribe') {
-        router.push(
-          `/${router.locale}/${router.query.redirect as string}?hashtag=${
-            router.query.hashtag
-          }&sublink=${router.query.sublink}`
-        )
-        return
-      } else {
-        router.push('/dashboard')
+      const { token, refreshToken, user } = data
+
+      if (
+        (token === null || token === undefined) &&
+        user?.twoFactorAuthEnabled === true
+      ) {
+        router.push(`/verification?email=${user.email}`)
         return
       }
+
+      localStorage.setItem('token', token)
+      localStorage.setItem('refreshToken', refreshToken)
+
+      setRefreshToken(refreshToken)
+      setToken(token)
+
+      router.push('/dashboard')
     } catch (error) {
       console.log(error)
       //   show toast if error
@@ -283,15 +281,11 @@ export const UserProvider = ({ children }: any) => {
       if (!response.ok) {
         throw new Error('Error resetting password')
       }
-      toast.success('Password reset successfully', {
-        autoClose: 5000,
-      })
+      toast.success('Password reset successfully')
 
       router.push('/login')
     } catch (error) {
-      toast.error('Error resetting password', {
-        autoClose: 5000,
-      })
+      toast.error('Error resetting password')
     }
   }
 
@@ -331,10 +325,7 @@ export const UserProvider = ({ children }: any) => {
       })
       handleGetUserDetails()
     } catch (error) {
-      toast.error('Error updating user', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.error('Error updating user')
     }
   }
 
@@ -358,10 +349,7 @@ export const UserProvider = ({ children }: any) => {
       })
       router.push('/verification?email=' + email + '&resend=true')
     } catch (error) {
-      toast.error('Error resending OTP', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.error('Error resending OTP')
     }
   }
 
@@ -377,17 +365,11 @@ export const UserProvider = ({ children }: any) => {
       if (!response.ok) {
         throw new Error('Error deleting user')
       }
-      toast.success('User deleted successfully', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.success('User deleted successfully')
 
       router.push('/login')
     } catch (error) {
-      toast.error('Error deleting user', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.error('Error deleting user')
     }
   }
 
@@ -407,10 +389,7 @@ export const UserProvider = ({ children }: any) => {
         const data = await response.json()
         setUser(data)
       } catch (error) {
-        toast.error('Error getting user details', {
-          position: 'top-right',
-          autoClose: 5000,
-        })
+        toast.error('Error getting user details')
       }
     }
   }

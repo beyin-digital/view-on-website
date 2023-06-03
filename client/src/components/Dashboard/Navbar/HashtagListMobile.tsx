@@ -20,13 +20,12 @@ export default function HashtagListMobile() {
     }
   }, [token])
 
-  console.log(keywords)
   return (
     <Box
       sx={{
         width: '100%',
         height: '84px',
-        display: { xs: 'flex', md: 'flex', lg: 'none' },
+        display: { xs: 'flex', md: 'none', lg: 'none' },
         flexDirection: 'column',
         alignItems: 'flex-start',
       }}
@@ -44,7 +43,7 @@ export default function HashtagListMobile() {
           onChange={handleChange}
           variant="scrollable"
           scrollButtons={false}
-          // defaultValue={keywords?.data[0]?.letters}
+          defaultValue={selectedKeyword?.letters}
         >
           {keywords?.data?.map((keyword: any) => (
             <Tab

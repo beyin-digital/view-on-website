@@ -20,12 +20,11 @@ const Layout = dynamic(() => import('@/components/Layout/LayoutLogin'), {
   ssr: false,
 })
 import Head from 'next/head'
-import withAuth from '@/hooks/withAuth'
 
 const LoginPage = () => {
   const { t } = useTranslation('login')
   const router = useRouter()
-  const { token } = useContext(UserContext)
+  const { token, user } = useContext(UserContext)
 
   const boxStyle = useMemo(
     () => ({
@@ -51,7 +50,7 @@ const LoginPage = () => {
         return
       }
     }
-  }, [token])
+  }, [])
 
   return (
     <>
