@@ -17,7 +17,7 @@ import { KeywordContext } from '@/contexts/keywordContext'
 
 const Navbar = () => {
   const { t } = useTranslation('common')
-  const { pathname, push } = useRouter()
+  const { pathname } = useRouter()
 
   const links = [
     {
@@ -102,7 +102,6 @@ const Navbar = () => {
     const selectedKeyword = keywords?.data?.find(
       (keyword: any) => keyword.letters === newValue
     )
-    router.push(`/dashboard/home/${selectedKeyword}`)
     setSelectedKeyword(selectedKeyword)
   }
 
@@ -173,12 +172,10 @@ const Navbar = () => {
             onChange={handleChange}
             variant="scrollable"
             scrollButtons="auto"
-            defaultValue={selectedKeyword?.letters || pathname.split('/')[3]}
+            defaultValue={selectedKeyword?.letters}
           >
             {keywords?.data?.map((keyword: any) => (
               <Tab
-                LinkComponent={Link}
-                href={`/dashboard/home/${keyword.letters}`}
                 sx={{
                   minWidth: '15%',
                   fontSize: {

@@ -20,7 +20,6 @@ import { countries } from '@/utils/countries'
 import { downloadSvg } from '@/utils/downloadSvg'
 
 import io from 'socket.io-client'
-import { useRouter } from 'next/router'
 const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
 const geoApifyKey = process.env.NEXT_PUBLIC_GEOAPIFY_KEY
 
@@ -47,7 +46,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const HomeWeb = () => {
   const { t } = useTranslation('dashboard')
-  const router = useRouter()
+
   const {
     selectedKeyword,
     setAnalyticsData,
