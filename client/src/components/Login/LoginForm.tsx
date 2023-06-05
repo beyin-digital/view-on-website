@@ -269,6 +269,7 @@ const LoginForm = () => {
                 return (
                   <GoogleLogin
                     type="icon"
+                    shape="circle"
                     onSuccess={(credentialResponse) => {
                       handleGoogleAuth(credentialResponse.credential as string)
                     }}
