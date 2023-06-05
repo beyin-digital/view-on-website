@@ -653,7 +653,7 @@ const SubscribePage: NextPage = () => {
                                     values.sublink.length > 4 &&
                                     !isValidUrl(values.sublink)
                                   ) {
-                                    toast.error('Please enter a valid hashtag')
+                                    toast.error('Please enter a valid Sublink')
                                     return
                                   }
                                   if (keywordFound) {

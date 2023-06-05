@@ -109,8 +109,6 @@ const Navbar = () => {
     if (token) {
       getUsersKeywords(page)
     }
-
-    return () => {}
   }, [token])
 
   if (!token) {

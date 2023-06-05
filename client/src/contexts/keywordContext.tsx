@@ -222,6 +222,7 @@ export const KeywordProvider = ({ children }: any) => {
       }
       const data = await response.json()
       toast.success('Keyword updated successfully')
+      setSelectedKeyword({ ...selectedKeyword, ...data })
     } catch (error) {
       toast.error('Error updating keyword')
     }
