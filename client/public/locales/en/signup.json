@@ -10,5 +10,9 @@
   "form_name": "Name",
   "form_email": "E-mail",
   "form_password": "Password",
-  "form_confirm": "Confirm Password"
+  "form_confirm": "Confirm Password",
+  "nav_examples": "Examples",
+  "nav_login": "Login",
+  "nav_subscribe": "Subscribe",
+  "back": "BACK"
 }

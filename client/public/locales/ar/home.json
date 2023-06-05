@@ -7,5 +7,6 @@
   "header_text_one": "اكتب",
   "header_text_two": "#الكلمة المفتاحية",
   "header_text_three": "ليتم إعادة تحويلك",
-  "header_text_vow": "viewonwebsite.com"
+  "header_text_vow": "viewonwebsite.com",
+  "error": "الكلمات المفتاحية يجب ان تحتوي فقط على الحروف و المسافات والاندر سكور."
 }

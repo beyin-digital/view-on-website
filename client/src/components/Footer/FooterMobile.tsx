@@ -1,12 +1,20 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import TextViewOnWeb from "../Home/TextViewOnWeb";
 import { useTranslation } from "next-i18next";
-import { ImageBackground } from "./ImageBackground";
-import ModalFooter from "./ModalFooter";
+
 import { useRouter } from "next/router";
 import { useState } from "react";
+
+import dynamic from "next/dynamic";
+import { icons, links } from "../Layout/GLobal";
+const ModalFooter = dynamic(() => import("./ModalFooter"), {
+	ssr: false,
+});
+const TextViewOnWeb = dynamic(() => import("../Home/TextViewOnWeb"), {
+	ssr: false,
+});
+
 const FooterMobile = () => {
 	const { t } = useTranslation("common");
 	const { locale } = useRouter();
@@ -24,59 +32,28 @@ const FooterMobile = () => {
 		// console.log("hi");
 	}
 
-	const links = [
-		{ id: 11, name: "contact", link: "/contact", tKey: "footer_contact" },
-		// { id: 22, name: "Learn More", link: "/example", tKey: "footer_learn" },
-		{
-			id: 33,
-			name: "Privacy Policy",
-			link: "/privacy",
-			tKey: "footer_privacy",
-		},
-		{ id: 44, name: "T&C", link: "/terms", tKey: "footer_terms" },
-	];
-	const icons = [
-		{
-			id: 1,
-			name: "youtube",
-			icon: "/icons/youtube.svg",
-			link: "https://instagram.com",
-		},
-		{
-			id: 3,
-			name: "instagram",
-			link: "https://instagram.com",
-			icon: "/icons/instagram.svg",
-		},
-		{
-			id: 4,
-			name: "faceBook",
-			link: "https://facebook.com",
-			icon: "/icons/facebook.svg",
-		},
-	];
 	return (
 		<>
 			<Box
 				sx={{
-					height: { xs: "70vh", sm: "60vh", md: "" },
+					height: { xs: "60vh", sm: "60vh", md: "" },
 					width: "100%",
 					display: { xs: "flex", sm: "flex", md: "none", xl: "none" },
-					alignItems: "end",
-					justifyContent: "center",
+					alignItems: "flex-end",
+					justifyContent: "flex-end",
 					position: "relative",
-					overflow: "hidden",
-					maxHeight: "70vh",
+					background: "url('/images/swirl.webp')",
+					backgroundPositionY: { xs: "0px", sm: "-5px" },
+					backgroundPositionX: { xs: "-650px", sm: "-600px" },
 				}}
 			>
-				{/* footer background */}
-				<ImageBackground />
 				<Box
 					sx={{
 						width: "100%",
+						height: { xs: "100", sm: "42vh" },
 						display: { xs: "flex", sm: "flex", md: "none", xl: "none" },
 						alignItems: "end",
-						justifyContent: "center",
+						justifyContent: "end",
 						position: "relative",
 						marginTop: { xs: "0", sm: "5rem" },
 					}}
@@ -85,12 +62,12 @@ const FooterMobile = () => {
 						sx={{
 							width: "100%",
 							border: "1px solid #E3E3E3",
-							height: { xs: "100%", sm: "315px", md: "400px", xl: "30vh" },
+							height: { xs: "100%", sm: "100%", md: "400px", xl: "30vh" },
 							backdropFilter: "blur(50px)",
 							borderRadius: "15px 15px 0px 0px",
 							background: "rgba(251, 251, 251, 0.6)",
 							display: "flex",
-							justifyContent: "start",
+							justifyContent: "end",
 							flexDirection: "column",
 						}}
 					>
@@ -122,22 +99,24 @@ const FooterMobile = () => {
 										display: "flex",
 										flexDirection: "column",
 										alignItems: "center",
-										marginY: "1rem",
+										marginTop: "1rem",
 									}}
 								>
-									<Image
-										src="/images/logo.svg"
-										alt="Logo View On Website "
-										title="Logo View On Website "
-										width={100}
-										height={50}
-									/>
+									<Link href="/" title="logo View On Website">
+										<Image
+											src="/images/logo.svg"
+											alt="Logo View On Website "
+											title="Logo View On Website "
+											width={100}
+											height={50}
+										/>
+									</Link>
+
 									<Typography
 										sx={{
 											fontSize: { xs: "8px", xl: "10px" },
 											fontWeight: "600",
 											lineHeight: "12px",
-											marginY: "1rem",
 										}}
 										color="#343132"
 									></Typography>
@@ -166,10 +145,15 @@ const FooterMobile = () => {
 									}}
 								>
 									{icons.map((item) => (
-										<Link href={item.link} key={item.id}>
+										<Link
+											href={item.link}
+											key={item.id}
+											target="_blank"
+											title={item.alt}
+										>
 											<Image
 												src={item.icon}
-												alt={item.name}
+												alt={item.alt}
 												height={17}
 												width={17}
 												style={{
@@ -213,7 +197,8 @@ const FooterMobile = () => {
 								{links.map((item) => (
 									<Link
 										href={item.link}
-										title={`${t(item.tKey)}`}
+										title={`${t(item.title)}`}
+										locale={router.locale}
 										key={item.id}
 										style={{
 											textDecoration: "none",
@@ -229,7 +214,7 @@ const FooterMobile = () => {
 												textTransform: "capitalize",
 											}}
 										>
-											{t(item.tKey)}
+											{t(item.title)}
 										</Typography>
 									</Link>
 								))}
@@ -267,7 +252,7 @@ const FooterMobile = () => {
 								width: "100%",
 								height: "50px",
 								display: "flex",
-								alignItems: "center",
+								alignItems: "end",
 								justifyContent: "center",
 							}}
 						>
@@ -275,7 +260,7 @@ const FooterMobile = () => {
 								sx={{
 									textAlign: "center",
 									fontSize: { xs: "10px", md: "13px" },
-									lineHeight: "15px",
+									// lineHeight: "15px",
 									fontWeight: "400",
 								}}
 							>

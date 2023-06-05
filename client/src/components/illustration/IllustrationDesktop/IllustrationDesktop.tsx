@@ -1,26 +1,32 @@
-import LayoutDesktop from "./Components/Layout";
+import Footer from '@/components/Footer/Footer'
 import {
-	ButtonStyleDesktop,
-	HeaderLayoutDesktop,
-	MainContainerDesktop,
-	ThreeOptionDesktop,
-} from "./Components";
+  ButtonStyleDesktop,
+  HeaderLayoutDesktop,
+  MainContainerDesktop,
+  ThreeOptionDesktop,
+} from './Components'
+
+import dynamic from 'next/dynamic'
+
+const LayoutDesktop = dynamic(() => import('./Components/Layout'), {
+  ssr: false,
+})
 
 const IllustrationDesktop = () => {
-	return (
-		<>
-			<LayoutDesktop>
-				{/* header Layout */}
-				<HeaderLayoutDesktop />
-				{/* main container */}
-				<MainContainerDesktop />
-				{/* three option */}
-				<ThreeOptionDesktop />
-				{/* button */}
-				{/* <ButtonStyleDesktop /> */}
-			</LayoutDesktop>
-		</>
-	);
-};
+  return (
+    <>
+      <LayoutDesktop>
+        {/* header Layout */}
+        <HeaderLayoutDesktop />
+        {/* main container */}
+        <MainContainerDesktop />
+        {/* three option */}
+        <ThreeOptionDesktop />
+        {/* button */}
+        {/* <ButtonStyleDesktop /> */}
+      </LayoutDesktop>
+    </>
+  )
+}
 
-export default IllustrationDesktop;
+export default IllustrationDesktop

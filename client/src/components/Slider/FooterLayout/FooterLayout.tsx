@@ -1,12 +1,12 @@
-import { useRouter } from "next/router";
-import DetailsFooter from "./DetailsFooter";
+import { useRouter } from 'next/router'
+import DetailsFooter from './DetailsFooter'
 
 const FooterLayout = () => {
-	return (
-		<>
-			<DetailsFooter />
-		</>
-	);
-};
+  return (
+    <>
+      <DetailsFooter />
+    </>
+  )
+}
 
-export default FooterLayout;
+export default FooterLayout

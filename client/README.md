@@ -1,16 +1,32 @@
+---
+marp:true
+---
+
 # View on Website (Client)
 
-This is the Client application for the View On Website Platform. This project was bootstrapped with create-next-app and is making use of Material UI as it's component library
+This application is a Next.js TypeScript client designed for the "View on Website" feature. It uses Material UI for the visual components. Here's how you can get it up and running:
 
 ## How to get started
 
-Download it and run:
+Install all the application dependencies by running either
 
 ```sh
-yarn
-yarn dev
+ yarn install
+ or
+ npm install.
 ```
+
+To start the application,
+
+```sh
+run
+ npm run dev
+ or
+ yarn dev.
+```
+
+The application supports both Arabic and English languages. Inside the public folder, you'll find a file called locale which contains the translation file.
 
 ## !! Note
 
-More updates will be made to this repo and the README file as time goes on to keep the teams updated on the stack and to ease the onboarding process for new team members or other developers in the future.
+Please let me know if you need any further clarification or assistance.

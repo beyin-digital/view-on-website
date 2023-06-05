@@ -7,5 +7,8 @@
   "input": "Email or #Keyword",
   "send": "send",
   "account": "Don’t have an account?  ",
-  "signup": "Signup"
+  "signup": "Signup",
+  "nav_subscribe": "Subscribe",
+  "nav_examples": "Examples",
+  "nav_login": "Login"
 }

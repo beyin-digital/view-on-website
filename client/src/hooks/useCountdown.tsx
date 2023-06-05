@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 export default function useCountdown() {
-	const [secondsLeft, setSecondsLeft] = useState(0);
+  const [secondsLeft, setSecondsLeft] = useState(0)
 
-	useEffect(() => {
-		if (secondsLeft <= 0) return;
+  useEffect(() => {
+    if (secondsLeft <= 0) return
 
-		const timeout = setTimeout(() => {
-			setSecondsLeft(secondsLeft - 1);
-		}, 1000);
+    const timeout = setTimeout(() => {
+      setSecondsLeft(secondsLeft - 1)
+    }, 1000)
 
-		return () => clearTimeout(timeout);
-	}, [secondsLeft]);
+    return () => clearTimeout(timeout)
+  }, [secondsLeft])
 
-	function start(seconds: number) {
-		setSecondsLeft(seconds);
-	}
+  function start(seconds: number) {
+    setSecondsLeft(seconds)
+  }
 
-	return {
-		secondsLeft,
-		start,
-	};
+  return {
+    secondsLeft,
+    start,
+  }
 }

@@ -1,12 +1,12 @@
-name: PUSH TO "VIEWONWEBSITE"
+name: push to vow client and server repos
 on:
     push:
-        branches: [main]
+        branches: [dev]
     pull_request:
-        branches: [main]
+        branches: [dev]
 
 jobs:
-    build:
+    push_to_client_repo:
         runs-on: ubuntu-latest
         container: pandoc/latex
         steps:
@@ -16,8 +16,23 @@ jobs:
               env:
                   API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
               with:
-                  source-directory: "."
-                  destination-github-username: "VIEWONWEBSITE"
-                  destination-repository-name: "frontend"
+                  source-directory: "./client"
+                  destination-github-username: "salihcodes"
+                  destination-repository-name: "vow-client"
                   user-email: salih.codes@gmail.com
-                  target-branch: master
+                  target-branch: main
+    push_to_vow_api_rebuild:
+        runs-on: ubuntu-latest
+        container: pandoc/latex
+        steps:
+            - uses: actions/checkout@v2
+            - name: Pushes to another repository
+              uses: cpina/github-action-push-to-another-repository@main
+              env:
+                  API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+              with:
+                  source-directory: "./server"
+                  destination-github-username: "beyin-digital"
+                  destination-repository-name: "vow-api-rebuild"
+                  user-email: salih.codes@gmail.com
+                  target-branch: main

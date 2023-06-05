@@ -1,111 +1,275 @@
-import { api } from "@/utils/api";
-import { useRouter } from "next/router";
-import { createContext, useEffect, useState } from "react";
+import { useRouter } from 'next/router'
+import { createContext, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
-// create a context for the keyword
-export const KeywordContext = createContext<{
-	values: any;
-	setValues: React.Dispatch<React.SetStateAction<any>>;
-	checkKeywordavailability: (keyword: string) => void;
-	keywordFound?: boolean;
-	token?: string;
-	handleSubscription: (
-		letters: string,
-		sublink: string,
-		price: number,
-		interval: string
-	) => void;
-	getUserSubscriptions: () => void;
-	subscriptions: any[];
-}>({
-	values: "",
-	setValues: () => {},
-	checkKeywordavailability: async (keyword: string) => {},
-	keywordFound: false,
-	token: "",
-	handleSubscription: async (
-		letters: string,
-		sublink: string,
-		price: number,
-		interval: string
-	) => {},
-	getUserSubscriptions: async () => {},
-	subscriptions: [],
-});
+export const KeywordContext = createContext<any>({})
 
 export const KeywordProvider = ({ children }: any) => {
-	const router = useRouter();
-	const [values, setValues] = useState({
-		hashtag: "",
-		sublinks: "",
-	});
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+  const router = useRouter()
+  const [values, setValues] = useState({
+    hashtag: '',
+    sublinks: '',
+  })
+  const [swiperSelectedtedKeyword, setSwiperSelectedtedKeyword] =
+    useState<any>('')
+  const [isSearching, setIsSearching] = useState(false)
+  const [sortedKeywords, setSortedKeywords] = useState<string[]>([])
+  const [keywordFound, setKeywordFound] = useState(false)
+  const [keywords, setKeywords] = useState<any>({})
+  const [mobileKeywords, setMobileKeywords] = useState<any>({})
 
-	const [keywordFound, setKeywordFound] = useState(false);
+  const [subscriptions, setSubscriptions] = useState<any>({})
+  const [selectedKeyword, setSelectedKeyword] = useState<any>(null)
+  const [selectedMobileKeyword, setSelectedMobileKeyword] = useState<any>(null)
 
-	const [token, setToken] = useState("");
-	const [subscriptions, setSubscriptions] = useState([]);
+  const [token, setToken] = useState('')
+  const [analyticsData, setAnalyticsData] = useState({
+    totalVisits: 0,
+    totalVisitsToday: 0,
+    totalDailyVisitsByHoursOfTheDay: [],
+    totalVisitsByMonthsOfTheYear: [],
+    totalVisitsByDaysOfTheWeek: [],
+    totalVisitsByDaysOfTheMonth: [],
+  })
 
-	const checkKeywordavailability = async (keyword: string) => {
-		// check if keyword is available
-		const res = await api.get(`/keywords?hashtag=${keyword}`);
-		const data = res.data;
+  const [foundKeyword, setFoundKeyword] = useState({})
 
-		if (data) {
-			setKeywordFound(true);
-			return;
-		}
-		setKeywordFound(false);
-		// if available, setKeyword
-		// else, show error message
-	};
+  const [lineChartDataType, setLineChartDataType] = useState<
+    'day' | 'week' | 'month' | 'year'
+  >('day')
 
-	const handleSubscription = async (
-		letters: string,
-		sublink: string,
-		price: number,
-		interval: string
-	) => {
-		if (token === "") {
-			router.push("/login");
-			return;
-		}
-		const res = await api.post(
-			"/stripe/payment",
-			{ letters, sublink, price, interval },
-			{ headers: { Authorization: `Bearer ${token}` } }
-		);
-		const data = res.data;
-		window.location.href = data.url;
-	};
+  const handleCheckKeyword = async (keyword: string) => {
+    try {
+      setIsSearching(true)
+      const response = await fetch(
+        `${apiUrl}/keywords/letters?letters=${keyword}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
 
-	const getUserSubscriptions = async () => {
-		const res = await api.get("/subscriptions", {
-			headers: { Authorization: `Bearer ${token}` },
-		});
-		const data = res.data.data;
-		if (data.length > 0) {
-			console.log(data);
-			setSubscriptions(data);
-		}
-	};
-	useEffect(() => {
-		const token = localStorage.getItem("token");
-		setToken(token || "");
-	}, [keywordFound, token]);
-	return (
-		<KeywordContext.Provider
-			value={{
-				values,
-				setValues,
-				checkKeywordavailability,
-				keywordFound,
-				token,
-				handleSubscription,
-				getUserSubscriptions,
-				subscriptions,
-			}}
-		>
-			{children}
-		</KeywordContext.Provider>
-	);
-};
+      setFoundKeyword(data)
+      setKeywordFound(true)
+      setIsSearching(false)
+    } catch (error) {
+      setKeywordFound(false)
+      setIsSearching(false)
+    } finally {
+      setIsSearching(false)
+    }
+  }
+
+  const handleSubscription = async (
+    letters: string,
+    sublink: string,
+    interval?: string
+  ) => {
+    try {
+      if (token.length <= 0 || token === null || token === undefined) {
+        router.push(
+          `/login?redirect=subscribe&hashtag=${letters}&sublink=${sublink}`
+        )
+        return
+      }
+      const response = await fetch(`${apiUrl}/payment/pay`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ letters, sublink, interval }),
+      })
+      if (!response.ok) {
+        throw new Error()
+      }
+      const data = await response.json()
+      window.location.href = data.url
+    } catch (error) {
+      toast.error('Error subscribing to keyword')
+    }
+  }
+
+  const handleUnsubscribe = async (id: string) => {
+    try {
+      const response = await fetch(`${apiUrl}/payment/unsubscribe`, {
+        method: 'DELETE',
+        body: JSON.stringify({ id }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
+      toast.success('Unsubscribed successfully')
+      getUsersKeywords(1)
+    } catch (error) {
+      toast.error('Error unsubscribing')
+    }
+  }
+
+  const getUsersKeywords = async (page: number) => {
+    try {
+      const response = await fetch(
+        `${apiUrl}/keywords?page=${page ? page : 1}&limit=10`,
+        {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
+
+      const data = await response.json()
+      if (data?.data?.length <= 0) {
+        return
+      }
+      if (page === 1 || page === undefined) {
+        setKeywords(data)
+        setMobileKeywords(data)
+        if (selectedKeyword === null) {
+          setSelectedKeyword(data?.data[0])
+          setSelectedMobileKeyword(data?.data[0])
+        }
+        return
+      }
+      console.log('Extra keywords found', data)
+      setKeywords({
+        ...keywords,
+        data: [...keywords.data, ...data.data],
+        hasNextPage: data.hasNextPage,
+      })
+      setMobileKeywords({
+        ...mobileKeywords,
+        data: [...mobileKeywords.data, ...data.data],
+        hasNextPage: data.hasNextPage,
+      })
+    } catch (error) {
+      console.error('Error fetching keywords')
+    }
+  }
+
+  const getUserSubscriptions = async (page?: number) => {
+    try {
+      const response = await fetch(
+        `${apiUrl}/subscriptions?page=${page}&limit=10`,
+        {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
+      const data = await response.json()
+      if (data.data.length <= 0) {
+        return
+      }
+      if (page === 1) {
+        setSubscriptions(data)
+        return
+      }
+      setSubscriptions({
+        ...subscriptions,
+        data: [...subscriptions.data, ...data.data],
+        hasNextPage: data.hasNextPage,
+      })
+    } catch (error) {
+      console.error('Error fetching subscriptions')
+    }
+  }
+
+  const checkPremiumKeyword = async () => {
+    const response = await fetch(`${apiUrl}/keywords/check/premium`, {
+      method: 'GET',
+    })
+
+    if (!response.ok) {
+      throw new Error('Error fetching data')
+    }
+
+    const data = await response.json()
+    const alphabets = 'abcdefghijklmnopqrstuvwxyz'.split('')
+    const filteredAlphabets = alphabets.filter(
+      (alphabet) => !data.some((item: any) => item.slug === alphabet)
+    )
+    setSortedKeywords(filteredAlphabets)
+    setSwiperSelectedtedKeyword(filteredAlphabets[0])
+  }
+
+  const updateKeywordDetails = async (id: number, values: any) => {
+    try {
+      const response = await fetch(`${apiUrl}/keywords/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(values),
+      })
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
+      const data = await response.json()
+      toast.success('Keyword updated successfully')
+    } catch (error) {
+      toast.error('Error updating keyword')
+    }
+  }
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem('token')
+    if (savedToken) {
+      setToken(savedToken)
+    }
+  }, [keywordFound, token])
+  return (
+    <KeywordContext.Provider
+      value={{
+        values,
+        setValues,
+        handleCheckKeyword,
+        keywordFound,
+        token,
+        handleSubscription,
+        getUsersKeywords,
+        getUserSubscriptions,
+        subscriptions,
+        keywords,
+        selectedKeyword,
+        setSelectedKeyword,
+        updateKeywordDetails,
+        analyticsData,
+        lineChartDataType,
+        setLineChartDataType,
+        isSearching,
+        checkPremiumKeyword,
+        sortedKeywords,
+        setAnalyticsData,
+        foundKeyword,
+        swiperSelectedtedKeyword,
+        setSwiperSelectedtedKeyword,
+        handleUnsubscribe,
+        setKeywords,
+        setSubscriptions,
+        mobileKeywords,
+        setMobileKeywords,
+        selectedMobileKeyword,
+        setSelectedMobileKeyword,
+        setFoundKeyword,
+      }}
+    >
+      {children}
+    </KeywordContext.Provider>
+  )
+}

@@ -5,7 +5,9 @@
   "title": "Welcome Back",
   "input_email": "Email or keyword",
   "input_password": "Password",
-  "login": "login",
   "forget": "Forgot Password?",
-  "sign_up": "Or login with"
+  "sign_up": "Or login with",
+  "nav_examples": "Examples",
+  "subscribe": "subscribe",
+  "login": "login"
 }

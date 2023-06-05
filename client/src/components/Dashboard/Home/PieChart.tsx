@@ -3,15 +3,15 @@ import { ResponsivePie } from "@nivo/pie";
 const PieChart = ({ data }: any) => (
 	<ResponsivePie
 		data={data}
-		margin={{ top: 10, right: 80, bottom: 120, left: 80 }}
-		valueFormat={value =>
+		margin={{ top: 16, right: 80, bottom: 120, left: 80 }}
+		valueFormat={(value) =>
 			`${Number(value).toLocaleString("en-GB", {
 				minimumFractionDigits: 2,
 			})}`
 		}
 		innerRadius={0.7}
 		padAngle={0.7}
-		cornerRadius={3}
+		cornerRadius={0}
 		activeOuterRadiusOffset={8}
 		borderWidth={1}
 		borderColor={{
@@ -45,6 +45,7 @@ const PieChart = ({ data }: any) => (
 			},
 		]}
 		enableArcLabels={false}
+		enableArcLinkLabels={false}
 		legends={[
 			{
 				anchor: "bottom",
@@ -56,7 +57,7 @@ const PieChart = ({ data }: any) => (
 				itemWidth: 80,
 				itemHeight: 18,
 				itemTextColor: "#999",
-				itemDirection: "left-to-right",
+				itemDirection: "top-to-bottom",
 				itemOpacity: 1,
 				symbolSize: 18,
 				symbolShape: "circle",

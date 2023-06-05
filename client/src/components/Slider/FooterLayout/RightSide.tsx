@@ -1,10 +1,9 @@
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import CheckIcon from "@mui/icons-material/Check";
-import { FiArrowDownRight, FiArrowDownLeft } from "react-icons/fi";
 
 const RightSide = () => {
 	const { t } = useTranslation("slider");
@@ -24,16 +23,22 @@ const RightSide = () => {
 				maxWidth: "100%",
 				flexDirection: { xs: "column-reverse", sm: "row", md: "row" },
 				alignItems: "center",
+				justifyContent: "center",
 			}}
 		>
 			<Box
 				sx={{
 					width: {
-						xs: "70%",
+						xs: "100%",
 						sm: "60%",
 						md: "50%",
 						xl: "50%",
 					},
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "start",
+
+					flexDirection: "column",
 				}}
 			>
 				{/* Check components */}
@@ -45,14 +50,16 @@ const RightSide = () => {
 									key={item.id}
 									sx={{
 										display: "flex",
-										alignItems: "center",
+										alignItems: "start",
+										justifyContent: "end",
 										height: { xs: "30px", xl: "25px" },
-										flexDirection: "row-reverse",
+										width: { xs: "100%", sm: "90%", md: "100%" },
 									}}
+									className="checkSlider"
 								>
-									<CheckIcon fontSize="small" />
 									<Box
 										sx={{
+											width: "100%",
 											paddingX: ".5rem",
 										}}
 									>
@@ -61,11 +68,13 @@ const RightSide = () => {
 												fontSize: "16px",
 												fontWeight: "400",
 												lineHeight: "14px",
+												textAlign: "right",
 											}}
 										>
 											{t(item.tKey)}
 										</Typography>
 									</Box>
+									<CheckIcon fontSize="small" />
 								</Box>
 							))}
 						</>
@@ -79,7 +88,9 @@ const RightSide = () => {
 										alignItems: "center",
 										justifyContent: "center",
 										height: { xs: "30px", xl: "25px" },
+										width: { xs: "100%", sm: "90%", md: "100%" },
 									}}
+									className="checkSlider"
 								>
 									<CheckIcon fontSize="small" />
 									<Box
@@ -122,47 +133,9 @@ const RightSide = () => {
 					paddingX: "1rem",
 				}}
 			>
-				{/* <Box
-					sx={{
-						width: { xs: "50%", md: "35%", xl: "45%" },
-						height: "100%",
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "center",
-						alignItems: "center",
-						marginX: "1rem",
-					}}
-				>
-					<Typography
-						sx={{
-							fontSize: {
-								xs: "30px",
-								sm: "40px",
-								md: "40px",
-								xl: "40px",
-							},
-							lineHeight: "37px",
-							fontWeight: "400",
-							marginY: ".5rem",
-						}}
-					>
-						$3.65
-					</Typography>
-					<Typography
-						sx={{
-							fontSize: "16px",
-							lineHeight: "14px",
-							fontWeight: "300",
-							height: { xs: "100%", md: "20px", xl: "20px" },
-							color: "#343132",
-						}}
-					>
-						{t("text_dolor")}
-					</Typography>
-				</Box> */}
 				<Box
 					sx={{
-						width: { xs: "50%", md: "40%", xl: "45%" },
+						width: { xs: "90%", md: "40%", xl: "45%" },
 						height: "100%",
 						display: "flex",
 						flexDirection: "column",

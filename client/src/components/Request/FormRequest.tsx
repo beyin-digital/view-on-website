@@ -1,11 +1,27 @@
 import { Box, Button, OutlinedInput, Typography } from "@mui/material";
 import LoginTextSignUp from "../Login/LoginTextSignUp";
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 import { IconsStyle } from "../Button";
+import { useContext, useState } from "react";
+import { UserContext } from "@/contexts/userContext";
+import { useRouter } from "next/router";
+import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
 
 const FormRequest = () => {
 	const { t } = useTranslation("request");
+	const [identifier, setIdentifier] = useState("");
+	const { locale } = useRouter();
+
+	const { forgotPassword } = useContext(UserContext);
+	// animation
+	const [hoveredButton, setHoveredButton] = useState(false);
+	const handleHoverButton = () => {
+		setHoveredButton(!hoveredButton);
+	};
+
+	const handleLeave = () => {
+		setHoveredButton(false);
+	};
 
 	return (
 		<>
@@ -19,6 +35,7 @@ const FormRequest = () => {
 				}}
 			>
 				<OutlinedInput
+					value={identifier}
 					sx={{
 						width: "100%",
 						height: { xs: "45px", md: "50px", xl: "65px" },
@@ -36,8 +53,12 @@ const FormRequest = () => {
 						"&:hover > .MuiOutlinedInput-notchedOutline": {
 							border: "0",
 						},
+						"& input::placeholder": {
+							fontSize: { xs: "18px", md: "22px", xl: "26px" },
+						},
 					}}
 					placeholder={`${t("input")}`}
+					onChange={(e) => setIdentifier(e.target.value)}
 				/>
 			</Box>
 			<Box
@@ -56,8 +77,14 @@ const FormRequest = () => {
 						background: "#0090EC",
 						borderRadius: "16px",
 					}}
+					className="ButtonPayCard"
+					onMouseEnter={handleHoverButton}
+					onMouseLeave={handleLeave}
 				>
 					<Button
+						onClick={() => {
+							identifier && forgotPassword(identifier);
+						}}
 						sx={{
 							paddingX: "18px",
 							height: "59px",
@@ -65,7 +92,6 @@ const FormRequest = () => {
 							display: "flex",
 							justifyContent: "space-around",
 						}}
-						// onClick={}
 						type="submit"
 					>
 						<Typography
@@ -80,7 +106,20 @@ const FormRequest = () => {
 						>
 							{t("send")}
 						</Typography>
-						<IconsStyle />
+						{locale === "ar" ? (
+							<FiArrowUpLeft
+								size={42}
+								color="#FBFBFB"
+								className={hoveredButton ? "animated-icon_rtl" : ""}
+							/>
+						) : (
+							<FiArrowUpRight
+								size={42}
+								color="#FBFBFB"
+								className={hoveredButton ? "animated-icon" : ""}
+							/>
+						)}
+						{/* <IconsStyle /> */}
 					</Button>
 				</Box>
 				<LoginTextSignUp />

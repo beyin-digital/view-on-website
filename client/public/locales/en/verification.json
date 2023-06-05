@@ -5,5 +5,9 @@
   "title": " Verification Link Sent",
   "desc": "Enter the authenrication code we sent to Your email Test@abceed.com below:",
   "resend": "Resend code",
-  "button": "Verify"
+  "button": "Verify",
+  "nav_subscribe": "Subscribe",
+  "nav_examples": "Examples",
+  "nav_login": "Login",
+  "back": "BACK"
 }

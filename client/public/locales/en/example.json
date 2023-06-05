@@ -4,9 +4,13 @@
   "meta_keyword": "",
   "box_one_title": "See it",
   "box_one_desc": "Making your #keyword visible will help customers easily interact with it to be redirected to your product or service sub-link via our Home page",
-  "box_two_title": "Type the #kyeword.",
+  "box_two_title": "Type the #keyword.",
   "box_two_desc": "Your customers will quickly type the #keyword they saw in the E-Label you displayed and visit your website through our homepage.",
   "box_three_title": "Be Redirected!",
-  "box_three_desc": "Your costumers in a Blink will be automatically redirected to your Sub-link-URL, your dashboard will show you all the conversions of your #keyword, it is your opportunity to optimize, know and to take control over your conversion rate.",
-  "button": "subscribe"
+  "box_three_desc": "Your Customers in a Blink will be automatically redirected to your Sub-link-URL, your dashboard will show you all the conversions of your #keyword, it is your opportunity to optimize, know and to take control over your conversion rate.",
+  "button": "subscribe",
+  "nav_login": "Login",
+  "nav_subscribe": "Subscribe",
+  "nav_signup": "SignUp",
+  "illustration": "Illustration"
 }

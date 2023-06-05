@@ -1,22 +1,47 @@
-import Header from "@/components/Navbar/Navbar";
+// import Header from '@/components/Navbar/Navbar'
 import { Box } from "@mui/material";
 
-// layout
-import Footer from "@/components/Footer/Footer";
-import FooterMobile from "@/components/Footer/FooterMobile";
-
-// components
-import SwiperSlider from "./CenterLayout/SwiperSlider";
-import FooterLayout from "./FooterLayout/FooterLayout";
-import HeaderLayout from "./TopLayout/HeaderLayout";
-import TextPremium from "./TopLayout/TextPremium";
-import TextAndButton from "./TextAndButton";
-import { BackgroundImageSlider } from "./BackgroundImage";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+// components
+import dynamic from "next/dynamic";
+import { Background } from "../Layout/Background";
+const Header = dynamic(() => import("@/components/Navbar/Navbar"), {
+	ssr: false,
+});
+const Footer = dynamic(() => import("@/components/Footer/Footer"), {
+	ssr: false,
+});
+const FooterMobile = dynamic(() => import("@/components/Footer/FooterMobile"), {
+	ssr: false,
+});
+const SwiperSlider = dynamic(() => import("./CenterLayout/SwiperSlider"), {
+	ssr: false,
+});
+const FooterLayout = dynamic(() => import("./FooterLayout/FooterLayout"), {
+	ssr: false,
+});
+const HeaderLayout = dynamic(() => import("./TopLayout/HeaderLayout"), {
+	ssr: false,
+});
+const TextPremium = dynamic(() => import("./TopLayout/TextPremium"), {
+	ssr: false,
+});
+const TextAndButton = dynamic(() => import("./TextAndButton"), {
+	ssr: false,
+});
 
 const SliderDesktop = ({ onClick, selectedImage }: any) => {
 	const { locale } = useRouter();
+	const [showSlider, setShowSlider] = useState(false);
 
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setShowSlider(true);
+		}, 300);
+
+		return () => clearTimeout(timer);
+	}, []);
 	return (
 		<Box
 			sx={{
@@ -24,25 +49,25 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
 				zIndex: "9999999",
 			}}
 		>
-			{/* <Header /> */}
+			{showSlider && <Background />}
+
+			<Header />
 
 			<Box
 				sx={{
 					maxWidth: "100%",
+					maxHeight: "100%",
 					margin: "auto",
 					height: { xs: "", md: "89vh" },
 					display: "flex",
 					flexDirection: "column",
-					justifyContent: "space-between",
+					justifyContent: "center",
 					position: "relative",
 				}}
 			>
-				<BackgroundImageSlider />
 				<Box
 					sx={{
 						position: "relative",
-						marginTop: "1rem",
-						marginBottom: "1rem",
 					}}
 				>
 					{/* Text Premium top layout */}
@@ -82,7 +107,7 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
 											width: { xs: "100%", md: "100%", xl: "80%" },
 											height: "90%",
 											transform: { xs: "", md: "", xl: "skew(16deg, 0deg)" },
-											paddingX: { xs: "1rem", md: "2rem", xl: "6rem" },
+											// paddingX: { xs: "1rem", md: "2rem", xl: "6rem" },
 											display: "flex",
 											flexDirection: "column",
 											justifyContent: "space-around",
@@ -121,7 +146,7 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
 					</Box>
 				</Box>
 				{/* text and button */}
-				<TextAndButton />
+				{/* <TextAndButton selectedImage={selectedImage} /> */}
 			</Box>
 			<Footer />
 			<FooterMobile />
