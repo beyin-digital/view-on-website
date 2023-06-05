@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { Suspense, useContext } from 'react'
+import { Suspense, useContext, useEffect } from 'react'
 
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
@@ -30,9 +30,14 @@ const HomeMobile = dynamic(
 const DashboardHomePage = () => {
   const { t } = useTranslation('dashboard')
   const router = useRouter()
-  const { token } = useContext(UserContext)
+  const { token, user } = useContext(UserContext)
 
   if (!token) return <></>
+  useEffect(() => {
+    if (user?.hasKeywords === false) {
+      router.push(`${router.locale}/`)
+    }
+  }, [user])
   return (
     <>
       <Head>
