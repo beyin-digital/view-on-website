@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { User } from '@/types/user'
-import { api } from '@/utils/api'
 
 export const UserContext = createContext<any>({})
 
@@ -105,7 +104,7 @@ export const UserProvider = ({ children }: any) => {
       setToken(token)
       setRefreshToken(refreshToken)
 
-      if (user?.hasKeyword === false) {
+      if (user?.hasKeywords === false) {
         router.push(`/${router.locale}/subscribe`)
         return
       } else {
@@ -143,7 +142,7 @@ export const UserProvider = ({ children }: any) => {
       setToken(token)
       setRefreshToken(refreshToken)
       // Redirect user to home page if no Keywords and dashboard if keywords
-      if (user?.hasKeyword === false) {
+      if (user?.hasKeywords === false) {
         router.push(`/${router.locale}/subscribe`)
         return
       } else {
