@@ -14,6 +14,7 @@ export class KeywordViewCount extends EntityHelper {
 
   @ManyToOne(() => Keyword, {
     eager: true,
+    onDelete: 'CASCADE',
   })
   keyword: Keyword;
 
