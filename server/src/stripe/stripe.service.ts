@@ -12,16 +12,11 @@ import { User } from 'src/users/entities/user.entity';
 import { Subscription } from 'src/subscriptions/entities/subscription.entity';
 import { Order } from 'src/orders/entities/order.entity';
 import { Keyword } from 'src/keywords/entities/keyword.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { KeywordViewCount } from 'src/analytics/entities/keyword-view.entity';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class StripeService {
   public readonly stripe: Stripe;
   constructor(
-    @InjectRepository(KeywordViewCount)
-    private keywordViewCountRepository: Repository<KeywordViewCount>,
     private configService: ConfigService<AllConfigType>,
     private ordersService: OrdersService,
     private subscriptionsService: SubscriptionsService,
@@ -234,9 +229,6 @@ export class StripeService {
       await keyword.save();
     } else if (status === 'canceled') {
       await this.subscriptionsService.delete(subscription.id);
-      await this.keywordViewCountRepository.delete({
-        keyword: { id: keyword.id },
-      });
       await this.keywordsService.delete(keyword.id);
       const keywordsCount = await this.keywordsService.count({
         user: { id: user.id },

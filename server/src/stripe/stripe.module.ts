@@ -6,12 +6,9 @@ import { KeywordsModule } from 'src/keywords/keywords.module';
 import { UsersModule } from 'src/users/users.module';
 import { StripeController } from './stripe.controller';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { KeywordViewCount } from 'src/analytics/entities/keyword-view.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([KeywordViewCount]),
     ConfigModule,
     OrdersModule,
     SubscriptionsModule,
