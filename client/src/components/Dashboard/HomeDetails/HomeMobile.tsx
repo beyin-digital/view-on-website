@@ -112,59 +112,60 @@ const HomeMobile = () => {
     }
   }
 
-  const updateData = async (data: any) => {
-    if (data?.keywordId === selectedKeyword?.id) {
-      setAnalyticsData({
-        ...analyticsData,
-        totalVisits: data?.totalVisits,
-        totalVisitsToday: data?.totalVisitsToday,
-        totalDailyVisitsByHoursOfTheDay: data?.totalDailyVisitsByHoursOfTheDay,
-        totalVisitsByMonthsOfTheYear: data?.totalVisitsByMonthsOfTheYear,
-        totalVisitsByDaysOfTheWeek: data?.totalVisitsByDaysOfTheWeek,
-        totalVisitsByDaysOfTheMonth: data?.totalVisitsByDaysOfTheMonth,
-      })
-      setPieChartData([
-        {
-          id: 'today',
-          label: `${t('box_four_today')}`,
-          tKey: 'box_four_today',
-          value: data?.totalVisitsToday,
-          color: 'hsla(112, 81%, 52%, 1)',
-        },
-        {
-          id: 'all-time',
-          label: `${t('box_four_all')}`,
-          tKey: 'box_four_all',
-          value: data?.totalVisits,
-          color: 'hsla(203, 100%, 46%, 1)',
-        },
-      ])
-      setLineChartData([
-        {
-          id: "Today's visits",
-          color: 'hsla(203, 100%, 46%, 1)',
-          data: data?.totalDailyVisitsByHoursOfTheDay,
-        },
-        {
-          id: "This Week's visits",
-          color: 'hsla(203, 100%, 46%, 1)',
-          data: data?.totalVisitsByDaysOfTheWeek,
-        },
-        {
-          id: "This month's visits",
-          color: 'hsla(203, 100%, 46%, 1)',
-          data: data?.totalVisitsByDaysOfTheMonth,
-        },
-        {
-          id: "This year's visits",
-          color: 'hsla(203, 100%, 46%, 1)',
-          data: data?.totalVisitsByMonthsOfTheYear,
-        },
-      ])
-    }
-  }
-
   useEffect(() => {
+    if (selectedKeyword == null) return
+    const updateData = (data: any) => {
+      if (data?.keywordId === selectedKeyword?.id) {
+        setAnalyticsData({
+          ...analyticsData,
+          totalVisits: data?.totalVisits,
+          totalVisitsToday: data?.totalVisitsToday,
+          totalDailyVisitsByHoursOfTheDay:
+            data?.totalDailyVisitsByHoursOfTheDay,
+          totalVisitsByMonthsOfTheYear: data?.totalVisitsByMonthsOfTheYear,
+          totalVisitsByDaysOfTheWeek: data?.totalVisitsByDaysOfTheWeek,
+          totalVisitsByDaysOfTheMonth: data?.totalVisitsByDaysOfTheMonth,
+        })
+        setPieChartData([
+          {
+            id: 'today',
+            label: `${t('box_four_today')}`,
+            tKey: 'box_four_today',
+            value: data?.totalVisitsToday,
+            color: 'hsla(112, 81%, 52%, 1)',
+          },
+          {
+            id: 'all-time',
+            label: `${t('box_four_all')}`,
+            tKey: 'box_four_all',
+            value: data?.totalVisits,
+            color: 'hsla(203, 100%, 46%, 1)',
+          },
+        ])
+        setLineChartData([
+          {
+            id: "Today's visits",
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalDailyVisitsByHoursOfTheDay,
+          },
+          {
+            id: "This Week's visits",
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalVisitsByDaysOfTheWeek,
+          },
+          {
+            id: "This month's visits",
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalVisitsByDaysOfTheMonth,
+          },
+          {
+            id: "This year's visits",
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalVisitsByMonthsOfTheYear,
+          },
+        ])
+      }
+    }
     socket.emit(
       'createConnection',
       { keywordId: selectedKeyword?.id },
@@ -429,30 +430,7 @@ const HomeMobile = () => {
                   width: '100%',
                   background: '#0090EC',
                   borderRadius: '7px',
-                  color: '#343132',
-                  fontWeight: 500,
-                  fontSize: '11px',
-                  boxShadow: 'none',
-                  textTransform: 'none',
-                  '&:hover': {
-                    background: '#0090EC',
-                  },
-                  margin: '.2rem',
-                }}
-                onClick={() => {
-                  router.push('/dashboard/subscriptions')
-                }}
-              >
-                {t('go_to_subscriptions')}
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  height: '42px',
-                  width: '100%',
-                  background: '#0090EC',
-                  borderRadius: '7px',
-                  color: '#343132',
+                  color: 'white',
                   fontWeight: 500,
                   fontSize: '11px',
                   boxShadow: 'none',
