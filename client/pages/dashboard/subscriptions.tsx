@@ -352,7 +352,7 @@ const DashboardSubscriptionsPage = () => {
                   marginX: '2rem',
                 }}
               >
-                {subscriptions?.hasNextPage && subscriptions?.legnth >= 9 && (
+                {subscriptions?.hasNextPage && subscriptions?.length >= 9 && (
                   <Button
                     variant="contained"
                     sx={{
