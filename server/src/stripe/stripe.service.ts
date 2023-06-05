@@ -188,6 +188,7 @@ export class StripeService {
     renewalAmount,
     renewalDate,
     intervalCount,
+    interval,
     invoiceId,
   }: {
     subscriptionId?: string;
@@ -196,6 +197,7 @@ export class StripeService {
     renewalAmount?: number;
     renewalDate?: number;
     intervalCount?: number;
+    interval?: string;
     invoiceId?: string;
   }) {
     const subscription = (await this.subscriptionsService.findOne({
@@ -220,7 +222,7 @@ export class StripeService {
       subscription.renewalDate =
         new Date((renewalDate as number) * 1000) || subscription.renewalDate;
       subscription.duration =
-        intervalCount === 1
+        intervalCount === 1 && interval
           ? 'monthly'
           : intervalCount === 6
           ? '6 months'
@@ -272,6 +274,7 @@ export class StripeService {
           renewalDate: subscription.current_period_end as number,
           status: subscription.status,
           intervalCount: subscription.plan?.interval_count as number,
+          interval: subscription.plan?.interval as string,
           invoiceId: subscription.latest_invoice as string,
         });
         break;
