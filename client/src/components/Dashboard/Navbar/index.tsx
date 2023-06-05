@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { Box, Button, Tab, Tabs, Typography } from '@mui/material'
 import Image from 'next/image'
 import { BiMenu } from 'react-icons/bi'
@@ -17,7 +17,7 @@ import { KeywordContext } from '@/contexts/keywordContext'
 
 const Navbar = () => {
   const { t } = useTranslation('common')
-  const pathname = usePathname()
+  const { pathname, push } = useRouter()
 
   const links = [
     {
@@ -102,6 +102,7 @@ const Navbar = () => {
     const selectedKeyword = keywords?.data?.find(
       (keyword: any) => keyword.letters === newValue
     )
+    router.push(`/dashboard/home/${selectedKeyword}`)
     setSelectedKeyword(selectedKeyword)
   }
 
@@ -172,10 +173,12 @@ const Navbar = () => {
             onChange={handleChange}
             variant="scrollable"
             scrollButtons="auto"
-            defaultValue={selectedKeyword?.letters}
+            defaultValue={selectedKeyword?.letters || pathname.split('/')[3]}
           >
             {keywords?.data?.map((keyword: any) => (
               <Tab
+                LinkComponent={Link}
+                href={`/dashboard/home/${keyword.letters}`}
                 sx={{
                   minWidth: '15%',
                   fontSize: {
