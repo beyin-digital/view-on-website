@@ -32,7 +32,7 @@ jobs:
                   API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
               with:
                   source-directory: "./server"
-                  destination-github-username: "salihcodes"
+                  destination-github-username: "beyin-digital"
                   destination-repository-name: "vow-api-rebuild"
                   user-email: salih.codes@gmail.com
                   target-branch: main

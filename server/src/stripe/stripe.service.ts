@@ -187,7 +187,6 @@ export class StripeService {
     purchaseDate,
     renewalAmount,
     renewalDate,
-    interval,
     intervalCount,
     invoiceId,
   }: {
@@ -196,7 +195,6 @@ export class StripeService {
     purchaseDate?: number;
     renewalAmount?: number;
     renewalDate?: number;
-    interval?: string;
     intervalCount?: number;
     invoiceId?: string;
   }) {
@@ -223,7 +221,7 @@ export class StripeService {
         new Date((renewalDate as number) * 1000) || subscription.renewalDate;
       subscription.duration =
         intervalCount === 1
-          ? (interval as string)
+          ? 'monthly'
           : intervalCount === 6
           ? '6 months'
           : 'year' || subscription.duration;
@@ -273,7 +271,6 @@ export class StripeService {
           renewalAmount: subscription.plan?.amount as number,
           renewalDate: subscription.current_period_end as number,
           status: subscription.status,
-          interval: subscription.plan?.interval as string,
           intervalCount: subscription.plan?.interval_count as number,
           invoiceId: subscription.latest_invoice as string,
         });
