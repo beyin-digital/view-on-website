@@ -831,7 +831,12 @@ const SubscribePage: NextPage = () => {
             <PackageBoxOne
               onClick={async () => {
                 if (!token) {
-                  router.push('/login')
+                  router.push(
+                    '/login?redirect=subscribe&hashtag=' +
+                      values.hashtag +
+                      '&sublink=' +
+                      values.sublink
+                  )
                   return
                 } else {
                   if (
@@ -854,7 +859,12 @@ const SubscribePage: NextPage = () => {
             <PackageBoxTwo
               onClick={async () => {
                 if (!token) {
-                  router.push('/login')
+                  router.push(
+                    '/login?redirect=subscribe&hashtag=' +
+                      values.hashtag +
+                      '&sublink=' +
+                      values.sublink
+                  )
                   return
                 } else {
                   if (
@@ -876,7 +886,12 @@ const SubscribePage: NextPage = () => {
             <PackageBoxThree
               onClick={async () => {
                 if (!token) {
-                  router.push('/login')
+                  router.push(
+                    '/login?redirect=subscribe&hashtag=' +
+                      values.hashtag +
+                      '&sublink=' +
+                      values.sublink
+                  )
                   return
                 } else {
                   if (
