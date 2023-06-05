@@ -19,6 +19,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 import Image from 'next/image'
 import { UserContext } from '@/contexts/userContext'
 import { links, icons } from '../Layout/GLobal'
+import { toast } from 'react-toastify'
 const Header = () => {
   const { t } = useTranslation('common')
   const router = useRouter()
@@ -216,6 +217,10 @@ const Header = () => {
 
             {token ? (
               <Link
+                onClick={() => {
+                  !user?.hasKeywords &&
+                    toast('You need to have a keyword to access the dashboard')
+                }}
                 href={`${
                   user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
                 }`}
@@ -273,6 +278,10 @@ const Header = () => {
           >
             {token ? (
               <Link
+                onClick={() => {
+                  !user?.hasKeywords &&
+                    toast('You need to have a keyword to access the dashboard')
+                }}
                 href={`${
                   user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
                 }`}
@@ -561,6 +570,12 @@ const Header = () => {
               >
                 {token ? (
                   <Link
+                    onClick={() => {
+                      !user?.hasKeywords &&
+                        toast(
+                          'You need to have a keyword to access the dashboard'
+                        )
+                    }}
                     href={`${
                       user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
                     }`}

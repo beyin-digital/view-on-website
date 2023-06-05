@@ -19,6 +19,7 @@ import Image from 'next/image'
 import { UserContext } from '@/contexts/userContext'
 import { icons, links } from '../Layout/GLobal'
 import { FiArrowUpLeft, FiArrowUpRight } from 'react-icons/fi'
+import { toast } from 'react-toastify'
 
 const NavbarSubscribe = () => {
   const { t } = useTranslation('common')
@@ -247,6 +248,10 @@ const NavbarSubscribe = () => {
 
             {token ? (
               <Link
+                onClick={() => {
+                  !user?.hasKeywords &&
+                    toast('You need to have a keyword to access the dashboard')
+                }}
                 style={{
                   textDecoration: 'none',
                 }}
@@ -308,6 +313,10 @@ const NavbarSubscribe = () => {
           >
             {token ? (
               <Link
+                onClick={() => {
+                  !user?.hasKeywords &&
+                    toast('You need to have a keyword to access the dashboard')
+                }}
                 style={{
                   textDecoration: 'none',
                 }}
@@ -619,6 +628,12 @@ const NavbarSubscribe = () => {
               >
                 {token ? (
                   <Link
+                    onClick={() => {
+                      !user?.hasKeywords &&
+                        toast(
+                          'You need to have a keyword to access the dashboard'
+                        )
+                    }}
                     href={`${
                       user?.hasKeywords
                         ? `${locale}/dashboard`
