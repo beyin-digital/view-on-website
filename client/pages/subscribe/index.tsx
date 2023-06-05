@@ -344,6 +344,7 @@ const SubscribePage: NextPage = () => {
                           </Typography>
                         ) : allowedCharacters.test(values.hashtag) &&
                           !isSearching &&
+                          keywordFound &&
                           values.hashtag.length >= 1 ? (
                           <Typography
                             sx={{
@@ -361,7 +362,7 @@ const SubscribePage: NextPage = () => {
                               paddingX: '.6rem',
                             }}
                           >
-                            {keywordFound && t('not_available')}
+                            {t('not_available')}
                           </Typography>
                         ) : null}
 
