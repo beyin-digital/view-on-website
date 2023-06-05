@@ -50,7 +50,7 @@ const LoginPage = () => {
         return
       }
     }
-  }, [])
+  }, [token])
 
   return (
     <>

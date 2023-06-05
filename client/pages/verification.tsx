@@ -27,18 +27,16 @@ const VerificationPage = () => {
 
   const router = useRouter()
 
-  //   useEffect(() => {
-  //     if (token) {
-  //       if ((router.query.redirect as string) === 'subscribe') {
-  //         router.push(
-  //           `/${router.locale}/${router.query.redirect as string}?hashtag=${
-  //             router.query.hashtag
-  //           }&sublink=${router.query.sublink}`
-  //         )
-  //         return
-  //       }
-  //     }
-  //   }, [token])
+  useEffect(() => {
+    if (token) {
+      if (router.query.redirect === 'subscribe') {
+        router.push(
+          `/${router.locale}/subscribe?hashtag=${router.query.hashtag}&sublink=${router.query.sublink}`
+        )
+        return
+      }
+    }
+  }, [token])
   return (
     <>
       <Head>
