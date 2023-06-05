@@ -352,28 +352,29 @@ const DashboardSubscriptionsPage = () => {
                   marginX: '2rem',
                 }}
               >
-                {subscriptions?.hasNextPage && subscriptions?.length >= 9 && (
-                  <Button
-                    variant="contained"
-                    sx={{
-                      height: '52px',
-                      width: '199px',
-                      color: '#FBFBFB',
-                      background: '#0090EC',
-                      borderRadius: '12px',
-                      fontSize: '24px',
-                      '&: hover': {
+                {subscriptions?.hasNextPage &&
+                  subscriptions?.data?.length >= 9 && (
+                    <Button
+                      variant="contained"
+                      sx={{
+                        height: '52px',
+                        width: '199px',
+                        color: '#FBFBFB',
                         background: '#0090EC',
-                      },
-                    }}
-                    onClick={() => {
-                      setPage(page + 1)
-                      getUserSubscriptions(page + 1)
-                    }}
-                  >
-                    Load more
-                  </Button>
-                )}
+                        borderRadius: '12px',
+                        fontSize: '24px',
+                        '&: hover': {
+                          background: '#0090EC',
+                        },
+                      }}
+                      onClick={() => {
+                        setPage(page + 1)
+                        getUserSubscriptions(page + 1)
+                      }}
+                    >
+                      Load more
+                    </Button>
+                  )}
               </Box>
             </Box>
           </Box>
