@@ -496,7 +496,7 @@ export class AuthService {
     });
   }
 
-  async softDelete(user: User): Promise<void> {
-    await this.usersService.softDelete(user.id);
+  async delete(user: User): Promise<void> {
+    await this.usersService.delete(user.id);
   }
 }

@@ -20,6 +20,7 @@ export class Otp extends EntityHelper {
 
   @ManyToOne(() => User, {
     eager: true,
+    onDelete: 'CASCADE',
   })
   @Exclude({ toPlainOnly: true })
   user?: User;

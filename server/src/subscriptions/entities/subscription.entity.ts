@@ -24,6 +24,7 @@ export class Subscription extends EntityHelper {
   @Allow()
   @ManyToOne(() => User, {
     eager: true,
+    onDelete: 'CASCADE',
   })
   user: User;
 
@@ -63,7 +64,9 @@ export class Subscription extends EntityHelper {
   stripeSubscriptionStatus: string;
 
   @Allow()
-  @ManyToOne(() => Keyword)
+  @ManyToOne(() => Keyword, {
+    onDelete: 'CASCADE',
+  })
   keyword: Keyword;
 
   @Column({ nullable: true })

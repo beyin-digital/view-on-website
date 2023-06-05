@@ -25,6 +25,7 @@ export class Refresh extends EntityHelper {
 
   @ManyToOne(() => User, {
     eager: true,
+    onDelete: 'CASCADE',
   })
   user: User;
 

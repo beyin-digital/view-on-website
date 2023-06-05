@@ -24,6 +24,7 @@ export class Forgot extends EntityHelper {
   @Allow()
   @ManyToOne(() => User, {
     eager: true,
+    onDelete: 'CASCADE',
   })
   user: User;
 

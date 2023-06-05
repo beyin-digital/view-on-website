@@ -28,6 +28,6 @@ export class Order extends EntityHelper {
   @CreateDateColumn()
   createdAt: string;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User, { eager: true, onDelete: 'CASCADE' })
   user: User;
 }

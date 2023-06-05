@@ -44,7 +44,7 @@ export class UsersService {
     );
   }
 
-  async softDelete(id: number): Promise<void> {
-    await this.usersRepository.softDelete(id);
+  async delete(id: number): Promise<void> {
+    await this.usersRepository.delete(id);
   }
 }

@@ -45,6 +45,7 @@ export class Keyword extends EntityHelper {
   @Allow()
   @ManyToOne(() => User, {
     eager: true,
+    onDelete: 'CASCADE',
   })
   user: User;
 
