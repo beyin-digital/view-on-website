@@ -217,7 +217,7 @@ export class StripeService {
       subscription.renewalDate =
         new Date((renewalDate as number) * 1000) || subscription.renewalDate;
       subscription.duration =
-        intervalCount === 1 && interval
+        intervalCount === 1 && interval === 'month'
           ? 'monthly'
           : intervalCount === 6
           ? '6 months'
