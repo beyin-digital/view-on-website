@@ -262,7 +262,6 @@ const NavbarStatic = ({
                 }}
               >
                 <Typography
-                  // onClick={() => router.push(`${locale}/dashboard`)}
                   sx={{
                     letterSpacing: '0.02em',
                     fontSize: { xs: '23px', xl: '32px' },

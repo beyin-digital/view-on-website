@@ -251,7 +251,9 @@ const NavbarSubscribe = () => {
                   textDecoration: 'none',
                 }}
                 href={`${
-                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
+                  user?.hasKeywords
+                    ? `${locale}/dashboard`
+                    : `${locale}/subscribe`
                 }`}
               >
                 <Typography
@@ -310,7 +312,9 @@ const NavbarSubscribe = () => {
                   textDecoration: 'none',
                 }}
                 href={`${
-                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
+                  user?.hasKeywords
+                    ? `${locale}/dashboard`
+                    : `${locale}/subscribe`
                 }`}
               >
                 <Typography
@@ -616,7 +620,9 @@ const NavbarSubscribe = () => {
                 {token ? (
                   <Link
                     href={`${
-                      user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
+                      user?.hasKeywords
+                        ? `${locale}/dashboard`
+                        : `${locale}/subscribe`
                     }`}
                     style={{
                       textDecoration: 'none',

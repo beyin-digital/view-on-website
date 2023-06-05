@@ -187,11 +187,9 @@ const Header = () => {
             {token ? (
               <Link
                 href={`${
-                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
+                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/login`
                 }`}
-                title={`$
-									{t("nav_Dashboard")}
-              `}
+                title={`${t('nav_Dashboard')}`}
                 style={{
                   textDecoration: 'none',
                 }}
@@ -249,7 +247,7 @@ const Header = () => {
             {token ? (
               <Link
                 href={`${
-                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
+                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/login`
                 }`}
                 title={`${t('nav_Dashboard')}`}
                 style={{
@@ -517,7 +515,7 @@ const Header = () => {
                         `${
                           user?.hasKeywords
                             ? `${locale}/dashboard`
-                            : `${locale}/`
+                            : `${locale}/login`
                         }`
                       )
                     }
