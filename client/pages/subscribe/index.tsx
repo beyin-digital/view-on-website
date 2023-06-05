@@ -72,7 +72,7 @@ const SubscribePage: NextPage = () => {
 
   const allowedCharacters = /^[^\s]+$/
 
-  const hashtagDebounce = useDebounce(values.hashtag, 250)
+  const hashtagDebounce = useDebounce(values.hashtag, 200)
   const { handleSubscription, handleCheckKeyword, keywordFound, isSearching } =
     useContext(KeywordContext)
   const { token } = useContext(UserContext)
@@ -322,6 +322,7 @@ const SubscribePage: NextPage = () => {
                         }}
                       >
                         {allowedCharacters.test(values.hashtag) &&
+                        !keywordFound &&
                         !isSearching &&
                         values.hashtag.length >= 1 ? (
                           <Typography
@@ -343,8 +344,8 @@ const SubscribePage: NextPage = () => {
                             {!keywordFound && t('available')}
                           </Typography>
                         ) : allowedCharacters.test(values.hashtag) &&
-                          !isSearching &&
                           keywordFound &&
+                          !isSearching &&
                           values.hashtag.length >= 1 ? (
                           <Typography
                             sx={{
@@ -362,7 +363,7 @@ const SubscribePage: NextPage = () => {
                               paddingX: '.6rem',
                             }}
                           >
-                            {t('not_available')}
+                            {keywordFound && t('not_available')}
                           </Typography>
                         ) : null}
 
