@@ -97,13 +97,21 @@ export const UserProvider = ({ children }: any) => {
       //   get data from response
       const data = await response.json()
       //   get token and refresh token from data
-      const { token, refreshToken } = data
+      const { token, refreshToken, user } = data
       //   set token and refresh token in local storage
       localStorage.setItem('token', token)
       localStorage.setItem('refreshToken', refreshToken)
       //   set token and refresh token in state
       setToken(token)
       setRefreshToken(refreshToken)
+
+      if (user?.hasKeyword === false) {
+        router.push(`/${router.locale}/subscribe`)
+        return
+      } else {
+        router.push('/dashboard')
+        return
+      }
     } catch (error) {
       //   show toast if error
       toast.error('Error logging in. Please try again.')
@@ -136,7 +144,7 @@ export const UserProvider = ({ children }: any) => {
       setRefreshToken(refreshToken)
       // Redirect user to home page if no Keywords and dashboard if keywords
       if (user?.hasKeyword === false) {
-        router.push('/')
+        router.push(`/${router.locale}/subscribe`)
         return
       } else {
         router.push('/dashboard')
