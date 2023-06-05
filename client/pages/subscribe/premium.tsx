@@ -665,10 +665,19 @@ const SubscribePremiumPage: NextPage = () => {
                                     )
                                     return
                                   }
-                                  await handleSubscription(
-                                    values.hashtag,
-                                    values.sublink
-                                  )
+                                  if (token) {
+                                    await handleSubscription(
+                                      values.hashtag,
+                                      values.sublink
+                                    )
+                                  } else {
+                                    router.push(
+                                      '/login?redirect=subscribe&hashtag=' +
+                                        values.hashtag +
+                                        '&sublink=' +
+                                        values.sublink
+                                    )
+                                  }
                                 }}
                                 className="ButtonPay"
                                 onMouseEnter={handleHoverButton}
