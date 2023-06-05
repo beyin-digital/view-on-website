@@ -667,6 +667,7 @@ const SubscribePage: NextPage = () => {
                                       values.hashtag,
                                       values.sublink
                                     )
+                                    return
                                   } else {
                                     router.push(
                                       '/login?redirect=subscribe&hashtag=' +
