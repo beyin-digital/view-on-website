@@ -770,7 +770,7 @@ const SubscribePage: NextPage = () => {
                   >
                     <Typography
                       sx={{
-                        fontSize: '14px',
+                        fontSize: '18px',
                         fontWeight: '400',
                         color: '#343132',
                       }}
