@@ -1,11 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, Matches } from 'class-validator';
 
 export class AuthResetPasswordDto {
   @ApiProperty({
-    example: 'newPasswqrod1234*',
+    example: 'newPasswrod1234*',
     description: "user's new password",
   })
+  @Matches(
+    /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^*&+=])(?=\S+$).{8,}$/,
+    {
+      message: 'password_too_weak_or_does_not_requirement',
+    },
+  )
   @IsNotEmpty()
   password: string;
 
