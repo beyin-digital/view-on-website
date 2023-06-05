@@ -17,9 +17,13 @@ export const KeywordProvider = ({ children }: any) => {
   const [sortedKeywords, setSortedKeywords] = useState<string[]>([])
   const [keywordFound, setKeywordFound] = useState(false)
   const [keywords, setKeywords] = useState<any>({})
-  const [selectedKeyword, setSelectedKeyword] = useState<any>(null)
-  const [token, setToken] = useState('')
+  const [mobileKeywords, setMobileKeywords] = useState<any>({})
+
   const [subscriptions, setSubscriptions] = useState<any>({})
+  const [selectedKeyword, setSelectedKeyword] = useState<any>(null)
+  const [selectedMobileKeyword, setSelectedMobileKeyword] = useState<any>(null)
+
+  const [token, setToken] = useState('')
   const [analyticsData, setAnalyticsData] = useState({
     totalVisits: 0,
     totalVisitsToday: 0,
@@ -107,36 +111,47 @@ export const KeywordProvider = ({ children }: any) => {
         throw new Error('Error fetching data')
       }
       toast.success('Unsubscribed successfully')
-      getUsersKeywords()
+      getUsersKeywords(1)
     } catch (error) {
       toast.error('Error unsubscribing')
     }
   }
 
-  const getUsersKeywords = async (page?: number) => {
+  const getUsersKeywords = async (page: number) => {
     try {
-      const response = await fetch(`${apiUrl}/keywords?page=${page}&limit=10`, {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      const response = await fetch(
+        `${apiUrl}/keywords?page=${page ? page : 1}&limit=10`,
+        {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       if (!response.ok) {
         throw new Error('Error fetching data')
       }
 
       const data = await response.json()
-      if (data.data.length <= 0) {
+      if (data?.data?.length <= 0) {
         return
       }
-      if (page === 1) {
+      if (page === 1 || page === undefined) {
         setKeywords(data)
+        setMobileKeywords(data)
         if (selectedKeyword === null) {
           setSelectedKeyword(data?.data[0])
+          setSelectedMobileKeyword(data?.data[0])
         }
         return
       }
+      console.log('Extra keywords found', data)
       setKeywords({
         ...keywords,
         data: [...keywords.data, ...data.data],
+        hasNextPage: data.hasNextPage,
+      })
+      setMobileKeywords({
+        ...mobileKeywords,
+        data: [...mobileKeywords.data, ...data.data],
         hasNextPage: data.hasNextPage,
       })
     } catch (error) {
@@ -157,7 +172,6 @@ export const KeywordProvider = ({ children }: any) => {
         throw new Error('Error fetching data')
       }
       const data = await response.json()
-      console.log(data.data)
       if (data.data.length <= 0) {
         return
       }
@@ -193,11 +207,7 @@ export const KeywordProvider = ({ children }: any) => {
     setSwiperSelectedtedKeyword(filteredAlphabets[0])
   }
 
-  const updateKeywordDetails = async (
-    id: number,
-    page: number,
-    values: any
-  ) => {
+  const updateKeywordDetails = async (id: number, values: any) => {
     try {
       const response = await fetch(`${apiUrl}/keywords/${id}`, {
         method: 'PATCH',
@@ -212,7 +222,6 @@ export const KeywordProvider = ({ children }: any) => {
       }
       const data = await response.json()
       toast.success('Keyword updated successfully')
-      getUsersKeywords(page)
     } catch (error) {
       toast.error('Error updating keyword')
     }
@@ -251,6 +260,13 @@ export const KeywordProvider = ({ children }: any) => {
         swiperSelectedtedKeyword,
         setSwiperSelectedtedKeyword,
         handleUnsubscribe,
+        setKeywords,
+        setSubscriptions,
+        mobileKeywords,
+        setMobileKeywords,
+        selectedMobileKeyword,
+        setSelectedMobileKeyword,
+        setFoundKeyword,
       }}
     >
       {children}

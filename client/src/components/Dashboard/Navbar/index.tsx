@@ -18,22 +18,6 @@ import { KeywordContext } from '@/contexts/keywordContext'
 const Navbar = () => {
   const { t } = useTranslation('common')
   const pathname = usePathname()
-  const router = useRouter()
-  const [mobileNavOpen, setMobileNavOpen] = React.useState(false)
-
-  const { logout, token } = useContext(UserContext)
-  const { getUsersKeywords, keywords, selectedKeyword, setSelectedKeyword } =
-    useContext(KeywordContext)
-
-  const [open, setOpen] = useState(false)
-  const [page, setPage] = useState(1)
-  const handleOpen = () => {
-    setMobileNavOpen(false)
-    setOpen(true)
-  }
-  const handleClose = () => {
-    setOpen(false)
-  }
 
   const links = [
     {
@@ -93,6 +77,27 @@ const Navbar = () => {
     },
   ]
 
+  const router = useRouter()
+  const [mobileNavOpen, setMobileNavOpen] = React.useState(false)
+
+  const { logout, token } = useContext(UserContext)
+  const {
+    getUsersKeywords,
+    keywords,
+    selectedKeyword,
+    setSelectedKeyword,
+    setKeywords,
+  } = useContext(KeywordContext)
+
+  const [open, setOpen] = useState(false)
+  const [page, setPage] = useState(1)
+  const handleOpen = () => {
+    setMobileNavOpen(false)
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     const selectedKeyword = keywords?.data?.find(
       (keyword: any) => keyword.letters === newValue
@@ -104,7 +109,13 @@ const Navbar = () => {
     if (token) {
       getUsersKeywords(page)
     }
+
+    return () => {}
   }, [token])
+
+  if (!token) {
+    return <></>
+  }
 
   return (
     <>
@@ -186,7 +197,7 @@ const Navbar = () => {
               />
             ))}
           </Tabs>
-          {keywords.hasNextPage && (
+          {keywords?.hasNextPage && (
             <Button
               onClick={() => {
                 setPage(page + 1)

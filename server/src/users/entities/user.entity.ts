@@ -46,6 +46,9 @@ export class User extends EntityHelper {
   @Expose({ groups: ['me', 'admin'] })
   hasPassword: boolean;
 
+  @Column({ nullable: true, default: false })
+  hasKeywords: boolean;
+
   @BeforeInsert()
   @BeforeUpdate()
   async setPassword() {

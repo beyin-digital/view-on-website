@@ -45,11 +45,19 @@ const VerificationDetails = () => {
   }
   const { secondsLeft, start } = useCountdown()
 
-  const { user, handleVerifyOtp, resendOTP } = useContext(UserContext)
+  const { user, token, handleVerifyOtp, resendOTP } = useContext(UserContext)
 
   useEffect(() => {
     start(60)
-  }, [user])
+    if (token) {
+      if (router.query.redirect === 'subscribe') {
+        router.push(
+          `/${router.locale}/subscribe?hashtag=${router.query.hashtag}&sublink=${router.query.sublink}`
+        )
+        return
+      }
+    }
+  }, [user, token])
 
   return (
     <>

@@ -51,16 +51,14 @@ const DashboardSubscriptionsPage = () => {
   const { t } = useTranslation('subscriptionsDash')
   const router = useRouter()
   const { locale } = useRouter()
-  const { getUserSubscriptions, subscriptions, handleUnsubscribe } =
-    useContext(KeywordContext)
+  const {
+    getUserSubscriptions,
+    subscriptions,
+    handleUnsubscribe,
+    setSubscriptions,
+  } = useContext(KeywordContext)
   const { token, user } = useContext(UserContext)
-  const [isScrollable, setIsScrollable] = useState(subscriptions.length > 3)
-
-  useEffect(() => {
-    if (token) {
-      getUserSubscriptions(page)
-    }
-  }, [token])
+  const [isScrollable, setIsScrollable] = useState(subscriptions?.length > 3)
 
   const [open, setOpen] = useState(false)
   const [selectedKeyword, setSelectedKeyword] = useState<any>({})
@@ -73,6 +71,15 @@ const DashboardSubscriptionsPage = () => {
   const handleClose = () => {
     setOpen(false)
   }
+
+  useEffect(() => {
+    if (token) {
+      getUserSubscriptions(page)
+    }
+    return () => {
+      setSubscriptions(null)
+    }
+  }, [token])
 
   if (!token) {
     return <></>
@@ -292,7 +299,7 @@ const DashboardSubscriptionsPage = () => {
                           <>
                             <Typography fontSize="20px">
                               {subscription?.duration}
-                              ly <br />
+                              <br />
                             </Typography>
                             <Typography>{t('package')}</Typography>
                           </>
@@ -345,27 +352,28 @@ const DashboardSubscriptionsPage = () => {
                   marginX: '2rem',
                 }}
               >
-                <Button
-                  disabled={subscriptions?.hasNextPage === false}
-                  variant="contained"
-                  sx={{
-                    height: '52px',
-                    width: '199px',
-                    color: '#FBFBFB',
-                    background: '#0090EC',
-                    borderRadius: '12px',
-                    fontSize: '24px',
-                    '&: hover': {
+                {subscriptions?.hasNextPage && subscriptions?.legnth >= 9 && (
+                  <Button
+                    variant="contained"
+                    sx={{
+                      height: '52px',
+                      width: '199px',
+                      color: '#FBFBFB',
                       background: '#0090EC',
-                    },
-                  }}
-                  onClick={() => {
-                    setPage(page + 1)
-                    getUserSubscriptions(page + 1)
-                  }}
-                >
-                  Load more
-                </Button>
+                      borderRadius: '12px',
+                      fontSize: '24px',
+                      '&: hover': {
+                        background: '#0090EC',
+                      },
+                    }}
+                    onClick={() => {
+                      setPage(page + 1)
+                      getUserSubscriptions(page + 1)
+                    }}
+                  >
+                    Load more
+                  </Button>
+                )}
               </Box>
             </Box>
           </Box>

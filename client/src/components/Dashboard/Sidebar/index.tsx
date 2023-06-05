@@ -12,11 +12,8 @@ import {
 import {
   BsFacebook,
   BsFillShieldLockFill,
-  BsLinkedin,
-  BsTwitter,
 } from 'react-icons/bs'
 import { RiLogoutBoxFill } from 'react-icons/ri'
-import { BiHome } from 'react-icons/bi'
 import { useContext, useState } from 'react'
 import Modal from '../Modal'
 import { UserContext } from '@/contexts/userContext'

@@ -127,20 +127,16 @@ export const UserProvider = ({ children }: any) => {
       // Get data from response
       const data = await response.json()
       // Get token and refresh token from data
-      const { token, refreshToken } = data
+      const { token, refreshToken, user } = data
       // Set token and refresh token in local storage
       localStorage.setItem('token', token)
       localStorage.setItem('refreshToken', refreshToken)
       // Set token and refresh token in state
       setToken(token)
       setRefreshToken(refreshToken)
-      // Redirect user to dashboard page
-      if ((router.query.redirect as string) === 'subscribe') {
-        router.push(
-          `/${router.locale}/${router.query.redirect as string}?hashtag=${
-            router.query.hashtag
-          }&sublink=${router.query.sublink}`
-        )
+      // Redirect user to home page if no Keywords and dashboard if keywords
+      if (user?.hasKeyword === false) {
+        router.push('/')
         return
       } else {
         router.push('/dashboard')
@@ -193,9 +189,7 @@ export const UserProvider = ({ children }: any) => {
       }
       if ((router.query.redirect as string) === 'subscribe') {
         router.push(
-          `/${router.locale}/verification?email=${values.email}&redirect=${
-            router.query.redirect as string
-          }&hashtag=${router.query.hashtag}&sublink=${router.query.sublink}`
+          `/${router.locale}/verification?email=${values.email}&redirect=subscribe&hashtag=${router.query.hashtag}&sublink=${router.query.sublink}`
         )
         return
       } else {
@@ -319,10 +313,7 @@ export const UserProvider = ({ children }: any) => {
       if (!response.ok) {
         throw new Error('Error updating user')
       }
-      toast.success('User updated successfully', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.success('User updated successfully')
       handleGetUserDetails()
     } catch (error) {
       toast.error('Error updating user')
@@ -366,6 +357,12 @@ export const UserProvider = ({ children }: any) => {
         throw new Error('Error deleting user')
       }
       toast.success('User deleted successfully')
+
+      localStorage.removeItem('token')
+      localStorage.removeItem('refreshToken')
+
+      setToken(null)
+      setRefreshToken(null)
 
       router.push('/login')
     } catch (error) {

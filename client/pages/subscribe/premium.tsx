@@ -56,7 +56,7 @@ const FooterMobile = dynamic(() => import('@/components/Footer/FooterMobile'), {
   ssr: false,
 })
 
-const SubscribePage: NextPage = () => {
+const SubscribePremiumPage: NextPage = () => {
   const { t } = useTranslation('subscribe')
   const router = useRouter()
   const { locale } = useRouter()
@@ -279,7 +279,6 @@ const SubscribePage: NextPage = () => {
                           ? 'borderSubscribeInput'
                           : ''
                       }`}
-                      onChange={handleChange}
                     />
                     {!isInputValid && values.hashtag.length > 1 && (
                       <Typography sx={{ color: 'red' }}>
@@ -629,7 +628,11 @@ const SubscribePage: NextPage = () => {
                           allowedCharacters.test(values.hashtag) && (
                             <>
                               <Button
-                                disabled={keywordFound}
+                                disabled={
+                                  keywordFound ||
+                                  values.hashtag.length === 0 ||
+                                  !isValidUrl(values.sublink)
+                                }
                                 sx={{
                                   borderRadius: '16px',
                                   paddingX: '18px',
@@ -662,21 +665,11 @@ const SubscribePage: NextPage = () => {
                                     )
                                     return
                                   }
-                                  if (token) {
-                                    await handleSubscription(
-                                      values.hashtag,
-                                      values.sublink
-                                    )
-                                  } else {
-                                    router.push(
-                                      '/login?redirect=subscribe&hashtag=' +
-                                        values.hashtag +
-                                        '&sublink=' +
-                                        values.sublink
-                                    )
-                                  }
+                                  await handleSubscription(
+                                    values.hashtag,
+                                    values.sublink
+                                  )
                                 }}
-                                type="submit"
                                 className="ButtonPay"
                                 onMouseEnter={handleHoverButton}
                                 onMouseLeave={handleLeave}
@@ -910,4 +903,4 @@ export async function getStaticProps({ params, locale }: any) {
     },
   }
 }
-export default SubscribePage
+export default SubscribePremiumPage

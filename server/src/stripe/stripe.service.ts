@@ -156,7 +156,9 @@ export class StripeService {
       order.status = 'paid';
       await order?.save();
 
-      const foundUser = await this.usersService.findOne({ stripeCustomerId });
+      const foundUser = (await this.usersService.findOne({
+        stripeCustomerId,
+      })) as User;
 
       const subscription = await this.subscriptionsService.create({
         letters: metaData.letters,
@@ -173,6 +175,9 @@ export class StripeService {
         user: foundUser as User,
         subscription: subscription,
       });
+
+      foundUser.hasKeywords = true || foundUser.hasKeywords;
+      await foundUser.save();
     }
   }
 
@@ -183,6 +188,7 @@ export class StripeService {
     renewalAmount,
     renewalDate,
     interval,
+    intervalCount,
     invoiceId,
   }: {
     subscriptionId?: string;
@@ -191,6 +197,7 @@ export class StripeService {
     renewalAmount?: number;
     renewalDate?: number;
     interval?: string;
+    intervalCount?: number;
     invoiceId?: string;
   }) {
     const subscription = (await this.subscriptionsService.findOne({
@@ -201,6 +208,10 @@ export class StripeService {
       subscription: { stripeSubscriptionId: subscriptionId },
     })) as Keyword;
 
+    const user = (await this.usersService.findOne({
+      id: subscription.user.id,
+    })) as User;
+
     if (status === 'active') {
       subscription.stripeSubscriptionStatus =
         status || subscription.stripeSubscriptionStatus;
@@ -210,7 +221,12 @@ export class StripeService {
         (renewalAmount as number) / 100 || subscription.renewalAmount;
       subscription.renewalDate =
         new Date((renewalDate as number) * 1000) || subscription.renewalDate;
-      subscription.duration = interval || subscription.duration;
+      subscription.duration =
+        intervalCount === 1
+          ? (interval as string)
+          : intervalCount === 6
+          ? '6 months'
+          : 'year' || subscription.duration;
       subscription.invoiceId = invoiceId || subscription.invoiceId;
       keyword.renewalDate = new Date((renewalDate as number) * 1000);
       keyword.purchaseDate = new Date((purchaseDate as number) * 1000);
@@ -222,6 +238,14 @@ export class StripeService {
         keyword: { id: keyword.id },
       });
       await this.keywordsService.delete(keyword.id);
+      const keywordsCount = await this.keywordsService.count({
+        user: { id: user.id },
+      });
+
+      if (keywordsCount === 0) {
+        user.hasKeywords = false;
+        await user.save();
+      }
     }
   }
 
@@ -250,6 +274,7 @@ export class StripeService {
           renewalDate: subscription.current_period_end as number,
           status: subscription.status,
           interval: subscription.plan?.interval as string,
+          intervalCount: subscription.plan?.interval_count as number,
           invoiceId: subscription.latest_invoice as string,
         });
         break;

@@ -58,4 +58,10 @@ export class KeywordsService {
   async delete(id: number): Promise<void> {
     await this.keywordsRepository.delete(id);
   }
+
+  async count(fields: EntityCondition<Keyword>): Promise<number> {
+    return this.keywordsRepository.count({
+      where: fields,
+    });
+  }
 }
