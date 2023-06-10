@@ -80,14 +80,9 @@ const Navbar = () => {
   const router = useRouter()
   const [mobileNavOpen, setMobileNavOpen] = React.useState(false)
 
-  const { logout, token } = useContext(UserContext)
-  const {
-    getUsersKeywords,
-    keywords,
-    selectedKeyword,
-    setSelectedKeyword,
-    setKeywords,
-  } = useContext(KeywordContext)
+  const { logout, user, token } = useContext(UserContext)
+  const { getUsersKeywords, keywords, selectedKeyword, setSelectedKeyword } =
+    useContext(KeywordContext)
 
   const [open, setOpen] = useState(false)
   const [page, setPage] = useState(1)
@@ -106,14 +101,10 @@ const Navbar = () => {
   }
 
   useEffect(() => {
-    if (token) {
+    if (token && user?.hasKeywords) {
       getUsersKeywords(page)
     }
   }, [token])
-
-  if (!token) {
-    return <></>
-  }
 
   return (
     <>

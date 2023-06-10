@@ -32,12 +32,14 @@ const DashboardHomePage = () => {
   const router = useRouter()
   const { token, user } = useContext(UserContext)
 
-  if (!token) return <></>
   useEffect(() => {
     if (user?.hasKeywords === false) {
       router.push(`${router.locale}/`)
     }
   }, [user])
+
+  if (!token) return <></>
+
   return (
     <>
       <Head>

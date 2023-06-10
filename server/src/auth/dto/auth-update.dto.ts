@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, MinLength, Validate } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  Matches,
+  MinLength,
+  Validate,
+} from 'class-validator';
 import { IsExist } from '../../utils/validators/is-exists.validator';
 import { FileEntity } from '../../files/entities/file.entity';
 
@@ -17,10 +23,15 @@ export class AuthUpdateDto {
   fullName?: string;
 
   @ApiProperty()
-  @IsOptional()
+  @MinLength(8)
   @IsNotEmpty()
-  @MinLength(6)
-  password?: string;
+  @Matches(
+    /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^*&+=])(?=\S+$).{8,}$/,
+    {
+      message: 'password_too_weak',
+    },
+  )
+  password: string;
 
   @ApiProperty()
   @IsOptional()

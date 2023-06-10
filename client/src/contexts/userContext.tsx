@@ -69,7 +69,13 @@ export const UserProvider = ({ children }: any) => {
       setRefreshToken(refreshToken)
       setToken(token)
 
-      router.push('/dashboard')
+      if (user?.hasKeywords === false) {
+        router.push(`/${router.locale}/subscribe`)
+        return
+      } else {
+        router.push('/dashboard')
+        return
+      }
     } catch (error) {
       console.log(error)
       //   show toast if error
@@ -286,17 +292,10 @@ export const UserProvider = ({ children }: any) => {
 
       router.push('/login')
     } catch (error) {
-      toast.error('Error resetting password')
+      toast.error(
+        'Error resetting password. Password should be 8 characters minimum and Contain at least one uppercase letter, one number and one special character'
+      )
     }
-  }
-
-  const logout = () => {
-    //  remove token and refresh token from local storage
-    localStorage.removeItem('token')
-    localStorage.removeItem('refreshToken')
-    // set token and refresh token to null
-    setToken(null)
-    setRefreshToken(null)
   }
 
   const updateUser = async (values: any) => {
@@ -318,12 +317,26 @@ export const UserProvider = ({ children }: any) => {
         },
       })
       if (!response.ok) {
-        throw new Error('Error updating user')
+        throw response
       }
       toast.success('User updated successfully')
       handleGetUserDetails()
-    } catch (error) {
-      toast.error('Error updating user')
+    } catch (error: any) {
+      const errorResponse = await error.json()
+      if (errorResponse?.errors?.oldPassword === 'incorrectOldPassword') {
+        toast.error('Current Password is incorrect')
+      }
+      if (errorResponse?.errors?.oldPassword === 'missingOldPassword') {
+        toast.error('Please enter your current password')
+      }
+      if (errorResponse?.errors.oldPassword === 'must_not_be_empty') {
+        toast.error('Please enter your current password')
+      }
+      if (errorResponse?.errors?.password === 'password_too_weak') {
+        toast.error(
+          'Password should be 8 characters minimum and Contain at least one uppercase letter, one number and one special character'
+        )
+      }
     }
   }
 
@@ -348,6 +361,26 @@ export const UserProvider = ({ children }: any) => {
       router.push('/verification?email=' + email + '&resend=true')
     } catch (error) {
       toast.error('Error resending OTP')
+    }
+  }
+  const handleGetUserDetails = async () => {
+    if (token) {
+      try {
+        const response = await fetch(`${apiUrl}/auth/me`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        if (!response.ok) {
+          throw new Error('Error getting user details')
+        }
+        const data = await response.json()
+        setUser(data)
+      } catch (error) {
+        toast.error('Error getting user details')
+      }
     }
   }
 
@@ -377,25 +410,16 @@ export const UserProvider = ({ children }: any) => {
     }
   }
 
-  const handleGetUserDetails = async () => {
-    if (token) {
-      try {
-        const response = await fetch(`${apiUrl}/auth/me`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        if (!response.ok) {
-          throw new Error('Error getting user details')
-        }
-        const data = await response.json()
-        setUser(data)
-      } catch (error) {
-        toast.error('Error getting user details')
-      }
-    }
+  const logout = () => {
+    //  remove token and refresh token from local storage
+    localStorage.removeItem('token')
+    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('user')
+    // set token and refresh token to null
+    router.push('/login')
+
+    setToken(null)
+    setRefreshToken(null)
   }
 
   useEffect(() => {

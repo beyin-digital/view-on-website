@@ -220,6 +220,8 @@ const SubscribePage: NextPage = () => {
                   >
                     <OutlinedInput
                       inputProps={{
+                        minLength: 1,
+                        maxLength: 13,
                         pattern: allowedCharacters.test(values.hashtag),
                       }}
                       name="hashtag"

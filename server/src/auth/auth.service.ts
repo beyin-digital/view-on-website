@@ -372,7 +372,7 @@ export class AuthService {
       user = foundUser;
     } else {
       const foundKeyword = await this.keywordsService.findOne({
-        slug: identifier.toLocaleLowerCase().replace(/ /g, '-'),
+        slug: identifier.toLowerCase().replace(/ /g, '-'),
       });
       user = foundKeyword?.user || null;
     }

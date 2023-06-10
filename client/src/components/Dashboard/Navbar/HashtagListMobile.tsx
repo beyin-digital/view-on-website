@@ -1,27 +1,28 @@
 import { KeywordContext } from '@/contexts/keywordContext'
 import { UserContext } from '@/contexts/userContext'
 import { Box, Tab, Tabs, Typography } from '@mui/material'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 export default function HashtagListMobile() {
   const {
     getUsersKeywords,
-    keywords,
     mobileKeywords,
     selectedMobileKeyword,
     setSelectedMobileKeyword,
   } = useContext(KeywordContext)
 
-  const { token } = useContext(UserContext)
+  const { user, token } = useContext(UserContext)
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    const selectedMobileKeyword = keywords?.data?.find(
+    const selectedMobileKeyword = mobileKeywords?.data?.find(
       (keyword: any) => keyword.letters === newValue
     )
     setSelectedMobileKeyword(selectedMobileKeyword)
   }
+  const [page, setPage] = useState(1)
+
   useEffect(() => {
-    if (token) {
-      getUsersKeywords()
+    if (token && user?.hasKeywords) {
+      getUsersKeywords(page)
     }
   }, [token])
 

@@ -117,10 +117,12 @@ export const KeywordProvider = ({ children }: any) => {
     }
   }
 
-  const getUsersKeywords = async (page: number) => {
+  const getUsersKeywords = async (page: number, limit?: number) => {
     try {
       const response = await fetch(
-        `${apiUrl}/keywords?page=${page ? page : 1}&limit=10`,
+        `${apiUrl}/keywords?page=${page ? page : 1}&limit=${
+          limit ? limit : 10
+        }`,
         {
           method: 'GET',
           headers: { Authorization: `Bearer ${token}` },
@@ -140,10 +142,16 @@ export const KeywordProvider = ({ children }: any) => {
         if (selectedKeyword === null) {
           setSelectedKeyword(data?.data[0])
           setSelectedMobileKeyword(data?.data[0])
+        } else {
+          setSelectedKeyword(
+            data?.data.find((x: any) => x._id === selectedKeyword._id)
+          )
+          setSelectedMobileKeyword(
+            data?.data.find((x: any) => x._id === selectedKeyword._id)
+          )
         }
-        return
+        return data
       }
-      console.log('Extra keywords found', data)
       setKeywords({
         ...keywords,
         data: [...keywords.data, ...data.data],
@@ -154,6 +162,7 @@ export const KeywordProvider = ({ children }: any) => {
         data: [...mobileKeywords.data, ...data.data],
         hasNextPage: data.hasNextPage,
       })
+      return data
     } catch (error) {
       console.error('Error fetching keywords')
     }
@@ -223,6 +232,9 @@ export const KeywordProvider = ({ children }: any) => {
       const data = await response.json()
       toast.success('Keyword updated successfully')
       setSelectedKeyword({ ...selectedKeyword, ...data })
+      const updatedData = await getUsersKeywords(1, keywords?.data?.length)
+      console.log('updatedData', updatedData)
+      setKeywords({ ...keywords, data: updatedData.data })
     } catch (error) {
       toast.error('Error updating keyword')
     }
