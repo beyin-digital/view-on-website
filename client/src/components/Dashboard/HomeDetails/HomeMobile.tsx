@@ -48,14 +48,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const HomeMobile = () => {
   const { t } = useTranslation('dashboard')
-  const router = useRouter()
   const {
     selectedKeyword,
     setAnalyticsData,
     updateKeywordDetails,
     analyticsData,
   } = useContext(KeywordContext)
-  const { token } = useContext(UserContext)
 
   const [lineChartType, setLineChartType] = useState(1)
 

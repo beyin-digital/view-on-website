@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Button, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Button, Tab, Tabs, Typography, IconButton } from '@mui/material'
 import Image from 'next/image'
 import { BiMenu } from 'react-icons/bi'
 import { IoIosLogOut, IoMdClose } from 'react-icons/io'
@@ -14,6 +14,7 @@ import Modal from '../Modal'
 import { UserContext } from '@/contexts/userContext'
 import { useTranslation } from 'react-i18next'
 import { KeywordContext } from '@/contexts/keywordContext'
+import { Add } from '@mui/icons-material'
 
 const Navbar = () => {
   const { t } = useTranslation('common')
@@ -80,7 +81,7 @@ const Navbar = () => {
   const router = useRouter()
   const [mobileNavOpen, setMobileNavOpen] = React.useState(false)
 
-  const { logout, user, token } = useContext(UserContext)
+  const { logout, token, user } = useContext(UserContext)
   const { getUsersKeywords, keywords, selectedKeyword, setSelectedKeyword } =
     useContext(KeywordContext)
 
@@ -98,11 +99,25 @@ const Navbar = () => {
       (keyword: any) => keyword.letters === newValue
     )
     setSelectedKeyword(selectedKeyword)
+    if (router.query.hashtag) {
+      router.push(`/${router.locale}/dashboard/`)
+    }
   }
 
   useEffect(() => {
-    if (token && user?.hasKeywords) {
+    if (token) {
+      if (router.query.hashtag) {
+        getUsersKeywords(
+          parseInt(router.query.page as string),
+          parseInt(router.query.limit as string)
+        )
+        return
+      }
       getUsersKeywords(page)
+    }
+
+    return () => {
+      setSelectedKeyword(null)
     }
   }, [token])
 
@@ -187,14 +202,16 @@ const Navbar = () => {
             ))}
           </Tabs>
           {keywords?.hasNextPage && (
-            <Button
+            <IconButton
+              size="small"
+              sx={{}}
               onClick={() => {
                 setPage(page + 1)
                 getUsersKeywords(page + 1)
               }}
             >
-              Load More
-            </Button>
+              <Add />
+            </IconButton>
           )}
         </Box>
       </Box>
@@ -248,7 +265,7 @@ const Navbar = () => {
           <Typography fontSize="24px" fontWeight="600">
             {t('side_title')}
           </Typography>
-          <Link href="/dashboard">
+          <Link href="/">
             <Image
               src="/images/logo.webp"
               alt="logo"

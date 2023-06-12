@@ -68,10 +68,7 @@ const WebProfile = () => {
               borderRadius: '21px',
             }}
             variant="square"
-          >
-            {/* {user?.fullName.split(' ')[0].charAt(0)}
-            {user?.fullName.split(' ')[1].charAt(0)} */}
-          </Avatar>
+          ></Avatar>
           <Typography
             sx={{
               fontSize: '36px',
@@ -183,8 +180,8 @@ const WebProfile = () => {
             {t('country')}
           </MenuItem>
           {countries.map((country) => (
-            <MenuItem value={country.country} key={country.country}>
-              {country.country}
+            <MenuItem value={country?.country} key={country?.country}>
+              {country?.country}
             </MenuItem>
           ))}
         </Select>

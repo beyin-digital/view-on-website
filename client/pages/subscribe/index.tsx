@@ -3,7 +3,7 @@ import Head from 'next/head'
 import useDebounce from '@/hooks/useDebounce'
 import { isValidUrl } from '@/utils/checkUrl'
 import { toast } from 'react-toastify'
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 import {
@@ -57,6 +57,9 @@ const FooterMobile = dynamic(() => import('@/components/Footer/FooterMobile'), {
 })
 
 const SubscribePage: NextPage = () => {
+  const scrollTargetRef = useRef<any>(null)
+  const [isScrolling, setIsScrolling] = useState(false)
+
   const { t } = useTranslation('subscribe')
   const router = useRouter()
   const { locale } = useRouter()
@@ -76,6 +79,21 @@ const SubscribePage: NextPage = () => {
   const { handleSubscription, handleCheckKeyword, keywordFound, isSearching } =
     useContext(KeywordContext)
   const { token } = useContext(UserContext)
+
+  const scrollToTarget = () => {
+    setIsScrolling(true)
+
+    if (scrollTargetRef?.current) {
+      scrollTargetRef?.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+
+    setTimeout(() => {
+      setIsScrolling(false)
+    }, 1000) // Adjust the delay to match your desired scrolling duration
+  }
 
   let price = ''
   let priceNumber = 0
@@ -136,6 +154,10 @@ const SubscribePage: NextPage = () => {
       setShowAngledArrow(true)
     } else {
       setShowAngledArrow(false)
+    }
+
+    if(router.query.hashtag){
+        scrollToTarget()
     }
 
     return () => {
@@ -626,6 +648,7 @@ const SubscribePage: NextPage = () => {
                     {values.hashtag.length <= 3 &&
                     !keywordFound &&
                     !isSearching ? (
+                      // Premium subscriptions
                       <>
                         {values.hashtag.length >= 1 &&
                           allowedCharacters.test(values.hashtag) && (
@@ -719,46 +742,97 @@ const SubscribePage: NextPage = () => {
                           )}
                       </>
                     ) : (
-                      <Box
-                        sx={{
-                          width: '100%',
-                        }}
-                      >
-                        {values.hashtag.length > 3 &&
+                      //Regular subsscriptions
+                      <>
+                        {values.hashtag.length >= 1 &&
                           allowedCharacters.test(values.hashtag) && (
-                            <Box
-                              sx={{
-                                width: '100%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                                flexDirection: {
-                                  xs: 'column-reverse',
-                                  sm: 'row',
-                                },
-                              }}
-                            >
-                              {/* Icon Scroll */}
-                              <Box
+                            <>
+                              <Button
                                 sx={{
-                                  width: '100%',
-                                  display:
-                                    values.hashtag.length >= 4 &&
-                                    values.sublink.length > 0 &&
-                                    isValidUrl(values.sublink) &&
-                                    !keywordFound &&
-                                    allowedCharacters.test(values.hashtag)
-                                      ? 'flex'
-                                      : 'none',
-                                  alignItems: 'center',
-                                  justifyContent: 'start',
+                                  borderRadius: '16px',
+                                  paddingX: '18px',
+                                  height: '59px',
+                                  width: {
+                                    xs: '100%',
+                                    sm: '311px',
+                                    md: '311px',
+                                    xl: '311px',
+                                  },
+                                  display: 'flex',
+                                  background: '#0090EC',
+                                  justifyContent: 'space-around',
                                 }}
+                                onClick={async (e) => {
+                                  if (values.sublink.length < 4) {
+                                    toast.error('Add your sublink to proceed')
+                                    return
+                                  }
+                                  if (
+                                    values.sublink.length > 4 &&
+                                    !isValidUrl(values.sublink)
+                                  ) {
+                                    toast.error('Please enter a valid Sublink')
+                                    return
+                                  }
+                                  if (keywordFound) {
+                                    toast.error(
+                                      'This hashtag is already in use'
+                                    )
+                                    return
+                                  }
+                                  if (token) {
+                                    scrollToTarget()
+                                    return
+                                  } else {
+                                    if (values.hashtag.length > 3) {
+                                      router.push(
+                                        '/login?redirect=subscribe&hashtag=' +
+                                          values.hashtag +
+                                          '&sublink=' +
+                                          values.sublink
+                                      )
+                                    }
+                                  }
+                                }}
+                                // type="submit"
+                                className="ButtonPay"
+                                onMouseEnter={handleHoverButton}
+                                onMouseLeave={handleLeave}
                               >
-                                <IconScroll />
-                              </Box>
-                            </Box>
+                                <Typography
+                                  sx={{
+                                    letterSpacing: '0.02em',
+                                    fontSize: '32px',
+                                    fontWeight: '400',
+                                    lineHeight: '40px',
+                                    color: '#343132',
+                                    textTransform: 'uppercase',
+                                  }}
+                                >
+                                  {t('button')}
+                                  {/* {t("pay")} */}
+                                </Typography>
+                                {locale === 'ar' ? (
+                                  <FiArrowDownLeft
+                                    size={42}
+                                    color="#343132"
+                                    className={
+                                      hoveredButton ? 'ButtonReserve_rtl' : ''
+                                    }
+                                  />
+                                ) : (
+                                  <FiArrowDownRight
+                                    size={42}
+                                    color="#343132"
+                                    className={
+                                      hoveredButton ? 'ButtonReserve_ltr' : ''
+                                    }
+                                  />
+                                )}
+                              </Button>
+                            </>
                           )}
-                      </Box>
+                      </>
                     )}
                   </Box>
                   {/* text under line  */}
@@ -800,6 +874,7 @@ const SubscribePage: NextPage = () => {
 
         {/* package box */}
         <Box
+          ref={scrollTargetRef}
           sx={{
             width: '100%',
             height: { xs: '100%', xl: '100vh' },

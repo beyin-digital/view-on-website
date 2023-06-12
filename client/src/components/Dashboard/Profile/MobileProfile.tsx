@@ -12,11 +12,12 @@ import {
 } from '@mui/material'
 
 import { useTranslation } from 'react-i18next'
+import { countries } from '@/utils/countries'
 
 const MobileProfile = () => {
   const { t } = useTranslation('profile')
 
-  const { updateUser, user } = useContext(UserContext)
+  const { updateUser, user, token } = useContext(UserContext)
 
   const [values, setValues] = useState({
     fullName: '',
@@ -29,10 +30,14 @@ const MobileProfile = () => {
       setValues({
         fullName: user?.fullName,
         organisation: user?.organisation,
-        country: '',
+        country: user?.country as string,
       })
     }
   }, [])
+
+  if (!token) {
+    return <></>
+  }
   return (
     <Box
       sx={{
@@ -148,6 +153,9 @@ const MobileProfile = () => {
                 border: '0',
               },
             }}
+            onChange={(e) => {
+              setValues({ ...values, fullName: e.target.value })
+            }}
           />
           <OutlinedInput
             value={values?.organisation}
@@ -166,12 +174,18 @@ const MobileProfile = () => {
                 border: '0',
               },
             }}
+            onChange={(e) => {
+              setValues({ ...values, organisation: e.target.value })
+            }}
           />
           <Select
             displayEmpty
             value={values.country}
+            onChange={(e) => {
+              setValues({ ...values, country: e.target.value })
+            }}
             renderValue={(selected: any) => {
-              if (selected.length === 0) {
+              if (selected?.length === 0) {
                 return (
                   <Typography
                     sx={{
@@ -183,6 +197,7 @@ const MobileProfile = () => {
                   </Typography>
                 )
               }
+              return selected
             }}
             sx={{
               height: '57px',
@@ -201,6 +216,11 @@ const MobileProfile = () => {
             <MenuItem disabled value="">
               {t('country')}
             </MenuItem>
+            {countries.map((country) => (
+              <MenuItem value={country?.country} key={country?.country}>
+                {country?.country}
+              </MenuItem>
+            ))}
           </Select>
 
           <Button

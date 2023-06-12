@@ -1,13 +1,15 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { User } from '@/types/user'
+import { KeywordContext } from './keywordContext'
 
 export const UserContext = createContext<any>({})
 
 export const UserProvider = ({ children }: any) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const router = useRouter()
+  const { setKeywords, setSelectedKeyword } = useContext(KeywordContext)
   const [values, setValues] = useState({
     identifier: '',
     email: '',
@@ -186,6 +188,10 @@ export const UserProvider = ({ children }: any) => {
     e.preventDefault()
     try {
       // initial login request to get token and refresh token
+      if (values.password !== values.confirmPassword) {
+        toast.error('Passwords do not match')
+        return
+      }
       const response = await fetch(`${apiUrl}/auth/email/register`, {
         method: 'POST',
         body: JSON.stringify({
@@ -363,6 +369,7 @@ export const UserProvider = ({ children }: any) => {
       toast.error('Error resending OTP')
     }
   }
+
   const handleGetUserDetails = async () => {
     if (token) {
       try {
@@ -414,10 +421,7 @@ export const UserProvider = ({ children }: any) => {
     //  remove token and refresh token from local storage
     localStorage.removeItem('token')
     localStorage.removeItem('refreshToken')
-    localStorage.removeItem('user')
     // set token and refresh token to null
-    router.push('/login')
-
     setToken(null)
     setRefreshToken(null)
   }

@@ -409,8 +409,7 @@ const DashboardSecurityPage = () => {
               padding: '0px 27px',
               position: 'relative',
               zIndex: '991',
-              // border: "1px solid red",
-              // background: "#EFEFEF",
+
               marginY: '4rem',
             }}
           >
@@ -419,7 +418,6 @@ const DashboardSecurityPage = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                // justifyContent:"space-around"
               }}
             >
               <Avatar
@@ -572,6 +570,7 @@ const DashboardSecurityPage = () => {
                   />
                   <Button
                     disabled={values?.currentPassword === ''}
+                    onClick={handleChangePassword}
                     sx={{
                       background: '#0090EC',
                       height: '44px',

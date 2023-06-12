@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router'
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { UserContext } from './userContext'
 
 export const KeywordContext = createContext<any>({})
 
 export const KeywordProvider = ({ children }: any) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
+  const { token, user } = useContext(UserContext)
   const router = useRouter()
   const [values, setValues] = useState({
     hashtag: '',
@@ -21,9 +23,8 @@ export const KeywordProvider = ({ children }: any) => {
 
   const [subscriptions, setSubscriptions] = useState<any>({})
   const [selectedKeyword, setSelectedKeyword] = useState<any>(null)
-  const [selectedMobileKeyword, setSelectedMobileKeyword] = useState<any>(null)
 
-  const [token, setToken] = useState('')
+  //   const [token, setToken] = useState<string | null>(null)
   const [analyticsData, setAnalyticsData] = useState({
     totalVisits: 0,
     totalVisitsToday: 0,
@@ -73,7 +74,7 @@ export const KeywordProvider = ({ children }: any) => {
     interval?: string
   ) => {
     try {
-      if (token.length <= 0 || token === null || token === undefined) {
+      if (token === null || token === undefined) {
         router.push(
           `/login?redirect=subscribe&hashtag=${letters}&sublink=${sublink}`
         )
@@ -136,32 +137,32 @@ export const KeywordProvider = ({ children }: any) => {
       if (data?.data?.length <= 0) {
         return
       }
-      if (page === 1 || page === undefined) {
+      if (router.query.hashtag) {
+        const keyword = data?.data?.find(
+          (keyword: any) => keyword.slug === router.query.hashtag
+        )
+        setSelectedKeyword(keyword)
+
+        setKeywords({
+          ...keywords,
+          data: [...data.data],
+          hasNextPage: false,
+        })
+        return
+      }
+
+      if ((page === 1 || page === undefined) && limit === undefined) {
         setKeywords(data)
-        setMobileKeywords(data)
-        if (selectedKeyword === null) {
-          setSelectedKeyword(data?.data[0])
-          setSelectedMobileKeyword(data?.data[0])
-        } else {
-          setSelectedKeyword(
-            data?.data.find((x: any) => x._id === selectedKeyword._id)
-          )
-          setSelectedMobileKeyword(
-            data?.data.find((x: any) => x._id === selectedKeyword._id)
-          )
-        }
+        setSelectedKeyword(data.data[0])
         return data
       }
+
       setKeywords({
         ...keywords,
         data: [...keywords.data, ...data.data],
         hasNextPage: data.hasNextPage,
       })
-      setMobileKeywords({
-        ...mobileKeywords,
-        data: [...mobileKeywords.data, ...data.data],
-        hasNextPage: data.hasNextPage,
-      })
+
       return data
     } catch (error) {
       console.error('Error fetching keywords')
@@ -241,11 +242,11 @@ export const KeywordProvider = ({ children }: any) => {
   }
 
   useEffect(() => {
-    const savedToken = localStorage.getItem('token')
-    if (savedToken) {
-      setToken(savedToken)
-    }
-  }, [keywordFound, token])
+    // const savedToken = localStorage.getItem('token')
+    // if (savedToken) {
+    //   setToken(savedToken)
+    // }
+  }, [keywordFound, selectedKeyword])
   return (
     <KeywordContext.Provider
       value={{
@@ -277,8 +278,6 @@ export const KeywordProvider = ({ children }: any) => {
         setSubscriptions,
         mobileKeywords,
         setMobileKeywords,
-        selectedMobileKeyword,
-        setSelectedMobileKeyword,
         setFoundKeyword,
       }}
     >

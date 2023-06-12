@@ -18,15 +18,6 @@ export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache
 }
 
-const combineProviders = (providers: any[]) =>
-  providers.reduce((Combined: any, Provider: any) => ({ children }: any) => (
-    <Combined>
-      <Provider>{children}</Provider>
-    </Combined>
-  ))
-
-const Providers = combineProviders([UserProvider, KeywordProvider])
-
 function MyApp(props: MyAppProps) {
   const { locale } = useRouter()
   const isRTL = locale === 'ar'
@@ -100,11 +91,9 @@ function MyApp(props: MyAppProps) {
         />
       </Head>
       <div dir={isRTL ? 'rtl' : 'ltr'}>
-        <Providers>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </Providers>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </div>
     </CacheProvider>
   )

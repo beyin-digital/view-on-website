@@ -41,13 +41,13 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (token) {
-      if ((router.query.redirect) === 'subscribe') {
+      if (router.query.redirect === 'subscribe') {
         router.push(
-          `/${router.locale}/subscribe?hashtag=${
-            router.query.hashtag
-          }&sublink=${router.query.sublink}`
+          `/${router.locale}/subscribe?hashtag=${router.query.hashtag}&sublink=${router.query.sublink}`
         )
         return
+      } else {
+        router.push(`/${router.locale}/dashboard`)
       }
     }
   }, [token])

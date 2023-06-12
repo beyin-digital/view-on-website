@@ -1,29 +1,33 @@
-// withAuth.js
+// withAuth.tsx
 
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { UserContext } from '../contexts/userContext'
 
 const withAuth = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
-    const { token, handleRefreshToken } = useContext(UserContext)
+    const { token } = useContext(UserContext)
     const router = useRouter()
+    const [isLoading, setIsLoading] = useState(true) // New state variable
 
     useEffect(() => {
-      if (!token) {
-        // Redirects to the authentication page if the user is not authenticated
-        router.push('/login')
-      } else {
-        const isTokenExpired = new Date().getTime() / 1000 > token.exp
-
-        if (isTokenExpired) {
-          handleRefreshToken() // Calling the function to get a new access token
+      setTimeout(() => {
+        if (token === null) {
+          router.push('/login')
+        } else {
+          setIsLoading(false)
+          if (router.query.hashtag) {
+            router.push(
+              `/dashboard?hashtag=${router.query.hashtag}&page=${router.query.page}&limit=${router.query.limit}`
+            )
+            // console.log('From withAuth Hook: ', router)
+            return
+          }
         }
-      }
-    }, [token, handleRefreshToken, router])
+      }, 250)
+    }, [token])
 
-    if (!token) {
-      // Shows loading state while the user is not authenticated
+    if (isLoading) {
       return <div>Loading...</div>
     }
 
