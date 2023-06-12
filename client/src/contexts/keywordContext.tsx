@@ -141,13 +141,12 @@ export const KeywordProvider = ({ children }: any) => {
         const keyword = data?.data?.find(
           (keyword: any) => keyword.slug === router.query.hashtag
         )
-        setSelectedKeyword(keyword)
-
         setKeywords({
           ...keywords,
           data: [...data.data],
           hasNextPage: false,
         })
+        setSelectedKeyword(keyword)
         return
       }
 
