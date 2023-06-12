@@ -25,7 +25,6 @@ import { Keyword } from './entities/keyword.entity';
 import { InfinityPaginationResultType } from '../utils/types/infinity-pagination-result.type';
 import { NullableType } from '../utils/types/nullable.type';
 import { KeywordsService } from './keywords.service';
-import { AnalyticsGateway } from 'src/analytics/analytics.gateway';
 
 @ApiTags('Keywords')
 @Controller({
@@ -33,10 +32,7 @@ import { AnalyticsGateway } from 'src/analytics/analytics.gateway';
   version: '1',
 })
 export class KeywordsController {
-  constructor(
-    private readonly keywordsService: KeywordsService,
-    private analyticsGateway: AnalyticsGateway,
-  ) {}
+  constructor(private readonly keywordsService: KeywordsService) {}
 
   @Get('letters')
   @HttpCode(HttpStatus.OK)
@@ -54,7 +50,7 @@ export class KeywordsController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @UseGuards(AuthGuard('jwt'))
   @SerializeOptions({
     groups: ['me', 'admin'],
   })

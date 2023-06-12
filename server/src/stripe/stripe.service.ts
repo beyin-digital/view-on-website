@@ -54,6 +54,12 @@ export class StripeService {
         ? 10000
         : null;
 
+    const keywordsLimit = await this.keywordsService.count({
+      user: {
+        stripeCustomerId: createCheckoutSessionDto.stripeCustomerId,
+      },
+    });
+
     if (premiumPrice === null) {
       const recurring: Stripe.Checkout.SessionCreateParams.LineItem.PriceData.Recurring =
         createCheckoutSessionDto?.interval === 'month'
@@ -89,8 +95,10 @@ export class StripeService {
           },
         ],
         mode: 'subscription',
-        success_url: `${frontendDomain}/en/dashboard`,
-        cancel_url: `${frontendDomain}/en/dashboard`,
+        success_url: `${frontendDomain}/en/payment?hashtag=${createCheckoutSessionDto.letters
+          .toLowerCase()
+          .replace(/ /g, '-')}?page=1&limit=${keywordsLimit + 1}`,
+        cancel_url: `${frontendDomain}/en/`,
       });
     } else {
       checkoutSession = await this.stripe.checkout.sessions.create({
@@ -114,7 +122,9 @@ export class StripeService {
           },
         ],
         mode: 'payment',
-        success_url: `${frontendDomain}/en/dashboard`,
+        success_url: `${frontendDomain}/en/payment?hashtag=${createCheckoutSessionDto.letters
+          .toLowerCase()
+          .replace(/ /g, '-')}?page=1&limit=${keywordsLimit + 1}`,
         cancel_url: `${frontendDomain}/en/dashboard`,
       });
     }
