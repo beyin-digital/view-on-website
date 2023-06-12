@@ -150,6 +150,7 @@ export const UserProvider = ({ children }: any) => {
       setToken(token)
       setRefreshToken(refreshToken)
       // Redirect user to home page if no Keywords and dashboard if keywords
+      toast.success("OTP verified successfully. You'll be redirected soon.")
       if (user?.hasKeywords === false) {
         router.push(`/${router.locale}/subscribe`)
         return
@@ -360,10 +361,7 @@ export const UserProvider = ({ children }: any) => {
       if (!response.ok) {
         throw new Error('Error resending OTP')
       }
-      toast.success('OTP sent successfully', {
-        position: 'top-right',
-        autoClose: 5000,
-      })
+      toast.success('OTP sent successfully')
       router.push('/verification?email=' + email + '&resend=true')
     } catch (error) {
       toast.error('Error resending OTP')

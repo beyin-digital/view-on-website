@@ -189,9 +189,9 @@ const VerificationDetails = () => {
               onClick={() => {
                 if (secondsLeft <= 0) {
                   resendOTP(
-                    user?.email || (router.query.newUser as string) || ''
+                    user?.email || (router.query.email as string) || ''
                   )
-                  start(30)
+                  start(60)
                 }
               }}
               sx={{
