@@ -146,6 +146,7 @@ export const KeywordProvider = ({ children }: any) => {
           data: [...data.data],
           hasNextPage: false,
         })
+        console.log(keyword)
         setSelectedKeyword(keyword)
         return
       }

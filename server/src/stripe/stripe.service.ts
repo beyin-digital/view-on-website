@@ -97,7 +97,7 @@ export class StripeService {
         mode: 'subscription',
         success_url: `${frontendDomain}/en/payment?hashtag=${createCheckoutSessionDto.letters
           .toLowerCase()
-          .replace(/ /g, '-')}?page=1&limit=${keywordsLimit + 1}`,
+          .replace(/ /g, '-')}&page=1&limit=${keywordsLimit + 1}`,
         cancel_url: `${frontendDomain}/en/`,
       });
     } else {
@@ -124,7 +124,7 @@ export class StripeService {
         mode: 'payment',
         success_url: `${frontendDomain}/en/payment?hashtag=${createCheckoutSessionDto.letters
           .toLowerCase()
-          .replace(/ /g, '-')}?page=1&limit=${keywordsLimit + 1}`,
+          .replace(/ /g, '-')}&page=1&limit=${keywordsLimit + 1}`,
         cancel_url: `${frontendDomain}/en/dashboard`,
       });
     }

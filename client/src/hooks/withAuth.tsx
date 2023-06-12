@@ -18,9 +18,8 @@ const withAuth = (WrappedComponent: any) => {
           setIsLoading(false)
           if (router.query.hashtag) {
             router.push(
-              `/dashboard?hashtag=${router.query.hashtag}&page=${router.query.page}&limit=${router.query.limit}`
+              `${router.locale}/dashboard?hashtag=${router.query.hashtag}&page=${router.query.page}&limit=${router.query.limit}`
             )
-            // console.log('From withAuth Hook: ', router)
             return
           }
         }
