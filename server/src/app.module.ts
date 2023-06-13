@@ -20,7 +20,7 @@ import { AuthFacebookModule } from './auth-facebook/auth-facebook.module';
 import { AuthGoogleModule } from './auth-google/auth-google.module';
 import { AuthTwitterModule } from './auth-twitter/auth-twitter.module';
 import { I18nModule } from 'nestjs-i18n/dist/i18n.module';
-import { HeaderResolver } from 'nestjs-i18n';
+import { AcceptLanguageResolver, HeaderResolver } from 'nestjs-i18n';
 import { TypeOrmConfigService } from './database/typeorm-config.service';
 import { MailConfigService } from './mail/mail-config.service';
 import { ForgotModule } from './forgot/forgot.module';
@@ -73,6 +73,7 @@ import { AnalyticsModule } from './analytics/analytics.module';
         loaderOptions: { path: path.join(__dirname, '/i18n/'), watch: true },
       }),
       resolvers: [
+        AcceptLanguageResolver,
         {
           use: HeaderResolver,
           useFactory: (configService: ConfigService) => {

@@ -90,6 +90,11 @@ const SubscribePage: NextPage = () => {
       setIsScrolling(false)
     }, 1000) // Adjust the delay to match your desired scrolling duration
   }
+  function isEmoji(encodedValue: string) {
+    const decodedValue = decodeURI(encodedValue)
+    const emojiPattern = /\p{Emoji}/u
+    return emojiPattern.test(decodedValue)
+  }
 
   let price = ''
   let priceNumber = 0
@@ -98,7 +103,7 @@ const SubscribePage: NextPage = () => {
       price = '1m'
       priceNumber = 999995.35
       break
-    case 2:
+    case 2 || isEmoji(values?.hashtag):
       price = '100k'
       priceNumber = 100000
       break

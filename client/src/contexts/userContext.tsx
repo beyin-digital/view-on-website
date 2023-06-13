@@ -45,6 +45,7 @@ export const UserProvider = ({ children }: any) => {
         }),
         headers: {
           'Content-Type': 'application/json',
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       //  check request response status
@@ -94,6 +95,7 @@ export const UserProvider = ({ children }: any) => {
         body: JSON.stringify({ idToken }),
         headers: {
           'Content-Type': 'application/json',
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       //   check request response status
@@ -133,6 +135,7 @@ export const UserProvider = ({ children }: any) => {
         body: JSON.stringify({ otp }),
         headers: {
           'Content-Type': 'application/json',
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       // Check response status
@@ -170,6 +173,7 @@ export const UserProvider = ({ children }: any) => {
         body: JSON.stringify({ email }),
         headers: {
           'Content-Type': 'application/json',
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       if (!response.ok) {
@@ -202,10 +206,11 @@ export const UserProvider = ({ children }: any) => {
         }),
         headers: {
           'Content-Type': 'application/json',
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       if (!response.ok) {
-        throw new Error('Error signing up')
+        throw response
       }
       if ((router.query.redirect as string) === 'subscribe') {
         router.push(
@@ -216,8 +221,30 @@ export const UserProvider = ({ children }: any) => {
         router.push('/verification?email=' + values.email)
         return
       }
-    } catch (error) {
-      toast.error('Error signing up. Please try again.')
+    } catch (error: any) {
+      const errorResponse = await error.json()
+      if (errorResponse?.errors?.email === 'email_already_exists') {
+        toast.error('Email already exists')
+      }
+      if (
+        errorResponse?.errors?.fullName.startsWith(
+          'full_name_invalid_or_missing'
+        )
+      ) {
+        toast.error('Full name is missing or is invalid')
+      }
+      if (errorResponse?.errors?.email === 'email must be an email') {
+        toast.error('Email must be a valid email address')
+      }
+      if (
+        errorResponse?.errors?.password ===
+        'password_too_weak_or_does_not_requirement'
+      ) {
+        console.log('password too weak')
+        toast.error(
+          'Password should be 8 characters minimum and have at least one uppercase letter, one number and one special character'
+        )
+      }
     }
   }
 
@@ -231,6 +258,7 @@ export const UserProvider = ({ children }: any) => {
         }),
         headers: {
           'Content-Type': 'application/json',
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       if (!response.ok) {
@@ -264,6 +292,7 @@ export const UserProvider = ({ children }: any) => {
         }),
         headers: {
           'Content-Type': 'application/json',
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       // Check response status
@@ -289,6 +318,7 @@ export const UserProvider = ({ children }: any) => {
         }),
         headers: {
           'Content-Type': 'application/json',
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       // Check response status
@@ -321,6 +351,7 @@ export const UserProvider = ({ children }: any) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       if (!response.ok) {
@@ -356,6 +387,7 @@ export const UserProvider = ({ children }: any) => {
         }),
         headers: {
           'Content-Type': 'application/json',
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       if (!response.ok) {
@@ -376,6 +408,7 @@ export const UserProvider = ({ children }: any) => {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
+            'Accept-Language': router.locale || 'en-GB',
           },
         })
         if (!response.ok) {
@@ -396,6 +429,7 @@ export const UserProvider = ({ children }: any) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       if (!response.ok) {

@@ -45,10 +45,16 @@ export class StripeService {
     const frontendDomain = this.configService.get('app').frontendDomain;
     let checkoutSession: any;
     const wordLength = createCheckoutSessionDto.letters.length;
+    function isEmoji(encodedValue: string) {
+      const decodedValue = decodeURI(encodedValue);
+      const emojiPattern = /\p{Emoji}/u;
+      return emojiPattern.test(decodedValue);
+    }
     const premiumPrice =
       wordLength < 2
         ? 999999
-        : wordLength >= 2 && wordLength < 3
+        : (wordLength >= 2 && wordLength < 3) ||
+          isEmoji(createCheckoutSessionDto.letters)
         ? 100000
         : wordLength === 3
         ? 10000
@@ -81,12 +87,15 @@ export class StripeService {
           letters: createCheckoutSessionDto.letters,
           sublink: createCheckoutSessionDto.sublink,
         },
+        locale: 'auto',
         line_items: [
           {
             price_data: {
               currency: 'usd',
               product_data: {
-                name: createCheckoutSessionDto.letters,
+                name: `Rights to use the #${decodeURI(
+                  createCheckoutSessionDto.letters,
+                )}`,
               },
               unit_amount: regularSubsPricing * 100,
               recurring,
@@ -95,7 +104,9 @@ export class StripeService {
           },
         ],
         mode: 'subscription',
-        success_url: `${frontendDomain}/en/payment?hashtag=${createCheckoutSessionDto.letters
+        success_url: `${frontendDomain}/${
+          createCheckoutSessionDto.lang
+        }/payment?hashtag=${createCheckoutSessionDto.letters
           .toLowerCase()
           .replace(/ /g, '-')}&page=1&limit=${keywordsLimit + 1}`,
         cancel_url: `${frontendDomain}/dashboard`,
@@ -108,12 +119,15 @@ export class StripeService {
           letters: createCheckoutSessionDto.letters,
           sublink: createCheckoutSessionDto.sublink,
         },
+        locale: 'auto',
         line_items: [
           {
             price_data: {
               currency: 'usd',
               product_data: {
-                name: `Rights to use the #${createCheckoutSessionDto.letters}`,
+                name: `Rights to use the #${decodeURI(
+                  createCheckoutSessionDto.letters,
+                )}`,
               },
               unit_amount: (premiumPrice || 0) * 100,
             },
@@ -122,7 +136,9 @@ export class StripeService {
           },
         ],
         mode: 'payment',
-        success_url: `${frontendDomain}/en/payment?hashtag=${createCheckoutSessionDto.letters
+        success_url: `${frontendDomain}/${
+          createCheckoutSessionDto.lang
+        }/payment?hashtag=${createCheckoutSessionDto.letters
           .toLowerCase()
           .replace(/ /g, '-')}&page=1&limit=${keywordsLimit + 1}`,
         cancel_url: `${frontendDomain}/dashboard`,
@@ -175,7 +191,7 @@ export class StripeService {
       });
 
       await this.keywordsService.create({
-        letters: metaData.letters,
+        letters: decodeURI(metaData.letters),
         sublink: metaData.sublink,
         user: foundUser as User,
         subscription: subscription,

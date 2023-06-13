@@ -247,7 +247,7 @@ const DashboardSubscriptionsPage = () => {
                     }}
                   >
                     <Typography fontSize="32px" fontWeight="bold">
-                      #{subscription?.letters?.toUpperCase()}
+                      #{decodeURI(subscription?.letters?.toUpperCase())}
                     </Typography>
                   </Box>
                   <Box
@@ -473,7 +473,7 @@ const DashboardSubscriptionsPage = () => {
                   }}
                 >
                   <Typography fontSize="24px" fontWeight={700}>
-                    #{subscription?.letters?.toUpperCase()}
+                    #{decodeURI(subscription?.letters?.toUpperCase())}
                   </Typography>
                 </Box>
                 <Box

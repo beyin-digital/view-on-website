@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { AuthGuard } from '@nestjs/passport';
+import { I18n, I18nContext } from 'nestjs-i18n';
 
 @Controller({
   path: 'payment',
@@ -26,8 +27,13 @@ export class PaymentController {
   @Post('pay')
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.OK)
-  intiatePaymentProcess(@Req() req: any, @Body() data: any) {
-    return this.paymentService.intiatePaymentProcess(req.user, data);
+  intiatePaymentProcess(
+    @Req() req: any,
+    @I18n() i18n: I18nContext,
+    @Body() data: any,
+  ) {
+    const lang = i18n.lang;
+    return this.paymentService.intiatePaymentProcess(req.user, lang, data);
   }
 
   @UseGuards(AuthGuard('jwt'))

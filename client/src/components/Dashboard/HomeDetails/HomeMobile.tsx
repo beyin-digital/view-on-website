@@ -180,7 +180,7 @@ const HomeMobile = () => {
 
     setValues({
       ...values,
-      hashtag: selectedKeyword?.letters,
+      hashtag: decodeURI(selectedKeyword?.letters),
       sublink: selectedKeyword?.sublink,
       organisation: selectedKeyword?.organisation || '',
       country: selectedKeyword?.country || '',
@@ -208,8 +208,7 @@ const HomeMobile = () => {
           sx={{
             width: '100%',
             height: '429px',
-						paddingY: "1rem",
-
+            paddingY: '1rem',
           }}
         >
           <>
@@ -375,7 +374,7 @@ const HomeMobile = () => {
               }}
             >
               <Typography fontSize="26px" fontWeight={700}>
-                #{selectedKeyword?.letters?.toUpperCase()}
+                #{decodeURI(selectedKeyword?.letters?.toUpperCase())}
               </Typography>
             </Box>
 
@@ -441,7 +440,7 @@ const HomeMobile = () => {
                   margin: '.2rem',
                 }}
                 onClick={() => {
-                  downloadSvg(selectedKeyword.letters.toUpperCase())
+                  downloadSvg(decodeURI(selectedKeyword.letters.toUpperCase()))
                 }}
               >
                 {t('box_two_download')}

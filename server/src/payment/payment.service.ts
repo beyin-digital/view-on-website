@@ -19,8 +19,10 @@ export class PaymentService {
 
   async intiatePaymentProcess(
     user: User,
+    lang: string,
     intiatePaymentDto: InitiatePaymentDto,
   ) {
+    console.log(lang);
     const foundUser = await this.usersService.findOne({
       id: user.id,
     });
@@ -44,6 +46,7 @@ export class PaymentService {
       interval: intiatePaymentDto.interval,
       stripeCustomerId: foundUser?.stripeCustomerId as string,
       sublink: intiatePaymentDto.sublink,
+      lang,
     });
 
     await this.ordersService.create({

@@ -49,6 +49,7 @@ export const KeywordProvider = ({ children }: any) => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Accept-Language': router.locale || 'en-GB',
           },
         }
       )
@@ -85,8 +86,13 @@ export const KeywordProvider = ({ children }: any) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
+          'Accept-Language': router.locale || 'en-GB',
         },
-        body: JSON.stringify({ letters, sublink, interval }),
+        body: JSON.stringify({
+          letters: encodeURI(letters),
+          sublink,
+          interval,
+        }),
       })
       if (!response.ok) {
         throw new Error()
@@ -106,6 +112,7 @@ export const KeywordProvider = ({ children }: any) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       if (!response.ok) {
@@ -126,7 +133,10 @@ export const KeywordProvider = ({ children }: any) => {
         }`,
         {
           method: 'GET',
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Accept-Language': router.locale || 'en-GB',
+          },
         }
       )
       if (!response.ok) {
@@ -175,7 +185,10 @@ export const KeywordProvider = ({ children }: any) => {
         `${apiUrl}/subscriptions?page=${page}&limit=10`,
         {
           method: 'GET',
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Accept-Language': router.locale || 'en-GB',
+          },
         }
       )
       if (!response.ok) {
@@ -224,6 +237,7 @@ export const KeywordProvider = ({ children }: any) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
+          'Accept-Language': router.locale || 'en-GB',
         },
         body: JSON.stringify(values),
       })
