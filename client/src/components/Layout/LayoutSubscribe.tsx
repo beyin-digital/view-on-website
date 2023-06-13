@@ -35,11 +35,12 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
       >
         <Box
           sx={{
-            margin: 'auto',
-            height: { xs: '100%', md: '90vh', xl: '96vh' },
+            // margin: 'auto',
+            // height: "100%",
+            height: { xs: '100%', md: '90vh', xl: '100vh' },
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            // justifyContent: 'center',
             position: 'relative',
           }}
         >
@@ -62,18 +63,7 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
             }}
             className="ImageBgHom"
           />
-          {/* <Image
-            alt=""
-            style={{
-              top: '-1rem',
-              left: '-11rem',
-              position: 'absolute',
-            }}
-            src="/images/swirl.webp"
-            width={600}
-            height={500}
-            className="ImageHome"
-          /> */}
+
 
           <Header />
           <Box
@@ -88,7 +78,7 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
               borderRadius: '30px',
               transform: { xs: 'skew(0deg, 0deg)', sm: 'skew(-16deg, 0deg)' },
               // overflow: { xs: "", md: "hidden", xl: "hidden" },
-              margin: { xs: '5rem auto', sm: '3rem auto' },
+              margin: { xs: '2rem auto', sm: '3rem auto' },
               zIndex: '999',
               paddingX: '2rem',
               paddingY: '7px',

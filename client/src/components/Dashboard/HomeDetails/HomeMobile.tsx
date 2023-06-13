@@ -207,7 +207,9 @@ const HomeMobile = () => {
         <Item
           sx={{
             width: '100%',
-            height: '419px',
+            height: '429px',
+						paddingY: "1rem",
+
           }}
         >
           <>

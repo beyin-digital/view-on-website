@@ -80,7 +80,7 @@ const SliderDesktop = ({ onClick, selectedImage }: any) => {
 							right: { xs: "0%", sm: "0%", md: "0%", xl: "20%" },
 							maxWidth: "100%",
 							width: "100%",
-							height: { xs: "100%", sm: "100vh", md: "550px", xl: "520px" },
+							height: { xs: "100%", sm: "100vh", md: "550px", xl: "590px" },
 							background: "rgba(251, 251, 251, 0.6)",
 							border: "1px solid #FBFBFB",
 							backdropFilter: "blur(100px)",

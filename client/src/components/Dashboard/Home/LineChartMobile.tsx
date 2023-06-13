@@ -18,7 +18,7 @@ const LineChartMobile = ({ data }: any) => {
           }}
           data={[data]}
           curve="catmullRom"
-          margin={{ top: 45, right: 10, bottom: 60, left: 60 }}
+          margin={{ top: 45, right: 15, bottom: 60, left: 60 }}
           xScale={{ type: 'point' }}
           yScale={{
             type: 'linear',
@@ -31,11 +31,11 @@ const LineChartMobile = ({ data }: any) => {
           enableGridY={false}
           axisRight={null}
           axisBottom={{
-            tickSize: 3,
+            tickSize: 5,
             tickPadding: 10,
             tickRotation: -90,
             legend: `${t('day')}`,
-            legendOffset: 0,
+            legendOffset: -10,
             legendPosition: 'end',
           }}
           axisLeft={{

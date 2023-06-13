@@ -21,8 +21,8 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 		<Box
 			sx={{
 				maxWidth: "100%",
-				// overflowX: "hidden",
-				minHeight: "100%",
+				overflow: "hidden",
+				maxHeight: "100vh",
 			}}
 		>
 			{/* <Header /> */}
@@ -49,7 +49,7 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 							position: "relative",
 							maxWidth: "1920px",
 							width: { xs: "110%", sm: "100%", md: "90%", xl: "80%" },
-							height: { xs: "414px", sm: "500px", md: "550px", xl: "590px" },
+							minHeight: { xs: "414px", sm: "500px", md: "550px", xl: "590px" },
 							background: "rgba(251, 251, 251, 0.6)",
 							border: "1px solid #FBFBFB",
 							backdropFilter: "blur(100px)",
@@ -75,12 +75,13 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 					sx={{
 						margin: "auto",
 						width: "100%",
-						position: { xs: "relative", md: "fixed" },
-						height: { xs: "100vh", md: "100vh", xl: "100vh" },
+						position: { xs: "relative", md: "" },
+						minHeight: { xs: "100vh", md: "100vh", xl: "100vh" },
 						display: "flex",
 						flexDirection: "column",
 						justifyContent: "space-between",
 						overflow: "hidden",
+						maxHeight: "100%",
 					}}
 				>
 					<BackgroundHome />
@@ -93,7 +94,7 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 							position: "relative",
 							maxWidth: "1920px",
 							width: { xs: "110%", sm: "100%", md: "100%", xl: "100%" },
-							height: { xs: "414px", sm: "500px", md: "550px", xl: "590px" },
+							height: { xs: "434px", sm: "500px", md: "550px", xl: "590px" },
 							background: "rgba(251, 251, 251, 0.6)",
 							border: "1px solid #FBFBFB",
 							backdropFilter: "blur(100px)",
@@ -105,7 +106,7 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 							paddingY: "7px",
 							display: "flex",
 							alignItems: { xs: "flex-start", sm: "baseline", md: "center" },
-							justifyContent: "end",
+							justifyContent: "center",
 							marginLeft: {
 								xs: "-1rem",
 								sm: "-3rem",
@@ -117,7 +118,9 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 						{children}
 					</Box>
 
-					<Footer onClick={onClick} />
+					<>
+						<Footer onClick={onClick} />
+					</>
 				</Box>
 			)}
 		</Box>

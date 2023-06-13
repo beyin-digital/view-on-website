@@ -68,11 +68,8 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
   }, [hashtagDebounce, keywordFound])
 
   return (
-    <Suspense>
-      <>
-        <Suspense fallback={<div>Loading...</div>}>
-          <>
-            {/* <Header  /> */}
+
+
             <>
               <HomeDetails
                 keywordFound={keywordFound}
@@ -88,36 +85,34 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
                 onClick={toggleDrawer('bottom', false)}
                 onKeyDown={toggleDrawer('bottom', false)}
                 sx={{
-                  background: '#FBFBFB',
-                  '.MuiDrawer-root': {
-                    boxShadow: '0px 0px 0px 0px',
-                    background: '#FBFBFB',
-                  },
-                  '.root-MuiModal-backdrop': {
-                    boxShadow: '0px 0px 0px 0px',
-                    background: '#FBFBFB',
-                  },
-                  boxShadow: isShadowVisible ? '0px 0px 0px #fbfbfb' : '',
-                  'MuiBackdrop-root': {
-                    boxShadow: '0px 0px 0px 0px',
-                    background: '#FBFBFB',
-                  },
-                  '.MuiBackdrop-root': {
-                    boxShadow: '0px 0px 0px 0px',
-                    background: '#FBFBFB',
-                  },
-                  maxHeight:"auto"
+                //   background: '#FBFBFB',
+                //   '.MuiDrawer-root': {
+                //     boxShadow: '0px 0px 0px 0px',
+                //     background: '#FBFBFB',
+                //   },
+                //   '.root-MuiModal-backdrop': {
+                //     boxShadow: '0px 0px 0px 0px',
+                //     background: '#FBFBFB',
+                //   },
+                //   boxShadow: isShadowVisible ? '0px 0px 0px #fbfbfb' : '',
+                //   'MuiBackdrop-root': {
+                //     boxShadow: '0px 0px 0px 0px',
+                //     background: '#FBFBFB',
+                //   },
+                //   '.MuiBackdrop-root': {
+                //     boxShadow: '0px 0px 0px 0px',
+                //     background: '#FBFBFB',
+                //   },
+                  height:"100vh",
+                  background: "transparent",
                 }}
               >
-                <Suspense>
+                <>
                   <SliderDesktop onClick={closeModel} />
-                </Suspense>
+                </>
               </Drawer>
             </>
-          </>
-        </Suspense>
-      </>
-    </Suspense>
+
   )
 }
 

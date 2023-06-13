@@ -78,7 +78,7 @@ const LayoutDesktop: React.FC<Props> = ({ children }) => {
               position: 'relative',
               maxWidth: '100%',
               width: '2192px',
-              height: { xs: '100%', sm: '540px', md: '650px', xl: '650px' },
+              height: { xs: '100%', sm: '540px', md: '650px', xl: '590px' },
               background: {
                 xs: 'transparent',
                 md: 'rgba(251, 251, 251, 0.6)',

@@ -418,6 +418,7 @@ const DashboardSecurityPage = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
+                marginY:"1.5rem"
               }}
             >
               <Avatar
