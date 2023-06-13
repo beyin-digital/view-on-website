@@ -266,7 +266,7 @@ const DetailsFooter = () => {
                       color: '#343132',
                     }}
                   >
-                    {t('pay')}
+                    {t('button')}
                   </Typography>
                   <FiArrowDownRight
                     size={42}
@@ -301,7 +301,7 @@ const DetailsFooter = () => {
                       color: '#343132',
                     }}
                   >
-                    {`${token ? t('pay') : t('button')}`}
+                    {t('button')}
                   </Typography>
                   <FiArrowDownRight
                     size={42}

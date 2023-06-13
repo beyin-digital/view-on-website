@@ -106,7 +106,7 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 							paddingY: "7px",
 							display: "flex",
 							alignItems: { xs: "flex-start", sm: "baseline", md: "center" },
-							justifyContent: "center",
+							justifyContent: "end",
 							marginLeft: {
 								xs: "-1rem",
 								sm: "-3rem",

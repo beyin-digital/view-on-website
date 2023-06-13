@@ -5,11 +5,11 @@
   "text_one": "احجز",
   "text_keyword": "كلمتك المفتاحية",
   "text_two": "قبل أن يسبقك أحد",
-  "input_hashtag_one": "اكتب هاشتاغ الكلمة المفتاحية",
+  "input_hashtag_one": "مثال : #brand",
   "text_hashtag": "هاشتاغ الكلمة المفتاحية المختارة متميز",
   "text_premium": "متميز",
   "text_input_sublink": "من فضلك أضف رابط كلمتك المفتاحية",
-  "input_hashtag_two": "https://example:Brandname.com/item",
+  "input_hashtag_two": "مثال : https://brandname.com/item",
   "button": "حجز",
   "available": "  متوفر  ",
   "availableP": "  متوفر  ",
@@ -44,7 +44,7 @@
   "subscribe": "الاشتراك",
   "cancel": "إلغاء",
   "not_available": "غير متوفر",
-  "error": "الكلمات المفتاحية يجب ان تحتوي فقط على الحروف و المسافات والاندر سكور.",
+  "error": "الكلمة المفتاحية يجب ألا تحتوي على مسافات",
   "text_line": "في حال استمرارك بالدفع فأنت توافق على",
   "text_line_link": " الشروط والاحكام"
 }
