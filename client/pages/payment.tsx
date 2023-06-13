@@ -10,7 +10,7 @@ const Payment = () => {
         `/${router.locale}/dashboard?hashtag=${router.query.hashtag}&page=${router.query.page}&limit=${router.query.limit}`
       )
     }
-  }, [])
+  }, [router.query.hashtag])
 
   return <div></div>
 }
