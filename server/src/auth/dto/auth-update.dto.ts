@@ -24,6 +24,7 @@ export class AuthUpdateDto {
 
   @ApiProperty()
   @MinLength(8)
+  @IsOptional()
   @IsNotEmpty()
   @Matches(
     /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^*&+=])(?=\S+$).{8,}$/,
