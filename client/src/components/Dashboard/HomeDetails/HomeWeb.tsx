@@ -644,7 +644,7 @@ const HomeWeb = () => {
 					xl={12}
 					height={402}
 					sx={{
-						minHeight: "45vh",
+						minHeight: "42vh",
 					}}
 				>
 					<Item
@@ -689,7 +689,7 @@ const HomeWeb = () => {
 									"&:hover > .MuiOutlinedInput-notchedOutline": {
 										border: "0",
 									},
-									zIndex: "2",
+									zIndex: "999",
 								}}
 							>
 								<MenuItem value={0} disabled>
