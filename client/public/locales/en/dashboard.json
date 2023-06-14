@@ -30,5 +30,9 @@
     "cancel": "Cancel",
     "go_to_subscriptions": "Go To Subscriptions",
     "day": "day",
-    "log_out": "You're about to Log out of your View On Website Dashboard?"
+    "log_out": "You're about to Log out of your View On Website Dashboard?",
+    "id_one":"Today's visits",
+    "id_two":"This Week's visits",
+    "id_three":"This month's visits",
+    "id_four":"This year's visits"
 }
