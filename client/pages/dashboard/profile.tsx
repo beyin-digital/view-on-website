@@ -75,7 +75,7 @@ const DashboardProfilePage = () => {
   return (
     <>
       <Head>
-        <title>{t('meta_title')} </title>
+        <title>View On Website -{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
         <link

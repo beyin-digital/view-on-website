@@ -1,22 +1,36 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import Seo from "@/components/Seo";
+import { useTranslation } from "next-i18next";
 
 const Payment = () => {
-  const router = useRouter()
+	const { t } = useTranslation("payment");
 
-  useEffect(() => {
-    if (router.query.hashtag) {
-      router.push(
-        `/${router.locale}/dashboard?hashtag=${decodeURI(
-          router.query.hashtag as string
-        )}&page=${router.query.page}&limit=${router.query.limit}`
-      )
-    }
-  }, [router.query.hashtag])
+	const router = useRouter();
 
-  return <div></div>
-}
+	useEffect(() => {
+		if (router.query.hashtag) {
+			router.push(
+				`/${router.locale}/dashboard?hashtag=${decodeURI(
+					router.query.hashtag as string,
+				)}&page=${router.query.page}&limit=${router.query.limit}`,
+			);
+		}
+	}, [router.query.hashtag]);
 
-export default Payment
+	return (
+		<>
+			<Seo
+				title={t("meta_title")}
+				descLong={`${t("meta_desc")}`}
+				descShort={`${t("meta_descShort")}`}
+				keyboard={`${t("meta_keyword")}`}
+				canonical="https://vow-client.vercel.app/subscribe"
+			/>
+		</>
+	);
+};
+
+export default Payment;
 
 // http://localhost:3000/payment?hashtag=p&page=1&limit=18

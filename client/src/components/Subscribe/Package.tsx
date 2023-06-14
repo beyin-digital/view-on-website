@@ -26,9 +26,24 @@ export const PackageBoxOne: React.FC<Props> = ({ onClick, name }) => {
 	};
 
 	const descCardOne = [
-		{ id: 1, desc: "Triple Hashtag Keyword", tKey: "box_one_one" },
-		{ id: 2, desc: "Triple Hashtag Keyword", tKey: "box_one_two" },
-		{ id: 3, desc: "Triple Hashtag Keyword", tKey: "box_one_three" },
+		{
+			id: 1,
+			desc: "Triple Hashtag Keyword",
+			tKey: "box_one_one",
+			alt: "Icon Check Arrow True",
+		},
+		{
+			id: 2,
+			desc: "Triple Hashtag Keyword",
+			tKey: "box_one_two",
+			alt: "Icon Check Arrow True",
+		},
+		{
+			id: 3,
+			desc: "Triple Hashtag Keyword",
+			tKey: "box_one_three",
+			alt: "Icon Check Arrow True",
+		},
 	];
 	return (
 		<>
@@ -116,7 +131,13 @@ export const PackageBoxOne: React.FC<Props> = ({ onClick, name }) => {
 								marginY: ".3rem",
 							}}
 						>
-							<Image src="/icons/check.svg" alt="" width={30} height={30} />
+							<Image
+								src="/icons/check.svg"
+								alt={item.alt}
+								title={item.alt}
+								width={30}
+								height={30}
+							/>
 							<Typography
 								sx={{
 									fontSize: {
@@ -219,9 +240,24 @@ export const PackageBoxTwo: React.FC<Props> = ({ onClick, name }) => {
 		setHoveredButton(false);
 	};
 	const descCardTwo = [
-		{ id: 11, desc: "Triple Hashtag Keyword", tKey: "box_two_one" },
-		{ id: 22, desc: "Triple Hashtag Keyword", tKey: "box_two_two" },
-		{ id: 23, desc: "Triple Hashtag Keyword", tKey: "box_two_three" },
+		{
+			id: 11,
+			desc: "Triple Hashtag Keyword",
+			tKey: "box_two_one",
+			alt: "Icon Check Arrow True",
+		},
+		{
+			id: 22,
+			desc: "Triple Hashtag Keyword",
+			tKey: "box_two_two",
+			alt: "Icon Check Arrow True",
+		},
+		{
+			id: 23,
+			desc: "Triple Hashtag Keyword",
+			tKey: "box_two_three",
+			alt: "Icon Check Arrow True",
+		},
 		// { id: 244, desc: "Triple Hashtag Keyword", tKey: "box_two_four" },
 	];
 	return (
@@ -315,7 +351,13 @@ export const PackageBoxTwo: React.FC<Props> = ({ onClick, name }) => {
 								marginY: ".3rem",
 							}}
 						>
-							<Image src="/icons/check.svg" alt="" width={30} height={30} />
+							<Image
+								src="/icons/check.svg"
+								alt={item.alt}
+								title={item.alt}
+								width={30}
+								height={30}
+							/>
 							<Typography
 								sx={{
 									fontSize: {
@@ -419,9 +461,24 @@ export const PackageBoxThree: React.FC<Props> = ({ onClick, name }) => {
 		setHoveredButton(false);
 	};
 	const descCardThree = [
-		{ id: 111, desc: "Triple Hashtag Keyword", tKey: "box_three_one" },
-		{ id: 222, desc: "Triple Hashtag Keyword", tKey: "box_three_two" },
-		{ id: 233, desc: "Triple Hashtag Keyword", tKey: "box_three_three" },
+		{
+			id: 111,
+			desc: "Triple Hashtag Keyword",
+			tKey: "box_three_one",
+			alt: "Icon Check Arrow True",
+		},
+		{
+			id: 222,
+			desc: "Triple Hashtag Keyword",
+			tKey: "box_three_two",
+			alt: "Icon Check Arrow True",
+		},
+		{
+			id: 233,
+			desc: "Triple Hashtag Keyword",
+			tKey: "box_three_three",
+			alt: "Icon Check Arrow True",
+		},
 	];
 	return (
 		<>
@@ -510,7 +567,13 @@ export const PackageBoxThree: React.FC<Props> = ({ onClick, name }) => {
 								marginX: ".2rem",
 							}}
 						>
-							<Image src="/icons/check.svg" alt="" width={30} height={30} />
+							<Image
+								src="/icons/check.svg"
+								alt={item.alt}
+								title={item.alt}
+								width={30}
+								height={30}
+							/>
 							<Typography
 								sx={{
 									fontSize: {

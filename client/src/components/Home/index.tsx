@@ -103,7 +103,7 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
                 //     boxShadow: '0px 0px 0px 0px',
                 //     background: '#FBFBFB',
                 //   },
-                  height:"100vh",
+                  height:{ xs: "", md: "100vh" },
                   background: "transparent",
                 }}
               >

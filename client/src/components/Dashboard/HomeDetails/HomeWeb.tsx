@@ -18,6 +18,7 @@ import { KeywordContext } from '@/contexts/keywordContext'
 import { api } from '@/utils/api'
 import { countries } from '@/utils/countries'
 import { downloadSvg } from '@/utils/downloadSvg'
+import { useRouter } from "next/router";
 
 import io from 'socket.io-client'
 const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
@@ -46,6 +47,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const HomeWeb = () => {
   const { t } = useTranslation('dashboard')
+	const { locale } = useRouter();
 
   const {
     selectedKeyword,
@@ -122,38 +124,38 @@ const HomeWeb = () => {
         setPieChartData([
           {
             id: 'today',
-            label: `${t('box_four_today')}`,
-            tKey: 'box_four_today',
+           label: 'Today',
+      tKey: 'box_four_today',
             value: data?.totalVisitsToday,
             color: 'hsla(112, 81%, 52%, 1)',
           },
           {
             id: 'all-time',
-            label: `${t('box_four_all')}`,
-            tKey: 'box_four_all',
+           label: 'All time',
+      tKey: 'box_four_all',
             value: data?.totalVisits,
             color: 'hsla(203, 100%, 46%, 1)',
           },
         ])
         setLineChartData([
           {
-            id: "Today's visits",
-            color: 'hsla(203, 100%, 46%, 1)',
+            id: "",
+            color: "",
             data: data?.totalDailyVisitsByHoursOfTheDay,
           },
           {
-            id: "This Week's visits",
-            color: 'hsla(203, 100%, 46%, 1)',
+            id: "",
+            color: '',
             data: data?.totalVisitsByDaysOfTheWeek,
           },
           {
-            id: "This month's visits",
-            color: 'hsla(203, 100%, 46%, 1)',
+            id: "",
+            color: '',
             data: data?.totalVisitsByDaysOfTheMonth,
           },
           {
-            id: "This year's visits",
-            color: 'hsla(203, 100%, 46%, 1)',
+            id: "",
+            color: '',
             data: data?.totalVisitsByMonthsOfTheYear,
           },
         ])
@@ -502,7 +504,15 @@ const HomeWeb = () => {
               }}
             >
               <Typography fontSize="32px" fontWeight={500}>
-                #{decodeURI(selectedKeyword?.letters?.toUpperCase())}
+                {locale === "en" ? (
+					<>
+					#{decodeURI(selectedKeyword?.letters?.toUpperCase())}
+					</>
+				):(
+					<>
+					{decodeURI(selectedKeyword?.letters?.toUpperCase())}#
+					</>
+				)}
               </Typography>
             </Box>
 
@@ -638,7 +648,7 @@ const HomeWeb = () => {
           xl={12}
           height={402}
           sx={{
-            minHeight: '40vh',
+            minHeight: '45vh',
           }}
         >
           <Item

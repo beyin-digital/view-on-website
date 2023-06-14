@@ -57,6 +57,7 @@ const SignupDetails = () => {
               marginY: { xs: '1rem', md: '0', xl: '0' },
               marginLeft: { sm: '2rem' },
             }}
+            component={"h1"}
           >
             {t('title')}
           </Typography>

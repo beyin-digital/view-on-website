@@ -93,7 +93,7 @@ export default function HashtagListMobile() {
             />
           ))}
         </Tabs>
-        {keywords?.hasNextPage && (
+        {/* {keywords?.hasNextPage && (
           <IconButton
             onClick={() => {
               setPage(page + 1)
@@ -102,7 +102,7 @@ export default function HashtagListMobile() {
           >
             <Add />
           </IconButton>
-        )}
+        )} */}
       </Box>
     </Box>
   )

@@ -12,13 +12,14 @@ const Layout = dynamic(() => import('@/components/Layout/Layout'), {
 })
 import Head from 'next/head'
 import { useTranslation } from 'next-i18next'
+import Seo from '@/components/Seo'
 
 const AboutPage = () => {
   const { t } = useTranslation('about')
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_desc')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
@@ -28,7 +29,9 @@ const AboutPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
+      <Seo title={t('meta_title')} descLong={`${t('meta_desc')}`}  descShort={`${t('meta_descShort')}`}  keyboard={`${t('meta_keyword')}`} canonical="https://vow-client.vercel.app/subscribe" />
+
       <Layout>
         {/* <Container maxWidth="lg">
         <Box

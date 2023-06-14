@@ -32,6 +32,7 @@ export const HeaderLayoutDesktop = () => {
 						}}
 					>
 						<Typography
+							component={"h1"}
 							sx={{
 								fontSize: { xs: "30px", md: "50px", xl: "64px" },
 								fontWeight: "600",
@@ -42,6 +43,7 @@ export const HeaderLayoutDesktop = () => {
 						</Typography>
 					</Box>
 					<Typography
+						component={"h2"}
 						sx={{
 							fontSize: { xs: "40px", xl: "40px" },
 							fontWeight: "600",
@@ -116,7 +118,6 @@ export const HeaderLayoutDesktop = () => {
 								sx={{
 									width: "257px",
 									height: "90px",
-
 									display: "flex",
 									alignItems: "",
 									justifyContent: "end",
@@ -265,7 +266,6 @@ export const MainContainerDesktop = () => {
 						<Box
 							sx={{
 								width: "290px",
-
 								display: "flex",
 								alignItems: "center",
 								justifyContent: "center",
@@ -290,9 +290,19 @@ export const MainContainerDesktop = () => {
 						}}
 					>
 						{locale === "ar" ? (
-							<img src="/images/illustrationPicCenterAR.png" loading="lazy" />
+							<img
+								src="/images/illustrationPicCenterAR.png"
+								alt="illustration Pic Center AR"
+								title="illustration Pic Center AR"
+								loading="lazy"
+							/>
 						) : (
-							<img src="/images/illustrationPicCenter.png" loading="lazy" />
+							<img
+								src="/images/illustrationPicCenter.png"
+								alt="illustration Pic Center AR"
+								title="illustration Pic Center AR"
+								loading="lazy"
+							/>
 						)}
 					</Box>
 

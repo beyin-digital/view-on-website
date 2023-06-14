@@ -23,6 +23,7 @@ import { useTranslation } from 'next-i18next'
 import { useContext, useEffect } from 'react'
 import { UserContext } from '@/contexts/userContext'
 import { useRouter } from 'next/router'
+import Seo from '@/components/Seo'
 
 const SignUpPage = () => {
   const { t } = useTranslation('signup')
@@ -38,7 +39,7 @@ const SignUpPage = () => {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
@@ -48,7 +49,9 @@ const SignUpPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
+      <Seo title={t('meta_title')} descLong={`${t('meta_desc')}`}  descShort={`${t('meta_descShort')}`}  keyboard={`${t('meta_keyword')}`} canonical="https://vow-client.vercel.app/subscribe" />
+
       <Layout>
         <Grid
           container

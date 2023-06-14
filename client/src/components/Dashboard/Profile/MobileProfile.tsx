@@ -45,7 +45,7 @@ const MobileProfile = () => {
         width: { md: '100%' },
         maxWidth: '100%',
         maxHeight: { xs: '100vh', sm: '100%' },
-        height: { xs: '100vh', sm: '100vh' },
+        height: { xs: '100%', sm: '100vh' },
         display: {
           xs: 'block',
           sm: 'flex',
@@ -212,6 +212,7 @@ const MobileProfile = () => {
                 border: '0',
               },
             }}
+            placeholder={`${t("country")}`}
           >
             <MenuItem disabled value="">
               {t('country')}

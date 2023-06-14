@@ -5,7 +5,7 @@ import { UserContext } from "@/contexts/userContext";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import withAuth from "@/hooks/withAuth";
-
+import Head from "next/head";
 const Navbar = dynamic(() => import("@/components/Dashboard/Navbar"), {
 	ssr: false,
 });
@@ -18,9 +18,21 @@ const FooterMobile = dynamic(() => import("../Footer/FooterMobile"), {
 
 interface RootLayoutProps {
 	children: React.ReactNode;
+	title: any;
+	descShort: any;
+	descLong: any;
+	keyword: any;
+	canonical: any;
 }
 
-function RootLayout({ children }: RootLayoutProps) {
+function RootLayout({
+	children,
+	title,
+	descShort,
+	descLong,
+	keyword,
+	canonical,
+}: RootLayoutProps) {
 	const pathname = usePathname();
 	const router = useRouter();
 	const { locale } = useRouter();
@@ -96,6 +108,7 @@ function RootLayout({ children }: RootLayoutProps) {
 					zIndex: 30,
 					position: "absolute",
 					minHeight: "100vh",
+					height: "100%",
 					width: "100%",
 					maxWidth: "1920px",
 				}}
@@ -115,7 +128,7 @@ function RootLayout({ children }: RootLayoutProps) {
 					{locale === "ar" ? (
 						<Box
 							sx={{
-								position: { xs: "absolute", xl: "fixed" },
+								position: "absolute",
 								left: "0",
 								display: { xs: "none", md: "flex" },
 								width: {
@@ -133,7 +146,7 @@ function RootLayout({ children }: RootLayoutProps) {
 					) : (
 						<Box
 							sx={{
-								position: { xs: "absolute", xl: "fixed" },
+								position: "absolute",
 								right: "0",
 								display: { xs: "none", md: "flex" },
 								width: {

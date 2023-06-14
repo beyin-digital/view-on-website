@@ -1,7 +1,9 @@
 {
-  "meta_title": "View On Website | Login",
-  "meta_desc": "",
-  "meta_keyword": "",
+  "meta_title": "Login",
+  "meta_desc": "Login to your VOW account using your Keyword, Email, or Google/Apple authentication to manage your services.",
+    "meta_descShort": "Login to your VOW account",
+
+  "meta_keyword": "Login, VOW, Keyword, Email, Google/Apple Authentication,#a,#b,#c,#d,#e,#f,#g,#h,#i,#j,#k,#l,#m,#n,#o,#p,#q,#r,#s,#t,#u,#v,#w,#x,#y,#z",
   "title": "Welcome Back",
   "input_email": "Email or keyword",
   "input_password": "Password",

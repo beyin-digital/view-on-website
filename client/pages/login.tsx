@@ -20,6 +20,7 @@ const Layout = dynamic(() => import('@/components/Layout/LayoutLogin'), {
   ssr: false,
 })
 import Head from 'next/head'
+import Seo from '@/components/Seo'
 
 const LoginPage = () => {
   const { t } = useTranslation('login')
@@ -54,7 +55,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
@@ -64,7 +65,9 @@ const LoginPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
+      <Seo title={t('meta_title')} descLong={`${t('meta_desc')}`}  descShort={`${t('meta_descShort')}`}  keyboard={`${t('meta_keyword')}`} canonical="https://vow-client.vercel.app/subscribe" />
+
       <Layout>
         <Box sx={boxStyle}>
           <Box

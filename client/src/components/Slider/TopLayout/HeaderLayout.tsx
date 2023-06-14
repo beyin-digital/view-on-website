@@ -59,7 +59,7 @@ const HeaderLayout: React.FC<SecondComponentProps> = ({ selectedImage }) => {
                     lineHeight: '45px',
                   }}
                 >
-                  #{t('keyword')}
+                  {t('text_keyword')}
                 </Typography>
                 {t('prime')}
               </Typography>
@@ -107,7 +107,7 @@ const HeaderLayout: React.FC<SecondComponentProps> = ({ selectedImage }) => {
                     lineHeight: '40px',
                   }}
                 >
-                  #{t('keyword')}
+                  {t('text_keyword')}
                 </Typography>
               </Typography>
             </Box>

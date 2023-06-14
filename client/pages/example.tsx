@@ -27,6 +27,7 @@ const FooterMobile = dynamic(() => import('@/components/Footer/FooterMobile'), {
 })
 import Head from 'next/head'
 import { Background } from '@/components/Layout/Background'
+import Seo from '@/components/Seo'
 // import { BackgroundHome } from "@/components/Layout/Background";
 
 const Example = () => {
@@ -34,7 +35,7 @@ const Example = () => {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
@@ -44,7 +45,9 @@ const Example = () => {
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
+      <Seo title={t('meta_title')} descLong={`${t('meta_desc')}`}  descShort={`${t('meta_descShort')}`}  keyboard={`${t('meta_keyword')}`} canonical="https://vow-client.vercel.app/subscribe" />
+
       <Box
         sx={{
           height: { xs: '100%', xl: '100vh' },

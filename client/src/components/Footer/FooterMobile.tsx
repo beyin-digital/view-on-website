@@ -50,7 +50,7 @@ const FooterMobile = () => {
 				<Box
 					sx={{
 						width: "100%",
- 						display: { xs: "flex", sm: "flex", md: "none", xl: "none" },
+						display: { xs: "flex", sm: "flex", md: "none", xl: "none" },
 						alignItems: "end",
 						justifyContent: "end",
 						position: "relative",
@@ -61,14 +61,13 @@ const FooterMobile = () => {
 						sx={{
 							width: "100%",
 							border: "1px solid #E3E3E3",
- 							backdropFilter: "blur(50px)",
+							backdropFilter: "blur(50px)",
 							borderRadius: "15px 15px 0px 0px",
 							background: "rgba(251, 251, 251, 0.6)",
 							display: "flex",
 							justifyContent: "end",
 							flexDirection: "column",
-							paddingTop:"1rem"
-
+							paddingTop: "1rem",
 						}}
 					>
 						<Box
@@ -154,6 +153,7 @@ const FooterMobile = () => {
 											<Image
 												src={item.icon}
 												alt={item.alt}
+												title={item.alt}
 												height={17}
 												width={17}
 												style={{

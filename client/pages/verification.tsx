@@ -19,6 +19,7 @@ import Head from 'next/head'
 import { useContext, useEffect } from 'react'
 import { UserContext } from '@/contexts/userContext'
 import { useRouter } from 'next/router'
+import Seo from '@/components/Seo'
 
 const VerificationPage = () => {
   // translate hook
@@ -40,7 +41,7 @@ const VerificationPage = () => {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
@@ -50,7 +51,9 @@ const VerificationPage = () => {
         />{' '}
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
+      <Seo title={t('meta_title')} descLong={`${t('meta_desc')}`}  descShort={`${t('meta_descShort')}`}  keyboard={`${t('meta_keyword')}`} canonical="https://vow-client.vercel.app/subscribe" />
+
       <Layout>
         <VerificationDetails />
       </Layout>

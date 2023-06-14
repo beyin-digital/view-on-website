@@ -62,7 +62,7 @@ const NavbarStatic = ({
         }}
       >
         <Box sx={{ cursor: 'pointer', margin: '.5rem 0', textAlign: 'center' }}>
-          <Link href="/" title="logo View On Website">
+          <Link href="/" title="logo View On Website Logo">
             <img
               src="/images/logo.svg"
               alt="logo View On Website"
@@ -202,7 +202,7 @@ const NavbarStatic = ({
           style={{
             textDecoration: 'none',
           }}
-          title="Lang EN"
+          title={`${locale === 'en' ? 'ar' : 'en'}`}
         >
           <Box
             sx={{
@@ -260,6 +260,7 @@ const NavbarStatic = ({
                 style={{
                   textDecoration: 'none',
                 }}
+                title={`${t('nav_Dashboard')}`}
               >
                 <Typography
                   sx={{
@@ -280,6 +281,7 @@ const NavbarStatic = ({
                 style={{
                   textDecoration: 'none',
                 }}
+                title={`${t('nav_getStarted')}`}
               >
                 <Typography
                   sx={{
@@ -318,6 +320,7 @@ const NavbarStatic = ({
                 style={{
                   textDecoration: 'none',
                 }}
+                title={`${t('nav_Dashboard')}`}
               >
                 <Typography
                   // onClick={() => router.push(`${locale}/dashboard`)}
@@ -339,6 +342,7 @@ const NavbarStatic = ({
                 style={{
                   textDecoration: 'none',
                 }}
+                title={`${t('nav_getStarted')}`}
               >
                 <Typography
                   sx={{
@@ -484,7 +488,7 @@ const NavbarStatic = ({
               )}
             </IconButton>
             <Box component="div" sx={{ cursor: 'pointer', margin: '.5rem 0' }}>
-              <Link href="/" title="Home View On Website">
+              <Link href="/" title="Home View On Website Logo">
                 <img
                   src="/images/logo.svg"
                   alt="logo View On Website"
@@ -585,7 +589,7 @@ const NavbarStatic = ({
                     <Link
                       href={asPath}
                       locale={locale === 'en' ? 'ar' : 'en'}
-                      title=""
+                      title={`${locale === 'en' ? 'ar' : 'en'}`}
                       style={{ textDecoration: 'none' }}
                     >
                       <Typography
@@ -621,6 +625,7 @@ const NavbarStatic = ({
                     href={`${
                       user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
                     }`}
+                    title={`${t('nav_Dashboard')}`}
                   >
                     <Typography
                       sx={{
@@ -642,6 +647,7 @@ const NavbarStatic = ({
                     style={{
                       textDecoration: 'none',
                     }}
+                    title={`${t('nav_getStarted')}`}
                   >
                     <Typography
                       sx={{

@@ -34,13 +34,14 @@ const IllustrationMobile = dynamic(
 )
 
 import Head from 'next/head'
+import Seo from '@/components/Seo'
 
 const Illustration = () => {
   const { t } = useTranslation('illustration')
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
@@ -50,7 +51,9 @@ const Illustration = () => {
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
+      <Seo title={t('meta_title')} descLong={`${t('meta_desc')}`}  descShort={`${t('meta_descShort')}`}  keyboard={`${t('meta_keyword')}`} canonical="https://vow-client.vercel.app/subscribe" />
+
       <Header
         nameOne={t('subscribe')}
         linkOne="/subscribe"

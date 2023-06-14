@@ -22,6 +22,7 @@ const SwiperLabel = ({ selectedKeyword }: any) => {
           <img
             src="/images/cut-out-parallelogram.webp"
             alt="Layout Box View on Website"
+            title="Layout Box View on Website"
             style={{
               width: '230px',
               height: '100px',
@@ -75,6 +76,7 @@ const SwiperLabel = ({ selectedKeyword }: any) => {
           <img
             src="/images/cut-out-parallelogram.webp"
             alt="Layout Box View on Website"
+            title="Layout Box View on Website"
             style={{
               width: '230px',
               height: '100px',

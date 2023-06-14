@@ -1,7 +1,8 @@
 {
-  "meta_title": "View On Website |  Security ",
-  "meta_desc": "",
-  "meta_keyword": "",
+  "meta_title": "Security",
+  "meta_desc": "Update password, enable two-factor authentication, or delete your VOW account from the security page",
+  "meta_descShort": "Ensure your VOW account's security",
+  "meta_keyword": "Security, VOW, Password, Two-Factor Authentication,#a,#b,#c,#d,#e,#f,#g,#h,#i,#j,#k,#l,#m,#n,#o,#p,#q,#r,#s,#t,#u,#v,#w,#x,#y,#z",
   "change": "Change your password:",
   "pass": "Current Password",
   "new_pass": "New Password",
@@ -15,11 +16,11 @@
   "cancel_security": "Cancel",
   "sure": "Sure",
   "cancel": "Cancel",
-  "delete":"Delete",
+  "delete": "Delete",
   "delete_accont": "you're about to delete you account and all it's contents",
   "modal": "You're about to disable two factor authentication. Are you sure about this action?",
   "log_out": "You're about to Log out of your View On Website Dashboard?",
-  "seems":"Seems you don't have a password currently",
-  "setPassword":"Click the button below to set a password",
-  "setTitle":"Set a Password"
+  "seems": "Seems you don't have a password currently",
+  "setPassword": "Click the button below to set a password",
+  "setTitle": "Set a Password"
 }

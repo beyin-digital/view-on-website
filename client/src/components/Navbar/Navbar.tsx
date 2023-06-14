@@ -53,7 +53,7 @@ const Header = () => {
         }}
       >
         <Box sx={{ cursor: 'pointer', margin: '.5rem 0', textAlign: 'center' }}>
-          <Link href="/" title="logo View On Website">
+          <Link href="/" title="logo View On Website Logo">
             <img
               src="/images/logo.svg"
               alt="logo View On Website"
@@ -163,7 +163,7 @@ const Header = () => {
           style={{
             textDecoration: 'none',
           }}
-          title="Lang EN"
+          title={`${locale === 'en' ? 'ar' : 'en'}`}
         >
           <Box
             sx={{
@@ -227,6 +227,7 @@ const Header = () => {
                 style={{
                   textDecoration: 'none',
                 }}
+                title={`${t('nav_Dashboard')}`}
               >
                 <Typography
                   sx={{
@@ -247,6 +248,7 @@ const Header = () => {
                 style={{
                   textDecoration: 'none',
                 }}
+                title={`${t('nav_getStarted')}`}
               >
                 <Typography
                   sx={{
@@ -288,6 +290,7 @@ const Header = () => {
                 style={{
                   textDecoration: 'none',
                 }}
+                title={`${t('nav_Dashboard')}`}
               >
                 <Typography
                   sx={{
@@ -308,6 +311,7 @@ const Header = () => {
                 style={{
                   textDecoration: 'none',
                 }}
+                title={`${t('nav_getStarted')}`}
               >
                 <Typography
                   sx={{
@@ -457,7 +461,7 @@ const Header = () => {
               sx={{ cursor: 'pointer', margin: '.5rem 0' }}
               // onClick={() => router.push("/")}
             >
-              <Link href="/" title="Home View On Website">
+              <Link href="/" title="Home View On Website Logo">
                 <img
                   src="/images/logo.svg"
                   alt="logo View On Website"
@@ -540,7 +544,7 @@ const Header = () => {
                     <Link
                       href={asPath}
                       locale={locale === 'en' ? 'ar' : 'en'}
-                      title=""
+                      title={`${locale === 'en' ? 'ar' : 'en'}`}
                       style={{ textDecoration: 'none' }}
                     >
                       <Typography
@@ -579,7 +583,7 @@ const Header = () => {
                     href={`${
                       user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
                     }`}
-                    title="View On Website Dashboard"
+                    title={`${t('nav_Dashboard')}`}
                     style={{
                       textDecoration: 'none',
                     }}
@@ -601,7 +605,7 @@ const Header = () => {
                 ) : (
                   <Link
                     href="/illustration"
-                    title="View On Website illustration"
+                    title={`${t('nav_getStarted')}`}
                     style={{
                       textDecoration: 'none',
                     }}

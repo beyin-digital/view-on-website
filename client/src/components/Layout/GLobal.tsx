@@ -1,19 +1,19 @@
 export const icons = [
   {
     id: 1,
-    alt: 'youtube',
+    alt: 'youtube Icon',
     icon: '/icons/youtube.svg',
     link: 'https://youtube.com',
   },
   {
     id: 3,
-    alt: 'instagram',
+    alt: 'instagram Icon' ,
     link: 'https://instagram.com',
     icon: '/icons/instagram.svg',
   },
   {
     id: 4,
-    alt: 'faceBook',
+    alt: 'faceBook  Icon',
     link: 'https://facebook.com',
     icon: '/icons/facebook.svg',
   },
