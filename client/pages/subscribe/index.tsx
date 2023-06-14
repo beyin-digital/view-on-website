@@ -683,19 +683,19 @@ const SubscribePage: NextPage = () => {
 																}}
 																onClick={async () => {
 																	if (values?.sublink?.length < 4) {
-																		toast.error("Add your sublink to proceed");
+																		toast.error(`${t("toast_one")}`);
 																		return;
 																	}
 																	if (
 																		values?.sublink?.length > 4 &&
 																		!isValidUrl(values?.sublink)
 																	) {
-																		toast.error("Please enter a valid Sublink");
+																		toast.error(`${t("toast_two")}`);
 																		return;
 																	}
 																	if (keywordFound) {
 																		toast.error(
-																			"This hashtag is already in use",
+																			`${t("toast_three")}`,
 																		);
 																		return;
 																	}
@@ -776,20 +776,18 @@ const SubscribePage: NextPage = () => {
 																}}
 																onClick={async (e) => {
 																	if (values?.sublink?.length < 4) {
-																		toast.error("Add your sublink to proceed");
+																		toast.error(`${t("toast_one")}`);
 																		return;
 																	}
 																	if (
 																		values?.sublink?.length > 4 &&
 																		!isValidUrl(values?.sublink)
 																	) {
-																		toast.error("Please enter a valid Sublink");
+																		toast.error(`${t("toast_two")}`);
 																		return;
 																	}
 																	if (keywordFound) {
-																		toast.error(
-																			"This hashtag is already in use",
-																		);
+																		toast.error(`${t("toast_three")}`);
 																		return;
 																	}
 																	if (token) {
