@@ -29,14 +29,11 @@ const HomePage = () => {
 				<meta name="keyword" content={`${t("meta_keyword")}`} />
 				<link
 					rel="canonical"
-					href="https://wiewonwebsite.com/en/illustration"
+					href=""
 				/>
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="shortcut icon" href="/favicon.ico" />
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-				/>
+
 			</Head>
 			<PageHome anchor={"bottom"} />
 		</Suspense>

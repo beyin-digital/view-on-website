@@ -137,28 +137,28 @@ const HomeWeb = () => {
             color: 'hsla(203, 100%, 46%, 1)',
           },
         ])
-        setLineChartData([
-          {
-            id: "",
-            color: "",
-            data: data?.totalDailyVisitsByHoursOfTheDay,
-          },
-          {
-            id: "",
-            color: '',
-            data: data?.totalVisitsByDaysOfTheWeek,
-          },
-          {
-            id: "",
-            color: '',
-            data: data?.totalVisitsByDaysOfTheMonth,
-          },
-          {
-            id: "",
-            color: '',
-            data: data?.totalVisitsByMonthsOfTheYear,
-          },
-        ])
+       setLineChartData([
+					{
+						id: "Today's visits",
+						color: "hsla(203, 100%, 46%, 1)",
+						data: data?.totalDailyVisitsByHoursOfTheDay,
+					},
+					{
+						id: "This Week's visits",
+						color: "hsla(203, 100%, 46%, 1)",
+						data: data?.totalVisitsByDaysOfTheWeek,
+					},
+					{
+						id: "This month's visits",
+						color: "hsla(203, 100%, 46%, 1)",
+						data: data?.totalVisitsByDaysOfTheMonth,
+					},
+					{
+						id: "This year's visits",
+						color: "hsla(203, 100%, 46%, 1)",
+						data: data?.totalVisitsByMonthsOfTheYear,
+					},
+				]);
       }
     }
 

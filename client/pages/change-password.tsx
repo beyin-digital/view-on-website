@@ -31,18 +31,17 @@ const ChangePassword = () => {
 
   return (
     <>
-      {/* <Head>
+      <Head>
         <title>{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_desc')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
         <link
           rel="canonical"
-          href="https://viewonwebsite.com/en/illustration"
+          href=""
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
-      </Head> */}
-      <Seo title={t('meta_title')} descLong={`${t('meta_desc')}`}  descShort={`${t('meta_descShort')}`}  keyboard={`${t('meta_keyword')}`} canonical="https://vow-client.vercel.app/subscribe" />
+      </Head>
 
       <Layout>
         <Box

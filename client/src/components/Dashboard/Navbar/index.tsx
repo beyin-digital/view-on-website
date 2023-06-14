@@ -190,7 +190,7 @@ const Navbar = () => {
 						value={selectedKeyword?.letters}
 						onChange={handleChange}
 						variant="scrollable"
-						scrollButtons
+						scrollButtons="auto"
 						// StartScrollButtonIcon={ArrowBackIosNewIcon}
 						// EndScrollButtonIcon={ArrowBackIosNewIcon}
 						// direction={locale === "ar" ? "rtl" : "ltr"}
@@ -219,7 +219,7 @@ const Navbar = () => {
 							/>
 						))}
 					</Tabs>
-					{/* {keywords?.hasNextPage && (
+					{keywords?.hasNextPage && (
 						<IconButton
 							size="small"
 							sx={{}}
@@ -230,7 +230,7 @@ const Navbar = () => {
 						>
 							<Add />
 						</IconButton>
-					)} */}
+					)}
 				</Box>
 			</Box>
 			{/* Mobile Header */}

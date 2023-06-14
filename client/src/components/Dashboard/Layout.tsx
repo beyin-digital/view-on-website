@@ -108,7 +108,6 @@ function RootLayout({
 					zIndex: 30,
 					position: "absolute",
 					minHeight: "100vh",
-					height: "100%",
 					width: "100%",
 					maxWidth: "1920px",
 				}}
@@ -128,7 +127,7 @@ function RootLayout({
 					{locale === "ar" ? (
 						<Box
 							sx={{
-								position: "absolute",
+								position: { xs: "absolute", xl: "fixed" },
 								left: "0",
 								display: { xs: "none", md: "flex" },
 								width: {
@@ -140,13 +139,14 @@ function RootLayout({
 								minHeight: "100vh",
 								paddingX: { xs: "10px", md: "30px" },
 							}}
+
 						>
 							{children}
 						</Box>
 					) : (
 						<Box
 							sx={{
-								position: "absolute",
+								position: { xs: "absolute", xl: "fixed" },
 								right: "0",
 								display: { xs: "none", md: "flex" },
 								width: {
@@ -158,6 +158,7 @@ function RootLayout({
 								maxHeight: "100vh",
 								paddingX: { xs: "10px", md: "30px" },
 							}}
+
 						>
 							{children}
 						</Box>

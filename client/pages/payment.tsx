@@ -18,17 +18,7 @@ const Payment = () => {
 		}
 	}, [router.query.hashtag]);
 
-	return (
-		<>
-			<Seo
-				title={t("meta_title")}
-				descLong={`${t("meta_desc")}`}
-				descShort={`${t("meta_descShort")}`}
-				keyboard={`${t("meta_keyword")}`}
-				canonical="https://vow-client.vercel.app/subscribe"
-			/>
-		</>
-	);
+	return <></>;
 };
 
 export default Payment;

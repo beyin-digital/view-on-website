@@ -78,10 +78,10 @@ const DashboardProfilePage = () => {
         <title>View On Website -{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
-        <link
+         <link
           rel="canonical"
-          href="https://wiewonwebsite.com/en/illustration"
-        />{' '}
+          href=""
+        />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>

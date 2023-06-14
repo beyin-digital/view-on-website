@@ -41,19 +41,12 @@ const DashboardHomePage = () => {
 	return (
 		<>
 			<Head>
-				<title>View On Website -  {t("meta_title")}</title>
+				<title>View On Website - {t("meta_title")}</title>
 				<meta name="description" content={`${t("meta_description")}`} />
 				<meta name="keyword" content={`${t("meta_keyword")}`} />
-				<link
-					rel="canonical"
-					href="https://wiewonwebsite.com/en/illustration"
-				/>{" "}
+				<link rel="canonical" href="" />
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="shortcut icon" href="/favicon.ico" />
-        <meta
-					name="viewport"
-					content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-				/>
 			</Head>
 			<RootLayout>
 				<Box sx={{ display: { xs: "none", md: "block" }, marginX: "" }}>
