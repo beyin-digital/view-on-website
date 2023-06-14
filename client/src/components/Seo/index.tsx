@@ -12,7 +12,7 @@ const Seo = ({ title, descShort, descLong, keyword,canonical }: any) => {
 					content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 				/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<title>View On Website | {title}</title>
+				<title>View On Website - {title}</title>
 				<meta name="description" content={descLong} />
 				<meta name="keyword" content={keyword} />
 				<meta name="application-name" content="VIEW ON WEBSITE" />
