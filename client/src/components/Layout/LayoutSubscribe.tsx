@@ -31,6 +31,7 @@ const LayoutSubscribe: React.FC<Props> = ({ children }) => {
           maxWidth: '100%',
           overflow: 'hidden',
           height: { xs: '100%', md: '96vh' },
+          marginY:{xs:"3rem",sm:"auto"}
         }}
       >
         <Box

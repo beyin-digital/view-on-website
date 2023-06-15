@@ -75,7 +75,7 @@ export default function HashtagListMobile() {
           value={selectedKeyword?.letters}
           onChange={handleChange}
           variant="scrollable"
-          scrollButtons={false}
+          scrollButtons={"auto"}
           defaultValue={selectedKeyword?.letters}
         >
           {keywords?.data?.map((keyword: any) => (
@@ -93,7 +93,7 @@ export default function HashtagListMobile() {
             />
           ))}
         </Tabs>
-        {/* {keywords?.hasNextPage && (
+        {keywords?.hasNextPage && (
           <IconButton
             onClick={() => {
               setPage(page + 1)
@@ -102,7 +102,7 @@ export default function HashtagListMobile() {
           >
             <Add />
           </IconButton>
-        )} */}
+        )}
       </Box>
     </Box>
   )

@@ -24,6 +24,7 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 				overflow: "hidden",
 				maxHeight: "100vh",
 			}}
+			className="HomeWatchSize"
 		>
 			{/* <Header /> */}
 			{locale === "ar" ? (
