@@ -21,7 +21,7 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 		<Box
 			sx={{
 				maxWidth: "100%",
-				overflow: "hidden",
+				overflowX: "hidden",
 				maxHeight: "100vh",
 			}}
 			className="HomeWatchSize"
