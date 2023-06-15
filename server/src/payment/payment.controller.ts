@@ -42,6 +42,6 @@ export class PaymentController {
   })
   @Delete('unsubscribe')
   unsubscribe(@Req() req: any, @Body('id') id: number) {
-    return this.paymentService.unsubscribe(req.user, id);
+    return this.paymentService.unsubscribe(id);
   }
 }

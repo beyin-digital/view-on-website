@@ -59,14 +59,7 @@ export class PaymentService {
     return { url: checkoutSession.url };
   }
 
-  async unsubscribe(user: User, id: number) {
-    const foundSubscription = await this.subscriptionsService.findOne({
-      id: id,
-      user: { id: user.id },
-    });
-    const subscription = await this.stripeService.cancelSubscription(
-      foundSubscription?.stripeSubscriptionId as string,
-    );
-    return subscription;
+  async unsubscribe(id: number) {
+    await this.stripeService.cancelSubscription(id);
   }
 }

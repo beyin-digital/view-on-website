@@ -119,7 +119,7 @@ export const KeywordProvider = ({ children }: any) => {
         throw new Error('Error fetching data')
       }
       toast.success('Unsubscribed successfully')
-      getUsersKeywords(1)
+      getUserSubscriptions(1)
     } catch (error) {
       toast.error('Error unsubscribing')
     }
@@ -204,7 +204,13 @@ export const KeywordProvider = ({ children }: any) => {
       }
       setSubscriptions({
         ...subscriptions,
-        data: [...subscriptions.data, ...data.data],
+        // check for existing keyword and remove it from the list
+        data: data.data.filter(
+          (item: any) =>
+            !subscriptions.data.some(
+              (subscription: any) => subscription.id === item.id
+            )
+        ),
         hasNextPage: data.hasNextPage,
       })
     } catch (error) {
