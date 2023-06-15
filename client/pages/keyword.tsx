@@ -9,17 +9,17 @@ const HashtagPage = (): JSX.Element => {
   useEffect(() => {
     if (hashtag) {
       axios
-        .get(`http://localhost:4000/api/v1/keywords?letters=${hashtag}`)
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/keywords?letters=${hashtag}`)
         .then((response) => {
-          const { link } = response.data // Assuming the API response has a "link" property
-          if (link) {
-            router.push(link)
+          const { sublink } = response.data // Assuming the API response has a "link" property
+          if (sublink) {
+            window.location.href = sublink
           } else {
-            // Handle case when no link is returned
+            router.push(`${router.locale}/subscribe?hashtag=${hashtag}`)
           }
         })
         .catch((error) => {
-          // Handle error case
+          router.push('/404')
         })
     }
   }, [hashtag])
