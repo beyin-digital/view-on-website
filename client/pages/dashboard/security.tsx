@@ -420,6 +420,7 @@ const DashboardSecurityPage = () => {
                 alignItems: 'center',
                 marginY:"1.5rem"
               }}
+              className="securityWatchSize"
             >
               <Avatar
                 sx={{
@@ -436,7 +437,7 @@ const DashboardSecurityPage = () => {
               </Avatar>
               <Box
                 sx={{
-                  marginX: '2rem',
+                  marginX: {xs:".5rem",sm:'2rem',}
                 }}
               >
                 <Typography

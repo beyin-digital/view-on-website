@@ -139,7 +139,6 @@ function RootLayout({
 								minHeight: "100vh",
 								paddingX: { xs: "10px", md: "30px" },
 							}}
-
 						>
 							{children}
 						</Box>
@@ -158,7 +157,6 @@ function RootLayout({
 								maxHeight: "100vh",
 								paddingX: { xs: "10px", md: "30px" },
 							}}
-
 						>
 							{children}
 						</Box>
@@ -173,6 +171,7 @@ function RootLayout({
 							minHeight: "100%",
 							height: "100vh",
 						}}
+						className="MobileBodyWatchSize"
 					>
 						{children}
 						<>
@@ -188,6 +187,7 @@ function RootLayout({
 									bottom: "0",
 									marginTop: "15rem",
 								}}
+								className="footerWatchSize"
 							>
 								<Box
 									sx={{

@@ -567,6 +567,7 @@ export const ButtonStyle = () => {
 					marginX: "1rem",
 					paddingX: "1rem",
 					cursor: "pointer",
+					marginTop:"3rem"
 				}}
 			>
 				<NextLink
@@ -589,9 +590,11 @@ export const ButtonStyle = () => {
 							borderRadius: "12px",
 
 						}}
-						className={`icon-container ${hovered ? "hovered" : ""}`}
+						className={`sizeButtonWatch icon-container ${hovered ? "hovered" : ""}`}
 						onMouseEnter={handleHover}
 						onMouseLeave={handleHover}
+					// className=""
+
 					>
 						<>
 							<Typography

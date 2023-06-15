@@ -16,7 +16,7 @@ const ErrorPage = () => {
   return (
     <>
       <Head>
-        <title>{t('meta_title')} </title>
+        <title>VIEW ON WEBSITE - {t('meta_title')} </title>
         <meta name="description" content={`${t('meta_desc')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
         <link

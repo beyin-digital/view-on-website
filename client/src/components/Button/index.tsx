@@ -32,7 +32,7 @@ export const LinkSubscribe = () => {
         background: '#31E716',
         borderRadius: '16px',
       }}
-      className={`icon-container ${hovered ? 'hovered' : ''}`}
+      className={`sizeButtonWatch icon-container  ${hovered ? 'hovered' : ''}`}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
     >
@@ -50,6 +50,7 @@ export const LinkSubscribe = () => {
         title={`${t('button')}`}
         href="/subscribe"
         locale={router.locale}
+        className=''
       >
         <Typography
           sx={{

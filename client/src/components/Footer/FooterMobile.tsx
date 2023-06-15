@@ -46,6 +46,7 @@ const FooterMobile = () => {
 					backgroundPositionY: { xs: "0px", sm: "-5px" },
 					backgroundPositionX: { xs: "-650px", sm: "-600px" },
 				}}
+				className="footerWatchSizePages"
 			>
 				<Box
 					sx={{

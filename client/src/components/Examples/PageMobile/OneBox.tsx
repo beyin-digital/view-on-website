@@ -94,7 +94,7 @@ const OneBox = () => {
                   fontWeight: '300',
                   marginY: '.8rem',
                 }}
-                className="exampleOneBoxTextSmall"
+                className="exampleOneBoxTextSmall sizeWatch"
               >
                 {t('box_one_desc')}
               </Typography>

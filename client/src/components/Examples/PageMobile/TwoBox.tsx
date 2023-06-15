@@ -72,6 +72,7 @@ const TwoBox = () => {
                     marginY: '1rem',
                     paddingRight: '.5rem',
                   }}
+                  className='sizeWatch'
                 >
                   {t('box_three_desc')}
                 </Typography>

@@ -5,34 +5,31 @@
 // import Link from '@/components/Link'
 // import ProTip from '@/components/ProTip'
 // import Copyright from '@/components/Copyright'
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
-const Layout = dynamic(() => import('@/components/Layout/Layout'), {
-  ssr: false,
-})
-import Head from 'next/head'
-import { useTranslation } from 'next-i18next'
-import Seo from '@/components/Seo'
+const Layout = dynamic(() => import("@/components/Layout/Layout"), {
+	ssr: false,
+});
+import Head from "next/head";
+import { useTranslation } from "next-i18next";
+import Seo from "@/components/Seo";
 
 const AboutPage = () => {
-  const { t } = useTranslation('about')
+	const { t } = useTranslation("about");
 
-  return (
-    <>
-      <Head>
-        <title>{t('meta_title')} </title>
-        <meta name="description" content={`${t('meta_desc')}`} />
-        <meta name="keyword" content={`${t('meta_keyword')}`} />
-        <link
-          rel="canonical"
-          href=""
-        />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-      </Head>
+	return (
+		<>
+			<Head>
+				<title>VIEW ON WEBSITE - {t("meta_title")} </title>
+				<meta name="description" content={`${t("meta_desc")}`} />
+				<meta name="keyword" content={`${t("meta_keyword")}`} />
+				<link rel="canonical" href="" />
+				<link rel="icon" href="/favicon.ico" />
+				<link rel="shortcut icon" href="/favicon.ico" />
+			</Head>
 
-      <Layout>
-        {/* <Container maxWidth="lg">
+			<Layout>
+				{/* <Container maxWidth="lg">
         <Box
           sx={{
             my: 4,
@@ -54,9 +51,9 @@ const AboutPage = () => {
           <Copyright />
         </Box>
       </Container> */}
-      </Layout>
-    </>
-  )
-}
+			</Layout>
+		</>
+	);
+};
 
-export default AboutPage
+export default AboutPage;
