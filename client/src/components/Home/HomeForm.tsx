@@ -61,7 +61,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
       <Box
         sx={{
           display: 'flex',
-          width: { xs: '45%', sm: '80%', md: '94%', xl: '100%' },
+          width: { xs: '45%', sm: '80%', md: '80%', xl: '100%' },
           justifyContent: {
             xs: 'space-evenly',
             md: 'space-evenly',

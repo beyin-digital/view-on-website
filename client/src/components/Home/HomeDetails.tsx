@@ -72,9 +72,9 @@ const HomeDetails = ({
 							backgroundRepeat: "no-repeat",
 							backgroundSize: "contain",
 							position: "relative",
-							marginY:{xs:"1rem"},
-							marginRight:{xs:"1rem"},
-							backgroundImage: "url('/images/cut-out-parallelogram.webp')",
+							marginY: { xs: "1rem" },
+							marginRight: { xs: "1rem" },
+							backgroundImage: "url('/images/cut-out-parallelogram.png')",
 						}}
 						className="parallelogr watch-screen"
 					>
