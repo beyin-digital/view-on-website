@@ -74,7 +74,7 @@ const HomeDetails = ({
 							position: "relative",
 							marginY: { xs: "1rem" },
 							marginRight: { xs: "1rem" },
-							backgroundImage: "url('/images/cut-out-parallelogram.png')",
+							backgroundImage: "url('/images/cut-out-parallelogram.svg')",
 						}}
 						className="parallelogr watch-screen"
 					>
@@ -94,7 +94,7 @@ const HomeDetails = ({
 							>
 								<Box
 									sx={{
-										width: "90%",
+										width: "80%",
 										height: "90%",
 
 										display: "flex",
@@ -128,7 +128,7 @@ const HomeDetails = ({
 							>
 								<Box
 									sx={{
-										width: "90%",
+										width: "80%",
 										height: "90%",
 
 										display: "flex",
