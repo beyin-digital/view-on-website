@@ -94,9 +94,8 @@ const HomeDetails = ({
 							>
 								<Box
 									sx={{
-										width: "80%",
+										width: { xs: "80%", md: "65%", xl: "80%" },
 										height: "90%",
-
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "space-evenly",
@@ -128,9 +127,8 @@ const HomeDetails = ({
 							>
 								<Box
 									sx={{
-										width: "80%",
+										width: { xs: "80%", md: "65%", xl: "80%" },
 										height: "90%",
-
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "space-evenly",
