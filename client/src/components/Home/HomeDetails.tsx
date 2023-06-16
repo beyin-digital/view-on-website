@@ -76,7 +76,7 @@ const HomeDetails = ({
 							marginRight:{xs:"1rem"},
 							backgroundImage: "url('/images/cut-out-parallelogram.webp')",
 						}}
-						className="parallelogr"
+						className="parallelogr watch-screen"
 					>
 						{locale === "ar" ? (
 							<Box
@@ -90,7 +90,7 @@ const HomeDetails = ({
 									flexDirection: "column",
 									paddingX: "1rem",
 								}}
-								className="boxGreenLayou"
+								className="boxGreenLayoutWatch"
 							>
 								<Box
 									sx={{
@@ -124,7 +124,7 @@ const HomeDetails = ({
 									flexDirection: "column",
 									paddingX: "1rem",
 								}}
-								// className="boxGreenLayout"
+								className="boxGreenLayoutWatch"
 							>
 								<Box
 									sx={{
