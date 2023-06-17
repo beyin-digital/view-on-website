@@ -22,7 +22,7 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
         .get(
           `${
             process.env.NEXT_PUBLIC_API_URL
-          }/keywords/letters?letters=${encodeURI(routerSlug as string)}`
+          }/keywords/letters?letters=${decodeURI(routerSlug as string)}`
         )
         .then((response) => {
           if (response.status !== 200) {
