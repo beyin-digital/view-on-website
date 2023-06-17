@@ -90,7 +90,7 @@ const DashboardSubscriptionsPage = () => {
         <title>View On Website - {t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
-        <link rel="canonical" href="" />
+        <link rel="canonical" href="https://www.viewonwebsite.com/subscribe" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>{' '}

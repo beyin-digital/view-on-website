@@ -74,19 +74,20 @@ function MyApp(props: MyAppProps) {
 				<link rel="manifest" href="/pwa/manifest.json" />
 				<meta name="twitter:card" content="summary" />
 				<meta name="twitter:url" content="https://viewonwebsite.com" />
-				<meta name="twitter:title" content="" />
-				<meta name="twitter:description" content="" />
+				<meta name="twitter:title" content="VIEW ON WEBSITE" />
+				<meta name="twitter:description" content={`${t("meta_descShort")}`} />
 				<meta name="twitter:image" content="https://viewonwebsite.com" />
-				<meta name="twitter:creator" content="" />
+				<meta name="twitter:creator" content="VIEW ON WEBSITE" />
 				<meta property="og:type" content="website" />
-				<meta property="og:title" content="" />
-				<meta property="og:description" content="" />
+				<meta property="og:title" content="VIEW ON WEBSITE" />
+				<meta property="og:description" content={`${t("meta_descShort")}`} />
 				<meta property="og:site_name" content="VIEW ON WEBSITE" />
 				<meta property="og:url" content="https://www.viewonwebsite.com" />
 				<meta
 					property="og:image"
-					content="https://website-vow.vercel.app/images/logo.svg"
+					content="https://www.viewonwebsite.com/images/logo.svg"
 				/>
+				<link rel="canonical" href="https://www.viewonwebsite.com/subscribe" />
 			</Head>
 
 			<div dir={isRTL ? "rtl" : "ltr"}>

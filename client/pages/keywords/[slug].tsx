@@ -40,6 +40,7 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
 					name="viewport"
 					content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 				/>
+
 				{/* <meta
 					http-equiv="refresh"
 					content={`0; URL=http://localhost:3000/en/subscribe/premium?hashtag=${slug}`}
@@ -54,6 +55,7 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
 					name="keyword"
 					content="VOW, ViewOnWebsite, Keyword Redirection, Sub-Links, E-Lable,#a,#b,#c,#d,#e,#f,#g,#h,#i,#j,#k,#l,#m,#n,#o,#p,#q,#r,#s,#t,#u,#v,#w,#x,#y,#z"
 				/>
+				<link rel="canonical" href={`https://www.viewonwebsite.com/${slug}`} />
 				<meta name="application-name" content="VIEW ON WEBSITE" />
 				<meta name="apple-mobile-web-app-title" content="VIEW ON WEBSITE" />
 				<link rel="icon" href="/favicon.ico" />
@@ -90,18 +92,24 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
 				<link rel="manifest" href="/pwa/manifest.json" />
 				<meta name="twitter:card" content="summary" />
 				<meta name="twitter:url" content="https://viewonwebsite.com" />
-				<meta name="twitter:title" content="" />
-				<meta name="twitter:description" content="" />
+				<meta name="twitter:title" content="View On Website" />
+				<meta
+					name="twitter:description"
+					content="Experience a new era of internet browsing with VOW's keyword redirection service. Enter your #Keyword for instant redirection"
+				/>
 				<meta name="twitter:image" content="https://viewonwebsite.com" />
-				<meta name="twitter:creator" content="" />
+				<meta name="twitter:creator" content="View On Website" />
 				<meta property="og:type" content="website" />
-				<meta property="og:title" content="" />
-				<meta property="og:description" content="" />
+				<meta property="og:title" content="View On Website" />
+				<meta
+					property="og:description"
+					content="Experience a new era of internet browsing with VOW's keyword redirection service. Enter your #Keyword for instant redirection"
+				/>
 				<meta property="og:site_name" content="VIEW ON WEBSITE" />
 				<meta property="og:url" content="https://www.viewonwebsite.com" />
 				<meta
 					property="og:image"
-					content="https://website-vow.vercel.app/images/logo.svg"
+					content="https://www.viewonwebsite.com/images/logo.svg"
 				/>
 			</Head>
 			{/* <h1>{slug}</h1> */}

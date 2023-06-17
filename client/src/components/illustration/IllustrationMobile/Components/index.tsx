@@ -11,6 +11,7 @@ export const ImageHeader = () => {
 				sx={{
 					width: "100%",
 					display: { xs: "none", sm: "block" },
+					
 				}}
 			>
 				<Image

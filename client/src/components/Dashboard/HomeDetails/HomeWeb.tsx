@@ -623,7 +623,9 @@ const HomeWeb = () => {
 					</Grid>
 				</Grid>
 				<Grid item md={6} xl={2.6} height={380}>
-					<Item>
+					<Item sx={{
+						padding:"40px 8px"
+					}}>
 						<Typography
 							align="center"
 							marginTop="18px"

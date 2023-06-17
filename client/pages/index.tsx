@@ -29,11 +29,11 @@ const HomePage = () => {
 				<meta name="keyword" content={`${t("meta_keyword")}`} />
 				<link
 					rel="canonical"
-					href=""
+					href="https://www.viewonwebsite.com/illustration"
 				/>
+
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="shortcut icon" href="/favicon.ico" />
-
 			</Head>
 			<PageHome anchor={"bottom"} />
 		</Suspense>
