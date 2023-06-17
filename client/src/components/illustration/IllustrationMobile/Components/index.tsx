@@ -11,7 +11,7 @@ export const ImageHeader = () => {
 				sx={{
 					width: "100%",
 					display: { xs: "none", sm: "block" },
-					
+
 				}}
 			>
 				<Image
@@ -189,7 +189,7 @@ export const HeaderLayout = () => {
 					>
 						{locale === "ar" ? (
 							<img
-								src="/images/illustrationPicCenterAR.png"
+								src="/images/illustrationPicCenterAR.svg"
 								style={{
 									width: "100%",
 								}}
@@ -199,7 +199,7 @@ export const HeaderLayout = () => {
 							/>
 						) : (
 							<img
-								src="/images/illustrationPicCenter.png"
+								src="/images/illustrationPicCenter.svg"
 								style={{
 									width: "100%",
 								}}
@@ -267,7 +267,7 @@ export const MainContainer = () => {
 						className="swirlSmall"
 					>
 						<img
-							src="/images/swirlSmall.webp"
+							src="/images/swirlSmall.svg"
 							loading="lazy"
 							alt="View On Website swirl Small"
 							title="View On Website swirl Small"

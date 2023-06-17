@@ -101,7 +101,7 @@ const TwoBox = () => {
                 className="ExampleBoxTwoPi ExampleBoxTwoImageMobile"
               >
                 <img
-                  src="/images/mobile.webp"
+                  src="/images/mobile.svg"
                   alt="View On Website Photo Inter Keyword"
                   title="View On Website Photo Inter Keyword"
                   style={{

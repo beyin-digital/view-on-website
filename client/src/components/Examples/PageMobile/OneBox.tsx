@@ -113,7 +113,7 @@ const OneBox = () => {
           }}
         >
           <img
-            src="/images/phone.webp"
+            src="/images/phone.svg"
             alt="View On Website Man Look at Phone"
             title="View On Website Man Look at Phone"
             style={{
