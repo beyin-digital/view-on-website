@@ -146,8 +146,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const jsonData = await import('../../public/data/keyword.json')
-  const data: PageData[] = jsonData.default
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/keywords/check/premium`,
+    {
+      method: 'GET',
+    }
+  )
+  const data: PageData[] = await response.json()
 
   const paths = data.map((item) => ({
     params: {
