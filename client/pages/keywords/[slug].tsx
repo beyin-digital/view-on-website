@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 type PageData = {
   slug: string
@@ -134,35 +135,40 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { slug } = params as { slug: string }
-
-  return {
-    props: {
-      data,
-      slug: slug || '',
-    },
-  }
-}
-
-export const getStaticPaths: GetStaticPaths = async () => {
+export async function getStaticPaths() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/keywords/check/premium`,
-    {
-      method: 'GET',
-    }
+    `${process.env.NEXT_PUBLIC_API_URL}/keywords/check/premium`
   )
-  const parsedData = await response.json()
-  const data = parsedData.default
-  const paths = data.map((item: any) => ({
-    params: {
-      slug: item.slug,
-    },
-  }))
+  const data = await response.json()
+
+  const paths = data?.map((item: any) => {
+    return {
+      params: {
+        slug: item.slug,
+      },
+    }
+  })
+  console.log(paths)
 
   return {
     paths,
     fallback: false,
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/keywords/letters?letters=${params?.slug}`,
+    {
+      method: 'GET',
+    }
+  )
+  const data = await response.json()
+
+  return {
+    props: {
+      slug: data.slug,
+    },
   }
 }
 
