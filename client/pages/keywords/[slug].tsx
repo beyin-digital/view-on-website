@@ -20,9 +20,14 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
     if (routerSlug) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_API_URL}/keywords/letters?letters=${routerSlug}`
+          `${
+            process.env.NEXT_PUBLIC_API_URL
+          }/keywords/letters?letters=${encodeURI(routerSlug as string)}`
         )
         .then((response) => {
+          if (response.status !== 200) {
+            throw new Error()
+          }
           const { sublink } = response.data // Assuming the API response has a "link" property
           if (sublink) {
             window.location.href = sublink
@@ -33,7 +38,9 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
           }
         })
         .catch((error) => {
-          router.push('/404')
+          router.push(
+            `${router.locale}/subscribe/premium?hashtag=${routerSlug}`
+          )
         })
     }
   }, [routerSlug])
