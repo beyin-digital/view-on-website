@@ -21,7 +21,7 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
       .get(
         `${
           process.env.NEXT_PUBLIC_API_URL
-        }/keywords/letters?letters=${decodeURI(routerSlug)}`
+        }/keywords/letters?letters=${decodeURI(routerSlug as string)}`
       )
       .then((response) => {
         if (response.status !== 200) {
@@ -34,7 +34,7 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
         } else {
           router.push(
             `/${router.locale}/subscribe/premium?hashtag=${decodeURI(
-              routerSlug
+              routerSlug as string
             )}`
           )
           return
@@ -42,7 +42,9 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
       })
       .catch((error) => {
         router.push(
-          `/${router.locale}/subscribe/premium?hashtag=${decodeURI(routerSlug)}`
+          `/${router.locale}/subscribe/premium?hashtag=${decodeURI(
+            routerSlug as string
+          )}`
         )
         return
       })
