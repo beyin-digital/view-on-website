@@ -152,8 +152,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
       method: 'GET',
     }
   )
-  const data = await response.json()
-
+  const parsedData = await response.json()
+  const data = parsedData.default
   const paths = data.map((item: any) => ({
     params: {
       slug: item.slug,
