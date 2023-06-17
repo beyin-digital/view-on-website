@@ -20,7 +20,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
   const [isInputFocused, setIsInputFocused] = useState(false)
   const [isInputValid, setIsInputValid] = useState(true)
 
-  const allowedCharacters = /^[a-zA-Z\u0600-\u06FF\s.,،]+$/
+  const allowedCharacters = /^[^. ]+$/
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value
 
