@@ -204,13 +204,8 @@ export const KeywordProvider = ({ children }: any) => {
       }
       setSubscriptions({
         ...subscriptions,
-        // check for existing keyword and remove it from the list
-        data: data.data.filter(
-          (item: any) =>
-            !subscriptions.data.some(
-              (subscription: any) => subscription.id === item.id
-            )
-        ),
+        // check for existing keyword and remove it from the list if it isn't returned from the api
+        data: [...subscriptions.data, ...data.data],
         hasNextPage: data.hasNextPage,
       })
     } catch (error) {
