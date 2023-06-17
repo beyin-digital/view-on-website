@@ -19,7 +19,9 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
   useEffect(() => {
     axios
       .get(
-        `${process.env.NEXT_PUBLIC_API_URL}/keywords/letters?letters=${routerSlug}`
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }/keywords/letters?letters=${decodeURI(routerSlug)}`
       )
       .then((response) => {
         if (response.status !== 200) {
@@ -28,16 +30,23 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
         const { sublink } = response.data // Assuming the API response has a "link" property
         if (sublink) {
           window.location.href = sublink
+          return
         } else {
           router.push(
-            `/${router.locale}/subscribe/premium?hashtag=${routerSlug}`
+            `/${router.locale}/subscribe/premium?hashtag=${decodeURI(
+              routerSlug
+            )}`
           )
+          return
         }
       })
       .catch((error) => {
-        router.push(`/${router.locale}/subscribe/premium?hashtag=${routerSlug}`)
+        router.push(
+          `/${router.locale}/subscribe/premium?hashtag=${decodeURI(routerSlug)}`
+        )
+        return
       })
-  }, [routerSlug])
+  }, [router.query.slug])
 
   return (
     <>
