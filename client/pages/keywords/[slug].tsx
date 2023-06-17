@@ -20,9 +20,7 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
     if (routerSlug) {
       axios
         .get(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
-          }/keywords/letters?letters=${decodeURI(routerSlug as string)}`
+          `${process.env.NEXT_PUBLIC_API_URL}/keywords/letters?letters=${routerSlug}`
         )
         .then((response) => {
           if (response.status !== 200) {
@@ -33,13 +31,13 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
             window.location.href = sublink
           } else {
             router.push(
-              `${router.locale}/subscribe/premium?hashtag=${routerSlug}`
+              `/${router.locale}/subscribe/premium?hashtag=${routerSlug}`
             )
           }
         })
         .catch((error) => {
           router.push(
-            `${router.locale}/subscribe/premium?hashtag=${routerSlug}`
+            `/${router.locale}/subscribe/premium?hashtag=${routerSlug}`
           )
         })
     }
