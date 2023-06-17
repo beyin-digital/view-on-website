@@ -20,7 +20,7 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
     if (routerSlug) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_API_URL}/keywords?letters=${routerSlug}`
+          `${process.env.NEXT_PUBLIC_API_URL}/keywords/letters?letters=${routerSlug}`
         )
         .then((response) => {
           const { sublink } = response.data // Assuming the API response has a "link" property
