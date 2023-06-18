@@ -76,6 +76,7 @@ const OneBox = () => {
                 width: { xs: '65%', sm: '322px', md: '50%' },
                 height: '134px',
               }}
+              className="SizeWatchTextExample"
             >
               <Typography
                 sx={{

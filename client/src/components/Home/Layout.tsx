@@ -32,12 +32,14 @@ const Layout: React.FC<Props> = ({ children, onClick }) => {
 					sx={{
 						margin: "auto",
 						width: "100%",
-						position: { xs: "relative", md: "fixed" },
-						height: { xs: "100vh", md: "100vh", xl: "100vh" },
+						position: { xs: "relative", md: "" },
+						minHeight: { xs: "100vh", md: "100vh", xl: "100vh" },
 						display: "flex",
 						flexDirection: "column",
 						justifyContent: "space-between",
 						overflow: "hidden",
+						maxHeight: "100%",
+
 					}}
 				>
 					<BackgroundHome />

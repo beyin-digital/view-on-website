@@ -46,7 +46,7 @@ const Footer = ({ onClick }: any) => {
 					sx={{
 						display: "flex",
 						alignItems: "center",
-						width: "50%",
+						width: { xs: "40%", xl: "50%" },
 						justifyContent: "space-between",
 						flexDirection: { xs: "column", md: "row", xl: "row" },
 					}}
@@ -136,6 +136,42 @@ const Footer = ({ onClick }: any) => {
 							flexDirection: { xs: "column", md: "row", xl: "row" },
 						}}
 					>
+						<NextLink
+							href="/"
+							style={{
+								textDecoration: "none",
+								color: "inherit",
+								cursor: "pointer",
+							}}
+						>
+							<Box
+								sx={{
+									border: "1px solid #343132",
+									borderRadius: "34px",
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "space-around",
+									width: "143px",
+								}}
+							>
+								<Typography
+									fontSize="20px"
+									fontWeight="400"
+									lineHeight="32px"
+									textAlign="center"
+									textTransform={"capitalize"}
+								>
+									{t("footer_play")}
+								</Typography>
+								<Image
+									src="/icons/play.png"
+									alt={t("footer_learn")}
+									title={`${t("footer_learn")}`}
+									width={20}
+									height={20}
+								/>
+							</Box>
+						</NextLink>
 						<NextLink
 							href=""
 							locale={router.locale}

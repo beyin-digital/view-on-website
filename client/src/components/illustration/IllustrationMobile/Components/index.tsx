@@ -229,6 +229,7 @@ export const MainContainer = () => {
 					position: "relative",
 					marginY: { xs: "6rem", sm: "5rem" },
 					padding: { xs: "1rem", sm: "2rem" },
+					// overflow:"auto"
 				}}
 				className="MainBoxPic"
 			>
@@ -623,9 +624,9 @@ export const ButtonStyle = () => {
 						{locale === "ar" ? (
 							<>
 								<svg
-									width="38"
-									height="38"
-									viewBox="0 0 38 38"
+									width="25"
+									height="30"
+									viewBox="0 0 40 30"
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg"
 									className="icon-left_rtl"

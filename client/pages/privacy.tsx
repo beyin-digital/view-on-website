@@ -3,9 +3,17 @@ import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import Seo from "@/components/Seo";
 
-const Layout = dynamic(() => import("@/components/Layout/Layout"), {
+const PrivacyDetails = dynamic(() => import("@/components/PrivacyDetails"), {
+	ssr: false,
+});
+const Navbar = dynamic(() => import("@/components/Navbar/Navbar"), {
+	ssr: false,
+});
+const Footer = dynamic(() => import("@/components/Footer/Footer"), {
+	ssr: false,
+});
+const FooterMobile = dynamic(() => import("@/components/Footer/FooterMobile"), {
 	ssr: false,
 });
 
@@ -26,6 +34,12 @@ const Privacy = () => {
 			{/* <Layout>
         <h1></h1>
       </Layout> */}
+			<>
+				<Navbar />
+				<PrivacyDetails />
+				<Footer />
+				<FooterMobile />
+			</>
 		</>
 	);
 };

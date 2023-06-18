@@ -239,6 +239,26 @@ const FooterMobile = () => {
 										close={handleClose}
 									/>
 								</>
+								<Link
+									href="/"
+									style={{
+										textDecoration: "none",
+										color: "#343132",
+									}}
+								>
+									<Typography
+										sx={{
+											fontSize: { xs: "14px", sm: "20px" },
+											fontWeight: "400",
+											lineHeight: "25px",
+											textAlign: "center",
+											textTransform: "capitalize",
+											cursor: "pointer",
+										}}
+									>
+										{t("footer_play")}
+									</Typography>
+								</Link>
 							</Box>
 						</Box>
 						<Typography

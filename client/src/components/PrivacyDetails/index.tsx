@@ -2,8 +2,8 @@ import { Box, Container, Typography } from "@mui/material";
 import Content from "./Content";
 import { useTranslation } from "next-i18next";
 
-const TermsDetails = () => {
-	const { t } = useTranslation("terms");
+const PrivacyDetails = () => {
+	const { t } = useTranslation("privacy");
 
 	return (
 		<>
@@ -66,4 +66,4 @@ const TermsDetails = () => {
 	);
 };
 
-export default TermsDetails;
+export default PrivacyDetails;

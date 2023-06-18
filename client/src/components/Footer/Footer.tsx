@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import NextLink from "next/link";
 
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
@@ -52,7 +53,7 @@ const Footer = () => {
 			>
 				<Box
 					sx={{
-						width: "100%",
+						width: {xs:"",md:"60%",xl:"90%"},
 						display: { xs: "flex", md: "flex", xl: "flex" },
 						alignItems: "center",
 					}}
@@ -79,12 +80,50 @@ const Footer = () => {
 				</Box>
 				<Box
 					sx={{
-						width: { xs: "", sm: "90%", xl: "50%" },
+						width: { xs: "", sm: "100%", xl: "60%" },
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "space-around",
 					}}
 				>
+					<NextLink
+						href="/"
+						style={{
+							textDecoration: "none",
+							color: "inherit",
+							cursor: "pointer",
+						}}
+					>
+						<Box
+							sx={{
+								border: "1px solid #343132",
+								borderRadius: "34px",
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "space-around",
+								width: "143px",
+							}}
+						>
+							<Typography
+								fontSize="20px"
+								fontWeight="400"
+								lineHeight="32px"
+								textAlign="center"
+								textTransform={"capitalize"}
+							>
+								{t("footer_play")}
+							</Typography>
+							<Image
+								src="/icons/play.png"
+								alt={t("footer_learn")}
+								title={`${t("footer_learn")}`}
+								width={20}
+								height={20}
+							/>
+						</Box>
+					</NextLink>
+
+					{/*  */}
 					<Box
 						style={{
 							textDecoration: "none",

@@ -4,7 +4,6 @@ import { useTranslation } from "next-i18next";
 
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import Seo from "@/components/Seo";
 
 const Layout = dynamic(() => import("@/components/Layout/Layout"), {
 	ssr: false,

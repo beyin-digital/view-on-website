@@ -3,7 +3,6 @@ import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import Seo from "@/components/Seo";
 
 const Navbar = dynamic(() => import("@/components/Navbar/Navbar"), {
 	ssr: false,
