@@ -281,7 +281,7 @@ const Navbar = () => {
           </Typography>
           <Link href="/">
             <Image
-              src="/images/logo.webp"
+              src="/images/logo.svg"
               alt="logo"
               width={74}
               height={37}
