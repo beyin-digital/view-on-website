@@ -39,7 +39,7 @@ const ContactDetails = () => {
 		<>
 			<Box
 				sx={{
-					width: "90%",
+					width: "100%",
 					height: "100%",
 					display: "flex",
 					alginItems: "center",
@@ -50,125 +50,136 @@ const ContactDetails = () => {
 			>
 				<Box
 					sx={{
-						display: "flex",
-						alignItems: "start",
-						justifyContent: "center",
-						flexDirection: "column",
-						width: { xs: "95%", md: "85%", lg: "70%" },
+						width: { xs: "90%", md: "75%" },
 						height: "100%",
+						display: "flex",
+						alginItems: "center",
+						justifyContent: "end",
 					}}
 				>
-					{cards.map((item) => (
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "start",
-								justifyContent: "space-around",
-								flexDirection: "column",
-								height: { xs: "100%", sm: "170px" },
-								width: "100%",
-							}}
-							key={item.id}
-						>
-							<Typography
-								sx={{
-									fontSize: { xs: "20px", md: "30px", xl: "40px" },
-									fontWeight: "400",
-									lineHeight: "37px",
-									px: { xs: "2rem", md: "0" },
-								}}
-							>
-								{t(item.name)}
-							</Typography>
-							<Typography
-								sx={{
-									fontSize: { xs: "16px", sm: "20px", md: "24px" },
-									fontWeight: "400",
-									lineHeight: "22px",
-									px: { xs: "2rem", md: "0" },
-								}}
-							>
-								{t(item.text)}
-							</Typography>
+					<Box
+						sx={{
+							display: "flex",
+							alignItems: "end",
+							justifyContent: "center",
+							flexDirection: "column",
+							width: { xs: "99%", md: "100%", lg: "95%" },
+							height: "100%",
+						}}
+					>
+						{cards.map((item) => (
 							<Box
 								sx={{
-									width: { xs: "100%", md: "80%" },
 									display: "flex",
-									alignItems: "center",
-									justifyContent: "space-between",
-									flexDirection: { xs: "column", lg: "row" },
-									px: { xs: ".2rem", sm: "2rem", md: "0" },
+									alignItems: "start",
+									justifyContent: "space-around",
+									flexDirection: "column",
+									height: { xs: "100%", sm: "170px" },
+									width: "100%",
 								}}
+								key={item.id}
 							>
-								<Link
-									href={`mailto:${item.email}`}
-									target="_blank"
-									style={{
-										textDecoration: "none",
-										color: "inherit",
-										width: "100%",
+								<Typography
+									sx={{
+										fontSize: { xs: "16px", md: "25px", xl: "40px" },
+										fontWeight: "500",
+										lineHeight: "27px",
+										px: { xs: "2rem", md: "0" },
+										py: { xs: ".1rem", md: "0" },
 									}}
 								>
-									<Box
-										sx={{
-											width: { xs: "100%", md: "100%" },
-											display: "flex",
-											alignItems: "center",
-											justifyContent: "space-between",
-											marginY: { xs: ".5rem", md: "0" },
+									{t(item.name)}
+								</Typography>
+								<Typography
+									sx={{
+										fontSize: { xs: "15px", sm: "20px", md: "24px" },
+										fontWeight: "400",
+										lineHeight: "22px",
+										px: { xs: "2rem", md: "0" },
+									}}
+								>
+									{t(item.text)}
+								</Typography>
+								<Box
+									sx={{
+										width: { xs: "100%", md: "80%" },
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "space-between",
+										flexDirection: { xs: "column", lg: "row" },
+										px: { xs: ".2rem", sm: "2rem", md: "0" },
+									}}
+								>
+									<Link
+										href={`mailto:${item.email}`}
+										target="_blank"
+										style={{
+											textDecoration: "none",
+											color: "inherit",
+											width: "100%",
 										}}
 									>
-										{/* icon */}
-										<MdEmail size={25} />
-										<Typography
+										<Box
 											sx={{
-												fontSize: { xs: "16px", sm: "20px" },
-												fontWeight: "400",
-												lineHeight: "18px",
-												width: { xs: "90%", lg: "90%" },
-												textTransform: "capitalize",
+												width: { xs: "100%", md: "100%" },
+												display: "flex",
+												alignItems: "center",
+												justifyContent: "space-between",
+												marginY: { xs: ".5rem", md: "0" },
 											}}
 										>
-											{item.email}
-										</Typography>
-									</Box>
-								</Link>
-								<Link
-									href={`https://api.whatsapp.com/send?phone=${item.iconPhone}`}
-									target="_blank"
-									style={{
-										textDecoration: "none",
-										color: "inherit",
-										width: "100%",
-									}}
-								>
-									<Box
-										sx={{
-											width: { xs: "100%", md: "100%" },
-											display: "flex",
-											alignItems: "center",
-											justifyContent: "space-between",
-											marginY: { xs: ".5rem", md: "0" },
+											{/* icon */}
+											<MdEmail size={25} />
+											<Typography
+												sx={{
+													fontSize: { xs: "16px", sm: "20px" },
+													fontWeight: "400",
+													lineHeight: "18px",
+													width: { xs: "90%", lg: "90%" },
+													textTransform: "capitalize",
+												}}
+											>
+												{item.email}
+											</Typography>
+										</Box>
+									</Link>
+									<Link
+										href={`https://api.whatsapp.com/send?phone=${item.iconPhone}`}
+										target="_blank"
+										style={{
+											textDecoration: "none",
+											color: "inherit",
+											width: "100%",
 										}}
 									>
-										{/* icon */}
-										<RiWhatsappFill size={25} />
-										<Typography
+										<Box
 											sx={{
-												width: { xs: "90%", lg: "90%" },
-												fontSize: { xs: "16px", sm: "20px" },
+												width: { xs: "100%", md: "100%" },
+												display: "flex",
+												alignItems: "center",
+												justifyContent: "space-between",
+												marginY: { xs: ".5rem", md: "0" },
+											}}
+										>
+											{/* icon */}
+											<RiWhatsappFill size={25} />
+											<Typography
+												sx={{
+													width: { xs: "90%", lg: "90%" },
+													fontSize: { xs: "16px", sm: "20px" },
 
-												fontWeight: "400",
-												lineHeight: "18px",
-											}}
-										>
-											{item.phone}
-										</Typography>
-									</Box>
-								</Link>
+													fontWeight: "400",
+													lineHeight: "18px",
+												}}
+											>
+												{item.phone}
+											</Typography>
+										</Box>
+									</Link>
+								</Box>
 							</Box>
-						</Box>
-					))}
+						))}
+					</Box>
 				</Box>
 			</Box>
 		</>

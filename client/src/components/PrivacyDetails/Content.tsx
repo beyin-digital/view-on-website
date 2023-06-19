@@ -15,7 +15,7 @@ const TypographyStyle = ({ children }: Props) => {
 					fontWeight: "500",
 					lineHeight: "23px",
 					marginY: "1rem",
-					textAlign: "justify",
+					// textAlign: "justify",
 					// textDecoration: "underline",
 				}}
 			>
@@ -34,7 +34,7 @@ const TypographyUnderLine = ({ children }: Props) => {
 					fontWeight: "500",
 					lineHeight: "25px",
 					marginX: "1rem",
-					textAlign: "justify",
+					// textAlign: "justify",
 					textDecoration: "underline",
 				}}
 			>
