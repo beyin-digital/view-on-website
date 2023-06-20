@@ -107,7 +107,7 @@ const Navbar = () => {
   }
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     const selectedKeyword = keywords?.data?.find(
-      (keyword: any) => keyword?.letters === newValue
+      (keyword: any) => decodeURI(encodeURI(keyword?.letters) === newValue
     )
     setSelectedKeyword(selectedKeyword)
     if (router.query.hashtag) {
