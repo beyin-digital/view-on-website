@@ -89,7 +89,7 @@ export default function HashtagListMobile() {
               }}
               value={keyword?.letters}
               key={keyword?.id}
-              label={`#` + decodeURI(keyword?.letters)}
+              label={`#` + decodeURI(encodeURI(keyword?.letters))}
             />
           ))}
         </Tabs>
