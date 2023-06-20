@@ -12,7 +12,7 @@ export default function HashtagListMobile() {
   const { user, token } = useContext(UserContext)
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     const selectedKeyword = keywords?.data?.find(
-      (keyword: any) => keyword.letters === newValue
+      (keyword: any) => keyword?.letters === newValue
     )
     setSelectedKeyword(selectedKeyword)
     if (router.query.hashtag) {
