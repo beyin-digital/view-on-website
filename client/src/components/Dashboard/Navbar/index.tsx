@@ -107,7 +107,7 @@ const Navbar = () => {
   }
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     const selectedKeyword = keywords?.data?.find(
-      (keyword: any) => keyword.letters === newValue
+      (keyword: any) => keyword?.letters === newValue
     )
     setSelectedKeyword(selectedKeyword)
     if (router.query.hashtag) {
@@ -207,7 +207,7 @@ const Navbar = () => {
                     md: '10px',
                     xl: '20px',
                   },
-                  fontWeight: selectedKeyword === keyword ? 600 : 400,
+                  fontWeight: selectedKeyword?.id === keyword?.id ? 600 : 400,
                   color: 'black',
                 }}
                 value={keyword?.letters}
