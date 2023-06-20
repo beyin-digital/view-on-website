@@ -12,7 +12,8 @@ export default function HashtagListMobile() {
   const { user, token } = useContext(UserContext)
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     const selectedKeyword = keywords?.data?.find(
-      (keyword: any) =>  keyword?.letters === newValue
+      (keyword: any) =>
+        (decodeURI(encodeURI(keyword?.letters)) as any) === newValue
     ) as any
     setSelectedKeyword(selectedKeyword)
     if (router.query.hashtag) {
@@ -75,7 +76,7 @@ export default function HashtagListMobile() {
           value={selectedKeyword?.letters}
           onChange={handleChange}
           variant="scrollable"
-          scrollButtons={"auto"}
+          scrollButtons={'auto'}
           defaultValue={selectedKeyword?.letters}
         >
           {keywords?.data?.map((keyword: any) => (
