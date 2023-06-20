@@ -210,9 +210,9 @@ const Navbar = () => {
                   fontWeight: selectedKeyword === keyword ? 600 : 400,
                   color: 'black',
                 }}
-                value={keyword.letters}
-                key={keyword.id}
-                label={`#` + decodeURI(keyword.letters)}
+                value={keyword?.letters}
+                key={keyword?.id}
+                label={`#` + decodeURI(keyword?.letters)}
               />
             ))}
           </Tabs>
