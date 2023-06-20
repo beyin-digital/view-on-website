@@ -242,8 +242,12 @@ const DashboardSubscriptionsPage = () => {
                       borderRadius: '16px',
                     }}
                   >
-                    <Typography fontSize="32px" fontWeight="bold">
-                      #{decodeURI(subscription?.letters?.toUpperCase())}
+                    <Typography
+                      fontSize="32px"
+                      fontWeight="bold"
+                      textTransform="uppercase"
+                    >
+                      #{decodeURI(encodeURI(selectedKeyword?.letters))}
                     </Typography>
                   </Box>
                   <Box
@@ -462,14 +466,19 @@ const DashboardSubscriptionsPage = () => {
                     alignItems: 'center',
                     width: '100%',
                     height: '59px',
+
                     background: subscription?.isPremium
                       ? 'linear-gradient(270deg, #0090EC 0%, #31E716 100%)'
                       : '#31E716',
                     borderRadius: '13px',
                   }}
                 >
-                  <Typography fontSize="24px" fontWeight={700}>
-                    #{decodeURI(subscription?.letters?.toUpperCase())}
+                  <Typography
+                    fontSize="24px"
+                    fontWeight={700}
+                    textTransform="uppercase"
+                  >
+                    #{decodeURI(encodeURI(selectedKeyword?.letters))}
                   </Typography>
                 </Box>
                 <Box
@@ -598,7 +607,8 @@ const DashboardSubscriptionsPage = () => {
         >
           <Box>
             <Typography>
-              {t('unsubscribe_text')} #{selectedKeyword?.letters}
+              {t('unsubscribe_text')} #
+              {decodeURI(encodeURI(selectedKeyword?.letters))}
             </Typography>
           </Box>
           <Box
