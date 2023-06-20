@@ -247,7 +247,7 @@ const DashboardSubscriptionsPage = () => {
                       fontWeight="bold"
                       textTransform="uppercase"
                     >
-                      #{decodeURI(encodeURI(selectedKeyword?.letters))}
+                      #{decodeURI(encodeURI(subscription?.letters))}
                     </Typography>
                   </Box>
                   <Box
@@ -478,7 +478,7 @@ const DashboardSubscriptionsPage = () => {
                     fontWeight={700}
                     textTransform="uppercase"
                   >
-                    #{decodeURI(encodeURI(selectedKeyword?.letters))}
+                    #{decodeURI(encodeURI(subscription?.letters))}
                   </Typography>
                 </Box>
                 <Box

@@ -44,7 +44,7 @@ export const KeywordProvider = ({ children }: any) => {
     try {
       setIsSearching(true)
       const response = await fetch(
-        `${apiUrl}/keywords/letters?letters=${keyword}`,
+        `${apiUrl}/keywords/letters?letters=${encodeURI(keyword)}`,
         {
           method: 'GET',
           headers: {
