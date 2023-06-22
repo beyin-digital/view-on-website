@@ -4,7 +4,7 @@ import { User } from 'src/users/entities/user.entity';
 export class CreateSubscriptionDto {
   @IsString()
   @IsNotEmpty()
-  @Matches(/^[^$#.%\s]+$/, {
+  @Matches(/^[^$#.%\s]*$/, {
     message: 'Keyword cannot contain any spaces or dots',
   })
   letters: string;
