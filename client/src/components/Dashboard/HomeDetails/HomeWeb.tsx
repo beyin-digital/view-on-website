@@ -562,7 +562,7 @@ const HomeWeb = () => {
               variant="contained"
               sx={{
                 height: '42px',
-                width: '200px',
+                width: '100%',
                 background: '#0090EC',
                 borderRadius: '7px',
                 color: '#FBFBFB',
