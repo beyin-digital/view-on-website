@@ -213,7 +213,7 @@ export class StripeService {
       })) as User;
 
       const subscription = await this.subscriptionsService.create({
-        letters: metaData.letters,
+        letters: decodeURI(metaData.letters),
         stripeSubscriptionId: subscriptionId,
         user: foundUser as User,
         purchaseAmount: purchaseAmount / 100,
@@ -260,10 +260,6 @@ export class StripeService {
       subscription: { stripeSubscriptionId: subscriptionId },
     })) as Keyword;
 
-    // const user = (await this.usersService.findOne({
-    //   id: subscription.user.id,
-    // })) as User;
-
     if (status === 'active') {
       subscription.stripeSubscriptionStatus =
         status || subscription.stripeSubscriptionStatus;
@@ -285,18 +281,6 @@ export class StripeService {
       await subscription?.save();
       await keyword.save();
     }
-    //  else if (status === 'canceled') {
-    //   await this.subscriptionsService.delete(subscription.id);
-    //   await this.keywordsService.delete(keyword.id);
-    //   const keywordsCount = await this.keywordsService.count({
-    //     user: { id: user.id },
-    //   });
-
-    //   if (keywordsCount === 0) {
-    //     user.hasKeywords = false;
-    //     await user.save();
-    //   }
-    // }
   }
 
   async processEvent(event: Stripe.Event) {

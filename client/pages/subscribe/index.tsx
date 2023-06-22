@@ -69,7 +69,7 @@ const SubscribePage: NextPage = () => {
     sublink: '',
   })
 
-  const allowedCharacters = /^[^. ]+$/
+  const allowedCharacters = /^[^$#.%\s]+$/
 
   const hashtagDebounce = useDebounce(values.hashtag, 200)
   const { handleSubscription, handleCheckKeyword, keywordFound, isSearching } =

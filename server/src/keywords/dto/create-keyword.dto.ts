@@ -8,8 +8,7 @@ import { Subscription } from 'src/subscriptions/entities/subscription.entity';
 export class CreateKeywordDto {
   @ApiProperty({ example: 'hello world' })
   @IsNotEmpty()
-  // matches any character except space and .
-  @Matches(/^[^ .]+$/, {
+  @Matches(/^[^$#.%\s]+$/, {
     message: 'Keyword cannot contain any spaces or dots',
   })
   letters?: string;
