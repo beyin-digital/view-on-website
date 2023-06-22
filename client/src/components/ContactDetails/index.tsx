@@ -22,7 +22,7 @@ const ContactDetails = () => {
 			text: "text",
 			iconEmail: "",
 			email: "business@viewonwebsite.com",
-			iconPhone: "50 776 9111",
+			iconPhone: "507769111",
 			phone: "+971507769111",
 		},
 		{
@@ -31,8 +31,8 @@ const ContactDetails = () => {
 			text: "text",
 			iconEmail: "press@viewonwebsite.com",
 			email: "Press@ViewOnWebsite.com",
-			iconPhone: "52 873 8551",
-			phone: "+971528738551",
+			iconPhone: "509113667",
+			phone: "+971509113667",
 		},
 	];
 	return (
