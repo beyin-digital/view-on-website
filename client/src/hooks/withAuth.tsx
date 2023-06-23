@@ -16,12 +16,10 @@ const withAuth = (WrappedComponent: any) => {
         const token = localStorage.getItem('token')
         if (router.pathname === '/dashboard' && !token) {
           router.push(`${router.locale}/login`)
-          return
         }
-        if (router.pathname === '/dashboard' && token) {
-          if (!user?.hasKeywords) {
+        if (router.pathname === '/dashboard') {
+          if (user?.hasKeywords === false) {
             router.push(`${router.locale}/`)
-            return
           }
         }
         if (router.pathname === '/login' && !token) {
@@ -34,7 +32,6 @@ const withAuth = (WrappedComponent: any) => {
                 router.query.hashtag as string
               )}&page=${router.query.page}&limit=${router.query.limit}`
             )
-            return
           }
         }
       }, 250)

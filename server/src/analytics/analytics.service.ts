@@ -26,10 +26,7 @@ export class AnalyticsService {
     const user = await this.getUserFromAuthenticationToken(
       socket.handshake.auth?.token,
     );
-    if (!user) {
-      console.log('not founf');
-      //   throw new WsException('Invalid credentials.');
-    }
+
     return { user, token: socket.handshake.auth?.token };
   }
 
@@ -55,41 +52,7 @@ export class AnalyticsService {
     }
   }
 
-  async getIndividualKeywordAnalytics(clientTimezone: any, id?: number) {
-    const adjustDateToClientTimezone = (date: any, clientTimezone: any) => {
-      const clientOffset = clientTimezone * 60; // Convert client's timezone to minutes
-      const clientOffsetInMilliseconds = clientOffset * 60 * 1000;
-      return new Date(date.getTime() + clientOffsetInMilliseconds);
-    };
-
-    // Function to compare dates in the client's timezone
-    const isSameDateInClientTimezone = (date1, date2) => {
-      return (
-        date1.getDate() === date2.getDate() &&
-        date1.getMonth() === date2.getMonth() &&
-        date1.getFullYear() === date2.getFullYear()
-      );
-    };
-
-    // Function to compare hours in the client's timezone
-    const isSameHourInClientTimezone = (date1, date2, hour) => {
-      return date1.getHours() === hour;
-    };
-
-    // Function to compare months in the client's timezone
-    const isSameMonthInClientTimezone = (date1, date2) => {
-      return date1.getMonth() === date2.getMonth();
-    };
-
-    // Function to compare days of the week in the client's timezone
-    const isSameDayOfWeekInClientTimezone = (date1, date2) => {
-      return date1.getDay() === date2.getDay();
-    };
-
-    // Function to compare days of the month in the client's timezone
-    const isSameDayOfMonthInClientTimezone = (date1, date2) => {
-      return date1.getDate() === date2.getDate();
-    };
+  async getIndividualKeywordAnalytics(timezoneOffset: any, id?: number) {
     const keyword = await this.keywordsRepository.findOne({
       where: {
         id,
@@ -101,12 +64,6 @@ export class AnalyticsService {
         keyword: { id: keyword?.id },
       },
     });
-
-    const currentUtcDate = new Date();
-    const currentDateInClientTimezone = adjustDateToClientTimezone(
-      currentUtcDate,
-      clientTimezone,
-    );
 
     if (keywordCount.length === 0) {
       return {
@@ -155,33 +112,33 @@ export class AnalyticsService {
       keywordId: keyword?.id,
       totalVisits: keywordCount.length,
       totalVisitsToday: keywordCount.filter((count) => {
-        // const today = new Date();
+        const today = new Date();
         const countDate = new Date(count.createdAt);
-
-        return isSameDateInClientTimezone(
-          countDate,
-          currentDateInClientTimezone,
+        return (
+          countDate.getDate() === today.getDate() &&
+          countDate.getMonth() === today.getMonth() &&
+          countDate.getFullYear() === today.getFullYear()
         );
       }).length,
-      totalDailyVisitsByHoursOfTheDay: [...Array(24).keys()].map((hour) => {
-        const countDate = new Date(keywordCount[0].createdAt);
-        return {
-          x: hour + ':00',
-          y: keywordCount.filter(() => {
-            return (
-              isSameDateInClientTimezone(
-                countDate,
-                currentDateInClientTimezone,
-              ) &&
-              isSameHourInClientTimezone(
-                countDate,
-                currentDateInClientTimezone,
-                hour,
-              )
-            );
-          }).length,
-        };
-      }),
+      totalDailyVisitsByHoursOfTheDay: [...Array(24).keys()]
+        .map((hour) => {
+          return {
+            x: hour + ':00',
+            y: keywordCount.filter((count) => {
+              const countDate = new Date(count.createdAt);
+              return countDate.getHours() === hour;
+            }).length,
+          };
+        })
+        .map((hour) => {
+          const date = new Date();
+          date.setHours(date.getHours() + timezoneOffset);
+          return {
+            x: hour.x,
+            y: hour.y,
+            isCurrentHour: date.getHours() === parseInt(hour.x.split(':')[0]),
+          };
+        }),
       totalVisitsByMonthsOfTheYear: [...Array(12).keys()].map((month) => {
         return {
           x: new Date(0, month).toLocaleString('default', {
@@ -189,10 +146,7 @@ export class AnalyticsService {
           }),
           y: keywordCount.filter((count) => {
             const countDate = new Date(count.createdAt);
-            return isSameMonthInClientTimezone(
-              countDate,
-              currentDateInClientTimezone,
-            );
+            return countDate.getMonth() === month;
           }).length,
         };
       }),
@@ -203,10 +157,7 @@ export class AnalyticsService {
           }),
           y: keywordCount.filter((count) => {
             const countDate = new Date(count.createdAt);
-            return isSameDayOfWeekInClientTimezone(
-              countDate,
-              currentDateInClientTimezone,
-            );
+            return countDate.getDay() === day;
           }).length,
         };
       }),
@@ -223,10 +174,7 @@ export class AnalyticsService {
           x: day + 1,
           y: keywordCount.filter((count) => {
             const countDate = new Date(count.createdAt);
-            return isSameDayOfMonthInClientTimezone(
-              countDate,
-              currentDateInClientTimezone,
-            );
+            return countDate.getDate() === day + 1;
           }).length,
         };
       }),
