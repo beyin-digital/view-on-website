@@ -39,17 +39,9 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
     if (foundKeyword) {
       const trimmedHashtag = hashtag.trim() // Remove extra spaces from the text
       if (trimmedHashtag !== '') {
-        const getClientTimezone = () => {
-          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-          return timezone
-        }
-
-        // Call the function to retrieve the client's timezone and update the state
-        const timezone = getClientTimezone()
         // Check for characters after removing spaces
         socket.emit('redirectionAdded', {
           keywordId: foundKeyword?.id,
-          timezone,
         })
 
         isMobile
