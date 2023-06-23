@@ -29,9 +29,13 @@ export class AnalyticsGateway {
   server: Server;
 
   @SubscribeMessage('redirectionAdded')
-  async addRedirection(@MessageBody('keywordId') keywordId: number) {
+  async addRedirection(
+    @MessageBody('keywordId') keywordId: number,
+    @MessageBody('timezone') timezone: any,
+  ) {
     await this.analyticsService.createNewKeywordAnalyticsEntry(keywordId);
     const newRecord = await this.analyticsService.getIndividualKeywordAnalytics(
+      timezone,
       keywordId,
     );
     this.server.emit('getNewRecords', newRecord);
@@ -41,11 +45,11 @@ export class AnalyticsGateway {
   async createConnection(
     @ConnectedSocket() client: Socket,
     @MessageBody('keywordId') keywordId: number,
-    @MessageBody('timezoneOffset') timezoneOffset: any,
+    @MessageBody('timezone') timezone: any,
   ) {
     const allRecords =
       await this.analyticsService.getIndividualKeywordAnalytics(
-        timezoneOffset,
+        timezone,
         keywordId,
       );
     this.server.emit('createConnection', allRecords);
@@ -55,11 +59,11 @@ export class AnalyticsGateway {
   async getNewRecords(
     @ConnectedSocket() client: Socket,
     @MessageBody('keywordId') keywordId: number,
-    @MessageBody('timezoneOffset') timezoneOffset: any,
+    @MessageBody('timezone') timezone: any,
   ) {
     const allRecords =
       await this.analyticsService.getIndividualKeywordAnalytics(
-        timezoneOffset,
+        timezone,
         keywordId,
       );
     this.server.emit('getNewRecords', allRecords);

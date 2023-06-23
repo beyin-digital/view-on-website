@@ -52,7 +52,7 @@ export class AnalyticsService {
     }
   }
 
-  async getIndividualKeywordAnalytics(timezoneOffset: any, id?: number) {
+  async getIndividualKeywordAnalytics(timezone: string, id?: number) {
     const keyword = await this.keywordsRepository.findOne({
       where: {
         id,
@@ -120,25 +120,23 @@ export class AnalyticsService {
           countDate.getFullYear() === today.getFullYear()
         );
       }).length,
-      totalDailyVisitsByHoursOfTheDay: [...Array(24).keys()]
-        .map((hour) => {
+      totalDailyVisitsByHoursOfTheDay:
+        // calculate the total visits by hour of the day and make sure the timezone offset thats passed as an argument is taken into account when returning the time of the day
+        [...Array(24).keys()].map((hour) => {
           return {
-            x: hour + ':00',
+            x: new Date(0, 0, 0, hour).toLocaleString('default', {
+              hour: 'numeric',
+              hour12: true,
+              timeZone: timezone,
+              timeZoneName: 'short',
+            }),
             y: keywordCount.filter((count) => {
               const countDate = new Date(count.createdAt);
               return countDate.getHours() === hour;
             }).length,
           };
-        })
-        .map((hour) => {
-          const date = new Date();
-          date.setHours(date.getHours() + timezoneOffset);
-          return {
-            x: hour.x,
-            y: hour.y,
-            isCurrentHour: date.getHours() === parseInt(hour.x.split(':')[0]),
-          };
         }),
+
       totalVisitsByMonthsOfTheYear: [...Array(12).keys()].map((month) => {
         return {
           x: new Date(0, month).toLocaleString('default', {
