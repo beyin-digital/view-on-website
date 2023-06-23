@@ -19,7 +19,7 @@ const withAuth = (WrappedComponent: any) => {
           return
         }
         if (router.pathname === '/dashboard' && token) {
-          if (!user.hasKeywords) {
+          if (!user?.hasKeywords) {
             router.push(`${router.locale}/`)
             return
           }
