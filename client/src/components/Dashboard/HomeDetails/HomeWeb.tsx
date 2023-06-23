@@ -161,16 +161,23 @@ const HomeWeb = () => {
         ])
       }
     }
+    const getClientTimezone = () => {
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+      return timezone
+    }
+
+    // Call the function to retrieve the client's timezone and update the state
+    const timezone = getClientTimezone()
 
     socket.emit(
       'createConnection',
-      { keywordId: selectedKeyword?.id },
+      { keywordId: selectedKeyword?.id, timezone },
       (data: any) => updateData(data)
     )
 
     socket.emit(
       'getNewRecords',
-      { keywordId: selectedKeyword?.id },
+      { keywordId: selectedKeyword?.id, timezone },
       (data: any) => {
         updateData(data)
       }

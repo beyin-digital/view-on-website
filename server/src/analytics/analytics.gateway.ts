@@ -41,9 +41,13 @@ export class AnalyticsGateway {
   async createConnection(
     @ConnectedSocket() client: Socket,
     @MessageBody('keywordId') keywordId: number,
+    @MessageBody('timezone') timezone: any,
   ) {
     const allRecords =
-      await this.analyticsService.getIndividualKeywordAnalytics(keywordId);
+      await this.analyticsService.getIndividualKeywordAnalytics(
+        timezone,
+        keywordId,
+      );
     this.server.emit('createConnection', allRecords);
   }
 
@@ -51,9 +55,13 @@ export class AnalyticsGateway {
   async getNewRecords(
     @ConnectedSocket() client: Socket,
     @MessageBody('keywordId') keywordId: number,
+    @MessageBody('timezone') timezone: any,
   ) {
     const allRecords =
-      await this.analyticsService.getIndividualKeywordAnalytics(keywordId);
+      await this.analyticsService.getIndividualKeywordAnalytics(
+        timezone,
+        keywordId,
+      );
     this.server.emit('getNewRecords', allRecords);
   }
 }

@@ -55,7 +55,41 @@ export class AnalyticsService {
     }
   }
 
-  async getIndividualKeywordAnalytics(id?: number) {
+  async getIndividualKeywordAnalytics(clientTimezone: any, id?: number) {
+    const adjustDateToClientTimezone = (date: any, clientTimezone: any) => {
+      const clientOffset = clientTimezone * 60; // Convert client's timezone to minutes
+      const clientOffsetInMilliseconds = clientOffset * 60 * 1000;
+      return new Date(date.getTime() + clientOffsetInMilliseconds);
+    };
+
+    // Function to compare dates in the client's timezone
+    const isSameDateInClientTimezone = (date1, date2) => {
+      return (
+        date1.getDate() === date2.getDate() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getFullYear() === date2.getFullYear()
+      );
+    };
+
+    // Function to compare hours in the client's timezone
+    const isSameHourInClientTimezone = (date1, date2, hour) => {
+      return date1.getHours() === hour;
+    };
+
+    // Function to compare months in the client's timezone
+    const isSameMonthInClientTimezone = (date1, date2) => {
+      return date1.getMonth() === date2.getMonth();
+    };
+
+    // Function to compare days of the week in the client's timezone
+    const isSameDayOfWeekInClientTimezone = (date1, date2) => {
+      return date1.getDay() === date2.getDay();
+    };
+
+    // Function to compare days of the month in the client's timezone
+    const isSameDayOfMonthInClientTimezone = (date1, date2) => {
+      return date1.getDate() === date2.getDate();
+    };
     const keyword = await this.keywordsRepository.findOne({
       where: {
         id,
@@ -67,6 +101,12 @@ export class AnalyticsService {
         keyword: { id: keyword?.id },
       },
     });
+
+    const currentUtcDate = new Date();
+    const currentDateInClientTimezone = adjustDateToClientTimezone(
+      currentUtcDate,
+      clientTimezone,
+    );
 
     if (keywordCount.length === 0) {
       return {
@@ -115,25 +155,29 @@ export class AnalyticsService {
       keywordId: keyword?.id,
       totalVisits: keywordCount.length,
       totalVisitsToday: keywordCount.filter((count) => {
-        const today = new Date();
+        // const today = new Date();
         const countDate = new Date(count.createdAt);
-        return (
-          countDate.getDate() === today.getDate() &&
-          countDate.getMonth() === today.getMonth() &&
-          countDate.getFullYear() === today.getFullYear()
+
+        return isSameDateInClientTimezone(
+          countDate,
+          currentDateInClientTimezone,
         );
       }).length,
       totalDailyVisitsByHoursOfTheDay: [...Array(24).keys()].map((hour) => {
-        const today = new Date();
         const countDate = new Date(keywordCount[0].createdAt);
         return {
           x: hour + ':00',
           y: keywordCount.filter(() => {
             return (
-              countDate.getDate() === today.getDate() &&
-              countDate.getMonth() === today.getMonth() &&
-              countDate.getFullYear() === today.getFullYear() &&
-              countDate.getHours() === hour
+              isSameDateInClientTimezone(
+                countDate,
+                currentDateInClientTimezone,
+              ) &&
+              isSameHourInClientTimezone(
+                countDate,
+                currentDateInClientTimezone,
+                hour,
+              )
             );
           }).length,
         };
@@ -145,7 +189,10 @@ export class AnalyticsService {
           }),
           y: keywordCount.filter((count) => {
             const countDate = new Date(count.createdAt);
-            return countDate.getMonth() === month;
+            return isSameMonthInClientTimezone(
+              countDate,
+              currentDateInClientTimezone,
+            );
           }).length,
         };
       }),
@@ -156,7 +203,10 @@ export class AnalyticsService {
           }),
           y: keywordCount.filter((count) => {
             const countDate = new Date(count.createdAt);
-            return countDate.getDay() === day;
+            return isSameDayOfWeekInClientTimezone(
+              countDate,
+              currentDateInClientTimezone,
+            );
           }).length,
         };
       }),
@@ -173,7 +223,10 @@ export class AnalyticsService {
           x: day + 1,
           y: keywordCount.filter((count) => {
             const countDate = new Date(count.createdAt);
-            return countDate.getDate() === day + 1;
+            return isSameDayOfMonthInClientTimezone(
+              countDate,
+              currentDateInClientTimezone,
+            );
           }).length,
         };
       }),
