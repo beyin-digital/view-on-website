@@ -239,13 +239,19 @@ const Sidebar = () => {
               marginLeft: '60px',
             }}
           >
-            <Link href="https://instagram.com/vow" target="_blank">
+            <Link
+              href="https://www.facebook.com/profile.php?id=100064864085130"
+              target="_blank"
+            >
               <BsFacebook size={20} color="#343132" />
             </Link>
-            <Link href="https://instagram.com/vow" target="_blank">
+            <Link
+              href="https://m.youtube.com/@viewonwebsite/playlists"
+              target="_blank"
+            >
               <AiFillYoutube size={20} color="#343132" />
             </Link>
-            <Link href="https://instagram.com/vow" target="_blank">
+            <Link href="https://instagram.com/viewonwebsite" target="_blank">
               <AiFillInstagram size={20} color="#343132" />
             </Link>
           </Box>
