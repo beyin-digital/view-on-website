@@ -19,7 +19,7 @@ import { AnalyticsService } from './analytics.service';
     origin: [
       'http://localhost:3000',
       'https://vow-client.vercel.app',
-      'https://vow-client-staging.vercel.app',
+      'https://viewonwebsite.com',
     ],
   },
 })
