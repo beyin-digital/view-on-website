@@ -7,7 +7,7 @@ import { Box } from '@mui/material'
 
 const withAuth = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
-    const { token } = useContext(UserContext)
+    const { token, user } = useContext(UserContext)
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(true) // New state variable
 
@@ -16,6 +16,13 @@ const withAuth = (WrappedComponent: any) => {
         const token = localStorage.getItem('token')
         if (router.pathname === '/dashboard' && !token) {
           router.push(`${router.locale}/login`)
+          return
+        }
+        if (router.pathname === '/dashboard' && token) {
+          if (!user.hasKeywords) {
+            router.push(`${router.locale}/`)
+            return
+          }
         }
         if (router.pathname === '/login' && !token) {
           router.push('/login')
