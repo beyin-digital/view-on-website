@@ -1,54 +1,31 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
-import data from '../../public/data/keyword.json'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import axios from 'axios'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-type PageData = {
-  slug: string
-  sublink?: string
-}
-
-const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
-  data,
-  slug,
-}) => {
+const SlugPage = ({ data }: any) => {
   const router = useRouter()
-  const { slug: routerSlug } = router.query
+  const { slug } = router.query
+  console.log(slug)
+
   useEffect(() => {
-    axios
-      .get(
-        `${
-          process.env.NEXT_PUBLIC_API_URL
-        }/keywords/letters?letters=${decodeURI(routerSlug as string)}`
-      )
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error()
-        }
-        const { sublink } = response.data // Assuming the API response has a "link" property
-        if (sublink) {
-          window.location.href = sublink
-          return
-        } else {
-          router.push(
-            `/${router.locale}/subscribe/premium?hashtag=${decodeURI(
-              routerSlug as string
-            )}`
-          )
-          return
-        }
-      })
-      .catch((error) => {
+    if (slug) {
+      if (data?.sublink) {
+        window.location.href = data?.sublink
+        return
+      }
+      if (data.slug.length < 2) {
         router.push(
           `/${router.locale}/subscribe/premium?hashtag=${decodeURI(
-            routerSlug as string
+            slug as string
           )}`
         )
         return
-      })
+      }
+      router.push(
+        `/${router.locale}/subscribe/?hashtag=${decodeURI(slug as string)}`
+      )
+    }
   }, [router.query.slug])
 
   return (
@@ -60,12 +37,7 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
 
-        {/* <meta
-					http-equiv="refresh"
-					content={`0; URL=http://localhost:3000/en/subscribe/premium?hashtag=${slug}`}
-				/> */}
-
-        <title>keyword #{slug}</title>
+        <title>keyword #{decodeURI(data.letters)}</title>
         <meta
           name="description"
           content="Experience a new era of internet browsing with VOW's keyword redirection service. Enter your #Keyword for instant redirection"
@@ -74,7 +46,10 @@ const SlugPage: React.FC<{ data: PageData[]; slug: string }> = ({
           name="keyword"
           content="VOW, ViewOnWebsite, Keyword Redirection, Sub-Links, E-Lable,#a,#b,#c,#d,#e,#f,#g,#h,#i,#j,#k,#l,#m,#n,#o,#p,#q,#r,#s,#t,#u,#v,#w,#x,#y,#z"
         />
-        <link rel="canonical" href={`https://www.viewonwebsite.com/${slug}`} />
+        <link
+          rel="canonical"
+          href={`https://www.viewonwebsite.com/${decodeURI(data.letters)}`}
+        />
         <meta name="application-name" content="VIEW ON WEBSITE" />
         <meta name="apple-mobile-web-app-title" content="VIEW ON WEBSITE" />
         <link rel="icon" href="/favicon.ico" />
@@ -148,7 +123,6 @@ export async function getStaticPaths() {
       },
     }
   })
-  console.log(paths)
 
   return {
     paths,
@@ -156,7 +130,7 @@ export async function getStaticPaths() {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/keywords/letters?letters=${params?.slug}`,
     {
@@ -164,10 +138,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   )
   const data = await response.json()
-
+  console.log(response)
   return {
     props: {
-      slug: data.slug,
+      data,
     },
   }
 }

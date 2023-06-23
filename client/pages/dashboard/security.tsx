@@ -112,10 +112,7 @@ const DashboardSecurityPage = () => {
         <title>View On Website -{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
-        <link
-          rel="canonical"
-          href="https://www.viewonwebsite.com/subscribe"
-        />
+        <link rel="canonical" href="https://www.viewonwebsite.com/subscribe" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
@@ -418,7 +415,7 @@ const DashboardSecurityPage = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                marginY:"1.5rem"
+                marginY: '1.5rem',
               }}
               className="securityWatchSize"
             >
@@ -437,7 +434,7 @@ const DashboardSecurityPage = () => {
               </Avatar>
               <Box
                 sx={{
-                  marginX: {xs:".5rem",sm:'2rem',}
+                  marginX: { xs: '.5rem', sm: '2rem' },
                 }}
               >
                 <Typography

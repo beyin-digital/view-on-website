@@ -176,8 +176,10 @@ const Navbar = () => {
           <Tabs
             sx={{
               height: '100%',
-              width: '75%',
+              width: '80%',
               color: '#0090EC',
+              display: 'flex',
+              alignItems: 'center',
             }}
             TabIndicatorProps={{
               sx: {
@@ -188,10 +190,46 @@ const Navbar = () => {
             value={selectedKeyword?.letters}
             onChange={handleChange}
             variant="scrollable"
-            scrollButtons="auto"
-            // StartScrollButtonIcon={ArrowBackIosNewIcon}
-            // EndScrollButtonIcon={ArrowBackIosNewIcon}
-            // direction={locale === "ar" ? "rtl" : "ltr"}
+            scrollButtons={keywords?.data?.length > 6 ? true : false}
+            ScrollButtonComponent={(props) => {
+              if (router.locale == 'ar') {
+                if (props.direction === 'left' && !props.disabled) {
+                  return (
+                    <ArrowForwardIosIcon
+                      sx={{ marginTop: '10px' }}
+                      fontSize="small"
+                    />
+                  )
+                } else if (props.direction === 'right' && !props.disabled) {
+                  return (
+                    <ArrowBackIosNewIcon
+                      sx={{ marginTop: '10px' }}
+                      fontSize="small"
+                    />
+                  )
+                } else {
+                  return null
+                }
+              } else {
+                if (props.direction === 'left' && !props.disabled) {
+                  return (
+                    <ArrowBackIosNewIcon
+                      sx={{ marginTop: '10px' }}
+                      fontSize="small"
+                    />
+                  )
+                } else if (props.direction === 'right' && !props.disabled) {
+                  return (
+                    <ArrowForwardIosIcon
+                      sx={{ marginTop: '10px' }}
+                      fontSize="small"
+                    />
+                  )
+                } else {
+                  return null
+                }
+              }
+            }}
             defaultValue={selectedKeyword?.letters}
           >
             {keywords?.data?.map((keyword: any) => (

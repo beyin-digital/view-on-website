@@ -13,7 +13,11 @@ const withAuth = (WrappedComponent: any) => {
 
     useEffect(() => {
       setTimeout(() => {
-        if (token === null) {
+        const token = localStorage.getItem('token')
+        if (router.pathname === '/dashboard' && !token) {
+          router.push(`${router.locale}/login`)
+        }
+        if (router.pathname === '/login' && !token) {
           router.push('/login')
         } else {
           setIsLoading(false)

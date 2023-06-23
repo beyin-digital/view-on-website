@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { User } from '@/types/user'
 import { KeywordContext } from './keywordContext'
+import Cookies from 'js-cookie'
 
 export const UserContext = createContext<any>({})
 
@@ -68,7 +69,7 @@ export const UserProvider = ({ children }: any) => {
 
       localStorage.setItem('token', token)
       localStorage.setItem('refreshToken', refreshToken)
-
+      //   Cookies.set('token', token)
       setRefreshToken(refreshToken)
       setToken(token)
 
