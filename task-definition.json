@@ -1,0 +1,183 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:eu-central-1:692922070933:task-definition/vow-ecr-task:8",
+    "containerDefinitions": [
+        {
+            "name": "vow-ecr",
+            "image": "692922070933.dkr.ecr.eu-central-1.amazonaws.com/vow-ecr",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 4000,
+                    "hostPort": 4000,
+                    "protocol": "tcp",
+                    "name": "vow-ecr-4000-tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "GOOGLE_CLIENT_SECRET",
+                    "value": "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"
+                },
+                {
+                    "name": "MAIL_DEFAULT_EMAIL",
+                    "value": "noreply@viewonwebsite.com"
+                },
+                {
+                    "name": "STRIPE_SECRET_KEY",
+                    "value": "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"
+                },
+                {
+                    "name": "MAIL_HOST",
+                    "value": "smtp.gmail.com"
+                },
+                {
+                    "name": "DATABASE_HOST",
+                    "value": "vow-db.cl46jsjcv1zx.eu-central-1.rds.amazonaws.com"
+                },
+                {
+                    "name": "APP_NAME",
+                    "value": "View on Website"
+                },
+                {
+                    "name": "DATABASE_TYPE",
+                    "value": "postgres"
+                },
+                {
+                    "name": "DATABASE_USERNAME",
+                    "value": "postgres"
+                },
+                {
+                    "name": "FRONTEND_DOMAIN",
+                    "value": "https://viewonwebsite.com"
+                },
+                {
+                    "name": "API_PREFIX",
+                    "value": "api"
+                },
+                {
+                    "name": "DATABASE_NAME",
+                    "value": "postgres"
+                },
+                {
+                    "name": "GOOGLE_CLIENT_ID",
+                    "value": "422342995174-umvsumt4l83cbf15srlfs8l2vtb27el0.apps.googleusercontent.com"
+                },
+                {
+                    "name": "STRIPE_CURRENCY",
+                    "value": "usd"
+                },
+                {
+                    "name": "DATABASE_PORT",
+                    "value": "5432"
+                },
+                {
+                    "name": "MAIL_USER",
+                    "value": "noreply@viewonwebsite.com"
+                },
+                {
+                    "name": "DATABASE_SSL_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "MAIL_PORT",
+                    "value": "587"
+                },
+                {
+                    "name": "BACKEND_DOMAIN",
+                    "value": "https://api.viewonwebsite.com"
+                },
+                {
+                    "name": "AUTH_JWT_SECRET",
+                    "value": "lXZ1Jkcyfqws766h7BUnm+nWHpEEgCTbzEwkpDAVCKcn/K9JFUUvi/JsWwXjKPNnH2On5WZ7SeT96gbV2PWzo03UYC60t5RmcIdi1i0lYf70INYkK84ZYN8y//+GFCYXHd2EDShTI9f80gYdBiSNQBBpNA9Ww8tAl7UhQAkVaJgX+zZe/vBeBQ9EKPTqZPlOylCC3LgfSc8ZZY2Sjg5F4n9kOaLBPRyneN3wD3DpM5c2tpA+eYGYQyFHgljsnnsa+zI1Pfy4RVYv2vqJtlsoqVNJGSoeQJM8C30/Wo+MgHkR3AQCDPpNtSKfLlp+RvNtVBVIcQEVne4VLumV6N4PAg=="
+                },
+                {
+                    "name": "STRIPE_WEBHOOK_SECRET",
+                    "value": "whsec_b7e739700f676f84644eccf38db0507284e84a7659d3201b54ecd7ee34ac1c89"
+                },
+                {
+                    "name": "MAIL_DEFAULT_NAME",
+                    "value": "View on website"
+                },
+                {
+                    "name": "AUTH_JWT_TOKEN_EXPIRES_IN",
+                    "value": "365d"
+                },
+                {
+                    "name": "APP_PORT",
+                    "value": "4000"
+                },
+                {
+                    "name": "MAIL_PASSWORD",
+                    "value": "bXMBC344N=NZ5hN&"
+                },
+                {
+                    "name": "DATABASE_PASSWORD",
+                    "value": "V96S4KW42KERI8mYyvdk"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/vow-ecr-task",
+                    "awslogs-region": "eu-central-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "family": "vow-ecr-task",
+    "executionRoleArn": "arn:aws:iam::692922070933:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 8,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "registeredAt": "2023-06-23T21:49:01.225000+03:00",
+    "registeredBy": "arn:aws:iam::692922070933:user/salih"
+}
