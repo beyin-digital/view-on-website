@@ -1,6 +1,6 @@
 import { Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsOptional, Matches } from 'class-validator';
 import { lowerCaseTransformer } from 'src/utils/transformers/lower-case.transformer';
 import { User } from 'src/users/entities/user.entity';
 import { Subscription } from 'src/subscriptions/entities/subscription.entity';
@@ -8,6 +8,9 @@ import { Subscription } from 'src/subscriptions/entities/subscription.entity';
 export class CreateKeywordDto {
   @ApiProperty({ example: 'hello world' })
   @IsNotEmpty()
+  @Matches(/^[^$#.%\s]*$/, {
+    message: 'Keyword cannot contain any spaces or dots',
+  })
   letters?: string;
 
   @ApiProperty({

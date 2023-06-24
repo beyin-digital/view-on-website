@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router'
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { UserContext } from './userContext'
 
 export const KeywordContext = createContext<any>({})
 
 export const KeywordProvider = ({ children }: any) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
+  const { token, user } = useContext(UserContext)
   const router = useRouter()
   const [values, setValues] = useState({
     hashtag: '',
@@ -21,9 +23,8 @@ export const KeywordProvider = ({ children }: any) => {
 
   const [subscriptions, setSubscriptions] = useState<any>({})
   const [selectedKeyword, setSelectedKeyword] = useState<any>(null)
-  const [selectedMobileKeyword, setSelectedMobileKeyword] = useState<any>(null)
 
-  const [token, setToken] = useState('')
+  //   const [token, setToken] = useState<string | null>(null)
   const [analyticsData, setAnalyticsData] = useState({
     totalVisits: 0,
     totalVisitsToday: 0,
@@ -43,11 +44,12 @@ export const KeywordProvider = ({ children }: any) => {
     try {
       setIsSearching(true)
       const response = await fetch(
-        `${apiUrl}/keywords/letters?letters=${keyword}`,
+        `${apiUrl}/keywords/letters?letters=${encodeURI(keyword)}`,
         {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Accept-Language': router.locale || 'en-GB',
           },
         }
       )
@@ -73,7 +75,7 @@ export const KeywordProvider = ({ children }: any) => {
     interval?: string
   ) => {
     try {
-      if (token.length <= 0 || token === null || token === undefined) {
+      if (token === null || token === undefined) {
         router.push(
           `/login?redirect=subscribe&hashtag=${letters}&sublink=${sublink}`
         )
@@ -84,8 +86,13 @@ export const KeywordProvider = ({ children }: any) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
+          'Accept-Language': router.locale || 'en-GB',
         },
-        body: JSON.stringify({ letters, sublink, interval }),
+        body: JSON.stringify({
+          letters: encodeURI(letters),
+          sublink,
+          interval,
+        }),
       })
       if (!response.ok) {
         throw new Error()
@@ -105,25 +112,31 @@ export const KeywordProvider = ({ children }: any) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
+          'Accept-Language': router.locale || 'en-GB',
         },
       })
       if (!response.ok) {
         throw new Error('Error fetching data')
       }
       toast.success('Unsubscribed successfully')
-      getUsersKeywords(1)
+      getUserSubscriptions(1)
     } catch (error) {
       toast.error('Error unsubscribing')
     }
   }
 
-  const getUsersKeywords = async (page: number) => {
+  const getUsersKeywords = async (page: number, limit?: number) => {
     try {
       const response = await fetch(
-        `${apiUrl}/keywords?page=${page ? page : 1}&limit=10`,
+        `${apiUrl}/keywords?page=${page ? page : 1}&limit=${
+          limit ? limit : 10
+        }`,
         {
           method: 'GET',
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Accept-Language': router.locale || 'en-GB',
+          },
         }
       )
       if (!response.ok) {
@@ -134,26 +147,33 @@ export const KeywordProvider = ({ children }: any) => {
       if (data?.data?.length <= 0) {
         return
       }
-      if (page === 1 || page === undefined) {
-        setKeywords(data)
-        setMobileKeywords(data)
-        if (selectedKeyword === null) {
-          setSelectedKeyword(data?.data[0])
-          setSelectedMobileKeyword(data?.data[0])
-        }
+      if (router.query.hashtag) {
+        const keyword = data?.data?.find(
+          (keyword: any) => keyword.slug === router.query.hashtag
+        )
+        setKeywords({
+          ...keywords,
+          data: [...data.data],
+          hasNextPage: false,
+        })
+        console.log(keyword)
+        setSelectedKeyword(keyword)
         return
       }
-      console.log('Extra keywords found', data)
+
+      if ((page === 1 || page === undefined) && limit === undefined) {
+        setKeywords(data)
+        setSelectedKeyword(data.data[0])
+        return data
+      }
+
       setKeywords({
         ...keywords,
         data: [...keywords.data, ...data.data],
         hasNextPage: data.hasNextPage,
       })
-      setMobileKeywords({
-        ...mobileKeywords,
-        data: [...mobileKeywords.data, ...data.data],
-        hasNextPage: data.hasNextPage,
-      })
+
+      return data
     } catch (error) {
       console.error('Error fetching keywords')
     }
@@ -165,7 +185,10 @@ export const KeywordProvider = ({ children }: any) => {
         `${apiUrl}/subscriptions?page=${page}&limit=10`,
         {
           method: 'GET',
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Accept-Language': router.locale || 'en-GB',
+          },
         }
       )
       if (!response.ok) {
@@ -181,6 +204,7 @@ export const KeywordProvider = ({ children }: any) => {
       }
       setSubscriptions({
         ...subscriptions,
+        // check for existing keyword and remove it from the list if it isn't returned from the api
         data: [...subscriptions.data, ...data.data],
         hasNextPage: data.hasNextPage,
       })
@@ -214,6 +238,7 @@ export const KeywordProvider = ({ children }: any) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
+          'Accept-Language': router.locale || 'en-GB',
         },
         body: JSON.stringify(values),
       })
@@ -222,17 +247,21 @@ export const KeywordProvider = ({ children }: any) => {
       }
       const data = await response.json()
       toast.success('Keyword updated successfully')
+      setSelectedKeyword({ ...selectedKeyword, ...data })
+      const updatedData = await getUsersKeywords(1, keywords?.data?.length)
+      console.log('updatedData', updatedData)
+      setKeywords({ ...keywords, data: updatedData.data })
     } catch (error) {
       toast.error('Error updating keyword')
     }
   }
 
   useEffect(() => {
-    const savedToken = localStorage.getItem('token')
-    if (savedToken) {
-      setToken(savedToken)
-    }
-  }, [keywordFound, token])
+    // const savedToken = localStorage.getItem('token')
+    // if (savedToken) {
+    //   setToken(savedToken)
+    // }
+  }, [keywordFound, selectedKeyword])
   return (
     <KeywordContext.Provider
       value={{
@@ -264,8 +293,6 @@ export const KeywordProvider = ({ children }: any) => {
         setSubscriptions,
         mobileKeywords,
         setMobileKeywords,
-        selectedMobileKeyword,
-        setSelectedMobileKeyword,
         setFoundKeyword,
       }}
     >

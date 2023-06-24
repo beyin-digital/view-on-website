@@ -16,8 +16,6 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material'
-import { useRouter } from 'next/navigation'
-// import Modal from "@/components/Dashboard/Modal";
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import Head from 'next/head'
 
@@ -44,53 +42,8 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
-const AntSwitch = styled(Switch)(({ theme }) => ({
-  width: 43,
-  height: 22,
-  padding: 0,
-  display: 'flex',
-  '&:active': {
-    '& .MuiSwitch-thumb': {
-      width: 15,
-    },
-    '& .MuiSwitch-switchBase.Mui-checked': {
-      transform: 'translateX(9px)',
-    },
-  },
-  '& .MuiSwitch-switchBase': {
-    padding: 0,
-    '&.Mui-checked': {
-      transform: 'translateX(22px)',
-      color: '#fff',
-      '& + .MuiSwitch-track': {
-        opacity: 1,
-        backgroundColor: theme.palette.mode === 'dark' ? '#0DA7F6' : '#0DA7F6',
-      },
-    },
-  },
-  '& .MuiSwitch-thumb': {
-    boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
-    width: 22,
-    height: 22,
-    borderRadius: 11,
-    transition: theme.transitions.create(['width'], {
-      duration: 200,
-    }),
-  },
-  '& .MuiSwitch-track': {
-    borderRadius: 18 / 2,
-    opacity: 1,
-    backgroundColor:
-      theme.palette.mode === 'dark'
-        ? 'rgba(255,255,255,.35)'
-        : 'rgba(0,0,0,.25)',
-    boxSizing: 'border-box',
-  },
-}))
-
 const DashboardSecurityPage = () => {
   const { t } = useTranslation('security')
-  const router = useRouter()
   const { updateUser, user, handleDeleteUser, token, forgotPassword } =
     useContext(UserContext)
 
@@ -156,13 +109,10 @@ const DashboardSecurityPage = () => {
   return (
     <>
       <Head>
-        <title>{t('meta_title')} </title>
+        <title>View On Website -{t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
-        <link
-          rel="canonical"
-          href="https://wiewonwebsite.com/en/illustration"
-        />{' '}
+        <link rel="canonical" href="https://www.viewonwebsite.com/subscribe" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
@@ -456,8 +406,7 @@ const DashboardSecurityPage = () => {
               padding: '0px 27px',
               position: 'relative',
               zIndex: '991',
-              // border: "1px solid red",
-              // background: "#EFEFEF",
+
               marginY: '4rem',
             }}
           >
@@ -466,8 +415,9 @@ const DashboardSecurityPage = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                // justifyContent:"space-around"
+                marginY: '1.5rem',
               }}
+              className="securityWatchSize"
             >
               <Avatar
                 sx={{
@@ -484,7 +434,7 @@ const DashboardSecurityPage = () => {
               </Avatar>
               <Box
                 sx={{
-                  marginX: '2rem',
+                  marginX: { xs: '.5rem', sm: '2rem' },
                 }}
               >
                 <Typography
@@ -618,6 +568,8 @@ const DashboardSecurityPage = () => {
                     }}
                   />
                   <Button
+                    disabled={values?.currentPassword === ''}
+                    onClick={handleChangePassword}
                     sx={{
                       background: '#0090EC',
                       height: '44px',

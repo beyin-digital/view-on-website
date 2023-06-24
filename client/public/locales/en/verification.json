@@ -1,9 +1,11 @@
 {
   "meta_title": "View On Website | Verification",
   "meta_desc": "",
+    "meta_descShort": "",
+
   "meta_keyword": "",
   "title": " Verification Link Sent",
-  "desc": "Enter the authenrication code we sent to Your email Test@abceed.com below:",
+  "desc": "Enter the authentication code we sent to Your email Test@abceed.com below:",
   "resend": "Resend code",
   "button": "Verify",
   "nav_subscribe": "Subscribe",

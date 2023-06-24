@@ -72,6 +72,7 @@ const TwoBox = () => {
                     marginY: '1rem',
                     paddingRight: '.5rem',
                   }}
+                  className='sizeWatch'
                 >
                   {t('box_three_desc')}
                 </Typography>
@@ -100,7 +101,7 @@ const TwoBox = () => {
                 className="ExampleBoxTwoPi ExampleBoxTwoImageMobile"
               >
                 <img
-                  src="/images/mobile.webp"
+                  src="/images/mobile.svg"
                   alt="View On Website Photo Inter Keyword"
                   title="View On Website Photo Inter Keyword"
                   style={{

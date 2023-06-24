@@ -35,7 +35,7 @@ export class AuthRegisterLoginDto {
   @MinLength(3)
   //   add regex for full name with space in the middle
   @Matches(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/, {
-    message: 'full_name_invalid',
+    message: 'full_name_invalid_or_missing',
   })
   fullName: string;
 }

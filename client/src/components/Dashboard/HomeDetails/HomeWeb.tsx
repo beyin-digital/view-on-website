@@ -18,6 +18,7 @@ import { KeywordContext } from '@/contexts/keywordContext'
 import { api } from '@/utils/api'
 import { countries } from '@/utils/countries'
 import { downloadSvg } from '@/utils/downloadSvg'
+import { useRouter } from 'next/router'
 
 import io from 'socket.io-client'
 const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
@@ -46,6 +47,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const HomeWeb = () => {
   const { t } = useTranslation('dashboard')
+  const { locale } = useRouter()
 
   const {
     selectedKeyword,
@@ -122,14 +124,14 @@ const HomeWeb = () => {
         setPieChartData([
           {
             id: 'today',
-            label: `${t('box_four_today')}`,
+            label: 'Today',
             tKey: 'box_four_today',
             value: data?.totalVisitsToday,
             color: 'hsla(112, 81%, 52%, 1)',
           },
           {
             id: 'all-time',
-            label: `${t('box_four_all')}`,
+            label: 'All time',
             tKey: 'box_four_all',
             value: data?.totalVisits,
             color: 'hsla(203, 100%, 46%, 1)',
@@ -137,38 +139,45 @@ const HomeWeb = () => {
         ])
         setLineChartData([
           {
-            id: "Today's visits",
+            id: `${t('id_one')}`,
             color: 'hsla(203, 100%, 46%, 1)',
             data: data?.totalDailyVisitsByHoursOfTheDay,
           },
           {
-            id: "This Week's visits",
+            id: `${t('id_two')}`,
             color: 'hsla(203, 100%, 46%, 1)',
             data: data?.totalVisitsByDaysOfTheWeek,
           },
           {
-            id: "This month's visits",
+            id: `${t('id_three')}`,
             color: 'hsla(203, 100%, 46%, 1)',
             data: data?.totalVisitsByDaysOfTheMonth,
           },
           {
-            id: "This year's visits",
+            id: `${t('id_four')}`,
             color: 'hsla(203, 100%, 46%, 1)',
             data: data?.totalVisitsByMonthsOfTheYear,
           },
         ])
       }
     }
+    const getClientTimezone = () => {
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+      return timezone
+    }
+
+    // Call the function to retrieve the client's timezone and update the state
+    const timezone = getClientTimezone()
 
     socket.emit(
       'createConnection',
-      { keywordId: selectedKeyword?.id },
+      { keywordId: selectedKeyword?.id, timezone },
       (data: any) => updateData(data)
     )
 
     socket.emit(
       'getNewRecords',
-      { keywordId: selectedKeyword?.id },
+      { keywordId: selectedKeyword?.id, timezone },
       (data: any) => {
         updateData(data)
       }
@@ -178,7 +187,7 @@ const HomeWeb = () => {
 
     setValues({
       ...values,
-      hashtag: selectedKeyword?.letters,
+      hashtag: decodeURI(encodeURI(selectedKeyword?.letters)),
       sublink: selectedKeyword?.sublink,
       organisation: selectedKeyword?.organisation || '',
       country: selectedKeyword?.country || '',
@@ -471,7 +480,11 @@ const HomeWeb = () => {
         </Grid>
         {/* box two */}
         <Grid item md={6} xl={3} height={380}>
-          <Item sx={{ paddingX: '18px' }}>
+          <Item
+            sx={{
+              paddingX: '18px',
+            }}
+          >
             <Typography
               marginTop="17px"
               variant="h5"
@@ -497,8 +510,16 @@ const HomeWeb = () => {
                 background: 'linear-gradient(270deg, #0090EC 0%, #31E716 100%)',
               }}
             >
-              <Typography fontSize="32px" fontWeight={500}>
-                #{selectedKeyword?.letters?.toUpperCase()}
+              <Typography
+                fontSize="32px"
+                fontWeight={500}
+                textTransform="uppercase"
+              >
+                {locale === 'en' ? (
+                  <>#{decodeURI(encodeURI(selectedKeyword?.letters))}</>
+                ) : (
+                  <>{decodeURI(encodeURI(selectedKeyword?.letters))}#</>
+                )}
               </Typography>
             </Box>
 
@@ -548,14 +569,14 @@ const HomeWeb = () => {
               variant="contained"
               sx={{
                 height: '42px',
-                width: '200px',
+                width: '100%',
                 background: '#0090EC',
                 borderRadius: '7px',
                 color: '#FBFBFB',
                 fontWeight: 500,
                 fontSize: '14px',
                 boxShadow: 'none',
-                textTransform: 'none',
+                textTransform: 'uppercase',
                 cursor: 'pointer',
                 '&:hover': {
                   background: '#0090EC',
@@ -563,7 +584,7 @@ const HomeWeb = () => {
                 marginY: '18px',
               }}
               onClick={() => {
-                downloadSvg(selectedKeyword?.letters?.toUpperCase())
+                downloadSvg(decodeURI(encodeURI(selectedKeyword?.letters)))
               }}
             >
               {/* Download E-label stamp */}
@@ -613,7 +634,11 @@ const HomeWeb = () => {
           </Grid>
         </Grid>
         <Grid item md={6} xl={2.6} height={380}>
-          <Item>
+          <Item
+            sx={{
+              padding: '40px 8px',
+            }}
+          >
             <Typography
               align="center"
               marginTop="18px"
@@ -634,10 +659,14 @@ const HomeWeb = () => {
           xl={12}
           height={402}
           sx={{
-            minHeight: '40vh',
+            minHeight: '42vh',
           }}
         >
-          <Item sx={{ background: 'rgba(251, 251, 251, 0.3)' }}>
+          <Item
+            sx={{
+              background: 'rgba(251, 251, 251, 0.3)',
+            }}
+          >
             <Box
               sx={{
                 width: '90%',
@@ -647,12 +676,13 @@ const HomeWeb = () => {
                 justifyContent: 'space-between',
                 paddingX: '18px',
                 color: '#343132',
+                cursor: 'pointer',
               }}
             >
               <Typography fontSize="20px">
                 {t('box_main_chart_title')}
               </Typography>
-              {/* Time Selection */}
+
               <Select
                 displayEmpty
                 value={lineChartType}
@@ -669,11 +699,12 @@ const HomeWeb = () => {
                   },
                   '.MuiOutlinedInput-notchedOutline': {
                     border: '0',
-                    padding: '9px',
+                    // padding: "9px",
                   },
                   '&:hover > .MuiOutlinedInput-notchedOutline': {
                     border: '0',
                   },
+                  zIndex: '999',
                 }}
               >
                 <MenuItem value={0} disabled>

@@ -1,30 +1,74 @@
-// withAuth.js
+// withAuth.tsx
 
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { UserContext } from '../contexts/userContext'
+import { Box } from '@mui/material'
 
 const withAuth = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
-    const { token, handleRefreshToken } = useContext(UserContext)
+    const { token, user } = useContext(UserContext)
     const router = useRouter()
+    const [isLoading, setIsLoading] = useState(true) // New state variable
 
     useEffect(() => {
-      if (!token) {
-        // Redirects to the authentication page if the user is not authenticated
-        router.push('/login')
-      } else {
-        const isTokenExpired = new Date().getTime() / 1000 > token.exp
-
-        if (isTokenExpired) {
-          handleRefreshToken() // Calling the function to get a new access token
+      setTimeout(() => {
+        const token = localStorage.getItem('token')
+        if (router.pathname === '/dashboard' && !token) {
+          router.push(`${router.locale}/login`)
         }
-      }
-    }, [token, handleRefreshToken, router])
+        if (router.pathname === '/dashboard') {
+          if (user?.hasKeywords === false) {
+            router.push(`${router.locale}/`)
+          }
+        }
+        if (router.pathname === '/login' && !token) {
+          router.push('/login')
+        } else {
+          setIsLoading(false)
+          if (router.query.hashtag) {
+            router.push(
+              `${router.locale}/dashboard?hashtag=${decodeURI(
+                router.query.hashtag as string
+              )}&page=${router.query.page}&limit=${router.query.limit}`
+            )
+          }
+        }
+      }, 250)
+    }, [token])
 
-    if (!token) {
-      // Shows loading state while the user is not authenticated
-      return <div>Loading...</div>
+    if (isLoading) {
+      return (
+        <>
+          <Box
+            sx={{
+              position: 'fixed',
+              height: '100vh',
+              width: '100%',
+              maxWidth: '100%',
+              minHeight: '100vh',
+              display: 'flex',
+              flexDirection: 'column',
+
+              background: "url('/images/swirl.webp')",
+              backgroundPositionY: '-1000px',
+              backgroundPositionX: '-500px',
+              backgroundRepeat: 'no-repeat',
+              margin: '0 auto',
+            }}
+          />
+          <Box
+            sx={{
+              zIndex: 1,
+              position: 'fixed',
+              height: '100vh',
+              width: '100%',
+              background: 'rgba(221, 250, 255, 0.17)',
+              backdropFilter: 'blur(38px)',
+            }}
+          />
+        </>
+      )
     }
 
     return <WrappedComponent {...props} />

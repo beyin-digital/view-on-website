@@ -36,7 +36,7 @@ const FooterMobile = () => {
 		<>
 			<Box
 				sx={{
-					height: { xs: "60vh", sm: "60vh", md: "" },
+					// height: { xs: "60vh", sm: "", md: "" },
 					width: "100%",
 					display: { xs: "flex", sm: "flex", md: "none", xl: "none" },
 					alignItems: "flex-end",
@@ -46,11 +46,11 @@ const FooterMobile = () => {
 					backgroundPositionY: { xs: "0px", sm: "-5px" },
 					backgroundPositionX: { xs: "-650px", sm: "-600px" },
 				}}
+				className="footerWatchSizePages"
 			>
 				<Box
 					sx={{
 						width: "100%",
-						height: { xs: "100", sm: "42vh" },
 						display: { xs: "flex", sm: "flex", md: "none", xl: "none" },
 						alignItems: "end",
 						justifyContent: "end",
@@ -62,13 +62,13 @@ const FooterMobile = () => {
 						sx={{
 							width: "100%",
 							border: "1px solid #E3E3E3",
-							height: { xs: "100%", sm: "100%", md: "400px", xl: "30vh" },
 							backdropFilter: "blur(50px)",
 							borderRadius: "15px 15px 0px 0px",
 							background: "rgba(251, 251, 251, 0.6)",
 							display: "flex",
 							justifyContent: "end",
 							flexDirection: "column",
+							paddingTop: "1rem",
 						}}
 					>
 						<Box
@@ -154,6 +154,7 @@ const FooterMobile = () => {
 											<Image
 												src={item.icon}
 												alt={item.alt}
+												title={item.alt}
 												height={17}
 												width={17}
 												style={{
@@ -238,6 +239,26 @@ const FooterMobile = () => {
 										close={handleClose}
 									/>
 								</>
+								<Link
+									href="/"
+									style={{
+										textDecoration: "none",
+										color: "#343132",
+									}}
+								>
+									<Typography
+										sx={{
+											fontSize: { xs: "14px", sm: "20px" },
+											fontWeight: "400",
+											lineHeight: "25px",
+											textAlign: "center",
+											textTransform: "capitalize",
+											cursor: "pointer",
+										}}
+									>
+										{t("footer_play")}
+									</Typography>
+								</Link>
 							</Box>
 						</Box>
 						<Typography

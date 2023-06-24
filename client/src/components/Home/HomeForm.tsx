@@ -3,6 +3,8 @@ import { Box, OutlinedInput, TextField } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { KeywordContext } from '@/contexts/keywordContext'
 import { toast } from 'react-toastify'
+import { isMobile } from 'react-device-detect'
+
 import io from 'socket.io-client'
 
 const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
@@ -18,7 +20,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
   const [isInputFocused, setIsInputFocused] = useState(false)
   const [isInputValid, setIsInputValid] = useState(true)
 
-  const allowedCharacters = /^[a-zA-Z\u0600-\u06FF\s.,،]+$/
+  const allowedCharacters = /^[^. ]+$/
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value
 
@@ -38,8 +40,13 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
       const trimmedHashtag = hashtag.trim() // Remove extra spaces from the text
       if (trimmedHashtag !== '') {
         // Check for characters after removing spaces
-        socket.emit('redirectionAdded', { keywordId: foundKeyword?.id })
-        window.open(`${foundKeyword?.sublink}`, '_blank')
+        socket.emit('redirectionAdded', {
+          keywordId: foundKeyword?.id,
+        })
+
+        isMobile
+          ? (window.location.href = foundKeyword?.sublink)
+          : (window.open(`${foundKeyword?.sublink}`, '_blank') as any)
         setHashtag('')
         setFoundKeyword(null)
       }
@@ -56,7 +63,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
       <Box
         sx={{
           display: 'flex',
-          width: { xs: '45%', sm: '80%', md: '100%', xl: '100%' },
+          width: { xs: '45%', sm: '80%', md: '80%', xl: '100%' },
           justifyContent: {
             xs: 'space-evenly',
             md: 'space-evenly',
@@ -105,6 +112,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
               inputProps={{
                 autoComplete: 'off',
                 spellCheck: false,
+                maxLength: 13,
                 pattern: allowedCharacters.test(hashtag),
               }}
               onChange={handleInputChange}
@@ -140,7 +148,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
                 },
                 '& .MuiInputBase-input': {
                   caretColor: '#000',
-                  color: isInputFocused ? '#2BEA0F' : '',
+                  color: isInputFocused ? '#6BBF52' : '',
                   fontWeight: '800',
                 },
                 '& .MuiOutlinedInput-input': {
@@ -190,7 +198,8 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
               d="M32.4944 12.4305L3.35356 41.5713C1.98672 42.9381 1.98672 45.1542 3.35356 46.521L5.47897 48.6464C6.84581 50.0133 9.06188 50.0133 10.4287 48.6464L39.5695 19.5056C39.8845 19.1907 40.4231 19.4137 40.4231 19.8592L40.4231 43.4615C40.4231 45.3945 41.9901 46.9615 43.9231 46.9615L47 46.9615C48.933 46.9615 50.5 45.3945 50.5 43.4615L50.5 5C50.5 3.067 48.933 1.5 47 1.5L8.53847 1.5C6.60547 1.5 5.03847 3.067 5.03847 5L5.03847 8.07692C5.03847 10.0099 6.60547 11.5769 8.53846 11.5769L32.1408 11.5769C32.5863 11.5769 32.8093 12.1155 32.4944 12.4305Z"
               fill="#343132"
               style={{
-                stroke: keywordFound && !isInputEmpty ? '#2BEA0F' : 'none',
+                stroke:
+                  keywordFound && !isInputEmpty ? 'rgb(43, 234, 15)' : 'none',
                 strokeWidth: foundKeyword?.sublink && !isInputEmpty ? '2' : '0',
               }}
             />
@@ -207,7 +216,8 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
               d="M44.5858 42.4604C45.3668 41.6793 45.3668 40.413 44.5858 39.6319L15.445 10.4911C14.185 9.2312 15.0774 7.07692 16.8592 7.07692L40.4615 7.07692C41.5661 7.07692 42.4615 6.18149 42.4615 5.07692L42.4615 2C42.4615 0.89543 41.5661 -1.81691e-06 40.4615 -1.76863e-06L2 -8.74227e-08C0.89543 -3.91405e-08 3.91405e-08 0.895431 8.74228e-08 2L1.76863e-06 40.4615C1.81691e-06 41.5661 0.895432 42.4615 2 42.4615L5.07692 42.4615C6.18149 42.4615 7.07692 41.5661 7.07692 40.4615L7.07692 16.8592C7.07692 15.0774 9.23121 14.1851 10.4911 15.445L39.6319 44.5858C40.413 45.3668 41.6793 45.3668 42.4604 44.5858L44.5858 42.4604Z"
               fill="#343132"
               style={{
-                stroke: keywordFound && !isInputEmpty ? '#2BEA0F' : 'none',
+                stroke:
+                  keywordFound && !isInputEmpty ? 'rgb(43, 234, 15)' : 'none',
                 strokeWidth: keywordFound && !isInputEmpty ? '2' : '0',
               }}
             />

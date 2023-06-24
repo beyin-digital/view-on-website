@@ -35,8 +35,37 @@ export class StripeService {
     });
   }
 
-  async cancelSubscription(stripeSubscriptionId: string) {
-    return await this.stripe.subscriptions.del(stripeSubscriptionId);
+  async cancelSubscription(id: number) {
+    const subscription = (await this.subscriptionsService.findOne({
+      id,
+    })) as Subscription;
+
+    const cancel = await this.stripe.subscriptions.del(
+      subscription.stripeSubscriptionId,
+    );
+
+    if (cancel) {
+      const keyword = (await this.keywordsService.findOne({
+        subscription: {
+          stripeSubscriptionId: subscription?.stripeSubscriptionId,
+        },
+      })) as Keyword;
+
+      const user = (await this.usersService.findOne({
+        id: subscription.user.id,
+      })) as User;
+
+      await this.keywordsService.delete(keyword.id);
+      await this.subscriptionsService.delete(subscription.id);
+      const keywordsCount = await this.keywordsService.count({
+        user: { id: user.id },
+      });
+
+      if (keywordsCount === 0) {
+        user.hasKeywords = false;
+        await user.save();
+      }
+    }
   }
 
   async createCheckoutSession(
@@ -45,14 +74,28 @@ export class StripeService {
     const frontendDomain = this.configService.get('app').frontendDomain;
     let checkoutSession: any;
     const wordLength = createCheckoutSessionDto.letters.length;
+
+    function isEmoji(encodedValue: string) {
+      const decodedValue = decodeURI(encodedValue);
+      const flagRegex = /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/;
+      const emojiRegex = /[\uD800-\uDBFF][\uDC00-\uDFFF]/;
+      return flagRegex.test(decodedValue) || emojiRegex.test(decodedValue);
+    }
     const premiumPrice =
       wordLength < 2
         ? 999999
-        : wordLength >= 2 && wordLength < 3
+        : (wordLength >= 2 && wordLength < 3) ||
+          isEmoji(createCheckoutSessionDto.letters)
         ? 100000
         : wordLength === 3
         ? 10000
         : null;
+
+    const keywordsLimit = await this.keywordsService.count({
+      user: {
+        stripeCustomerId: createCheckoutSessionDto.stripeCustomerId,
+      },
+    });
 
     if (premiumPrice === null) {
       const recurring: Stripe.Checkout.SessionCreateParams.LineItem.PriceData.Recurring =
@@ -75,12 +118,15 @@ export class StripeService {
           letters: createCheckoutSessionDto.letters,
           sublink: createCheckoutSessionDto.sublink,
         },
+        locale: 'auto',
         line_items: [
           {
             price_data: {
               currency: 'usd',
               product_data: {
-                name: createCheckoutSessionDto.letters,
+                name: `Rights to use the #${decodeURI(
+                  createCheckoutSessionDto.letters,
+                )}`,
               },
               unit_amount: regularSubsPricing * 100,
               recurring,
@@ -89,8 +135,12 @@ export class StripeService {
           },
         ],
         mode: 'subscription',
-        success_url: `${frontendDomain}/en/dashboard`,
-        cancel_url: `${frontendDomain}/en/dashboard`,
+        success_url: `${frontendDomain}/${
+          createCheckoutSessionDto.lang
+        }/payment?hashtag=${createCheckoutSessionDto.letters
+          .toLowerCase()
+          .replace(/ /g, '-')}&page=1&limit=${keywordsLimit + 1}`,
+        cancel_url: `${frontendDomain}/dashboard`,
       });
     } else {
       checkoutSession = await this.stripe.checkout.sessions.create({
@@ -100,12 +150,15 @@ export class StripeService {
           letters: createCheckoutSessionDto.letters,
           sublink: createCheckoutSessionDto.sublink,
         },
+        locale: 'auto',
         line_items: [
           {
             price_data: {
               currency: 'usd',
               product_data: {
-                name: `Rights to use the #${createCheckoutSessionDto.letters}`,
+                name: `Rights to use the #${decodeURI(
+                  createCheckoutSessionDto.letters,
+                )}`,
               },
               unit_amount: (premiumPrice || 0) * 100,
             },
@@ -114,8 +167,12 @@ export class StripeService {
           },
         ],
         mode: 'payment',
-        success_url: `${frontendDomain}/en/dashboard`,
-        cancel_url: `${frontendDomain}/en/dashboard`,
+        success_url: `${frontendDomain}/${
+          createCheckoutSessionDto.lang
+        }/payment?hashtag=${createCheckoutSessionDto.letters
+          .toLowerCase()
+          .replace(/ /g, '-')}&page=1&limit=${keywordsLimit + 1}`,
+        cancel_url: `${frontendDomain}/dashboard`,
       });
     }
 
@@ -156,7 +213,7 @@ export class StripeService {
       })) as User;
 
       const subscription = await this.subscriptionsService.create({
-        letters: metaData.letters,
+        letters: decodeURI(metaData.letters),
         stripeSubscriptionId: subscriptionId,
         user: foundUser as User,
         purchaseAmount: purchaseAmount / 100,
@@ -165,7 +222,7 @@ export class StripeService {
       });
 
       await this.keywordsService.create({
-        letters: metaData.letters,
+        letters: decodeURI(metaData.letters),
         sublink: metaData.sublink,
         user: foundUser as User,
         subscription: subscription,
@@ -203,10 +260,6 @@ export class StripeService {
       subscription: { stripeSubscriptionId: subscriptionId },
     })) as Keyword;
 
-    const user = (await this.usersService.findOne({
-      id: subscription.user.id,
-    })) as User;
-
     if (status === 'active') {
       subscription.stripeSubscriptionStatus =
         status || subscription.stripeSubscriptionStatus;
@@ -217,7 +270,7 @@ export class StripeService {
       subscription.renewalDate =
         new Date((renewalDate as number) * 1000) || subscription.renewalDate;
       subscription.duration =
-        intervalCount === 1 && interval
+        intervalCount === 1 && interval === 'month'
           ? 'monthly'
           : intervalCount === 6
           ? '6 months'
@@ -227,17 +280,6 @@ export class StripeService {
       keyword.purchaseDate = new Date((purchaseDate as number) * 1000);
       await subscription?.save();
       await keyword.save();
-    } else if (status === 'canceled') {
-      await this.subscriptionsService.delete(subscription.id);
-      await this.keywordsService.delete(keyword.id);
-      const keywordsCount = await this.keywordsService.count({
-        user: { id: user.id },
-      });
-
-      if (keywordsCount === 0) {
-        user.hasKeywords = false;
-        await user.save();
-      }
     }
   }
 
@@ -270,12 +312,13 @@ export class StripeService {
           invoiceId: subscription.latest_invoice as string,
         });
         break;
-      case 'customer.subscription.deleted':
-        const subscriptionDeleted = event.data.object as any;
-        await this.updateSubscriptionAndKeyword({
-          subscriptionId: subscriptionDeleted.id,
-          status: subscriptionDeleted.status,
-        });
+      //   case 'customer.subscription.deleted':
+      //     const subscriptionDeleted = event.data.object as any;
+      //     await this.updateSubscriptionAndKeyword({
+      //       subscriptionId: subscriptionDeleted.id,
+      //       status: subscriptionDeleted.status,
+      //     });
+      //     break;
       default:
         console.log(`Unhandled event type ${event.type}`);
     }

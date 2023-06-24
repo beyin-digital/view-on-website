@@ -19,7 +19,7 @@ import { AnalyticsService } from './analytics.service';
     origin: [
       'http://localhost:3000',
       'https://vow-client.vercel.app',
-      'https://vow-client-staging.vercel.app',
+      'https://viewonwebsite.com',
     ],
   },
 })
@@ -29,9 +29,13 @@ export class AnalyticsGateway {
   server: Server;
 
   @SubscribeMessage('redirectionAdded')
-  async addRedirection(@MessageBody('keywordId') keywordId: number) {
+  async addRedirection(
+    @MessageBody('keywordId') keywordId: number,
+    @MessageBody('timezone') timezone: any,
+  ) {
     await this.analyticsService.createNewKeywordAnalyticsEntry(keywordId);
     const newRecord = await this.analyticsService.getIndividualKeywordAnalytics(
+      timezone,
       keywordId,
     );
     this.server.emit('getNewRecords', newRecord);
@@ -41,9 +45,13 @@ export class AnalyticsGateway {
   async createConnection(
     @ConnectedSocket() client: Socket,
     @MessageBody('keywordId') keywordId: number,
+    @MessageBody('timezone') timezone: any,
   ) {
     const allRecords =
-      await this.analyticsService.getIndividualKeywordAnalytics(keywordId);
+      await this.analyticsService.getIndividualKeywordAnalytics(
+        timezone,
+        keywordId,
+      );
     this.server.emit('createConnection', allRecords);
   }
 
@@ -51,9 +59,13 @@ export class AnalyticsGateway {
   async getNewRecords(
     @ConnectedSocket() client: Socket,
     @MessageBody('keywordId') keywordId: number,
+    @MessageBody('timezone') timezone: any,
   ) {
     const allRecords =
-      await this.analyticsService.getIndividualKeywordAnalytics(keywordId);
+      await this.analyticsService.getIndividualKeywordAnalytics(
+        timezone,
+        keywordId,
+      );
     this.server.emit('getNewRecords', allRecords);
   }
 }

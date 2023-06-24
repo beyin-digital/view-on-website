@@ -26,10 +26,7 @@ export class AnalyticsService {
     const user = await this.getUserFromAuthenticationToken(
       socket.handshake.auth?.token,
     );
-    if (!user) {
-      console.log('not founf');
-      //   throw new WsException('Invalid credentials.');
-    }
+
     return { user, token: socket.handshake.auth?.token };
   }
 
@@ -55,7 +52,7 @@ export class AnalyticsService {
     }
   }
 
-  async getIndividualKeywordAnalytics(id?: number) {
+  async getIndividualKeywordAnalytics(timezone: string, id?: number) {
     const keyword = await this.keywordsRepository.findOne({
       where: {
         id,
@@ -123,21 +120,23 @@ export class AnalyticsService {
           countDate.getFullYear() === today.getFullYear()
         );
       }).length,
-      totalDailyVisitsByHoursOfTheDay: [...Array(24).keys()].map((hour) => {
-        const today = new Date();
-        const countDate = new Date(keywordCount[0].createdAt);
-        return {
-          x: hour + ':00',
-          y: keywordCount.filter(() => {
-            return (
-              countDate.getDate() === today.getDate() &&
-              countDate.getMonth() === today.getMonth() &&
-              countDate.getFullYear() === today.getFullYear() &&
-              countDate.getHours() === hour
-            );
-          }).length,
-        };
-      }),
+      totalDailyVisitsByHoursOfTheDay:
+        // calculate the total visits by hour of the day and make sure the timezone offset thats passed as an argument is taken into account when returning the time of the day
+        [...Array(24).keys()].map((hour) => {
+          return {
+            x: new Date(0, 0, 0, hour).toLocaleString('default', {
+              hour: 'numeric',
+              hour12: true,
+              timeZone: timezone,
+              timeZoneName: 'short',
+            }),
+            y: keywordCount.filter((count) => {
+              const countDate = new Date(count.createdAt);
+              return countDate.getHours() === hour;
+            }).length,
+          };
+        }),
+
       totalVisitsByMonthsOfTheYear: [...Array(12).keys()].map((month) => {
         return {
           x: new Date(0, month).toLocaleString('default', {

@@ -25,6 +25,7 @@ import { OtpService } from 'src/otp/otp.service';
 import { RefreshService } from 'src/refresh/refresh.service';
 import { StripeService } from 'src/stripe/stripe.service';
 import { Otp } from 'src/otp/entities/otp.entity';
+import { AuthResendMailDto } from './dto/auth-resend-mail.dto';
 
 @Injectable()
 export class AuthService {
@@ -261,6 +262,21 @@ export class AuthService {
     });
   }
 
+  async resendMail(dto: AuthResendMailDto): Promise<void> {
+    const user = (await this.usersService.findOne({
+      email: dto.email,
+    })) as User;
+
+    const otp = await this.otpsService.create({ user });
+
+    await this.mailService.userSignUp({
+      to: dto.email,
+      data: {
+        otp: otp.token || '',
+      },
+    });
+  }
+
   async checkEmailExists(email: string): Promise<boolean> {
     const user = await this.usersService.findOne({
       email,
@@ -372,7 +388,7 @@ export class AuthService {
       user = foundUser;
     } else {
       const foundKeyword = await this.keywordsService.findOne({
-        slug: identifier,
+        slug: identifier.toLowerCase().replace(/ /g, '-'),
       });
       user = foundKeyword?.user || null;
     }

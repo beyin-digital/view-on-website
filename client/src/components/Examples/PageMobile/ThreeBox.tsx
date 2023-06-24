@@ -46,7 +46,7 @@ const ThreeBox = () => {
             className="ExampleBoxThreePi"
           >
             <img
-              src="/images/pic.webp"
+              src="/images/pic.svg"
               title="Your costumers in a Blink will be automatically redirected to your Sub-link-URL"
               alt="Your costumers in a Blink will be automatically redirected to your Sub-link-URL, your dashboard will show you all the conversions of your #keyword, it is your opportunity to optimize"
               style={{
@@ -84,6 +84,7 @@ const ThreeBox = () => {
                 lineHeight: { xs: '15px', sm: '20px', md: '20px' },
                 fontWeight: '300',
               }}
+              className='sizeWatch'
             >
               {t('box_three_desc')}
             </Typography>

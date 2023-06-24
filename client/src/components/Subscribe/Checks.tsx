@@ -9,7 +9,7 @@ const Checks = () => {
     { id: 1, title: 'Easy to Read from Distance', tKey: 'checks_one' },
     { id: 2, title: 'Continuous Analytical Reports', tKey: 'checks_two' },
     { id: 3, title: 'Profile Chart Dashboard', tKey: 'checks_three' },
-    { id: 4, title: 'SEO Supported Keyword', tKey: 'checks_four' },
+    { id: 4, title: 'SEO Supported Keyword', tKey: 'checks_five' },
   ]
   return (
     <>

@@ -73,6 +73,9 @@ const DashboardSubscriptionsPage = () => {
   }
 
   useEffect(() => {
+    if (user?.hasKeywords === false) {
+      router.push(`${router.locale}/`)
+    }
     if (token) {
       getUserSubscriptions(page)
     }
@@ -81,20 +84,13 @@ const DashboardSubscriptionsPage = () => {
     }
   }, [token])
 
-  if (!token) {
-    return <></>
-  }
-
   return (
     <>
       <Head>
-        <title>{t('meta_title')} </title>
+        <title>View On Website - {t('meta_title')} </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
-        <link
-          rel="canonical"
-          href="https://wiewonwebsite.com/en/illustration"
-        />{' '}
+        <link rel="canonical" href="https://www.viewonwebsite.com/subscribe" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>{' '}
@@ -246,8 +242,12 @@ const DashboardSubscriptionsPage = () => {
                       borderRadius: '16px',
                     }}
                   >
-                    <Typography fontSize="32px" fontWeight="bold">
-                      #{subscription?.letters?.toUpperCase()}
+                    <Typography
+                      fontSize="32px"
+                      fontWeight="bold"
+                      textTransform="uppercase"
+                    >
+                      #{decodeURI(encodeURI(subscription?.letters))}
                     </Typography>
                   </Box>
                   <Box
@@ -352,28 +352,29 @@ const DashboardSubscriptionsPage = () => {
                   marginX: '2rem',
                 }}
               >
-                {subscriptions?.hasNextPage && subscriptions?.legnth >= 9 && (
-                  <Button
-                    variant="contained"
-                    sx={{
-                      height: '52px',
-                      width: '199px',
-                      color: '#FBFBFB',
-                      background: '#0090EC',
-                      borderRadius: '12px',
-                      fontSize: '24px',
-                      '&: hover': {
+                {subscriptions?.hasNextPage &&
+                  subscriptions?.data?.length >= 9 && (
+                    <Button
+                      variant="contained"
+                      sx={{
+                        height: '52px',
+                        width: '199px',
+                        color: '#FBFBFB',
                         background: '#0090EC',
-                      },
-                    }}
-                    onClick={() => {
-                      setPage(page + 1)
-                      getUserSubscriptions(page + 1)
-                    }}
-                  >
-                    Load more
-                  </Button>
-                )}
+                        borderRadius: '12px',
+                        fontSize: '24px',
+                        '&: hover': {
+                          background: '#0090EC',
+                        },
+                      }}
+                      onClick={() => {
+                        setPage(page + 1)
+                        getUserSubscriptions(page + 1)
+                      }}
+                    >
+                      Load more
+                    </Button>
+                  )}
               </Box>
             </Box>
           </Box>
@@ -465,14 +466,19 @@ const DashboardSubscriptionsPage = () => {
                     alignItems: 'center',
                     width: '100%',
                     height: '59px',
+
                     background: subscription?.isPremium
                       ? 'linear-gradient(270deg, #0090EC 0%, #31E716 100%)'
                       : '#31E716',
                     borderRadius: '13px',
                   }}
                 >
-                  <Typography fontSize="24px" fontWeight={700}>
-                    #{subscription?.letters?.toUpperCase()}
+                  <Typography
+                    fontSize="24px"
+                    fontWeight={700}
+                    textTransform="uppercase"
+                  >
+                    #{decodeURI(encodeURI(subscription?.letters))}
                   </Typography>
                 </Box>
                 <Box
@@ -570,6 +576,28 @@ const DashboardSubscriptionsPage = () => {
                 )}
               </Box>
             ))}
+            {subscriptions?.hasNextPage && subscriptions?.data?.length >= 9 && (
+              <Button
+                variant="contained"
+                sx={{
+                  height: '52px',
+                  width: '199px',
+                  color: '#FBFBFB',
+                  background: '#0090EC',
+                  borderRadius: '12px',
+                  fontSize: '24px',
+                  '&: hover': {
+                    background: '#0090EC',
+                  },
+                }}
+                onClick={() => {
+                  setPage(page + 1)
+                  getUserSubscriptions(page + 1)
+                }}
+              >
+                Load more
+              </Button>
+            )}
           </Box>
         </ItemMobile>
         <Modal
@@ -579,7 +607,8 @@ const DashboardSubscriptionsPage = () => {
         >
           <Box>
             <Typography>
-              {t('unsubscribe_text')} #{selectedKeyword?.letters}
+              {t('unsubscribe_text')} #
+              {decodeURI(encodeURI(selectedKeyword?.letters))}
             </Typography>
           </Box>
           <Box
@@ -599,7 +628,7 @@ const DashboardSubscriptionsPage = () => {
               sx={{ height: '42px', width: '154px' }}
               onClick={async () => {
                 await handleUnsubscribe(selectedKeyword?.id)
-                window.location.reload()
+                await getUserSubscriptions(page)
                 handleClose()
               }}
             >

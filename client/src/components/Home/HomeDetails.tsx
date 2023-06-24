@@ -72,11 +72,11 @@ const HomeDetails = ({
 							backgroundRepeat: "no-repeat",
 							backgroundSize: "contain",
 							position: "relative",
-							marginY:{xs:"1rem"},
-							marginRight:{xs:"1rem"},
-							backgroundImage: "url('/images/cut-out-parallelogram.webp')",
+							marginY: { xs: "1rem" },
+							marginRight: { xs: "1rem" },
+							backgroundImage: "url('/images/cut-out-parallelogram.svg')",
 						}}
-						className="parallelogr"
+						className="parallelogr watch-screen"
 					>
 						{locale === "ar" ? (
 							<Box
@@ -90,13 +90,12 @@ const HomeDetails = ({
 									flexDirection: "column",
 									paddingX: "1rem",
 								}}
-								className="boxGreenLayou"
+								className="boxGreenLayoutWatch"
 							>
 								<Box
 									sx={{
-										width: "90%",
+										width: { xs: "80%", md: "65%", xl: "80%" },
 										height: "90%",
-
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "space-evenly",
@@ -124,13 +123,12 @@ const HomeDetails = ({
 									flexDirection: "column",
 									paddingX: "1rem",
 								}}
-								// className="boxGreenLayout"
+								className="boxGreenLayoutWatch"
 							>
 								<Box
 									sx={{
-										width: "90%",
+										width: { xs: "80%", md: "65%", xl: "80%" },
 										height: "90%",
-
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "space-evenly",

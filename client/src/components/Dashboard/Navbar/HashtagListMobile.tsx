@@ -1,27 +1,41 @@
 import { KeywordContext } from '@/contexts/keywordContext'
 import { UserContext } from '@/contexts/userContext'
-import { Box, Tab, Tabs, Typography } from '@mui/material'
-import React, { useContext, useEffect } from 'react'
+import { Box, Tab, Tabs, Typography, IconButton } from '@mui/material'
+import React, { useContext, useEffect, useState } from 'react'
+import { Add } from '@mui/icons-material'
+import { useRouter } from 'next/router'
 
 export default function HashtagListMobile() {
-  const {
-    getUsersKeywords,
-    keywords,
-    mobileKeywords,
-    selectedMobileKeyword,
-    setSelectedMobileKeyword,
-  } = useContext(KeywordContext)
-
-  const { token } = useContext(UserContext)
+  const { getUsersKeywords, keywords, selectedKeyword, setSelectedKeyword } =
+    useContext(KeywordContext)
+  const router = useRouter()
+  const { user, token } = useContext(UserContext)
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    const selectedMobileKeyword = keywords?.data?.find(
-      (keyword: any) => keyword.letters === newValue
-    )
-    setSelectedMobileKeyword(selectedMobileKeyword)
+    const selectedKeyword = keywords?.data?.find(
+      (keyword: any) =>
+        (decodeURI(encodeURI(keyword?.letters)) as any) === newValue
+    ) as any
+    setSelectedKeyword(selectedKeyword)
+    if (router.query.hashtag) {
+      router.push(`/${router.locale}/dashboard/`)
+    }
   }
+  const [page, setPage] = useState(1)
+
   useEffect(() => {
     if (token) {
-      getUsersKeywords()
+      if (router.query.hashtag) {
+        getUsersKeywords(
+          parseInt(router.query.page as string),
+          parseInt(router.query.limit as string)
+        )
+        return
+      }
+      getUsersKeywords(page)
+    }
+
+    return () => {
+      setSelectedKeyword(null)
     }
   }, [token])
 
@@ -38,11 +52,19 @@ export default function HashtagListMobile() {
       <Typography fontSize="20px" fontWeight={600} color="#505050">
         My #Hashtags
       </Typography>
-      {mobileKeywords?.data?.length > 0 && (
+      <Box
+        sx={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
         <Tabs
           sx={{
             height: '100%',
-            width: '75%',
+            width: '85%',
             color: '#0090EC',
           }}
           TabIndicatorProps={{
@@ -51,28 +73,38 @@ export default function HashtagListMobile() {
               color: '#0090EC',
             },
           }}
-          value={selectedMobileKeyword?.letters}
+          value={selectedKeyword?.letters}
           onChange={handleChange}
           variant="scrollable"
-          scrollButtons={false}
-          defaultValue={selectedMobileKeyword?.letters}
+          scrollButtons={'auto'}
+          defaultValue={selectedKeyword?.letters}
         >
-          {mobileKeywords?.data?.map((keyword: any) => (
+          {keywords?.data?.map((keyword: any) => (
             <Tab
               sx={{
                 minWidth: '15%',
                 fontSize: '18px',
                 marginTop: '10px',
-                fontWeight: selectedMobileKeyword === keyword ? 600 : 400,
+                fontWeight: selectedKeyword === keyword ? 600 : 400,
                 color: 'black',
               }}
-              value={keyword.letters}
-              key={keyword.id}
-              label={`#` + keyword.letters}
+              value={keyword?.letters}
+              key={keyword?.id}
+              label={`#` + decodeURI(encodeURI(keyword?.letters))}
             />
           ))}
         </Tabs>
-      )}
+        {keywords?.hasNextPage && (
+          <IconButton
+            onClick={() => {
+              setPage(page + 1)
+              getUsersKeywords(page + 1)
+            }}
+          >
+            <Add />
+          </IconButton>
+        )}
+      </Box>
     </Box>
   )
 }

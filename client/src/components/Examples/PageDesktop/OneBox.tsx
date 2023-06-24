@@ -78,6 +78,7 @@ const OneBox = () => {
                   lineHeight: '20px',
                   marginY: '1.5rem',
                 }}
+                component={"h1"}
               >
                 {t('box_one_title')}
               </Typography>
@@ -88,6 +89,7 @@ const OneBox = () => {
                   lineHeight: '14px',
                   fontWeight: '400',
                 }}
+                component={"h2"}
               >
                 {t('box_one_desc')}
               </Typography>

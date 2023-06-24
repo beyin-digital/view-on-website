@@ -1,7 +1,8 @@
 {
-  "meta_title": "View On Website | Subscribe",
-  "meta_desc": "",
-  "meta_keyword": "",
+  "meta_title": "Reserve Your #Keywords - VOW Subscription Packages",
+  "meta_desc": "Reserve your regular #keywords with our subscription packages. Enjoy analytical reports, E-Label and more benefits",
+  "meta_descShort": "Get your regular #keywords with VOW's subscription packages.",
+  "meta_keyword": "Subscription, VOW, #Keyword, Regular Keywords, Dashboard, E-Lable,#a,#b,#c,#d,#e,#f,#g,#h,#i,#j,#k,#l,#m,#n,#o,#p,#q,#r,#s,#t,#u,#v,#w,#x,#y,#z",
   "text_one": "Reserve your",
   "text_keyword": "keyword",
   "text_two": "before someone else does",
@@ -32,6 +33,7 @@
   "checks_two": "Continuous Analytical Reports",
   "checks_three": "SEO Supported Keyword",
   "checks_four": "Unique alphabet letter",
+  "checks_five": "Profile Chart Dashboard",
   "cash_one": "One time payment",
   "cash_two": "Yearly renewal",
   "more_dolor": "K",
@@ -44,7 +46,10 @@
   "subscribe": "subscribe",
   "cancel": "cancel",
   "not_available": "Not Available",
-  "error": "spaces aren't allowed in hashtags",
+  "error": "Keywords can't have spaces, #, $, % or periods (.)",
   "text_line": "By proceeding with payment, you agree to the ",
-  "text_line_link": "terms & conditions."
+  "text_line_link": "terms & conditions.",
+  "toast_one": "Add your sublink to proceed",
+  "toast_two": "Please enter a valid Sublink",
+  "toast_thre": "This hashtag is already in use"
 }

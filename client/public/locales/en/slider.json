@@ -1,6 +1,9 @@
 {
-  "title": "Reserve Your Premium",
-  "keyword": "Keyword",
+    "meta_title": "Premium #Keywords",
+  "meta_desc": "Secure your unique identity online with our premium #keywords",
+  "meta_descShort": "Reserve your premium #keywords with VOW",
+
+  "meta_keyword": "Premium Keywords, VOW, Unique Identity, One-time Payment,#a,#b,#c,#d,#e,#f,#g,#h,#i,#j,#k,#l,#m,#n,#o,#p,#q,#r,#s,#t,#u,#v,#w,#x,#y,#z",
   "dolor": "$",
   "more_dolor": "",
   "text_num": "1M",
@@ -15,5 +18,7 @@
   "footer_text": "Want to look up your own Premium",
   "button_two": "subscribe",
   "of": " of ",
-  "pay": "Pay"
+  "pay": "Pay",
+  "title":"Reserve Your Premium ",
+  "text_keyword":"#Keyword"
 }

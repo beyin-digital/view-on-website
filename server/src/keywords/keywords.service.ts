@@ -31,6 +31,9 @@ export class KeywordsService {
       },
       skip: (paginationOptions.page - 1) * paginationOptions.limit,
       take: paginationOptions.limit,
+      order: {
+        id: 'asc',
+      },
     });
   }
 

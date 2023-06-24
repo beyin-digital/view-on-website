@@ -70,6 +70,7 @@ const RightSide = () => {
 												lineHeight: "14px",
 												textAlign: "right",
 											}}
+											className="SizeCheckWatch"
 										>
 											{t(item.tKey)}
 										</Typography>
@@ -106,6 +107,7 @@ const RightSide = () => {
 												lineHeight: "14px",
 												// textAlign:"right"
 											}}
+											className="SizeCheckWatch"
 										>
 											{t(item.tKey)}
 										</Typography>

@@ -76,6 +76,7 @@ const OneBox = () => {
                 width: { xs: '65%', sm: '322px', md: '50%' },
                 height: '134px',
               }}
+              className="SizeWatchTextExample"
             >
               <Typography
                 sx={{
@@ -94,7 +95,7 @@ const OneBox = () => {
                   fontWeight: '300',
                   marginY: '.8rem',
                 }}
-                className="exampleOneBoxTextSmall"
+                className="exampleOneBoxTextSmall sizeWatch"
               >
                 {t('box_one_desc')}
               </Typography>
@@ -113,7 +114,7 @@ const OneBox = () => {
           }}
         >
           <img
-            src="/images/phone.webp"
+            src="/images/phone.svg"
             alt="View On Website Man Look at Phone"
             title="View On Website Man Look at Phone"
             style={{

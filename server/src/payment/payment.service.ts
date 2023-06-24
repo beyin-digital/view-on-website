@@ -19,8 +19,10 @@ export class PaymentService {
 
   async intiatePaymentProcess(
     user: User,
+    lang: string,
     intiatePaymentDto: InitiatePaymentDto,
   ) {
+    console.log(lang);
     const foundUser = await this.usersService.findOne({
       id: user.id,
     });
@@ -44,6 +46,7 @@ export class PaymentService {
       interval: intiatePaymentDto.interval,
       stripeCustomerId: foundUser?.stripeCustomerId as string,
       sublink: intiatePaymentDto.sublink,
+      lang,
     });
 
     await this.ordersService.create({
@@ -56,14 +59,7 @@ export class PaymentService {
     return { url: checkoutSession.url };
   }
 
-  async unsubscribe(user: User, id: number) {
-    const foundSubscription = await this.subscriptionsService.findOne({
-      id: id,
-      user: { id: user.id },
-    });
-    const subscription = await this.stripeService.cancelSubscription(
-      foundSubscription?.stripeSubscriptionId as string,
-    );
-    return subscription;
+  async unsubscribe(id: number) {
+    await this.stripeService.cancelSubscription(id);
   }
 }

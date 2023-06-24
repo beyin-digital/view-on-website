@@ -1,7 +1,9 @@
 {
-  "meta_title": "View On Website | تسجيل الدخول",
-  "meta_desc": "",
-  "meta_keyword": "",
+  "meta_title": "تسجيل الدخول",
+  "meta_desc": "قم بتسجيل الدخول إلى حسابك في VOW باستخدام الكلمة المفتاحية، أو البريد الإلكتروني، أو التحقق من Google/Apple لإدارة خدماتك.",
+    "meta_descShort": "قم بتسجيل الدخول إلى حسابك في VOW.",
+
+  "meta_keyword": "تسجيل الدخول, VOW, الكلمة المفتاحية, البريد الإلكتروني, التحقق من Google/Apple , #a,#b,#c,#d,#e,#f,#g,#h,#i,#j,#k,#l,#m,#n,#o,#p,#q,#r,#s,#t,#u,#v,#w,#x,#y,#z",
   "title": "مرحبا",
   "input_email": "اسم المستخدم",
   "input_password": "كلمة المرور",

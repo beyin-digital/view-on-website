@@ -1,6 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Button, Tab, Tabs, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  Tab,
+  Tabs,
+  Typography,
+  IconButton,
+  tabsClasses,
+} from '@mui/material'
 import Image from 'next/image'
 import { BiMenu } from 'react-icons/bi'
 import { IoIosLogOut, IoMdClose } from 'react-icons/io'
@@ -8,16 +16,20 @@ import { MdHomeFilled } from 'react-icons/md'
 import { FaUserAlt } from 'react-icons/fa'
 import { AiFillCreditCard, AiFillInstagram } from 'react-icons/ai'
 import { BsFacebook, BsFillShieldLockFill, BsYoutube } from 'react-icons/bs'
-
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import Link from 'next/link'
 import Modal from '../Modal'
 import { UserContext } from '@/contexts/userContext'
 import { useTranslation } from 'react-i18next'
+
 import { KeywordContext } from '@/contexts/keywordContext'
+import { Add } from '@mui/icons-material'
 
 const Navbar = () => {
   const { t } = useTranslation('common')
   const { pathname } = useRouter()
+  const { locale } = useRouter()
 
   const links = [
     {
@@ -80,14 +92,9 @@ const Navbar = () => {
   const router = useRouter()
   const [mobileNavOpen, setMobileNavOpen] = React.useState(false)
 
-  const { logout, token } = useContext(UserContext)
-  const {
-    getUsersKeywords,
-    keywords,
-    selectedKeyword,
-    setSelectedKeyword,
-    setKeywords,
-  } = useContext(KeywordContext)
+  const { logout, token, user } = useContext(UserContext)
+  const { getUsersKeywords, keywords, selectedKeyword, setSelectedKeyword } =
+    useContext(KeywordContext)
 
   const [open, setOpen] = useState(false)
   const [page, setPage] = useState(1)
@@ -100,22 +107,32 @@ const Navbar = () => {
   }
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     const selectedKeyword = keywords?.data?.find(
-      (keyword: any) => keyword.letters === newValue
-    )
+      (keyword: any) =>
+        (decodeURI(encodeURI(keyword?.letters)) as any) === newValue
+    ) as any
     setSelectedKeyword(selectedKeyword)
+    if (router.query.hashtag) {
+      router.push(`/${router.locale}/dashboard/`)
+    }
   }
 
   useEffect(() => {
     if (token) {
+      if (router.query.hashtag) {
+        getUsersKeywords(
+          parseInt(router.query.page as string),
+          parseInt(router.query.limit as string)
+        )
+        return
+      }
       getUsersKeywords(page)
     }
+    console.log('rerenderd')
 
-    return () => {}
+    return () => {
+      setSelectedKeyword(null)
+    }
   }, [token])
-
-  if (!token) {
-    return <></>
-  }
 
   return (
     <>
@@ -159,8 +176,10 @@ const Navbar = () => {
           <Tabs
             sx={{
               height: '100%',
-              width: '75%',
+              width: '80%',
               color: '#0090EC',
+              display: 'flex',
+              alignItems: 'center',
             }}
             TabIndicatorProps={{
               sx: {
@@ -171,7 +190,46 @@ const Navbar = () => {
             value={selectedKeyword?.letters}
             onChange={handleChange}
             variant="scrollable"
-            scrollButtons="auto"
+            scrollButtons={keywords?.data?.length > 6 ? true : false}
+            ScrollButtonComponent={(props) => {
+              if (router.locale == 'ar') {
+                if (props.direction === 'left' && !props.disabled) {
+                  return (
+                    <ArrowForwardIosIcon
+                      sx={{ marginTop: '10px' }}
+                      fontSize="small"
+                    />
+                  )
+                } else if (props.direction === 'right' && !props.disabled) {
+                  return (
+                    <ArrowBackIosNewIcon
+                      sx={{ marginTop: '10px' }}
+                      fontSize="small"
+                    />
+                  )
+                } else {
+                  return null
+                }
+              } else {
+                if (props.direction === 'left' && !props.disabled) {
+                  return (
+                    <ArrowBackIosNewIcon
+                      sx={{ marginTop: '10px' }}
+                      fontSize="small"
+                    />
+                  )
+                } else if (props.direction === 'right' && !props.disabled) {
+                  return (
+                    <ArrowForwardIosIcon
+                      sx={{ marginTop: '10px' }}
+                      fontSize="small"
+                    />
+                  )
+                } else {
+                  return null
+                }
+              }
+            }}
             defaultValue={selectedKeyword?.letters}
           >
             {keywords?.data?.map((keyword: any) => (
@@ -188,28 +246,29 @@ const Navbar = () => {
                     md: '10px',
                     xl: '20px',
                   },
-                  fontWeight: selectedKeyword === keyword ? 600 : 400,
+                  fontWeight: selectedKeyword?.id === keyword?.id ? 600 : 400,
                   color: 'black',
                 }}
-                value={keyword.letters}
-                key={keyword.id}
-                label={`#` + keyword.letters}
+                value={keyword?.letters}
+                key={keyword?.id}
+                label={`#` + decodeURI(encodeURI(keyword?.letters))}
               />
             ))}
           </Tabs>
           {keywords?.hasNextPage && (
-            <Button
+            <IconButton
+              size="small"
+              sx={{}}
               onClick={() => {
                 setPage(page + 1)
                 getUsersKeywords(page + 1)
               }}
             >
-              Load More
-            </Button>
+              <Add />
+            </IconButton>
           )}
         </Box>
       </Box>
-
       {/* Mobile Header */}
       <Box
         sx={{
@@ -259,9 +318,9 @@ const Navbar = () => {
           <Typography fontSize="24px" fontWeight="600">
             {t('side_title')}
           </Typography>
-          <Link href="/dashboard">
+          <Link href="/">
             <Image
-              src="/images/logo.webp"
+              src="/images/logo.svg"
               alt="logo"
               width={74}
               height={37}

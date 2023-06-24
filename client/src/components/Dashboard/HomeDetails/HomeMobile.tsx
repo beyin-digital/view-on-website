@@ -48,14 +48,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const HomeMobile = () => {
   const { t } = useTranslation('dashboard')
-  const router = useRouter()
   const {
     selectedKeyword,
     setAnalyticsData,
     updateKeywordDetails,
     analyticsData,
   } = useContext(KeywordContext)
-  const { token } = useContext(UserContext)
 
   const [lineChartType, setLineChartType] = useState(1)
 
@@ -112,59 +110,60 @@ const HomeMobile = () => {
     }
   }
 
-  const updateData = async (data: any) => {
-    if (data?.keywordId === selectedKeyword?.id) {
-      setAnalyticsData({
-        ...analyticsData,
-        totalVisits: data?.totalVisits,
-        totalVisitsToday: data?.totalVisitsToday,
-        totalDailyVisitsByHoursOfTheDay: data?.totalDailyVisitsByHoursOfTheDay,
-        totalVisitsByMonthsOfTheYear: data?.totalVisitsByMonthsOfTheYear,
-        totalVisitsByDaysOfTheWeek: data?.totalVisitsByDaysOfTheWeek,
-        totalVisitsByDaysOfTheMonth: data?.totalVisitsByDaysOfTheMonth,
-      })
-      setPieChartData([
-        {
-          id: 'today',
-          label: `${t('box_four_today')}`,
-          tKey: 'box_four_today',
-          value: data?.totalVisitsToday,
-          color: 'hsla(112, 81%, 52%, 1)',
-        },
-        {
-          id: 'all-time',
-          label: `${t('box_four_all')}`,
-          tKey: 'box_four_all',
-          value: data?.totalVisits,
-          color: 'hsla(203, 100%, 46%, 1)',
-        },
-      ])
-      setLineChartData([
-        {
-          id: "Today's visits",
-          color: 'hsla(203, 100%, 46%, 1)',
-          data: data?.totalDailyVisitsByHoursOfTheDay,
-        },
-        {
-          id: "This Week's visits",
-          color: 'hsla(203, 100%, 46%, 1)',
-          data: data?.totalVisitsByDaysOfTheWeek,
-        },
-        {
-          id: "This month's visits",
-          color: 'hsla(203, 100%, 46%, 1)',
-          data: data?.totalVisitsByDaysOfTheMonth,
-        },
-        {
-          id: "This year's visits",
-          color: 'hsla(203, 100%, 46%, 1)',
-          data: data?.totalVisitsByMonthsOfTheYear,
-        },
-      ])
-    }
-  }
-
   useEffect(() => {
+    if (selectedKeyword == null) return
+    const updateData = (data: any) => {
+      if (data?.keywordId === selectedKeyword?.id) {
+        setAnalyticsData({
+          ...analyticsData,
+          totalVisits: data?.totalVisits,
+          totalVisitsToday: data?.totalVisitsToday,
+          totalDailyVisitsByHoursOfTheDay:
+            data?.totalDailyVisitsByHoursOfTheDay,
+          totalVisitsByMonthsOfTheYear: data?.totalVisitsByMonthsOfTheYear,
+          totalVisitsByDaysOfTheWeek: data?.totalVisitsByDaysOfTheWeek,
+          totalVisitsByDaysOfTheMonth: data?.totalVisitsByDaysOfTheMonth,
+        })
+        setPieChartData([
+          {
+            id: 'today',
+            label: `${t('box_four_today')}`,
+            tKey: 'box_four_today',
+            value: data?.totalVisitsToday,
+            color: 'hsla(112, 81%, 52%, 1)',
+          },
+          {
+            id: 'all-time',
+            label: `${t('box_four_all')}`,
+            tKey: 'box_four_all',
+            value: data?.totalVisits,
+            color: 'hsla(203, 100%, 46%, 1)',
+          },
+        ])
+        setLineChartData([
+          {
+            id: `${t('id_one')}`,
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalDailyVisitsByHoursOfTheDay,
+          },
+          {
+            id: `${t('id_two')}`,
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalVisitsByDaysOfTheWeek,
+          },
+          {
+            id: `${t('id_three')}`,
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalVisitsByDaysOfTheMonth,
+          },
+          {
+            id: `${t('id_four')}`,
+            color: 'hsla(203, 100%, 46%, 1)',
+            data: data?.totalVisitsByMonthsOfTheYear,
+          },
+        ])
+      }
+    }
     socket.emit(
       'createConnection',
       { keywordId: selectedKeyword?.id },
@@ -181,7 +180,7 @@ const HomeMobile = () => {
 
     setValues({
       ...values,
-      hashtag: selectedKeyword?.letters,
+      hashtag: decodeURI(encodeURI(selectedKeyword?.letters)),
       sublink: selectedKeyword?.sublink,
       organisation: selectedKeyword?.organisation || '',
       country: selectedKeyword?.country || '',
@@ -199,6 +198,7 @@ const HomeMobile = () => {
           flexDirection: 'column',
           gap: '16px',
           marginX: { xs: '15px', sm: '29px' },
+          marginY: '6rem',
         }}
       >
         <Box sx={{ display: { xs: 'block', md: 'none' }, width: '100%' }}>
@@ -208,7 +208,8 @@ const HomeMobile = () => {
         <Item
           sx={{
             width: '100%',
-            height: '419px',
+            height: '429px',
+            paddingY: '1rem',
           }}
         >
           <>
@@ -374,7 +375,7 @@ const HomeMobile = () => {
               }}
             >
               <Typography fontSize="26px" fontWeight={700}>
-                #{selectedKeyword?.letters?.toUpperCase()}
+                #{decodeURI(encodeURI(selectedKeyword?.letters))}
               </Typography>
             </Box>
 
@@ -429,41 +430,18 @@ const HomeMobile = () => {
                   width: '100%',
                   background: '#0090EC',
                   borderRadius: '7px',
-                  color: '#343132',
+                  color: 'white',
                   fontWeight: 500,
                   fontSize: '11px',
                   boxShadow: 'none',
-                  textTransform: 'none',
+                  textTransform: 'uppercase',
                   '&:hover': {
                     background: '#0090EC',
                   },
                   margin: '.2rem',
                 }}
                 onClick={() => {
-                  router.push('/dashboard/subscriptions')
-                }}
-              >
-                {t('go_to_subscriptions')}
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  height: '42px',
-                  width: '100%',
-                  background: '#0090EC',
-                  borderRadius: '7px',
-                  color: '#343132',
-                  fontWeight: 500,
-                  fontSize: '11px',
-                  boxShadow: 'none',
-                  textTransform: 'none',
-                  '&:hover': {
-                    background: '#0090EC',
-                  },
-                  margin: '.2rem',
-                }}
-                onClick={() => {
-                  downloadSvg(selectedKeyword.letters.toUpperCase())
+                  downloadSvg(decodeURI(encodeURI(selectedKeyword?.letters)))
                 }}
               >
                 {t('box_two_download')}
@@ -474,7 +452,7 @@ const HomeMobile = () => {
         <Item
           sx={{
             width: '100%',
-            height: '319px',
+            height: { xs: 'auto', sm: '319px' },
             paddingX: '40px',
           }}
         >

@@ -35,7 +35,7 @@ export class Otp extends EntityHelper {
 
   @BeforeInsert()
   setExpiredAtAndGenerateToken() {
-    this.expiredAt = new Date(Date.now() + 1000 * 60 * 5);
+    this.expiredAt = new Date(Date.now() + 1000 * 60 * 2);
     // Generate 6 random digit number
     this.token = Math.floor(100000 + Math.random() * 900000).toString();
   }

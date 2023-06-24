@@ -52,7 +52,7 @@ const TwoBox = () => {
               sx={{
                 width: { md: '100%', xl: '300px' },
                 fontSize: '14px',
-                lineHeight: '14px',
+                lineHeight: '19px',
                 fontWeight: '400',
                 marginY: '.5rem',
               }}

@@ -9,10 +9,7 @@ import {
   AiFillInstagram,
   AiFillYoutube,
 } from 'react-icons/ai'
-import {
-  BsFacebook,
-  BsFillShieldLockFill,
-} from 'react-icons/bs'
+import { BsFacebook, BsFillShieldLockFill } from 'react-icons/bs'
 import { RiLogoutBoxFill } from 'react-icons/ri'
 import { useContext, useState } from 'react'
 import Modal from '../Modal'
@@ -41,54 +38,54 @@ const Sidebar = () => {
       icon: (
         <AiFillHome
           size={24}
-          color={router.pathname === '/dashboard' ? 'white' : ''}
+          color={router.pathname === 'dashboard' ? 'white' : ''}
         />
       ),
-      href: '/dashboard',
+      href: 'dashboard',
     },
     {
       name: 'Profile',
       tKey: 'side_profile',
       icon: (
         <FaUserAlt
-          color={router.pathname === '/dashboard/profile' ? 'white' : ''}
+          color={router.pathname === 'dashboard/profile' ? 'white' : ''}
           size={24}
         />
       ),
-      href: '/dashboard/profile',
+      href: 'dashboard/profile',
     },
     {
       name: 'Subscriptions',
       tKey: 'side_subscribe',
       icon: (
         <AiFillCreditCard
-          color={router.pathname === '/dashboard/subscriptions' ? 'white' : ''}
+          color={router.pathname === 'dashboard/subscriptions' ? 'white' : ''}
           size={24}
         />
       ),
-      href: '/dashboard/subscriptions',
+      href: 'dashboard/subscriptions',
     },
     {
       name: 'Security',
       tKey: 'side_security',
       icon: (
         <BsFillShieldLockFill
-          color={router.pathname === '/dashboard/security' ? 'white' : ''}
+          color={router.pathname === 'dashboard/security' ? 'white' : ''}
           size={24}
         />
       ),
-      href: '/dashboard/security',
+      href: 'dashboard/security',
     },
     {
       name: 'Logout',
       tKey: 'side_logout',
       icon: (
         <RiLogoutBoxFill
-          color={router.pathname === '/dashboard/logout' ? 'white' : ''}
+          color={router.pathname === 'dashboard/logout' ? 'white' : ''}
           size={24}
         />
       ),
-      href: '/dashboard/logout',
+      href: 'dashboard/logout',
     },
   ]
   return (
@@ -171,7 +168,8 @@ const Sidebar = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 height: '60px',
-                background: router.pathname === link.href ? '#0090EC' : '',
+                background:
+                  router.pathname === '/' + link.href ? '#0090EC' : '',
                 borderRadius: '2px',
               }}
             >
@@ -181,7 +179,8 @@ const Sidebar = () => {
                 className="SideBarDashboardIcon"
                 sx={{
                   fontWeight: router.pathname === link.href ? 500 : 400,
-                  color: router.pathname === link.href ? '#FBFBFB' : '#000',
+                  color:
+                    router.pathname === '/' + link.href ? '#FBFBFB' : '#000',
                   width: '200px',
                 }}
               >
@@ -240,13 +239,19 @@ const Sidebar = () => {
               marginLeft: '60px',
             }}
           >
-            <Link href="https://instagram.com/vow" target="_blank">
+            <Link
+              href="https://www.facebook.com/profile.php?id=100064864085130"
+              target="_blank"
+            >
               <BsFacebook size={20} color="#343132" />
             </Link>
-            <Link href="https://instagram.com/vow" target="_blank">
+            <Link
+              href="https://m.youtube.com/@viewonwebsite/playlists"
+              target="_blank"
+            >
               <AiFillYoutube size={20} color="#343132" />
             </Link>
-            <Link href="https://instagram.com/vow" target="_blank">
+            <Link href="https://instagram.com/viewonwebsite" target="_blank">
               <AiFillInstagram size={20} color="#343132" />
             </Link>
           </Box>

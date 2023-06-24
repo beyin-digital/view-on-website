@@ -16,4 +16,8 @@ export class CreateCheckoutSessionDto {
   @IsString()
   @IsNotEmpty()
   stripeCustomerId: string;
+
+  @IsString()
+  @IsOptional()
+  lang: string;
 }
