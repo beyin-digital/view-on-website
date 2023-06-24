@@ -20,6 +20,7 @@ import { AnalyticsService } from './analytics.service';
       'http://localhost:3000',
       'https://vow-client.vercel.app',
       'https://viewonwebsite.com',
+      'https://www.viewonwebsite.com',
     ],
   },
 })

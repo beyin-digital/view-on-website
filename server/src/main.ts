@@ -21,6 +21,7 @@ async function bootstrap() {
         'http://localhost:3000',
         'https://vow-client.vercel.app',
         'https://viewonwebsite.com',
+        'https://www.viewonwebsite.com',
       ],
     },
 
