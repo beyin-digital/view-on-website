@@ -124,7 +124,7 @@ export class AnalyticsService {
         // calculate the total visits by hour of the day and make sure the timezone offset thats passed as an argument is taken into account when returning the time of the day
         [...Array(24).keys()].map((hour) => {
           return {
-            x: new Date(0, 0, 0, hour).toLocaleString('default', {
+            x: new Date(0, 0, 0, hour).toLocaleString('en-GB', {
               hour: 'numeric',
               hour12: true,
               timeZone: timezone,
