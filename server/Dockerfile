@@ -10,7 +10,6 @@ COPY . /usr/src/app
 RUN cp -a /tmp/app/node_modules /usr/src/app
 
 WORKDIR /usr/src/app
-RUN cp env-example .env
 RUN npm run build
 
-CMD ["/opt/startup.sh"]
+CMD ["npm","run","start:prod"]
