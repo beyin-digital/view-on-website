@@ -17,7 +17,6 @@ import io from 'socket.io-client'
 import { KeywordContext } from '@/contexts/keywordContext'
 import { countries } from '@/utils/countries'
 import { downloadSvg } from '@/utils/downloadSvg'
-import { useRouter } from 'next/router'
 const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
 const geoApifyKey = process.env.NEXT_PUBLIC_GEOAPIFY_KEY
 
@@ -164,15 +163,24 @@ const HomeMobile = () => {
         ])
       }
     }
+
+    const getClientTimezone = () => {
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+      return timezone
+    }
+
+    // Call the function to retrieve the client's timezone and update the state
+    const timezone = getClientTimezone()
+
     socket.emit(
       'createConnection',
-      { keywordId: selectedKeyword?.id },
+      { keywordId: selectedKeyword?.id, timezone },
       (data: any) => updateData(data)
     )
 
     socket.emit(
       'getNewRecords',
-      { keywordId: selectedKeyword?.id },
+      { keywordId: selectedKeyword?.id, timezone },
       (data: any) => updateData(data)
     )
 

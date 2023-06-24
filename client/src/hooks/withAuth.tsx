@@ -17,7 +17,7 @@ const withAuth = (WrappedComponent: any) => {
         if (router.pathname === '/dashboard' && !token) {
           router.push(`${router.locale}/login`)
         }
-        if (router.pathname === '/dashboard') {
+        if (router.pathname.startsWith('/dashboard')) {
           if (user?.hasKeywords === false) {
             router.push(`${router.locale}/`)
           }
