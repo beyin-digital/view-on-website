@@ -2,17 +2,19 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Seo from '@/components/Seo'
 import { useTranslation } from 'next-i18next'
+import { GetServerSideProps, GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-const Payment = () => {
+const Payment = ({ data }: any) => {
   const { t } = useTranslation('payment')
 
   const router = useRouter()
 
   useEffect(() => {
     router.push(
-      `/${router.locale}/dashboard?hashtag=${decodeURI(
-        router.query.hashtag as string
-      )}&page=${router.query.page}&limit=${router.query.limit}`
+      `/${data?.locale}/dashboard?hashtag=${decodeURI(
+        data?.hashtag as string
+      )}&page=${data?.page}&limit=${data?.limit}`
     )
     return
   }, [router.query.hashtag])
@@ -22,4 +24,19 @@ const Payment = () => {
 
 export default Payment
 
-// http://localhost:3000/payment?hashtag=p&page=1&limit=18
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  locale,
+}) => {
+  return {
+    props: {
+      data: {
+        hashtag: query.hashtag,
+        page: query.page,
+        limit: query.limit,
+        locale: locale || '',
+      },
+      ...(await serverSideTranslations(locale || '', ['common'])),
+    },
+  }
+}
