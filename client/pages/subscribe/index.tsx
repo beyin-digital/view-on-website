@@ -93,7 +93,13 @@ const SubscribePage: NextPage = () => {
   function isEmoji(encodedValue: string) {
     const flagRegex = /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/
     const emojiRegex = /[\uD800-\uDBFF][\uDC00-\uDFFF]/
-    return flagRegex.test(encodedValue) || emojiRegex.test(encodedValue)
+    if (encodedValue.length == 4 && flagRegex.test(encodedValue)) {
+      return true
+    } else if (encodedValue.length == 2 && emojiRegex.test(encodedValue)) {
+      return true
+    } else {
+      return false
+    }
   }
 
   let price = ''
@@ -252,7 +258,7 @@ const SubscribePage: NextPage = () => {
                       inputProps={{
                         minLength: 1,
                         maxLength: 13,
-                        pattern: allowedCharacters,
+                        pattern: allowedCharacters.test(values.hashtag),
                       }}
                       name="hashtag"
                       sx={{
@@ -403,8 +409,7 @@ const SubscribePage: NextPage = () => {
                         !keywordFound &&
                         !isSearching &&
                         (values?.hashtag?.length >= 1 ||
-                          values?.hashtag?.length <= 3) &&
-                        isEmoji(values.hashtag) ? (
+                          values?.hashtag?.length <= 3) ? (
                           <Typography
                             onClick={() =>
                               router.push(`${router.asPath}/premium`)
@@ -567,12 +572,12 @@ const SubscribePage: NextPage = () => {
                               },
                               height: '100%',
                               display:
-                                !keywordFound &&
-                                !isSearching &&
-                                values?.hashtag?.length >= 1 &&
-                                values?.hashtag?.length <= 3 &&
-                                isEmoji(values?.hashtag) &&
-                                allowedCharacters.test(values.hashtag)
+                                (!keywordFound &&
+                                  !isSearching &&
+                                  values?.hashtag?.length >= 1 &&
+                                  values?.hashtag?.length <= 3) ||
+                                (isEmoji(values?.hashtag) &&
+                                  allowedCharacters.test(values.hashtag))
                                   ? 'flex'
                                   : 'none',
                               alignItems: 'center',
