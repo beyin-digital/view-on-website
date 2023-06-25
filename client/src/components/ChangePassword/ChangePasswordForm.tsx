@@ -5,8 +5,9 @@ import { UserContext } from '@/contexts/userContext'
 
 import { Box, Typography, OutlinedInput, Button } from '@mui/material'
 import { toast } from 'react-toastify'
+import { GetServerSideProps } from 'next'
 
-const ChangePasswordForm = () => {
+const ChangePasswordForm = ({ token }: any) => {
   //  translate hooks
   const { t } = useTranslation('changePassword')
   const { query } = useRouter()
@@ -119,7 +120,7 @@ const ChangePasswordForm = () => {
                 values.password === values.confirmPassword &&
                 values.password.length > 8
               ) {
-                resetPassword(values.password, query.token as string)
+                resetPassword(values.password, token as string)
               }
               if (values.password !== values.confirmPassword) {
                 toast.error('Passwords do not match')
