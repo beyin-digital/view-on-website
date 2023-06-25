@@ -14,6 +14,7 @@ const SwiperLabel = ({ selectedKeyword }: any) => {
       {locale === 'ar' ? (
         <Box
           sx={{
+            userSelect: 'none',
             position: { xs: 'relative', md: 'absolute' },
             top: { xs: '10px', sm: '2rem', md: '2rem', xl: '0' },
             left: { xs: '', md: '2rem' },
