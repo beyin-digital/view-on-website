@@ -28,13 +28,13 @@ import Seo from '@/components/Seo'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-const ChangePassword = ({ token, locale }: any) => {
+const ChangePassword = ({ data }: any) => {
   const { t } = useTranslation('changePassword')
   const router = useRouter()
 
   useEffect(() => {
-    router.push(`/${locale}/change-password?token=${token}`)
-  }, [token])
+    router.push(`/${data?.locale}/change-password?token=${data?.token}`)
+  }, [router.query.token])
   return (
     <>
       <Head>
@@ -120,8 +120,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   return {
     props: {
-      token: query.token,
-      locale: locale || '',
+      data: { token: query?.token, locale: locale || '' },
       ...(await serverSideTranslations(locale || '', [
         'common',
         'changePassword',
