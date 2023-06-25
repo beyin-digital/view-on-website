@@ -196,15 +196,13 @@ const Navbar = () => {
                 if (props.direction === 'left' && !props.disabled) {
                   return (
                     <ArrowForwardIosIcon
-                      sx={{ marginTop: '10px' }}
-                      fontSize="small"
+                      sx={{ marginTop: '10px', fontSize: '8px' }}
                     />
                   )
                 } else if (props.direction === 'right' && !props.disabled) {
                   return (
                     <ArrowBackIosNewIcon
-                      sx={{ marginTop: '10px' }}
-                      fontSize="small"
+                      sx={{ marginTop: '10px', fontSize: '8px' }}
                     />
                   )
                 } else {
@@ -221,8 +219,7 @@ const Navbar = () => {
                 } else if (props.direction === 'right' && !props.disabled) {
                   return (
                     <ArrowForwardIosIcon
-                      sx={{ marginTop: '10px' }}
-                      fontSize="small"
+                      sx={{ marginTop: '10px', fontSize: '8px' }}
                     />
                   )
                 } else {

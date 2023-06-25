@@ -1,30 +1,23 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
-const SlugPage = ({ data }: any) => {
+const KeywordsPage = ({ data }: any) => {
   const router = useRouter()
-  const { slug } = router.query
-  console.log(slug)
-
   useEffect(() => {
-    if (slug) {
-      if (data?.sublink) {
-        window.location.href = data?.sublink
-        return
-      }
-      if (data.slug.length < 2) {
-        router.push(
-          `/${router.locale}/subscribe/premium?hashtag=${decodeURI(
-            slug as string
-          )}`
-        )
-        return
-      }
+    if (data?.sublink) {
+      window.location.href = data?.sublink
+      return
+    } else {
+      console.log(data?.slug)
       router.push(
-        `/${router.locale}/subscribe/?hashtag=${decodeURI(slug as string)}`
+        data?.slug.length < 4
+          ? `/subscribe/premium?hashtag=${data.slug}`
+          : `/subscribe?hashtag=${data.slug}`
       )
+
+      return
     }
   }, [router.query.slug])
 
@@ -37,7 +30,7 @@ const SlugPage = ({ data }: any) => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
 
-        <title>keyword #{decodeURI(data.letters)}</title>
+        <title>keyword #{decodeURI(data?.letters)}</title>
         <meta
           name="description"
           content="Experience a new era of internet browsing with VOW's keyword redirection service. Enter your #Keyword for instant redirection"
@@ -48,7 +41,7 @@ const SlugPage = ({ data }: any) => {
         />
         <link
           rel="canonical"
-          href={`https://www.viewonwebsite.com/${decodeURI(data.letters)}`}
+          href={`https://www.viewonwebsite.com/${decodeURI(data?.letters)}`}
         />
         <meta name="application-name" content="VIEW ON WEBSITE" />
         <meta name="apple-mobile-web-app-title" content="VIEW ON WEBSITE" />
@@ -106,6 +99,7 @@ const SlugPage = ({ data }: any) => {
           content="https://www.viewonwebsite.com/images/logo.svg"
         />
       </Head>
+      <div></div>
     </>
   )
 }
@@ -116,34 +110,43 @@ export async function getStaticPaths() {
   )
   const data = await response.json()
 
-  const paths = data?.map((item: any) => {
-    return {
-      params: {
-        slug: item.slug,
-      },
-    }
-  })
+  const paths = data?.map((item: any) => ({
+    params: {
+      slug: item.slug,
+    },
+  }))
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/keywords/letters?letters=${params?.slug}`,
-    {
-      method: 'GET',
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/keywords/letters?letters=${params?.slug}`
+    )
+
+    const data = await response.json()
+
+    return {
+      props: {
+        data,
+      },
+      revalidate: 1,
     }
-  )
-  const data = await response.json()
-  console.log(response)
-  return {
-    props: {
-      data,
-    },
+  } catch (error) {
+    return {
+      props: {
+        data: {
+          letters: params?.slug,
+          slug: params?.slug,
+        },
+      },
+      revalidate: 1,
+    }
   }
 }
 
-export default SlugPage
+export default KeywordsPage

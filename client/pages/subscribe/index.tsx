@@ -252,7 +252,7 @@ const SubscribePage: NextPage = () => {
                       inputProps={{
                         minLength: 1,
                         maxLength: 13,
-                        pattern: allowedCharacters.test(values.hashtag),
+                        pattern: allowedCharacters,
                       }}
                       name="hashtag"
                       sx={{
@@ -313,7 +313,7 @@ const SubscribePage: NextPage = () => {
                       }`}
                       onChange={handleChange}
                     />
-                    {!isInputValid && values?.hashtag?.length > 1 && (
+                    {!isInputValid && values?.hashtag?.length >= 1 && (
                       <Typography sx={{ color: 'red' }}>
                         {t('error')}
                       </Typography>
@@ -566,12 +566,12 @@ const SubscribePage: NextPage = () => {
                               },
                               height: '100%',
                               display:
-                                (!keywordFound &&
+                                ((!keywordFound &&
                                   !isSearching &&
                                   values?.hashtag?.length >= 1 &&
                                   values?.hashtag?.length <= 3) ||
-                                (isEmoji(values?.hashtag) &&
-                                  allowedCharacters.test(values.hashtag))
+                                  isEmoji(values?.hashtag)) &&
+                                allowedCharacters.test(values.hashtag)
                                   ? 'flex'
                                   : 'none',
                               alignItems: 'center',
@@ -627,30 +627,30 @@ const SubscribePage: NextPage = () => {
                         {!keywordFound &&
                           !isSearching &&
                           (values?.hashtag?.length < 4 ||
-                            (isEmoji(values.hashtag) &&
-                              allowedCharacters.test(values.hashtag) && (
-                                <Box
-                                  sx={{
-                                    width: {
-                                      xs: '100%',
-                                      md: '60%',
-                                      xl: '40%',
-                                    },
-                                    height: '100%',
-                                    display:
-                                      values?.hashtag?.length === 1 ||
-                                      values?.hashtag?.length === 2 ||
-                                      values?.hashtag?.length === 3 ||
-                                      isEmoji(values?.hashtag)
-                                        ? 'flex'
-                                        : 'none',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                  }}
-                                >
-                                  <Checks />
-                                </Box>
-                              )))}
+                            isEmoji(values.hashtag)) &&
+                          allowedCharacters.test(values.hashtag) && (
+                            <Box
+                              sx={{
+                                width: {
+                                  xs: '100%',
+                                  md: '60%',
+                                  xl: '40%',
+                                },
+                                height: '100%',
+                                display:
+                                  values?.hashtag?.length === 1 ||
+                                  values?.hashtag?.length === 2 ||
+                                  values?.hashtag?.length === 3 ||
+                                  isEmoji(values?.hashtag)
+                                    ? 'flex'
+                                    : 'none',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}
+                            >
+                              <Checks />
+                            </Box>
+                          )}
                       </Box>
                     </>
 
