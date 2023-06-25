@@ -403,7 +403,8 @@ const SubscribePage: NextPage = () => {
                         !keywordFound &&
                         !isSearching &&
                         (values?.hashtag?.length >= 1 ||
-                          values?.hashtag?.length <= 3) ? (
+                          values?.hashtag?.length <= 3) &&
+                        isEmoji(values.hashtag) ? (
                           <Typography
                             onClick={() =>
                               router.push(`${router.asPath}/premium`)
@@ -566,11 +567,11 @@ const SubscribePage: NextPage = () => {
                               },
                               height: '100%',
                               display:
-                                ((!keywordFound &&
-                                  !isSearching &&
-                                  values?.hashtag?.length >= 1 &&
-                                  values?.hashtag?.length <= 3) ||
-                                  isEmoji(values?.hashtag)) &&
+                                !keywordFound &&
+                                !isSearching &&
+                                values?.hashtag?.length >= 1 &&
+                                values?.hashtag?.length <= 3 &&
+                                isEmoji(values?.hashtag) &&
                                 allowedCharacters.test(values.hashtag)
                                   ? 'flex'
                                   : 'none',
