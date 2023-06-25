@@ -11,7 +11,7 @@ export default function SliderSwiper() {
 					}}
 				>
 					<img
-						src="/images/slid.svg"
+						src="/images/slid.webp"
 						alt="View On Website Photo"
 						title="View On Website Photo"
 						style={{

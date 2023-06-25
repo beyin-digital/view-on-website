@@ -128,7 +128,7 @@ export class AnalyticsService {
               hour: 'numeric',
               hour12: true,
               timeZone: timezone,
-              timeZoneName: 'short',
+              timeZoneName: undefined,
             }),
             y: keywordCount.filter((count) => {
               const countDate = new Date(count.createdAt);
