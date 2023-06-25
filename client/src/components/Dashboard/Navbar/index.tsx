@@ -169,6 +169,7 @@ const Navbar = () => {
             fontSize={{ xs: '20px', md: '22px', xl: '32px' }}
             fontWeight={600}
             width="20%"
+            paddingLeft="15px"
           >
             {t('title')}
           </Typography>

@@ -9,16 +9,12 @@ const Payment = () => {
   const router = useRouter()
 
   useEffect(() => {
-    if (router.query.hashtag) {
-      router.push(
-        `/${router.locale}/dashboard?hashtag=${decodeURI(
-          router.query.hashtag as string
-        )}&page=${router.query.page}&limit=${router.query.limit}`
-      )
-      return
-    } else {
-      router.push('/subscribe')
-    }
+    router.push(
+      `/${router.locale}/dashboard?hashtag=${decodeURI(
+        router.query.hashtag as string
+      )}&page=${router.query.page}&limit=${router.query.limit}`
+    )
+    return
   }, [router.query.hashtag])
 
   return <></>
