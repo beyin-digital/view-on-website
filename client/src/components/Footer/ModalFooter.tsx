@@ -131,7 +131,8 @@ const ModalFooter = (props: IntrinsicAttributes) => {
 											height: "59px",
 											display: "flex",
 											alignItems: "center",
-											justifyContent: "center",
+											// justifyContent: "center",
+											justifyContent: { xs: "center", sm: "space-evenly" },
 											flexDirection: { xs: "column", sm: "row-reverse" },
 										}}
 									>
@@ -153,15 +154,15 @@ const ModalFooter = (props: IntrinsicAttributes) => {
 										</Box>
 										<Box
 											sx={{
-												width: "60%",
+												width: { xs: "80%", sm: "50%" },
 											}}
 										>
 											<Typography
 												sx={{
 													fontSize: { xs: "16px", sm: "20px" },
-
+													textAlign: "right",
 													fontWeight: "400",
-													lineHeight: "18px",
+													lineHeight: "20px",
 													color: "#343132",
 												}}
 											>
@@ -316,14 +317,14 @@ const ModalFooter = (props: IntrinsicAttributes) => {
 											height: "59px",
 											display: "flex",
 											alignItems: "center",
-											justifyContent: "center",
+											justifyContent: { xs: "center", sm: "space-evenly" },
 											flexDirection: { xs: "column", sm: "row-reverse" },
 										}}
 									>
 										<Box
 											sx={{
-												width: "25%",
-												marginX: "1rem",
+												width: "20%",
+												// marginX: "1rem",
 											}}
 										>
 											<Typography
@@ -339,7 +340,7 @@ const ModalFooter = (props: IntrinsicAttributes) => {
 										</Box>
 										<Box
 											sx={{
-												width: "60%",
+												width: { xs: "80%", sm: "50%" },
 											}}
 										>
 											<Typography
@@ -599,7 +600,8 @@ const ModalFooter = (props: IntrinsicAttributes) => {
 											height: "59px",
 											display: "flex",
 											alignItems: "center",
-											justifyContent: "center",
+											// justifyContent: "center",
+											justifyContent: { xs: "center", sm: "space-evenly" },
 											flexDirection: { xs: "column", sm: "row-reverse" },
 										}}
 									>
@@ -621,13 +623,13 @@ const ModalFooter = (props: IntrinsicAttributes) => {
 										</Box>
 										<Box
 											sx={{
-												width: "60%",
+												width: { xs: "80%", sm: "50%" },
 											}}
 										>
 											<Typography
 												sx={{
 													fontSize: { xs: "16px", sm: "20px" },
-
+													textAlign: "right",
 													fontWeight: "400",
 													lineHeight: "18px",
 													color: "#343132",
