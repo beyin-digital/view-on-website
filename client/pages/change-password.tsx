@@ -25,10 +25,16 @@ const ChangePasswordForm = dynamic(
 
 import Head from 'next/head'
 import Seo from '@/components/Seo'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
-const ChangePassword = ({ token }: any) => {
+const ChangePassword = ({ token, locale }: any) => {
   const { t } = useTranslation('changePassword')
+  const router = useRouter()
 
+  useEffect(() => {
+    router.push(`/${locale}/change-password?token=${token}`)
+  }, [])
   return (
     <>
       <Head>
@@ -99,7 +105,7 @@ const ChangePassword = ({ token }: any) => {
               }}
             >
               <ChangePasswordDetails />
-              <ChangePasswordForm token={token} />
+              <ChangePasswordForm />
             </Box>
           </Box>
         </Box>
@@ -115,6 +121,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       token: query.token,
+      locale: locale || '',
       ...(await serverSideTranslations(locale || '', [
         'common',
         'changePassword',
