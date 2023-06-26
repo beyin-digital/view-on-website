@@ -127,8 +127,6 @@ const Navbar = () => {
       }
       getUsersKeywords(page)
     }
-    console.log('rerenderd')
-
     return () => {
       setSelectedKeyword(null)
     }
@@ -173,7 +171,18 @@ const Navbar = () => {
           >
             {t('title')}
           </Typography>
-
+          {keywords?.hasNextPage && locale == 'ar' && (
+            <IconButton
+              size="small"
+              sx={{}}
+              onClick={() => {
+                setPage(page + 1)
+                getUsersKeywords(page + 1)
+              }}
+            >
+              <Add />
+            </IconButton>
+          )}
           <Tabs
             sx={{
               height: '100%',
@@ -191,44 +200,10 @@ const Navbar = () => {
             value={selectedKeyword?.letters}
             onChange={handleChange}
             variant="scrollable"
-            scrollButtons={keywords?.data?.length > 6 ? true : false}
-            ScrollButtonComponent={(props) => {
-              if (router.locale == 'ar') {
-                if (props.direction === 'left' && !props.disabled) {
-                  return (
-                    <ArrowForwardIosIcon
-                      sx={{ marginTop: '10px', fontSize: '8px' }}
-                    />
-                  )
-                } else if (props.direction === 'right' && !props.disabled) {
-                  return (
-                    <ArrowBackIosNewIcon
-                      sx={{ marginTop: '10px', fontSize: '8px' }}
-                    />
-                  )
-                } else {
-                  return null
-                }
-              } else {
-                if (props.direction === 'left' && !props.disabled) {
-                  return (
-                    <ArrowBackIosNewIcon
-                      sx={{ marginTop: '10px' }}
-                      fontSize="small"
-                    />
-                  )
-                } else if (props.direction === 'right' && !props.disabled) {
-                  return (
-                    <ArrowForwardIosIcon
-                      sx={{ marginTop: '10px', fontSize: '8px' }}
-                    />
-                  )
-                } else {
-                  return null
-                }
-              }
-            }}
+            scrollButtons="auto"
+            allowScrollButtonsMobile
             defaultValue={selectedKeyword?.letters}
+            dir="ltr"
           >
             {keywords?.data?.map((keyword: any) => (
               <Tab
@@ -253,7 +228,7 @@ const Navbar = () => {
               />
             ))}
           </Tabs>
-          {keywords?.hasNextPage && (
+          {keywords?.hasNextPage && locale == 'en' && (
             <IconButton
               size="small"
               sx={{}}

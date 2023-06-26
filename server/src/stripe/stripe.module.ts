@@ -6,6 +6,7 @@ import { KeywordsModule } from 'src/keywords/keywords.module';
 import { UsersModule } from 'src/users/users.module';
 import { StripeController } from './stripe.controller';
 import { ConfigModule } from '@nestjs/config';
+import { MailModule } from 'src/mail/mail.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ConfigModule } from '@nestjs/config';
     SubscriptionsModule,
     KeywordsModule,
     UsersModule,
+    MailModule,
   ],
   providers: [StripeService],
   exports: [StripeService],

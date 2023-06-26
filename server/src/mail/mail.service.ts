@@ -124,4 +124,80 @@ export class MailService {
       },
     });
   }
+
+  async newSubscription(
+    mailData: MailData<{
+      letters: string;
+      price: number;
+      renewalDate: string;
+    }>,
+  ): Promise<void> {
+    const i18n = I18nContext.current();
+    let newSubscriptionTitle: MaybeType<string>;
+    let text1: MaybeType<string>;
+    let text2: MaybeType<string>;
+    let text3: MaybeType<string>;
+
+    if (i18n) {
+      [newSubscriptionTitle, text1, text2, text3] = await Promise.all([
+        i18n.t('common.newSubscription'),
+        i18n.t('new-subscription.text1'),
+        i18n.t('new-subscription.text2'),
+        i18n.t('new-subscription.text3'),
+      ]);
+    }
+
+    await this.mailerService.sendMail({
+      to: mailData.to,
+      subject: newSubscriptionTitle,
+      template: 'new-subscription',
+      context: {
+        title: newSubscriptionTitle,
+        letters: mailData.data.letters,
+        price: mailData.data.price.toLocaleString('en-GB'),
+        renewalDate: mailData.data.renewalDate,
+        app_name: this.configService.get('app.name', { infer: true }),
+        text1,
+        text2,
+        text3,
+      },
+    });
+  }
+
+  async premium(
+    mailData: MailData<{
+      letters: string;
+      price: number;
+    }>,
+  ): Promise<void> {
+    const i18n = I18nContext.current();
+    let premiumTitle: MaybeType<string>;
+    let text1: MaybeType<string>;
+    let text2: MaybeType<string>;
+    let text3: MaybeType<string>;
+
+    if (i18n) {
+      [premiumTitle, text1, text2, text3] = await Promise.all([
+        i18n.t('common.premium'),
+        i18n.t('premium.text1'),
+        i18n.t('premium.text2'),
+        i18n.t('premium.text3'),
+      ]);
+    }
+
+    await this.mailerService.sendMail({
+      to: mailData.to,
+      subject: premiumTitle,
+      template: 'premium',
+      context: {
+        title: premiumTitle,
+        letters: mailData.data.letters,
+        price: mailData.data.price,
+        app_name: this.configService.get('app.name', { infer: true }),
+        text1,
+        text2,
+        text3,
+      },
+    });
+  }
 }

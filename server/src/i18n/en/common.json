@@ -1,5 +1,7 @@
 {
   "confirmEmail": "Confirm email",
   "resetPassword": "Reset password",
-  "twoFactorAuth":"Two factor Authentication"
+  "twoFactorAuth": "Two factor Authentication",
+  "newSubscription": "New subscription",
+  "premium": "Premium"
 }

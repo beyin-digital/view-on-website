@@ -12,6 +12,7 @@ import { User } from 'src/users/entities/user.entity';
 import { Subscription } from 'src/subscriptions/entities/subscription.entity';
 import { Order } from 'src/orders/entities/order.entity';
 import { Keyword } from 'src/keywords/entities/keyword.entity';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class StripeService {
@@ -22,6 +23,7 @@ export class StripeService {
     private subscriptionsService: SubscriptionsService,
     private keywordsService: KeywordsService,
     private usersService: UsersService,
+    private mailService: MailService,
   ) {
     this.stripe = new Stripe(this.configService.get('stripe').secretKey, {
       apiVersion: '2022-11-15',
@@ -230,6 +232,15 @@ export class StripeService {
 
       foundUser.hasKeywords = true || foundUser.hasKeywords;
       await foundUser.save();
+      if (subscription.isPremium) {
+        await this.mailService.premium({
+          to: subscription.user.email as string,
+          data: {
+            letters: subscription.letters,
+            price: order.amount / 100,
+          },
+        });
+      }
     }
   }
 
@@ -280,6 +291,14 @@ export class StripeService {
       keyword.purchaseDate = new Date((purchaseDate as number) * 1000);
       await subscription?.save();
       await keyword.save();
+      await this.mailService.newSubscription({
+        to: subscription.user.email as string,
+        data: {
+          letters: subscription.letters,
+          renewalDate: subscription.renewalDate.toLocaleDateString('en-GB'),
+          price: subscription.purchaseAmount,
+        },
+      });
     }
   }
 
@@ -310,6 +329,13 @@ export class StripeService {
           intervalCount: subscription.plan?.interval_count as number,
           interval: subscription.plan?.interval as string,
           invoiceId: subscription.latest_invoice as string,
+        });
+        break;
+      case 'customer.subscription.paused':
+        const subscriptionPaused = event.data.object as any;
+        await this.updateSubscriptionAndKeyword({
+          subscriptionId: subscriptionPaused.id,
+          status: subscriptionPaused.status,
         });
         break;
       //   case 'customer.subscription.deleted':
