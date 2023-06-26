@@ -29,13 +29,6 @@ import { useEffect } from 'react'
 
 const ChangePassword = ({ data }: any) => {
   const { t } = useTranslation('changePassword')
-  const router = useRouter()
-
-  useEffect(() => {
-    router.push(`/${router.asPath}`, {
-      query: { token: data?.token as string },
-    })
-  }, [router.pathname, data?.locale, data?.token])
 
   console.log(data?.token)
   return (
@@ -116,19 +109,6 @@ const ChangePassword = ({ data }: any) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  query,
-  locale,
-}) => {
-  return {
-    props: {
-      data: { token: query.token, locale: locale || '' },
-      ...(await serverSideTranslations(locale || '', [
-        'common',
-        'changePassword',
-      ])),
-    },
-  }
-}
+
 
 export default ChangePassword
