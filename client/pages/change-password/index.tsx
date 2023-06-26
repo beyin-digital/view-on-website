@@ -1,18 +1,31 @@
+import { Box } from '@mui/material'
+
 // translate
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 // components
+import dynamic from 'next/dynamic'
+const Layout = dynamic(() => import('@/components/Layout/Layout'), {
+  ssr: false,
+})
+const ChangePasswordDetails = dynamic(
+  () => import('@/components/ChangePassword/ChangePasswordDetails'),
+  {
+    ssr: false,
+  }
+)
+const ChangePasswordForm = dynamic(
+  () => import('@/components/ChangePassword/ChangePasswordForm'),
+  {
+    ssr: false,
+  }
+)
 
-const ChangePassword = () => {
+const ChangePasswordPage = () => {
   const { t } = useTranslation('changePassword')
-  const router = useRouter()
-  useEffect(() => {
-    router.push(`/${router.locale}/change-password/${router.query.token}`)
-  }, [router.query.token])
+
   return (
     <>
       <Head>
@@ -52,6 +65,41 @@ const ChangePassword = () => {
         <meta name="theme-color" content="#ffffff" />
         <link rel="manifest" href="/pwa/manifest.json" />
       </Head>
+
+      <Layout>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+            paddingX: '1rem',
+            transform: 'skew(16deg, 0deg)',
+          }}
+        >
+          <Box
+            sx={{
+              width: { xs: '100%', md: '80%', xl: '75%' },
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'end',
+            }}
+          >
+            <Box
+              sx={{
+                width: '728px',
+                height: { xs: '100%', sm: '600px', md: '600px', xl: '600px' },
+                padding: '1rem',
+              }}
+            >
+              <ChangePasswordDetails />
+              <ChangePasswordForm />
+            </Box>
+          </Box>
+        </Box>
+      </Layout>
     </>
   )
 }
@@ -67,4 +115,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   }
 }
 
-export default ChangePassword
+export default ChangePasswordPage
