@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 
 // translate
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 
 // components
@@ -30,7 +30,6 @@ import { useEffect } from 'react'
 const ChangePassword = ({ data }: any) => {
   const { t } = useTranslation('changePassword')
   const router = useRouter()
-
 
   console.log(data?.token)
   return (
@@ -111,9 +110,7 @@ const ChangePassword = ({ data }: any) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  locale,
-}) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale || '', [
