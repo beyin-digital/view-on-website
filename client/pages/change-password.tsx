@@ -34,7 +34,7 @@ const ChangePassword = ({ data }: any) => {
 
   useEffect(() => {
     router.push(`/${data?.locale}/change-password?token=${data?.token}`)
-  }, [router.query.token])
+  }, [data?.token])
   return (
     <>
       <Head>
