@@ -61,6 +61,16 @@ export default function HashtagListMobile() {
           alignItems: 'center',
         }}
       >
+        {keywords?.hasNextPage && router.locale == 'ar' && (
+          <IconButton
+            onClick={() => {
+              setPage(page + 1)
+              getUsersKeywords(page + 1)
+            }}
+          >
+            <Add />
+          </IconButton>
+        )}
         <Tabs
           sx={{
             height: '100%',
@@ -78,6 +88,7 @@ export default function HashtagListMobile() {
           variant="scrollable"
           scrollButtons={'auto'}
           defaultValue={selectedKeyword?.letters}
+          dir="ltr"
         >
           {keywords?.data?.map((keyword: any) => (
             <Tab
@@ -94,7 +105,7 @@ export default function HashtagListMobile() {
             />
           ))}
         </Tabs>
-        {keywords?.hasNextPage && (
+        {keywords?.hasNextPage && router.locale == 'en' && (
           <IconButton
             onClick={() => {
               setPage(page + 1)
