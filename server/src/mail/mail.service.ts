@@ -75,9 +75,11 @@ export class MailService {
       template: 'reset-password',
       context: {
         title: resetPasswordTitle,
-        url: `${this.configService.get('app.frontendDomain', {
-          infer: true,
-        })}/en/change-password?token=${mailData.data.hash}`,
+        url: encodeURIComponent(
+          `${this.configService.get('app.frontendDomain', {
+            infer: true,
+          })}/en/change-password?token=${mailData.data.hash}`,
+        ),
         actionTitle: resetPasswordTitle,
         app_name: this.configService.get('app.name', {
           infer: true,

@@ -2,9 +2,11 @@ import { Box } from '@mui/material'
 
 // translate
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
-
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 // components
 import dynamic from 'next/dynamic'
 const Layout = dynamic(() => import('@/components/Layout/Layout'), {
@@ -23,15 +25,15 @@ const ChangePasswordForm = dynamic(
   }
 )
 
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-
-const ChangePassword = ({ data }: any) => {
+const ChangePassword = () => {
   const { t } = useTranslation('changePassword')
   const router = useRouter()
-
-  console.log(data?.token)
+  useEffect(() => {
+    const resetPasswordUrl = encodeURIComponent(
+      `https://viewonwebsite.com/change-password?token=${router.query.token}`
+    )
+    router.push(resetPasswordUrl)
+  }, [])
   return (
     <>
       <Head>
