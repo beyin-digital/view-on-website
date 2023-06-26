@@ -36,6 +36,8 @@ const ChangePassword = ({ data }: any) => {
       query: { token: data?.token as string },
     })
   }, [router.pathname, data?.locale, data?.token])
+
+  console.log(data?.token)
   return (
     <>
       <Head>
