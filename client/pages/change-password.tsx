@@ -29,6 +29,14 @@ import { useEffect } from 'react'
 
 const ChangePassword = ({ data }: any) => {
   const { t } = useTranslation('changePassword')
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push(`/${router.asPath}`, {
+      pathname: `/${router.asPath}`,
+      query: { token: data?.token as string },
+    })
+  }, [router.pathname, data?.locale, data?.token])
 
   console.log(data?.token)
   return (
@@ -108,7 +116,5 @@ const ChangePassword = ({ data }: any) => {
     </>
   )
 }
-
-
 
 export default ChangePassword
