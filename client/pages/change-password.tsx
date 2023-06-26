@@ -32,9 +32,11 @@ const ChangePassword = ({ data }: any) => {
   const router = useRouter()
 
   useEffect(() => {
-    window.location.href = `/${data?.locale as string}/change-password?token=${
-      data?.token as string
-    }`
+    router.replace(
+      `/${data?.locale as string}/change-password?token=${
+        data?.token as string
+      }`
+    )
   }, [])
   return (
     <>
