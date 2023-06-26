@@ -32,7 +32,7 @@ const ChangePassword = ({ data }: any) => {
   const router = useRouter()
 
   useEffect(() => {
-    router.push(
+    window.location.replace(
       `/${data?.locale as string}/change-password?token=${
         data?.token as string
       }`
