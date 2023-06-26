@@ -75,7 +75,7 @@ export class MailService {
       template: 'reset-password',
       context: {
         title: resetPasswordTitle,
-        url: encodeURIComponent(
+        url: decodeURIComponent(
           `${this.configService.get('app.frontendDomain', {
             infer: true,
           })}/en/change-password?token=${mailData.data.hash}`,
