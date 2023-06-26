@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 
 // translate
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { useTranslation } from 'next-i18next'
 
 // components
@@ -24,7 +24,6 @@ const ChangePasswordForm = dynamic(
 )
 
 import Head from 'next/head'
-import Seo from '@/components/Seo'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
@@ -33,15 +32,18 @@ const ChangePassword = ({ data }: any) => {
   const router = useRouter()
 
   useEffect(() => {
-    router.push(`/${data?.locale}/change-password?token=${data?.token}`)
-  }, [data?.token])
+    router.push(
+      `/${data?.locale as string}/change-password?token=${
+        data?.token as string
+      }`
+    )
+  }, [router.query.token])
   return (
     <>
       <Head>
         <title>VIEW ON WEBSITE - {t('meta_title')} </title>
         <meta name="description" content={`${t('meta_desc')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
-        <link rel="canonical" href="https://www.viewonwebsite.com/example" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="msapplication-config" content="/pwa/browserconfig.xml" />
@@ -120,7 +122,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   return {
     props: {
-      data: { token: query?.token, locale: locale || '' },
+      data: { token: query.token, locale: locale || '' },
       ...(await serverSideTranslations(locale || '', [
         'common',
         'changePassword',
