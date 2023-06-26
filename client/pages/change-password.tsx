@@ -30,7 +30,7 @@ const ChangePassword = () => {
   const router = useRouter()
   useEffect(() => {
     const resetPasswordUrl = encodeURIComponent(
-      `https://viewonwebsite.com/change-password?token=${router.query.token}`
+      `/change-password?token=${router.query.token}`
     )
     router.push(resetPasswordUrl)
   }, [])
