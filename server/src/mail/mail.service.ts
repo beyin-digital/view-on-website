@@ -194,7 +194,7 @@ export class MailService {
       context: {
         title: premiumTitle,
         letters: mailData.data.letters,
-        price: mailData.data.price,
+        price: mailData.data.price.toLocaleString('en-GB'),
         app_name: this.configService.get('app.name', { infer: true }),
         text1,
         text2,
