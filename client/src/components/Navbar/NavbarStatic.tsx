@@ -19,6 +19,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 import Image from 'next/image'
 import { UserContext } from '@/contexts/userContext'
 import { icons, links } from '../Layout/GLobal'
+import FooterNav from './FooterNav'
 
 const NavbarStatic = ({
   nameOne,
@@ -406,41 +407,7 @@ const NavbarStatic = ({
           </Link>
         ))}
       </Box>
-      <Box
-        sx={{
-          marginX: '1rem',
-        }}
-      >
-        {links.map((link) => (
-          <Link
-            key={t(link.title)}
-            title={`${t(link.title)}`}
-            href={link.link}
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-            <Box
-              sx={{
-                height: '55px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Typography
-                fontSize="18px"
-                fontWeight={'400'}
-                lineHeight="27px"
-                color="#343132"
-                textTransform={'capitalize'}
-              >
-                {t(link.title)}
-              </Typography>
-            </Box>
-          </Link>
-        ))}
-      </Box>
+      <FooterNav  />
     </Box>
   )
   return (

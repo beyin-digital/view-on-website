@@ -15,7 +15,7 @@ const Header = () => {
 		<>
 			<Box
 				sx={{
-					width: { xs: "100%", md: "90%", xl: "100%" },
+					width: { xs: "100%", md: "90%", lg: "100%" },
 					// height: "200px",
 					display: "flex",
 					alignItems: "center",
@@ -25,8 +25,8 @@ const Header = () => {
 			>
 				<Box
 					sx={{
-						width: { xs: "85%", sm: "80%", md: "100%", xl: "100%" },
-						px: { xs: "1rem", sm: "1.5rem", md: "0rem", xl: ".1rem" },
+						width: { xs: "85%", sm: "80%", md: "100%", lg: "100%" },
+						px: { xs: "1rem", sm: "1.5rem", md: "0rem", lg: ".1rem" },
 					}}
 				>
 					<Typography
@@ -36,7 +36,7 @@ const Header = () => {
 								xs: "30px",
 								sm: "36px",
 								md: "50px",
-								xl: "64px",
+								lg: "60px",
 							},
 						}}
 						lineHeight="40px"
@@ -50,7 +50,7 @@ const Header = () => {
 						component={"h2"}
 						sx={{
 							margin: "1rem auto",
-							fontSize: { xs: "20px", md: "30px", xl: "40px" },
+							fontSize: { xs: "20px", md: "30px", lg: "40px" },
 							lineHeight: "92.5%",
 							fontWeight: "400",
 							height: "44px",
@@ -60,7 +60,7 @@ const Header = () => {
 						<Typography
 							component={"span"}
 							sx={{
-								fontSize: { xs: "20px", md: "30px", xl: "40px" },
+								fontSize: { xs: "20px", md: "30px", lg: "40px" },
 								borderRadius: "7px",
 								background: "linear-gradient(270deg, #0090EC 0%, #31E716 100%)",
 								height: "44px",

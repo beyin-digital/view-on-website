@@ -187,78 +187,129 @@ const FooterMobile = () => {
 									},
 									justifyContent: "space-around",
 									flexDirection: {
-										xs: "column",
+										xs: "row",
 										sm: "column",
 										md: "row",
 										xl: "row",
 									},
-									paddingX: { xs: "1rem", sm: "0", md: "0", xl: "0" },
+									paddingX: { xs: "1px", sm: "0", md: "0", xl: "0" },
 								}}
 							>
-								{links.map((item) => (
-									<Link
-										href={item.link}
-										title={`${t(item.title)}`}
-										locale={router.locale}
-										key={item.id}
-										style={{
-											textDecoration: "none",
-											color: "#343132",
-										}}
-									>
-										<Typography
-											sx={{
-												fontSize: { xs: "14px", sm: "20px" },
-												fontWeight: "400",
-												lineHeight: "25px",
-												textAlign: "center",
-												textTransform: "capitalize",
-											}}
-										>
-											{t(item.title)}
-										</Typography>
-									</Link>
-								))}
-								<>
-									<Typography
-										sx={{
-											fontSize: { xs: "14px", sm: "20px" },
-											fontWeight: "400",
-											lineHeight: "25px",
-											textAlign: "center",
-											textTransform: "capitalize",
-											cursor: "pointer",
-										}}
-										onClick={openModel}
-									>
-										{t("footer_learn")}
-									</Typography>
-									<ModalFooter
-										open={open}
-										onClick={closeModel}
-										close={handleClose}
-									/>
-								</>
-								<Link
-									href="/"
-									style={{
-										textDecoration: "none",
-										color: "#343132",
+								<Box
+									sx={{
+										display: "flex",
+										alignItems: "flex-start",
+										flexDirection: "column",
 									}}
 								>
-									<Typography
-										sx={{
-											fontSize: { xs: "14px", sm: "20px" },
-											fontWeight: "400",
-											lineHeight: "25px",
-											textAlign: "center",
-											textTransform: "capitalize",
+									{links.map((item) => (
+										<Link
+											href={item.link}
+											title={`${t(item.title)}`}
+											locale={router.locale}
+											key={item.id}
+											style={{
+												textDecoration: "none",
+												color: "#343132",
+											}}
+										>
+											<Typography
+												sx={{
+													fontSize: { xs: "14px", sm: "20px" },
+													fontWeight: "400",
+													lineHeight: "25px",
+													textAlign: "center",
+													textTransform: "capitalize",
+												}}
+											>
+												{t(item.title)}
+											</Typography>
+										</Link>
+									))}
+								</Box>
+
+								<Box>
+									<Box
+										style={{
+											textDecoration: "none",
+											color: "inherit",
 											cursor: "pointer",
 										}}
 									>
-										{t("footer_play")}
-									</Typography>
-								</Link>
+										<Box
+											sx={{
+												border: "1px solid #343132",
+												borderRadius: "34px",
+												display: "flex",
+												alignItems: "center",
+												justifyContent: "space-around",
+												width: "143px",
+												marginTop: { xs: ".5rem" },
+											}}
+											onClick={openModel}
+										>
+											<Typography
+												fontSize="20px"
+												fontWeight="400"
+												lineHeight="32px"
+												textAlign="center"
+												textTransform={"capitalize"}
+											>
+												{t("footer_learn")}
+											</Typography>
+											<Image
+												src="/icons/i.svg"
+												alt={t("footer_learn")}
+												title={`${t("footer_learn")}`}
+												width={20}
+												height={20}
+											/>
+											{/* modal */}
+										</Box>
+										<ModalFooter
+											open={open}
+											onClick={closeModel}
+											close={handleClose}
+										/>
+									</Box>
+									<Link
+										href="/"
+										style={{
+											textDecoration: "none",
+											color: "inherit",
+											cursor: "pointer",
+										}}
+									>
+										<Box
+											sx={{
+												border: "1px solid #343132",
+												borderRadius: "34px",
+												display: "flex",
+												alignItems: "center",
+												justifyContent: "space-around",
+												width: "143px",
+												marginY: { xs: ".5rem" },
+											}}
+										>
+											<Typography
+												fontSize="20px"
+												fontWeight="400"
+												lineHeight="32px"
+												textAlign="center"
+												textTransform={"capitalize"}
+											>
+												{t("footer_play")}
+											</Typography>
+											<Image
+												src="/icons/play.png"
+												alt={t("footer_learn")}
+												title={`${t("footer_learn")}`}
+												width={20}
+												height={20}
+											/>
+										</Box>
+									</Link>
+								</Box>
 							</Box>
 						</Box>
 						<Typography

@@ -18,7 +18,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
 import { UserContext } from "@/contexts/userContext";
-import { links, icons } from "../Layout/GLobal";
+import { icons } from "../Layout/GLobal";
+import FooterNav from "./FooterNav";
 const Header = () => {
 	const { t } = useTranslation("common");
 	const router = useRouter();
@@ -333,41 +334,7 @@ const Header = () => {
 					</Link>
 				))}
 			</Box>
-			<Box
-				sx={{
-					marginX: "1rem",
-				}}
-			>
-				{links.map((link) => (
-					<Link
-						key={t(link.title)}
-						title={`${t(link.title)}`}
-						href={link.link}
-						style={{
-							textDecoration: "none",
-						}}
-					>
-						<Box
-							sx={{
-								height: "55px",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-between",
-							}}
-						>
-							<Typography
-								fontSize="18px"
-								fontWeight={"400"}
-								lineHeight="27px"
-								color="#343132"
-								textTransform={"capitalize"}
-							>
-								{t(link.title)}
-							</Typography>
-						</Box>
-					</Link>
-				))}
-			</Box>
+			<FooterNav />
 		</Box>
 	);
 	return (

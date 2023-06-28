@@ -1,97 +1,61 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { Box, Typography, Button } from "@mui/material";
 import { useTranslation } from "next-i18next";
-import NextLink from "next/link";
-
-import { Box, Typography } from "@mui/material";
-import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-// components
-import { icons, links } from "../Layout/GLobal";
+import Image from "next/image";
+import { links } from "../Layout/GLobal";
 
-import dynamic from "next/dynamic";
-const ModalFooter = dynamic(() => import("./ModalFooter"), {
-	ssr: false,
-});
+import ModalFooter from "../Footer/ModalFooter";
 
-const Footer = () => {
-	// translate hook
+const FooterNav = () => {
 	const { t } = useTranslation("common");
-	const { locale } = useRouter();
 	const router = useRouter();
 
 	// modal
 	const [open, setOpen] = useState(false);
-	const handleClose = () => setOpen(false);
+	// const handleClose = () => setOpen(false);
 	function closeModel() {
 		setOpen(false);
+		// console.log("hi");
 	}
 	function openModel() {
 		setOpen(true);
+		// console.log("hi");
 	}
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	return (
 		<>
 			<Box
 				sx={{
 					width: "100%",
-					display: { xs: "none", sm: "none", md: "flex", xl: "flex" },
-					flexDirection: { xs: "column", md: "row", xl: "row" },
-					alignItems: "center",
-					justifyContent: {
-						xs: "space-between",
-						md: "space-between",
-						xl: "space-between",
-					},
-
-					marginY: "-.2rem",
-					marginBottom: ".1rem",
-					position: "relative",
-					zIndex: "9",
+					display: "flex",
+					justifyContent: "space-around",
+					flexDirection: { xs: "column", sm: "row" },
+					paddingX: "1rem",
+					alignItems: { xs: "start", sm: "center" },
 				}}
 			>
 				<Box
 					sx={{
-						width: { xs: "", md: "60%", xl: "90%" },
-						display: { xs: "flex", md: "flex", xl: "flex" },
-						alignItems: "center",
-					}}
-				>
-					{icons.map((item) => (
-						<Link
-							key={item.id}
-							title={`${item.alt}`}
-							href={item.link}
-							target="_blank"
-						>
-							<Image
-								src={item.icon}
-								alt={item.alt}
-								title={`${item.alt}`}
-								height={30}
-								width={30}
-								style={{
-									margin: "0 1rem",
-								}}
-							/>
-						</Link>
-					))}
-				</Box>
-				<Box
-					sx={{
-						width: { xs: "", sm: "100%", xl: "60%" },
+						width: { xs: "50%", sm: "50%" },
 						display: "flex",
-						alignItems: "center",
 						justifyContent: "space-around",
+						flexDirection: "column",
 					}}
 				>
-					<NextLink
-						href="/"
+					<Link
+						href="https://youtube.com"
 						style={{
 							textDecoration: "none",
 							color: "inherit",
 							cursor: "pointer",
+							marginTop: ".5rem",
+							marginBottom: ".5rem",
 						}}
 					>
 						<Box
@@ -121,7 +85,7 @@ const Footer = () => {
 								height={20}
 							/>
 						</Box>
-					</NextLink>
+					</Link>
 
 					{/*  */}
 					<Box
@@ -140,6 +104,7 @@ const Footer = () => {
 								justifyContent: "space-around",
 								width: "143px",
 							}}
+
 							onClick={openModel}
 						>
 							<Typography
@@ -160,29 +125,51 @@ const Footer = () => {
 							/>
 							{/* modal */}
 						</Box>
-						<ModalFooter open={open} onClick={closeModel} close={handleClose} />
+						<ModalFooter
+							open={open}
+							onClick={() => {
+								handleClose();
+							}}
+							// close={handleClose}
+						/>
 					</Box>
-
-					{links.map((item) => (
+				</Box>
+				{/*  */}
+				<Box
+					sx={{
+						width: { xs: "50%", sm: "50%" },
+						display: "flex",
+						justifyContent: "space-around",
+						flexDirection: "column",
+					}}
+				>
+					{links.map((link) => (
 						<Link
-							key={item.id}
-							href={item.link}
-							title={`${t(item.title)}`}
-							locale={router.locale}
+							key={t(link.title)}
+							title={`${t(link.title)}`}
+							href={link.link}
 							style={{
 								textDecoration: "none",
-								color: "inherit",
 							}}
 						>
-							<Typography
-								fontSize="20px"
-								fontWeight="400"
-								lineHeight="32px"
-								textAlign="center"
-								textTransform={"capitalize"}
+							<Box
+								sx={{
+									height: "35px",
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "space-between",
+								}}
 							>
-								{`${t(item.title)}`}
-							</Typography>
+								<Typography
+									fontSize="18px"
+									fontWeight={"400"}
+									lineHeight="27px"
+									color="#343132"
+									textTransform={"capitalize"}
+								>
+									{t(link.title)}
+								</Typography>
+							</Box>
 						</Link>
 					))}
 				</Box>
@@ -191,4 +178,4 @@ const Footer = () => {
 	);
 };
 
-export default Footer;
+export default FooterNav;

@@ -7,12 +7,12 @@ export const ImagesOneBoxAR = () => {
       <Box
         sx={{
           position: 'absolute',
-          top: { xs: '0rem', lg: '21rem', xl: '17rem' },
+          top: { xs: '0rem', lg: '18rem', xl: '17rem' },
           right: {
             xs: '0',
             sm: '',
             md: '40rem',
-            lg: '53rem',
+            lg: '56rem',
             xl: '60rem',
           },
           zIndex: '91',
@@ -90,7 +90,7 @@ export const ImagesTwoBoxAR = () => {
             sm: '',
             md: '',
             lg: '28rem',
-            xl: '25.3rem',
+            xl: '23rem',
           },
           width: { xs: '', sm: '', md: '220px', lg: '223px', xl: '400px' },
           height: {

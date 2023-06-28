@@ -9,7 +9,7 @@ const TextViewOnWeb = ({ keywordFound }: { keywordFound?: string }) => {
             xs: '60px',
             sm: '70px',
             md: '140px',
-            xl: '120px',
+            lg: '120px',
           },
           width: '50%',
           display: 'flex',
@@ -24,7 +24,7 @@ const TextViewOnWeb = ({ keywordFound }: { keywordFound?: string }) => {
               xs: '20px',
               sm: '24px',
               md: '40px',
-              xl: '50px',
+              lg: '50px',
             },
           }}
           fontWeight="600"

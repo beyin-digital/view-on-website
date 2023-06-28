@@ -20,6 +20,7 @@ import { UserContext } from "@/contexts/userContext";
 import { icons, links } from "../Layout/GLobal";
 import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
 import { toast } from "react-toastify";
+import FooterNav from "./FooterNav";
 
 const NavbarSubscribe = () => {
 	const { t } = useTranslation("common");
@@ -414,41 +415,7 @@ const NavbarSubscribe = () => {
 					</Link>
 				))}
 			</Box>
-			<Box
-				sx={{
-					marginX: "1rem",
-				}}
-			>
-				{links.map((link) => (
-					<Link
-						key={t(link.title)}
-						title={`${t(link.title)}`}
-						href={link.link}
-						style={{
-							textDecoration: "none",
-						}}
-					>
-						<Box
-							sx={{
-								height: "55px",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "space-between",
-							}}
-						>
-							<Typography
-								fontSize="18px"
-								fontWeight={"400"}
-								lineHeight="27px"
-								color="#343132"
-								textTransform={"capitalize"}
-							>
-								{t(link.title)}
-							</Typography>
-						</Box>
-					</Link>
-				))}
-			</Box>
+			<FooterNav />
 		</Box>
 	);
 	return (
@@ -646,7 +613,7 @@ const NavbarSubscribe = () => {
 										style={{
 											textDecoration: "none",
 										}}
-                    title={`${t("nav_Dashboard")}`}
+										title={`${t("nav_Dashboard")}`}
 									>
 										<Typography
 											// onClick={() => router.push(`${locale}/dashboard`)}
@@ -668,7 +635,7 @@ const NavbarSubscribe = () => {
 										style={{
 											textDecoration: "none",
 										}}
-                    title={`${t("nav_getStarted")}`}
+										title={`${t("nav_getStarted")}`}
 									>
 										<Typography
 											sx={{

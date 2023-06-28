@@ -9,18 +9,7 @@ interface Props {
 const TypographyStyle = ({ children }: Props) => {
 	return (
 		<>
-			<Typography
-				sx={{
-					fontSize: { xs: "16px", md: "20px" },
-					fontWeight: "500",
-					lineHeight: "23px",
-					marginY: "1rem",
-					// textAlign: "justify",
-					// textDecoration: "underline",
-				}}
-			>
-				{children}
-			</Typography>
+			<>{children}</>
 		</>
 	);
 };
@@ -31,7 +20,7 @@ const TypographyUnderLine = ({ children }: Props) => {
 				component={"span"}
 				sx={{
 					fontSize: { xs: "19px", md: "24px" },
-					fontWeight: "500",
+					fontWeight: "800",
 					lineHeight: "25px",
 					marginX: "1rem",
 					// textAlign: "justify",
@@ -48,22 +37,12 @@ const Content = () => {
 	const { t } = useTranslation("terms");
 
 	return (
-		<ul className="list_one">
-			<li>
+		<ul className="list_one arabic-list">
+			<li className="list_li">
 				<TypographyStyle>
+					<TypographyUnderLine>{t("a_Web")}</TypographyUnderLine>
 					<Link
-						href="/https://viewonwebsite.com"
-						style={{
-							color: "inherit",
-							marginLeft: "1rem",
-							marginRight: "1rem",
-						}}
-					>
-						The Website.
-					</Link>
-					{t("a_Web")}
-					<Link
-						href="/https://viewonwebsite.com"
+						href="https://viewonwebsite.com"
 						style={{
 							color: "inherit",
 							marginLeft: "1rem",
@@ -72,95 +51,96 @@ const Content = () => {
 					>
 						[viewonwebsite.com]
 					</Link>
-					{t("a_text_one")} <b>{t("a_service")}</b> {t("a_text_two")} (“
+					{t("a_text_one")}
+					<b>{t("a_service")}</b> {t("a_text_two")} (“
 					<b>{t("a_premium_service")}</b>”) ({t("a_together")}
-					<b>{t("a_service")}</b>).
+					<b>{t("a_service")}</b>)
 				</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
 					<TypographyUnderLine>{t("b_title")} </TypographyUnderLine>
 					{t("b_text")} (“{t("b_uae")}”).{t("b_text_two")}
 				</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("c_title")}</TypographyUnderLine>
+					<TypographyUnderLine>{t("c_title")} </TypographyUnderLine>
 					{t("c_text_one")}(“{t("c_terms")}”) {t("c_text_two")}
 				</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
 					<TypographyUnderLine>{t("d_title")} </TypographyUnderLine>
 					{t("d_text")}
 				</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("e_title")}</TypographyUnderLine>
+					<TypographyUnderLine>{t("e_title")} </TypographyUnderLine>
 					{t("e_text")}
 				</TypographyStyle>
-				<ul className="list_two">
-					<li>
-						<TypographyStyle>{t("e_one")}</TypographyStyle>
+				<ol className="list_two">
+					<li className="">
+						<Typography>{t("e_one")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("e_two")}</TypographyStyle>
-					</li>
-
-					<li>
-						<TypographyStyle>{t("e_three")}</TypographyStyle>
+						<Typography>{t("e_two")}</Typography>
 					</li>
 
 					<li>
-						<TypographyStyle>{t("e_four")}</TypographyStyle>
+						<Typography>{t("e_three")}</Typography>
 					</li>
 
 					<li>
-						<TypographyStyle>{t("e_five")}</TypographyStyle>
+						<Typography>{t("e_four")}</Typography>
+					</li>
+
+					<li>
+						<Typography>{t("e_five")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("e_six")}</TypographyStyle>
+						<Typography>{t("e_six")}</Typography>
 					</li>
-				</ul>
+				</ol>
 			</li>
-			<TypographyStyle>{t("e_text_two")}</TypographyStyle>
-			<TypographyStyle>{t("e_text_three")}</TypographyStyle>
-			<li>
+			<br />- <TypographyStyle>{t("e_text_two")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("e_text_three")}</TypographyStyle>
+			<li className="list_li">
 				<TypographyStyle>
 					<TypographyUnderLine>{t("f_title")} </TypographyUnderLine>
 					{t("f_text")}
 				</TypographyStyle>
-				<ul className="list_two">
+				<ol className="list_two">
 					<li>
-						<TypographyStyle>{t("f_one")}</TypographyStyle>
+						<Typography>{t("f_one")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("f_two")}</TypographyStyle>
+						<Typography>{t("f_two")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("f_three")}</TypographyStyle>
+						<Typography>{t("f_three")}</Typography>
 					</li>
-				</ul>
+				</ol>
 			</li>
-			<TypographyStyle>{t("f_text_two")}</TypographyStyle>
-			<TypographyStyle>{t("f_text_three")}</TypographyStyle>
-			<TypographyStyle>{t("f_text_four")}</TypographyStyle>
-			<TypographyStyle>{t("f_text_five")}</TypographyStyle>
-			<li>
+			<br />- <TypographyStyle>{t("f_text_two")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("f_text_three")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("f_text_four")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("f_text_five")}</TypographyStyle>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("g_title")}</TypographyUnderLine>
+					<TypographyUnderLine>{t("g_title")} </TypographyUnderLine>
 					{t("g_text")}
 				</TypographyStyle>
 			</li>
-			<TypographyStyle>{t("g_text_two")}</TypographyStyle>
-			<TypographyStyle>{t("g_text_three")}</TypographyStyle>
-			<li>
+			<br />- <TypographyStyle>{t("g_text_two")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("g_text_three")}</TypographyStyle>
+			<li className="list_li">
 				<TypographyStyle>
 					<TypographyUnderLine> {t("h_title")} </TypographyUnderLine>
 					{t("h_text")}
 				</TypographyStyle>
-				<ul className="list_two">
+				<ol className="list_two">
 					<li>
 						<Typography>{t("h_one")}</Typography>
 					</li>
@@ -171,210 +151,209 @@ const Content = () => {
 					<li>
 						<Typography>{t("h_three")}</Typography>
 					</li>
-				</ul>
+				</ol>
 			</li>
-			<TypographyStyle>{t("h_text_two")}</TypographyStyle>
-			<TypographyStyle>{t("h_text_three")}</TypographyStyle>
-			<li>
+			<br />- <TypographyStyle>{t("h_text_two")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("h_text_three")}</TypographyStyle>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("i_title")}</TypographyUnderLine>
+					<TypographyUnderLine>{t("i_title")} </TypographyUnderLine>
 					{t("i_text")}
 				</TypographyStyle>
 			</li>
-			<TypographyStyle>{t("i_text_one")}</TypographyStyle>
-			<TypographyStyle>{t("i_text_two")}</TypographyStyle>
-			<TypographyStyle>{t("i_text_three")}</TypographyStyle>
-			<li>
+			<br />- <TypographyStyle>{t("i_text_one")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("i_text_two")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("i_text_three")}</TypographyStyle>
+			<li className="list_li">
 				<TypographyStyle>
 					<TypographyUnderLine>{t("j_title")} </TypographyUnderLine>
 					{t("j_text_one")}
 				</TypographyStyle>
 			</li>
-			<TypographyStyle>{t("j_text_two")}</TypographyStyle>
-			<li>
+			<br />- <TypographyStyle>{t("j_text_two")}</TypographyStyle>
+			<li className="list_li">
 				<TypographyStyle>
 					<TypographyUnderLine>{t("k_title")} </TypographyUnderLine>
 					{t("k_text_one")}
 				</TypographyStyle>
 			</li>
-			<TypographyStyle>{t("k_text_two")}</TypographyStyle>
-			<TypographyStyle>{t("k_text_three")}</TypographyStyle>
-			<TypographyStyle>{t("k_text_four")}</TypographyStyle>
-			<li>
+			<br />- <TypographyStyle>{t("k_text_two")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("k_text_three")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("k_text_four")}</TypographyStyle>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("l_title")}</TypographyUnderLine>
+					<TypographyUnderLine>{t("l_title")} </TypographyUnderLine>
 					{t("l_text_one")}
 				</TypographyStyle>
 			</li>
-			<TypographyStyle>{t("l_text_two")}</TypographyStyle>
-			<TypographyStyle>{t("l_text_three")}</TypographyStyle>
-			<li>
+			<br />- <TypographyStyle>{t("l_text_two")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("l_text_three")}</TypographyStyle>
+			<li className="list_li">
 				<TypographyStyle>
 					<TypographyUnderLine>{t("m_title")} </TypographyUnderLine>
 					{t("m_text_one")}
 				</TypographyStyle>
 			</li>
-			<TypographyStyle>{t("m_text_two")}</TypographyStyle>
-			<TypographyStyle>{t("m_text_three")}</TypographyStyle>
-			<TypographyStyle>{t("m_text_four")}</TypographyStyle>
-			<li>
+			<br />- <TypographyStyle>{t("m_text_two")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("m_text_three")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("m_text_four")}</TypographyStyle>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("n_title")}</TypographyUnderLine>
+					<TypographyUnderLine>{t("n_title")} </TypographyUnderLine>
 					{t("n_text_one")}
 				</TypographyStyle>
-				<TypographyStyle>{t("n_text_two")}</TypographyStyle>
-				<TypographyStyle>{t("n_text_three")}</TypographyStyle>
-				<ul className="list_two">
+				<br />- <TypographyStyle>{t("n_text_two")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("n_text_three")}</TypographyStyle>
+				<ol className="list_two">
 					<li>
-						<TypographyStyle>{t("n_one")}</TypographyStyle>
+						<Typography>{t("n_one")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("n_two")}</TypographyStyle>
+						<Typography>{t("n_two")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("n_three")}</TypographyStyle>
+						<Typography>{t("n_three")}</Typography>
 					</li>
-				</ul>
+				</ol>
 				<TypographyStyle>{t("n_text_four")}</TypographyStyle>
 			</li>
-
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
 					<TypographyUnderLine>{t("o_title")} </TypographyUnderLine>
 					{t("o_text_one")}
 				</TypographyStyle>
-				<TypographyStyle>{t("o_text_two")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("o_text_two")}</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("p_title")}</TypographyUnderLine>
+					<TypographyUnderLine>{t("p_title")} </TypographyUnderLine>
 					{t("p_text_one")}
 				</TypographyStyle>
-				<TypographyStyle>{t("p_text_two")}</TypographyStyle>
-				<TypographyStyle>{t("p_text_three")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("p_text_two")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("p_text_three")}</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("q_title")}</TypographyUnderLine>
+					<TypographyUnderLine>{t("q_title")} </TypographyUnderLine>
 					{t("q_text")}
 				</TypographyStyle>
-				<ul className="list_two">
+				<ol className="list_two">
 					<li>
-						<TypographyStyle>{t("q_one")}</TypographyStyle>
+						<Typography>{t("q_one")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("q_two")}</TypographyStyle>
+						<Typography>{t("q_two")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("q_three")}</TypographyStyle>
+						<Typography>{t("q_three")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("q_four")}</TypographyStyle>
+						<Typography>{t("q_four")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("q_five")}</TypographyStyle>
+						<Typography>{t("q_five")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("q_six")}</TypographyStyle>
+						<Typography>{t("q_six")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("q_seven")}</TypographyStyle>
+						<Typography>{t("q_seven")}</Typography>
 					</li>
-				</ul>
+				</ol>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("r_title")}. </TypographyUnderLine>
+					<TypographyUnderLine>{t("r_title")} </TypographyUnderLine>
 					{t("r_text")}
 				</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("x_title")}</TypographyUnderLine>
+					<TypographyUnderLine>{t("x_title")} </TypographyUnderLine>
 					{t("x_text_one")}
 				</TypographyStyle>
-				<TypographyStyle>{t("x_text_two")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("x_text_two")}</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("y_title")}</TypographyUnderLine>
+					<TypographyUnderLine>{t("y_title")} </TypographyUnderLine>
 					{t("y_text_one")}
 				</TypographyStyle>
-				<TypographyStyle>{t("y_text_two")}</TypographyStyle>
-				<TypographyStyle>{t("y_text_three")}</TypographyStyle>
-				<ul className="list_two">
+				<br />- <TypographyStyle>{t("y_text_two")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("y_text_three")}</TypographyStyle>
+				<ol className="list_two">
 					<li>
-						<TypographyStyle>{t("y_one")}</TypographyStyle>
+						<Typography>{t("y_one")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("y_two")}</TypographyStyle>
+						<Typography>{t("y_two")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("y_three")}</TypographyStyle>
+						<Typography>{t("y_three")}</Typography>
 					</li>
-				</ul>
+				</ol>
 				<TypographyStyle>{t("y_text_four")}</TypographyStyle>
-				<ul className="list_two">
+				<ol className="list_two">
 					<li>
-						<TypographyStyle>{t("y_tow_one")}</TypographyStyle>
+						<Typography>{t("y_tow_one")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("y_tow_two")}</TypographyStyle>
+						<Typography>{t("y_tow_two")}</Typography>
 					</li>
 					<li>
-						<TypographyStyle>{t("y_tow_three")}</TypographyStyle>
+						<Typography>{t("y_tow_three")}</Typography>
 					</li>
-				</ul>
-				<TypographyStyle>{t("y_text_five")}</TypographyStyle>
-				<TypographyStyle>{t("y_text_six")}</TypographyStyle>
-
-				<TypographyStyle>{t("y_text_seven")}</TypographyStyle>
-				<TypographyStyle>{t("y_text_eight")}</TypographyStyle>
+				</ol>
+				- <TypographyStyle>{t("y_text_five")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("y_text_six")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("y_text_seven")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("y_text_eight")}</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
 					<TypographyUnderLine>{t("z_title")} </TypographyUnderLine>
 					{t("z_text")}
 				</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("s_title")}. </TypographyUnderLine>
+					<TypographyUnderLine>{t("s_title")} </TypographyUnderLine>
 					{t("s_text_one")}
 				</TypographyStyle>
-				<TypographyStyle>{t("s_text_two")}</TypographyStyle>
-				<TypographyStyle>{t("s_text_three")}</TypographyStyle>
-				<TypographyStyle>{t("s_text_four")}</TypographyStyle>
-				<TypographyStyle>{t("s_text_five")}</TypographyStyle>
+				- <TypographyStyle>{t("s_text_two")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("s_text_three")}</TypographyStyle>
+				<br />- <TypographyStyle>{t("s_text_four")}</TypographyStyle>
+				<br />- <TypographyStyle>
+					{t("s_text_five")}
+				</TypographyStyle> <br /> -
 				<TypographyStyle>{t("s_text_six")}</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("t_title")}. </TypographyUnderLine>
+					<TypographyUnderLine>{t("t_title")} </TypographyUnderLine>
 					{t("t_text")}
 				</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("u_title")}. </TypographyUnderLine>
+					<TypographyUnderLine>{t("u_title")} </TypographyUnderLine>
 					{t("u_text")}
 				</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
-					<TypographyUnderLine>{t("v_title")}</TypographyUnderLine>
+					<TypographyUnderLine> {t("v_title")} </TypographyUnderLine>
 					{t("v_text")}
 				</TypographyStyle>
 			</li>
-			<li>
+			<li className="list_li">
 				<TypographyStyle>
 					<TypographyUnderLine>{t("w_title")} </TypographyUnderLine>
 					{t("w_text_one")}
 				</TypographyStyle>
 			</li>
-
-			<TypographyStyle>{t("w_text_two")}</TypographyStyle>
-			<TypographyStyle>{t("w_text_three")}</TypographyStyle>
+			- <TypographyStyle>{t("w_text_two")}</TypographyStyle>
+			<br />- <TypographyStyle>{t("w_text_three")}</TypographyStyle>
 		</ul>
 	);
 };
