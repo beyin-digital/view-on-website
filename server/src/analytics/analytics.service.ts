@@ -8,6 +8,8 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import { ConfigService } from '@nestjs/config';
 import { Socket } from 'socket.io';
+import { DateTime } from 'luxon';
+
 // import { WsException } from '@nestjs/websockets';
 
 @Injectable()
@@ -47,6 +49,7 @@ export class AnalyticsService {
       return this.keywordViewCountRepository.save(
         this.keywordViewCountRepository.create({
           keyword: foundKeyword as Keyword,
+          createdAt: DateTime.local().setZone(foundKeyword.timezone).toJSDate(),
         }),
       );
     }
@@ -108,6 +111,7 @@ export class AnalyticsService {
         }),
       };
     }
+
     return {
       keywordId: keyword?.id,
       totalVisits: keywordCount.length,
@@ -120,22 +124,29 @@ export class AnalyticsService {
           countDate.getFullYear() === today.getFullYear()
         );
       }).length,
-      totalDailyVisitsByHoursOfTheDay:
-        // calculate the total visits by hour of the day and make sure the timezone offset thats passed as an argument is taken into account when returning the time of the day
-        [...Array(24).keys()].map((hour) => {
+      totalDailyVisitsByHoursOfTheDay: (() => {
+        const hoursArray = Array.from({ length: 24 }, (_, hour) => hour);
+        const localOffset = DateTime.local({
+          zone: keyword?.timezone,
+        }).offset;
+        return hoursArray.map((hour) => {
+          const visitCounts = keywordCount.filter((count) => {
+            const countDate = DateTime.fromISO(
+              count.createdAt.toISOString(),
+            ).setZone(count.keyword.timezone);
+
+            const countOffset = countDate.offset;
+            const countHour =
+              (countDate.hour + countOffset - localOffset + 24) % 24;
+            return countHour === hour;
+          }).length;
+
           return {
-            x: new Date(0, 0, 0, hour).toLocaleString('en-GB', {
-              hour: 'numeric',
-              hour12: true,
-              timeZone: timezone,
-              timeZoneName: undefined,
-            }),
-            y: keywordCount.filter((count) => {
-              const countDate = new Date(count.createdAt);
-              return countDate.getHours() === hour;
-            }).length,
+            x: hour + ':00',
+            y: visitCounts,
           };
-        }),
+        });
+      })(),
 
       totalVisitsByMonthsOfTheYear: [...Array(12).keys()].map((month) => {
         return {
@@ -179,3 +190,14 @@ export class AnalyticsService {
     };
   }
 }
+
+/*
+  if (keywordCount.length === 0) {
+    return empty values
+  }
+
+  else{
+    We need time of record creation
+    We need user timezone
+  }
+*/

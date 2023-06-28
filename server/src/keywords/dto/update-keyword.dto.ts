@@ -27,4 +27,8 @@ export class UpdateKeywordDto extends PartialType(CreateKeywordDto) {
   @IsString()
   @IsOptional()
   state?: string;
+
+  @IsString()
+  @IsOptional()
+  timezone?: string;
 }

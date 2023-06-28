@@ -35,6 +35,9 @@ export class Keyword extends EntityHelper {
   country: string;
 
   @Column({ nullable: true })
+  timezone: string;
+
+  @Column({ nullable: true })
   organisation: string;
 
   @BeforeInsert()
