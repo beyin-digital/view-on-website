@@ -21,6 +21,7 @@ import Head from 'next/head'
 
 import dynamic from 'next/dynamic'
 import withAuth from '@/hooks/withAuth'
+import { toast } from 'react-toastify'
 
 const RootLayout = dynamic(() => import('@/components/Dashboard/Layout'), {
   ssr: false,
@@ -91,10 +92,15 @@ const DashboardSecurityPage = () => {
   }
 
   const handleChangePassword = () => {
+    if (values.newPassword !== values.confirmPassword) {
+      toast.error("Passwords don't match")
+      return
+    }
     updateUser({
       oldPassword: values.currentPassword,
       password: values.newPassword,
     })
+    return
   }
 
   useEffect(() => {

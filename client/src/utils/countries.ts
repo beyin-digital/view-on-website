@@ -1,6 +1,7 @@
 export const countries = [
   {
     country: 'Afghanistan',
+    coordinates: [33.93911, 67.709953],
     states: [
       'Badakhshan',
       'Badghis',
@@ -40,6 +41,7 @@ export const countries = [
   },
   {
     country: 'Albania',
+    coordinates: [41.153332, 20.168331],
     states: [
       'Berat',
       'Dibres',
@@ -57,6 +59,7 @@ export const countries = [
   },
   {
     country: 'Algeria',
+    coordinates: [28.033886, 1.659626],
     states: [
       'Adrar',
       'Ain Defla',
@@ -110,6 +113,7 @@ export const countries = [
   },
   {
     country: 'Andorra',
+    coordinates: [42.546245, 1.601554],
     states: [
       'Andorra la Vella',
       'Canillo',
@@ -122,6 +126,7 @@ export const countries = [
   },
   {
     country: 'Angola',
+    coordinates: [-11.202692, 17.873887],
     states: [
       'Bengo',
       'Benguela',
@@ -146,6 +151,7 @@ export const countries = [
 
   {
     country: 'Antigua and Barbuda',
+    coordinates: [17.060816, -61.796428],
     states: [
       'Barbuda',
       'Redonda',
@@ -159,6 +165,7 @@ export const countries = [
   },
   {
     country: 'Argentina',
+    coordinates: [-38.416097, -63.616672],
     states: [
       'Buenos Aires',
       'Buenos Aires Capital',
@@ -188,6 +195,7 @@ export const countries = [
   },
   {
     country: 'Armenia',
+    coordinates: [40.0691, 45.0382],
     states: [
       'Aragatsotn',
       'Ararat',
@@ -204,6 +212,7 @@ export const countries = [
   },
   {
     country: 'Australia',
+    coordinates: [25.2744, 133.7751],
     states: [
       'Queensland',
       'New South Wales',
@@ -215,6 +224,7 @@ export const countries = [
   },
   {
     country: 'Austria',
+    coordinates: [47.5162, 14.5501],
     states: [
       'Burgenland',
       'Kaernten',
@@ -229,6 +239,7 @@ export const countries = [
   },
   {
     country: 'Azerbaijan',
+    coordinates: [],
     states: [
       'Abseron Rayonu',
       'Agcabadi Rayonu',
@@ -305,6 +316,7 @@ export const countries = [
   },
   {
     country: 'Bahamas',
+    coordinates: [25.0343, -77.3963],
     states: [
       'Acklins and Crooked Islands',
       'Bimini',
@@ -331,6 +343,7 @@ export const countries = [
   },
   {
     country: 'Bahrain',
+    coordinates: [26.0667, 50.5577],
     states: [
       'Al Hadd',
       'Al Manamah',
@@ -348,10 +361,12 @@ export const countries = [
   },
   {
     country: 'Bangladesh',
+    coordinates: [23.685, 90.3563],
     states: ['Barisal', 'Chittagong', 'Dhaka', 'Khulna', 'Rajshahi', 'Sylhet'],
   },
   {
     country: 'Barbados',
+    coordinates: [13.1939, -59.5432],
     states: [
       'Christ Church',
       'Saint Andrew',
@@ -368,6 +383,7 @@ export const countries = [
   },
   {
     country: 'Belarus',
+    coordinates: [53.7098, 27.9534],
     states: [
       'Brest',
       'Homyel',
@@ -380,6 +396,7 @@ export const countries = [
   },
   {
     country: 'Belgium',
+    coordinates: [50.5039, 4.4699],
     states: [
       'Antwerpen',
       'Brabant Wallon',
@@ -398,6 +415,7 @@ export const countries = [
   },
   {
     country: 'Belize',
+    coordinates: [17.1899, -88.4976],
     states: [
       'Belize',
       'Cayo',
@@ -409,6 +427,7 @@ export const countries = [
   },
   {
     country: 'Benin',
+    coordinates: [9.3077, 2.3158],
     states: [
       'Alibori',
       'Atakora',
@@ -426,6 +445,7 @@ export const countries = [
   },
   {
     country: 'Bermuda',
+    coordinates: [32.3078, -64.7505],
     states: [
       'Devonshire',
       'Hamilton',
@@ -442,6 +462,7 @@ export const countries = [
   },
   {
     country: 'Bhutan',
+    coordinates: [27.514162, 90.433601],
     states: [
       'Bumthang',
       'Chukha',
@@ -467,6 +488,7 @@ export const countries = [
   },
   {
     country: 'Bolivia',
+    coordinates: [-16.290154, -63.588653],
     states: [
       'Chuquisaca',
       'Cochabamba',
@@ -481,6 +503,7 @@ export const countries = [
   },
   {
     country: 'Bosnia and Herzegovina',
+    coordinates: [43.915886, 17.679076],
     states: [
       'Una-Sana [Federation]',
       'Posavina [Federation]',
@@ -503,6 +526,7 @@ export const countries = [
   },
   {
     country: 'Botswana',
+    coordinates: [-22.328474, 24.684866],
     states: [
       'Central',
       'Ghanzi',
@@ -517,6 +541,7 @@ export const countries = [
   },
   {
     country: 'Brazil',
+    coordinates: [-14.235004, -51.92528],
     states: [
       'Acre',
       'Alagoas',
@@ -549,10 +574,12 @@ export const countries = [
   },
   {
     country: 'Brunei',
+    coordinates: [4.535277, 114.727669],
     states: ['Belait', 'Brunei and Muara', 'Temburong', 'Tutong'],
   },
   {
     country: 'Bulgaria',
+    coordinates: [42.733883, 25.48583],
     states: [
       'Blagoevgrad',
       'Burgas',
@@ -586,6 +613,7 @@ export const countries = [
   },
   {
     country: 'Burkina Faso',
+    coordinates: [12.238333, -1.561593],
     states: [
       'Bale',
       'Bam',
@@ -636,6 +664,7 @@ export const countries = [
   },
   {
     country: 'Burma',
+    coordinates: [21.916221, 95.955974],
     states: [
       'Ayeyarwady',
       'Bago',
@@ -655,6 +684,7 @@ export const countries = [
   },
   {
     country: 'Burundi',
+    coordinates: [-3.373056, 29.918886],
     states: [
       'Bubanza',
       'Bujumbura Mairie',
@@ -677,6 +707,7 @@ export const countries = [
   },
   {
     country: 'Cambodia',
+    coordinates: [12.565679, 104.990963],
     states: [
       'Banteay Mean Chey',
       'Batdambang',
@@ -706,6 +737,7 @@ export const countries = [
   },
   {
     country: 'Cameroon',
+    coordinates: [7.369722, 12.354722],
     states: [
       'Adamaoua',
       'Centre',
@@ -721,6 +753,7 @@ export const countries = [
   },
   {
     country: 'Canada',
+    coordinates: [56.130366, -106.346771],
     states: [
       'Alberta',
       'British Columbia',
@@ -739,6 +772,7 @@ export const countries = [
   },
   {
     country: 'Cape Verde',
+    coordinates: [16.002082, -24.013197],
     states: [
       'Boa Vista',
       'Brava',
@@ -758,6 +792,7 @@ export const countries = [
   },
   {
     country: 'Central African Republic',
+    coordinates: [6.611111, 20.939444],
     states: [
       'Bamingui-Bangoran',
       'Bangui',
@@ -780,6 +815,7 @@ export const countries = [
   },
   {
     country: 'Chad',
+    coordinates: [15.454166, 18.732207],
     states: [
       'Batha',
       'Biltine',
@@ -799,6 +835,7 @@ export const countries = [
   },
   {
     country: 'Chile',
+    coordinates: [-35.675147, -71.542969],
     states: [
       'Aysen',
       'Antofagasta',
@@ -817,6 +854,7 @@ export const countries = [
   },
   {
     country: 'China',
+    coordinates: [35.86166, 104.195397],
     states: [
       'Anhui',
       'Fujian',
@@ -853,6 +891,7 @@ export const countries = [
   },
   {
     country: 'Colombia',
+    coordinates: [4.570868, -74.297333],
     states: [
       'Amazonas',
       'Antioquia',
@@ -891,10 +930,12 @@ export const countries = [
   },
   {
     country: 'Comoros',
+    coordinates: [-11.87, 43.87],
     states: ['Grande Comore (Njazidja)', 'Anjouan (Nzwani)', 'Moheli (Mwali)'],
   },
   {
     country: 'Congo, Democratic Republic',
+    coordinates: [-4.04, 21.76],
     states: [
       'Bandundu',
       'Bas-Congo',
@@ -911,6 +952,7 @@ export const countries = [
   },
   {
     country: 'Congo, Republic of the',
+    coordinates: [-0.23, 15.83],
     states: [
       'Bouenza',
       'Brazzaville',
@@ -927,6 +969,7 @@ export const countries = [
   },
   {
     country: 'Costa Rica',
+    coordinates: [9.93, -84.08],
     states: [
       'Alajuela',
       'Cartago',
@@ -939,6 +982,7 @@ export const countries = [
   },
   {
     country: "Cote d'Ivoire",
+    coordinates: [7.54, -5.55],
     states: [
       'Abidjan',
       'Bas-Sassandra',
@@ -958,6 +1002,7 @@ export const countries = [
   },
   {
     country: 'Croatia',
+    coordinates: [45.1, 15.2],
     states: [
       'Bjelovarsko-Bilogorska',
       'Brodsko-Posavska',
@@ -984,6 +1029,7 @@ export const countries = [
   },
   {
     country: 'Cuba',
+    coordinates: [21.521757, -77.781167],
     states: [
       'Camaguey',
       'Ciego de Avila',
@@ -1004,6 +1050,7 @@ export const countries = [
   },
   {
     country: 'Cyprus',
+    coordinates: [35.126413, 33.429859],
     states: [
       'Famagusta',
       'Kyrenia',
@@ -1015,6 +1062,7 @@ export const countries = [
   },
   {
     country: 'Czech Republic',
+    coordinates: [49.817492, 15.472962],
     states: [
       'Jihocesky Kraj',
       'Jihomoravsky Kraj',
@@ -1034,6 +1082,7 @@ export const countries = [
   },
   {
     country: 'Denmark',
+    coordinates: [56.26392, 9.501785],
     states: [
       'Arhus',
       'Bornholm',
@@ -1055,10 +1104,12 @@ export const countries = [
   },
   {
     country: 'Djibouti',
+    coordinates: [11.825138, 42.590275],
     states: ['Ali Sabih', 'Dikhil', 'Djibouti', 'Obock', 'Tadjoura'],
   },
   {
     country: 'Dominica',
+    coordinates: [15.414999, -61.370976],
     states: [
       'Saint Andrew',
       'Saint David',
@@ -1074,6 +1125,7 @@ export const countries = [
   },
   {
     country: 'Dominican Republic',
+    coordinates: [18.735693, -70.162651],
     states: [
       'Azua',
       'Baoruco',
@@ -1111,6 +1163,7 @@ export const countries = [
   },
   {
     country: 'East Timor',
+    coordinates: [-8.874217, 125.727539],
     states: [
       'Aileu',
       'Ainaro',
@@ -1129,6 +1182,7 @@ export const countries = [
   },
   {
     country: 'Ecuador',
+    coordinates: [-1.8312, -78.1834],
     states: [
       'Azuay',
       'Bolivar',
@@ -1156,6 +1210,7 @@ export const countries = [
   },
   {
     country: 'Egypt',
+    coordinates: [26.8206, 30.8025],
     states: [
       'Ad Daqahliyah',
       'Al Bahr al Ahmar',
@@ -1187,6 +1242,7 @@ export const countries = [
   },
   {
     country: 'El Salvador',
+    coordinates: [13.7942, -88.8965],
     states: [
       'Ahuachapan',
       'Cabanas',
@@ -1206,6 +1262,7 @@ export const countries = [
   },
   {
     country: 'Equatorial Guinea',
+    coordinates: [1.6508, 10.2679],
     states: [
       'Annobon',
       'Bioko Norte',
@@ -1218,6 +1275,7 @@ export const countries = [
   },
   {
     country: 'Eritrea',
+    coordinates: [15.1794, 39.7823],
     states: [
       'Anseba',
       'Debub',
@@ -1229,6 +1287,7 @@ export const countries = [
   },
   {
     country: 'Estonia',
+    coordinates: [58.5953, 25.0136],
     states: [
       'Harjumaa (Tallinn)',
       'Hiiumaa (Kardla)',
@@ -1249,6 +1308,7 @@ export const countries = [
   },
   {
     country: 'Ethiopia',
+    coordinates: [9.145, 40.4897],
     states: [
       'Addis Ababa',
       'Afar',
@@ -1265,6 +1325,7 @@ export const countries = [
   },
   {
     country: 'Fiji',
+    coordinates: [-17.7134, 178.065],
     states: [
       'Central (Suva)',
       'Eastern (Levuka)',
@@ -1275,6 +1336,7 @@ export const countries = [
   },
   {
     country: 'Finland',
+    coordinates: [61.9241, 25.7482],
     states: [
       'Aland',
       'Etela-Suomen Laani',
@@ -1286,6 +1348,7 @@ export const countries = [
   },
   {
     country: 'France',
+    coordinates: [46.2276, 2.2137],
     states: [
       'Alsace',
       'Aquitaine',
@@ -1313,6 +1376,7 @@ export const countries = [
   },
   {
     country: 'Gabon',
+    coordinates: [-0.8037, 11.6094],
     states: [
       'Estuaire',
       'Haut-Ogooue',
@@ -1327,6 +1391,7 @@ export const countries = [
   },
   {
     country: 'Gambia',
+    coordinates: [13.4432, 15.3101],
     states: [
       'Banjul',
       'Central River',
@@ -1338,6 +1403,7 @@ export const countries = [
   },
   {
     country: 'Georgia',
+    coordinates: [42.3154, 43.3569],
     states: [
       'Abkhazia',
       'Adjara',
@@ -1356,6 +1422,7 @@ export const countries = [
   ,
   {
     country: 'Germany',
+    coordinates: [51.1657, 10.4515],
     states: [
       'Baden-Wuerttemberg',
       'Bayern',
@@ -1377,6 +1444,7 @@ export const countries = [
   },
   {
     country: 'Ghana',
+    coordinates: [7.9465, -1.0232],
     states: [
       'Ashanti',
       'Brong-Ahafo',
@@ -1392,6 +1460,7 @@ export const countries = [
   },
   {
     country: 'Greece',
+    coordinates: [39.0742, 21.8243],
     states: [
       'Agion Oros',
       'Achaia',
@@ -1449,6 +1518,7 @@ export const countries = [
   },
   {
     country: 'Greenland',
+    coordinates: [71.706936, -42.604303],
     states: [
       'Avannaa (Nordgronland)',
       'Tunu (Ostgronland)',
@@ -1457,6 +1527,7 @@ export const countries = [
   },
   {
     country: 'Grenada',
+    coordinates: [12.262776, -61.604171],
     states: [
       'Carriacou and Petit Martinique',
       'Saint Andrew',
@@ -1469,6 +1540,7 @@ export const countries = [
   },
   {
     country: 'Guatemala',
+    coordinates: [15.783471, -90.230759],
     states: [
       'Alta Verapaz',
       'Baja Verapaz',
@@ -1496,6 +1568,7 @@ export const countries = [
   },
   {
     country: 'Guinea',
+    coordinates: [9.945587, -9.696645],
     states: [
       'Beyla',
       'Boffa',
@@ -1535,6 +1608,7 @@ export const countries = [
   },
   {
     country: 'Guinea-Bissau',
+    coordinates: [11.803749, -15.180413],
     states: [
       'Bafata',
       'Biombo',
@@ -1549,6 +1623,7 @@ export const countries = [
   },
   {
     country: 'Guyana',
+    coordinates: [4.860416, -58.93018],
     states: [
       'Barima-Waini',
       'Cuyuni-Mazaruni',
@@ -1564,6 +1639,7 @@ export const countries = [
   },
   {
     country: 'Haiti',
+    coordinates: [18.9712, -72.2852],
     states: [
       'Artibonite',
       'Centre',
@@ -1578,6 +1654,7 @@ export const countries = [
   },
   {
     country: 'Honduras',
+    coordinates: [15.2, -86.2419],
     states: [
       'Atlantida',
       'Choluteca',
@@ -1601,10 +1678,12 @@ export const countries = [
   },
   {
     country: 'Hong Kong',
+    coordinates: [22.3964, 114.1095],
     states: [],
   },
   {
     country: 'Hungary',
+    coordinates: [47.1625, 19.5033],
     states: [
       'Bacs-Kiskun',
       'Baranya',
@@ -1649,6 +1728,7 @@ export const countries = [
   },
   {
     country: 'Iceland',
+    coordinates: [64.9631, -19.0208],
     states: [
       'Austurland',
       'Hofudhborgarsvaedhi',
@@ -1662,6 +1742,7 @@ export const countries = [
   },
   {
     country: 'India',
+    coordinates: [20.5937, 78.9629],
     states: [
       'Andaman and Nicobar Islands',
       'Andhra Pradesh',
@@ -1702,6 +1783,7 @@ export const countries = [
   },
   {
     country: 'Indonesia',
+    coordinates: [113.9213, -0.7893],
     states: [
       'Aceh',
       'Bali',
@@ -1740,6 +1822,7 @@ export const countries = [
   },
   {
     country: 'Iran',
+    coordinates: [32.427908, 53.688046],
     states: [
       'Ardabil',
       'Azarbayjan-e Gharbi',
@@ -1775,6 +1858,7 @@ export const countries = [
   },
   {
     country: 'Iraq',
+    coordinates: [33.2232, 43.6793],
     states: [
       'Al Anbar',
       'Al Basrah',
@@ -1798,6 +1882,7 @@ export const countries = [
   },
   {
     country: 'Ireland',
+    coordinates: [53.1424, -7.6921],
     states: [
       'Carlow',
       'Cavan',
@@ -1829,6 +1914,7 @@ export const countries = [
   },
   {
     country: 'Israel',
+    coordinates: [31.0461, 34.8516],
     states: [
       'Central',
       'Haifa',
@@ -1840,6 +1926,7 @@ export const countries = [
   },
   {
     country: 'Italy',
+    coordinates: [41.8719, 12.5674],
     states: [
       'Abruzzo',
       'Basilicata',
@@ -1865,6 +1952,7 @@ export const countries = [
   },
   {
     country: 'Jamaica',
+    coordinates: [18.1096, -77.2975],
     states: [
       'Clarendon',
       'Hanover',
@@ -1884,6 +1972,7 @@ export const countries = [
   },
   {
     country: 'Japan',
+    coordinates: [36.2048, 138.2529],
     states: [
       'Aichi',
       'Akita',
@@ -1936,6 +2025,7 @@ export const countries = [
   },
   {
     country: 'Jordan',
+    coordinates: [30.5852, 36.2384],
     states: [
       'Ajlun',
       "Al 'Aqabah",
@@ -1953,6 +2043,7 @@ export const countries = [
   },
   {
     country: 'Kazakhstan',
+    coordinates: [48.0196, 66.9237],
     states: [
       'Almaty Oblysy',
       'Almaty Qalasy',
@@ -1975,6 +2066,7 @@ export const countries = [
   },
   {
     country: 'Kenya',
+    coordinates: [0.0236, 37.9062],
     states: [
       'Central',
       'Coast',
@@ -1988,6 +2080,7 @@ export const countries = [
   },
   {
     country: 'Kiribati',
+    coordinates: [-3.370417, -168.734039],
     states: [
       'Banaba',
       'Tarawa',
@@ -1999,6 +2092,7 @@ export const countries = [
   },
   {
     country: 'Korea North',
+    coordinates: [40.339852, 127.510093],
     states: [
       'Chagang',
       'North Hamgyong',
@@ -2017,6 +2111,7 @@ export const countries = [
   },
   {
     country: 'Korea South',
+    coordinates: [35.907757, 127.766922],
     states: [
       'Seoul',
       'Busan City',
@@ -2038,6 +2133,7 @@ export const countries = [
   },
   {
     country: 'Kuwait',
+    coordinates: [29.3117, 47.4818],
     states: [
       'Al Ahmadi',
       'Al Farwaniyah',
@@ -2049,6 +2145,7 @@ export const countries = [
   },
   {
     country: 'Kyrgyzstan',
+    coordinates: [41.2044, 74.7661],
     states: [
       'Batken Oblasty',
       'Bishkek Shaary',
@@ -2062,6 +2159,7 @@ export const countries = [
   },
   {
     country: 'Laos',
+    coordinates: [19.8563, 102.4955],
     states: [
       'Attapu',
       'Bokeo',
@@ -2085,6 +2183,7 @@ export const countries = [
   },
   {
     country: 'Latvia',
+    coordinates: [56.8796, 24.6032],
     states: [
       'Aizkraukles Rajons',
       'Aluksnes Rajons',
@@ -2123,6 +2222,7 @@ export const countries = [
   },
   {
     country: 'Lebanon',
+    coordinates: [33.8547, 35.8623],
     states: [
       'Beyrouth',
       'Beqaa',
@@ -2134,6 +2234,7 @@ export const countries = [
   },
   {
     country: 'Lesotho',
+    coordinates: [-29.61, 28.2336],
     states: [
       'Berea',
       'Butha-Buthe',
@@ -2149,6 +2250,7 @@ export const countries = [
   },
   {
     country: 'Liberia',
+    coordinates: [6.4281, -9.4295],
     states: [
       'Bomi',
       'Bong',
@@ -2169,6 +2271,7 @@ export const countries = [
   },
   {
     country: 'Libya',
+    coordinates: [26.3351, 17.2283],
     states: [
       'Ajdabiya',
       "Al 'Aziziyah",
@@ -2199,6 +2302,7 @@ export const countries = [
   },
   {
     country: 'Liechtenstein',
+    coordinates: [47.166, 9.5554],
     states: [
       'Balzers',
       'Eschen',
@@ -2215,6 +2319,7 @@ export const countries = [
   },
   {
     country: 'Lithuania',
+    coordinates: [55.1694, 23.8813],
     states: [
       'Alytaus',
       'Kauno',
@@ -2230,10 +2335,12 @@ export const countries = [
   },
   {
     country: 'Luxembourg',
+    coordinates: [49.8153, 6.1296],
     states: ['Diekirch', 'Grevenmacher', 'Luxembourg'],
   },
   {
     country: 'Macedonia',
+    coordinates: [41.6086, 21.7453],
     states: [
       'Aerodrom',
       'Aracinovo',
@@ -2324,6 +2431,7 @@ export const countries = [
   },
   {
     country: 'Madagascar',
+    coordinates: [-18.766947, 46.869107],
     states: [
       'Antananarivo',
       'Antsiranana',
@@ -2335,6 +2443,7 @@ export const countries = [
   },
   {
     country: 'Malawi',
+    coordinates: [-13.254308, 34.301525],
     states: [
       'Balaka',
       'Blantyre',
@@ -2367,6 +2476,7 @@ export const countries = [
   },
   {
     country: 'Malaysia',
+    coordinates: [4.210484, 101.975766],
     states: [
       'Johor',
       'Kedah',
@@ -2387,6 +2497,7 @@ export const countries = [
   },
   {
     country: 'Maldives',
+    coordinates: [3.202778, 73.22068],
     states: [
       'Alifu',
       'Baa',
@@ -2412,6 +2523,7 @@ export const countries = [
   },
   {
     country: 'Mali',
+    coordinates: [17.570692, -3.996166],
     states: [
       'Bamako (Capital)',
       'Gao',
@@ -2426,6 +2538,7 @@ export const countries = [
   },
   {
     country: 'Malta',
+    coordinates: [35.937496, 14.375416],
     states: [
       'Southern Harbour',
       'Northern Harbour',
@@ -2436,6 +2549,7 @@ export const countries = [
   },
   {
     country: 'Marshall Islands',
+    coordinates: [7.131474, 171.184478],
     states: [
       'Ailuk',
       'Ailinglaplap',
@@ -2474,6 +2588,7 @@ export const countries = [
   },
   {
     country: 'Mauritania',
+    coordinates: [21.00789, -10.940835],
     states: [
       'Adrar',
       'Assaba',
@@ -2492,6 +2607,7 @@ export const countries = [
   },
   {
     country: 'Mauritius',
+    coordinates: [-20.348404, 57.552152],
     states: [
       'Agalega Islands',
       'Black River',
@@ -2509,6 +2625,7 @@ export const countries = [
   },
   {
     country: 'Mexico',
+    coordinates: [23.634501, -102.552784],
     states: [
       'Aguascalientes',
       'Baja California',
@@ -2546,10 +2663,12 @@ export const countries = [
   },
   {
     country: 'Micronesia',
+    coordinates: [7.425554, 150.550812],
     states: [],
   },
   {
     country: 'Moldova',
+    coordinates: [47.411631, 28.369885],
     states: [
       'Anenii Noi',
       'Basarabeasca',
@@ -2592,6 +2711,7 @@ export const countries = [
   },
   {
     country: 'Mongolia',
+    coordinates: [46.8625, 103.8467],
     states: [
       'Arhangay',
       'Bayanhongor',
@@ -2619,6 +2739,7 @@ export const countries = [
   },
   {
     country: 'Morocco',
+    coordinates: [31.7917, -7.0926],
     states: [
       'Agadir',
       'Al Hoceima',
@@ -2663,10 +2784,12 @@ export const countries = [
   },
   {
     country: 'Monaco',
+    coordinates: [43.7384, 7.4246],
     states: ['Monaco-Ville', 'La Condamine', 'Monte Carlo', 'Fontvieille'],
   },
   {
     country: 'Mozambique',
+    coordinates: [-18.665695, 35.529562],
     states: [
       'Cabo Delgado',
       'Gaza',
@@ -2683,6 +2806,7 @@ export const countries = [
   },
   {
     country: 'Namibia',
+    coordinates: [-22.9576, 18.4904],
     states: [
       'Caprivi',
       'Erongo',
@@ -2705,6 +2829,7 @@ export const countries = [
   },
   {
     country: 'Nepal',
+    coordinates: [28.3949, 84.124],
     states: [
       'Bagmati',
       'Bheri',
@@ -2724,6 +2849,7 @@ export const countries = [
   },
   {
     country: 'Netherlands',
+    coordinates: [52.1326, 5.2913],
     states: [
       'Drenthe',
       'Flevoland',
@@ -2741,6 +2867,7 @@ export const countries = [
   },
   {
     country: 'New Zealand',
+    coordinates: [-40.9006, 174.886],
     states: [
       'Auckland',
       'Bay of Plenty',
@@ -2763,6 +2890,7 @@ export const countries = [
   },
   {
     country: 'Nicaragua',
+    coordinates: [12.8654, -85.2072],
     states: [
       'Atlantico Norte',
       'Atlantico Sur',
@@ -2785,6 +2913,7 @@ export const countries = [
   },
   {
     country: 'Niger',
+    coordinates: [17.6078, 8.0817],
     states: [
       'Agadez',
       'Diffa',
@@ -2798,6 +2927,7 @@ export const countries = [
   },
   {
     country: 'Nigeria',
+    coordinates: [9.082, 8.6753],
     states: [
       'Abia',
       'Abuja Federal Capital',
@@ -2840,6 +2970,7 @@ export const countries = [
   },
   {
     country: 'Norway',
+    coordinates: [60.472024, 8.468946],
     states: [
       'Akershus',
       'Aust-Agder',
@@ -2864,6 +2995,7 @@ export const countries = [
   },
   {
     country: 'Oman',
+    coordinates: [21.512583, 55.923255],
     states: [
       'Ad Dakhiliyah',
       'Al Batinah',
@@ -2877,6 +3009,7 @@ export const countries = [
   },
   {
     country: 'Pakistan',
+    coordinates: [30.375321, 69.345116],
     states: [
       'Balochistan',
       'North-West Frontier Province',
@@ -2888,6 +3021,7 @@ export const countries = [
   },
   {
     country: 'Panama',
+    coordinates: [8.537981, -80.782127],
     states: [
       'Bocas del Toro',
       'Chiriqui',
@@ -2903,6 +3037,7 @@ export const countries = [
   },
   {
     country: 'Papua New Guinea',
+    coordinates: [-6.314993, 143.95555],
     states: [
       'Bougainville',
       'Central',
@@ -2928,6 +3063,7 @@ export const countries = [
   },
   {
     country: 'Paraguay',
+    coordinates: [-23.4425, -58.4438],
     states: [
       'Alto Paraguay',
       'Alto Parana',
@@ -2951,6 +3087,7 @@ export const countries = [
   },
   {
     country: 'Peru',
+    coordinates: [-9.19, -75.0152],
     states: [
       'Amazonas',
       'Ancash',
@@ -2981,6 +3118,7 @@ export const countries = [
   },
   {
     country: 'Philippines',
+    coordinates: [12.8797, 121.774],
     states: [
       'Abra',
       'Agusan del Norte',
@@ -3065,6 +3203,7 @@ export const countries = [
   },
   {
     country: 'Poland',
+    coordinates: [51.9194, 19.1451],
     states: [
       'Greater Poland (Wielkopolskie)',
       'Kuyavian-Pomeranian (Kujawsko-Pomorskie)',
@@ -3086,6 +3225,7 @@ export const countries = [
   },
   {
     country: 'Portugal',
+    coordinates: [39.3999, -8.2245],
     states: [
       'Aveiro',
       'Acores',
@@ -3111,6 +3251,7 @@ export const countries = [
   },
   {
     country: 'Qatar',
+    coordinates: [25.3548, 51.1839],
     states: [
       'Ad Dawhah',
       'Al Ghuwayriyah',
@@ -3126,6 +3267,7 @@ export const countries = [
   },
   {
     country: 'Romania',
+    coordinates: [46.0, 25.0],
     states: [
       'Alba',
       'Arad',
@@ -3173,6 +3315,7 @@ export const countries = [
   },
   {
     country: 'Russia',
+    coordinates: [61.524, 105.3188],
     states: [
       'Amur',
       "Arkhangel'sk",
@@ -3267,6 +3410,7 @@ export const countries = [
   },
   {
     country: 'Rwanda',
+    coordinates: [-1.940278, 29.873888],
     states: [
       'Butare',
       'Byumba',
@@ -3284,6 +3428,7 @@ export const countries = [
   },
   {
     country: 'Samoa',
+    coordinates: [-13.759029, -172.104629],
     states: [
       "A'ana",
       'Aiga-i-le-Tai',
@@ -3300,6 +3445,7 @@ export const countries = [
   },
   {
     country: 'San Marino',
+    coordinates: [43.94236, 12.457777],
     states: [
       'Acquaviva',
       'Borgo Maggiore',
@@ -3314,6 +3460,7 @@ export const countries = [
   },
   {
     country: 'Sao Tome',
+    coordinates: [0.18636, 6.61308],
     states: [
       'Água Grande',
       'Cantagalo',
@@ -3326,6 +3473,7 @@ export const countries = [
   },
   {
     country: 'Saudi Arabia',
+    coordinates: [23.885942, 45.079162],
     states: [
       'Al Bahah',
       'Al Hudud ash Shamaliyah',
@@ -3344,6 +3492,7 @@ export const countries = [
   },
   {
     country: 'Senegal',
+    coordinates: [14.497401, -14.452362],
     states: [
       'Dakar',
       'Diourbel',
@@ -3360,6 +3509,7 @@ export const countries = [
   },
   {
     country: 'Serbia',
+    coordinates: [44.016521, 21.005859],
     states: [
       'Valjevo',
       'Šabac',
@@ -3389,6 +3539,7 @@ export const countries = [
   },
   {
     country: 'Kosovo',
+    coordinates: [42.602636, 20.902977],
     states: [
       'Ferizaj',
       'Gjakova',
@@ -3401,6 +3552,7 @@ export const countries = [
   },
   {
     country: 'Montenegro',
+    coordinates: [42.708678, 19.37439],
     states: [
       'Andrijevica',
       'Bar',
@@ -3431,6 +3583,7 @@ export const countries = [
   },
   {
     country: 'Seychelles',
+    coordinates: [-4.679574, 55.491977],
     states: [
       'Anse aux Pins',
       'Anse Boileau',
@@ -3459,6 +3612,7 @@ export const countries = [
   },
   {
     country: 'Sierra Leone',
+    coordinates: [8.460555, -11.779889],
     states: [
       'Eastern Province',
       'Northern Province',
@@ -3469,6 +3623,7 @@ export const countries = [
   },
   {
     country: 'Singapore',
+    coordinates: [1.3521, 103.8198],
     states: [
       'Aljunied Group Representation Constituency',
       'Ang Mo Kio Group Representation Constituency',
@@ -3490,6 +3645,7 @@ export const countries = [
   },
   {
     country: 'Slovakia',
+    coordinates: [48.669026, 19.699024],
     states: [
       'Banskobystricky',
       'Bratislavsky',
@@ -3503,6 +3659,7 @@ export const countries = [
   },
   {
     country: 'Slovenia',
+    coordinates: [46.151241, 14.995463],
     states: [
       'Ajdovscina',
       'Beltinci',
@@ -3701,6 +3858,7 @@ export const countries = [
   },
   {
     country: 'Solomon Islands',
+    coordinates: [9.6457, 160.1562],
     states: [
       'Central',
       'Choiseul',
@@ -3716,6 +3874,7 @@ export const countries = [
   },
   {
     country: 'Somalia',
+    coordinates: [5.152149, 46.199616],
     states: [
       'Awdal',
       'Bakool',
@@ -3739,6 +3898,7 @@ export const countries = [
   },
   {
     country: 'South Africa',
+    coordinates: [-30.559482, 22.937506],
     states: [
       'Eastern Cape',
       'Free State',
@@ -3753,6 +3913,7 @@ export const countries = [
   },
   {
     country: 'Spain',
+    coordinates: [40.463667, -3.74922],
     states: [
       'Andalucia',
       'Aragon',
@@ -3777,6 +3938,7 @@ export const countries = [
   },
   {
     country: 'Sri Lanka',
+    coordinates: [7.873054, 80.771797],
     states: [
       'Central',
       'North Central',
@@ -3790,6 +3952,7 @@ export const countries = [
   },
   {
     country: 'Sudan',
+    coordinates: [12.862807, 30.217636],
     states: [
       "A'ali an Nil",
       'Al Bahr al Ahmar',
@@ -3821,6 +3984,7 @@ export const countries = [
   },
   {
     country: 'Suriname',
+    coordinates: [3.919305, -56.027783],
     states: [
       'Brokopondo',
       'Commewijne',
@@ -3836,10 +4000,12 @@ export const countries = [
   },
   {
     country: 'Swaziland',
+    coordinates: [-26.522503, 31.465866],
     states: ['Hhohho', 'Lubombo', 'Manzini', 'Shiselweni'],
   },
   {
     country: 'Sweden',
+    coordinates: [60.128161, 18.643501],
     states: [
       'Blekinge',
       'Dalarnas',
@@ -3866,6 +4032,7 @@ export const countries = [
   },
   {
     country: 'Switzerland',
+    coordinates: [46.818188, 8.227512],
     states: [
       'Aargau',
       'Appenzell Ausser-Rhoden',
@@ -3897,6 +4064,7 @@ export const countries = [
   },
   {
     country: 'Syria',
+    coordinates: [34.802075, 38.996815],
     states: [
       'Al Hasakah',
       'Al Ladhiqiyah',
@@ -3916,6 +4084,7 @@ export const countries = [
   },
   {
     country: 'Taiwan',
+    coordinates: [23.69781, 120.960515],
     states: [
       'Chang-hua',
       'Chia-i',
@@ -3946,6 +4115,7 @@ export const countries = [
   },
   {
     country: 'Tajikistan',
+    coordinates: [38.861034, 71.276093],
     states: [
       'Sughd Region',
       'Districts of Republican Subordination',
@@ -3956,6 +4126,7 @@ export const countries = [
   },
   {
     country: 'Tanzania',
+    coordinates: [-6.369028, 34.888822],
     states: [
       'Arusha',
       'Dar es Salaam',
@@ -3987,6 +4158,7 @@ export const countries = [
   },
   {
     country: 'Thailand',
+    coordinates: [15.870032, 100.992541],
     states: [
       'Amnat Charoen',
       'Ang Thong',
@@ -4068,14 +4240,17 @@ export const countries = [
   },
   {
     country: 'Togo',
+    coordinates: [8.619543, 0.824782],
     states: ['Kara', 'Plateaux', 'Savanes', 'Centrale', 'Maritime'],
   },
   {
     country: 'Tonga',
+    coordinates: [-21.178986, -175.198242],
     states: ['Tongatapu', 'Vavaʻu', 'Haʻapai', 'ʻEua', 'Ongo Niua', 'Tonga'],
   },
   {
     country: 'Trinidad and Tobago',
+    coordinates: [10.691803, -61.222503],
     states: [
       'Couva',
       'Diego Martin',
@@ -4096,6 +4271,7 @@ export const countries = [
   },
   {
     country: 'Tunisia',
+    coordinates: [33.886917, 9.537499],
     states: [
       'Ariana (Aryanah)',
       'Beja (Bajah)',
@@ -4125,6 +4301,7 @@ export const countries = [
   },
   {
     country: 'Turkey',
+    coordinates: [38.963745, 35.243322],
     states: [
       'Adana',
       'Adiyaman',
@@ -4211,6 +4388,7 @@ export const countries = [
   },
   {
     country: 'Turkmenistan',
+    coordinates: [38.969719, 59.556278],
     states: [
       'Ahal Welayaty (Ashgabat)',
       'Balkan Welayaty (Balkanabat)',
@@ -4221,6 +4399,7 @@ export const countries = [
   },
   {
     country: 'Uganda',
+    coordinates: [1.373333, 32.290275],
     states: [
       'Adjumani',
       'Apac',
@@ -4282,6 +4461,7 @@ export const countries = [
   },
   {
     country: 'Ukraine',
+    coordinates: [31.1656, 49.422],
     states: [
       'Cherkasy',
       'Chernihiv',
@@ -4314,6 +4494,7 @@ export const countries = [
   },
   {
     country: 'United Arab Emirates',
+    coordinates: [23.424076, 53.847818],
     states: [
       'Abu Dhabi',
       "'Ajman",
@@ -4326,10 +4507,12 @@ export const countries = [
   },
   {
     country: 'United Kingdom',
+    coordinates: [55.378051, -3.435973],
     states: [],
   },
   {
     country: 'United States',
+    coordinates: [37.09024, -95.712891],
     states: [
       'Alabama',
       'Alaska',
@@ -4386,6 +4569,7 @@ export const countries = [
   },
   {
     country: 'Uruguay',
+    coordinates: [-32.522779, -55.765835],
     states: [
       'Artigas',
       'Canelones',
@@ -4410,6 +4594,7 @@ export const countries = [
   },
   {
     country: 'Uzbekistan',
+    coordinates: [41.3775, 64.5853],
     states: [
       'Andijon Viloyati',
       'Buxoro Viloyati',
@@ -4429,10 +4614,12 @@ export const countries = [
   },
   {
     country: 'Vanuatu',
+    coordinates: [15.3767, 166.9592],
     states: ['Malampa', 'Penama', 'Sanma', 'Shefa', 'Tafea', 'Torba'],
   },
   {
     country: 'Venezuela',
+    coordinates: [6.4238, 66.5897],
     states: [
       'Amazonas',
       'Anzoategui',
@@ -4463,6 +4650,7 @@ export const countries = [
   },
   {
     country: 'Vietnam',
+    coordinates: [16.1667, 107.8333],
     states: [
       'An Giang',
       'Bac Giang',
@@ -4532,6 +4720,7 @@ export const countries = [
   },
   {
     country: 'Yemen',
+    coordinates: [15.552727, 48.516388],
     states: [
       'Abyan',
       "'Adan",
@@ -4556,6 +4745,7 @@ export const countries = [
   },
   {
     country: 'Zambia',
+    coordinates: [-13.133897, 27.849332],
     states: [
       'Central',
       'Copperbelt',
@@ -4570,6 +4760,7 @@ export const countries = [
   },
   {
     country: 'Zimbabwe',
+    coordinates: [-19.015438, 29.154857],
     states: [
       'Bulawayo',
       'Harare',

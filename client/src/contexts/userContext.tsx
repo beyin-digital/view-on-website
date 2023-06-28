@@ -63,6 +63,12 @@ export const UserProvider = ({ children }: any) => {
         (token === null || token === undefined) &&
         user?.twoFactorAuthEnabled === true
       ) {
+        if (router.query.redirect === 'subscribe') {
+          router.push(
+            `/${router.locale}/verification?redirect=subscribe&hashtag=${router.query.hashtag}&sublink=${router.query.sublink}`
+          )
+          return
+        }
         router.push(`/verification?email=${user.email}`)
         return
       }
