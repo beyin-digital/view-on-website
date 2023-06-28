@@ -30,10 +30,10 @@ const ThreeBox = () => {
             sx={{
               transform: 'skew(-16deg, 0deg)',
               position: 'absolute',
-              top: { xs: '3rem', xl: '-1rem' },
+              top: { xs: '0rem', xl: '-1rem' },
               left: { xs: '', md: '0rem', xl: '3rem' },
-              width: { md: '550px', xl: '578px' },
-              height: { md: '550px', xl: '583px' },
+              width: { md: '550px', lg: '580px' },
+              height: { md: '550px', lg: '600px' },
             }}
           >
             <img

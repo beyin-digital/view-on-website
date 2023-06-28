@@ -20,9 +20,9 @@ export const Background = () => {
 						xs: "-1544px",
 						sm: "-1544px",
 						md: "-1100px",
-						xl: "-1000px",
+						lg: "-1100px",
 					},
-					backgroundPositionX: { xs: "-800px", md: "-600px", xl: "-300px" },
+					backgroundPositionX: { xs: "-800px", md: "-600px", lg: "-300px" },
 					backgroundRepeat: "no-repeat",
 				}}
 				className="ImageBgHom"

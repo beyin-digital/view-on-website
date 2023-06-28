@@ -63,11 +63,11 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
       <Box
         sx={{
           display: 'flex',
-          width: { xs: '45%', sm: '80%', md: '80%', xl: '100%' },
+          width: { xs: '45%', sm: '80%', md: '80%', lg: '100%' },
           justifyContent: {
             xs: 'space-evenly',
             md: 'space-evenly',
-            xl: 'space-around',
+            lg: 'space-around',
           },
           alignItems: 'baseline',
         }}
@@ -123,7 +123,7 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
                   xs: '18px',
                   sm: '22px',
                   md: '28px',
-                  xl: '38px',
+                  lg: '38px',
                 },
                 lineHeight: '28px',
                 marginY: '.5rem',
@@ -177,12 +177,12 @@ const HomeForm = ({ setHashtag, hashtag }: any) => {
             width: {
               xs: '40px',
               md: '49px',
-              xl: '56px',
+              lg: '56px',
             },
             height: {
               xs: '40px',
               md: '49px',
-              xl: '56px',
+              lg: '56px',
             },
           }}
         >

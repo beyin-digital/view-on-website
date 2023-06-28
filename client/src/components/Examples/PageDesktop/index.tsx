@@ -33,11 +33,11 @@ const PageDesktop = () => {
 				<Box
 					my="auto"
 					sx={{
-						height: { xs: "100%", md: "100vh", xl: "88vh" },
+						height: { xs: "100%", md: "100vh", lg: "88vh" },
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",
-						width: { xs: "100%", md: "110vw", xl: "110vw" },
+						width: { xs: "100%", md: "110vw", lg: "110vw" },
 						position: "relative",
 						flexDirection: "column",
 						maxHeight: "88vh",
@@ -46,8 +46,8 @@ const PageDesktop = () => {
 				>
 					<Box
 						sx={{
-							height: { xs: "100%", md: "620px", xl: "590px" },
-							width: { xs: "100%", md: "1920px", xl: "2000px" },
+							height: { xs: "100%", md: "620px", lg: "590px" },
+							width: { xs: "100%", md: "1920px", lg: "2000px" },
 							borderTop: "1px solid #FBFBFB",
 							borderBottom: "1px solid #FBFBFB",
 							display: "flex",

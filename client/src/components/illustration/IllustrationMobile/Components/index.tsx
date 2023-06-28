@@ -11,19 +11,17 @@ export const ImageHeader = () => {
 				sx={{
 					width: "100%",
 					display: { xs: "none", sm: "block" },
+
 				}}
 			>
 				<Image
 					fill
 					src="/images/swirl.webp"
-					alt="Background Vow swirl "
-					title="Background Vow swirl "
+					alt=""
 					style={{
 						top: "-63rem",
 						position: "absolute",
 					}}
-					placeholder="blur"
-					blurDataURL="/images/swirl.webp"
 				/>
 			</Box>
 			<Box
@@ -35,15 +33,11 @@ export const ImageHeader = () => {
 				<Image
 					fill
 					src="/images/swirl.webp"
-					alt="Background Vow swirl "
-					title="Background Vow swirl "
+					alt=""
 					style={{
 						top: "-57rem",
 						position: "absolute",
 					}}
-					placeholder="blur"
-					blurDataURL="/images/swirl.webp"
-					loading="lazy"
 				/>
 			</Box>
 		</>
@@ -195,7 +189,7 @@ export const HeaderLayout = () => {
 					>
 						{locale === "ar" ? (
 							<img
-								src="/images/illustrationPicCenterAR.png"
+								src="/images/illustrationPicCenterAR.svg"
 								style={{
 									width: "100%",
 								}}
@@ -205,7 +199,7 @@ export const HeaderLayout = () => {
 							/>
 						) : (
 							<img
-								src="/images/illustrationPicCenter.png"
+								src="/images/illustrationPicCenter.svg"
 								style={{
 									width: "100%",
 								}}
@@ -575,7 +569,7 @@ export const ButtonStyle = () => {
 					marginX: "1rem",
 					paddingX: "1rem",
 					cursor: "pointer",
-					marginTop: "3rem",
+					marginTop:"3rem"
 				}}
 			>
 				<NextLink
@@ -596,13 +590,13 @@ export const ButtonStyle = () => {
 							paddingX: "1.5rem",
 							background: "#31E716",
 							borderRadius: "12px",
+
 						}}
-						className={`sizeButtonWatch icon-container ${
-							hovered ? "hovered" : ""
-						}`}
+						className={`sizeButtonWatch icon-container ${hovered ? "hovered" : ""}`}
 						onMouseEnter={handleHover}
 						onMouseLeave={handleHover}
-						// className=""
+					// className=""
+
 					>
 						<>
 							<Typography
