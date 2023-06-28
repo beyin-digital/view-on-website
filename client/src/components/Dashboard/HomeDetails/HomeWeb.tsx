@@ -100,7 +100,11 @@ const HomeWeb = () => {
         })
 
         const res = await api.get(
-          `https://api.geoapify.com/v1/geocode/reverse?lat=${values.coordinates[0]}&lon=${values.coordinates[1]}&apiKey=${geoApifyKey}`
+          `https://api.geoapify.com/v1/geocode/reverse?lat=${
+            position.coords.latitude | values.coordinates[0]
+          }&lon=${
+            position.coords.longitude | values.coordinates[1]
+          }&apiKey=${geoApifyKey}`
         )
         if (res.status === 200) {
           const data = res.data.features
