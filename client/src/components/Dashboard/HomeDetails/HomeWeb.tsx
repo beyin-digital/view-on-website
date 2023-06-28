@@ -21,6 +21,7 @@ import { downloadSvg } from '@/utils/downloadSvg'
 import { useRouter } from 'next/router'
 
 import io from 'socket.io-client'
+import { set } from 'zod'
 const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
 const geoApifyKey = process.env.NEXT_PUBLIC_GEOAPIFY_KEY
 
@@ -64,6 +65,8 @@ const HomeWeb = () => {
     organisation: '',
     country: '',
     state: '',
+    timezone: '',
+    coordinates: [],
   })
 
   const [pieChartData, setPieChartData] = React.useState([
@@ -88,8 +91,16 @@ const HomeWeb = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         setLocationIsLoading(true)
+        setValues({
+          ...values,
+          coordinates: [
+            position.coords.latitude as never,
+            position.coords.longitude as never,
+          ],
+        })
+
         const res = await api.get(
-          `https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=${geoApifyKey}`
+          `https://api.geoapify.com/v1/geocode/reverse?lat=${values.coordinates[0]}&lon=${values.coordinates[1]}&apiKey=${geoApifyKey}`
         )
         if (res.status === 200) {
           const data = res.data.features
@@ -97,6 +108,7 @@ const HomeWeb = () => {
             ...values,
             country: data[0].properties.country,
             state: data[0].properties.city,
+            timezone: data[0].properties.timezone.name,
           })
           setLocationIsLoading(false)
         }
@@ -355,6 +367,9 @@ const HomeWeb = () => {
                       ...values,
                       state: '',
                       country: e.target.value,
+                      coordinates: countries.find(
+                        (country) => country?.country === e.target.value
+                      )?.coordinates as any,
                     })
                   }
                   renderValue={(selected: any) => {
@@ -443,17 +458,17 @@ const HomeWeb = () => {
               }}
             >
               <Button
-                // disabled={
-                //   JSON.stringify(values) ===
-                //   JSON.stringify(selectedKeyword)
-                // }
-                onClick={() => {
-                  updateKeywordDetails(selectedKeyword?.id, {
-                    country: values?.country,
-                    state: values?.state,
-                    organisation: values?.organisation,
-                    sublink: values?.sublink,
-                  })
+                onClick={async () => {
+                  await getLocation()
+                  if (values?.timezone) {
+                    updateKeywordDetails(selectedKeyword?.id, {
+                      country: values?.country,
+                      state: values?.state,
+                      organisation: values?.organisation,
+                      sublink: values?.sublink,
+                      timezone: values?.timezone,
+                    })
+                  }
                 }}
                 disableRipple
                 variant="contained"
@@ -667,56 +682,73 @@ const HomeWeb = () => {
               background: 'rgba(251, 251, 251, 0.3)',
             }}
           >
-            <Box
-              sx={{
-                width: '90%',
-                height: '10px',
-                margin: '0 auto',
-                display: 'flex',
-                justifyContent: 'space-between',
-                paddingX: '18px',
-                color: '#343132',
-                cursor: 'pointer',
-              }}
-            >
-              <Typography fontSize="20px">
-                {t('box_main_chart_title')}
-              </Typography>
-
-              <Select
-                displayEmpty
-                value={lineChartType}
-                onChange={(e) => {
-                  setLineChartType(e.target.value as number)
-                }}
+            {selectedKeyword?.timezone ? (
+              <Box
                 sx={{
-                  height: '42px',
-                  width: '168px',
-                  background: 'white',
-                  borderRadius: '15px',
-                  '&:hover select': {
-                    border: '0',
-                  },
-                  '.MuiOutlinedInput-notchedOutline': {
-                    border: '0',
-                    // padding: "9px",
-                  },
-                  '&:hover > .MuiOutlinedInput-notchedOutline': {
-                    border: '0',
-                  },
-                  zIndex: '999',
+                  width: '90%',
+                  height: '10px',
+                  margin: '0 auto',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  paddingX: '18px',
+                  color: '#343132',
+                  cursor: 'pointer',
                 }}
               >
-                <MenuItem value={0} disabled>
-                  Duration
-                </MenuItem>
-                <MenuItem value={1}>24 hours</MenuItem>
-                <MenuItem value={2}>7 days</MenuItem>
-                <MenuItem value={3}>30 days</MenuItem>
-                <MenuItem value={4}>Year</MenuItem>
-              </Select>
-            </Box>
-            {lineChartData !== null &&
+                <Typography fontSize="20px">
+                  {t('box_main_chart_title')}
+                </Typography>
+
+                <Select
+                  displayEmpty
+                  value={lineChartType}
+                  onChange={(e) => {
+                    setLineChartType(e.target.value as number)
+                  }}
+                  sx={{
+                    height: '42px',
+                    width: '168px',
+                    background: 'white',
+                    borderRadius: '15px',
+                    '&:hover select': {
+                      border: '0',
+                    },
+                    '.MuiOutlinedInput-notchedOutline': {
+                      border: '0',
+                      // padding: "9px",
+                    },
+                    '&:hover > .MuiOutlinedInput-notchedOutline': {
+                      border: '0',
+                    },
+                    zIndex: '999',
+                  }}
+                >
+                  <MenuItem value={0} disabled>
+                    Duration
+                  </MenuItem>
+                  <MenuItem value={1}>24 hours</MenuItem>
+                  <MenuItem value={2}>7 days</MenuItem>
+                  <MenuItem value={3}>30 days</MenuItem>
+                  <MenuItem value={4}>Year</MenuItem>
+                </Select>
+              </Box>
+            ) : (
+              <Box
+                sx={{
+                  height: '100%',
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Typography sx={{ fontWeight: 'bold', fontSize: '32px' }}>
+                  Please add a location your keyword to view chart data
+                </Typography>
+              </Box>
+            )}
+            {selectedKeyword?.timezone &&
+              lineChartData !== null &&
               lineChartData.length >= 4 &&
               (lineChartType == 1 ? (
                 <LineChart data={lineChartData[0]} />
