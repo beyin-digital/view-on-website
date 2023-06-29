@@ -3,13 +3,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
 
-import {
-	Box,
-	Button,
-	Fade,
-	Modal as MUIModal,
-	Typography,
-} from "@mui/material";
+import { Box, Button, Fade, Modal, Typography } from "@mui/material";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FiArrowUpLeft, FiArrowUpRight } from "react-icons/fi";
 
@@ -44,16 +38,18 @@ const ModalFooter = ({ open, close, onClick }: any) => {
 				justifyContent: "center",
 			}}
 		>
-			<MUIModal
+			<Modal
 				open={open}
 				onClose={close}
+				aria-labelledby="modal-modal-title"
+				aria-describedby="modal-modal-description"
 				className="swiper-blur"
 				disableAutoFocus
 				closeAfterTransition
 			>
 				{/* <Backdrop open={open} /> */}
 
-				<Fade in={open}>
+				<>
 					<Box
 						sx={{
 							display: "flex",
@@ -70,6 +66,7 @@ const ModalFooter = ({ open, close, onClick }: any) => {
 								width: "100%",
 								maxWidth: "100%",
 								height: "100%",
+
 								bgcolor: "transparent",
 								paddingX: "1rem",
 								display: "flex",
@@ -83,13 +80,14 @@ const ModalFooter = ({ open, close, onClick }: any) => {
 									border: "1px solid #FBFBFB",
 									borderRadius: "20px",
 									position: "relative",
-									width: { xs: "90%", sm: "500px", md: "500px", xl: "500px" },
+									width: { xs: "85%", sm: "500px", md: "500px", xl: "500px" },
 									height: { xs: "600px", md: "700px", xl: "700px" },
 									paddingX: "1rem",
 									display: "flex",
 									alignItems: "center",
 									justifyContent: "center",
 									flexDirection: "column",
+									marginY:"2rem"
 								}}
 								className="modalBlur"
 							>
@@ -119,7 +117,7 @@ const ModalFooter = ({ open, close, onClick }: any) => {
 								<Box
 									sx={{
 										width: "100%",
-										height: { xs: "250px", sm: "150px" },
+										height: { xs: "100%", sm: "150px" },
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "space-between",
@@ -304,7 +302,7 @@ const ModalFooter = ({ open, close, onClick }: any) => {
 								<Box
 									sx={{
 										width: "100%",
-										height: { xs: "250px", sm: "150px" },
+										height: { xs: "100%", sm: "150px" },
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "space-between",
@@ -587,7 +585,7 @@ const ModalFooter = ({ open, close, onClick }: any) => {
 								<Box
 									sx={{
 										width: "100%",
-										height: { xs: "250px", sm: "150px" },
+										height: { xs: "100%", sm: "150px" },
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "space-between",
@@ -868,7 +866,7 @@ const ModalFooter = ({ open, close, onClick }: any) => {
 							<Box
 								sx={{
 									cursor: "pointer",
-									bottom: "20rem",
+									bottom: { xs: "15rem", sm: "18rem" },
 									right: "-.3rem",
 									zIndex: "9999999",
 									position: "relative",
@@ -883,8 +881,8 @@ const ModalFooter = ({ open, close, onClick }: any) => {
 							</Box>
 						</Box>
 					</Box>
-				</Fade>
-			</MUIModal>
+				</>
+			</Modal>
 		</Box>
 	);
 };
