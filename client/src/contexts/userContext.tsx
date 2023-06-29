@@ -187,7 +187,6 @@ export const UserProvider = ({ children }: any) => {
         throw new Error('Error checking email')
       }
       const data = await response.json()
-      console.log(data)
 
       return data
     } catch (error) {
@@ -247,7 +246,6 @@ export const UserProvider = ({ children }: any) => {
         errorResponse?.errors?.password ===
         'password_too_weak_or_does_not_requirement'
       ) {
-        console.log('password too weak')
         toast.error(
           'Password should be 8 characters minimum and have at least one uppercase letter, one number and one special character'
         )
