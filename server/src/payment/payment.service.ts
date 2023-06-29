@@ -22,7 +22,6 @@ export class PaymentService {
     lang: string,
     intiatePaymentDto: InitiatePaymentDto,
   ) {
-    console.log(lang);
     const foundUser = await this.usersService.findOne({
       id: user.id,
     });

@@ -338,13 +338,6 @@ export class StripeService {
           status: subscriptionPaused.status,
         });
         break;
-      //   case 'customer.subscription.deleted':
-      //     const subscriptionDeleted = event.data.object as any;
-      //     await this.updateSubscriptionAndKeyword({
-      //       subscriptionId: subscriptionDeleted.id,
-      //       status: subscriptionDeleted.status,
-      //     });
-      //     break;
       default:
         console.log(`Unhandled event type ${event.type}`);
     }

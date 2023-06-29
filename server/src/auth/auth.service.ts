@@ -307,7 +307,6 @@ export class AuthService {
       id: foundOtp?.user?.id,
     })) as User;
 
-    console.log(foundOtp);
     foundOtp.token = null;
     foundOtp.used = true;
     foundOtp.usedAt = new Date();
@@ -335,7 +334,6 @@ export class AuthService {
     const foundRefreshToken = await this.refreshesService.findOne({
       token,
     });
-    console.log(foundRefreshToken);
 
     if (!foundRefreshToken) {
       throw new HttpException(
