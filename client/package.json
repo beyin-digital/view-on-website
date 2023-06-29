@@ -27,17 +27,12 @@
     "@nivo/line": "0.80.0",
     "@nivo/pie": "0.80.0",
     "@react-oauth/google": "^0.11.0",
-    "@tanstack/react-query": "^4.29.5",
-    "@tanstack/react-query-devtools": "^4.29.6",
     "@types/material-ui": "^0.21.12",
     "axios": "^1.4.0",
-    "cookie": "^0.5.0",
-    "cookie-parser": "^1.4.6",
     "dayjs": "^1.11.7",
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.15",
-    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.0",
     "mui-one-time-password-input": "^1.1.0",
     "next": "^13.3.4",
@@ -53,7 +48,6 @@
     "react-icons": "^4.8.0",
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.2",
-    "react-use-websocket": "3.0.0",
     "react-visibility-sensor": "^5.1.1",
     "sharp": "^0.32.1",
     "sitemap": "^7.1.1",
@@ -77,6 +71,7 @@
     "eslint-config-next": "latest",
     "prettier": "2.8.4",
     "ts-node": "^10.9.1",
-    "typescript": "latest"
+    "typescript": "latest",
+    "husky": "^8.0.0"
   }
 }

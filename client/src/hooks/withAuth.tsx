@@ -12,30 +12,28 @@ const withAuth = (WrappedComponent: any) => {
     const [isLoading, setIsLoading] = useState(true) // New state variable
 
     useEffect(() => {
-      setTimeout(() => {
-        const token = localStorage.getItem('token')
-        if (router.pathname === '/dashboard' && !token) {
-          router.push(`${router.locale}/login`)
+      const token = localStorage.getItem('token')
+      if (router.pathname.startsWith('/dashboard') && !token) {
+        router.push(`/${router.locale}/login`)
+      }
+      if (router.pathname.startsWith('/dashboard')) {
+        if (user?.hasKeywords === false) {
+          router.push(`/${router.locale}/`)
         }
-        if (router.pathname.startsWith('/dashboard')) {
-          if (user?.hasKeywords === false) {
-            router.push(`${router.locale}/`)
-          }
+      }
+      if (router.pathname === '/login' && !token) {
+        router.push('/login')
+      } else {
+        setIsLoading(false)
+        if (router.query.hashtag) {
+          router.push(
+            `${router.locale}/dashboard?hashtag=${decodeURI(
+              router.query.hashtag as string
+            )}&page=${router.query.page}&limit=${router.query.limit}`
+          )
         }
-        if (router.pathname === '/login' && !token) {
-          router.push('/login')
-        } else {
-          setIsLoading(false)
-          if (router.query.hashtag) {
-            router.push(
-              `${router.locale}/dashboard?hashtag=${decodeURI(
-                router.query.hashtag as string
-              )}&page=${router.query.page}&limit=${router.query.limit}`
-            )
-          }
-        }
-      }, 250)
-    }, [token])
+      }
+    }, [])
 
     if (isLoading) {
       return (

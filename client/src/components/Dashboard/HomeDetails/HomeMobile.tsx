@@ -19,6 +19,7 @@ import { countries } from '@/utils/countries'
 import { downloadSvg } from '@/utils/downloadSvg'
 import { LoadingButton } from '@mui/lab'
 import { MdLocationOn } from 'react-icons/md'
+import { api } from '@/utils/api'
 const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
 const geoApifyKey = process.env.NEXT_PUBLIC_GEOAPIFY_KEY
 
@@ -65,7 +66,7 @@ const HomeMobile = () => {
     country: '',
     state: '',
     timezone: '',
-    coordinates: [],
+    coordinates: [] as number[],
   })
 
   const [pieChartData, setPieChartData] = React.useState([
@@ -89,32 +90,69 @@ const HomeMobile = () => {
 
   const [locationIsLoading, setLocationIsLoading] = useState(false)
 
+  const getLocationData = async (lat?: number, lng?: number) => {
+    try {
+      setLocationIsLoading(true)
+      const res = await api.get(
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${
+          (lat as number) || values.coordinates[0]
+        }&lon=${(lng as number) || values.coordinates[1]}&apiKey=${geoApifyKey}`
+      )
+      if (res.status === 200) {
+        const data = res.data.features
+        setValues({
+          ...values,
+          country: data[0].properties.country,
+          state: data[0].properties.city,
+          timezone: data[0].properties.timezone.name,
+        })
+      }
+    } catch (error) {
+      setLocationIsLoading(false)
+    } finally {
+      setLocationIsLoading(false)
+    }
+  }
+
+  const getAutoLocation = async () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        try {
+          setLocationIsLoading(true)
+          setValues({
+            ...values,
+            timezone: '',
+          })
+          const res = await api.get(
+            `https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=${geoApifyKey}`
+          )
+          if (res.status === 200) {
+            const data = res.data.features
+            setValues({
+              ...values,
+              country: data[0].properties.country,
+              state: data[0].properties.city,
+              timezone: data[0].properties.timezone.name,
+            })
+          }
+        } catch (error) {
+          setLocationIsLoading(false)
+        } finally {
+          setLocationIsLoading(false)
+        }
+      })
+    } else {
+      alert('Geolocation is not supported by this browser.')
+    }
+  }
+
   const getLocation = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         setValues({
           ...values,
-          coordinates: [
-            position.coords.latitude as never,
-            position.coords.longitude as never,
-          ],
+          coordinates: [position.coords.latitude, position.coords.longitude],
         })
-        setLocationIsLoading(true)
-        const response = await fetch(
-          `https://api.geoapify.com/v1/geocode/reverse?lat=${values.coordinates[0]}&lon=${values.coordinates[1]}&apiKey=${geoApifyKey}`
-        )
-        const data = await response.json()
-        if (response.ok) {
-          const locationData = data.features
-          setValues({
-            ...values,
-            country: locationData[0].properties.country,
-            state: locationData[0].properties.city,
-            timezone: locationData[0].properties.timezone.name,
-          })
-          setLocationIsLoading(false)
-        }
-        setLocationIsLoading(false)
       })
     } else {
       alert('Geolocation is not supported by this browser.')
@@ -560,20 +598,12 @@ const HomeMobile = () => {
             {/* Location input */}
             <Box>
               {/* Title */}
-              <Typography
-                marginTop="40px"
-                fontSize="16px"
-                variant="h5"
-                textAlign="start"
-                component="div"
-                color="#343132"
-              >
-                {t('box_one_location')}
-              </Typography>
+
               {/* Second inputs container */}
               <Box
                 sx={{
                   display: 'flex',
+                  flexDirection: 'column',
                   justifyContent: 'space-between',
                 }}
               >
@@ -588,20 +618,20 @@ const HomeMobile = () => {
                 >
                   {/* Title */}
                   <Typography
-                    // marginTop="40px"
-                    fontSize="20px"
+                    marginTop="-8px"
+                    fontSize="16px"
                     variant="h5"
                     textAlign="start"
                     component="div"
+                    color="#343132"
                   >
-                    {/* Location */}
                     {t('box_one_location')}
                   </Typography>
                   {/* Location Button */}
                   <Box
                     sx={{
-                      height: '32px',
-                      width: '80%',
+                      height: '24px',
+                      width: '60%',
                       background: '#31E716',
                       borderRadius: '7px',
                       display: 'flex',
@@ -613,15 +643,15 @@ const HomeMobile = () => {
                       disableRipple
                       loading={locationIsLoading}
                       variant="contained"
-                      onClick={getLocation}
+                      onClick={getAutoLocation}
                       sx={{
-                        height: '32px',
+                        height: '24px',
                         width: '100%',
                         background: '#31E716',
                         // borderRadius: "7px",
                         color: '#343132',
                         fontWeight: 400,
-                        fontSize: '15px',
+                        fontSize: '12px',
                         boxShadow: 'none',
                         textTransform: 'none',
                         lineHeight: '14px',
@@ -636,90 +666,107 @@ const HomeMobile = () => {
                   </Box>
                 </Box>
                 {/* Country select */}
-                <Select
-                  displayEmpty
-                  value={values?.country}
-                  onChange={(e) =>
-                    setValues({
-                      ...values,
-                      state: '',
-                      country: e.target.value,
-                      coordinates: countries.find(
+                <Box
+                  sx={{
+                    display: 'flex',
+                    width: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Select
+                    displayEmpty
+                    value={values?.country}
+                    onChange={async (e) => {
+                      setValues({
+                        ...values,
+                        state: '',
+                        country: e.target.value,
+                        coordinates: countries.find(
+                          (country) => country?.country === e.target.value
+                        )?.coordinates as any,
+                      })
+                      const newCoordinates = countries.find(
                         (country) => country?.country === e.target.value
-                      )?.coordinates as any,
-                    })
-                  }
-                  renderValue={(selected: any) => {
-                    if (selected?.length === 0) {
-                      return `${t('box_one_location_country')}`
-                    }
+                      )?.coordinates as any
 
-                    return selected
-                  }}
-                  sx={{
-                    height: '35px',
-                    width: '48%',
-                    background: 'white',
-                    borderRadius: '15px',
-                    '.MuiOutlinedInput-notchedOutline': {
-                      border: '0',
-                      padding: '9px',
-                    },
-                    '&:hover > .MuiOutlinedInput-notchedOutline': {
-                      border: '0',
-                    },
-                  }}
-                >
-                  <MenuItem disabled value="">
-                    {'box_one_location_country'}
-                  </MenuItem>
-                  {countries?.map((country) => (
-                    <MenuItem key={country?.country} value={country?.country}>
-                      {country?.country}
+                      await getLocationData(
+                        newCoordinates[0],
+                        newCoordinates[1]
+                      )
+                    }}
+                    renderValue={(selected: any) => {
+                      if (selected?.length === 0) {
+                        return `${t('box_one_location_country')}`
+                      }
+
+                      return selected
+                    }}
+                    sx={{
+                      height: '35px',
+                      width: '48%',
+                      background: 'white',
+                      borderRadius: '15px',
+                      '.MuiOutlinedInput-notchedOutline': {
+                        border: '0',
+                        padding: '9px',
+                      },
+                      '&:hover > .MuiOutlinedInput-notchedOutline': {
+                        border: '0',
+                      },
+                    }}
+                  >
+                    <MenuItem disabled value="">
+                      {'box_one_location_country'}
                     </MenuItem>
-                  ))}
-                </Select>
-                {/* State Select */}
-                <Select
-                  displayEmpty
-                  value={values?.state}
-                  onChange={(e) =>
-                    setValues({
-                      ...values,
-                      state: e.target.value,
-                    })
-                  }
-                  renderValue={(selected: any) => {
-                    if (selected?.length === 0) {
-                      return `${t('box_one_location_state')}`
-                    }
-                    return selected
-                  }}
-                  sx={{
-                    height: '35px',
-                    width: '48%',
-                    background: 'white',
-                    borderRadius: '15px',
-                    '.MuiOutlinedInput-notchedOutline': {
-                      border: '0',
-                      padding: '9px',
-                    },
-                    '&:hover > .MuiOutlinedInput-notchedOutline': {
-                      border: '0',
-                    },
-                  }}
-                >
-                  <MenuItem disabled value="">
-                    {t('box_one_location_state')}
-                  </MenuItem>
-                  {countries
-                    .find((country) => country?.country === values?.country)
-                    ?.states.map((state) => (
-                      <MenuItem key={state} value={state}>
-                        {state}
+                    {countries?.map((country) => (
+                      <MenuItem key={country?.country} value={country?.country}>
+                        {country?.country}
                       </MenuItem>
                     ))}
-                </Select>
+                  </Select>
+                  <Select
+                    displayEmpty
+                    value={values?.state}
+                    onChange={(e) =>
+                      setValues({
+                        ...values,
+                        state: e.target.value,
+                      })
+                    }
+                    renderValue={(selected: any) => {
+                      if (selected?.length === 0) {
+                        return `${t('box_one_location_state')}`
+                      }
+                      return selected
+                    }}
+                    sx={{
+                      height: '35px',
+                      width: '48%',
+                      background: 'white',
+                      borderRadius: '15px',
+                      '.MuiOutlinedInput-notchedOutline': {
+                        border: '0',
+                        padding: '9px',
+                      },
+                      '&:hover > .MuiOutlinedInput-notchedOutline': {
+                        border: '0',
+                      },
+                    }}
+                  >
+                    <MenuItem disabled value="">
+                      {t('box_one_location_state')}
+                    </MenuItem>
+                    {countries
+                      .find((country) => country?.country === values?.country)
+                      ?.states.map((state) => (
+                        <MenuItem key={state} value={state}>
+                          {state}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </Box>
+                {/* State Select */}
               </Box>
               <Box
                 sx={{
@@ -729,14 +776,22 @@ const HomeMobile = () => {
                 }}
               >
                 <Button
-                  onClick={() => {
-                    updateKeywordDetails(selectedKeyword?.id, {
-                      country: values?.country,
-                      state: values?.state,
-                      organisation: values?.organisation,
-                      sublink: values?.sublink,
-                      timezone: values?.timezone,
-                    })
+                  onClick={async () => {
+                    await getLocation()
+                    if (values?.coordinates?.length > 1) {
+                      if (values.timezone === null || values.timezone === '') {
+                        await getLocationData()
+                      }
+                    }
+                    if (values?.timezone) {
+                      updateKeywordDetails(selectedKeyword?.id, {
+                        country: values?.country,
+                        state: values?.state,
+                        organisation: values?.organisation,
+                        sublink: values?.sublink,
+                        timezone: values?.timezone,
+                      })
+                    }
                   }}
                   disableRipple
                   variant="contained"

@@ -1,77 +1,77 @@
-import { Typography, Box } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-import { useTranslation } from "next-i18next";
-import { GoogleLogin } from "@react-oauth/google";
-import { UserContext } from "@/contexts/userContext";
-import { useContext } from "react";
-import { toast } from "react-toastify";
+import { Typography, Box } from '@mui/material'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useTranslation } from 'next-i18next'
+import { GoogleLogin } from '@react-oauth/google'
+import { UserContext } from '@/contexts/userContext'
+import { useContext } from 'react'
+import { toast } from 'react-toastify'
 
 const SignupDetails = () => {
-	const { t } = useTranslation("signup");
+  const { t } = useTranslation('signup')
 
-	const { handleGoogleAuth } = useContext(UserContext);
+  const { handleGoogleAuth } = useContext(UserContext)
 
-	const icon = [
-		{
-			id: 1,
-			icon: "/icons/google.svg",
-			alt: "Google Icon",
-			title: "Google Icon",
-			link: "https://google.com",
-			name: "google",
-		},
-		{
-			id: 2,
-			icon: "/icons/apple.svg",
-			alt: "Apple Icon",
-			title: "Apple Icon",
-			link: "https://apple.com",
-			name: "apple",
-		},
-	];
-	return (
-		<>
-			<Box
-				sx={{
-					width: "100%",
-					height: { xs: "100%", md: "65px", xl: "65px" },
-					display: "flex",
-					alignItems: "center",
-					// justifyContent: {
-					//   xs: 'center',
-					//   md: 'space-between',
-					//   xl: 'space-between',
-					// },
-					justifyContent: { xs: "center", sm: "flex-start" },
-					flexDirection: { xs: "row", md: "row", xl: "row" },
-					marginY: "2rem",
-				}}
-			>
-				<>
-					<Typography
-						sx={{
-							fontSize: { xs: "20px", md: "30px", xl: "40px" },
-							fontWight: "300",
-							lineHeight: { xs: "24px", xl: "37px" },
-							marginY: { xs: "1rem", md: "0", xl: "0" },
-							marginLeft: "2rem",
-						}}
-						component={"h1"}
-					>
-						{t("title")}
-					</Typography>
-				</>
-				<Box
-					sx={{
-						width: { xs: "100%", sm: "100%", md: "50%", xl: "30%" },
-						display: { xs: "none", sm: "flex" },
-						alignItems: "center",
-						justifyContent: "space-between",
-						flexDirection: { xs: "column", md: "row", xl: "row" },
-					}}
-				>
-					{/*<Box
+  const icon = [
+    {
+      id: 1,
+      icon: '/icons/google.svg',
+      alt: 'Google Icon',
+      title: 'Google Icon',
+      link: 'https://google.com',
+      name: 'google',
+    },
+    {
+      id: 2,
+      icon: '/icons/apple.svg',
+      alt: 'Apple Icon',
+      title: 'Apple Icon',
+      link: 'https://apple.com',
+      name: 'apple',
+    },
+  ]
+  return (
+    <>
+      <Box
+        sx={{
+          width: '100%',
+          height: { xs: '100%', md: '65px', xl: '65px' },
+          display: 'flex',
+          alignItems: 'center',
+          // justifyContent: {
+          //   xs: 'center',
+          //   md: 'space-between',
+          //   xl: 'space-between',
+          // },
+          justifyContent: { xs: 'center', sm: 'flex-start' },
+          flexDirection: { xs: 'row', md: 'row', xl: 'row' },
+          marginY: '2rem',
+        }}
+      >
+        <>
+          <Typography
+            sx={{
+              fontSize: { xs: '20px', md: '30px', xl: '40px' },
+              fontWight: '300',
+              lineHeight: { xs: '24px', xl: '37px' },
+              marginY: { xs: '1rem', md: '0', xl: '0' },
+              marginLeft: '2rem',
+            }}
+            component={'h1'}
+          >
+            {t('title')}
+          </Typography>
+        </>
+        <Box
+          sx={{
+            width: { xs: '100%', sm: '100%', md: '50%', xl: '30%' },
+            display: { xs: 'none', sm: 'flex' },
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexDirection: { xs: 'column', md: 'row', xl: 'row' },
+          }}
+        >
+          {/*<Box
             sx={{
               width: { xs: '100%', md: '45%', xl: '100%' },
               display: 'flex',
@@ -134,7 +134,7 @@ const SignupDetails = () => {
             </Box>
           </Box> */}
 
-					{/* <Box
+          {/* <Box
             sx={{
               width: '50%',
               display: 'flex',
@@ -204,10 +204,10 @@ const SignupDetails = () => {
               }}
             ></Typography>
           </Box>*/}
-				</Box>
-			</Box>
-		</>
-	);
-};
+        </Box>
+      </Box>
+    </>
+  )
+}
 
-export default SignupDetails;
+export default SignupDetails

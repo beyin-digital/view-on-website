@@ -8,7 +8,7 @@ const LineChart = ({ data }: any) => {
       {data?.data?.length > 0 && (
         <ResponsiveLine
           data={[data]}
-          curve="catmullRom"
+          curve="linear"
           margin={{ top: 45, right: 120, bottom: 60, left: 60 }}
           xScale={{ type: 'point' }}
           yScale={{

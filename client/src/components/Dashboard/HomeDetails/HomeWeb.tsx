@@ -21,7 +21,6 @@ import { downloadSvg } from '@/utils/downloadSvg'
 import { useRouter } from 'next/router'
 
 import io from 'socket.io-client'
-import { set } from 'zod'
 const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
 const geoApifyKey = process.env.NEXT_PUBLIC_GEOAPIFY_KEY
 
@@ -66,7 +65,7 @@ const HomeWeb = () => {
     country: '',
     state: '',
     timezone: '',
-    coordinates: [],
+    coordinates: [] as number[],
   })
 
   const [pieChartData, setPieChartData] = React.useState([
@@ -87,36 +86,70 @@ const HomeWeb = () => {
   ])
   const [lineChartData, setLineChartData] = React.useState<any>(null)
   const [locationIsLoading, setLocationIsLoading] = useState(false)
+
+  const getLocationData = async (lat?: number, lng?: number) => {
+    try {
+      setLocationIsLoading(true)
+      const res = await api.get(
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${
+          (lat as number) || values.coordinates[0]
+        }&lon=${(lng as number) || values.coordinates[1]}&apiKey=${geoApifyKey}`
+      )
+      if (res.status === 200) {
+        const data = res.data.features
+        setValues({
+          ...values,
+          country: data[0].properties.country,
+          state: data[0].properties.city,
+          timezone: data[0].properties.timezone.name,
+        })
+      }
+    } catch (error) {
+      setLocationIsLoading(false)
+    } finally {
+      setLocationIsLoading(false)
+    }
+  }
+
+  const getAutoLocation = async () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        try {
+          setLocationIsLoading(true)
+          setValues({
+            ...values,
+            timezone: '',
+          })
+          const res = await api.get(
+            `https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=${geoApifyKey}`
+          )
+          if (res.status === 200) {
+            const data = res.data.features
+            setValues({
+              ...values,
+              country: data[0].properties.country,
+              state: data[0].properties.city,
+              timezone: data[0].properties.timezone.name,
+            })
+          }
+        } catch (error) {
+          setLocationIsLoading(false)
+        } finally {
+          setLocationIsLoading(false)
+        }
+      })
+    } else {
+      alert('Geolocation is not supported by this browser.')
+    }
+  }
+
   const getLocation = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
-        setLocationIsLoading(true)
         setValues({
           ...values,
-          coordinates: [
-            position.coords.latitude as never,
-            position.coords.longitude as never,
-          ],
+          coordinates: [position.coords.latitude, position.coords.longitude],
         })
-
-        const res = await api.get(
-          `https://api.geoapify.com/v1/geocode/reverse?lat=${
-            position.coords.latitude | values.coordinates[0]
-          }&lon=${
-            position.coords.longitude | values.coordinates[1]
-          }&apiKey=${geoApifyKey}`
-        )
-        if (res.status === 200) {
-          const data = res.data.features
-          setValues({
-            ...values,
-            country: data[0].properties.country,
-            state: data[0].properties.city,
-            timezone: data[0].properties.timezone.name,
-          })
-          setLocationIsLoading(false)
-        }
-        setLocationIsLoading(false)
       })
     } else {
       alert('Geolocation is not supported by this browser.')
@@ -333,7 +366,7 @@ const HomeWeb = () => {
                     disableRipple
                     loading={locationIsLoading}
                     variant="contained"
-                    onClick={getLocation}
+                    onClick={getAutoLocation}
                     sx={{
                       height: '32px',
                       width: '100%',
@@ -366,7 +399,7 @@ const HomeWeb = () => {
                 <Select
                   displayEmpty
                   value={values?.country}
-                  onChange={(e) =>
+                  onChange={async (e) => {
                     setValues({
                       ...values,
                       state: '',
@@ -375,7 +408,13 @@ const HomeWeb = () => {
                         (country) => country?.country === e.target.value
                       )?.coordinates as any,
                     })
-                  }
+
+                    const newCoordinates = countries.find(
+                      (country) => country?.country === e.target.value
+                    )?.coordinates as any
+
+                    await getLocationData(newCoordinates[0], newCoordinates[1])
+                  }}
                   renderValue={(selected: any) => {
                     if (selected.length === 0) {
                       return `${t('box_one_location_country')}`
@@ -464,6 +503,11 @@ const HomeWeb = () => {
               <Button
                 onClick={async () => {
                   await getLocation()
+                  if (values?.coordinates?.length > 1) {
+                    if (values.timezone === null || values.timezone === '') {
+                      await getLocationData()
+                    }
+                  }
                   if (values?.timezone) {
                     updateKeywordDetails(selectedKeyword?.id, {
                       country: values?.country,
@@ -474,6 +518,7 @@ const HomeWeb = () => {
                     })
                   }
                 }}
+                disabled={values.timezone === null || values.timezone === ''}
                 disableRipple
                 variant="contained"
                 sx={{

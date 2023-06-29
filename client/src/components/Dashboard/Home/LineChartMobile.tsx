@@ -17,7 +17,7 @@ const LineChartMobile = ({ data }: any) => {
             },
           }}
           data={[data]}
-          curve="catmullRom"
+          curve="linear"
           margin={{ top: 45, right: 15, bottom: 60, left: 60 }}
           xScale={{ type: 'point' }}
           yScale={{
@@ -41,6 +41,7 @@ const LineChartMobile = ({ data }: any) => {
           axisLeft={{
             legend: `${t('box_main_chart_visit')}`,
             legendPosition: 'middle',
+            format: (value) => Math.floor(value) === value && value,
             legendOffset: -40,
             tickRotation: 0,
             tickPadding: 5,

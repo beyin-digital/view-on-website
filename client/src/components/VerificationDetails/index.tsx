@@ -164,6 +164,7 @@ const VerificationDetails = () => {
                 value={otp}
                 onChange={handleChange}
                 length={6}
+                inputMode="numeric"
                 className="myClassName "
                 sx={{
                   '.MuiOutlinedInput-root': {
@@ -188,9 +189,7 @@ const VerificationDetails = () => {
             <Typography
               onClick={() => {
                 if (secondsLeft <= 0) {
-                  resendOTP(
-                    user?.email || (router.query.email as string) || ''
-                  )
+                  resendOTP(user?.email || (router.query.email as string) || '')
                   start(60)
                 }
               }}

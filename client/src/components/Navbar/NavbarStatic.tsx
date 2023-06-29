@@ -407,7 +407,7 @@ const NavbarStatic = ({
           </Link>
         ))}
       </Box>
-      <FooterNav  />
+      <FooterNav />
     </Box>
   )
   return (

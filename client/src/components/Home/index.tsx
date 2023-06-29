@@ -68,51 +68,48 @@ const PageHome: React.FC<PageHomeProps> = ({ anchor }) => {
   }, [hashtagDebounce, keywordFound])
 
   return (
-
-
-            <>
-              <HomeDetails
-                keywordFound={keywordFound}
-                hashtag={hashtag}
-                setHashtag={setHashtag}
-                onClick={openModel}
-              />
-              <Drawer
-                variant="temporary"
-                anchor={anchor}
-                open={isDrawerOpen}
-                onClose={() => setIsDrawerOpen(false)}
-                onClick={toggleDrawer('bottom', false)}
-                onKeyDown={toggleDrawer('bottom', false)}
-                sx={{
-                //   background: '#FBFBFB',
-                //   '.MuiDrawer-root': {
-                //     boxShadow: '0px 0px 0px 0px',
-                //     background: '#FBFBFB',
-                //   },
-                //   '.root-MuiModal-backdrop': {
-                //     boxShadow: '0px 0px 0px 0px',
-                //     background: '#FBFBFB',
-                //   },
-                //   boxShadow: isShadowVisible ? '0px 0px 0px #fbfbfb' : '',
-                //   'MuiBackdrop-root': {
-                //     boxShadow: '0px 0px 0px 0px',
-                //     background: '#FBFBFB',
-                //   },
-                //   '.MuiBackdrop-root': {
-                //     boxShadow: '0px 0px 0px 0px',
-                //     background: '#FBFBFB',
-                //   },
-                  height:{ xs: "", md: "100vh" },
-                  background: "transparent",
-                }}
-              >
-                <>
-                  <SliderDesktop onClick={closeModel} />
-                </>
-              </Drawer>
-            </>
-
+    <>
+      <HomeDetails
+        keywordFound={keywordFound}
+        hashtag={hashtag}
+        setHashtag={setHashtag}
+        onClick={openModel}
+      />
+      <Drawer
+        variant="temporary"
+        anchor={anchor}
+        open={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        onClick={toggleDrawer('bottom', false)}
+        onKeyDown={toggleDrawer('bottom', false)}
+        sx={{
+          //   background: '#FBFBFB',
+          //   '.MuiDrawer-root': {
+          //     boxShadow: '0px 0px 0px 0px',
+          //     background: '#FBFBFB',
+          //   },
+          //   '.root-MuiModal-backdrop': {
+          //     boxShadow: '0px 0px 0px 0px',
+          //     background: '#FBFBFB',
+          //   },
+          //   boxShadow: isShadowVisible ? '0px 0px 0px #fbfbfb' : '',
+          //   'MuiBackdrop-root': {
+          //     boxShadow: '0px 0px 0px 0px',
+          //     background: '#FBFBFB',
+          //   },
+          //   '.MuiBackdrop-root': {
+          //     boxShadow: '0px 0px 0px 0px',
+          //     background: '#FBFBFB',
+          //   },
+          height: { xs: '', md: '100vh' },
+          background: 'transparent',
+        }}
+      >
+        <>
+          <SliderDesktop onClick={closeModel} />
+        </>
+      </Drawer>
+    </>
   )
 }
 

@@ -50,7 +50,7 @@ export const LinkSubscribe = () => {
         title={`${t('button')}`}
         href="/subscribe"
         locale={router.locale}
-        className=''
+        className=""
       >
         <Typography
           sx={{

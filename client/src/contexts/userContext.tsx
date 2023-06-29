@@ -460,6 +460,7 @@ export const UserProvider = ({ children }: any) => {
     //  remove token and refresh token from local storage
     localStorage.removeItem('token')
     localStorage.removeItem('refreshToken')
+    router.push(`/${router.locale}/login`)
     // set token and refresh token to null
     setToken(null)
     setRefreshToken(null)

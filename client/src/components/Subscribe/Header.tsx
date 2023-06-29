@@ -20,7 +20,7 @@ const Header = () => {
         }}
       >
         <Typography
-            component={'h1'}
+          component={'h1'}
           sx={{
             fontSize: {
               xs: '18px',

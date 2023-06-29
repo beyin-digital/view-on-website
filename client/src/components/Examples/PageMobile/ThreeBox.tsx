@@ -84,7 +84,7 @@ const ThreeBox = () => {
                 lineHeight: { xs: '15px', sm: '20px', md: '20px' },
                 fontWeight: '300',
               }}
-              className='sizeWatch'
+              className="sizeWatch"
             >
               {t('box_three_desc')}
             </Typography>

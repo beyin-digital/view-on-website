@@ -212,7 +212,7 @@ const MobileProfile = () => {
                 border: '0',
               },
             }}
-            placeholder={`${t("country")}`}
+            placeholder={`${t('country')}`}
           >
             <MenuItem disabled value="">
               {t('country')}

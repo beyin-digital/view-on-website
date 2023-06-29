@@ -40,7 +40,7 @@ const LoginDetails = () => {
             fontWeight: '400',
             lineHeight: '37px',
           }}
-          component={"h1"}
+          component={'h1'}
         >
           {t('title')}
         </Typography>

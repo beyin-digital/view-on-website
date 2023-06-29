@@ -12,8 +12,8 @@ const LayoutMobile: React.FC<Props> = ({ children }) => {
       <Box
         sx={{
           width: '100%',
-          marginTop:"6rem",
-          marginBottom:"3rem"
+          marginTop: '6rem',
+          marginBottom: '3rem',
         }}
         className="IllustrationMobile"
       >

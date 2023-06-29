@@ -126,14 +126,21 @@ export class AnalyticsService {
       }).length,
       totalDailyVisitsByHoursOfTheDay: (() => {
         const hoursArray = Array.from({ length: 24 }, (_, hour) => hour);
-        const localOffset = DateTime.local({
-          zone: keyword?.timezone,
-        }).offset;
+        const currentDate = DateTime.local().setZone(keyword?.timezone);
+        const localOffset = currentDate.offset;
+
+        const last24HoursStart = currentDate.minus({ hours: 24 });
+
         return hoursArray.map((hour) => {
           const visitCounts = keywordCount.filter((count) => {
             const countDate = DateTime.fromISO(
               count.createdAt.toISOString(),
             ).setZone(count.keyword.timezone);
+
+            // Check if the countDate is within the last 24 hours
+            if (countDate < last24HoursStart || countDate >= currentDate) {
+              return false; // Skip this record if it's outside the last 24 hours
+            }
 
             const countOffset = countDate.offset;
             const countHour =
@@ -147,57 +154,68 @@ export class AnalyticsService {
           };
         });
       })(),
-
       totalVisitsByMonthsOfTheYear: [...Array(12).keys()].map((month) => {
+        const currentMonth = DateTime.local()
+          .minus({ months: 11 })
+          .startOf('month')
+          .plus({ months: month });
+
         return {
-          x: new Date(0, month).toLocaleString('default', {
-            month: 'short',
-          }),
+          x: currentMonth.toLocaleString({ month: 'short' }),
           y: keywordCount.filter((count) => {
-            const countDate = new Date(count.createdAt);
-            return countDate.getMonth() === month;
+            const countDate = DateTime.fromISO(
+              count.createdAt.toISOString(),
+            ).setZone('utc');
+            return (
+              countDate.month === currentMonth.month &&
+              countDate.year === currentMonth.year
+            );
           }).length,
         };
       }),
-      totalVisitsByDaysOfTheWeek: [...Array(7).keys()].map((day) => {
-        return {
-          x: new Date(0, 0, day).toLocaleString('default', {
-            weekday: 'short',
-          }),
-          y: keywordCount.filter((count) => {
-            const countDate = new Date(count.createdAt);
-            return countDate.getDay() === day;
-          }).length,
-        };
-      }),
-      totalVisitsByDaysOfTheMonth: [
-        ...Array(
-          new Date(
-            new Date().getFullYear(),
-            new Date().getMonth() + 1,
-            0,
-          ).getDate(),
-        ).keys(),
-      ].map((day) => {
-        return {
-          x: day + 1,
-          y: keywordCount.filter((count) => {
-            const countDate = new Date(count.createdAt);
-            return countDate.getDate() === day + 1;
-          }).length,
-        };
-      }),
+      totalVisitsByDaysOfTheWeek: (() => {
+        const currentDate = DateTime.local();
+        const last7Days = Array.from({ length: 7 }, (_, i) =>
+          currentDate.minus({ days: i }),
+        );
+
+        return last7Days.map((day) => {
+          const visitCounts = keywordCount.filter((count) => {
+            const countDate = DateTime.fromJSDate(count.createdAt);
+            return countDate.weekday === day.weekday;
+          }).length;
+
+          return {
+            x: day.toFormat('EEE'),
+            y: visitCounts,
+          };
+        });
+      })(),
+      totalVisitsByDaysOfTheMonth: (() => {
+        const currentDate = DateTime.local();
+        const currentMonthDays = currentDate.daysInMonth;
+
+        const earliestRecordDate = DateTime.local(
+          currentDate.year,
+          currentDate.month,
+          1,
+        ).startOf('day');
+
+        return Array.from({ length: currentMonthDays as any }, (_, day) => {
+          const dayOfMonth = day + 1;
+          const currentDayDate = earliestRecordDate.plus({ days: day });
+
+          const visitCounts = keywordCount.filter((count) => {
+            const countDate = DateTime.fromJSDate(count.createdAt);
+            return countDate.hasSame(currentDayDate, 'day');
+          }).length;
+
+          return {
+            x: dayOfMonth,
+            y: visitCounts,
+          };
+        });
+      })(),
     };
   }
 }
-
-/*
-  if (keywordCount.length === 0) {
-    return empty values
-  }
-
-  else{
-    We need time of record creation
-    We need user timezone
-  }
-*/
