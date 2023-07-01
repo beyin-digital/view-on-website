@@ -416,7 +416,7 @@ const HomeWeb = () => {
                     await getLocationData(newCoordinates[0], newCoordinates[1])
                   }}
                   renderValue={(selected: any) => {
-                    if (selected.length === 0) {
+                    if (selected?.length === 0) {
                       return `${t('box_one_location_country')}`
                     }
 
