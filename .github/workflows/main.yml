@@ -1,37 +1,37 @@
-# name: push to vow client and server repos
-# on:
-#   push:
-#     branches: [main]
-#   pull_request:
-#     branches: [main]
-# jobs:
-#   push_to_vow_frontend:
-#     runs-on: ubuntu-latest
-#     container: pandoc/latex
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Pushes to another repository
-#         uses: cpina/github-action-push-to-another-repository@main
-#         env:
-#           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-#         with:
-#           source-directory: "./client"
-#           destination-github-username: "VIEWONWEBSITE"
-#           destination-repository-name: "frontend"
-#           user-email: salih.codes@gmail.com
-#           target-branch: master
-#   push_vow_backend:
-#     runs-on: ubuntu-latest
-#     container: pandoc/latex
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Pushes to another repository
-#         uses: cpina/github-action-push-to-another-repository@main
-#         env:
-#           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-#         with:
-#           source-directory: "./server"
-#           destination-github-username: "VIEWONWEBSITE"
-#           destination-repository-name: "backend"
-#           user-email: salih.codes@gmail.com
-#           target-branch: master
+name: push to vow client and server repos
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  push_to_vow_frontend:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+    steps:
+      - uses: actions/checkout@v2
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: "./client"
+          destination-github-username: "VIEWONWEBSITE"
+          destination-repository-name: "frontend"
+          user-email: salih.codes@gmail.com
+          target-branch: master
+  push_vow_backend:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+    steps:
+      - uses: actions/checkout@v2
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: "./server"
+          destination-github-username: "VIEWONWEBSITE"
+          destination-repository-name: "backend"
+          user-email: salih.codes@gmail.com
+          target-branch: master
