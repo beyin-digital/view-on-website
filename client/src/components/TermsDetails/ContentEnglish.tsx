@@ -52,8 +52,10 @@ const Content = () => {
             [viewonwebsite.com]
           </Link>
           {t('a_text_one')}
-          <b>{t('a_service')}</b> {t('a_text_two')} (“
-          <b>{t('a_premium_service')}</b>”) ({t('a_together')}
+          <b>{t('a_service')}</b>
+          {t('a_text_two')}
+           (“ <b>{t('a_premium_service')}</b>”)
+           {t('a_together')}
           <b>{t('a_service')}</b>)
         </TypographyStyle>
       </li>
@@ -82,25 +84,25 @@ const Content = () => {
         </TypographyStyle>
         <ol className="list_two">
           <li className="">
-            <Typography>{t('e_one')}</Typography>
+            <TypographyStyle>{t('e_one')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('e_two')}</Typography>
-          </li>
-
-          <li>
-            <Typography>{t('e_three')}</Typography>
+            <TypographyStyle>{t('e_two')}</TypographyStyle>
           </li>
 
           <li>
-            <Typography>{t('e_four')}</Typography>
+            <TypographyStyle>{t('e_three')}</TypographyStyle>
           </li>
 
           <li>
-            <Typography>{t('e_five')}</Typography>
+            <TypographyStyle>{t('e_four')}</TypographyStyle>
+          </li>
+
+          <li>
+            <TypographyStyle>{t('e_five')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('e_six')}</Typography>
+            <TypographyStyle>{t('e_six')}</TypographyStyle>
           </li>
         </ol>
       </li>
@@ -113,13 +115,13 @@ const Content = () => {
         </TypographyStyle>
         <ol className="list_two">
           <li>
-            <Typography>{t('f_one')}</Typography>
+            <TypographyStyle>{t('f_one')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('f_two')}</Typography>
+            <TypographyStyle>{t('f_two')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('f_three')}</Typography>
+            <TypographyStyle>{t('f_three')}</TypographyStyle>
           </li>
         </ol>
       </li>
@@ -142,14 +144,14 @@ const Content = () => {
         </TypographyStyle>
         <ol className="list_two">
           <li>
-            <Typography>{t('h_one')}</Typography>
+            <TypographyStyle>{t('h_one')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('h_two')}</Typography>
+            <TypographyStyle>{t('h_two')}</TypographyStyle>
           </li>
 
           <li>
-            <Typography>{t('h_three')}</Typography>
+            <TypographyStyle>{t('h_three')}</TypographyStyle>
           </li>
         </ol>
       </li>
@@ -206,13 +208,13 @@ const Content = () => {
         <br />- <TypographyStyle>{t('n_text_three')}</TypographyStyle>
         <ol className="list_two">
           <li>
-            <Typography>{t('n_one')}</Typography>
+            <TypographyStyle>{t('n_one')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('n_two')}</Typography>
+            <TypographyStyle>{t('n_two')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('n_three')}</Typography>
+            <TypographyStyle>{t('n_three')}</TypographyStyle>
           </li>
         </ol>
         <TypographyStyle>{t('n_text_four')}</TypographyStyle>
@@ -239,25 +241,25 @@ const Content = () => {
         </TypographyStyle>
         <ol className="list_two">
           <li>
-            <Typography>{t('q_one')}</Typography>
+            <TypographyStyle>{t('q_one')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('q_two')}</Typography>
+            <TypographyStyle>{t('q_two')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('q_three')}</Typography>
+            <TypographyStyle>{t('q_three')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('q_four')}</Typography>
+            <TypographyStyle>{t('q_four')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('q_five')}</Typography>
+            <TypographyStyle>{t('q_five')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('q_six')}</Typography>
+            <TypographyStyle>{t('q_six')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('q_seven')}</Typography>
+            <TypographyStyle>{t('q_seven')}</TypographyStyle>
           </li>
         </ol>
       </li>
@@ -283,25 +285,25 @@ const Content = () => {
         <br />- <TypographyStyle>{t('y_text_three')}</TypographyStyle>
         <ol className="list_two">
           <li>
-            <Typography>{t('y_one')}</Typography>
+            <TypographyStyle>{t('y_one')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('y_two')}</Typography>
+            <TypographyStyle>{t('y_two')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('y_three')}</Typography>
+            <TypographyStyle>{t('y_three')}</TypographyStyle>
           </li>
         </ol>
         <TypographyStyle>{t('y_text_four')}</TypographyStyle>
         <ol className="list_two">
           <li>
-            <Typography>{t('y_tow_one')}</Typography>
+            <TypographyStyle>{t('y_tow_one')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('y_tow_two')}</Typography>
+            <TypographyStyle>{t('y_tow_two')}</TypographyStyle>
           </li>
           <li>
-            <Typography>{t('y_tow_three')}</Typography>
+            <TypographyStyle>{t('y_tow_three')}</TypographyStyle>
           </li>
         </ol>
         - <TypographyStyle>{t('y_text_five')}</TypographyStyle>
