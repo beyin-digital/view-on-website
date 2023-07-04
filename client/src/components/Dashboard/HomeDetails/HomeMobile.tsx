@@ -739,11 +739,15 @@ const HomeMobile = () => {
                     <MenuItem disabled value="">
                       {'box_one_location_country'}
                     </MenuItem>
-                    {countries?.map((country) => (
-                      <MenuItem key={country?.country} value={country?.country}>
-                        {country?.country}
-                      </MenuItem>
-                    ))}
+                    {!isLoading &&
+                      countries?.map((country) => (
+                        <MenuItem
+                          key={country?.country}
+                          value={country?.country}
+                        >
+                          {country?.country}
+                        </MenuItem>
+                      ))}
                   </Select>
                   <Select
                     displayEmpty
@@ -777,13 +781,14 @@ const HomeMobile = () => {
                     <MenuItem disabled value="">
                       {t('box_one_location_state')}
                     </MenuItem>
-                    {countries
-                      .find((country) => country?.country === values?.country)
-                      ?.states.map((state) => (
-                        <MenuItem key={state} value={state}>
-                          {state}
-                        </MenuItem>
-                      ))}
+                    {!isLoading &&
+                      countries
+                        .find((country) => country?.country === values?.country)
+                        ?.states.map((state) => (
+                          <MenuItem key={state} value={state}>
+                            {state}
+                          </MenuItem>
+                        ))}
                   </Select>
                 </Box>
                 {/* State Select */}
