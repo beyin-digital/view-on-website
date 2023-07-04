@@ -58,6 +58,7 @@ const HomeMobile = () => {
   } = useContext(KeywordContext)
 
   const [lineChartType, setLineChartType] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
 
   const [values, setValues] = React.useState({
     hashtag: '',
@@ -91,22 +92,30 @@ const HomeMobile = () => {
   const [locationIsLoading, setLocationIsLoading] = useState(false)
 
   const handleUpdateKeywordDetails = async () => {
-    const foundCoordinates = countries?.find(
-      (c) => c?.country === values.country
-    )?.coordinates as number[]
+    try {
+      setIsLoading(true)
+      const foundCoordinates = values.country
+        ? (countries?.find((c) => c?.country === values?.country)
+            ?.coordinates as number[])
+        : []
 
-    const { timezone } = (await getLocationData(
-      foundCoordinates[0],
-      foundCoordinates[1]
-    )) as any
+      const { timezone } = (await getLocationData(
+        foundCoordinates[0],
+        foundCoordinates[1]
+      )) as any
 
-    await updateKeywordDetails(selectedKeyword?.id, {
-      country: values?.country,
-      state: values?.state,
-      organisation: values?.organisation,
-      sublink: values?.sublink,
-      timezone: timezone,
-    })
+      await updateKeywordDetails(selectedKeyword?.id, {
+        country: values?.country,
+        state: values?.state,
+        organisation: values?.organisation,
+        sublink: values?.sublink,
+        timezone: timezone,
+      })
+    } catch (error) {
+      setIsLoading(false)
+    } finally {
+      setIsLoading(false)
+    }
   }
   const getLocationData = async (lat?: number, lng?: number) => {
     try {
@@ -121,7 +130,7 @@ const HomeMobile = () => {
         setValues({
           ...values,
           country: data[0].properties.country,
-          state: data[0].properties.city,
+          state: data[0].properties.state || data[0].properties.city,
           timezone: data[0].properties.timezone.name,
         })
       }
@@ -149,7 +158,7 @@ const HomeMobile = () => {
             setValues({
               ...values,
               country: data[0].properties.country,
-              state: data[0].properties.city,
+              state: data[0].properties.state || data[0].properties.city,
               timezone: data[0].properties.timezone.name,
             })
           }
@@ -703,15 +712,16 @@ const HomeMobile = () => {
                         coordinates: countries.find(
                           (country) => country?.country === e.target.value
                         )?.coordinates as any,
+                        timezone: '',
                       })
                     }}
-                    renderValue={(selected: any) => {
-                      if (selected?.length === 0) {
-                        return `${t('box_one_location_country')}`
-                      }
+                    // renderValue={(selected: any) => {
+                    //   if (selected?.length === 0) {
+                    //     return `${t('box_one_location_country')}`
+                    //   }
 
-                      return selected
-                    }}
+                    //   return selected
+                    // }}
                     sx={{
                       height: '35px',
                       width: '48%',
@@ -744,12 +754,12 @@ const HomeMobile = () => {
                         state: e.target.value,
                       })
                     }
-                    renderValue={(selected: any) => {
-                      if (selected?.length === 0) {
-                        return `${t('box_one_location_state')}`
-                      }
-                      return selected
-                    }}
+                    // renderValue={(selected: any) => {
+                    //   if (selected?.length === 0) {
+                    //     return `${t('box_one_location_state')}`
+                    //   }
+                    //   return selected
+                    // }}
                     sx={{
                       height: '35px',
                       width: '48%',
@@ -786,6 +796,15 @@ const HomeMobile = () => {
                 }}
               >
                 <Button
+                  disabled={
+                    isLoading ||
+                    values.country === '' ||
+                    values.state === '' ||
+                    selectedKeyword.letters === '' ||
+                    selectedKeyword.sublink === '' ||
+                    selectedKeyword.letters === undefined ||
+                    selectedKeyword.state === values.state
+                  }
                   onClick={handleUpdateKeywordDetails}
                   disableRipple
                   variant="contained"

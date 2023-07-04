@@ -1677,11 +1677,6 @@ export const countries = [
     ],
   },
   {
-    country: 'Hong Kong',
-    coordinates: [22.3964, 114.1095],
-    states: [],
-  },
-  {
     country: 'Hungary',
     coordinates: [47.1625, 19.5033],
     states: [
@@ -4508,7 +4503,7 @@ export const countries = [
   {
     country: 'United Kingdom',
     coordinates: [55.378051, -3.435973],
-    states: [],
+    states: ['England', 'Scotland', 'Wales', 'Northern Ireland'],
   },
   {
     country: 'United States',

@@ -160,6 +160,10 @@ export const KeywordProvider = ({ children }: any) => {
         setSelectedKeyword(keyword)
         return
       }
+      if (limit) {
+        setKeywords(data)
+        return data
+      }
 
       if ((page === 1 || page === undefined) && limit === undefined) {
         setKeywords(data)
@@ -172,6 +176,7 @@ export const KeywordProvider = ({ children }: any) => {
         data: [...keywords.data, ...data.data],
         hasNextPage: data.hasNextPage,
       })
+      return
     } catch (error) {
       console.error('Error fetching keywords')
     }
@@ -235,7 +240,6 @@ export const KeywordProvider = ({ children }: any) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
-          'Accept-Language': router.locale || 'en-GB',
         },
         body: JSON.stringify(values),
       })
@@ -244,10 +248,31 @@ export const KeywordProvider = ({ children }: any) => {
       }
       const data = await response.json()
       toast.success('Keyword updated successfully')
-      setSelectedKeyword({ ...selectedKeyword, ...data })
+      // setSelectedKeyword({ ...selectedKeyword, ...data })
       const updatedData = await getUsersKeywords(1, keywords?.data?.length)
-      console.log('updatedData', updatedData)
-      setKeywords({ ...keywords, data: updatedData.data })
+
+      const updatedKeyword = updatedData?.data?.find(
+        (keyword: any) => keyword.id === id
+      )
+
+      const updatedKeywordIndex = updatedData?.data?.findIndex(
+        (keyword: any) => keyword.id === id
+      )
+
+      const updatedKeywords = updatedData?.data?.filter(
+        (keyword: any) => keyword.id !== id
+      )
+
+      updatedKeywords.splice(updatedKeywordIndex, 0, updatedKeyword)
+
+      setKeywords({
+        ...keywords,
+        data: updatedKeywords,
+      })
+
+      setSelectedKeyword(updatedKeyword)
+
+      return
     } catch (error) {
       toast.error('Error updating keyword')
     }

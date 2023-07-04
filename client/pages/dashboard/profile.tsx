@@ -43,32 +43,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const DashboardProfilePage = () => {
   const { t } = useTranslation('profile')
 
-  const router = useRouter()
-  const { updateUser, user, token } = useContext(UserContext)
-
-  const [values, setValues] = useState({
-    fullName: '',
-    organisation: '',
-    country: '',
-  })
-
-  useEffect(() => {
-    if (user) {
-      setValues({
-        fullName: user?.fullName,
-        organisation: user?.organisation,
-        country: '',
-      })
-    }
-  }, [])
-
-  // if (!user) {
-  //   return <div>loading...</div>
-  // }
-
-  // const handleUpdateUser = async () => {
-  //   updateUser({ ...values })
-  // }
+  const { user, token } = useContext(UserContext)
 
   if (!token) return <></>
 
