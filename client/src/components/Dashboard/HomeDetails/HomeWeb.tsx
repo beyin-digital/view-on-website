@@ -515,15 +515,7 @@ const HomeWeb = () => {
               }}
             >
               <Button
-                disabled={
-                  isLoading ||
-                  values.country === '' ||
-                  values.state === '' ||
-                  selectedKeyword.letters === '' ||
-                  selectedKeyword.sublink === '' ||
-                  selectedKeyword.letters === undefined ||
-                  selectedKeyword.state === values.state
-                }
+                disabled={isLoading}
                 onClick={handleUpdateKeywordDetails}
                 disableRipple
                 variant="contained"
