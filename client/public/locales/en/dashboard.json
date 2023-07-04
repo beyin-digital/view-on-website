@@ -34,5 +34,6 @@
   "id_one": "Today's visits",
   "id_two": "This Week's visits",
   "id_three": "This month's visits",
-  "id_four": "This year's visits"
+  "id_four": "This year's visits",
+  "chart_access": "Please add a location to your keyword to gain access to the chart"
 }

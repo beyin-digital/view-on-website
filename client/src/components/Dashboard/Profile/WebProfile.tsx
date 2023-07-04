@@ -35,7 +35,7 @@ const WebProfile = () => {
         country: user?.country as string,
       })
     }
-  }, [])
+  }, [user])
 
   if (!token) {
     return <></>

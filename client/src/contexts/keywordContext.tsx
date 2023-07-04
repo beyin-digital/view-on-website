@@ -129,7 +129,7 @@ export const KeywordProvider = ({ children }: any) => {
     try {
       const response = await fetch(
         `${apiUrl}/keywords?page=${page ? page : 1}&limit=${
-          limit ? limit : 10
+          limit ? limit : 50
         }`,
         {
           method: 'GET',
@@ -172,8 +172,6 @@ export const KeywordProvider = ({ children }: any) => {
         data: [...keywords.data, ...data.data],
         hasNextPage: data.hasNextPage,
       })
-
-      return data
     } catch (error) {
       console.error('Error fetching keywords')
     }
@@ -182,7 +180,7 @@ export const KeywordProvider = ({ children }: any) => {
   const getUserSubscriptions = async (page?: number) => {
     try {
       const response = await fetch(
-        `${apiUrl}/subscriptions?page=${page}&limit=10`,
+        `${apiUrl}/subscriptions?page=${page}&limit=50`,
         {
           method: 'GET',
           headers: {
@@ -204,7 +202,6 @@ export const KeywordProvider = ({ children }: any) => {
       }
       setSubscriptions({
         ...subscriptions,
-        // check for existing keyword and remove it from the list if it isn't returned from the api
         data: [...subscriptions.data, ...data.data],
         hasNextPage: data.hasNextPage,
       })

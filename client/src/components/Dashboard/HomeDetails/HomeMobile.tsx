@@ -90,13 +90,31 @@ const HomeMobile = () => {
 
   const [locationIsLoading, setLocationIsLoading] = useState(false)
 
+  const handleUpdateKeywordDetails = async () => {
+    const foundCoordinates = countries?.find(
+      (c) => c?.country === values.country
+    )?.coordinates as number[]
+
+    const { timezone } = (await getLocationData(
+      foundCoordinates[0],
+      foundCoordinates[1]
+    )) as any
+
+    await updateKeywordDetails(selectedKeyword?.id, {
+      country: values?.country,
+      state: values?.state,
+      organisation: values?.organisation,
+      sublink: values?.sublink,
+      timezone: timezone,
+    })
+  }
   const getLocationData = async (lat?: number, lng?: number) => {
     try {
       setLocationIsLoading(true)
       const res = await api.get(
-        `https://api.geoapify.com/v1/geocode/reverse?lat=${
-          (lat as number) || values.coordinates[0]
-        }&lon=${(lng as number) || values.coordinates[1]}&apiKey=${geoApifyKey}`
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${lat as number}&lon=${
+          lng as number
+        }&apiKey=${geoApifyKey}`
       )
       if (res.status === 200) {
         const data = res.data.features
@@ -326,7 +344,7 @@ const HomeMobile = () => {
                 }}
               >
                 <Typography sx={{ fontWeight: 'bold', fontSize: '32px' }}>
-                  Please add a location your keyword to view chart data
+                  {t('chart_access')}
                 </Typography>
               </Box>
             )}
@@ -686,14 +704,6 @@ const HomeMobile = () => {
                           (country) => country?.country === e.target.value
                         )?.coordinates as any,
                       })
-                      const newCoordinates = countries.find(
-                        (country) => country?.country === e.target.value
-                      )?.coordinates as any
-
-                      await getLocationData(
-                        newCoordinates[0],
-                        newCoordinates[1]
-                      )
                     }}
                     renderValue={(selected: any) => {
                       if (selected?.length === 0) {
@@ -776,23 +786,7 @@ const HomeMobile = () => {
                 }}
               >
                 <Button
-                  onClick={async () => {
-                    await getLocation()
-                    if (values?.coordinates?.length > 1) {
-                      if (values.timezone === null || values.timezone === '') {
-                        await getLocationData()
-                      }
-                    }
-                    if (values?.timezone) {
-                      updateKeywordDetails(selectedKeyword?.id, {
-                        country: values?.country,
-                        state: values?.state,
-                        organisation: values?.organisation,
-                        sublink: values?.sublink,
-                        timezone: values?.timezone,
-                      })
-                    }
-                  }}
+                  onClick={handleUpdateKeywordDetails}
                   disableRipple
                   variant="contained"
                   sx={{

@@ -131,7 +131,7 @@ const Navbar = () => {
       setSelectedKeyword(null)
     }
   }, [token])
-
+  console.log(keywords)
   return (
     <>
       {/* Desktop Navbar */}

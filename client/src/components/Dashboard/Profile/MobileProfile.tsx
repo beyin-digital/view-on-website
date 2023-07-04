@@ -33,7 +33,7 @@ const MobileProfile = () => {
         country: user?.country as string,
       })
     }
-  }, [])
+  }, [user])
 
   if (!token) {
     return <></>

@@ -602,6 +602,46 @@ const DashboardSecurityPage = () => {
                 </Box>
               )}
 
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: { xs: '20px', lg: '0' },
+                  width: '100%',
+                }}
+              >
+                <Box sx={{ width: '100%', textAlign: 'left' }}>
+                  <Typography fontSize="14px">{t('text')}</Typography>
+                  <Typography fontSize="8px">{t('text_two')}</Typography>
+                </Box>
+                <Switch
+                  className="IconSwitchDashboard"
+                  checked={user?.twoFactorAuthEnabled}
+                  onChange={(e) => {
+                    if (user?.twoFactorAuthEnabled === true) {
+                      handleOpen()
+                      return
+                    } else {
+                      handleChangeTwoFactorAuth()
+                      setTwoFactorAuth(true)
+                    }
+                  }}
+                  sx={{
+                    '.mui-style-15wmqzy-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track ':
+                      {
+                        backgroundColor: '#0090EC',
+                      },
+                    '.MuiSwitch-track': {
+                      color: '#0090EC',
+                    },
+                    '	.MuiSwitch-thumb': {
+                      color: '#0090EC',
+                    },
+                  }}
+                />
+              </Box>
+
               <Button
                 color="error"
                 sx={{ alignSelf: 'flex-start', cursor: 'pointer' }}
