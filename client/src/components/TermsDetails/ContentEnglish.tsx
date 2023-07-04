@@ -54,8 +54,8 @@ const Content = () => {
           {t('a_text_one')}
           <b>{t('a_service')}</b>
           {t('a_text_two')}
-           (“ <b>{t('a_premium_service')}</b>”)
-           {t('a_together')}
+          (“ <b>{t('a_premium_service')}</b>”)
+          {t('a_together')}
           <b>{t('a_service')}</b>)
         </TypographyStyle>
       </li>

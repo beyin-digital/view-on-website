@@ -4,7 +4,7 @@ import React from 'react'
 const tiktokPixel = () => {
   return (
     <>
-    <Script>
+      <Script>
         {`
 
  !function (w, d, t) { w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var
@@ -12,7 +12,7 @@ const tiktokPixel = () => {
  Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)}; ttq.load('CIHG04RC77U441D1D5HG');
 ttq.page(); }(window, document, 'ttq');
         `}
-    </Script>
+      </Script>
     </>
   )
 }

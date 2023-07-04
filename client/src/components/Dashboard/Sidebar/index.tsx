@@ -100,7 +100,7 @@ const Sidebar = () => {
           background: 'rgba(251, 251, 251, 0.9)',
           border: '1px solid #E3E3E3',
           backdropFilter: 'blur(100px)',
-          margin:"auto -1rem"
+          margin: 'auto -1rem',
         }}
         className="SideBarDashboard"
       >
