@@ -24,7 +24,7 @@ const HomePage = () => {
   return (
     <Suspense fallback={null}>
       <Head>
-        <title>View On Website - {t('meta_title')} </title>
+        <title>View On Website  </title>
         <meta name="description" content={`${t('meta_description')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
         <link
