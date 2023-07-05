@@ -21,6 +21,8 @@ import { downloadSvg } from '@/utils/downloadSvg'
 import { useRouter } from 'next/router'
 
 import io from 'socket.io-client'
+import { isValidUrl } from '@/utils/checkUrl'
+import { toast } from 'react-toastify'
 const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
 const geoApifyKey = process.env.NEXT_PUBLIC_GEOAPIFY_KEY
 
@@ -115,7 +117,11 @@ const HomeWeb = () => {
 
   const handleUpdateKeywordDetails = async () => {
     try {
+      if (!isValidUrl(values.sublink)) {
+        return toast.error(t('invalid_url'))
+      }
       setIsLoading(true)
+
       const foundCoordinates = countries?.find(
         (c) => c?.country === values.country
       )?.coordinates as number[]

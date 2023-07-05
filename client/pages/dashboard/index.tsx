@@ -36,7 +36,7 @@ const DashboardHomePage = () => {
     if (user?.hasKeywords === false) {
       router.push(`${router.locale}/`)
     }
-  }, [token])
+  }, [token, user])
 
   return (
     <>

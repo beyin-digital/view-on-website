@@ -10,7 +10,6 @@ const KeywordsPage = ({ data }: any) => {
       window.location.href = data?.sublink
       return
     } else {
-      console.log(data?.slug)
       router.push(
         data?.slug.length < 4
           ? `/subscribe/premium?hashtag=${data.slug}`

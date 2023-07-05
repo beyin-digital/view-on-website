@@ -1,16 +1,13 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { User } from '@/types/user'
-import { KeywordContext } from './keywordContext'
-import Cookies from 'js-cookie'
 
 export const UserContext = createContext<any>({})
 
 export const UserProvider = ({ children }: any) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const router = useRouter()
-  const { setKeywords, setSelectedKeyword } = useContext(KeywordContext)
   const [values, setValues] = useState({
     identifier: '',
     email: '',
@@ -122,7 +119,7 @@ export const UserProvider = ({ children }: any) => {
       setRefreshToken(refreshToken)
 
       if (user?.hasKeywords === false) {
-        router.push(`/${router.locale}/subscribe`)
+        router.push(`/${router.locale}/`)
         return
       } else {
         router.push('/dashboard')
@@ -458,10 +455,11 @@ export const UserProvider = ({ children }: any) => {
     //  remove token and refresh token from local storage
     localStorage.removeItem('token')
     localStorage.removeItem('refreshToken')
-    router.push(`/${router.locale}/login`)
     // set token and refresh token to null
     setToken(null)
     setRefreshToken(null)
+
+    router.push(`/${router.locale}/login`)
   }
 
   useEffect(() => {
