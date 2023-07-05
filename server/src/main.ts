@@ -12,6 +12,10 @@ import { AppModule } from './app.module';
 import validationOptions from './utils/validation-options';
 import { AllConfigType } from './config/config.type';
 import rawBodyMiddleware from './stripe/middleware/raw-body.middleware';
+import * as requestIp from 'request-ip';
+
+import helmet from 'helmet';
+
 // import { runInCluster } from './utils/run-in-cluster';
 
 async function bootstrap() {
@@ -19,7 +23,6 @@ async function bootstrap() {
     cors: {
       origin: [
         'http://localhost:3000',
-        'https://vow-client.vercel.app',
         'https://viewonwebsite.com',
         'https://www.viewonwebsite.com',
       ],
@@ -27,6 +30,39 @@ async function bootstrap() {
 
     bufferLogs: true,
   });
+
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: [`'self'`],
+          styleSrc: [
+            `'self'`,
+            `'unsafe-inline'`,
+            'cdn.jsdelivr.net',
+            'fonts.googleapis.com',
+            'img.icons8.com',
+          ],
+          fontSrc: [`'self'`, 'fonts.gstatic.com'],
+          imgSrc: [
+            `'self'`,
+            'data:',
+            'cdn.jsdelivr.net',
+            'img.icons8.com',
+            'res.cloudinary.com',
+          ],
+          scriptSrc: [
+            `'self'`,
+            `https: 'unsafe-inline'`,
+            `cdn.jsdelivr.net`,
+            'img.icons8.com',
+          ],
+        },
+      },
+    }),
+  );
+
+  app.use(requestIp.mw());
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   const configService = app.get(ConfigService<AllConfigType>);
@@ -58,5 +94,4 @@ async function bootstrap() {
 
   await app.listen(configService.getOrThrow('app.port', { infer: true }));
 }
-// runInCluster(bootstrap);
 void bootstrap();
