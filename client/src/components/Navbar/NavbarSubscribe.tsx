@@ -168,7 +168,7 @@ const NavbarSubscribe = () => {
             </Link>
             <Link
               title={`${t('nav_signup')}`}
-              href="/singup"
+              href="/signup"
               style={{
                 textDecoration: 'none',
               }}
