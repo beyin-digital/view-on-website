@@ -33,7 +33,7 @@ const withAuth = (WrappedComponent: any) => {
           )
         }
       }
-    }, [token, user])
+    }, [user])
 
     if (isLoading) {
       return (
