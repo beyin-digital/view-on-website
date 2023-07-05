@@ -121,15 +121,18 @@ const HomeWeb = () => {
         return toast.error(t('invalid_url'))
       }
       setIsLoading(true)
+      let timezone
+      if (values.country !== '' && values.state !== '') {
+        const foundCoordinates = countries?.find(
+          (c) => c?.country === values.country
+        )?.coordinates as number[]
 
-      const foundCoordinates = countries?.find(
-        (c) => c?.country === values.country
-      )?.coordinates as number[]
-
-      const { timezone } = (await getLocationData(
-        foundCoordinates[0],
-        foundCoordinates[1]
-      )) as any
+        const { timezone: foundTimeZone } = (await getLocationData(
+          foundCoordinates[0],
+          foundCoordinates[1]
+        )) as any
+        timezone = foundTimeZone
+      }
 
       await updateKeywordDetails(selectedKeyword?.id, {
         country: values?.country,

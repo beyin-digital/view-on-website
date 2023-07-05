@@ -12,17 +12,18 @@ const withAuth = (WrappedComponent: any) => {
     const [isLoading, setIsLoading] = useState(true) // New state variable
 
     useEffect(() => {
-      // const token = localStorage.getItem('token')
-      if (router.pathname.startsWith('/dashboard') && !token) {
-        router.push(`/${router.locale}/login`)
-      }
+      const token = localStorage.getItem('token')
       if (router.pathname.startsWith('/dashboard')) {
         if (user?.hasKeywords === false) {
           router.push(`/${router.locale}/`)
         }
       }
+      if (router.pathname.startsWith('/dashboard') && !token) {
+        router.push(`/${router.locale}/login`)
+      }
+
       if (router.pathname === '/login' && !token) {
-        router.push('/login')
+        return
       } else {
         setIsLoading(false)
         if (router.query.hashtag) {
