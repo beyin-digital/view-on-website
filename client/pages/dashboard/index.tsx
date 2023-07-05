@@ -50,10 +50,10 @@ const DashboardHomePage = () => {
       </Head>
       <RootLayout>
         <Box sx={{ display: { xs: 'none', md: 'block' }, marginX: '' }}>
-          <HomeWeb />
+          {user?.hasKeywords && <HomeWeb />}
         </Box>
         {/* Mobile boxes */}
-        <HomeMobile />
+        {user?.hasKeywords && <HomeMobile />}
       </RootLayout>
     </>
   )

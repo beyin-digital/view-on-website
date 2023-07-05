@@ -37,7 +37,7 @@ function RootLayout({
   const router = useRouter()
   const { locale } = useRouter()
 
-  const { token } = useContext(UserContext)
+  const { token, user } = useContext(UserContext)
 
   if (!token)
     return (
@@ -112,7 +112,7 @@ function RootLayout({
           maxWidth: '1920px',
         }}
       >
-        {pathname === '/dashboard' && <Navbar />}
+        {pathname === '/dashboard' && user && <Navbar />}
         {/* Sidebar and Content body */}
         <Box
           sx={{
@@ -122,7 +122,7 @@ function RootLayout({
           }}
         >
           {/* Sidebar */}
-          <Sidebar />
+          {user && <Sidebar />}
           {/* Desktop Body container */}
           {locale === 'ar' ? (
             <Box
