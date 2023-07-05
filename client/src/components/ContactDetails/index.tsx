@@ -14,7 +14,7 @@ const ContactDetails = () => {
       iconEmail: '',
       email: 'support@viewonwebsite.com ',
       iconPhone: '564582253',
-      phone: '+971564582253',
+      phone: 'phone_one',
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ const ContactDetails = () => {
       iconEmail: '',
       email: 'business@viewonwebsite.com',
       iconPhone: '507769111',
-      phone: '+971507769111',
+      phone: 'phone_two',
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ const ContactDetails = () => {
       iconEmail: 'press@viewonwebsite.com',
       email: 'Press@ViewOnWebsite.com',
       iconPhone: '509113667',
-      phone: '+971509113667',
+      phone: 'phone_three',
     },
   ]
   return (
@@ -172,7 +172,7 @@ const ContactDetails = () => {
                           lineHeight: '18px',
                         }}
                       >
-                        {item.phone}
+                        {t(item.phone)}
                       </Typography>
                     </Box>
                   </Link>
