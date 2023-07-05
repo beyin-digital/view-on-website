@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { Box, OutlinedInput, TextField } from '@mui/material'
+import { Box, OutlinedInput } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { KeywordContext } from '@/contexts/keywordContext'
 import { toast } from 'react-toastify'

@@ -164,8 +164,12 @@ const VerificationDetails = () => {
                 value={otp}
                 onChange={handleChange}
                 length={6}
-                inputMode="numeric"
-                className="myClassName "
+                TextFieldsProps={{
+                  inputProps: {
+                    inputMode: 'numeric',
+                  },
+                }}
+                className="myClassName"
                 sx={{
                   '.MuiOutlinedInput-root': {
                     borderRadius: '50%',

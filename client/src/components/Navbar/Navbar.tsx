@@ -222,7 +222,9 @@ const Header = () => {
               <Link
                 onClick={() => {
                   !user?.hasKeywords &&
-                    toast('You need to have a keyword to access the dashboard')
+                    toast.info(
+                      'You need to have a keyword to access the dashboard'
+                    )
                 }}
                 href={`${
                   user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
@@ -285,7 +287,9 @@ const Header = () => {
               <Link
                 onClick={() => {
                   !user?.hasKeywords &&
-                    toast('You need to have a keyword to access the dashboard')
+                    toast.info(
+                      'You need to have a keyword to access the dashboard'
+                    )
                 }}
                 href={`${
                   user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
@@ -554,7 +558,7 @@ const Header = () => {
                   <Link
                     onClick={() => {
                       !user?.hasKeywords &&
-                        toast(
+                        toast.info(
                           'You need to have a keyword to access the dashboard'
                         )
                     }}

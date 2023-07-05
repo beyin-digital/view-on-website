@@ -12,7 +12,7 @@ const withAuth = (WrappedComponent: any) => {
     const [isLoading, setIsLoading] = useState(true) // New state variable
 
     useEffect(() => {
-      const token = localStorage.getItem('token')
+      // const token = localStorage.getItem('token')
       if (router.pathname.startsWith('/dashboard') && !token) {
         router.push(`/${router.locale}/login`)
       }
@@ -33,7 +33,7 @@ const withAuth = (WrappedComponent: any) => {
           )
         }
       }
-    }, [])
+    }, [token])
 
     if (isLoading) {
       return (

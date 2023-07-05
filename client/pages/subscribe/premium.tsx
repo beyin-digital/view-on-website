@@ -3,7 +3,7 @@ import Head from 'next/head'
 import useDebounce from '@/hooks/useDebounce'
 import { isValidUrl } from '@/utils/checkUrl'
 import { toast } from 'react-toastify'
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 import {
@@ -56,26 +56,51 @@ const FooterMobile = dynamic(() => import('@/components/Footer/FooterMobile'), {
   ssr: false,
 })
 
-const SubscribePremiumPage: NextPage = () => {
+const SubscribePage: NextPage = () => {
+  const scrollTargetRef = useRef<any>(null)
+  const [isScrolling, setIsScrolling] = useState(false)
+
   const { t } = useTranslation('subscribe')
   const router = useRouter()
   const { locale } = useRouter()
   const [isInputValid, setIsInputValid] = useState(true)
   const [values, setValues] = useState({
-    hashtag: (router.query.hashtag as string)
-      ? (router.query.hashtag as string)
-      : '',
-    sublink: (router.query.sublink as string)
-      ? (router.query.sublink as string)
-      : '',
+    hashtag: '',
+    sublink: '',
   })
 
-  const allowedCharacters = /^[^\s]+$/
+  const allowedCharacters = /^[^$#.%\s]*$/
 
-  const hashtagDebounce = useDebounce(values.hashtag, 500)
+  const hashtagDebounce = useDebounce(values.hashtag, 200)
   const { handleSubscription, handleCheckKeyword, keywordFound, isSearching } =
     useContext(KeywordContext)
   const { token } = useContext(UserContext)
+
+  const scrollToTarget = () => {
+    setIsScrolling(true)
+
+    if (scrollTargetRef?.current) {
+      scrollTargetRef?.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+
+    setTimeout(() => {
+      setIsScrolling(false)
+    }, 1000) // Adjust the delay to match your desired scrolling duration
+  }
+  function isEmoji(encodedValue: string) {
+    const flagRegex = /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/
+    const emojiRegex = /[\uD800-\uDBFF][\uDC00-\uDFFF]/
+    if (encodedValue.length == 4 && flagRegex.test(encodedValue)) {
+      return true
+    } else if (encodedValue.length == 2 && emojiRegex.test(encodedValue)) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   let price = ''
   let priceNumber = 0
@@ -116,6 +141,7 @@ const SubscribePremiumPage: NextPage = () => {
   const [showAngledArrow, setShowAngledArrow] = useState(false)
   // »arrow down
   const [showArrow, setShowArrow] = useState(true)
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -138,10 +164,20 @@ const SubscribePremiumPage: NextPage = () => {
       setShowAngledArrow(false)
     }
 
+    if (router.query.hashtag) {
+      scrollToTarget()
+    }
+    if (router.query.hashtag) {
+      setValues({
+        ...values,
+        hashtag: router.query.hashtag as string,
+        sublink: router.query.sublink as string,
+      })
+    }
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [hashtagDebounce, keywordFound])
+  }, [hashtagDebounce, keywordFound, router.query.hashtag])
 
   return (
     <>
@@ -220,6 +256,8 @@ const SubscribePremiumPage: NextPage = () => {
                   >
                     <OutlinedInput
                       inputProps={{
+                        minLength: 1,
+                        maxLength: 13,
                         pattern: allowedCharacters.test(values.hashtag),
                       }}
                       name="hashtag"
@@ -252,7 +290,7 @@ const SubscribePremiumPage: NextPage = () => {
                         },
                       }}
                       // className="borderSubscribeInput"
-                      value={values.hashtag}
+                      value={values?.hashtag}
                       placeholder={`${t('input_hashtag_one')}`}
                       startAdornment={<BsHash color="#31E716" size={90} />}
                       endAdornment={
@@ -280,7 +318,7 @@ const SubscribePremiumPage: NextPage = () => {
                           : ''
                       }`}
                     />
-                    {!isInputValid && values?.hashtag?.length > 1 && (
+                    {!isInputValid && values?.hashtag?.length >= 1 && (
                       <Typography sx={{ color: 'red' }}>
                         {t('error')}
                       </Typography>
@@ -320,7 +358,7 @@ const SubscribePremiumPage: NextPage = () => {
                           height: '60px',
                         }}
                       >
-                        {allowedCharacters.test(values.hashtag) &&
+                        {allowedCharacters.test(values?.hashtag) &&
                         !keywordFound &&
                         !isSearching &&
                         values?.hashtag?.length >= 1 ? (
@@ -340,9 +378,9 @@ const SubscribePremiumPage: NextPage = () => {
                               paddingX: '.6rem',
                             }}
                           >
-                            {t('available')}
+                            {!keywordFound && t('available')}
                           </Typography>
-                        ) : allowedCharacters.test(values.hashtag) &&
+                        ) : allowedCharacters.test(values?.hashtag) &&
                           keywordFound &&
                           !isSearching &&
                           values?.hashtag?.length >= 1 ? (
@@ -362,11 +400,11 @@ const SubscribePremiumPage: NextPage = () => {
                               paddingX: '.6rem',
                             }}
                           >
-                            {t('not_available')}
+                            {keywordFound && t('not_available')}
                           </Typography>
                         ) : null}
 
-                        {allowedCharacters.test(values.hashtag) &&
+                        {allowedCharacters.test(values?.hashtag) &&
                         !keywordFound &&
                         !isSearching &&
                         (values?.hashtag?.length >= 1 ||
@@ -411,6 +449,7 @@ const SubscribePremiumPage: NextPage = () => {
                     }}
                   >
                     <Typography
+                      component={'h2'}
                       sx={{
                         fontSize: {
                           xs: '15px',
@@ -532,11 +571,12 @@ const SubscribePremiumPage: NextPage = () => {
                               },
                               height: '100%',
                               display:
-                                !keywordFound &&
-                                !isSearching &&
-                                values?.hashtag?.length >= 1 &&
-                                values?.hashtag?.length <= 3 &&
-                                allowedCharacters.test(values.hashtag)
+                                (!keywordFound &&
+                                  !isSearching &&
+                                  values?.hashtag?.length >= 1 &&
+                                  values?.hashtag?.length <= 3) ||
+                                (isEmoji(values?.hashtag) &&
+                                  allowedCharacters.test(values.hashtag))
                                   ? 'flex'
                                   : 'none',
                               alignItems: 'center',
@@ -558,7 +598,7 @@ const SubscribePremiumPage: NextPage = () => {
                                 textTransform: 'uppercase',
                               }}
                             >
-                              ${price}
+                              ${isEmoji(values?.hashtag) ? '100k' : price}
                             </Typography>
                             <Typography
                               sx={{
@@ -578,7 +618,8 @@ const SubscribePremiumPage: NextPage = () => {
                                   !isSearching &&
                                   (values?.hashtag?.length === 1 ||
                                     values?.hashtag?.length === 2 ||
-                                    values?.hashtag?.length === 3)
+                                    values?.hashtag?.length === 3 ||
+                                    isEmoji(values?.hashtag))
                                     ? 'block'
                                     : 'none',
                               }}
@@ -590,7 +631,8 @@ const SubscribePremiumPage: NextPage = () => {
                         {/* Check  */}
                         {!keywordFound &&
                           !isSearching &&
-                          values?.hashtag?.length < 4 &&
+                          (values?.hashtag?.length < 4 ||
+                            isEmoji(values.hashtag)) &&
                           allowedCharacters.test(values.hashtag) && (
                             <Box
                               sx={{
@@ -603,7 +645,8 @@ const SubscribePremiumPage: NextPage = () => {
                                 display:
                                   values?.hashtag?.length === 1 ||
                                   values?.hashtag?.length === 2 ||
-                                  values?.hashtag?.length === 3
+                                  values?.hashtag?.length === 3 ||
+                                  isEmoji(values?.hashtag)
                                     ? 'flex'
                                     : 'none',
                                 alignItems: 'center',
@@ -620,19 +663,17 @@ const SubscribePremiumPage: NextPage = () => {
 
                     {/* Button Pay  */}
 
-                    {values?.hashtag?.length <= 3 &&
-                    !keywordFound &&
-                    !isSearching ? (
+                    {values?.hashtag?.length <= 3 ||
+                    (isEmoji(values?.hashtag) &&
+                      !keywordFound &&
+                      !isSearching) ? (
+                      // Premium subscriptions
                       <>
                         {values?.hashtag?.length >= 1 &&
-                          allowedCharacters.test(values.hashtag) && (
+                          allowedCharacters.test(values?.hashtag) && (
                             <>
                               <Button
-                                disabled={
-                                  keywordFound ||
-                                  values?.hashtag?.length === 0 ||
-                                  !isValidUrl(values?.sublink)
-                                }
+                                disabled={keywordFound}
                                 sx={{
                                   borderRadius: '16px',
                                   paddingX: '18px',
@@ -649,37 +690,36 @@ const SubscribePremiumPage: NextPage = () => {
                                 }}
                                 onClick={async () => {
                                   if (values?.sublink?.length < 4) {
-                                    toast.error('Add your sublink to proceed')
+                                    toast.error(`${t('toast_one')}`)
                                     return
                                   }
                                   if (
                                     values?.sublink?.length > 4 &&
                                     !isValidUrl(values?.sublink)
                                   ) {
-                                    toast.error('Please enter a valid hashtag')
+                                    toast.error(`${t('toast_two')}`)
                                     return
                                   }
                                   if (keywordFound) {
-                                    toast.error(
-                                      'This hashtag is already in use'
-                                    )
+                                    toast.error(`${t('toast_three')}`)
                                     return
                                   }
                                   if (token) {
                                     await handleSubscription(
-                                      values.hashtag,
+                                      values?.hashtag,
                                       values?.sublink
                                     )
                                     return
                                   } else {
                                     router.push(
                                       '/login?redirect=subscribe&hashtag=' +
-                                        values.hashtag +
+                                        values?.hashtag +
                                         '&sublink=' +
                                         values?.sublink
                                     )
                                   }
                                 }}
+                                type="submit"
                                 className="ButtonPay"
                                 onMouseEnter={handleHoverButton}
                                 onMouseLeave={handleLeave}
@@ -719,46 +759,96 @@ const SubscribePremiumPage: NextPage = () => {
                           )}
                       </>
                     ) : (
-                      <Box
-                        sx={{
-                          width: '100%',
-                        }}
-                      >
-                        {values?.hashtag?.length > 3 &&
-                          allowedCharacters.test(values.hashtag) && (
-                            <Box
-                              sx={{
-                                width: '100%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                                flexDirection: {
-                                  xs: 'column-reverse',
-                                  sm: 'row',
-                                },
-                              }}
-                            >
-                              {/* Icon Scroll */}
-                              <Box
+                      //Regular subsscriptions
+                      <>
+                        {values?.hashtag?.length >= 1 &&
+                          !isEmoji(values?.hashtag) &&
+                          allowedCharacters.test(values?.hashtag) && (
+                            <>
+                              <Button
                                 sx={{
-                                  width: '100%',
-                                  display:
-                                    values?.hashtag?.length >= 4 &&
-                                    values?.sublink?.length > 0 &&
-                                    isValidUrl(values?.sublink) &&
-                                    !keywordFound &&
-                                    allowedCharacters.test(values.hashtag)
-                                      ? 'flex'
-                                      : 'none',
-                                  alignItems: 'center',
-                                  justifyContent: 'start',
+                                  borderRadius: '16px',
+                                  paddingX: '18px',
+                                  height: '59px',
+                                  width: {
+                                    xs: '100%',
+                                    sm: '311px',
+                                    md: '311px',
+                                    xl: '311px',
+                                  },
+                                  display: 'flex',
+                                  background: '#0090EC',
+                                  justifyContent: 'space-around',
                                 }}
+                                onClick={async (e) => {
+                                  if (values?.sublink?.length < 4) {
+                                    toast.error(`${t('toast_one')}`)
+                                    return
+                                  }
+                                  if (
+                                    values?.sublink?.length > 4 &&
+                                    !isValidUrl(values?.sublink)
+                                  ) {
+                                    toast.error(`${t('toast_two')}`)
+                                    return
+                                  }
+                                  if (keywordFound) {
+                                    toast.error(`${t('toast_three')}`)
+                                    return
+                                  }
+                                  if (token) {
+                                    scrollToTarget()
+                                    return
+                                  } else {
+                                    if (values?.hashtag?.length > 3) {
+                                      router.push(
+                                        '/login?redirect=subscribe&hashtag=' +
+                                          values?.hashtag +
+                                          '&sublink=' +
+                                          values?.sublink
+                                      )
+                                    }
+                                  }
+                                }}
+                                // type="submit"
+                                className="ButtonPay"
+                                onMouseEnter={handleHoverButton}
+                                onMouseLeave={handleLeave}
                               >
-                                <IconScroll />
-                              </Box>
-                            </Box>
+                                <Typography
+                                  sx={{
+                                    letterSpacing: '0.02em',
+                                    fontSize: '32px',
+                                    fontWeight: '400',
+                                    lineHeight: '40px',
+                                    color: '#343132',
+                                    textTransform: 'uppercase',
+                                  }}
+                                >
+                                  {t('button')}
+                                  {/* {t("pay")} */}
+                                </Typography>
+                                {locale === 'ar' ? (
+                                  <FiArrowDownLeft
+                                    size={42}
+                                    color="#343132"
+                                    className={
+                                      hoveredButton ? 'ButtonReserve_rtl' : ''
+                                    }
+                                  />
+                                ) : (
+                                  <FiArrowDownRight
+                                    size={42}
+                                    color="#343132"
+                                    className={
+                                      hoveredButton ? 'ButtonReserve_ltr' : ''
+                                    }
+                                  />
+                                )}
+                              </Button>
+                            </>
                           )}
-                      </Box>
+                      </>
                     )}
                   </Box>
                   {/* text under line  */}
@@ -800,15 +890,17 @@ const SubscribePremiumPage: NextPage = () => {
 
         {/* package box */}
         <Box
+          ref={scrollTargetRef}
           sx={{
             width: '100%',
             height: { xs: '100%', xl: '100vh' },
             display:
               values?.hashtag?.length >= 4 &&
               values?.sublink?.length > 0 &&
+              !isEmoji(values?.hashtag) &&
               isValidUrl(values?.sublink) &&
               !keywordFound &&
-              allowedCharacters.test(values.hashtag)
+              allowedCharacters.test(values?.hashtag)
                 ? 'flex'
                 : 'none',
 
@@ -834,7 +926,12 @@ const SubscribePremiumPage: NextPage = () => {
             <PackageBoxOne
               onClick={async () => {
                 if (!token) {
-                  router.push('/login')
+                  router.push(
+                    '/login?redirect=subscribe&hashtag=' +
+                      values.hashtag +
+                      '&sublink=' +
+                      values?.sublink
+                  )
                   return
                 } else {
                   if (
@@ -857,7 +954,12 @@ const SubscribePremiumPage: NextPage = () => {
             <PackageBoxTwo
               onClick={async () => {
                 if (!token) {
-                  router.push('/login')
+                  router.push(
+                    '/login?redirect=subscribe&hashtag=' +
+                      values?.hashtag +
+                      '&sublink=' +
+                      values?.sublink
+                  )
                   return
                 } else {
                   if (
@@ -866,7 +968,7 @@ const SubscribePremiumPage: NextPage = () => {
                     isValidUrl(values?.sublink)
                   ) {
                     await handleSubscription(
-                      values.hashtag as string,
+                      values?.hashtag as string,
                       values?.sublink as string,
                       'year'
                     )
@@ -879,7 +981,12 @@ const SubscribePremiumPage: NextPage = () => {
             <PackageBoxThree
               onClick={async () => {
                 if (!token) {
-                  router.push('/login')
+                  router.push(
+                    '/login?redirect=subscribe&hashtag=' +
+                      values?.hashtag +
+                      '&sublink=' +
+                      values?.sublink
+                  )
                   return
                 } else {
                   if (
@@ -888,7 +995,7 @@ const SubscribePremiumPage: NextPage = () => {
                     isValidUrl(values?.sublink)
                   ) {
                     await handleSubscription(
-                      values.hashtag as string,
+                      values?.hashtag as string,
                       values?.sublink as string,
                       '6-months'
                     )
@@ -913,4 +1020,4 @@ export async function getStaticProps({ params, locale }: any) {
     },
   }
 }
-export default SubscribePremiumPage
+export default SubscribePage

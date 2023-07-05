@@ -10,7 +10,6 @@ import {
   Button,
 } from '@mui/material'
 
-import { UserContext } from '@/contexts/userContext'
 import { useTranslation } from 'react-i18next'
 import dynamic from 'next/dynamic'
 import io from 'socket.io-client'
@@ -20,6 +19,8 @@ import { downloadSvg } from '@/utils/downloadSvg'
 import { LoadingButton } from '@mui/lab'
 import { MdLocationOn } from 'react-icons/md'
 import { api } from '@/utils/api'
+import { isValidUrl } from '@/utils/checkUrl'
+import { toast } from 'react-toastify'
 const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL as string)
 const geoApifyKey = process.env.NEXT_PUBLIC_GEOAPIFY_KEY
 
@@ -91,9 +92,39 @@ const HomeMobile = () => {
 
   const [locationIsLoading, setLocationIsLoading] = useState(false)
 
+  const getLocationData = async (lat?: number, lng?: number) => {
+    try {
+      setLocationIsLoading(true)
+      const res = await api.get(
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${lat as number}&lon=${
+          lng as number
+        }&apiKey=${geoApifyKey}`
+      )
+      const data = res.data.features
+
+      if (res.status === 200) {
+        setValues({
+          ...values,
+          country: data[0].properties.country,
+          state: data[0].properties.state || data[0].properties.city,
+          timezone: data[0].properties.timezone.name,
+        })
+      }
+      return { timezone: data[0].properties.timezone.name }
+    } catch (error) {
+      setLocationIsLoading(false)
+    } finally {
+      setLocationIsLoading(false)
+    }
+  }
+
   const handleUpdateKeywordDetails = async () => {
     try {
+      if (!isValidUrl(values.sublink)) {
+        return toast.error(t('invalid_url'))
+      }
       setIsLoading(true)
+
       const foundCoordinates = values.country
         ? (countries?.find((c) => c?.country === values?.country)
             ?.coordinates as number[])
@@ -117,30 +148,6 @@ const HomeMobile = () => {
       setIsLoading(false)
     }
   }
-  const getLocationData = async (lat?: number, lng?: number) => {
-    try {
-      setLocationIsLoading(true)
-      const res = await api.get(
-        `https://api.geoapify.com/v1/geocode/reverse?lat=${lat as number}&lon=${
-          lng as number
-        }&apiKey=${geoApifyKey}`
-      )
-      if (res.status === 200) {
-        const data = res.data.features
-        setValues({
-          ...values,
-          country: data[0].properties.country,
-          state: data[0].properties.state || data[0].properties.city,
-          timezone: data[0].properties.timezone.name,
-        })
-      }
-    } catch (error) {
-      setLocationIsLoading(false)
-    } finally {
-      setLocationIsLoading(false)
-    }
-  }
-
   const getAutoLocation = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
@@ -153,8 +160,9 @@ const HomeMobile = () => {
           const res = await api.get(
             `https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=${geoApifyKey}`
           )
+          const data = res.data.features
+
           if (res.status === 200) {
-            const data = res.data.features
             setValues({
               ...values,
               country: data[0].properties.country,
@@ -162,24 +170,12 @@ const HomeMobile = () => {
               timezone: data[0].properties.timezone.name,
             })
           }
+          return { timezone: data[0].properties.timezone.name }
         } catch (error) {
           setLocationIsLoading(false)
         } finally {
           setLocationIsLoading(false)
         }
-      })
-    } else {
-      alert('Geolocation is not supported by this browser.')
-    }
-  }
-
-  const getLocation = async () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        setValues({
-          ...values,
-          coordinates: [position.coords.latitude, position.coords.longitude],
-        })
       })
     } else {
       alert('Geolocation is not supported by this browser.')
@@ -711,7 +707,7 @@ const HomeMobile = () => {
                         country: e.target.value,
                         coordinates: countries.find(
                           (country) => country?.country === e.target.value
-                        )?.coordinates as any,
+                        )?.coordinates as number[],
                         timezone: '',
                       })
                     }}
@@ -737,7 +733,7 @@ const HomeMobile = () => {
                     }}
                   >
                     <MenuItem disabled value="">
-                      {'box_one_location_country'}
+                      {t('box_one_location_country')}
                     </MenuItem>
                     {!isLoading &&
                       countries?.map((country) => (

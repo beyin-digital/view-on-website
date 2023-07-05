@@ -17,7 +17,6 @@ const TextViewOnWeb = dynamic(() => import('../Home/TextViewOnWeb'), {
 
 const FooterMobile = () => {
   const { t } = useTranslation('common')
-  const { locale } = useRouter()
   const router = useRouter()
 
   // modal
@@ -25,11 +24,9 @@ const FooterMobile = () => {
   const handleClose = () => setOpen(false)
   function closeModel() {
     setOpen(false)
-    // console.log("hi");
   }
   function openModel() {
     setOpen(true)
-    // console.log("hi");
   }
 
   return (

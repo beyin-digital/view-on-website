@@ -251,7 +251,9 @@ const NavbarSubscribe = () => {
               <Link
                 onClick={() => {
                   !user?.hasKeywords &&
-                    toast('You need to have a keyword to access the dashboard')
+                    toast.info(
+                      'You need to have a keyword to access the dashboard'
+                    )
                 }}
                 style={{
                   textDecoration: 'none',
@@ -318,7 +320,9 @@ const NavbarSubscribe = () => {
               <Link
                 onClick={() => {
                   !user?.hasKeywords &&
-                    toast('You need to have a keyword to access the dashboard')
+                    toast.info(
+                      'You need to have a keyword to access the dashboard'
+                    )
                 }}
                 style={{
                   textDecoration: 'none',
@@ -601,7 +605,7 @@ const NavbarSubscribe = () => {
                   <Link
                     onClick={() => {
                       !user?.hasKeywords &&
-                        toast(
+                        toast.info(
                           'You need to have a keyword to access the dashboard'
                         )
                     }}

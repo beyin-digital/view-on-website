@@ -105,24 +105,31 @@ const Navbar = () => {
   const handleClose = () => {
     setOpen(false)
   }
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     const selectedKeyword = keywords?.data?.find(
       (keyword: any) =>
         (decodeURI(encodeURI(keyword?.letters)) as any) === newValue
     ) as any
     setSelectedKeyword(selectedKeyword)
     if (router.query.hashtag) {
-      router.push(`/${router.locale}/dashboard/`)
+      router.replace(`/${router.locale}/dashboard`, undefined, {
+        shallow: true,
+      })
     }
   }
 
   useEffect(() => {
     if (token) {
       if (router.query.hashtag) {
-        getUsersKeywords(
-          parseInt(router.query.page as string),
-          parseInt(router.query.limit as string)
-        )
+        ;async () => {
+          await getUsersKeywords(
+            parseInt(router.query.page as string),
+            parseInt(router.query.limit as string)
+          )
+        }
+        router.replace(`/${router.locale}/dashboard`, undefined, {
+          shallow: true,
+        })
         return
       }
       getUsersKeywords(page)
@@ -131,7 +138,6 @@ const Navbar = () => {
       setSelectedKeyword(null)
     }
   }, [token])
-  console.log(keywords)
   return (
     <>
       {/* Desktop Navbar */}
