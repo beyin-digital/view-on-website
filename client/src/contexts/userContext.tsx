@@ -28,7 +28,6 @@ export const UserProvider = ({ children }: any) => {
   ) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
-
   // Login Function
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default pge reload after form submission
@@ -111,6 +110,19 @@ export const UserProvider = ({ children }: any) => {
       const data = await response.json()
       //   get token and refresh token from data
       const { token, refreshToken, user } = data
+      if (
+        (token === null || token === undefined) &&
+        user?.twoFactorAuthEnabled === true
+      ) {
+        if (router.query.redirect === 'subscribe') {
+          router.push(
+            `/${router.locale}/verification?redirect=subscribe&hashtag=${router.query.hashtag}&sublink=${router.query.sublink}`
+          )
+          return
+        }
+        router.push(`/verification?email=${user.email}`)
+        return
+      }
       //   set token and refresh token in local storage
       localStorage.setItem('token', token)
       localStorage.setItem('refreshToken', refreshToken)

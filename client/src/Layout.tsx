@@ -30,7 +30,11 @@ const Layout: React.FC<Props> = ({ children }) => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           {children}
-          <ToastContainer hideProgressBar position="bottom-center" />
+          <ToastContainer
+            hideProgressBar
+            position="bottom-center"
+            autoClose={5000}
+          />
         </ThemeProvider>
       </GoogleOAuthProvider>
     </Providers>

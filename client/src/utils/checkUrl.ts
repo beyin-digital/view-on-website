@@ -1,7 +1,7 @@
 export function isValidUrl(url: string) {
   try {
-    new URL(url) && url.split('/').length >= 3
-    return true
+    const testUrl = new URL(url)
+    return testUrl.protocol === 'https:'
   } catch (err) {
     return false
   }

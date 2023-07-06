@@ -87,7 +87,7 @@ const Footer = () => {
           }}
         >
           <NextLink
-            href="/"
+            href="https://www.youtube.com/playlist?list=PLkpOTpVlfWkkB1_7Mo-H5fhtEMhGPmaTn"
             style={{
               textDecoration: 'none',
               color: 'inherit',

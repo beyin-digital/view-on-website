@@ -447,7 +447,7 @@ const NavbarSubscribe = () => {
           }}
         >
           <Link
-            href="https://youtube.com"
+            href="https://www.youtube.com/playlist?list=PLkpOTpVlfWkkB1_7Mo-H5fhtEMhGPmaTn"
             style={{
               textDecoration: 'none',
               color: 'inherit',
