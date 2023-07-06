@@ -37,6 +37,7 @@ import { KeywordsModule } from './keywords/keywords.module';
 import { PaymentModule } from './payment/payment.module';
 import { OrdersModule } from './orders/orders.module';
 import { AnalyticsModule } from './analytics/analytics.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { AnalyticsModule } from './analytics/analytics.module';
         return new DataSource(options).initialize();
       },
     }),
+    ScheduleModule.forRoot(),
     MailerModule.forRootAsync({
       useClass: MailConfigService,
     }),

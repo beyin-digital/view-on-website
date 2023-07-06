@@ -6,6 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   DeleteDateColumn,
+  BeforeInsert,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { Allow } from 'class-validator';
@@ -27,6 +28,23 @@ export class Forgot extends EntityHelper {
     onDelete: 'CASCADE',
   })
   user: User;
+
+  @Column({
+    nullable: true,
+  })
+  expiredAt: Date;
+
+  @BeforeInsert()
+  setExpiredAtAndGenerateToken() {
+    // 3 hours
+    this.expiredAt = new Date(Date.now() + 3 * 60 * 60 * 1000);
+  }
+
+  @Column({ default: false })
+  used: boolean;
+
+  @Column({ nullable: true })
+  usedAt: Date;
 
   @CreateDateColumn()
   createdAt: Date;

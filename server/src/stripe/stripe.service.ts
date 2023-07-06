@@ -67,6 +67,9 @@ export class StripeService {
         user.hasKeywords = false;
         await user.save();
       }
+      await this.mailService.cancelSubscription({
+        to: user.email as string,
+      });
     }
   }
 
@@ -126,9 +129,9 @@ export class StripeService {
             price_data: {
               currency: 'usd',
               product_data: {
-                name: `Rights to use the #${decodeURI(
+                name: `Subscription for the rights to use the #${decodeURI(
                   createCheckoutSessionDto.letters,
-                )}`,
+                )} on the View on website platform`,
               },
               unit_amount: regularSubsPricing * 100,
               recurring,
@@ -148,6 +151,9 @@ export class StripeService {
       checkoutSession = await this.stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         customer: createCheckoutSessionDto.stripeCustomerId,
+        customer_update: {
+          address: 'auto',
+        },
         metadata: {
           letters: createCheckoutSessionDto.letters,
           sublink: createCheckoutSessionDto.sublink,
@@ -155,17 +161,22 @@ export class StripeService {
         locale: 'auto',
         line_items: [
           {
+            tax_rates: ['txr_1NQyjVBs9zGaVmNDvlZleZl0'],
             price_data: {
+              tax_behavior: 'inclusive',
               currency: 'usd',
               product_data: {
-                name: `Rights to use the #${decodeURI(
+                tax_code: 'txcd_10000000',
+
+                name: `Exclusive lifetime rights to use the #${decodeURI(
                   createCheckoutSessionDto.letters,
-                )}`,
+                )} on the View on website platform`,
               },
               unit_amount: (premiumPrice || 0) * 100,
             },
 
             quantity: 1,
+            // 5.263% tax
           },
         ],
         mode: 'payment',
@@ -297,9 +308,32 @@ export class StripeService {
           letters: subscription.letters,
           renewalDate: subscription.renewalDate.toLocaleDateString('en-GB'),
           price: subscription.purchaseAmount,
+          duration: subscription.duration,
         },
       });
     }
+  }
+
+  async sendReminderEmail(data: Stripe.Invoice) {
+    const user = await this.usersService.findOne({
+      stripeCustomerId: data.customer as string,
+    });
+    if (user) {
+      await this.mailService.sendRenewalNotice({ to: user?.email as string });
+    }
+  }
+
+  async deleteSubscriptionOnFailedPayment(data: Stripe.Invoice) {
+    const subscription = await this.subscriptionsService.findOne({
+      stripeSubscriptionId: data.subscription as string,
+    });
+    if (subscription) {
+      subscription.stripeSubscriptionStatus = 'canceled';
+      await subscription.save();
+    }
+    await this.mailService.sendRenewalFailed({
+      to: subscription?.user.email as string,
+    });
   }
 
   async processEvent(event: Stripe.Event) {
@@ -337,6 +371,15 @@ export class StripeService {
           subscriptionId: subscriptionPaused.id,
           status: subscriptionPaused.status,
         });
+        break;
+      case 'invoice.upcoming':
+        const upcomingInvoice = event.data.object as Stripe.Invoice;
+        console.log(upcomingInvoice);
+        break;
+      case 'invoice.payment_failed':
+        const failedInvoicePayment = event.data.object as Stripe.Invoice;
+        console.log(failedInvoicePayment);
+        await this.deleteSubscriptionOnFailedPayment(failedInvoicePayment);
         break;
       default:
         console.log(`Unhandled event type ${event.type}`);

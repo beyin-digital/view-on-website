@@ -1,7 +1,10 @@
 {
   "confirmEmail": "Confirm email",
-  "resetPassword": "Reset password",
-  "twoFactorAuth": "Two factor Authentication",
+  "forgetPassword": "Forget password",
+  "twoFactorAuth": "Two-factor authentication",
   "newSubscription": "New subscription",
-  "premium": "Premium"
+  "premium": "Premium",
+  "subscriptionCancellation": "Subscription cancellation",
+  "renewalNotice": "Renewal notice",
+  "subscriptionRenewalFailed": "Renewal Failed"
 }
