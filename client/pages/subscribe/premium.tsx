@@ -290,7 +290,7 @@ const SubscribePage: NextPage = () => {
                         },
                       }}
                       // className="borderSubscribeInput"
-                      value={values?.hashtag}
+                      value={values?.hashtag.toUpperCase()}
                       placeholder={`${t('input_hashtag_one')}`}
                       startAdornment={<BsHash color="#31E716" size={90} />}
                       endAdornment={

@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { Box, Modal } from '@mui/material'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 const ModalVideo = () => {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
   function closeModel() {
@@ -62,7 +64,11 @@ const ModalVideo = () => {
               }}
             >
               <iframe
-                src="https://thedxi.com/video/home"
+                src={
+                  router.locale === 'en'
+                    ? 'https://youtu.be/Gsg_WJPiTSc'
+                    : 'https://youtu.be/UnZSaf5Gxis'
+                }
                 width="100%"
                 height="100%"
                 style={{

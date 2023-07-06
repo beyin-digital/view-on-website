@@ -396,7 +396,7 @@ const Navbar = () => {
               <AiFillInstagram size={17.5} color="#343132" />
             </Link>
             <Link
-              href="https://m.youtube.com/@viewonwebsite/playlists"
+              href="https://www.youtube.com/playlist?list=PLkpOTpVlfWkkB1_7Mo-H5fhtEMhGPmaTn"
               target="_blank"
             >
               <BsYoutube size={17.5} color="#343132" />

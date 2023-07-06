@@ -587,9 +587,17 @@ const HomeWeb = () => {
                 textTransform="uppercase"
               >
                 {locale === 'en' ? (
-                  <>#{decodeURI(encodeURI(selectedKeyword?.letters))}</>
+                  <>
+                    #
+                    {selectedKeyword?.letters &&
+                      decodeURI(encodeURI(selectedKeyword?.letters))}
+                  </>
                 ) : (
-                  <>{decodeURI(encodeURI(selectedKeyword?.letters))}#</>
+                  <>
+                    {selectedKeyword?.letters &&
+                      decodeURI(encodeURI(selectedKeyword?.letters))}
+                    #
+                  </>
                 )}
               </Typography>
             </Box>

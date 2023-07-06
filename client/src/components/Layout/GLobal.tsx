@@ -3,7 +3,7 @@ export const icons = [
     id: 1,
     alt: 'youtube Icon',
     icon: '/icons/youtube.svg',
-    link: 'https://m.youtube.com/@viewonwebsite/playlists',
+    link: 'https://www.youtube.com/playlist?list=PLkpOTpVlfWkkB1_7Mo-H5fhtEMhGPmaTn',
   },
   {
     id: 3,

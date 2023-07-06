@@ -195,6 +195,19 @@ export class AuthService {
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     }
+    if (user.twoFactorAuthEnabled) {
+      const otp = await this.otpsService.create({
+        user,
+      });
+
+      await this.mailService.twoFactorAuth({
+        to: user?.email || '',
+        data: {
+          otp: otp.token || '',
+        },
+      });
+      return { user };
+    }
 
     const jwtToken = this.jwtService.sign({
       id: user.id,
@@ -292,6 +305,30 @@ export class AuthService {
     const foundOtp = (await this.otpsService.findOne({
       token: otp,
     })) as Otp;
+
+    if (foundOtp.used) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            user: 'otp_already_used',
+          },
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+
+    if (foundOtp.expiredAt < new Date(Date.now() - 5 * 60000)) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            user: 'otp_expired',
+          },
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
 
     if (!foundOtp) {
       throw new HttpException(
@@ -412,7 +449,7 @@ export class AuthService {
       user,
     });
 
-    await this.mailService.forgotPassword({
+    await this.mailService.forgetPassword({
       to: user.email || '',
       data: {
         hash,
@@ -426,6 +463,20 @@ export class AuthService {
         hash,
       },
     });
+    if (
+      forgot &&
+      forgot.createdAt < new Date(new Date().getTime() - 24 * 60 * 60 * 1000)
+    ) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            hash: `expired`,
+          },
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
 
     if (!forgot) {
       throw new HttpException(

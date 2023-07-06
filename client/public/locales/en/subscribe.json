@@ -46,7 +46,7 @@
   "subscribe": "subscribe",
   "cancel": "cancel",
   "not_available": "Not Available",
-  "error": "Keywords can't have spaces, #, $, % or periods (.)",
+  "error": "Keywords can't have spaces, #, $, %, +, & or periods (.)",
   "text_line": "By proceeding with payment, you agree to the ",
   "text_line_link": "terms & conditions.",
   "toast_one": "Add your sublink to proceed",

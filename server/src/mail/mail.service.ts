@@ -34,12 +34,12 @@ export class MailService {
       subject: emailConfirmTitle,
       text: `${this.configService.get('app.frontendDomain', {
         infer: true,
-      })}/confirm-email/${mailData.data.otp} ${emailConfirmTitle}`,
+      })}/confirm-email/${mailData?.data?.otp} ${emailConfirmTitle}`,
       template: 'activation',
       context: {
         title: emailConfirmTitle,
         actionTitle: emailConfirmTitle,
-        otp: mailData.data.otp,
+        otp: mailData?.data?.otp,
         app_name: this.configService.get('app.name', { infer: true }),
         text1,
         text2,
@@ -48,39 +48,41 @@ export class MailService {
     });
   }
 
-  async forgotPassword(mailData: MailData<{ hash: string }>): Promise<void> {
+  async forgetPassword(mailData: MailData<{ hash: string }>): Promise<void> {
     const i18n = I18nContext.current();
-    let resetPasswordTitle: MaybeType<string>;
+    let forgetPasswordTitle: MaybeType<string>;
     let text1: MaybeType<string>;
     let text2: MaybeType<string>;
     let text3: MaybeType<string>;
     let text4: MaybeType<string>;
 
     if (i18n) {
-      [resetPasswordTitle, text1, text2, text3, text4] = await Promise.all([
-        i18n.t('common.resetPassword'),
-        i18n.t('reset-password.text1'),
-        i18n.t('reset-password.text2'),
-        i18n.t('reset-password.text3'),
-        i18n.t('reset-password.text4'),
+      [forgetPasswordTitle, text1, text2, text3, text4] = await Promise.all([
+        i18n.t('common.forgetPassword'),
+        i18n.t('forget-password.text1'),
+        i18n.t('forget-password.text2'),
+        i18n.t('forget-password.text3'),
+        i18n.t('forget-password.text4'),
       ]);
     }
 
     await this.mailerService.sendMail({
       to: mailData.to,
-      subject: resetPasswordTitle,
+      subject: forgetPasswordTitle,
       text: `${this.configService.get('app.frontendDomain', {
         infer: true,
-      })}/en/change-password?token=${mailData.data.hash} ${resetPasswordTitle}`,
-      template: 'reset-password',
+      })}/en/change-password?token=${
+        mailData?.data?.hash
+      } ${forgetPasswordTitle}`,
+      template: 'forget-password',
       context: {
-        title: resetPasswordTitle,
+        title: forgetPasswordTitle,
         url: decodeURIComponent(
           `${this.configService.get('app.frontendDomain', {
             infer: true,
-          })}/en/change-password?token=${mailData.data.hash}`,
+          })}/en/change-password?token=${mailData?.data?.hash}`,
         ),
-        actionTitle: resetPasswordTitle,
+        actionTitle: forgetPasswordTitle,
         app_name: this.configService.get('app.name', {
           infer: true,
         }),
@@ -113,12 +115,12 @@ export class MailService {
       subject: twoFactorAuthTitle,
       text: `${this.configService.get('app.frontendDomain', {
         infer: true,
-      })}/confirm-email/${mailData.data.otp} ${twoFactorAuthTitle}`,
+      })}/confirm-email/${mailData?.data?.otp} ${twoFactorAuthTitle}`,
       template: 'two-factor-auth',
       context: {
         title: twoFactorAuthTitle,
         actionTitle: twoFactorAuthTitle,
-        otp: mailData.data.otp,
+        otp: mailData?.data?.otp,
         app_name: this.configService.get('app.name', { infer: true }),
         text1,
         text2,
@@ -132,6 +134,7 @@ export class MailService {
       letters: string;
       price: number;
       renewalDate: string;
+      duration: string;
     }>,
   ): Promise<void> {
     const i18n = I18nContext.current();
@@ -155,9 +158,10 @@ export class MailService {
       template: 'new-subscription',
       context: {
         title: newSubscriptionTitle,
-        letters: mailData.data.letters,
-        price: mailData.data.price.toLocaleString('en-GB'),
-        renewalDate: mailData.data.renewalDate,
+        letters: mailData?.data?.letters,
+        price: mailData?.data?.price.toLocaleString('en-GB'),
+        renewalDate: mailData?.data?.renewalDate,
+        duration: mailData?.data?.duration,
         app_name: this.configService.get('app.name', { infer: true }),
         text1,
         text2,
@@ -193,12 +197,72 @@ export class MailService {
       template: 'premium',
       context: {
         title: premiumTitle,
-        letters: mailData.data.letters,
-        price: mailData.data.price.toLocaleString('en-GB'),
+        letters: mailData?.data?.letters,
+        price: mailData?.data?.price.toLocaleString('en-GB'),
         app_name: this.configService.get('app.name', { infer: true }),
         text1,
         text2,
         text3,
+      },
+    });
+  }
+
+  async cancelSubscription(mailData: MailData): Promise<void> {
+    const i18n = I18nContext.current();
+    let subscriptionCancellationTitle: MaybeType<string>;
+
+    if (i18n) {
+      [subscriptionCancellationTitle] = await Promise.all([
+        i18n.t('common.subscriptionCancellation'),
+      ]);
+    }
+
+    await this.mailerService.sendMail({
+      to: mailData.to,
+      subject: subscriptionCancellationTitle,
+      template: 'subscription-cancellation',
+      context: {
+        title: subscriptionCancellationTitle,
+      },
+    });
+  }
+
+  async sendRenewalNotice(mailData: MailData): Promise<void> {
+    const i18n = I18nContext.current();
+    let renewalNoticeTitle: MaybeType<string>;
+
+    if (i18n) {
+      [renewalNoticeTitle] = await Promise.all([
+        i18n.t('common.renewalNotice'),
+      ]);
+    }
+
+    await this.mailerService.sendMail({
+      to: mailData.to,
+      subject: renewalNoticeTitle,
+      template: 'subscription-cancellation',
+      context: {
+        title: renewalNoticeTitle,
+      },
+    });
+  }
+
+  async sendRenewalFailed(mailData: MailData): Promise<void> {
+    const i18n = I18nContext.current();
+    let subscriptionRenewalFailedTitle: MaybeType<string>;
+
+    if (i18n) {
+      [subscriptionRenewalFailedTitle] = await Promise.all([
+        i18n.t('common.subscriptionRenewalFailed'),
+      ]);
+    }
+
+    await this.mailerService.sendMail({
+      to: mailData.to,
+      subject: subscriptionRenewalFailedTitle,
+      template: 'subscription-renewal-failed',
+      context: {
+        title: subscriptionRenewalFailedTitle,
       },
     });
   }

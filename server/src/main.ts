@@ -15,11 +15,10 @@ import rawBodyMiddleware from './stripe/middleware/raw-body.middleware';
 import * as requestIp from 'request-ip';
 
 import helmet from 'helmet';
-
-// import { runInCluster } from './utils/run-in-cluster';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: {
       origin: [
         'http://localhost:3000',
@@ -66,6 +65,7 @@ async function bootstrap() {
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   const configService = app.get(ConfigService<AllConfigType>);
+
   app.enableShutdownHooks();
   app.setGlobalPrefix(
     configService.getOrThrow('app.apiPrefix', { infer: true }),
