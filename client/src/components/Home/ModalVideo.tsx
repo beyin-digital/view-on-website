@@ -65,8 +65,8 @@ const ModalVideo = () => {
             >
               {router.locale === 'en' ? (
                 <iframe
-                  width="560"
-                  height="315"
+                  width="100%"
+                  height="100%"
                   src="https://www.youtube.com/embed/Gsg_WJPiTSc"
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -74,8 +74,8 @@ const ModalVideo = () => {
                 ></iframe>
               ) : (
                 <iframe
-                  width="560"
-                  height="315"
+                  width="100%"
+                  height="100%"
                   src="https://www.youtube.com/embed/UnZSaf5Gxis"
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -627,6 +627,7 @@ const SubscribePage: NextPage = () => {
                               }}
                             >
                               {t('cash_one')}
+                              <br />
                               {t('vat_included')}
                             </Typography>
                           </Box>

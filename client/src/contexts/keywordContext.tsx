@@ -104,27 +104,6 @@ export const KeywordProvider = ({ children }: any) => {
     }
   }
 
-  const handleUnsubscribe = async (id: string) => {
-    try {
-      const response = await fetch(`${apiUrl}/payment/unsubscribe`, {
-        method: 'DELETE',
-        body: JSON.stringify({ id }),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-          'Accept-Language': router.locale || 'en-GB',
-        },
-      })
-      if (!response.ok) {
-        throw new Error('Error fetching data')
-      }
-      toast.success('Unsubscribed successfully')
-      getUserSubscriptions(1)
-    } catch (error) {
-      toast.error('Error unsubscribing')
-    }
-  }
-
   const getUsersKeywords = async (page: number, limit?: number) => {
     try {
       const response = await fetch(
@@ -200,10 +179,12 @@ export const KeywordProvider = ({ children }: any) => {
       if (data.data.length <= 0) {
         return
       }
-      if (page === 1) {
+
+      if (page === 1 || page === undefined) {
         setSubscriptions(data)
         return
       }
+
       setSubscriptions({
         ...subscriptions,
         data: [...subscriptions.data, ...data.data],
@@ -211,6 +192,27 @@ export const KeywordProvider = ({ children }: any) => {
       })
     } catch (error) {
       console.error('Error fetching subscriptions')
+    }
+  }
+
+  const handleUnsubscribe = async (id: string) => {
+    try {
+      const response = await fetch(`${apiUrl}/payment/unsubscribe`, {
+        method: 'DELETE',
+        body: JSON.stringify({ id }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          'Accept-Language': router.locale || 'en-GB',
+        },
+      })
+      if (!response.ok) {
+        throw new Error('Error fetching data')
+      }
+      toast.success('Unsubscribed successfully')
+      getUserSubscriptions(1)
+    } catch (error) {
+      toast.error('Error unsubscribing')
     }
   }
 
