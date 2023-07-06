@@ -600,7 +600,6 @@ const SubscribePage: NextPage = () => {
                               }}
                             >
                               ${isEmoji(values?.hashtag) ? '100k' : price}
-                              <span>VAT included</span>
                             </Typography>
                             <Typography
                               sx={{
