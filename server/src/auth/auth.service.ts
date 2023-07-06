@@ -562,6 +562,13 @@ export class AuthService {
   }
 
   async delete(user: User): Promise<void> {
+    const userToDelete = await this.usersService.findOne({
+      id: user.id,
+    });
+
     await this.usersService.delete(user.id);
+    await this.mailService.accountDeletion({
+      to: userToDelete?.email as string,
+    });
   }
 }

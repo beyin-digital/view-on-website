@@ -118,7 +118,7 @@ function MyApp(props: MyAppProps) {
             style={{ display: 'none' }}
             alt=""
             src="https://px.ads.linkedin.com/collect/?pid=5690257&fmt=gif"
-          />{' '}
+          />
         </noscript>
         {/* facebook */}
         <script
@@ -144,7 +144,7 @@ function MyApp(props: MyAppProps) {
           }}
         />
         {/* snapchat */}
-        {/* <script type="text/javascript">
+        <script type="text/javascript">
           {`(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
 						{a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
 						a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
@@ -157,7 +157,7 @@ function MyApp(props: MyAppProps) {
 						});
 
 						snaptr('track', 'PAGE_VIEW');`}
-        </script> */}
+        </script>
       </Head>
 
       <div dir={isRTL ? 'rtl' : 'ltr'}>

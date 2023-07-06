@@ -6,5 +6,6 @@
   "premium": "Premium",
   "subscriptionCancellation": "Subscription cancellation",
   "renewalNotice": "Renewal notice",
-  "subscriptionRenewalFailed": "Renewal Failed"
+  "subscriptionRenewalFailed": "Renewal Failed",
+  "accountDelete": "Account delete"
 }

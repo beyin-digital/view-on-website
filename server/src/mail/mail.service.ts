@@ -266,4 +266,24 @@ export class MailService {
       },
     });
   }
+
+  async accountDeletion(mailData: MailData): Promise<void> {
+    const i18n = I18nContext.current();
+    let acountDeletionTitle: MaybeType<string>;
+
+    if (i18n) {
+      [acountDeletionTitle] = await Promise.all([
+        i18n.t('common.accountDelete'),
+      ]);
+    }
+
+    await this.mailerService.sendMail({
+      to: mailData.to,
+      subject: acountDeletionTitle,
+      template: 'account-deletion',
+      context: {
+        title: acountDeletionTitle,
+      },
+    });
+  }
 }
