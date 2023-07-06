@@ -69,7 +69,7 @@ const SubscribePage: NextPage = () => {
     sublink: '',
   })
 
-  const allowedCharacters = /^[^$&#.%\s]*$/
+  const allowedCharacters = /^[^$&#+.%\s]*$/
 
   const hashtagDebounce = useDebounce(values.hashtag, 200)
   const { handleSubscription, handleCheckKeyword, keywordFound, isSearching } =
@@ -600,6 +600,7 @@ const SubscribePage: NextPage = () => {
                               }}
                             >
                               ${isEmoji(values?.hashtag) ? '100k' : price}
+                              <span>VAT included</span>
                             </Typography>
                             <Typography
                               sx={{
@@ -613,6 +614,7 @@ const SubscribePage: NextPage = () => {
                                 fontWeight: '400',
                                 color: '#343132',
                                 textTransform: 'capitalize',
+                                textAlign: 'center',
                                 marginY: '.6rem',
                                 display:
                                   !keywordFound &&
@@ -626,6 +628,7 @@ const SubscribePage: NextPage = () => {
                               }}
                             >
                               {t('cash_one')}
+                              {t('vat_included')}
                             </Typography>
                           </Box>
                         </Box>

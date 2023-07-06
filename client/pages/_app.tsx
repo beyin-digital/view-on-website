@@ -6,12 +6,7 @@ import createEmotionCache from '../src/createEmotionCache'
 import { appWithTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
-import { KeywordProvider } from '@/contexts/keywordContext'
-import { UserProvider } from '@/contexts/userContext'
-import Seo from '@/components/Seo'
 import { useTranslation } from 'next-i18next'
-import Pixel from '@/components/Pixels/index'
-import Linkedin from '@/components/Pixels/Linkedin'
 import TikTokPixelLoader from '@/components/Pixels/tiktokPixel'
 import Script from 'next/script'
 const Layout = dynamic(() => import('@/Layout'), {
@@ -111,15 +106,18 @@ function MyApp(props: MyAppProps) {
         <script type="text/javascript">
           {` (function(l) { if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])}; window.lintrk.q=[]} var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})(window.lintrk);`}{' '}
         </script>
-        <noscript>
-          <img
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<img
             height="1"
             width="1"
             style={{ display: 'none' }}
             alt=""
             src="https://px.ads.linkedin.com/collect/?pid=5690257&fmt=gif"
-          />
-        </noscript>
+          />`,
+          }}
+        />
+
         {/* facebook */}
         <script
           dangerouslySetInnerHTML={{

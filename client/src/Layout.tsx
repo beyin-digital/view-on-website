@@ -32,7 +32,7 @@ const Layout: React.FC<Props> = ({ children }) => {
           {children}
           <ToastContainer
             hideProgressBar
-            position="bottom-center"
+            position="bottom-right"
             autoClose={5000}
           />
         </ThemeProvider>
