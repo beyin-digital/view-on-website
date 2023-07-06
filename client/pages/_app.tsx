@@ -105,14 +105,13 @@ function MyApp(props: MyAppProps) {
                            gtag('config', 'AW-11246193982');
       `}
         </Script>
-        {/* <script type="text/javascript">
+        <script type="text/javascript">
           {` _linkedin_partner_id = "5690257"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);`}{' '}
         </script>
         <script type="text/javascript">
           {` (function(l) { if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])}; window.lintrk.q=[]} var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})(window.lintrk);`}{' '}
-        </script> */}
-        {/* <noscript>
-          {' '}
+        </script>
+        <noscript>
           <img
             height="1"
             width="1"
@@ -120,9 +119,9 @@ function MyApp(props: MyAppProps) {
             alt=""
             src="https://px.ads.linkedin.com/collect/?pid=5690257&fmt=gif"
           />{' '}
-        </noscript> */}
+        </noscript>
         {/* facebook */}
-        {/* <script
+        <script
           dangerouslySetInnerHTML={{
             __html: `!function(f,b,e,v,n,t,s)
 								{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -136,14 +135,14 @@ function MyApp(props: MyAppProps) {
 								fbq('track', 'PageView');
       `,
           }}
-        /> */}
-        {/* <noscript
+        />
+        <noscript
           dangerouslySetInnerHTML={{
             __html: `<img height="1" width="1" style="display:none"
 								src="https://www.facebook.com/tr?id=1429998061166129&ev=PageView&noscript=1"
 								/>`,
           }}
-        /> */}
+        />
         {/* snapchat */}
         {/* <script type="text/javascript">
           {`(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()

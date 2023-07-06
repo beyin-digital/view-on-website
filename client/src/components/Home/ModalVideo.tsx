@@ -63,18 +63,25 @@ const ModalVideo = () => {
                 transform: 'translate(-50%, -50%)',
               }}
             >
-              <iframe
-                src={
-                  router.locale === 'en'
-                    ? 'https://youtu.be/Gsg_WJPiTSc'
-                    : 'https://youtu.be/UnZSaf5Gxis'
-                }
-                width="100%"
-                height="100%"
-                style={{
-                  border: '0',
-                }}
-              />
+              {router.locale === 'en' ? (
+                <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/Gsg_WJPiTSc"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/UnZSaf5Gxis"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              )}
               <Box
                 sx={{
                   cursor: 'pointer',
