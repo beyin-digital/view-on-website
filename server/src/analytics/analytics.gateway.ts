@@ -2,8 +2,6 @@
 import {
   WebSocketGateway,
   WebSocketServer,
-  //   OnGatewayConnection,
-  //   OnGatewayDisconnect,
   SubscribeMessage,
   MessageBody,
   ConnectedSocket,
@@ -11,17 +9,10 @@ import {
 
 import { Server, Socket } from 'socket.io';
 import { AnalyticsService } from './analytics.service';
-// import { AuthGuard } from '@nestjs/passport';
-// import { UseGuards } from '@nestjs/common';
 
 @WebSocketGateway({
   cors: {
-    origin: [
-      'http://localhost:3000',
-      'https://vow-client.vercel.app',
-      'https://viewonwebsite.com',
-      'https://www.viewonwebsite.com',
-    ],
+    origin: ['https://viewonwebsite.com', 'https://www.viewonwebsite.com'],
   },
 })
 export class AnalyticsGateway {
