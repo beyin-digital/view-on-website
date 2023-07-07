@@ -248,6 +248,10 @@ const NavbarSubscribe = () => {
             onMouseEnter={handleHoverButton}
             onMouseLeave={handleLeave}
             className="ButtonAnimation"
+            onClick={() => {
+              !user?.hasKeywords &&
+                toast.info('You need to have a keyword to access the dashboard')
+            }}
           >
             <FiArrowUpLeft
               size={42}
@@ -257,12 +261,6 @@ const NavbarSubscribe = () => {
 
             {token ? (
               <Link
-                onClick={() => {
-                  !user?.hasKeywords &&
-                    toast.info(
-                      'You need to have a keyword to access the dashboard'
-                    )
-                }}
                 style={{
                   textDecoration: 'none',
                 }}
@@ -323,15 +321,13 @@ const NavbarSubscribe = () => {
             onMouseEnter={handleHoverButton}
             onMouseLeave={handleLeave}
             className="ButtonAnimation"
+            onClick={() => {
+              !user?.hasKeywords &&
+                toast.info('You need to have a keyword to access the dashboard')
+            }}
           >
             {token ? (
               <Link
-                onClick={() => {
-                  !user?.hasKeywords &&
-                    toast.info(
-                      'You need to have a keyword to access the dashboard'
-                    )
-                }}
                 style={{
                   textDecoration: 'none',
                 }}
@@ -741,16 +737,16 @@ const NavbarSubscribe = () => {
                 }}
                 onMouseEnter={handleHoverButton}
                 onMouseLeave={handleLeave}
+                onClick={() => {
+                  !user?.hasKeywords &&
+                    toast.info(
+                      'You need to have a keyword to access the dashboard'
+                    )
+                }}
                 className="ButtonAnimation"
               >
                 {token ? (
                   <Link
-                    onClick={() => {
-                      !user?.hasKeywords &&
-                        toast.info(
-                          'You need to have a keyword to access the dashboard'
-                        )
-                    }}
                     href={`${
                       user?.hasKeywords
                         ? `${locale}/dashboard`

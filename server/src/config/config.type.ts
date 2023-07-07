@@ -82,6 +82,8 @@ export type StripeConfig = {
   secretKey?: string;
   currency?: string;
   webhookSecret?: string;
+  subscriptionTaxRateId?: string;
+  premiumTaxRateId?: string;
 };
 
 export type AllConfigType = {

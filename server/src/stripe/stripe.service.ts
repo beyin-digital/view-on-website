@@ -126,10 +126,15 @@ export class StripeService {
         locale: 'auto',
         line_items: [
           {
+            tax_rates: [
+              this.configService.get('stripe').subscriptionTaxRateId as string,
+            ],
             price_data: {
+              tax_behavior: 'exclusive',
               currency: 'usd',
               product_data: {
-                name: `Subscription for the rights to use the #${decodeURI(
+                tax_code: 'txcd_10000000',
+                name: `the rights to use the #${decodeURI(
                   createCheckoutSessionDto.letters,
                 )} on the View on website platform`,
               },
@@ -161,13 +166,14 @@ export class StripeService {
         locale: 'auto',
         line_items: [
           {
-            tax_rates: ['txr_1NQyjVBs9zGaVmNDvlZleZl0'],
+            tax_rates: [
+              this.configService.get('stripe').premiumTaxRateId as string,
+            ],
             price_data: {
               tax_behavior: 'inclusive',
               currency: 'usd',
               product_data: {
                 tax_code: 'txcd_10000000',
-
                 name: `Exclusive lifetime rights to use the #${decodeURI(
                   createCheckoutSessionDto.letters,
                 )} on the View on website platform`,

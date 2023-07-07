@@ -223,6 +223,10 @@ const Header = () => {
             onMouseEnter={handleHoverButton}
             onMouseLeave={handleLeave}
             className="ButtonAnimation"
+            onClick={() => {
+              !user?.hasKeywords &&
+                toast.info('You need to have a keyword to access the dashboard')
+            }}
           >
             <FiArrowUpLeft
               size={42}
@@ -232,12 +236,6 @@ const Header = () => {
 
             {token ? (
               <Link
-                onClick={() => {
-                  !user?.hasKeywords &&
-                    toast.info(
-                      'You need to have a keyword to access the dashboard'
-                    )
-                }}
                 href={`${
                   user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
                 }`}
@@ -292,17 +290,15 @@ const Header = () => {
               display: { xs: 'flex', lg: 'none' },
             }}
             onMouseEnter={handleHoverButton}
+            onClick={() => {
+              !user?.hasKeywords &&
+                toast.info('You need to have a keyword to access the dashboard')
+            }}
             onMouseLeave={handleLeave}
             className="ButtonAnimation"
           >
             {token ? (
               <Link
-                onClick={() => {
-                  !user?.hasKeywords &&
-                    toast.info(
-                      'You need to have a keyword to access the dashboard'
-                    )
-                }}
                 href={`${
                   user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
                 }`}
@@ -688,16 +684,16 @@ const Header = () => {
                 }}
                 onMouseEnter={handleHoverButton}
                 onMouseLeave={handleLeave}
+                onClick={() => {
+                  !user?.hasKeywords &&
+                    toast.info(
+                      'You need to have a keyword to access the dashboard'
+                    )
+                }}
                 className="ButtonAnimation"
               >
                 {token ? (
                   <Link
-                    onClick={() => {
-                      !user?.hasKeywords &&
-                        toast.info(
-                          'You need to have a keyword to access the dashboard'
-                        )
-                    }}
                     href={`${
                       user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
                     }`}
