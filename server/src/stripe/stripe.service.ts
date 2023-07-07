@@ -37,6 +37,10 @@ export class StripeService {
     });
   }
 
+  async deleteCustomer(stripeCustomerId: string) {
+    return await this.stripe.customers.del(stripeCustomerId);
+  }
+
   async cancelSubscription(id: number) {
     const subscription = (await this.subscriptionsService.findOne({
       id,

@@ -560,6 +560,9 @@ export class AuthService {
     });
 
     await this.usersService.delete(user.id);
+    await this.stripeService.deleteCustomer(
+      userToDelete?.stripeCustomerId as string,
+    );
     await this.mailService.accountDeletion({
       to: userToDelete?.email as string,
     });
