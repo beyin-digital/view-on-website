@@ -268,7 +268,7 @@ export const UserProvider = ({ children }: any) => {
       const response = await fetch(`${apiUrl}/auth/refresh`, {
         method: 'POST',
         body: JSON.stringify({
-          refreshToken,
+          token: refreshToken,
         }),
         headers: {
           'Content-Type': 'application/json',
