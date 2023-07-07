@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityCondition } from 'src/utils/types/entity-condition.type';
 import { IPaginationOptions } from 'src/utils/types/pagination-options';
@@ -7,16 +7,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { NullableType } from '../utils/types/nullable.type';
 import { Cron } from '@nestjs/schedule';
-import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class UsersService {
-  private readonly logger = new Logger(UsersService.name);
-
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-    private mailService: MailService,
   ) {}
 
   create(createProfileDto: CreateUserDto): Promise<User> {
@@ -66,13 +62,10 @@ export class UsersService {
 
     if (foundUsers.length) {
       foundUsers.map(async (user) => {
-        // set time to 5 minutes ago
-        if (user.createdAt < new Date(Date.now() - 1000 * 60 * 5)) {
+        if (user.createdAt < new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)) {
           await this.usersRepository.delete(user.id);
         }
       });
     }
   }
 }
-
-// new Date(Date.now() - 1000 * 60 * 60 * 24 * 7)

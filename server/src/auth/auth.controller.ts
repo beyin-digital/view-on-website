@@ -95,7 +95,7 @@ export class AuthController {
   async refreshAccessToken(
     @Body() refreshAccessTokenDto: RefreshAccessTokenDto,
   ): Promise<LoginResponseType> {
-    return this.service.refreshAccessToken(refreshAccessTokenDto.token);
+    return this.service.refreshAccessToken(refreshAccessTokenDto);
   }
 
   @Post('reset/password')

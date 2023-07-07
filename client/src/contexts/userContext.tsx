@@ -276,20 +276,20 @@ export const UserProvider = ({ children }: any) => {
         },
       })
       if (!response.ok) {
+        logout()
         throw new Error('Error refreshing access token')
       }
       // Get data from response
       const data = await response.json()
       // Get token and refresh token from data
-      const { token, refreshToken: newRefreshToken } = data
+      const { token, user, refreshToken: newRefreshToken } = data
       // Set token and refresh token in local storage
+
       localStorage.setItem('token', token)
       localStorage.setItem('refreshToken', newRefreshToken)
-      // Set token and refresh token in state
+      //   Cookies.set('token', token)
+      setRefreshToken(refreshToken)
       setToken(token)
-      setRefreshToken(newRefreshToken)
-      // Redirect user to dashboard page
-      router.push('/dashboard')
     } catch (error) {
       // Redirect to login page if error
       router.push('/login')
@@ -426,7 +426,10 @@ export const UserProvider = ({ children }: any) => {
           },
         })
         if (!response.ok) {
-          throw new Error('Error getting user details')
+          const tokenReset = handleRefreshToken()
+          if (!tokenReset) {
+            throw new Error('Error getting user details')
+          }
         }
         const data = await response.json()
         setUser(data)

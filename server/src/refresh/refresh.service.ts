@@ -19,10 +19,6 @@ export class RefreshService {
     );
   }
 
-  findAll() {
-    return `This action returns all otp`;
-  }
-
   findOne(fields: EntityCondition<Refresh>): Promise<NullableType<Refresh>> {
     return this.refreshesRepository.findOne({
       where: fields,

@@ -26,6 +26,7 @@ import { RefreshService } from 'src/refresh/refresh.service';
 import { StripeService } from 'src/stripe/stripe.service';
 import { Otp } from 'src/otp/entities/otp.entity';
 import { AuthResendMailDto } from './dto/auth-resend-mail.dto';
+import { RefreshAccessTokenDto } from './dto/auth-refresh-access-token.dto';
 
 @Injectable()
 export class AuthService {
@@ -305,8 +306,7 @@ export class AuthService {
     const foundOtp = (await this.otpsService.findOne({
       token: otp,
     })) as Otp;
-
-    if (foundOtp.used) {
+    if (!foundOtp || foundOtp.used) {
       throw new HttpException(
         {
           status: HttpStatus.UNPROCESSABLE_ENTITY,
@@ -327,16 +327,6 @@ export class AuthService {
           },
         },
         HttpStatus.UNPROCESSABLE_ENTITY,
-      );
-    }
-
-    if (!foundOtp) {
-      throw new HttpException(
-        {
-          status: HttpStatus.NOT_FOUND,
-          error: `notFound`,
-        },
-        HttpStatus.NOT_FOUND,
       );
     }
 
@@ -367,9 +357,12 @@ export class AuthService {
     return { token: accessToken, refreshToken: refreshToken.token, user };
   }
 
-  async refreshAccessToken(token: string): Promise<LoginResponseType> {
+  async refreshAccessToken(
+    refreshAccessTokenDto: RefreshAccessTokenDto,
+  ): Promise<LoginResponseType> {
     const foundRefreshToken = await this.refreshesService.findOne({
-      token,
+      token: refreshAccessTokenDto.token,
+      used: false,
     });
 
     if (!foundRefreshToken) {
