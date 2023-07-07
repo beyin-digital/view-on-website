@@ -21,6 +21,7 @@ import { UserContext } from '@/contexts/userContext'
 import { icons, links } from '../Layout/GLobal'
 import FooterNav from './FooterNav'
 import ModalNav from './ModalNav'
+import { toast } from 'react-toastify'
 
 const NavbarStatic = ({
   nameOne,
@@ -262,19 +263,33 @@ const NavbarStatic = ({
             />
 
             {token ? (
-              <Link
-                href={`${
-                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
-                }`}
-                style={{
-                  textDecoration: 'none',
-                }}
-                title={`${t('nav_Dashboard')}`}
-              >
+              user?.hasKeywords ? (
+                <Link
+                  href={`${locale}/dashboard/`}
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                  title={`${t('nav_Dashboard')}`}
+                >
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', lg: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_Dashboard')}
+                  </Typography>
+                </Link>
+              ) : (
                 <Typography
+                  onClick={() => toast.info(`${t('purchase_keyword')}`)}
                   sx={{
                     letterSpacing: '0.02em',
-                    fontSize: { xs: '23px', xl: '32px' },
+                    fontSize: { xs: '23px', lg: '32px' },
                     fontWeight: '700',
                     lineHeight: '40px',
                     color: '#343132',
@@ -283,7 +298,7 @@ const NavbarStatic = ({
                 >
                   {t('nav_Dashboard')}
                 </Typography>
-              </Link>
+              )
             ) : (
               <Link
                 href="/illustration"
@@ -322,20 +337,33 @@ const NavbarStatic = ({
             className="ButtonAnimation"
           >
             {token ? (
-              <Link
-                href={`${
-                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
-                }`}
-                style={{
-                  textDecoration: 'none',
-                }}
-                title={`${t('nav_Dashboard')}`}
-              >
+              user?.hasKeywords ? (
+                <Link
+                  href={`${locale}/dashboard/`}
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                  title={`${t('nav_Dashboard')}`}
+                >
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', lg: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_Dashboard')}
+                  </Typography>
+                </Link>
+              ) : (
                 <Typography
-                  // onClick={() => router.push(`${locale}/dashboard`)}
+                  onClick={() => toast.info(`${t('purchase_keyword')}`)}
                   sx={{
                     letterSpacing: '0.02em',
-                    fontSize: { xs: '23px', xl: '32px' },
+                    fontSize: { xs: '23px', lg: '32px' },
                     fontWeight: '700',
                     lineHeight: '40px',
                     color: '#343132',
@@ -344,7 +372,7 @@ const NavbarStatic = ({
                 >
                   {t('nav_Dashboard')}
                 </Typography>
-              </Link>
+              )
             ) : (
               <Link
                 href="/illustration"
@@ -727,29 +755,42 @@ const NavbarStatic = ({
                 className="ButtonAnimation"
               >
                 {token ? (
-                  <Link
-                    style={{
-                      textDecoration: 'none',
-                    }}
-                    href={`${
-                      user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
-                    }`}
-                    title={`${t('nav_Dashboard')}`}
-                  >
+                  user?.hasKeywords ? (
+                    <Link
+                      href={`${locale}/dashboard/`}
+                      style={{
+                        textDecoration: 'none',
+                      }}
+                      title={`${t('nav_Dashboard')}`}
+                    >
+                      <Typography
+                        sx={{
+                          letterSpacing: '0.02em',
+                          fontSize: { xs: '23px', lg: '32px' },
+                          fontWeight: '700',
+                          lineHeight: '40px',
+                          color: '#343132',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        {t('nav_Dashboard')}
+                      </Typography>
+                    </Link>
+                  ) : (
                     <Typography
+                      onClick={() => toast.info(`${t('purchase_keyword')}`)}
                       sx={{
                         letterSpacing: '0.02em',
-                        fontSize: { xs: '23px', xl: '32px' },
+                        fontSize: { xs: '23px', lg: '32px' },
                         fontWeight: '700',
                         lineHeight: '40px',
                         color: '#343132',
                         textTransform: 'uppercase',
                       }}
-                      onClick={() => router.push('/dashboard')}
                     >
                       {t('nav_Dashboard')}
                     </Typography>
-                  </Link>
+                  )
                 ) : (
                   <Link
                     href="/illustration"
@@ -767,7 +808,6 @@ const NavbarStatic = ({
                         color: '#343132',
                         textTransform: 'uppercase',
                       }}
-                      // onClick={() => router.push("/illustration")}
                     >
                       {t('nav_getStarted')}
                     </Typography>

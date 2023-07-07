@@ -248,10 +248,6 @@ const NavbarSubscribe = () => {
             onMouseEnter={handleHoverButton}
             onMouseLeave={handleLeave}
             className="ButtonAnimation"
-            onClick={() => {
-              !user?.hasKeywords &&
-                toast.info('You need to have a keyword to access the dashboard')
-            }}
           >
             <FiArrowUpLeft
               size={42}
@@ -260,22 +256,33 @@ const NavbarSubscribe = () => {
             />
 
             {token ? (
-              <Link
-                style={{
-                  textDecoration: 'none',
-                }}
-                href={`${
-                  user?.hasKeywords
-                    ? `${locale}/dashboard`
-                    : `${locale}/subscribe`
-                }`}
-                title={`${t('nav_Dashboard')}`}
-              >
+              user?.hasKeyword ? (
+                <Link
+                  href={`${locale}/dashboard/`}
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                  title={`${t('nav_Dashboard')}`}
+                >
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', lg: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_Dashboard')}
+                  </Typography>
+                </Link>
+              ) : (
                 <Typography
-                  // onClick={() => router.push(`${locale}/dashboard`)}
+                  onClick={() => toast.info(`${t('purchase_keyword')}`)}
                   sx={{
                     letterSpacing: '0.02em',
-                    fontSize: { xs: '23px', xl: '32px' },
+                    fontSize: { xs: '23px', lg: '32px' },
                     fontWeight: '700',
                     lineHeight: '40px',
                     color: '#343132',
@@ -284,7 +291,7 @@ const NavbarSubscribe = () => {
                 >
                   {t('nav_Dashboard')}
                 </Typography>
-              </Link>
+              )
             ) : (
               <Link
                 href="/illustration"
@@ -321,28 +328,35 @@ const NavbarSubscribe = () => {
             onMouseEnter={handleHoverButton}
             onMouseLeave={handleLeave}
             className="ButtonAnimation"
-            onClick={() => {
-              !user?.hasKeywords &&
-                toast.info('You need to have a keyword to access the dashboard')
-            }}
           >
             {token ? (
-              <Link
-                style={{
-                  textDecoration: 'none',
-                }}
-                href={`${
-                  user?.hasKeywords
-                    ? `${locale}/dashboard`
-                    : `${locale}/subscribe`
-                }`}
-                title={`${t('nav_Dashboard')}`}
-              >
+              user?.hasKeyword ? (
+                <Link
+                  href={`${locale}/dashboard/`}
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                  title={`${t('nav_Dashboard')}`}
+                >
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', lg: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_Dashboard')}
+                  </Typography>
+                </Link>
+              ) : (
                 <Typography
-                  // onClick={() => router.push(`${locale}/dashboard`)}
+                  onClick={() => toast.info(`${t('purchase_keyword')}`)}
                   sx={{
                     letterSpacing: '0.02em',
-                    fontSize: { xs: '23px', xl: '32px' },
+                    fontSize: { xs: '23px', lg: '32px' },
                     fontWeight: '700',
                     lineHeight: '40px',
                     color: '#343132',
@@ -351,7 +365,7 @@ const NavbarSubscribe = () => {
                 >
                   {t('nav_Dashboard')}
                 </Typography>
-              </Link>
+              )
             ) : (
               <Link
                 href="/illustration"
@@ -737,31 +751,36 @@ const NavbarSubscribe = () => {
                 }}
                 onMouseEnter={handleHoverButton}
                 onMouseLeave={handleLeave}
-                onClick={() => {
-                  !user?.hasKeywords &&
-                    toast.info(
-                      'You need to have a keyword to access the dashboard'
-                    )
-                }}
                 className="ButtonAnimation"
               >
                 {token ? (
-                  <Link
-                    href={`${
-                      user?.hasKeywords
-                        ? `${locale}/dashboard`
-                        : `${locale}/subscribe`
-                    }`}
-                    style={{
-                      textDecoration: 'none',
-                    }}
-                    title={`${t('nav_Dashboard')}`}
-                  >
+                  user?.hasKeywords ? (
+                    <Link
+                      href={`${locale}/dashboard/`}
+                      style={{
+                        textDecoration: 'none',
+                      }}
+                      title={`${t('nav_Dashboard')}`}
+                    >
+                      <Typography
+                        sx={{
+                          letterSpacing: '0.02em',
+                          fontSize: { xs: '23px', lg: '32px' },
+                          fontWeight: '700',
+                          lineHeight: '40px',
+                          color: '#343132',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        {t('nav_Dashboard')}
+                      </Typography>
+                    </Link>
+                  ) : (
                     <Typography
-                      // onClick={() => router.push(`${locale}/dashboard`)}
+                      onClick={() => toast.info(`${t('purchase_keyword')}`)}
                       sx={{
                         letterSpacing: '0.02em',
-                        fontSize: { xs: '23px', xl: '32px' },
+                        fontSize: { xs: '23px', lg: '32px' },
                         fontWeight: '700',
                         lineHeight: '40px',
                         color: '#343132',
@@ -770,7 +789,7 @@ const NavbarSubscribe = () => {
                     >
                       {t('nav_Dashboard')}
                     </Typography>
-                  </Link>
+                  )
                 ) : (
                   <Link
                     href="/illustration"

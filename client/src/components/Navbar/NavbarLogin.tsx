@@ -20,6 +20,7 @@ import Image from 'next/image'
 import { UserContext } from '@/contexts/userContext'
 import { icons, links } from '../Layout/GLobal'
 import ModalNav from './ModalNav'
+import { toast } from 'react-toastify'
 
 const Header = () => {
   const { t } = useTranslation('common')
@@ -194,20 +195,33 @@ const Header = () => {
             />
 
             {token ? (
-              <Link
-                href={`${
-                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/login`
-                }`}
-                title={`${t('nav_Dashboard')}`}
-                style={{
-                  textDecoration: 'none',
-                }}
-              >
+              user?.hasKeywords ? (
+                <Link
+                  href={`${locale}/dashboard/`}
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                  title={`${t('nav_Dashboard')}`}
+                >
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', lg: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_Dashboard')}
+                  </Typography>
+                </Link>
+              ) : (
                 <Typography
-                  // onClick={() => router.push(`${locale}/dashboard`)}
+                  onClick={() => toast.info(`${t('purchase_keyword')}`)}
                   sx={{
                     letterSpacing: '0.02em',
-                    fontSize: { xs: '23px', xl: '32px' },
+                    fontSize: { xs: '23px', lg: '32px' },
                     fontWeight: '700',
                     lineHeight: '40px',
                     color: '#343132',
@@ -216,7 +230,7 @@ const Header = () => {
                 >
                   {t('nav_Dashboard')}
                 </Typography>
-              </Link>
+              )
             ) : (
               <Link
                 href="/illustration"
@@ -255,20 +269,33 @@ const Header = () => {
             className="ButtonAnimation"
           >
             {token ? (
-              <Link
-                href={`${
-                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/login`
-                }`}
-                title={`${t('nav_Dashboard')}`}
-                style={{
-                  textDecoration: 'none',
-                }}
-              >
+              user?.hasKeywords ? (
+                <Link
+                  href={`${locale}/dashboard/`}
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                  title={`${t('nav_Dashboard')}`}
+                >
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', lg: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_Dashboard')}
+                  </Typography>
+                </Link>
+              ) : (
                 <Typography
-                  // onClick={() => router.push(`${locale}/dashboard`)}
+                  onClick={() => toast.info(`${t('purchase_keyword')}`)}
                   sx={{
                     letterSpacing: '0.02em',
-                    fontSize: { xs: '23px', xl: '32px' },
+                    fontSize: { xs: '23px', lg: '32px' },
                     fontWeight: '700',
                     lineHeight: '40px',
                     color: '#343132',
@@ -277,7 +304,7 @@ const Header = () => {
                 >
                   {t('nav_Dashboard')}
                 </Typography>
-              </Link>
+              )
             ) : (
               <Link
                 href="/illustration"

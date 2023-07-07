@@ -223,10 +223,6 @@ const Header = () => {
             onMouseEnter={handleHoverButton}
             onMouseLeave={handleLeave}
             className="ButtonAnimation"
-            onClick={() => {
-              !user?.hasKeywords &&
-                toast.info('You need to have a keyword to access the dashboard')
-            }}
           >
             <FiArrowUpLeft
               size={42}
@@ -235,16 +231,30 @@ const Header = () => {
             />
 
             {token ? (
-              <Link
-                href={`${
-                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
-                }`}
-                style={{
-                  textDecoration: 'none',
-                }}
-                title={`${t('nav_Dashboard')}`}
-              >
+              user?.hasKeyword ? (
+                <Link
+                  href={`${locale}/dashboard/`}
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                  title={`${t('nav_Dashboard')}`}
+                >
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', lg: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_Dashboard')}
+                  </Typography>
+                </Link>
+              ) : (
                 <Typography
+                  onClick={() => toast.info(`${t('purchase_keyword')}`)}
                   sx={{
                     letterSpacing: '0.02em',
                     fontSize: { xs: '23px', lg: '32px' },
@@ -256,7 +266,7 @@ const Header = () => {
                 >
                   {t('nav_Dashboard')}
                 </Typography>
-              </Link>
+              )
             ) : (
               <Link
                 href="/illustration"
@@ -290,24 +300,34 @@ const Header = () => {
               display: { xs: 'flex', lg: 'none' },
             }}
             onMouseEnter={handleHoverButton}
-            onClick={() => {
-              !user?.hasKeywords &&
-                toast.info('You need to have a keyword to access the dashboard')
-            }}
             onMouseLeave={handleLeave}
             className="ButtonAnimation"
           >
             {token ? (
-              <Link
-                href={`${
-                  user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
-                }`}
-                style={{
-                  textDecoration: 'none',
-                }}
-                title={`${t('nav_Dashboard')}`}
-              >
+              user?.hasKeywords ? (
+                <Link
+                  href={`${locale}/dashboard/`}
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                  title={`${t('nav_Dashboard')}`}
+                >
+                  <Typography
+                    sx={{
+                      letterSpacing: '0.02em',
+                      fontSize: { xs: '23px', lg: '32px' },
+                      fontWeight: '700',
+                      lineHeight: '40px',
+                      color: '#343132',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {t('nav_Dashboard')}
+                  </Typography>
+                </Link>
+              ) : (
                 <Typography
+                  onClick={() => toast.info(`${t('purchase_keyword')}`)}
                   sx={{
                     letterSpacing: '0.02em',
                     fontSize: { xs: '23px', lg: '32px' },
@@ -319,7 +339,7 @@ const Header = () => {
                 >
                   {t('nav_Dashboard')}
                 </Typography>
-              </Link>
+              )
             ) : (
               <Link
                 href="/illustration"
@@ -684,25 +704,33 @@ const Header = () => {
                 }}
                 onMouseEnter={handleHoverButton}
                 onMouseLeave={handleLeave}
-                onClick={() => {
-                  !user?.hasKeywords &&
-                    toast.info(
-                      'You need to have a keyword to access the dashboard'
-                    )
-                }}
                 className="ButtonAnimation"
               >
                 {token ? (
-                  <Link
-                    href={`${
-                      user?.hasKeywords ? `${locale}/dashboard` : `${locale}/`
-                    }`}
-                    title={`${t('nav_Dashboard')}`}
-                    style={{
-                      textDecoration: 'none',
-                    }}
-                  >
+                  user?.hasKeyword ? (
+                    <Link
+                      href={`${locale}/dashboard/`}
+                      style={{
+                        textDecoration: 'none',
+                      }}
+                      title={`${t('nav_Dashboard')}`}
+                    >
+                      <Typography
+                        sx={{
+                          letterSpacing: '0.02em',
+                          fontSize: { xs: '23px', lg: '32px' },
+                          fontWeight: '700',
+                          lineHeight: '40px',
+                          color: '#343132',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        {t('nav_Dashboard')}
+                      </Typography>
+                    </Link>
+                  ) : (
                     <Typography
+                      onClick={() => toast.info(`${t('purchase_keyword')}`)}
                       sx={{
                         letterSpacing: '0.02em',
                         fontSize: { xs: '23px', lg: '32px' },
@@ -714,7 +742,7 @@ const Header = () => {
                     >
                       {t('nav_Dashboard')}
                     </Typography>
-                  </Link>
+                  )
                 ) : (
                   <Link
                     href="/illustration"
