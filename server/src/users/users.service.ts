@@ -49,7 +49,7 @@ export class UsersService {
     await this.usersRepository.delete(id);
   }
 
-  @Cron('45 * * * * *')
+  @Cron('0 */30 9-17 * * *	')
   async handleCron() {
     const foundUsers = await this.usersRepository.find({
       where: {
