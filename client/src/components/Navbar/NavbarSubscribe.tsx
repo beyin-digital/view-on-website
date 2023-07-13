@@ -256,7 +256,7 @@ const NavbarSubscribe = () => {
             />
 
             {token ? (
-              user?.hasKeyword ? (
+              user?.hasKeywords ? (
                 <Link
                   href={`${locale}/dashboard/`}
                   style={{
@@ -330,7 +330,7 @@ const NavbarSubscribe = () => {
             className="ButtonAnimation"
           >
             {token ? (
-              user?.hasKeyword ? (
+              user?.hasKeywords ? (
                 <Link
                   href={`${locale}/dashboard/`}
                   style={{

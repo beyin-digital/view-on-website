@@ -231,7 +231,7 @@ const Header = () => {
             />
 
             {token ? (
-              user?.hasKeyword ? (
+              user?.hasKeywords ? (
                 <Link
                   href={`${locale}/dashboard/`}
                   style={{
@@ -707,7 +707,7 @@ const Header = () => {
                 className="ButtonAnimation"
               >
                 {token ? (
-                  user?.hasKeyword ? (
+                  user?.hasKeywords ? (
                     <Link
                       href={`${locale}/dashboard/`}
                       style={{

@@ -177,7 +177,7 @@ export const KeywordProvider = ({ children }: any) => {
       }
       const data = await response.json()
       if (data.data.length <= 0) {
-        router.push('/home')
+        router.push('/')
         return
       }
 
