@@ -28,7 +28,7 @@ const Request = () => {
     <>
       <Head>
         <title>VIEW ON WEBSITE - {t('meta_title')} </title>
-        <meta name="description" content={`${t('meta_description')}`} />
+        <meta name="description" content={`${t('meta_desc')}`} />
         <meta name="keyword" content={`${t('meta_keyword')}`} />
         <link
           rel="canonical"
