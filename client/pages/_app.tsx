@@ -117,27 +117,28 @@ function MyApp(props: MyAppProps) {
 					async
 					src="https://www.googletagmanager.com/gtag/js?id=G-0W0L6BV2WM"
 				></script>
-			</Head>
-			<Script>
-				{` window.dataLayer = window.dataLayer || [];
+				<Script>
+					{` window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'G-0W0L6BV2WM');`}
-			</Script>
-			<Script
+				</Script>
+			</Head>
+
+			{/* <Script
 				async
 				src="https://www.googletagmanager.com/gtag/js?id=AW-11246193982"
-			/>
+			/> */}
 
-			<Script id="google-tag-manager" strategy="afterInteractive">
+			{/* <Script id="google-tag-manager" strategy="afterInteractive">
 				{`
         window.dataLayer = window.dataLayer || [];
                           function gtag(){dataLayer.push(arguments);}
                           gtag('js', new Date());
                            gtag('config', 'AW-11246193982');
       `}
-			</Script>
+			</Script> */}
 			<Script type="text/javascript">
 				{` _linkedin_partner_id = "5690257"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);`}{" "}
 			</Script>
